@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>如何求职 C++ 后端开发岗位 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="如何求职 C++ 后端开发岗位">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-24 12:25" pubdate>
+        2020年5月24日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">如何求职 C++ 后端开发岗位</h1>
+            
+            <div class="markdown-body">
+              <p>知乎Live “如何求职 C++ 后端开发岗位” 的笔记</p>
+<a id="more"></a>
+<p><strong>C++学习内容</strong></p>
+<ul>
+<li>掌握C++基本语法和常用语言特性特性即可，切勿深陷C++浩如烟海的众多语言特性中。</li>
+<li>操作系统API：通过学习<a target="_blank" rel="noopener" href="https://book.douban.com/subject/3907181/">《Linux系统编程》</a>、<a target="_blank" rel="noopener" href="https://book.douban.com/subject/1088168/">《Windows 程序设计：第5版》</a>、<a target="_blank" rel="noopener" href="https://book.douban.com/subject/3235659/">《Windows核心编程(第5版)》</a> 掌握常用的C+。不常用的API，查 <a target="_blank" rel="noopener" href="http://manpages.courier-mta.org/">Linux mannul</a>/Windows mannul(手册)即可。</li>
+<li>熟悉操作系统原语，是C++的必备技能。</li>
+</ul>
+<p><strong>C++历史遗留问题、技术发展痕迹</strong></p>
+<ul>
+<li>字符串搜索函数会造成缓冲区溢出（当时的字符串长度不会像现在这么长）</li>
+<li>时间函数可能是非线性安全的（当时没有多线程编程需求）</li>
+<li>内存泄露（C++就不允许操作系统管理内存，只放心将内存交给程序员管理）</li>
+</ul>
+<p><strong>C++两大编程思想</strong></p>
+<ul>
+<li>面向对象（主流）</li>
+<li>模板编程（视情况而定）</li>
+</ul>
+<p><strong>C++11的优点</strong></p>
+<ul>
+<li>优化了语言特性，更加方便快捷的编程。</li>
+<li>引入了一些常用的库（STL）</li>
+<li>现在面试，会问很多C++11的特性。</li>
+<li>VS2013、GCC4.8支持C++11特性。</li>
+<li>分布式高性能、高并发的开发经验是积累出来的。建议新手先将单机性能做到极致，如果单机性能已经达到极致了，仍然不能满足业务需求，才开始考虑使用做拓展（水平拓展、垂直拓展）。基本思路就是先正确、后高效。</li>
+<li>如何将单机性能做到极致。</li>
+</ul>
+<p><strong>C++后端开发基本技术栈</strong></p>
+<ul>
+<li><p>C++部分</p>
+<ul>
+<li>C++基本语法和语言特性必须掌握</li>
+<li>操作系统API</li>
+<li>多线程编程（熟悉操作系统常见的多线程API，如条件变量和信号量、同步原语。）</li>
+<li>网络通信，理论（4成）+ 实践（6成）。操作系统层面的网络通信函数，如socket函数、send函数、accept函数、bind函数、listen函数、connect函数、recv函数等，掌握常见的网络通信模型（select模型、poll模型、epoll模型）。</li>
+</ul>
+</li>
+<li><p>数据库部分</p>
+<ul>
+<li>数据库基本理论</li>
+<li>增删改查SQL原语</li>
+<li>数据库权限理论</li>
+<li>数据库索引（类型、数据结构）</li>
+<li>数据库的锁（层级）</li>
+<li>数据的分表、分库</li>
+</ul>
+</li>
+<li><p>后端开发经验总结（从实践项目中积累）</p>
+<ul>
+<li>C++常用开发技能：如何检测内存泄漏、写时复制、智能指针是怎么实现的、</li>
+<li>《提高C++性能的编程技术》<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1g4cVjc_J4kgXc2d8OgJQ1w">百度网盘（提取码: 7xjb）</a></li>
+<li>如何设计日志模块：性能不重要，输出文本能够帮助开发人员迅速定位问题才是关键。</li>
+<li>断开重连、心跳控制、如何设计通信协议、服务的水平拓展和垂直拓展（水平拓展：一个服务不够就再加一个服务；垂直拓展：一个服务在其上下游再加一层服务，加内存条改改固态硬盘也算是垂直拓展。）</li>
+</ul>
+</li>
+<li><p>考察基础的一些问题</p>
+<ul>
+<li>多线程操作，什么时候需要加锁，什么时候不需要加锁，为什么操作一个整型数据必须加锁，否则不安全。</li>
+</ul>
+</li>
+</ul>
+<p><strong>如何提高C++后端开发技能（在完全掌握了上述基础知识之后）</strong></p>
+<ul>
+<li>基本功扎实，多看开源项目的代码。</li>
+</ul>
+<p><strong>会而不精</strong></p>
+<p>谨防会而不精</p>
+<p><strong>简历评估</strong>（链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1-1xpYko_FSm8tdib-CsDyQ">https://pan.baidu.com/s/1-1xpYko_FSm8tdib-CsDyQ</a> 提取码: a9xr）。</p>
+<ul>
+<li>求职简历和求职目标必须匹配。</li>
+<li>工作简历太啰嗦和项目经验太少。</li>
+<li>前几项写通用技能（算法数据结构、网络通信、多线程编程、Linux原理 ）、后几项写专业技能（熟悉C++常用语法，熟悉C++11标准，熟悉金融系统开发）。</li>
+<li>工作经验：简单说就行，某年某月-某年某月 在某公司做某某开发。</li>
+<li>项目经验：独立写上工作过程中完成的项目，某个大型项目中的自己独立完成的模块，要简单的说清楚大型项目的背景以及自己用什么技术完成了什么模块的开发，<strong>轻业务描述，重技术描述</strong>。 </li>
+<li>不能说“通过某某项目，使得我更熟悉某某技术。这样会显得自己对某某技术还不够熟悉。”，而是应该写成，“<strong>基于某某技术，完成了某某功能的开发。</strong>“</li>
+<li>不要一个版本的简历到处投递，针对心仪的岗位去定制简历。大致的模板可以参考拉钩网的模板来写。</li>
+<li>学历和实习经历一定要写清楚</li>
+</ul>
+<p><strong>面试时的薪资问题</strong></p>
+<ul>
+<li>优先扩大基础薪资上限，期权不是很靠谱。</li>
+<li>事前风控优于事后风控。</li>
+</ul>
+<p><strong>业务程序员如何提升自身技能</strong></p>
+<ul>
+<li>如果说C++后台开发的技术有10成，那么其中只有4成能从工作中学习到，剩下的6成，只能自己利用业余时间学习。</li>
+<li>你把时间分配到哪里，你就收获到什么。</li>
+</ul>
+<p><strong>应届生准备大厂C++后端开发</strong></p>
+<ul>
+<li>算法、数据结构。</li>
+<li>如果是从其他领域转向C++后端开发，那就多写一些C++多线程编程、C++网络编程等通用技能及相关经验。</li>
+</ul>
+<p><strong>参考链接</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/linyacool/article/details/84560901">我的C++后台开发学习路线(秋招，C++后台，面经)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lm409/article/details/68569972">《后台开发核心技术与应用实践》（一）</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/C/">C++</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/25/ACM-IOI-%E5%8E%86%E5%B9%B4%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F%E8%AE%BA%E6%96%87%E9%9B%86%E5%92%8C%E8%AE%BA%E6%96%87%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB%E6%95%B4%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ACM/IOI 历年国家集训队论文集和论文算法分类整理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/20/LeetCode-1371-%E6%AF%8F%E4%B8%AA%E5%85%83%E9%9F%B3%E5%8C%85%E5%90%AB%E5%81%B6%E6%95%B0%E6%AC%A1%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 1371. 每个元音包含偶数次的最长子字符串（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/05/24/%E5%A6%82%E4%BD%95%E6%B1%82%E8%81%8CC%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B2%97%E4%BD%8D/';
+        this.page.identifier = '/2020/05/24/%E5%A6%82%E4%BD%95%E6%B1%82%E8%81%8CC%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B2%97%E4%BD%8D/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

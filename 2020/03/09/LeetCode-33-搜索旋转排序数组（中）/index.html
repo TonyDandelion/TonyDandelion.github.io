@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 33. 搜索旋转排序数组（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 33. 搜索旋转排序数组（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-09 21:25" pubdate>
+        2020年3月9日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 33. 搜索旋转排序数组（中）</h1>
+            
+            <div class="markdown-body">
+              <p> 找到旋转的下标 <code>rotation_index</code> ，也就是数组中最小的元素。二分查找在这里可以派上用场。找到<code>rotation_index</code>之后，如果 <code>target &gt; nums[0]</code> 则说明targe在<code>rotation_index</code> 前面，否在target肯定在<code>rotation_index</code> 后面，在选中的数组区域中再次使用二分查找。 </p>
+<a id="more"></a>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。<br>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。<br>搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。<br>你可以假设数组中不存在重复的元素。<br>你的算法时间复杂度必须是 O(log n) 级别。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>示例 1:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python">输入: nums = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], target = <span class="hljs-number">0</span><br>输出: <span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python">输入: nums = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], target = <span class="hljs-number">3</span><br>输出: -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure></p>
+<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>数组、二分查找</p>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>算法非常直接：</p>
+<ul>
+<li>找到旋转的下标 <code>rotation_index</code> ，也就是数组中最小的元素。二分查找在这里可以派上用场。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/29/ZaYTFQpIB8lCqrU.png" srcset="/img/loading.gif" alt="1.png"></p>
+<ul>
+<li>找到<code>rotation_index</code>之后，如果 <code>target &gt; nums[0]</code> 则说明targe在<code>rotation_index</code> 前面，否在target肯定在<code>rotation_index</code> 后面，在选中的数组区域中再次使用二分查找。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/02/29/Ksv4nOzDTwBL6Py.png" srcset="/img/loading.gif" alt="2.png"><br><img src="https://i.loli.net/2020/02/29/FOMuYGc1KpIl5ZX.png" srcset="/img/loading.gif" alt="3.png"></p>
+<p><strong>代码步骤</strong></p>
+<p>1、定义find_rotate_index内部函数，利用二分查找确定<br>1.1、特判：nums[left] &lt; nums[right]这种情况就是没有翻转，rotate_index==0。<br>1.2、不断循环，知道找到降序出现的位置，计算中值。rotate_index这个位置刚好出现降序，满足条件的话，就返回pivot + 1即可。<br>1.3、否则，调整二分查找区间。如果当前节点值小于left对应值，则设置right为当前节点-1。否则设置left为当前节点+1。<br>2、定义内部二分查找函数search<br>2.1、计算mid，如果mid对应值等于待查找值，直接返回mid。否则，调整二分查找区间，继续查找。待查找值小于中值，更新right。反之，更新left。查找不到，返回-1。<br>3、主程序部分，根据长度进行几次特判，长度为0，长度为1。<br>3.1、找到rotate_index<br>3.2、根据rotate_index与target、0、nums[0]的关系，设置二分查找的区间。<br>改进版本：一趟搞定，旋转后，一边符合升序，一边不符合，利用此特点，见题解评论。  </p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/sou-suo-xuan-zhuan-pai-xu-shu-zu-by-leetcode/">LeetCode题解</a></p>
+<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search</span>(<span class="hljs-params">self, nums, target</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type nums: List[int]</span><br><span class="hljs-string">        :type target: int</span><br><span class="hljs-string">        :rtype: int</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># 定义find_rotate_index内部函数，利用二分查找确定rotate_index，rotate_index这个位置刚好出现降序。</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_rotate_index</span>(<span class="hljs-params">left, right</span>):</span><br>            <span class="hljs-keyword">if</span> nums[left] &lt; nums[right]:  <span class="hljs-comment"># 特判：nums[left] &lt; nums[right]这种情况就是没有翻转，rotate_index==0。</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><br>            <span class="hljs-keyword">while</span> left &lt;= right:  <span class="hljs-comment"># 不断循环，知道找到降序出现的位置</span><br>                pivot = (left + right) // <span class="hljs-number">2</span>  <span class="hljs-comment"># 计算中值</span><br>                <span class="hljs-keyword">if</span> nums[pivot] &gt; nums[pivot + <span class="hljs-number">1</span>]:  <span class="hljs-comment"># rotate_index这个位置刚好出现降序，满足条件的话，就返回pivot + 1即可。</span><br>                    <span class="hljs-keyword">return</span> pivot + <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 否则，调整二分查找区间。</span><br>                    <span class="hljs-keyword">if</span> nums[pivot] &lt; nums[left]:  <span class="hljs-comment"># 如果当前节点值小于left对应值，则设置right为当前节点-1。</span><br>                        right = pivot - <span class="hljs-number">1</span><br>                    <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 否则设置left为当前节点+1</span><br>                        left = pivot + <span class="hljs-number">1</span><br>        <br>        <span class="hljs-comment"># 定义内部二分查找函数search</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search</span>(<span class="hljs-params">left, right</span>):</span><br>            <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            Binary search</span><br><span class="hljs-string">            &quot;&quot;&quot;</span><br>            <span class="hljs-keyword">while</span> left &lt;= right:<br>                pivot = (left + right) // <span class="hljs-number">2</span>  <span class="hljs-comment"># 计算mid</span><br>                <span class="hljs-keyword">if</span> nums[pivot] == target:  <span class="hljs-comment"># 如果mid对应值等于待查找值，直接返回mid。</span><br>                    <span class="hljs-keyword">return</span> pivot<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 否则，调整二分查找区间，继续查找。</span><br>                    <span class="hljs-keyword">if</span> nums[pivot] &gt; target:  <span class="hljs-comment"># 待查找值小于中值，更新right。</span><br>                        right = pivot - <span class="hljs-number">1</span><br>                    <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 反之，更新left。</span><br>                        left = pivot + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># 查找不到，返回-1。</span><br>        <br>        <span class="hljs-comment"># 根据长度进行几次特判，长度为0，长度为1</span><br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> nums[<span class="hljs-number">0</span>] == target <span class="hljs-keyword">else</span> -<span class="hljs-number">1</span> <br><br>        <span class="hljs-comment"># 找到rotate_index</span><br>        rotate_index = find_rotate_index(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>)<br>        <br>        <span class="hljs-comment"># 根据rotate_index与target、0、nums[0]的关系，设置二分查找的区间。</span><br>        <span class="hljs-comment"># if target is the smallest element</span><br>        <span class="hljs-keyword">if</span> nums[rotate_index] == target:<br>            <span class="hljs-keyword">return</span> rotate_index<br>        <span class="hljs-comment"># if array is not rotated, search in the entire array</span><br>        <span class="hljs-keyword">if</span> rotate_index == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> search(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">if</span> target &lt; nums[<span class="hljs-number">0</span>]:<br>            <span class="hljs-comment"># search on the right side</span><br>            <span class="hljs-keyword">return</span> search(rotate_index, n - <span class="hljs-number">1</span>)<br>        <span class="hljs-comment"># search on the left side</span><br>        <span class="hljs-keyword">return</span> search(<span class="hljs-number">0</span>, rotate_index)<br><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]]<br>Input1 = [<span class="hljs-number">0</span>, <span class="hljs-number">3</span>]<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>Answer = [<span class="hljs-number">4</span>, -<span class="hljs-number">1</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.search(Input[i], Input1[i])<br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度 $O(logN)$<br>空间复杂度 $O(1)$  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%92%8C%E6%90%9C%E7%B4%A2/">二分查找和搜索</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/09/LeetCode-34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 34. 在排序数组中查找元素的第一个和最后一个位置（中）& 剑指offer 面试题53 - I. 在排序数组中查找数字 I（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/09/LeetCode-32-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7%EF%BC%88%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 32. 最长有效括号（难）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/09/LeetCode-33-%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/09/LeetCode-33-%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

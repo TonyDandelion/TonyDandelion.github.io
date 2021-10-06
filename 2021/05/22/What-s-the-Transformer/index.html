@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>What&#39;s the Transformer - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="What's the Transformer">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-22 00:40" pubdate>
+        2021年5月22日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">What&#39;s the Transformer</h1>
+            
+            <div class="markdown-body">
+              <p>简单讲一下Transformer的原理</p>
+<a id="more"></a>
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Transformer 由且仅由自注意力（Self-Attenion） 和前馈神经网络（Feed Forward Neural Network）组成。Transformer 的本质上是一个 Encoder-Decoder 的结构，</p>
+<p><img src="https://i.loli.net/2021/05/22/NYOauoLt5QEHecZ.png" srcset="/img/loading.gif" alt="image-20210522002930282.png" style="zoom:50%;" /></p>
+<p>Transformer 的提出解决了上面两个问题，首先它使用了 Attention 机制，将序列中的任意两个位置之间的距离是缩小为一个常量；其次它不是类似 RNN 的顺序结构，因此具有更好的并行性，符合现有的 GPU 框架。</p>
+<p>作者的实验是通过搭建编码器和解码器各 6 层，总共 12 层的 Encoder-Decoder，并在机器翻译中取得了 BLEU 值得新高。</p>
+<h1 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h1><p>输入 $X$</p>
+<p>权重矩阵 $W^Q$、$W^K$、$W^V$</p>
+<p>$q = X \times W^Q$</p>
+<p>$k = X \times W^K$</p>
+<p>$v = X \times W^V$</p>
+<p><img src="https://pic2.zhimg.com/v2-159cd31e629170e0bade136b91c9de61_r.jpg" srcset="/img/loading.gif" alt="preview" style="zoom: 67%;" /></p>
+<ol>
+<li>为每个向量计算一个 score： $score=q * k$  ；</li>
+<li>为了梯度的稳定，Transformer 使用了 score 归一化，即除以 $ \sqrt(d_k)$；</li>
+<li>对 score 施以 softmax 激活函数；</li>
+<li>softmax 点乘 Value 值 $v$ ，得到加权的每个输入向量的评分 $v$；</li>
+<li>相加之后得到最终的输出结果 $z=\sum v$  。</li>
+</ol>
+<p><img src="https://pic1.zhimg.com/v2-79b6b3c14439219777144668a008355c_r.jpg" srcset="/img/loading.gif" alt="preview" style="zoom:67%;" /></p>
+<p>以上过程为向量形式运算，实际以矩阵形式运算。</p>
+<p><img src="https://pic1.zhimg.com/v2-79b6b3c14439219777144668a008355c_r.jpg" srcset="/img/loading.gif" alt="preview" style="zoom:67%;" /></p>
+<p>以上全过程为</p>
+<script type="math/tex; mode=display">
+Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt(d_k)})V</script><p>在 self-attention 需要强调的最后一点是其采用了<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42706477">残差网络</a> [5] 中的 short-cut 结构，目的当然是解决深度学习中的退化问题，得到的最终结果如图。<strong>注意下面两图中的残差连接。</strong></p>
+<p><img src="https://pic1.zhimg.com/v2-2f06746893477aec8af0c9c3ca1c6c14_r.jpg" srcset="/img/loading.gif" alt="preview" style="zoom:50%;" /></p>
+<p><img src="https://i.loli.net/2021/05/22/fb6SeU5jAyNr1n4.png" srcset="/img/loading.gif" alt="Snipaste_2021-05-22_00-35-46.png" style="zoom: 33%;" /></p>
+<p>Query，Key，Value 的概念取自于信息检索系统，举个简单的搜索的例子来说。当你在某电商平台搜索某件商品（年轻女士冬季穿的红色薄款羽绒服）时，你在搜索引擎上输入的内容便是 Query，然后搜索引擎根据 Query 为你匹配 Key（例如商品的种类，颜色，描述等），然后<strong>根据 Query 和 Key 的相似度得到匹配的内容（Value)。</strong></p>
+<p>self-attention 中的 Q，K，V 也是起着类似的作用，在矩阵计算中，点积是计算两个矩阵相似度的方法之一，因此使用了 $QK^T$ 进行相似度的计算。接着便是根据相似度进行输出的匹配，这里使用了加权匹配的方式，而权值就是 query 与 key 的相似度。</p>
+<h1 id="Multi-Head-Attention"><a href="#Multi-Head-Attention" class="headerlink" title="Multi-Head Attention"></a>Multi-Head Attention</h1><p>Multi-Head Attention 相当于 $h$ 个不同的 self-attention 的集成（ensemble），在这里我们以 $h=8$ ! 举例说明。Multi-Head Attention 的输出分成 3 步：</p>
+<ol>
+<li>将数据 $X$ 分别输入到图 13 所示的 8 个 self-attention 中，得到 8 个加权后的特征矩阵 $Z_i, i\in{1,2,  …., 8}$  。</li>
+<li>将 8 个 $Z_i$ 按列拼成一个大的特征矩阵；</li>
+<li>特征矩阵经过一层全连接后得到输出 $Z$。</li>
+</ol>
+<p>整个过程如下图所示：</p>
+<p><img src="https://i.loli.net/2021/05/22/3z8KotEBw74CORv.jpg" srcset="/img/loading.gif" alt="v2-c2a91ac08b34e73c7f4b415ce823840e_r.jpg"></p>
+<p>同 self-attention 一样，multi-head attention 也加入了 short-cut 机制（见第一幅图）。</p>
+<h1 id="Encoder-Dcecoder-attention"><a href="#Encoder-Dcecoder-attention" class="headerlink" title="Encoder-Dcecoder attention"></a>Encoder-Dcecoder attention</h1><p>在解码器中，Transformer block 比编码器中多了个 encoder-cecoder attention。在 encoder-decoder attention 中， $Q$ 来自于解码器的上一个输出， $K$和 $V$则来自于与编码器的输出。其计算方式完全和图 10 的过程相同。</p>
+<p>由于在机器翻译中，解码过程是一个顺序操作的过程，也就是当解码第 $k$个特征向量时，我们只能看到第 $k-1$及其之前的解码结果，论文中把这种情况下的 multi-head attention 叫做 masked multi-head attention。</p>
+<h1 id="Loss-Layer"><a href="#Loss-Layer" class="headerlink" title="Loss Layer"></a>Loss Layer</h1><p>解码器解码之后，解码的特征向量经过一层激活函数为 softmax 的全连接层之后得到反映每个单词概率的输出向量。此时我们便可以通过 CTC 等损失函数训练模型了。</p>
+<p>而一个完整可训练的网络结构便是 encoder 和 decoder 的堆叠（各 $N$ 个， $N=6$) ），我们可以得到首图的完整的 Transformer 的结构（即论文中的图 1）。</p>
+<h1 id="Position-Embedding"><a href="#Position-Embedding" class="headerlink" title="Position Embedding"></a>Position Embedding</h1><p>截止目前为止，我们介绍的 Transformer 模型并没有捕捉顺序序列的能力，也就是说无论句子的结构怎么打乱，Transformer 都会得到类似的结果。换句话说，Transformer 只是一个功能更强大的词袋模型而已。</p>
+<p>为了解决这个问题，论文中在编码词向量时引入了位置编码（Position Embedding）的特征。具体地说，位置编码会在词向量中加入了单词的位置信息，这样 Transformer 就能区分不同位置的单词了。</p>
+<h1 id="Deep-Thinking"><a href="#Deep-Thinking" class="headerlink" title="Deep Thinking"></a>Deep Thinking</h1><p><strong>优点</strong>：（1）虽然 Transformer 最终也没有逃脱传统学习的套路，Transformer 也只是一个全连接（或者是一维卷积）加 Attention 的结合体。但是其设计已经足够有创新，因为其抛弃了在 NLP 中最根本的 RNN 或者 CNN 并且取得了非常不错的效果，算法的设计非常精彩，值得每个深度学习的相关人员仔细研究和品位。（2）Transformer 的设计最大的带来性能提升的关键是将任意两个单词的距离是 1，这对解决 NLP 中棘手的长期依赖问题是非常有效的。（3）Transformer 不仅仅可以应用在 NLP 的机器翻译领域，甚至可以不局限于 NLP 领域，是非常有科研潜力的一个方向。（4）算法的并行性非常好，符合目前的硬件（主要指 GPU）环境。</p>
+<p><strong>缺点</strong>：（1）粗暴的抛弃 RNN 和 CNN 虽然非常炫技，但是它也使模型丧失了捕捉局部特征的能力，RNN + CNN + Transformer 的结合可能会带来更好的效果。（2）Transformer 失去的位置信息其实在 NLP 中非常重要，而论文中在特征向量中加入 Position Embedding 也只是一个权宜之计，并没有改变 Transformer 结构上的固有缺陷。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] Vaswani A ,  Shazeer N ,  Parmar N , et al. Attention Is All You Need[J]. arXiv, 2017.</p>
+<p>[2] 大师兄. 详解 Transformer （Attention Is All You Need）[EB/OL]. 2021. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/48508221">https://zhuanlan.zhihu.com/p/48508221</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Deep-Learning/">Deep Learning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/04/shendu/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">改变命运的方法：培养慎独之心</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/13/paradigm-code/">
+                        <span class="hidden-mobile">CODE PARADIGM</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2021/05/22/What-s-the-Transformer/';
+        this.page.identifier = '/2021/05/22/What-s-the-Transformer/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

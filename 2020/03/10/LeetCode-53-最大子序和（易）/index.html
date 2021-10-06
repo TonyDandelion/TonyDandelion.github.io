@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 53. 最大子序和（易）&amp; 剑指offer 面试题42. 连续子数组的最大和（易） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 53. 最大子序和（易）& 剑指offer 面试题42. 连续子数组的最大和（易）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-10 01:30" pubdate>
+        2020年3月10日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 53. 最大子序和（易）&amp; 剑指offer 面试题42. 连续子数组的最大和（易）</h1>
+            
+            <div class="markdown-body">
+              <p>动态规划、分治算法的应用</p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个整数数组 <code>nums</code> ，找到一个<strong>具有最大和的连续子数组（子数组最少包含一个元素）</strong>，返回其最大和。<br>如果你已经实现复杂度为 $O(n)$ 的解法，尝试使用更为精妙的分治法求解。</p>
+<blockquote>
+<p><strong><em>测试用例</em></strong></p>
+</blockquote>
+<p>功能测试（输入的数组中有正数也有负数；输入的数组中全是正数；输入的数组中全是负数）。<br>特殊输入测试（表示数组的指针为nullptr指针）。</p>
+<blockquote>
+<p><strong><em>本题考点</em></strong></p>
+</blockquote>
+<p>考查应聘者对时间复杂度的理解。这道题如果应聘者给出时间复杂度为 $O(n^2)$ 甚至  $O(n^3)$  的算法，则是不能通过面试的。<strong>考查应聘者对动态规划的理解。</strong>如果应聘者熟练掌握了动态规划算法，那么他就能轻松地找到解题方案。<strong>如果没有想到用动态规划的思想，那么应聘者就需要仔细地分析累加子数组的和的过程，从而找到解题的规律。</strong><br>考查应聘者思维的全面性。<strong>能否合理地处理无效的输入</strong>，对面试结果有很重要的影响。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">输入: [<span class="hljs-string">-2</span>,1,<span class="hljs-string">-3</span>,4,<span class="hljs-string">-1</span>,2,1,<span class="hljs-string">-5</span>,4],<br>输出: 6<br></code></pre></div></td></tr></table></figure>
+<p>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>数组、分治算法、动态规划</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><h2 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h2><p>下面是用分治法解决问题的模板：<br>1、定义基本情况。<br>2、将问题分解为子问题并递归地解决它们。<br>3、合并子问题的解以获得原始问题的解。</p>
+<p>将数组二分为两部分<code>nums1[]</code>、<code>nums2[]</code>，则最大子序和一定是下面三种情况中的一种：<br>1、最大子序和在<code>nums1[]</code>中<br>2、最大子序和在<code>nums2[]</code>中<br>3、最大子序和跨越<code>nums1</code>和<code>nums2</code>，此时需计算<code>nums1[]</code>中<strong>从右端点开始（包含右端点）的最大子序的数值和</strong>以及<code>nums2[]</code>中<strong>从左端点开始（包含左端点）的最大自序的数值和</strong>，求这两个最大自序和之和。</p>
+<p><img src="https://i.loli.net/2020/03/05/wFBpjvzkVUqxyaJ.png" srcset="/img/loading.gif" alt="1.png"></p>
+<h2 id="动态规划（Kadane-算法）"><a href="#动态规划（Kadane-算法）" class="headerlink" title="动态规划（Kadane 算法）"></a>动态规划（Kadane 算法）</h2><p>在整个数组或在固定大小的滑动窗口中找到总和或最大值或最小值的问题可以通过动态规划（DP）在线性时间内解决。  有两种标准 DP 方法适用于数组：  </p>
+<ol>
+<li><strong>常数空间，沿数组移动并在原数组修改。</strong>  </li>
+<li>线性空间，首先沿 left-&gt;right 方向移动，然后再沿 right-&gt;left 方向移动。 合并结果。 </li>
+</ol>
+<p>我们在这里使用第一种方法，因为可以修改数组跟踪当前位置的最大和。下一步是在知道当前位置的最大和后更新全局最大和。  </p>
+<p><strong>算法</strong></p>
+<ul>
+<li>得到 <code>nums</code> 长度。</li>
+<li>设置第一值为默认最大和 <code>max_sum</code> 。</li>
+<li>依次遍历。<ul>
+<li>如果<strong>前一个 <code>cur_sum</code> 是正数</strong>，当前值 <code>nums[i]</code> 加上前一个 <code>cur_sum</code>（由于 <code>cur_sum</code> 就保存在 <code>nums</code> 中，所以是加上 <code>nums[i-1]</code>）。这里是把累加和 <code>cur_sum</code> 保存在原来的数组 <code>nums</code> 里面了。</li>
+<li>如果<strong>前一个  <code>cur_sum</code> 是负数</strong>，选择当前值 <code>nums[i]</code> 和最大和 <code>max_sum</code> 两者中最大的那个值为新的最大和。</li>
+</ul>
+</li>
+<li>返回最大和 <code>max_sum</code> 。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/03/05/B1qeJ5vRDi43ocM.png" srcset="/img/loading.gif" alt="picture"></p>
+<p><strong><em>一张表格说清楚</em></strong></p>
+<p>以 <code>[1, -2, 3, 10, -4, 7, 2, -5]</code> 为例，当加3时，前一个 <code>cur_sum</code> 为负数，即就选择 <code>max_sum(1)</code> 和 <code>nums[i](3)</code> 中较大的那一个，也就是3，作为新的 <code>max_sum</code>。当全部遍历之后，返回最终的 <code>max_sum(18)</code> 即可。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>num</th>
+<th>1</th>
+<th>-2</th>
+<th>3</th>
+<th>10</th>
+<th>-4</th>
+<th>7</th>
+<th>2</th>
+<th>-5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cur_sum(dp)</td>
+<td>1</td>
+<td>-1</td>
+<td>3</td>
+<td>13</td>
+<td>9</td>
+<td>16</td>
+<td>18</td>
+<td>13</td>
+</tr>
+<tr>
+<td>max_sum</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>13</td>
+<td>13</td>
+<td>16</td>
+<td>18</td>
+<td><strong>18</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>使用单个数组作为输入来查找最大（或最小）元素（或总和）的问题，贪心算法是可以在线性时间解决的方法之一。<strong>每一步都选择最佳方案，到最后就是全局最优的方案。</strong></p>
+<p><strong>算法：</strong><br>该算法通用且简单：遍历数组并在每个步骤中更新：当前元素 <code>current element</code>、当前元素位置的最大和 <code>current max sum</code> 、迄今为止的最大和 <code>mas sum seen so far</code></p>
+<ul>
+<li>得到 <code>nums</code>长度，设置当前元素位置的最大和 <code>max_sum</code>、迄今为止的最大 <code>curr_sum</code>。</li>
+<li>开始遍历，<code>1-(n-1)</code>。<ul>
+<li>从当前值 <code>nums[i]</code> 及其当前元素位置的最大和之和 <code>curr_sum + nums[i]</code> 之间选择一个最大值作为当前元素位置的最大和 <code>curr_sum</code> 。</li>
+<li>从当前元素位置的最大和 <code>curr_sum</code>、当前迄今为止的最大 <code>curr_sum</code> 中，选择一个作为新的迄今为止的最大 <code>curr_sum</code> 。</li>
+</ul>
+</li>
+<li>最终返回迄今为止的最大 <code>curr_sum</code> 。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/03/05/3ZytVRaz4GWdID8.png" srcset="/img/loading.gif" alt="2.png"></p>
+<p>上图蓝色箭头表示<strong>当前字符串起点位置</strong>，一直保持在使得和最大的位置，直到遍历到最后一个元素。单步最优解为 <code>max_sum = max(max_sum, max(nums[i], curr_sum + nums[i]))</code> 。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/solution/zui-da-zi-xu-he-by-leetcode/">LeetCode题解</a></p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><h2 id="分治算法-1"><a href="#分治算法-1" class="headerlink" title="分治算法"></a>分治算法</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cross_sum</span>(<span class="hljs-params">self, nums, left, right, p</span>):</span> <br>            <span class="hljs-keyword">if</span> left == right:<br>                <span class="hljs-keyword">return</span> nums[left]<br><br>            left_subsum = <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;-inf&#x27;</span>)<br>            curr_sum = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(p, left - <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                curr_sum += nums[i]<br>                left_subsum = <span class="hljs-built_in">max</span>(left_subsum, curr_sum)<br><br>            right_subsum = <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;-inf&#x27;</span>)<br>            curr_sum = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(p + <span class="hljs-number">1</span>, right + <span class="hljs-number">1</span>):<br>                curr_sum += nums[i]<br>                right_subsum = <span class="hljs-built_in">max</span>(right_subsum, curr_sum)<br><br>            <span class="hljs-keyword">return</span> left_subsum + right_subsum   <br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">helper</span>(<span class="hljs-params">self, nums, left, right</span>):</span> <br>        <span class="hljs-keyword">if</span> left == right:<br>            <span class="hljs-keyword">return</span> nums[left]<br>        <br>        p = (left + right) // <span class="hljs-number">2</span><br>            <br>        left_sum = self.helper(nums, left, p)<br>        right_sum = self.helper(nums, p + <span class="hljs-number">1</span>, right)<br>        cross_sum = self.cross_sum(nums, left, right, p)<br>        <br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(left_sum, right_sum, cross_sum)<br>        <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        <span class="hljs-keyword">return</span> self.helper(nums, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(nums) - <span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N \log N)$。<br>空间复杂度：$O(\log N)$，递归时栈使用的空间。<br>执行用时 :144 ms, 在所有 Python3 提交中击败了10.27%的用户<br>内存消耗 :14.2 MB, 在所有 Python3 提交中击败了22.59%的用户  </p>
+<h2 id="动态规划（Kadane-算法）-1"><a href="#动态规划（Kadane-算法）-1" class="headerlink" title="动态规划（Kadane 算法）"></a>动态规划（Kadane 算法）</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        n = <span class="hljs-built_in">len</span>(nums)  <span class="hljs-comment"># 得到nums长度</span><br>        max_sum = nums[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 设置第一值为默认最大和</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):  <span class="hljs-comment"># 依次遍历</span><br>            <span class="hljs-keyword">if</span> nums[i - <span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 当前一个是正数时当前值nums[i]加上前一个值nums[i-1]，否则跳过。这里等于说是把累加和保存在原来的数组nums里面了。</span><br>                nums[i] += nums[i - <span class="hljs-number">1</span>] <br>            max_sum = <span class="hljs-built_in">max</span>(nums[i], max_sum)  <span class="hljs-comment"># 选择当前值nums[i]和最大和max_sum两者中最大的那个值为新的最大和</span><br><br>        <span class="hljs-keyword">return</span> max_sum  <span class="hljs-comment"># 返回最大和 max_sum</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N)$。只遍历了一次数组。<br>空间复杂度：$O(1)$，使用了常数的空间。<br>执行用时 :52 ms, 在所有 Python3 提交中击败了90.50%的用户<br>内存消耗 :14.4 MB, 在所有 Python3 提交中击败了21.63%的用户  </p>
+<h2 id="贪心算法-1"><a href="#贪心算法-1" class="headerlink" title="贪心算法"></a>贪心算法</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        n = <span class="hljs-built_in">len</span>(nums)  <span class="hljs-comment"># 得到nums长度</span><br>        curr_sum = max_sum = nums[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 设置当前元素位置的最大和max_sum、迄今为止的最大curr_sum</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):  <span class="hljs-comment"># 开始遍历</span><br>            curr_sum = <span class="hljs-built_in">max</span>(nums[i], curr_sum + nums[i])  <span class="hljs-comment"># 从当前值nums[i]及其当前元素位置的最大和之和curr_sum + nums[i] 之间选择一个最大值作为当前元素位置的最大和curr_sum</span><br>            max_sum = <span class="hljs-built_in">max</span>(max_sum, curr_sum)  <span class="hljs-comment"># 从当前元素位置的最大和curr_sum、当前迄今为止的最大curr_sum中，选择一个作为新的迄今为止的最大curr_sum</span><br>            <br>        <span class="hljs-keyword">return</span> max_sum  <span class="hljs-comment"># 最终返回迄今为止的最大curr_sum</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N)$。只遍历一次数组。<br>空间复杂度：$O(1)$，只使用了常数空间。<br>执行用时 :48 ms, 在所有 Python3 提交中击败了93.17%的用户<br>内存消耗 :14 MB, 在所有 Python3 提交中击败了22.63%的用户  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/10/LeetCode-54.-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 54. 螺旋矩阵（中）& 剑指offer 面试题29. 顺时针打印矩阵（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/10/LeetCode-52-N%E7%9A%87%E5%90%8E-II%EF%BC%88%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 52. N皇后 II（难）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/10/LeetCode-53-%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C%EF%BC%88%E6%98%93%EF%BC%89/';
+        this.page.identifier = '/2020/03/10/LeetCode-53-%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C%EF%BC%88%E6%98%93%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 80.  删除排序数组中的重复项 II（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 80.  删除排序数组中的重复项 II（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-21 18:13" pubdate>
+        2020年3月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 80.  删除排序数组中的重复项 II（中）</h1>
+            
+            <div class="markdown-body">
+              <p>原地算法解决重复项，参照90题 <code>while</code> 的用法，配合Python内建API删除重复的数值即可。  </p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素最多出现两次，返回移除后数组的新长度。<br>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。  </p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例 1:</strong></p>
+<figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">给定 <span class="hljs-attr">nums</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br><br>函数应返回新长度 <span class="hljs-attr">length</span> = <span class="hljs-number">5</span>, 并且原数组的前五个元素被修改为 <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span> 。<br><br>你不需要考虑数组中超出新长度后面的元素。<br></code></pre></div></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">给定 nums = [<span class="hljs-number">0,0,1,1</span>,<span class="hljs-number">1,1,2,3</span>,<span class="hljs-number">3</span>],<br><br>函数应返回新长度 length = <span class="hljs-number">7</span>, 并且原数组的前五个元素被修改为 <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span> 。<br><br>你不需要考虑数组中超出新长度后面的元素。<br></code></pre></div></td></tr></table></figure>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>双指针、数组</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、单指针</strong><br>循环遍历，发现连续三个一样的就删去第三个。<br>调用了python内建的 <code>del</code> 函数完成删除。  </p>
+<p><strong>方法二、双指针计数删除</strong><br>用一个变量 cnt 来记录还允许有几次重复，cnt 初始化为1，如果出现过一次重复，则 cnt 加1。当cnt大于2时，说明出现第三次了，删除当前项，指针先回退再前进。当cnt小于等于2时，说明当前项出现次数小于2，调用了python内建的 <code>pop</code> 函数。  </p>
+<p><strong>方法三、双指针覆盖</strong><br>用 count 记录当前数字出现的次数。count 的最小计数始终为 1。<br>若当前元素与前一个元素相同，即 nums[i]==nums[i-1]，则 count++。若 count &gt; 2，则说明遇到了多余的重复项。在这种情况下，<strong>我们只向前移动 i，而 j 不动，i是快指针，j是慢指针</strong>。<br>若 count &lt;=2，则我们将 i 所指向的元素移动到 j 位置，并同时增加 i 和 j。<br>若当前元素与前一个元素不相同，即 nums[i] != nums[i - 1]，说明遇到了新元素，则我们更新 count = 1，并且将该元素移动到 j 位置，并同时增加 i 和 j。<br><strong>注意，这种方法没有真正的将数据从list中删除，而是向前覆盖了。</strong></p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<li>方法一单指针算法的实现</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">removeDuplicates</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        p = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> p &lt; <span class="hljs-built_in">len</span>(nums):<br>            <span class="hljs-keyword">while</span> p + <span class="hljs-number">2</span> &lt; <span class="hljs-built_in">len</span>(nums) <span class="hljs-keyword">and</span> nums[p] == nums[p + <span class="hljs-number">1</span>] == nums[p + <span class="hljs-number">2</span>]:  <span class="hljs-comment"># 遇到重复的数字了</span><br>                <span class="hljs-keyword">del</span> nums[p+<span class="hljs-number">2</span>]  <span class="hljs-comment"># equals nums.pop(p+2)</span><br>            p += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(nums)<br><br>Input = [[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>]]<br>Answer = [[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span> ]]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.removeDuplicates(Input[i])<br>        print(reslut == <span class="hljs-built_in">len</span>(Input[i]))<br></code></pre></div></td></tr></table></figure>
+<p><strong>时间复杂度</strong>：$O(n) + O(n^2)$，循环遍历了整个数组，每次删除操作 <code>del</code> 的时间复杂度是 $O(n^2)$，所以总的时间复杂度为 $O(n) + O(n^2)$。<br><strong>空间复杂度</strong>：$O(1)$，仅仅申请了一个常数级别的额外空间。<br><strong>执行用时</strong> :40 ms, 在所有 Python3 提交中击败了91.11%的用户<br><strong>内存消耗</strong> :13.5 MB, 在所有 Python3 提交中击败了5.08%的用户  </p>
+<ul>
+<li>方法二双指针计数方法的实现  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">removeDuplicates</span>(<span class="hljs-params">self, nums</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type nums: List[int]</span><br><span class="hljs-string">        :rtype: int</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        i, count = <span class="hljs-number">1</span>, <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> i &lt; <span class="hljs-built_in">len</span>(nums):<br>            <span class="hljs-keyword">if</span> nums[i] == nums[i - <span class="hljs-number">1</span>]:<br>                count += <span class="hljs-number">1</span><br>                <span class="hljs-keyword">if</span> count &gt; <span class="hljs-number">2</span>:<br>                    nums.pop(i)<br>                    i-= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                count = <span class="hljs-number">1</span><br>            i += <span class="hljs-number">1</span>    <br>                <br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(nums)<br></code></pre></div></td></tr></table></figure>
+<p><strong>时间复杂度</strong>：让我们看看最耗时的操作是什么：  我们必须遍历数组中的所有元素，若数组中有 N 个元素，则花费的时间为 $O(N)$。删除多余的重复项，<code>del</code> 操作也是 $O(N)$。最糟糕的情况是数组中的元素都相同，则我们需要执行 N-1 次的删除操作，则需要花费$O(N^2)$。 则，总的复杂度：$O(N) + O(N^2)$<br><strong>空间复杂度</strong>：$O(1)$，我们在原地修改数组。<br><strong>执行用时</strong> :44 ms, 在所有 Python3 提交中击败了84.12%的用户<br><strong>内存消耗</strong> :13.4 MB, 在所有 Python3 提交中击败了5.08%的用户</p>
+<ul>
+<li>方法三双指针覆盖的实现</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">removeDuplicates</span>(<span class="hljs-params">self, nums</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type nums: List[int]</span><br><span class="hljs-string">        :rtype: int</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        j, count = <span class="hljs-number">1</span>, <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(nums)):<br>            <span class="hljs-keyword">if</span> nums[i] == nums[i - <span class="hljs-number">1</span>]:<br>                count += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                count = <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> count &lt;= <span class="hljs-number">2</span>:<br>                nums[j] = nums[i]<br>                j += <span class="hljs-number">1</span><br>                <br>        <span class="hljs-keyword">return</span> j<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N)$，我们遍历每个数组元素一次。<br>空间复杂度：$O(1)$。<br>执行用时 :40 ms, 在所有 Python3 提交中击败了91.11%的用户<br>内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.08%的用户  </p>
+<blockquote>
+<p>参考连接  </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/solution/shan-chu-pai-xu-shu-zu-zhong-de-zhong-fu-xiang-i-7/">LeetCode官方题解</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/21/LeetCode-81-%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84-II%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 81. 搜索旋转排序数组 II（中）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/21/LeetCode-79-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 79. 单词搜索（中） & 剑指offer 面试题12. 矩阵中的路径（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/21/LeetCode-80-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9-II%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/21/LeetCode-80-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9-II%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

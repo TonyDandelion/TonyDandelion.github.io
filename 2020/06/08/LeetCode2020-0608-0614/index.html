@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>LeetCode 每日一题 0608-0614(2020) - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 每日一题 0608-0614(2020)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-08 10:29" pubdate>
+        2020年6月8日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 每日一题 0608-0614(2020)</h1>
+            
+            <div class="markdown-body">
+              <p>2020-06-08 至 2020-06-14 LeetCode 每日一题</p>
+<a id="more"></a>
+<h1 id="0608-990-Satisfiability-of-Equality-Equations-medium"><a href="#0608-990-Satisfiability-of-Equality-Equations-medium" class="headerlink" title="[0608] 990. Satisfiability of Equality Equations (medium)"></a>[0608] 990. Satisfiability of Equality Equations (medium)</h1><p><em>keyword</em>: 并查集、图</p>
+<blockquote>
+<p>no details process</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/satisfiability-of-equality-equations/">等式方程的可满足性</a></p>
+<blockquote>
+<p>并查集</p>
+</blockquote>
+<p>并查集被很多OIer（OIer可理解成参加信息学竞赛的人或信息学竞赛(如CSP,NOI,IOI,CTS(C),APIO，甚至ACM）选手，或者也可以理解为信息学奥林匹克爱好者从事信息学研究的人。）认为是最简洁而优雅的数据结构之一，主要用于解决一些元素分组的问题。它管理一系列不相交的集合，并支持两种操作：</p>
+<ul>
+<li>合并（Union）：把两个不相交的集合合并为一个集合。</li>
+<li>查询（Find）：查询两个元素是否在同一个集合中。</li>
+</ul>
+<p>关于并查集的概念、优化，请参看<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93647900">这篇文章</a>。</p>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>Given an array equations of strings that represent relationships between variables, each string equations[i] has length 4 and takes one of two different forms: “a==b” or “a!=b”.  Here, a and b are lowercase letters (not necessarily different) that represent one-letter variable names.</p>
+<p>Return true if and only if it is possible to assign integers to variable names so as to satisfy all the given equations.</p>
+<p>Example 1:<br><figure class="highlight smalltalk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smalltalk"><span class="hljs-type">Input</span>: [<span class="hljs-comment">&quot;a==b&quot;</span>,<span class="hljs-comment">&quot;b!=a&quot;</span>]<br><span class="hljs-type">Output</span>: <span class="hljs-keyword">false</span><br></code></pre></div></td></tr></table></figure><br>Explanation: If we assign say, a = 1 and b = 1, then the first equation is satisfied, but not the second.  There is no way to assign the variables to satisfy both equations.</p>
+<p>Example 2:<br><figure class="highlight smalltalk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smalltalk"><span class="hljs-type">Input</span>: [<span class="hljs-comment">&quot;b==a&quot;</span>,<span class="hljs-comment">&quot;a==b&quot;</span>]<br><span class="hljs-type">Output</span>: <span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure><br>Explanation: We could assign a = 1 and b = 1 to satisfy both equations.</p>
+<p>Example 3:<br><figure class="highlight smalltalk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smalltalk"><span class="hljs-type">Input</span>: [<span class="hljs-comment">&quot;a==b&quot;</span>,<span class="hljs-comment">&quot;b==c&quot;</span>,<span class="hljs-comment">&quot;a==c&quot;</span>]<br><span class="hljs-type">Output</span>: <span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure><br>Example 4:<br><figure class="highlight smalltalk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smalltalk"><span class="hljs-type">Input</span>: [<span class="hljs-comment">&quot;a==b&quot;</span>,<span class="hljs-comment">&quot;b!=c&quot;</span>,<span class="hljs-comment">&quot;c==a&quot;</span>]<br><span class="hljs-type">Output</span>: <span class="hljs-keyword">false</span><br></code></pre></div></td></tr></table></figure><br>Example 5:<br><figure class="highlight vbnet"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vbnet"><span class="hljs-symbol">Input:</span> [<span class="hljs-string">&quot;c==c&quot;</span>,<span class="hljs-string">&quot;b==d&quot;</span>,<span class="hljs-string">&quot;x!=z&quot;</span>]<br><span class="hljs-symbol">Output:</span> <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>Note:<br>1 &lt;= equations.length &lt;= 500<br>equations[i].length == 4<br>equations[i][0] and equations[i][3] are lowercase letters<br>equations[i][1] is either ‘=’ or ‘!’<br>equations[i][2] is ‘=’</p>
+<h2 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h2><p><strong>并查集</strong></p>
+<p>我们可以将每一个变量看作图中的一个节点，把相等的关系 == 看作是连接两个节点的边，那么由于表示相等关系的等式方程具有传递性，即如果 a==b 和 b==c 成立，则 a==c 也成立。也就是说，所有相等的变量属于同一个连通分量。因此，我们可以使用并查集来维护这种连通分量的关系。</p>
+<p>首先遍历所有的等式，构造并查集。同一个等式中的两个变量属于同一个连通分量，因此将两个变量进行合并。</p>
+<p>然后遍历所有的不等式。同一个不等式中的两个变量不能属于同一个连通分量，因此对两个变量分别查找其所在的连通分量，如果两个变量在同一个连通分量中，则产生矛盾，返回 false。</p>
+<p>如果遍历完所有的不等式没有发现矛盾，则返回 true。</p>
+<p><img src="https://user-images.githubusercontent.com/14906334/83991215-a8baa880-a97e-11ea-891c-28ff3685314e.gif" srcset="/img/loading.gif" alt="990_fig1"></p>
+<p>具体实现方面，使用一个数组 parent 存储每个变量的连通分量信息，其中的每个元素表示当前变量所在的连通分量的父节点信息，如果父节点是自身，说明该变量为所在的连通分量的根节点。一开始所有变量的父节点都是它们自身。对于合并操作，我们将第一个变量的根节点的父节点指向第二个变量的根节点；对于查找操作，我们沿着当前变量的父节点一路向上查找，直到找到根节点。</p>
+<p><strong>时间复杂度</strong>：$O(n + C \log C)$，其中 $n$ 是 equations 中的方程数量，$C$ 是变量的总数，在本题中变量都是小写字母，即 $C \leq 26$。上面的并查集代码中使用了路径压缩优化，对于每个方程的合并和查找的均摊时间复杂度都是 $O(\log C)$。由于需要遍历每个方程，因此总时间复杂度是 $O(n + C \log C)$。</p>
+<p><strong>空间复杂度</strong>：$O(C)$。创建一个数组 parent 存储每个变量的连通分量信息，由于变量都是小写字母，因此 parent 是长度为 $C$。</p>
+<p><em>参考链接</em></p>
+<p>作者：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/satisfiability-of-equality-equations/solution/deng-shi-fang-cheng-de-ke-man-zu-xing-by-leetcode-/">LeetCode-Solution</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equationsPossible</span><span class="hljs-params">(String[] equations)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> length = equations.length;<br>        <span class="hljs-keyword">int</span>[] parent = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>            parent[i] = i;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (String str : equations) &#123;<br>            <span class="hljs-keyword">if</span> (str.charAt(<span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;=&#x27;</span>) &#123;<br>                <span class="hljs-keyword">int</span> index1 = str.charAt(<span class="hljs-number">0</span>) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>                <span class="hljs-keyword">int</span> index2 = str.charAt(<span class="hljs-number">3</span>) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>                union(parent, index1, index2);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (String str : equations) &#123;<br>            <span class="hljs-keyword">if</span> (str.charAt(<span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;!&#x27;</span>) &#123;<br>                <span class="hljs-keyword">int</span> index1 = str.charAt(<span class="hljs-number">0</span>) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>                <span class="hljs-keyword">int</span> index2 = str.charAt(<span class="hljs-number">3</span>) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>                <span class="hljs-keyword">if</span> (find(parent, index1) == find(parent, index2)) &#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] parent, <span class="hljs-keyword">int</span> index1, <span class="hljs-keyword">int</span> index2)</span> </span>&#123;<br>        parent[find(parent, index1)] = find(parent, index2);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] parent, <span class="hljs-keyword">int</span> index)</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (parent[index] != index) &#123;<br>            parent[index] = parent[parent[index]];<br>            index = parent[index];<br>        &#125;<br>        <span class="hljs-keyword">return</span> index;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="0609-面试题46-把数字翻译成字符串-medium"><a href="#0609-面试题46-把数字翻译成字符串-medium" class="headerlink" title="[0609] 面试题46. 把数字翻译成字符串 (medium)"></a>[0609] 面试题46. 把数字翻译成字符串 (medium)</h1><p><a href="/2020/05/13/剑指offer-面试题46-把数字翻译成字符串（中）/">剑指offer 面试题46. 把数字翻译成字符串（中）</a></p>
+<p><em>keyword</em>: 动态规划</p>
+<h1 id="0610-9-Palindrome-Number-easy"><a href="#0610-9-Palindrome-Number-easy" class="headerlink" title="[0610] 9. Palindrome Number (easy)"></a>[0610] 9. Palindrome Number (easy)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-number/">回文数</a></p>
+<p><a href="/2020/03/08/LeetCode-9-回文数（易）/">LeetCode 9. 回文数（易）</a></p>
+<p><em>keywords</em>：边界值判定</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E4%B8%8E%E5%A0%86/">图与堆</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/19/Test-Mac-OS-synchronization/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Test Mac OS synchronization</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/04/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%E4%B8%80/">
+                        <span class="hidden-mobile">Java入门笔记一</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/06/08/LeetCode2020-0608-0614/';
+        this.page.identifier = '/2020/06/08/LeetCode2020-0608-0614/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

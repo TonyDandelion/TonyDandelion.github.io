@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>学习C++从入门到精通的的十本最经典书籍 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="学习C++从入门到精通的的十本最经典书籍">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-26 00:58" pubdate>
+        2020年5月26日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">学习C++从入门到精通的的十本最经典书籍</h1>
+            
+            <div class="markdown-body">
+              <p>C++学习经典教材</p>
+<a id="more"></a>
+<h1 id="C-Primer-4th-Edition-Recommend"><a href="#C-Primer-4th-Edition-Recommend" class="headerlink" title="C++ Primer, 4th Edition (Recommend)"></a>C++ Primer, 4th Edition (Recommend)</h1><p><img src="https://i.loli.net/2020/05/25/KMlbdvr5jt2qm79.jpg" srcset="/img/loading.gif" alt="1,"></p>
+<p>【原书名】 C++ Primer （4th Edition）<br>【原出版社】 Addison Wesley/Pearson<br>【作者】 （美）Stanley B.Lippman，Josée LaJoie，Barbara E.Moo<br>【译者】 李师贤<br>【丛书名】 图灵计算机科学丛书<br>【出版社】人民邮电出版社</p>
+<p>难度：★★☆<br>质量：★★★★★<br>广度：★★★★★<br>深度：★★★★<br>性价：★★★</p>
+<p>本书是久负盛名的C++经典教程，其内容是C++大师Stanley B. Lippman丰富的实践经验和C++标准委员会原负责人Josée Lajoie对C++标准深入理解的完美结合，已经帮助全球无数程序员学会了C++.本版对前一版进行了彻底的修订，内容经过了重新组织，更加入了C++先驱Barbara E. Moo在C++教学方面的真知灼见。既显著改善了可读性，又充分体现了C++语言的最新进展和当前的业界最佳实践。书中不但新增大量教学辅助内容，用于强调重要的知识点，提醒常见的错误，推荐优秀的编程实践，给出使用提示，还包含大量来自实战的示例和习题。对C++基本概念和技术全面而且权威的阐述，对现代C++编程风格的强调，使本书成为C++初学者的最佳指南；对于中高级程序员，本书也是不可或缺的参考书。本书的前言阐述了 第4版和前一版的不同之处。</p>
+<h1 id="C-Primer-Plus-Recommend"><a href="#C-Primer-Plus-Recommend" class="headerlink" title="C++ Primer Plus (Recommend)"></a>C++ Primer Plus (Recommend)</h1><p><img src="https://i.loli.net/2020/05/25/iWC2ldIqegSBy8L.jpg" srcset="/img/loading.gif" alt="2"></p>
+<p>【原书名】 C++ Primer Plus<br>【原出版社】 Sams<br>【作者】 （美）Stephen Prata<br>【译者】 孙建春 韦强<br>【丛书名】 Primer Plus 系列<br>【出版社】 人民邮电出版社</p>
+<p>难度：☆<br>质量：★★★☆<br>广度：★★★★<br>深度：★★★<br>性价：★★★☆</p>
+<p>本书针对的是C++初学者，书中从C语言基础知识开始介绍，然后在此基础上详细阐述C++新增的特性，因此不要求读者有C语言方面的背景知识。本书可作为大中院校教授C++课程的教材，也可供初学者自学C++时使用。覆盖面较全，章节安排比较合理，由浅入深，也很容易，故因此失去了一些深度。价格比较便宜，但翻译质量略有不足。现在，第五版也出版了，不过还没有读，看章节都差不多。</p>
+<h1 id="Essential-C"><a href="#Essential-C" class="headerlink" title="Essential C++"></a>Essential C++</h1><p><img src="https://i.loli.net/2020/05/25/XnyTVRm4opFlBYv.jpg" srcset="/img/loading.gif" alt="3"></p>
+<p>【原书名】 Essential C++<br>【原出版社】Pearson Education<br>【作者】 （美）Stanley B.Lippman<br>【丛书名】 深入C++系列<br>【出版社】 中国电力出版社</p>
+<p>难度：★☆<br>质量：★★★★<br>广度：★★★☆<br>深度：★★★<br>性价：★★☆</p>
+<p>Lippman的一部面向初学者的作品。在他写了那么后一本primer之后，为何还要写这么薄这么浅的书呢？其实primer对于初学者来说太笨重了，而这本书却是从不同的方面——C++的本质和组织结构对语言进行阐释，可以帮助初学者对这门语言有一个大致的了解，但知识范围不很全面，不适合系统学习，读者需要一定的编程知识。</p>
+<h1 id="Effective-C-amp-More-Effective-C"><a href="#Effective-C-amp-More-Effective-C" class="headerlink" title="Effective C++ &amp; More Effective C++"></a><strong>Effective C++ &amp; More Effective C++</strong></h1><blockquote>
+<p><strong>Effective C++, Third Edition</strong></p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/05/25/fpBkqljXUT7Ftgd.jpg" srcset="/img/loading.gif" alt="4"></p>
+<p>【原书名】 Effective C++, Third Edition<br>【原出版社】 Addison Wesley/Pearson<br>【作者】 （美）Scott Meyers<br>【出版社】 电子工业出版社</p>
+<blockquote>
+<p><strong>More Effective C++： 35 New Ways to Improve Your Programs and Designs</strong></p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/05/25/XaAcRoUCYwyF2Ot.jpg" srcset="/img/loading.gif" alt="4-5"></p>
+<p>【原书名】 More Effective C++： 35 New Ways to Improve Your Programs and Designs<br>【原出版社】 Addison Wesley/Pearson<br>【作者】 （美）Scott Meyers<br>【丛书名】 C++设计新思维系列丛书<br>【出版社】 机械工业出版社</p>
+<p>难度：★★★☆<br>质量：★★★★★<br>广度：★★★<br>深度：★★★★★<br>性价：★★</p>
+<p>C++真牛人大手笔，之以条款的形式回答了程序员在使用C++时经常提出的“因该注意些什么？”，“因该避免什么？”，“因该怎样去解决？”，“为什么？”等问题。C++程序员想要让自己的水平上更高的档次，此二书<strong>必看</strong>。价格稍贵，有一定难度，不适合初学者。</p>
+<h1 id="Thinking-in-C"><a href="#Thinking-in-C" class="headerlink" title="Thinking in C++"></a><strong>Thinking in C++</strong></h1><p><img src="https://i.loli.net/2020/05/25/RkQIFstaNGTuqxf.jpg" srcset="/img/loading.gif" alt="5"></p>
+<p>【原书名】 Thinking in C++<br>【原出版社】 McGraw Hill<br>【作者】 Bruce Eckel<br>【译者】 刘宗田　等<br>【丛书名】 计算机科学丛书<br>【出版社】 机械工业出版社</p>
+<p>难度：★★☆<br>质量：★★★<br>广度：★★★☆<br>深度：★★★★<br>性价：★★★</p>
+<p>除了讲述语言之外，有一定的工程性，从设计者的角度来描述C++怎样应用在实际的项目中。语言描述的全面性欠佳，但还是有一定精度的，尤其是在一些小技巧方面。本书还引入了大量的战例，通过一个个的真实项目来引导你使用C++的思想去思考问题。翻译很差，有一定难度。</p>
+<h1 id="The-Complete-C-Training-Course-Recommend"><a href="#The-Complete-C-Training-Course-Recommend" class="headerlink" title="The Complete C++ Training Course (Recommend)"></a><strong>The Complete C++ Training Course</strong> (Recommend)</h1><p><img src="https://i.loli.net/2020/05/25/O7Bflp1ea4dTMhL.jpg" srcset="/img/loading.gif" alt="6"></p>
+<p>【原书名】 The Complete C++ Training Course<br>【作者】 （美）Harvey M.Deitel Paul James Deitel<br>【译者】 邱仲潘　等<br>【丛书名】 国外计算机科学教材系列<br>【出版社】 电子工业出版社</p>
+<p>难度：★<br>质量：★★★☆<br>广度：★★★★★<br>深度：★★★★<br>性价：★★★★☆</p>
+<p><strong>正如其名，真正的大学教程，非常适合初学者学习，内容由浅入深，对C++各项特性的描述都很到位，章节的安排很有条理性</strong>。但深度略显不足，翻译质量不能称之为很好，有一定的疏漏，但对于厚度来讲，价格还算比较便宜。</p>
+<h1 id="The-Design-and-Evolution-of-C"><a href="#The-Design-and-Evolution-of-C" class="headerlink" title="The Design and Evolution of C++"></a>The Design and Evolution of C++</h1><p><img src="https://i.loli.net/2020/05/25/7jPTX9gFnJo8ZhB.jpg" srcset="/img/loading.gif" alt="7"></p>
+<p>【原书名】 The Design and Evolution of C++<br>【原出版社】 Addison-Wesley<br>【作者】 （美）Bjarne Stroustrup<br>【译者】 裘宗燕<br>【丛书名】 计算机科学丛书<br>【出版社】 机械工业出版社</p>
+<p>难度：★★★<br>质量：★★★<br>广度：★★☆<br>深度：★★★★<br>性价：★★★</p>
+<p>对于热爱C++的朋友来说，确实好书一本，可以当做小说来读，可以放在厕所或床头上以供消遣。本书对语言本身描述很少，并有一定难度。读者需要对C++有一定了解，不适合初学者阅读。本书也有英文版，如果不喜欢翻译的朋友可以看看。</p>
+<h1 id="The-C-Programming-Language-Special-Edition"><a href="#The-C-Programming-Language-Special-Edition" class="headerlink" title="The C++ Programming Language, Special Edition"></a>The C++ Programming Language, Special Edition</h1><p><img src="https://i.loli.net/2020/05/25/GAaEJTqHXeizNBW.jpg" srcset="/img/loading.gif" alt="8"></p>
+<p>【原书名】 The C++ Programming Language， Special Edition<br>【原出版社】 Addison Wesley<br>【作者】 （美）Bjarne Stroustrup<br>【译者】 裘宗燕<br>【丛书名】 计算机科学丛书<br>【出版社】 机械工业出版社</p>
+<p>难度：★☆<br>质量：★★★★☆<br>广度：★★★★☆<br>深度：★★★★<br>性价：★★★☆</p>
+<p>C++之父所作，被称之为“C++圣经”。不仅对语言，而且对语言周边的一些如发展史、语义哲学都有比较详细的描述。对语言的描述较为全面，同时包含一部分和程序库相关联的知识，并有一定深度，适合有一定语言基础的初学者，翻译质量不错，价格适中。</p>
+<h1 id="Inside-the-C-Object-Model"><a href="#Inside-the-C-Object-Model" class="headerlink" title="Inside the C++ Object Model"></a><strong>Inside the C++ Object Model</strong></h1><p><img src="https://i.loli.net/2020/05/25/gYzbq6RDWJE82nw.jpg" srcset="/img/loading.gif" alt="9"></p>
+<p>【原书名】 Inside the C++ Object Model<br>【原出版社】 Pearson Education<br>【作者】 （美）Stanley B.Lippman<br>【丛书名】 深入C++系列<br>【出版社】 中国电力出版社</p>
+<p>难度：★★★★☆<br>质量：★★★★★<br>广度：★★★<br>深度：★★★★★<br>性价：★★</p>
+<p>C++编译器开发主管所写。如果你想成为真正的C++高手，看这本书，他为你讲述了编译器在处理各种语法时在“后台”所做的事。对C++有较深入了解的读者会在读后有恍然大悟之感。侯捷翻译，质量相当不错，但内容太深，只适合对C++有较深了解的读者，价格偏贵。</p>
+<h1 id="C-程序设计系列教材-Recommend"><a href="#C-程序设计系列教材-Recommend" class="headerlink" title="C++程序设计系列教材 (Recommend)"></a>C++程序设计系列教材 (Recommend)</h1><p><img src="https://i.loli.net/2020/05/25/AUHPw9kpl4Koyzn.jpg" srcset="/img/loading.gif" alt="10"></p>
+<p>【作者】 钱能 董灵平 张敏霞<br>【丛书名】 C++程序设计系列教材<br>【出版社】 清华大学出版社</p>
+<p>难度：☆<br>质量：★★★<br>广度：★★★☆<br>深度：★★★<br>性价：★★★★★</p>
+<p>国人所著，国人水平实在有限，深度和广度欠佳，放在这十大里实在是因为再挑不出好书了。可圈可点之处有讲解较为清析、简单，符合中国学生思路，价格便宜。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/C/">C++</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/26/LeetCode-103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 103. 二叉树的锯齿形层次遍历（中）& 剑指offer 面试题32 III. 从上到下打印二叉树 III</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/26/ACM-IOI-%E5%8E%86%E5%B9%B4%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F%E8%AE%BA%E6%96%87%E9%9B%86%E5%92%8C%E8%AE%BA%E6%96%87%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB%E6%95%B4%E7%90%86/">
+                        <span class="hidden-mobile">ACM/IOI 历年国家集训队论文集和论文算法分类整理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/05/26/%E5%AD%A6%E4%B9%A0C-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%9A%84%E7%9A%84%E5%8D%81%E6%9C%AC%E6%9C%80%E7%BB%8F%E5%85%B8%E4%B9%A6%E7%B1%8D/';
+        this.page.identifier = '/2020/05/26/%E5%AD%A6%E4%B9%A0C-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%9A%84%E7%9A%84%E5%8D%81%E6%9C%AC%E6%9C%80%E7%BB%8F%E5%85%B8%E4%B9%A6%E7%B1%8D/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

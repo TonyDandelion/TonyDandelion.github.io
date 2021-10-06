@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>LeetCode2020 0622-0628 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode2020 0622-0628">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-26 11:33" pubdate>
+        2020年6月26日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      61
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode2020 0622-0628</h1>
+            
+            <div class="markdown-body">
+              <p>坚持记录完成LeetCode的每日一题</p>
+<a id="more"></a>
+<h1 id="0622-面试题-16-18-Pattern-Matching-LCCI-Medium"><a href="#0622-面试题-16-18-Pattern-Matching-LCCI-Medium" class="headerlink" title="[0622] 面试题 16. 18. Pattern Matching LCCI (Medium)"></a>[0622] 面试题 16. 18. Pattern Matching LCCI (Medium)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/pattern-matching-lcci/">面试题 16.18. Pattern Matching LCCI</a></p>
+<p><em>KeyWords:</em> 字符串与哈希表</p>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>You are given two strings, pattern and value. The pattern string consists of just the letters a and b, describing a pattern within a string. For example, the string catcatgocatgo matches the pattern aabab (where cat is a and go is b). It also matches patterns like a, ab, and b. Write a method to determine if value matches pattern. a and b cannot be the same string.</p>
+<p>Example 1:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input:  <span class="hljs-attr">pattern</span> = <span class="hljs-string">&quot;abba&quot;</span>, <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;dogcatcatdog&quot;</span><br>Output:  <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>Example 2:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input:  <span class="hljs-attr">pattern</span> = <span class="hljs-string">&quot;abba&quot;</span>, <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;dogcatcatfish&quot;</span><br>Output:  <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>Example 3:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input:  <span class="hljs-attr">pattern</span> = <span class="hljs-string">&quot;aaaa&quot;</span>, <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;dogcatcatdog&quot;</span><br>Output:  <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure><br>Example 4:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input:  <span class="hljs-attr">pattern</span> = <span class="hljs-string">&quot;abba&quot;</span>, <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;dogdogdogdog&quot;</span><br>Output:  <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>Explanation:  “a”=”dogdog”,b=””，vice versa.</p>
+<p>Note:<br>0 &lt;= len(pattern) &lt;= 1000<br>0 &lt;= len(value) &lt;= 1000<br>pattern only contains “a” and “b”, value only contains lowercase letters.</p>
+<h2 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h2><p><strong>枚举</strong></p>
+<p>本题的算法实现不难，但是细节较多。题目中给出的 <code>pattern</code> 和 <code>value</code> 的长度可以为 <code>0</code>，因此需要充分考虑边界情况。</p>
+<p>我们设 $\textit{pattern}$ 的长度为 $\ell_p$ ，$\textit{value}$ 的长度为 $\ell_v$ 。根据题目描述，我们需要给字母 a 和 b 分配不同的字符串值（可以为空字符串），使得将 $\textit{pattern}$ 中的字母替换成对应的字符串后，结果与 $\textit{value}$ 相同。</p>
+<p>在分配字符串之前，我们不妨先分配 a 和 b 对应字符串的长度。如果确定了长度，那么我们只要将 $\textit{value}$ 按照 $\textit{pattrn}$ 中出现字母的顺序，划分成 $\ell_p$ 个子串，并判断其中 a 对应的子串是否相同，以及 b 对应的子串是否相同即可。具体地，假设 $\textit{pattern}$ 中出现了 $c_a$ 个 a 以及 $\ell_p - c_a$ 个 b，并且 a 和 b 对应字符串的长度分别为 $\ell_a$ 和 $\ell_b$ ，那么必须要满足：</p>
+<script type="math/tex; mode=display">
+c_a * \ell_a + (\ell_p - c_a) * \ell_b = \ell_v</script><p>其中 $c_a$ 是已知的常量，$\ell_a$ 和 $\ell_b$  是未知数。这是一个二元一次方程，可能无解、有唯一解或者无数解。然而我们需要的仅仅是自然数解，也就是 $\ell_a$  和 $\ell_b$ 都大于等于 $0$ 的解，因此我们可以直接枚举 $\ell_a$ 的值，它必须是 $[0, \frac{\ell_v}{c_a}]$ 之间的自然数，否则 $\ell_b$ 就不会大于等于 0 了。在枚举 $\ell_a$ 之后，我们将其带入等式并解出 $\ell_b$。如果 $\ell_b$  是整数，我们就枚举了一组 a 和 b 的可能长度。</p>
+<p>在枚举了长度之后，我们就可以根据 $\textit{pattern}$ 来将 $\textit{value}$ 划分成 $\ell_p$ 个子串。具体地，我们遍历 $\textit{pattern}$，并用一个指针 $\textit{pos}$ 来帮助我们进行划分。当我们遍历到一个 $a$ 时，我们取出从 $\textit{pos}$ 开始，长度为 $\ell_a$ 的子串。如果这是我们第一次遇到字母 aa，我们就得到了 $a$ 应该对应的子串；否则，我们将取出的子串与 $a$ 应该对应的子串进行比较，如果不相同，说明模式匹配失败。</p>
+<p>同理，当我们遍历到一个 $b$ 时，我们取出从 $\textit{pos}$ 开始，长度为 $\ell_b$ 的子串，根据是否第一次遇到字母 $b$ 来进行比较。在比较结束后，我们将 $\textit{pos}$ 向后移动，进行下一个字母的匹配。</p>
+<p>在遍历完成之后，如果匹配没有失败，我们还需要判断一下 aa 和 bb 是否对应了不同的子串。只有它们对应的子串不同时，才是一种满足题目要求的模式匹配。</p>
+<p>细节</p>
+<p>上面的算法看上去不是很复杂：我们只需要用一重循环枚举 $\ell_a$，计算出 $\ell_b$，再用一重循环遍历 $\textit{pattern}$ 以及移动 $\textit{pos}$ 即可。但就像我们在「前言」部分所说的，本题有非常多的细节需要考虑。</p>
+<p>我们回到二元一次方程：</p>
+<script type="math/tex; mode=display">
+c_a * \ell_a + (\ell_p - c_a) * \ell_b = \ell_v</script><p>如果我们枚举 $\ell_a$，那么必须要求 $c_a \neq 0$，因为在 $c_a = 0$ 的情况下，原方程如果有解，那么一定有无数解（因为 $\ell_a$ 可以取任意值）。因此如果 $c_a = 0$，我们就必须枚举 $\ell_b$ 。这无疑增加了编码的复杂度，因为需要根据 $c_a$  的值选择对 $\ell_a$ 或 $\ell_b$ 进行枚举，失去了统一性。并且，如果 $\ell_p - c_a$ 也为 0，那么我们连 $\ell_b$都无法枚举。</p>
+<p>因此，我们必须梳理一下判断的逻辑：</p>
+<p>如果 $\textit{pattern}$ 为空，那么只有在 $\textit{value}$ 也为空时，它们才能匹配；</p>
+<p>如果 $\textit{value}$ 为空，那么如果 $\textit{pattern}$ 也为空，就和第一条的情况相同；如果 $\textit{pattern}$ 中只出现了一种字母，我们可以令该字母为空，另一没有出现的字母为任意非空串，就可以正确匹配；如果 $\textit{pattern}$ 中出现了两种字母，那么就无法正确匹配，因为这两种字母都必须为空串，而题目描述中规定它们不能表示相同的字符串；</p>
+<p>如果 $\textit{pattern}$ 和 $\textit{value}$ 均非空，那么我们需要枚举 $\textit{pattern}$ 中出现的那个字母（如果两个字母均出现，可以枚举任意一个）对应的长度，使用上面提到的算法进行判断。</p>
+<p>对于上面的第三条，我们可以根据「对称性」减少代码的编写的复杂度：我们还是固定枚举 $\ell_a$，但如果 $c_a &lt; \ell_p - c_a$ ，即 $a$ 出现的次数少于 $b$ 出现的次数，那么我们就将 $\textit{pattern}$ 中所有的 $a$ 替换成 $b$，$b$ 替换成 $a$。这样做就保证了 $a$ 出现了至少一次（$c_a &gt; 0$），枚举 $\ell_a$就不会有任何问题，同时不会影响答案的正确性。</p>
+<p>这样一来，我们就可以优化判断的逻辑：<br>我们首先保证 $\textit{pattern}$ 中 $a$ 出现的次数不少于 $b$ 出现的次数。如果不满足，我们就将 $a$ 和 $b$ 互相替换；<br>如果 $\textit{value}$ 为空，那么要求 $\textit{pattern}$ 也为空（$\ell_p = 0$）或者只出现了字母 $a$（$\ell_p - c_a = 0$），这两种情况均等同于 $\ell_p - c_a = 0$。在其余情况下，都无法匹配成功；<br>如果$ \textit{pattern}$ 为空且 $\textit{value}$ 不为空，那么无法匹配成功；<br>如果 $\textit{pattern}$ 和 $ \textit{value}$ 均非空，我们就可以枚举 $\ell_a$。</p>
+<p><strong>正则表达式</strong></p>
+<p>构造正则表达式解决问题</p>
+<p><strong>参考链接</strong></p>
+<p>作者：LeetCode-Solution<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/pattern-matching-lcci/solution/mo-shi-pi-pei-by-leetcode-solution/">https://leetcode-cn.com/problems/pattern-matching-lcci/solution/mo-shi-pi-pei-by-leetcode-solution/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h2 id="Java-Code"><a href="#Java-Code" class="headerlink" title="Java Code"></a>Java Code</h2><p>枚举</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">patternMatching</span><span class="hljs-params">(String pattern, String value)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> count_a = <span class="hljs-number">0</span>, count_b = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> ch: pattern.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&#x27;a&#x27;</span>) &#123;<br>                ++count_a;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                ++count_b;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (count_a &lt; count_b) &#123;<br>            <span class="hljs-keyword">int</span> temp = count_a;<br>            count_a = count_b;<br>            count_b = temp;<br>            <span class="hljs-keyword">char</span>[] array = pattern.toCharArray();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; array.length; i++) &#123;<br>                array[i] = array[i] == <span class="hljs-string">&#x27;a&#x27;</span> ? <span class="hljs-string">&#x27;b&#x27;</span> : <span class="hljs-string">&#x27;a&#x27;</span>;<br>            &#125;<br>            pattern = <span class="hljs-keyword">new</span> String(array);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (value.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> count_b == <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (pattern.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> len_a = <span class="hljs-number">0</span>; count_a * len_a &lt;= value.length(); ++len_a) &#123;<br>            <span class="hljs-keyword">int</span> rest = value.length() - count_a * len_a;<br>            <span class="hljs-keyword">if</span> ((count_b == <span class="hljs-number">0</span> &amp;&amp; rest == <span class="hljs-number">0</span>) || (count_b != <span class="hljs-number">0</span> &amp;&amp; rest % count_b == <span class="hljs-number">0</span>)) &#123;<br>                <span class="hljs-keyword">int</span> len_b = (count_b == <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : rest / count_b);<br>                <span class="hljs-keyword">int</span> pos = <span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">boolean</span> correct = <span class="hljs-keyword">true</span>;<br>                String value_a = <span class="hljs-string">&quot;&quot;</span>, value_b = <span class="hljs-string">&quot;&quot;</span>;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> ch: pattern.toCharArray()) &#123;<br>                    <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&#x27;a&#x27;</span>) &#123;<br>                        String sub = value.substring(pos, pos + len_a);<br>                        <span class="hljs-keyword">if</span> (value_a.length() == <span class="hljs-number">0</span>) &#123;<br>                            value_a = sub;<br>                        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!value_a.equals(sub)) &#123;<br>                            correct = <span class="hljs-keyword">false</span>;<br>                            <span class="hljs-keyword">break</span>;<br>                        &#125;<br>                        pos += len_a;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        String sub = value.substring(pos, pos + len_b);<br>                        <span class="hljs-keyword">if</span> (value_b.length() == <span class="hljs-number">0</span>) &#123;<br>                            value_b = sub;<br>                        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!value_b.equals(sub)) &#123;<br>                            correct = <span class="hljs-keyword">false</span>;<br>                            <span class="hljs-keyword">break</span>;<br>                        &#125;<br>                        pos += len_b;<br>                    &#125;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (correct &amp;&amp; !value_a.equals(value_b)) &#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>正则表达式</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">patternMatching</span><span class="hljs-params">(String pattern, String value)</span> </span>&#123;<br>     <span class="hljs-keyword">if</span> (value.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> pattern.length() &lt;= <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (pattern.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> value.length() == <span class="hljs-number">0</span>;<br>        &#125;<br><br>        Map&lt;String, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>        String start = pattern.substring(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">if</span>(start.equals(<span class="hljs-string">&quot;a&quot;</span>))&#123;<br>            map.put(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;\\1&quot;</span>);<br>            map.put(<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;\\2&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            map.put(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;\\2&quot;</span>);<br>            map.put(<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;\\1&quot;</span>);<br>        &#125;<br><br>        StringBuilder newPatter = <span class="hljs-keyword">new</span> StringBuilder();<br>        <span class="hljs-keyword">boolean</span> boolena = <span class="hljs-keyword">true</span>;<br>        <span class="hljs-keyword">boolean</span> boolenb = <span class="hljs-keyword">true</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; pattern.length(); i++)&#123;<br>            String sub = pattern.substring(i, i+<span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">switch</span> (sub)&#123;<br>                <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;a&quot;</span>:<br>                    <span class="hljs-keyword">if</span>(boolena)&#123;<br>                        newPatter.append(<span class="hljs-string">&quot;(\\w*)&quot;</span>);<br>                        boolena = <span class="hljs-keyword">false</span>;<br>                    &#125;<span class="hljs-keyword">else</span> &#123;<br>                        newPatter.append(map.get(<span class="hljs-string">&quot;a&quot;</span>));<br>                    &#125;<br>                    <span class="hljs-keyword">break</span>;<br>                <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;b&quot;</span>:<br>                    <span class="hljs-keyword">if</span>(boolenb)&#123;<br>                        newPatter.append(<span class="hljs-string">&quot;(\\w*)&quot;</span>);<br>                        boolenb = <span class="hljs-keyword">false</span>;<br>                    &#125;<span class="hljs-keyword">else</span> &#123;<br>                        newPatter.append(map.get(<span class="hljs-string">&quot;b&quot;</span>));<br>                    &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> value.matches(newPatter.toString());<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="0623-67-Add-Binary-Easy"><a href="#0623-67-Add-Binary-Easy" class="headerlink" title="[0623] 67. Add Binary (Easy)"></a>[0623] 67. Add Binary (Easy)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-binary/">67. Add Binary</a><br><a href="/2020/03/18/Leetcode-67-二进制求和（易）/">Leetcode 67. 二进制求和（易）</a></p>
+<h1 id="0624-15-3Sum-Closest-Medium"><a href="#0624-15-3Sum-Closest-Medium" class="headerlink" title="[0624] 15. 3Sum Closest (Medium)"></a>[0624] 15. 3Sum Closest (Medium)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum-closest/">3Sum Closest</a><br><a href="/2020/03/08/LeetCode-15-三数之和（中）/">LeetCode 15. 三数之和（中）</a></p>
+<h1 id="0625-139-Word-Break-Medium"><a href="#0625-139-Word-Break-Medium" class="headerlink" title="[0625] 139. Word Break (Medium)"></a>[0625] 139. Word Break (Medium)</h1><p>EveryDay Check LOST，端午节放假的原因，在外面玩了一整天，LeetCode每日一题 lost。以后无论什么日子，每天起床第一件事情，把当天的LeetCode做了。</p>
+<p><em>KeyWords:</em>  动态规划</p>
+<h2 id="Question-1"><a href="#Question-1" class="headerlink" title="Question"></a>Question</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-break/">139. Word Break</a></p>
+<p>Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.</p>
+<p>Note:</p>
+<p>The same word in the dictionary may be reused multiple times in the segmentation.<br>You may assume the dictionary does not contain duplicate words.</p>
+<p>Example 1:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input: <span class="hljs-attr">s</span> = <span class="hljs-string">&quot;leetcode&quot;</span>, <span class="hljs-attr">wordDict</span> = [<span class="hljs-string">&quot;leet&quot;</span>, <span class="hljs-string">&quot;code&quot;</span>]<br>Output: <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>Explanation: Return true because “leetcode” can be segmented as “leet code”.</p>
+<p>Example 2:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input: <span class="hljs-attr">s</span> = <span class="hljs-string">&quot;applepenapple&quot;</span>, <span class="hljs-attr">wordDict</span> = [<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;pen&quot;</span>]<br>Output: <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure><br>Explanation: Return true because “applepenapple” can be segmented as “apple pen apple”.<br>Note that you are allowed to reuse a dictionary word.</p>
+<p>Example 3:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input: <span class="hljs-attr">s</span> = <span class="hljs-string">&quot;catsandog&quot;</span>, <span class="hljs-attr">wordDict</span> = [<span class="hljs-string">&quot;cats&quot;</span>, <span class="hljs-string">&quot;dog&quot;</span>, <span class="hljs-string">&quot;sand&quot;</span>, <span class="hljs-string">&quot;and&quot;</span>, <span class="hljs-string">&quot;cat&quot;</span>]<br>Output: <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure></p>
+<h2 id="Intuition-1"><a href="#Intuition-1" class="headerlink" title="Intuition"></a>Intuition</h2><p>我们定义 $\textit{dp}[i]$ 表示字符串 $s$ 前 $i$ 个字符组成的字符串 $s[0..i-1]$ 是否能被空格拆分成若干个字典中出现的单词。从前往后计算考虑转移方程，每次转移的时候我们需要枚举包含位置 $i-1$ 的最后一个单词，看它是否出现在字典中以及除去这部分的字符串是否合法即可。公式化来说，我们需要枚举 $s[0..i-1]$ 中的分割点 $j$ ，看 $s[0..j-1]$ 组成的字符串 $s_1$（默认 $j = 0$ 时 $s_1$ 为空串）和 $s[j..i-1]$ 组成的字符串 $s_2$ 是否都合法，如果两个字符串均合法，那么按照定义 $s_1$ 和 $s_2$ 拼接成的字符串也同样合法。由于计算到 $\textit{dp}[i]$ 时我们已经计算出了 $\textit{dp}[0..i-1]$ 的值，因此字符串 $s_1$ 是否合法可以直接由 $dp[j]$ 得知，剩下的我们只需要看 $s_2$ 是否合法即可，因此我们可以得出如下转移方程：</p>
+<script type="math/tex; mode=display">
+\textit{dp}[i]=\textit{dp}[j]\ \&\&\ \textit{check}(s[j..i-1])</script><p>其中 $\textit{check}(s[j..i-1])$ 表示子串 $s[j..i-1]$ 是否出现在字典中。</p>
+<p>对于检查一个字符串是否出现在给定的字符串列表里一般可以考虑哈希表来快速判断，同时也可以做一些简单的剪枝，枚举分割点的时候倒着枚举，如果分割点 $j$ 到 $i$ 的长度已经大于字典列表里最长的单词的长度，那么就结束枚举，但是需要注意的是下面的代码给出的是不带剪枝的写法。</p>
+<p>对于边界条件，我们定义 $\textit{dp}[0]=true$ 表示空串且合法。</p>
+<p><strong>参考链接</strong></p>
+<p>作者：LeetCode-Solution<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-break/solution/dan-ci-chai-fen-by-leetcode-solution/">https://leetcode-cn.com/problems/word-break/solution/dan-ci-chai-fen-by-leetcode-solution/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h2 id="Java-Code-1"><a href="#Java-Code-1" class="headerlink" title="Java Code"></a>Java Code</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">wordBreak</span><span class="hljs-params">(String s, List&lt;String&gt; wordDict)</span> </span>&#123;<br>        Set&lt;String&gt; wordDictSet = <span class="hljs-keyword">new</span> HashSet(wordDict);<br>        <span class="hljs-keyword">boolean</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[s.length() + <span class="hljs-number">1</span>];<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-keyword">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= s.length(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) &#123;<br>                <span class="hljs-keyword">if</span> (dp[j] &amp;&amp; wordDictSet.contains(s.substring(j, i))) &#123;<br>                    dp[i] = <span class="hljs-keyword">true</span>;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[s.length()];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="0626-面试题-02-01-移除重复节点-easy"><a href="#0626-面试题-02-01-移除重复节点-easy" class="headerlink" title="[0626] 面试题 02.01. 移除重复节点 (easy)"></a>[0626] 面试题 02.01. 移除重复节点 (easy)</h1><p><em>Key words:</em> 字符串与哈希表、 链表</p>
+<h2 id="Question-2"><a href="#Question-2" class="headerlink" title="Question"></a>Question</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicate-node-lcci/">面试题 02.01. 移除重复节点</a></p>
+<p>编写代码，移除未排序链表中的重复节点。保留最开始出现的节点。</p>
+<p><strong>示例1:</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">输入：<span class="hljs-selector-attr">[1, 2, 3, 3, 2, 1]</span><br>输出：<span class="hljs-selector-attr">[1, 2, 3]</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>示例2:</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">输入：<span class="hljs-selector-attr">[1, 1, 1, 1, 2]</span><br>输出：<span class="hljs-selector-attr">[1, 2]</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ol>
+<li>链表长度在[0, 20000]范围内。</li>
+<li>链表元素在[0, 20000]范围内。</li>
+</ol>
+<p><strong>进阶：</strong>如果不得使用临时缓冲区，该怎么解决？</p>
+<h2 id="Intuition-2"><a href="#Intuition-2" class="headerlink" title="Intuition"></a>Intuition</h2><p><strong>缓冲区解法</strong></p>
+<p>基于hash map去重 </p>
+<p>复杂度分析</p>
+<ul>
+<li>时间复杂度：$O(N)$</li>
+<li>空间复杂度：$O(N)$</li>
+</ul>
+<p><strong>双层循环</strong></p>
+<p>给定的链表上使用两重循环，其中第一重循环从链表的头节点开始，枚举一个保留的节点，这是因为我们保留的是「最开始出现的节点」。第二重循环从枚举的保留节点开始，到链表的末尾结束，将所有与保留节点相同的节点全部移除。</p>
+<p>复杂度分析</p>
+<ul>
+<li>时间复杂度：$O(N^2)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<p><strong>参考链接</strong></p>
+<p>作者：LeetCode-Solution<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicate-node-lcci/solution/yi-chu-zhong-fu-jie-dian-by-leetcode-solution/">https://leetcode-cn.com/problems/remove-duplicate-node-lcci/solution/yi-chu-zhong-fu-jie-dian-by-leetcode-solution/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h2 id="Java-Code-2"><a href="#Java-Code-2" class="headerlink" title="Java Code"></a>Java Code</h2><p><strong>缓冲区解法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">removeDuplicateNodes</span><span class="hljs-params">(ListNode head)</span> </span>&#123;<br>        <span class="hljs-comment">// 特殊用例判定</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br>        <span class="hljs-comment">// 声明hashmap</span><br>        ListNode pos = head;<br>        Set&lt;Integer&gt; hashmap = <span class="hljs-keyword">new</span> HashSet&lt;Integer&gt;();<br>        <span class="hljs-comment">// 注意此处要在while之外将头节点添加进去</span><br>        hashmap.add(pos.val);<br><br>        <span class="hljs-comment">// 依次遍历链表节点进行判重</span><br>        <span class="hljs-keyword">while</span> (pos.next != <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">if</span> (hashmap.add(pos.next.val)) &#123;<br>                pos = pos.next;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                pos.next = pos.next.next;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 将最后一位置为null</span><br>        pos.next = <span class="hljs-keyword">null</span>;<br><br>        <span class="hljs-comment">// 返回处理之后的头节点</span><br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>双层循环解法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">removeDuplicateNodes</span><span class="hljs-params">(ListNode head)</span> </span>&#123;        <br>        <span class="hljs-comment">// 声明外部指针</span><br>        ListNode outter = head;<br>        <span class="hljs-comment">// 依次遍历判重</span><br>        <span class="hljs-comment">// 外层循环</span><br>        <span class="hljs-keyword">while</span> (outter != <span class="hljs-keyword">null</span>) &#123;<br>            ListNode inner = outter;<br>            <span class="hljs-comment">// 内层循环</span><br>            <span class="hljs-keyword">while</span> (inner.next != <span class="hljs-keyword">null</span>) &#123;<br>                <span class="hljs-keyword">if</span> (outter.val == inner.next.val) &#123;<br>                    <span class="hljs-comment">// 遇到重复的直接跳过</span><br>                    inner.next = inner.next.next;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-comment">// 不是重复的元素就保留</span><br>                    inner = inner.next;<br>                &#125;<br>            &#125;<br>            <span class="hljs-comment">// 更新外层循环指针</span><br>            outter = outter.next;<br>        &#125;<br>        <span class="hljs-comment">// 返回处理之后的头节点</span><br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="0627-41-First-Missing-Positive-Hard"><a href="#0627-41-First-Missing-Positive-Hard" class="headerlink" title="[0627] 41. First Missing Positive (Hard)"></a>[0627] 41. First Missing Positive (Hard)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-missing-positive/">41. First Missing Positive</a><br><a href="/2020/03/09/LeetCode-41-缺失的第一个正数（难）/">LeetCode 41. 缺失的第一个正数（难）</a></p>
+<h1 id="0628-209-Minimum-Size-Subarray-Sum-Medium"><a href="#0628-209-Minimum-Size-Subarray-Sum-Medium" class="headerlink" title="[0628] 209. Minimum Size Subarray Sum (Medium)"></a>[0628] 209. Minimum Size Subarray Sum (Medium)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-size-subarray-sum/">209. Minimum Size Subarray Sum</a></p>
+<p><em>Keywords:</em> 二分查找和搜索、数组与指针</p>
+<h2 id="Question-3"><a href="#Question-3" class="headerlink" title="Question"></a>Question</h2><p>Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s. If there isn’t one, return 0 instead.</p>
+<p>Example:<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: s = <span class="hljs-number">7</span>, nums =<span class="hljs-meta"> [2,3,1,2,4,3]</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure><br>Explanation: the subarray [4,3] has the minimal length under the problem constraint.</p>
+<p><strong>Follow up:</strong><br>If you have figured out the O(n) solution, try coding another solution of which the time complexity is O(n log n). </p>
+<h2 id="Intuition-3"><a href="#Intuition-3" class="headerlink" title="Intuition"></a>Intuition</h2><p><strong>前缀和 + 二分查找</strong></p>
+<p>在确定每个子数组的开始下标后，找到长度最小的子数组需要 $O(n)$ 的时间。如果使用二分查找，则可以将时间优化到 $O(\log n)$。</p>
+<p> 在确定每个子数组的开始下标后，找到长度最小的子数组需要 $O(n)$ 的时间。如果使用二分查找，则可以将时间优化到 $O(\log n)$。</p>
+<p>为了使用二分查找，需要额外创建一个数组 $\text{sums}$ 用于存储数组 $\text{nums}$ 的前缀和，其中 $\text{sums}[i]$ 表示从 $\text{nums}[0]$ 到 $\text{nums}[i-1]$ 的元素和。得到前缀和之后，对于每个开始下标 $i$，可通过二分查找得到大于或等于 $i$ 的最小下标 $\textit{bound}$，使得 $\text{sums}[\textit{bound}]-\text{sums}[i-1] \ge s$，并更新子数组的最小长度（此时子数组的长度是 $\textit{bound}-(i-1)$）。</p>
+<p>因为这道题保证了数组中每个元素都为正，<strong>所以前缀和一定是递增的，这一点保证了二分的正确性。</strong>如果题目没有说明数组中每个元素都为正，这里就不能使用二分来查找这个位置了。</p>
+<p>复杂度分析</p>
+<p>时间复杂度：$O(n \log n)$ <br><br>空间复杂度：$O(n)$</p>
+<p><strong>双指针</strong></p>
+<p>定义两个指针 $\textit{start}$ 和 $\textit{end}$ 分别表示子数组的开始位置和结束位置，维护变量 $\textit{sum}$ 存储子数组中的元素和（即从$ \text{nums}[\textit{start}]$ 到 $\text{nums}[\textit{end}]$ 的元素和）。</p>
+<p>初始状态下，$\textit{start}$ 和 $\textit{end}$ 都指向下标 $0$，$\textit{sum}$ 的值为 $0$。</p>
+<p>每一轮迭代，将 $\text{nums}[end]$ 加到 $\textit{sum}$，如果 $\textit{sum} \ge s$，则更新子数组的最小长度（此时子数组的长度是 $\textit{end}-\textit{start}+1$），然后将 $\text{nums}[start]$ 从 $\textit{sum}$ 中减去并将 $\textit{start}$ 右移，直到 $\textit{sum} &lt; s$，在此过程中同样更新子数组的最小长度。在每一轮迭代的最后，将 $\textit{end}$ 右移。</p>
+<p>复杂度分析</p>
+<p>时间复杂度：$O(n)$，其中 $n$ 是数组的长度。指针 $\textit{start}$ 和 $\textit{end}$ 最多各移动 $n$ 次。<br><br>空间复杂度：$O(1)$</p>
+<h2 id="Java-Code-3"><a href="#Java-Code-3" class="headerlink" title="Java Code"></a>Java Code</h2><p><strong>前缀和 + 二分查找</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> s, <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> n = nums.length;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">int</span> ans = Integer.MAX_VALUE;<br>        <span class="hljs-keyword">int</span>[] sums = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n + <span class="hljs-number">1</span>]; <br>        <span class="hljs-comment">// 为了方便计算，令 size = n + 1 </span><br>        <span class="hljs-comment">// sums[0] = 0 意味着前 0 个元素的前缀和为 0</span><br>        <span class="hljs-comment">// sums[1] = A[0] 前 1 个元素的前缀和为 A[0]</span><br>        <span class="hljs-comment">// 以此类推</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            sums[i] = sums[i - <span class="hljs-number">1</span>] + nums[i - <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-keyword">int</span> target = s + sums[i - <span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">int</span> bound = Arrays.binarySearch(sums, target);<br>            <span class="hljs-keyword">if</span> (bound &lt; <span class="hljs-number">0</span>) &#123;<br>                bound = -bound - <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (bound &lt;= n) &#123;<br>                ans = Math.min(ans, bound - (i - <span class="hljs-number">1</span>));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans == Integer.MAX_VALUE ? <span class="hljs-number">0</span> : ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>双指针</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> s, <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> n = nums.length;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">int</span> ans = Integer.MAX_VALUE;<br>        <span class="hljs-keyword">int</span> start = <span class="hljs-number">0</span>, end = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; n) &#123;<br>            sum += nums[end];<br>            <span class="hljs-keyword">while</span> (sum &gt;= s) &#123;<br>                ans = Math.min(ans, end - start + <span class="hljs-number">1</span>);<br>                sum -= nums[start];<br>                start++;<br>            &#125;<br>            end++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans == Integer.MAX_VALUE ? <span class="hljs-number">0</span> : ans;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%92%8C%E6%90%9C%E7%B4%A2/">二分查找和搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/27/Ant-Design-Pro-Guide/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ant Design Pro</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/26/Java%E8%AF%AD%E6%B3%95%E5%BF%AB%E6%9F%A5/">
+                        <span class="hidden-mobile">Java语法快查</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/06/26/LeetCode2020-0622-0628/';
+        this.page.identifier = '/2020/06/26/LeetCode2020-0622-0628/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

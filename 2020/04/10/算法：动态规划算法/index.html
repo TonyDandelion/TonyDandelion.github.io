@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>算法：动态规划算法 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="算法：动态规划算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-10 21:08" pubdate>
+        2020年4月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法：动态规划算法</h1>
+            
+            <div class="markdown-body">
+              <p>适合用Dynamic Program解决的问题，存在着状态传递。</p>
+<p>将递归过程中的状态存储起来，用于推导后续状态就是动态规划。</p>
+<a id="more"></a>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>动态规划的本质就是对<strong>中间状态</strong>进行保存，对<strong>子问题</strong>的解答结果进行保存，自底向上解出许多子问题，然后再做出选择，往往每一个步骤都求做一个选择，这个<strong>选择往往依赖于之前子问题的解</strong>。递归（分而治之）加上状态记录，<strong>利用记忆状态</strong>，避免重复判断，就是动态规划。</p>
+<p>简而言之，动态规划是<strong>从上往下</strong>分析问题，<strong>从下往上</strong>求解问题。</p>
+<h2 id="动态规划、DFS、回溯、递归之间的关系？"><a href="#动态规划、DFS、回溯、递归之间的关系？" class="headerlink" title="动态规划、DFS、回溯、递归之间的关系？"></a>动态规划、DFS、回溯、递归之间的关系？</h2><p>递归是DFS（深度优先搜索）的一种实现方式，<strong>DFS是动态规划的一种实现方式</strong>。回溯法是DFS过程中可以进行的可选操作。<code>动态规划 &gt; DFS(回溯法) &gt; 递归</code></p>
+<h2 id="哪些问题可以用动态规划解决？"><a href="#哪些问题可以用动态规划解决？" class="headerlink" title="哪些问题可以用动态规划解决？"></a>哪些问题可以用动态规划解决？</h2><p>满足以下四个条件的问题可以考虑用动态规划解决：</p>
+<ol>
+<li>该问题要求最优解。</li>
+<li>整体问题的最优解是依赖各个子问题的最优解。</li>
+<li>子问题之间还有相互重叠的更小的子问题。</li>
+<li>该问题适用于<strong>从上往下分析问题，从下往上求解问题</strong>的 解决思路。</li>
+</ol>
+<p>那怎么知道它就存在「重叠子问题」呢，这似乎不容易看出来？</p>
+<p>解答这个问题，最直观的应该是<strong>随便假设一个输入，然后画递归树，肯定是可以发现相同节点的。这属于定量分析</strong>，其实不用这么麻烦，下面我来教你定性分析，一眼就能看出「<strong>重叠子问题</strong>」性质。拿最简单的斐波那契数列举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-comment"># 给递归一个出口  第一位和第二位都是1</span><br>    <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> n == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-comment"># 从第三位开始  返回上一个数加上上一个数</span><br>        <span class="hljs-keyword">return</span> func(n-<span class="hljs-number">1</span>) + func(n-<span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
+<p>我们抽象出递归算法的框架：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>):</span><br>    fib(n - <span class="hljs-number">1</span>)<br>    fib(n - <span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
+<p>看着这个框架，请问原问题 $f(n)$，<strong>如何触达子问题 $f(n - 2)$？</strong>有两种路径，</p>
+<p>一是</p>
+<script type="math/tex; mode=display">
+f(n) -> f(n-1) -> f(n - 1 - 1)</script><p>二是 </p>
+<script type="math/tex; mode=display">
+f(n) -> f(n - 2)</script><p>前者经过两次递归，后者进过一次递归而已。两条不同的计算路径都到达了同一个问题，这就是<strong>「重叠子问题」</strong>，而且<strong>可以肯定的是，只要你发现一条重复路径，这样的重复路径一定存在千万条，意味着巨量子问题重叠。</strong></p>
+<h2 id="代码实现过程"><a href="#代码实现过程" class="headerlink" title="代码实现过程"></a>代码实现过程</h2><blockquote>
+<p>直接入手（简单问题）</p>
+</blockquote>
+<p>以 <a href="/2020/05/13/剑指offer-面试题47-礼物的最大价值（中）/">剑指offer 面试题47. 礼物的最大价值（中）</a> 为例：<br>1、状态定义：设函数 $f(i, j)$ 为到达坐标 $(i, j)$ 能拿到的礼物总和的<strong>最大值</strong>。<br>2、转移方程确定：由题意可知，通过 $(i,j-1)$ 和 $(i-1, j)$ 都可以达到 $(i, j)$。则状态转移方程为：$f(i, j) = max(f(i, j-1), f(i-1, j)) + gift(i, j)$。其中，$gift(i,j)$ 为坐标$(i, j)$的格子里礼物的价值。</p>
+<blockquote>
+<p>曲线救国（复杂问题）</p>
+</blockquote>
+<p>1、将原问题用递归实现（可以用到回溯法）<br>2、<strong>添加保存（记忆）状态的变量，将递归代码写入dp函数。</strong></p>
+<h2 id="动态规划算法框架"><a href="#动态规划算法框架" class="headerlink" title="动态规划算法框架"></a>动态规划算法框架</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">mono = &#123;&#125;  <span class="hljs-comment"># 声明记忆状态的变量</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dp</span>(<span class="hljs-params">指定状态的参数</span>):</span><br>	<span class="hljs-comment"># 判断该状态是否处理过，如果处理过，就直接返回</span><br>	<span class="hljs-keyword">if</span> memo中保存了该状态:<br>		<span class="hljs-keyword">return</span> mono中该状态的保存结果<br>	<span class="hljs-comment"># 针对该状态的递归代码</span><br>	<span class="hljs-keyword">if</span> ...:<br>		... <span class="hljs-comment"># 更新指定状态的参数</span><br>		ans = dp(指定状态的参数)<br>	<span class="hljs-keyword">else</span>:<br>		... <span class="hljs-comment"># 更新指定状态的参数</span><br>		ans = dp(指定状态的参数)<br>	<br>	mono[指定状态的参数作为<span class="hljs-built_in">dict</span>的key] = ans  <span class="hljs-comment"># 将这个未添加的状态添加到mono钟</span><br>	<span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
+<h2 id="状态转移方程"><a href="#状态转移方程" class="headerlink" title="状态转移方程"></a>状态转移方程</h2><p>求解动态规划问题过程中，理清楚状态转移方程至关重要，基于<strong>状态转移方程</strong>才能将前面记忆的结果用于后面状态的计算。  </p>
+<ul>
+<li>以斐波 那契数列举例，我们知道当前求解的数，是前面一个数和前前面一个数的和，所以状态转移方程如下：<script type="math/tex; mode=display">
+f(n) = f(n - 1) + f(n - 2)</script></li>
+<li>以LeetCode 62. 不同路径为例，由于只能水平向右和竖直向下行进，所以达到当前位置的可能路径条数，只能是达到右边位置的路径条数和到达上边位置的路径条数之和，所以状态转移方程如下：  <script type="math/tex; mode=display">
+dp[i][j] = dp[i-1][j] * dp[i][j-1]</script></li>
+</ul>
+<p>有了<strong>状态转移方程</strong>，将过去的状态根据题意，以 <code>list</code> 或者 <code>matrix</code> 的形式保存，持续更新，就能得到最终的结果了。<font color='red'><strong>注意初始状态的更新方法</strong></font>。  </p>
+<h1 id="关键思想总结"><a href="#关键思想总结" class="headerlink" title="关键思想总结"></a>关键思想总结</h1><p>关于动态规划的模板算法，可以参看 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112075593">动态规划套路秒杀背包问题</a> 这篇文章。</p>
+<h1 id="相关LeetCode题目"><a href="#相关LeetCode题目" class="headerlink" title="相关LeetCode题目"></a>相关LeetCode题目</h1><h2 id="LeetCode-10-正则表达式匹配（难）"><a href="#LeetCode-10-正则表达式匹配（难）" class="headerlink" title="LeetCode 10. 正则表达式匹配（难）"></a>LeetCode 10. 正则表达式匹配（难）</h2><p><strong>直觉</strong></p>
+<p>这个题目，递归回溯实现比较复杂，用动态规划更简单。这道题也是剑指offer原题，值得推荐，从递归到到动态规划，逐层递进，需要多学习，多复习。    </p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isMatch</span>(<span class="hljs-params">self, text, pattern</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> pattern:<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> text<br><br>        first_match = <span class="hljs-built_in">bool</span>(text) <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">0</span>] <span class="hljs-keyword">in</span> &#123;text[<span class="hljs-number">0</span>], <span class="hljs-string">&#x27;.&#x27;</span>&#125;<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(pattern) &gt;= <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>:<br>            res = (<br>                self.isMatch(text, pattern[<span class="hljs-number">2</span>:])<br>                <span class="hljs-keyword">or</span><br>                (first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>:], pattern))<br>            )<br>            <span class="hljs-keyword">return</span> res<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>: ], pattern[<span class="hljs-number">1</span>: ])<br><br>        <br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isMatch</span>(<span class="hljs-params">self, text, pattern</span>):</span><br>        memo = <span class="hljs-built_in">dict</span>()<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dp</span>(<span class="hljs-params">i, j</span>):</span><br>            <span class="hljs-keyword">if</span> (i, j) <span class="hljs-keyword">in</span> memo:  <span class="hljs-keyword">return</span> memo[(i, j)]<br>            <span class="hljs-keyword">if</span> j == <span class="hljs-built_in">len</span>(pattern):  <span class="hljs-keyword">return</span> i == <span class="hljs-built_in">len</span>(text)<br>            first_match = i &lt; <span class="hljs-built_in">len</span>(text) <span class="hljs-keyword">and</span> pattern[j] <span class="hljs-keyword">in</span> &#123;text[i], <span class="hljs-string">&#x27;.&#x27;</span>&#125;<br><br>            <span class="hljs-keyword">if</span> j &lt;= <span class="hljs-built_in">len</span>(pattern) - <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> pattern[j + <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>:<br>                ans = dp(i, j+<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> first_match <span class="hljs-keyword">and</span> dp(i+<span class="hljs-number">1</span>, j)<br>            <span class="hljs-keyword">else</span>:<br>                ans = first_match <span class="hljs-keyword">and</span> dp(i+<span class="hljs-number">1</span>, j+<span class="hljs-number">1</span>)<br>            <br>            memo[(i, j)] = ans<br>            <span class="hljs-keyword">return</span> ans<br>        <span class="hljs-keyword">return</span> dp(<span class="hljs-number">0</span>, <span class="hljs-number">0</span> )<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/08/LeetCode-10-正则表达式匹配（难）/">LeetCode-10-正则表达式匹配（难）</a></p>
+<h2 id="LeetCode-64-最小路径和（中）"><a href="#LeetCode-64-最小路径和（中）" class="headerlink" title="LeetCode 64. 最小路径和（中）"></a>LeetCode 64. 最小路径和（中）</h2><p><strong>直觉</strong></p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/17/LeetCode-64-最小路径和（中）/">LeetCode 64. 最小路径和（中）</a></p>
+<h2 id="LeetCode-70-爬楼梯（易）"><a href="#LeetCode-70-爬楼梯（易）" class="headerlink" title="LeetCode 70. 爬楼梯（易）"></a>LeetCode 70. 爬楼梯（易）</h2><p><strong>直觉</strong></p>
+<p>计算从第一层到达每一层可能的N方法，一直叠加。动态规划的状态转移公式为： <code>dp[n] = dp[n-1] + dp[n-2]</code>。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">n</span>):</span><br>    dp = [<span class="hljs-number">0</span>] * n<br>    <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">3</span>:  <span class="hljs-keyword">return</span> n<br>	dp[<span class="hljs-number">0</span>], dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>, <span class="hljs-number">2</span> <br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, n):<br>        dp[n] = dp[n-<span class="hljs-number">2</span>] + dp[n-<span class="hljs-number">1</span>] <br><span class="hljs-keyword">return</span> dp[-<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/17/LeetCode-70-爬楼梯（易）/">LeetCode 70. 爬楼梯（易）</a></p>
+<h2 id="LeetCode-89-格雷编码（中）"><a href="#LeetCode-89-格雷编码（中）" class="headerlink" title="LeetCode 89. 格雷编码（中）"></a>LeetCode 89. 格雷编码（中）</h2><p><strong>题目</strong></p>
+<p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。<br>给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。格雷编码序列必须以 0 开头。</p>
+<p><strong>直觉</strong></p>
+<p>1、先翻转 <code>0 1</code>，得到长度为 <code>n</code> 的排列 <code>0 1 1 0</code> （n=4）。<br>2、在前 <code>n/2</code> 个数字不变，在后 <code>n/2</code> 个排列前加 <code>1</code>。组成新排列，以此类推。  </p>
+<p>这个解法也可以理解成动态规划，状态转移方程就是：  </p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">dp</span>[j] += dp[j-<span class="hljs-number">1</span>] | <span class="hljs-number">1</span> &lt;&lt; i<br></code></pre></div></td></tr></table></figure>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">grayCode</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        res = [<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            size = <span class="hljs-built_in">len</span>(res)<br>            <span class="hljs-comment"># 为啥要从后面往前循环，因为是镜像的，由0 1得到1 0，所以必须从后往前循环。</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(size-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                res.append(res[j] | (<span class="hljs-number">1</span> &lt;&lt; i))<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="2020/03/23/LeetCode-89-格雷编码（中）/">LeetCode 89. 格雷编码（中）</a></p>
+<h2 id="LeetCode-97-交错字符串（难）"><a href="#LeetCode-97-交错字符串（难）" class="headerlink" title="LeetCode 97. 交错字符串（难）"></a>LeetCode 97. 交错字符串（难）</h2><p><strong>题目</strong></p>
+<p>给定三个字符串 <em>s1</em>, <em>s2</em>, <em>s3</em>, 验证 <em>s3</em> 是否是由 <em>s1</em> 和 <em>s2</em> 交错组成的。</p>
+<p><strong>直觉</strong></p>
+<p>设立一个表示进位的变量carried，建立一个新链表，把输入的两个链表从头往后同时处理，每两个相加，将结果加上carried后的值作为一个新节点到新链表后面。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/28/leetcode-97-交错字符串（难）/">LeetCode 97. 交错字符串（难）</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%8E%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法：二分查找与搜索算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">
+                        <span class="hidden-mobile">算法：分治算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/';
+        this.page.identifier = '/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>数据结构：字符串与哈希表 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据结构：字符串与哈希表">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-10 21:10" pubdate>
+        2020年4月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      46
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构：字符串与哈希表</h1>
+            
+            <div class="markdown-body">
+              <p>字符串和哈希表的一些知识点</p>
+<a id="more"></a>
+<h1 id="Python3-字符串基础代码"><a href="#Python3-字符串基础代码" class="headerlink" title="Python3 字符串基础代码"></a>Python3 字符串基础代码</h1><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="upper-and-lower"><a href="#upper-and-lower" class="headerlink" title="upper and lower"></a>upper and lower</h3><p><code>ord()</code>：char转ASCII</p>
+<p><code>chr()</code>：ASCII 转 char</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lower2upper</span>(<span class="hljs-params">_char</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;convert lower character to upper character</span><br><span class="hljs-string">    :param _char: char</span><br><span class="hljs-string">    :return: char</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>) &lt;= <span class="hljs-built_in">ord</span>(_char) &lt;= <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;z&#x27;</span>) : <br>            char_ASCII = <span class="hljs-built_in">ord</span>(_char) - <span class="hljs-number">32</span><br>            upper_char = <span class="hljs-built_in">chr</span>(char_ASCII)<br>            <span class="hljs-keyword">return</span> upper_char<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;_char must between \&#x27;a\&#x27; and \&#x27;z\&#x27;.&quot;</span>)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        print(e)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">upper2lower</span>(<span class="hljs-params">_char</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;convert upper character to lower character</span><br><span class="hljs-string">    :param _char: char</span><br><span class="hljs-string">    :return: char</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>) &lt;= <span class="hljs-built_in">ord</span>(_char) &lt; <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;Z&#x27;</span>):<br>            char_ASCII = <span class="hljs-built_in">ord</span>(_char) + <span class="hljs-number">32</span><br>            lower_char = <span class="hljs-built_in">chr</span>(char_ASCII)<br>            <span class="hljs-keyword">return</span> lower_char<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;_char must between \&#x27;A\&#x27; and \&#x27;Z\&#x27;.&quot;</span>)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        print(e)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    upper = lower2upper(<span class="hljs-string">&#x27;a&#x27;</span>)<br>    <span class="hljs-keyword">if</span> upper:  print(upper)<br>    lower = upper2lower(<span class="hljs-string">&#x27;8&#x27;</span>)<br>    <span class="hljs-keyword">if</span> lower:  print(lower)<br></code></pre></div></td></tr></table></figure>
+<h3 id="split"><a href="#split" class="headerlink" title="split"></a>split</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">split</span>(<span class="hljs-params">target, s</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot; split str according special divider</span><br><span class="hljs-string">    :param target: str</span><br><span class="hljs-string">    :param s: str</span><br><span class="hljs-string">    :return: list</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> s:<br>            start = <span class="hljs-number">0</span><br>            res = []<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s)):<br>                <span class="hljs-keyword">if</span> s[i] == target:<br>                    res.append(s[start:i])<br>                    start = i + <span class="hljs-number">1</span><br>            res.append(s[start:])<br>            <span class="hljs-keyword">return</span> res<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;s is not allowed to be empty!&quot;</span>)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        print(e)<br></code></pre></div></td></tr></table></figure>
+<h3 id="join"><a href="#join" class="headerlink" title="join"></a>join</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">join</span>(<span class="hljs-params">link, lists</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;join items in the list by special linker</span><br><span class="hljs-string">    :param link: str</span><br><span class="hljs-string">    :param lists: list</span><br><span class="hljs-string">    :return: str</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(lists):<br>            res = <span class="hljs-string">&#x27;&#x27;</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> lists:<br>                res += (i+link)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(link):<br>                res = res[:-<span class="hljs-built_in">len</span>(link)]<br>            <span class="hljs-keyword">return</span> res<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;lists is not allowed to be empty!&quot;</span>)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        print(e)<br></code></pre></div></td></tr></table></figure>
+<h3 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">replace</span>(<span class="hljs-params">target, replce, string</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;replace character in the str with anoteher charcter</span><br><span class="hljs-string">    :param target: str</span><br><span class="hljs-string">    :param replace: str</span><br><span class="hljs-string">    :param string: str</span><br><span class="hljs-string">    :return: str</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> target <span class="hljs-keyword">and</span> replace <span class="hljs-keyword">and</span> string:<br>            segments = split(target, string)<br>            res = join(replce, segments)<br>            <span class="hljs-keyword">return</span> res<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;paramter error&quot;</span>)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        print(e)<br></code></pre></div></td></tr></table></figure>
+<h3 id="String-sorted"><a href="#String-sorted" class="headerlink" title="String sorted"></a>String sorted</h3><p>手写 Python 字符串排序算法，未完待续。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">stringSorted</span>(<span class="hljs-params">_strs: List[<span class="hljs-built_in">str</span>]</span>) -&gt; List[str]:</span><br>    <span class="hljs-string">&quot;&quot;&quot;sort str</span><br><span class="hljs-string">    :param _strs: List[str]</span><br><span class="hljs-string">    :return List[str]:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 处理并列  A(65) &gt; Z(90) | a(97) &gt; z(112)</span><br>    <span class="hljs-comment"># 第一原则：字母越小越在前面。</span><br>    <span class="hljs-comment"># 第二原则：字母一样的，短小的越在前面。</span><br>    <span class="hljs-comment"># 把名字处理成整数 Tom -&gt; 84 111 109 || Lucy -&gt; 76 117 99 121 || Tomy -&gt; 84 111 109 121</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(_strs) == <span class="hljs-number">0</span>: <span class="hljs-keyword">return</span> []<br>    _dict = &#123;&#125;<br>    <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> res:<br>        tmp_list = []<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> name:<br>            tmp_list.append(<span class="hljs-built_in">ord</span>(j))<br>        _dict[name] = tmp_list<br><br>    res = name<br>    index = <span class="hljs-number">0</span>  <span class="hljs-comment"># 从名字的第一位开始比较</span><br>    chars = _dict[res]<br>    <span class="hljs-keyword">del</span> _dict[res]  <span class="hljs-comment"># 默认的这个可以删除掉 后面的比较中就不会自己和自己比较了</span><br>    tmp = [res]<br><br>    <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> _dict:<br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            <span class="hljs-keyword">if</span> _dict[name][index] &lt; chars[index]:  <span class="hljs-comment"># 找到一个更大的</span><br>                res = name<br>                tmp.append(name)<br>                chars = _dict[name]<br>                <span class="hljs-keyword">break</span>  <span class="hljs-comment"># 结束 while 循环</span><br>            <span class="hljs-keyword">elif</span> _dict[name][index] == chars[index]:  <span class="hljs-comment"># 当前位一样 去下一位比较</span><br>                <span class="hljs-keyword">if</span> (index + <span class="hljs-number">1</span>) &gt; (<span class="hljs-built_in">len</span>(chars) - <span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> (index + <span class="hljs-number">1</span>) &gt; (<span class="hljs-built_in">len</span>(_dict[name]) - <span class="hljs-number">1</span>):  <span class="hljs-comment"># 长度已经不一样了</span><br>                    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(chars) &lt; <span class="hljs-built_in">len</span>(_dict[name]):  <span class="hljs-comment"># 字母一样的，短小的越在前面。</span><br>                        <span class="hljs-keyword">break</span>  <span class="hljs-comment"># 结束 while 循环 保持原来的res</span><br>                    <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 当前的这个人名字更短</span><br>                        res = name<br>                        tmp.append(name)<br>                        chars = _dict[name]<br>                        <span class="hljs-keyword">break</span>  <span class="hljs-comment"># 结束 while 循环</span><br>                <span class="hljs-keyword">else</span>:<br>                    index += <span class="hljs-number">1</span>  <span class="hljs-comment"># 还没有超出去 index继续增加</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 当前这个更小</span><br>                <span class="hljs-keyword">break</span> <span class="hljs-comment"># 结束 while 循环 保持原来的res</span><br>        index = <span class="hljs-number">0</span>  <span class="hljs-comment"># 恢复 index 为0</span><br>    <span class="hljs-keyword">return</span> tmp[::-<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestFunc</span>(<span class="hljs-params">unittest.TestCase</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_func</span>(<span class="hljs-params">self</span>):</span><br>        inputs = [<br>            [<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-string">&quot;Lucy&quot;</span>, <span class="hljs-string">&quot;Tommy&quot;</span>],  <span class="hljs-comment"># 功能测试</span><br>            [<span class="hljs-string">&quot;sfs&quot;</span>, <span class="hljs-string">&quot;wevvs&quot;</span>, <span class="hljs-string">&quot;12343&quot;</span>],<br>            []  <span class="hljs-comment"># 特判</span><br>        ]<br>        answers = [<br>            [<span class="hljs-string">&quot;Lucy&quot;</span>, <span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-string">&quot;Tommy&quot;</span>],<br>            [<span class="hljs-string">&#x27;12343&#x27;</span>, <span class="hljs-string">&#x27;sfs&#x27;</span>, <span class="hljs-string">&#x27;wevvs&#x27;</span>],<br>            []<br>        ]<br>        res = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(inputs)):<br>            <span class="hljs-keyword">try</span>:<br>                res.append(stringSorted(inputs[i]))<br>            <span class="hljs-keyword">except</span> Exception:<br>                res.append(<span class="hljs-string">&quot;ValueError&quot;</span>)<br>        self.assertEqual(res, answers)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    unittest.main()<br></code></pre></div></td></tr></table></figure>
+<h3 id="String-to-Int32"><a href="#String-to-Int32" class="headerlink" title="String to Int32"></a>String to Int32</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">string2int32</span>(<span class="hljs-params">_str: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>    <span class="hljs-string">&quot;&quot;&quot;convert str to int</span><br><span class="hljs-string">    :param _str: str</span><br><span class="hljs-string">    :return int:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 输入类型检查</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isinstance</span>(_str, <span class="hljs-built_in">str</span>): <span class="hljs-keyword">raise</span> ValueError<br>    <span class="hljs-comment"># 长度特判</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(_str) == <span class="hljs-number">0</span>:  <span class="hljs-keyword">raise</span> ValueError<br>    flag = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 默认为正数</span><br>    ord_0 = <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;0&#x27;</span>)<br>    ord_9 = <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;9&#x27;</span>)<br><br>    <span class="hljs-comment"># 输入数据检测</span><br>    <span class="hljs-keyword">if</span> _str[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;-&#x27;</span>:<br>        _str = _str[<span class="hljs-number">1</span>:]<br>        flag = <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">for</span> _char <span class="hljs-keyword">in</span> _str:<br>        tmp = <span class="hljs-built_in">ord</span>(_char)<br>        <span class="hljs-keyword">if</span> tmp &lt; ord_0  <span class="hljs-keyword">or</span> tmp &gt; ord_9:<br>            <span class="hljs-keyword">raise</span> ValueError<br><br>    <span class="hljs-comment"># string to int</span><br>    res = <span class="hljs-number">0</span><br>    count = <span class="hljs-number">0</span><br>    is_valid = <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> _str[::-<span class="hljs-number">1</span>]:<br>        is_valid = <span class="hljs-literal">True</span><br>        <span class="hljs-comment"># 做溢出判断  -2147483648 &lt; int32 &lt; 2147483647</span><br>        <span class="hljs-comment"># 负数溢出判定 or 正数溢出判定</span><br>        tmp = (<span class="hljs-built_in">ord</span>(item) - ord_0) * (<span class="hljs-number">10</span>**count)<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> flag <span class="hljs-keyword">and</span> res &lt; <span class="hljs-number">147483648</span> <span class="hljs-keyword">and</span> tmp &lt;= <span class="hljs-number">2000000000</span>) <span class="hljs-keyword">or</span> (flag <span class="hljs-keyword">and</span> res &lt; <span class="hljs-number">147483647</span> <span class="hljs-keyword">and</span> tmp &lt;= <span class="hljs-number">2000000000</span>):<br>            <span class="hljs-keyword">pass</span>  <span class="hljs-comment"># 满足条件，不做处理。</span><br>        <span class="hljs-keyword">else</span>:<br>            is_valid = <span class="hljs-literal">False</span><br><br>        <span class="hljs-keyword">if</span> is_valid:<br>            res += tmp<br>            count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError<br><br>    <span class="hljs-keyword">return</span> res <span class="hljs-keyword">if</span> flag <span class="hljs-keyword">else</span> (<span class="hljs-number">0</span>-res)<br></code></pre></div></td></tr></table></figure>
+<p>测试代码</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> unittest<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestFunc</span>(<span class="hljs-params">unittest.TestCase</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_func</span>(<span class="hljs-params">self</span>):</span><br>        inputs = [<br>            <span class="hljs-string">&quot;520&quot;</span>, <span class="hljs-string">&quot;666&quot;</span>, <span class="hljs-string">&quot;-120&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;-3&quot;</span>,            <span class="hljs-comment"># 功能测试</span><br>            <span class="hljs-string">&quot;2147483646&quot;</span>, <span class="hljs-string">&quot;-2147483647&quot;</span>, <span class="hljs-string">&quot;-2147483650&quot;</span>,  <span class="hljs-comment"># 边界测试 -2147483648 &lt; int32 &lt; 2147483647</span><br>            <span class="hljs-string">&quot;0&quot;</span>, <span class="hljs-string">&quot;asdf&quot;</span>                                <span class="hljs-comment"># 特殊样例</span><br>        ]<br>        answers = [<span class="hljs-number">520</span>, <span class="hljs-number">666</span>, -<span class="hljs-number">120</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">3</span>, <span class="hljs-number">2147483646</span>, -<span class="hljs-number">2147483647</span>, <span class="hljs-string">&quot;ValueError&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;ValueError&quot;</span>]<br>        res = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(inputs)):<br>            <span class="hljs-keyword">try</span>:<br>                res.append(string2int(inputs[i]))<br>            <span class="hljs-keyword">except</span> Exception:<br>                res.append(<span class="hljs-string">&quot;ValueError&quot;</span>)<br>        self.assertEqual(res, answers)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    unittest.main()<br></code></pre></div></td></tr></table></figure>
+<h3 id="Int32-to-String"><a href="#Int32-to-String" class="headerlink" title="Int32 to String"></a>Int32 to String</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">int2string</span>(<span class="hljs-params">_int: <span class="hljs-built_in">int</span></span>) -&gt; str:</span><br>    <span class="hljs-comment"># 输入类型检查</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isinstance</span>(_int, <span class="hljs-built_in">int</span>): <span class="hljs-keyword">raise</span> ValueError<br>    <span class="hljs-comment"># 输入0特判</span><br>    <span class="hljs-keyword">if</span> _int == <span class="hljs-number">0</span>:  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;0&quot;</span><br>    <span class="hljs-comment"># 正负数检查</span><br>    flag = <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">if</span> _int &lt; <span class="hljs-number">0</span>:<br>        _int = <span class="hljs-number">0</span> - _int<br>        flag = <span class="hljs-literal">False</span><br>    res = <span class="hljs-string">&quot;&quot;</span><br>    hash_map = &#123;<span class="hljs-number">0</span>: <span class="hljs-string">&quot;0&quot;</span>, <span class="hljs-number">1</span>:   <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-number">2</span>: <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-number">3</span>: <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-number">4</span>: <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-number">5</span>: <span class="hljs-string">&quot;5&quot;</span>, <span class="hljs-number">6</span>: <span class="hljs-string">&quot;6&quot;</span>, <span class="hljs-number">7</span>: <span class="hljs-string">&quot;7&quot;</span>, <span class="hljs-number">8</span>: <span class="hljs-string">&quot;8&quot;</span>, <span class="hljs-number">9</span>: <span class="hljs-string">&quot;9&quot;</span>&#125;<br>    <span class="hljs-keyword">while</span> _int:<br>        res = hash_map[_int % <span class="hljs-number">10</span>] + res<br>        _int //= <span class="hljs-number">10</span><br>    <span class="hljs-keyword">return</span> res <span class="hljs-keyword">if</span> flag <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;-&quot;</span> + res<br></code></pre></div></td></tr></table></figure>
+<p>测试代码</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestFunc</span>(<span class="hljs-params">unittest.TestCase</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_func</span>(<span class="hljs-params">self</span>):</span><br>        inputs = [<span class="hljs-number">520</span>, <span class="hljs-number">666</span>, -<span class="hljs-number">120</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">3</span>, <span class="hljs-number">2147483646</span>, -<span class="hljs-number">2147483647</span>,  <span class="hljs-number">0</span>, <span class="hljs-string">&quot;123&quot;</span>]<br>        answers = [<br>            <span class="hljs-string">&quot;520&quot;</span>, <span class="hljs-string">&quot;666&quot;</span>, <span class="hljs-string">&quot;-120&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;-3&quot;</span>,  <span class="hljs-comment"># 功能测试</span><br>            <span class="hljs-string">&quot;2147483646&quot;</span>, <span class="hljs-string">&quot;-2147483647&quot;</span>,      <span class="hljs-comment"># 边界测试 -2147483648 &lt; int32 &lt; 2147483647</span><br>            <span class="hljs-string">&quot;0&quot;</span>, <span class="hljs-string">&quot;ValueError&quot;</span>                 <span class="hljs-comment"># 特殊样例</span><br>        ]<br>        res = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(inputs)):<br>            <span class="hljs-keyword">try</span>:<br>                res.append(int2string(inputs[i]))<br>            <span class="hljs-keyword">except</span> Exception:<br>                res.append(<span class="hljs-string">&quot;ValueError&quot;</span>)<br>        self.assertEqual(res, answers)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    unittest.main()<br></code></pre></div></td></tr></table></figure>
+<h2 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h2><h3 id="Take-List-As-Hash-Map"><a href="#Take-List-As-Hash-Map" class="headerlink" title="Take List As Hash Map"></a>Take List As Hash Map</h3><p>以 <code>list</code> 作为 <code>hash map</code>，适用于 key 为字符的情况，这时可以用一个长度为 256 的 <code>list</code> 作为 <code>hash map</code>，<code>list</code> 的第 <code>i</code> 个元素代表 <code>chr(i)</code> 这个字符作为 <code>key</code> 所对应的 <code>value</code>。具体应用可以参考<a href="/2020/05/13/剑指offer-面试题50-第一个只出现一次的字符（易）/">剑指offer 面试题50. 第一个只出现一次的字符（易）</a>。</p>
+<h3 id="List-to-Hash-map"><a href="#List-to-Hash-map" class="headerlink" title="List to Hash map"></a>List to Hash map</h3><p>输入带重复的list转化成hash map</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">self, inputs</span>):</span><br>        res = &#123;&#125;<br>        <span class="hljs-keyword">for</span> <span class="hljs-built_in">input</span> <span class="hljs-keyword">in</span> inputs:<br>            <span class="hljs-keyword">if</span> key <span class="hljs-keyword">in</span> res:<br>                res[key].append(<span class="hljs-built_in">input</span>)<br>            <span class="hljs-keyword">else</span>:<br>                res[key] = [<span class="hljs-built_in">input</span>]<br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hashMapFunc</span>(<span class="hljs-params">self, key</span>):</span><br>        <span class="hljs-comment"># 构建value-key关系</span><br>        <span class="hljs-keyword">return</span> _dict[key]<br></code></pre></div></td></tr></table></figure>
+<h2 id="其他基础代码实现"><a href="#其他基础代码实现" class="headerlink" title="其他基础代码实现"></a>其他基础代码实现</h2><h3 id="10进制转2、8、16进制"><a href="#10进制转2、8、16进制" class="headerlink" title="10进制转2、8、16进制"></a>10进制转2、8、16进制</h3><p>系统实现</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">bin</span>(<span class="hljs-number">160</span>)<br><span class="hljs-string">&#x27;0b10100000&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">oct</span>(<span class="hljs-number">160</span>)<br><span class="hljs-string">&#x27;0o240&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">hex</span>(<span class="hljs-number">160</span>)<br><span class="hljs-string">&#x27;0xa0&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<p>手动实现</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scale_Convert</span>(<span class="hljs-params">number, base</span>):</span><br>    prefix = &#123;<span class="hljs-number">2</span>: <span class="hljs-string">&quot;0b&quot;</span>, <span class="hljs-number">8</span>: <span class="hljs-string">&quot;0o&quot;</span>, <span class="hljs-number">16</span>: <span class="hljs-string">&quot;0x&quot;</span>&#125;<br>    hash_map = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>]<br>    b = []<br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        s = number // base<br>        y = number % base<br>        b = b + [y]<br>        <span class="hljs-keyword">if</span> s == <span class="hljs-number">0</span>:<br>           <span class="hljs-keyword">break</span><br>        number = s<br>    b.reverse()<br>    b = [<span class="hljs-built_in">str</span>(hash_map[i]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> b]<br>    <span class="hljs-keyword">return</span> prefix[base] + <span class="hljs-string">&quot;&quot;</span>.join(b)<br></code></pre></div></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>res = scale_Convert(<span class="hljs-number">160</span>, <span class="hljs-number">2</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>res<br><span class="hljs-string">&#x27;0b10100000&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>res = scale_Convert(<span class="hljs-number">160</span>, <span class="hljs-number">8</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>res<br><span class="hljs-string">&#x27;0o240&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>res = scale_Convert(<span class="hljs-number">160</span>, <span class="hljs-number">16</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>res<br><span class="hljs-string">&#x27;0xa0&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<p>其他</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>2进制</th>
+<th>8进制</th>
+<th>10进制</th>
+<th>16进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2进制</td>
+<td>-</td>
+<td>bin(int(n,8))</td>
+<td>bin(int(n,10))</td>
+<td>bin(int(n,16))</td>
+</tr>
+<tr>
+<td>8进制</td>
+<td>oct(<strong>int(n,2)</strong>)</td>
+<td>-</td>
+<td>oct(int(n,10))</td>
+<td>oct(int(n,16))</td>
+</tr>
+<tr>
+<td>10进制</td>
+<td><strong>int(n,2)</strong></td>
+<td>int(n,8)</td>
+<td>-</td>
+<td>int(n,16)</td>
+</tr>
+<tr>
+<td>16进制</td>
+<td>hex(<strong>int(n,2)</strong>)</td>
+<td>hex(int(n,8))</td>
+<td>hex(int(n,10))</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 2进制转8进制，先将2进制转成10进制，再将其10进制形式转换成8进制</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;0b10100000&#x27;</span>, <span class="hljs-number">2</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br><span class="hljs-number">160</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">oct</span>(a)<br><span class="hljs-string">&#x27;0o240&#x27;</span><br><span class="hljs-comment"># 一次性完成</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">oct</span>(<span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;0b10100000&#x27;</span>, <span class="hljs-number">2</span>))<br><span class="hljs-string">&#x27;0o240&#x27;</span><br><br><span class="hljs-comment"># 8进制转16进制，先将8进制转成10进制，再将其10进制形式转换成16进制</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;0o240&#x27;</span>, <span class="hljs-number">8</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br><span class="hljs-number">160</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">hex</span>(a)<br><span class="hljs-string">&#x27;0xa0&#x27;</span><br><span class="hljs-comment"># 一次性完成</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">hex</span>(<span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;0o240&#x27;</span>, <span class="hljs-number">8</span>))<br><span class="hljs-string">&#x27;0xa0&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<p>举一反三</p>
+<p>在微软产品Excel中，用A表示第1列，B表示第2列……Z表示第26列，AA表示第27列，AB表示第28列……以此类推。请写出一个函数，输入用字母表示的列号编码，输出它是第几列。<br>这是一道很新颖的关于进制的题目，其本质是把十进制数字用A～Z表示成二十六进制。如果想到这一点，那么解决这个问题就不难了。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">computeCols</span>(<span class="hljs-params">col</span>):</span><br>    hash_map = &#123;<span class="hljs-string">&quot;A&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;B&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;C&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;D&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&quot;E&quot;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&quot;F&quot;</span>: <span class="hljs-number">6</span>, <span class="hljs-string">&quot;G&quot;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&quot;H&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-string">&quot;I&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;J&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;K&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;L&quot;</span>: <span class="hljs-number">12</span>, <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">13</span>, <span class="hljs-string">&quot;N&quot;</span>: <span class="hljs-number">14</span>, <span class="hljs-string">&quot;O&quot;</span>: <span class="hljs-number">15</span>, <span class="hljs-string">&quot;P&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;Q&quot;</span>: <span class="hljs-number">17</span>, <span class="hljs-string">&quot;R&quot;</span>: <span class="hljs-number">18</span>, <span class="hljs-string">&quot;S&quot;</span>: <span class="hljs-number">19</span>, <span class="hljs-string">&quot;T&quot;</span>: <span class="hljs-number">20</span>, <span class="hljs-string">&quot;U&quot;</span>: <span class="hljs-number">21</span>, <span class="hljs-string">&quot;V&quot;</span>: <span class="hljs-number">22</span>, <span class="hljs-string">&quot;W&quot;</span>: <span class="hljs-number">23</span>, <span class="hljs-string">&quot;X&quot;</span>: <span class="hljs-number">24</span>, <span class="hljs-string">&quot;Y&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;Z&quot;</span>: <span class="hljs-number">26</span>&#125;<br>    <br>    count = <span class="hljs-number">0</span><br>    res = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> col[::-<span class="hljs-number">1</span>]:<br>        tmp = (<span class="hljs-number">26</span> ** count) * hash_map[char]<br>        res += tmp<br>        count += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> res<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    print(computeCols(<span class="hljs-string">&quot;AD&quot;</span>))<br></code></pre></div></td></tr></table></figure>
+<h1 id="关键思想总结"><a href="#关键思想总结" class="headerlink" title="关键思想总结"></a>关键思想总结</h1><h1 id="相关题目总结"><a href="#相关题目总结" class="headerlink" title="相关题目总结"></a>相关题目总结</h1><h2 id="LeetCode-36-有效的数独（中）"><a href="#LeetCode-36-有效的数独（中）" class="headerlink" title="LeetCode 36. 有效的数独（中）"></a>LeetCode 36. 有效的数独（中）</h2><p><strong>直觉</strong></p>
+<p>所谓合格的数独，本质就是一个判定是否存在重复的问题。这就可以通过<strong>创建 rows、column、boxes三种哈希表保存每个数字的出现情况，进而实现对重复是否存在的判定了。</strong></p>
+<ul>
+<li>遍历数独。</li>
+<li>检查看到每个单元格值是否已经在当前的行 / 列 / 子数独中出现过：<ul>
+<li>如果出现重复，返回 false。</li>
+<li>如果没有，则保留此值以进行进一步跟踪。</li>
+</ul>
+</li>
+<li>返回 true。</li>
+</ul>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">rows = [&#123;&#125; <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">9</span>)]<br>columns = [&#123;&#125; <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">9</span>)]<br>boxes = [&#123;&#125; <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">9</span>)]<br><br>box_index = (i // <span class="hljs-number">3</span> ) * <span class="hljs-number">3</span> + j // <span class="hljs-number">3</span>  <span class="hljs-comment"># 获取当前格子所在的 3x3 宫</span><br>rows[i][num] = rows[i].get(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>  <span class="hljs-comment"># 行出现次数加一</span><br>columns[j][num] = columns[j].get(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>  <span class="hljs-comment"># 列出现次数加一</span><br>boxes[box_index][num] = boxes[box_index].get(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>  <span class="hljs-comment"># 3x3 宫内出现次数加一</span><br><span class="hljs-comment"># 如果在行、列、3x3 小格子内，任何一种情况下出现次数超过1，就不是有效数独，返回False</span><br><span class="hljs-keyword">if</span> rows[i][num] &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> columns[j][num] &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> boxes[box_index][num] &gt; <span class="hljs-number">1</span>:<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>         <br></code></pre></div></td></tr></table></figure>
+<p>注意使用 <code>dict.get()</code> 命令来避免判定</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 不用get就要判定</span><br><span class="hljs-keyword">if</span> num <span class="hljs-keyword">in</span> rows[i]:<br>	rows[i][num] += <span class="hljs-number">1</span><br><span class="hljs-keyword">else</span>:<br>	rows[i][num] = <span class="hljs-number">0</span><br><br><span class="hljs-comment"># 用了get一行代码</span><br>rows[i][num] = rows[i].get(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/09/LeetCode-36-有效的数独（中）/">LeetCode 36. 有效的数独（中）</a></p>
+<h2 id="LeetCode-146-LRU缓存机制（中）"><a href="#LeetCode-146-LRU缓存机制（中）" class="headerlink" title="LeetCode 146. LRU缓存机制（中）"></a>LeetCode 146. LRU缓存机制（中）</h2><p><strong>直觉</strong></p>
+<p>哈希表保存key-value，链表保存使用时间前后关系。新插入或者刚刚访问过的key，放到双向链表最前面，如果新插入时cache容量不够，就删除双向链表最后面的那个节点（最近最久未使用）。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 定义双链表节点</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DLinkedNode</span>():</span><br>    <span class="hljs-string">&quot;&quot;&quot;bidirectional linked list</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.key = <span class="hljs-number">0</span><br>        self.val = <span class="hljs-number">0</span><br>        self.prev = <span class="hljs-literal">None</span><br>        self.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span><br><br><span class="hljs-comment"># 定义LRU Cache类，有添加节点、删除节点、移动到链表开头、移动到链表结尾、删除链表尾结点、初始化、get函数 </span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LRUCache</span>():</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, capacity</span>):</span><br>        self.cache = &#123;&#125;  <span class="hljs-comment"># hash map负责保存DLinkedNode，双向链表负责保存使用时间。</span><br>        self.size = <span class="hljs-number">0</span>  <span class="hljs-comment"># 保存当前已经存储的缓存数量</span><br>        self.capacity = capacity  <span class="hljs-comment"># 保存该LRUCache能够保存的最多缓存数量</span><br>        self.head, self.tail = DLinkedNode(), DLinkedNode()  <span class="hljs-comment"># head和tail起哑节点的作用</span><br>        self.head.<span class="hljs-built_in">next</span> = self.tail<br>        self.tail.prev = self.head<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span>(<span class="hljs-params">self, key</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;get node which with the certain key</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        node = self.cache.get(key, <span class="hljs-literal">None</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> node:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        self.moveToHead(node)  <span class="hljs-comment"># 只要访问过 就放到最前面</span><br>        <span class="hljs-keyword">return</span> node.val<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">put</span>(<span class="hljs-params">self, key, value</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;put value into the node which with the certain key</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        node = self.cache.get(key)<br>        <br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> node:  <span class="hljs-comment"># 新节点放到最前面</span><br>            newNode = DLinkedNode()<br>            newNode.key = key<br>            newNode.val = value<br>            self.cache[key] = newNode<br>            self.addNode(newNode)<br>            self.size += <span class="hljs-number">1</span><br><br>            <span class="hljs-keyword">if</span> self.size &gt; self.capacity:<br>                tail = self.popTailNode()<br>                <span class="hljs-keyword">del</span> self.cache[tail.key]<br>                self.size -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 之前已经存在的节点</span><br>            node.val = value<br>            self.moveToHead(node)<br><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/04/11/LeetCode-146-LRU缓存机制（中）/">LeetCode 146. LRU缓存机制（中）</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/11/Redis%E5%AD%97%E5%85%B8%E8%AF%A6%E8%A7%A3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis 字典详解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">
+                        <span class="hidden-mobile">数据结构：栈和队列</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/';
+        this.page.identifier = '/2020/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

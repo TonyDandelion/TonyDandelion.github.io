@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>somewhere vs anywhere - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="somewhere vs anywhere">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-31 21:37" pubdate>
+        2020年3月31日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">somewhere vs anywhere</h1>
+            
+            <div class="markdown-body">
+              <p>somewhere people vs  anywhere people</p>
+<a id="more"></a>
+<blockquote>
+<p> 问</p>
+</blockquote>
+<p>真正能做到anywhere，全然没有任何顾虑的people，又有多少呢？</p>
+<blockquote>
+<p>转载自</p>
+</blockquote>
+<p>作者：公子V<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/379923494/answer/1114344319">https://www.zhihu.com/question/379923494/answer/1114344319</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<blockquote>
+<p>全文</p>
+</blockquote>
+<p>英国报人David Goodhart提出来一个概念叫“somewhere people vs. anywhere people”。他分析了英国社会，说有50%的英国人，他们来自“somewhere”，也就是他们对自己生活的地方有很强的认同和依附，他们的移动能力不强，可能一辈子待在一个地方，起落荣辱寄托于斯，还有20%-25%的人，他们可能来自“anywhere”，也就是任何地方，他们生活在大都市，受过大学教育，移动能力很强，想去哪里去哪里，对特定的地方没有什么执念。现代社会，以往的政治经济光谱变得模糊，人的观念、态度，可能和他是somewhere people还是anywhere people有关。</p>
+<p>放到全球化的背景下，这种比对更加鲜明。有钱人可以选择在地球一边开设生意，另一边生活，这自不必说。随着全球沟通越来越紧密，很多人才的跨国流动性也越来越强，比如程序员、科研人员、跨国公司员工。对于这些人，全世界哪里机会好就可以去哪里。两个小例子，第一，欧美有跨国搬家公司，给他们钱，打包、货运，清关一并搞好，花几个钱，今天还在A国，明天整个家就到B国去了；第二，特朗普刚刚当选的时候好些人说美国不能待了，我觉得也就是说嘴，结果这几年我还真见过两个人，转头在加拿大找份工作就离开美国了。对于这些人来说，很有意思的一点是，他们的自我认知里面属地的性质很弱，你去问一个美国的大学老师，他可能首先认为自己是物理学家，第二认为自己是教授，然后第三是物理学会会员……第十八是美国人，因为他整个人是建立在自己的物理研究上的，美国不好住了可以去澳大利亚、英国、加拿大，甚至可以到中国，他看待世界的方式，认识自己的方式，虽然也受自己美国人身份的影响，但这种影响不是决定性的。再比如在美国工作的从事高科技工作的中国人，国内总有网上的喷子非常情绪化说这些人背弃中国加入美国了，可是你说这些人对美国有什么情感？假如明天硅谷凭空搬到澳大利亚了，这些人必然头也不回跟去澳大利亚，就这么干脆。以我自己来说，虽然我不是啥国际化人才，但我作为一个张家口人，没在张家口工作过一天，一直在北京工作，再进一步，假如现在有人给我足够高的工资挖我去上海，我拎包就能去，离开北京的飞机上我是不可能想起城南的胡同热泪盈眶的。</p>
+<p>但是对于somewhere people来说，他们的移动能力是很弱的，他们的生计与一个地方（国家）强烈绑定，在全球化过程中，他们是产业布局的被动接受者，可能有的地方莫名其妙就成了赢家，全世界都到那里去开公司，有的地方莫名其妙就成了输家，祖上几辈子都在勤勤恳恳种地，一夜之间地球另外一边的庄稼拉到他们家门口、做熟了放进他们碗里，成本都比他们自己种出来得要低，他们就失业了。你可能见过博士毕业在当地找不到博后，拎包换国家的，但是大同的煤矿工人要是没有煤挖了，是不可能在LinkedIn上更新一下简历，就被猎头挖去肯塔基州挖煤的，他们会在当地找一份别的工作，他们过得好不好，完全取决于当地的经济。在经济上对地方的依附，在文化上会表现为对当地同质化的社区（没有外地人）强烈的认同感，甚至是“忠诚”、“团队”意识。对国家的忠诚没有什么争议，但是对特定地方，比如城市、县的忠诚，还是很有意思的。对于somewhere people来说，他们的职业认同更低，而地域认同更高，他更有可能先把自己标注为大同人，其次才补充自己现在是矿工。</p>
+<p>Somewhere people就好比回转寿司店的顾客，只是这家店转盘不太灵光，隔十年二十年才转一下，还被一只看不见的手操作，有些人跟前是山珍海味，比如硅谷的老地主，睡一觉起来自己房子值一千万了，有些人跟前却是空盘子，比如锈带的产业工人。而Anywhere people，他们根本不坐下，而是端着盘子到处乱走，哪儿有好吃的就去哪儿。对于吃不上饭的somewhere people，看到这些人真是太火大了。</p>
+<p>在世界越来越联通的情况下，语言的障碍逐渐降低，世界各国的基础设施越来越标准化，易于使用，而每个地方的文化也越来越多元，人们随便去一个地方都可以找到自己的舒适区、更容易地安居，这都让anywhere people享受越来越强的mobility，但是somewhere people却不能乘上这班快车。我最喜欢打的比方是“乘坐地铁”，我第一次坐地铁就是在北京，如何笨拙、如何不能融入就不加赘述了，但是经过这么多年坐北京地铁，现在我到了世界上任何一个城市，都可以轻而易举看地铁图、买票、坐车，而且一上车扶着把手、动作熟练、一脸冷漠，仿佛已经坐了一万次一样，我和一个爱尔兰农民一起在伦敦搭地铁，人们会以为我是当地人而他是外地人。还有一个很好的例子是中餐厅，现在世界的各个角落都有中餐厅，虽然质量参差不齐，但对于成为世界公民的那部分中国人来说，所谓背井离乡追求更好的生活，其中背井离乡的成本因为中餐厅开遍全球，好像也没那个高了。反观somewhere people呢？从中又获得了什么益处？</p>
+<p>其实这件事本质上还是经济问题，但是在全球化的背景下，移动能力（mobility）就是经济不平均的具体表现。</p>
+<p>按道理讲，一个中国国籍和美国绿卡持有者，精通两国语言，工作待遇优厚，今天想回中国，一键买票就回了，明天要回美国也是说走就走，在不违反两国法律的情况下，这有任何问题吗？没有。</p>
+<p>但是，人们越来越意识到，mobility既是不平均的结果（良好的教育、经济条件导致更高的mobility），也可能会导致更大的不平均，比如这个人可以享受中美两国的好处而避免两国的不便之处，更有可能通过信息差等优势赚钱。这种情况下，mobility和豪华游艇一样，成为一种在大众中引人侧目的东西，尤其对于未能享受到全球化红利的地方来说，这种激烈的对比尤其显著。</p>
+<p>在这次疫情爆发之后，针对海外华人，特别是留学生，有非常多的讨论，我也简单了解了一下，实际上这些人一落地，在密切监督下隔离十四天，哪怕检出来很多病例，他们也不会散到社会上，很难影响复工复产。所以说除了个别担心复工复产，担心海关压力的人，大多数的问题，实际上是somewhere people vs anywhere people的矛盾。</p>
+<p>我看到一个网友留言，质问一个留学生：“国内疫情不好你不回来，国内疫情控制住了你回来避难，等结束了你不是又去美国了？”大意思是“好处还能让你全占了？”</p>
+<p>按道理讲，这个网友真的说到点儿上了，Exactly，好的mobility就是为了全占好处，就好比A饭店炒菜，B饭店火锅，你要没车只能走路，那家门口有啥就吃点儿啥吧，如果你买了车，你可以开着车中午去A，晚上去B。就像把工厂建在中国，东西出口欧美一样，不就是图中国成本低，欧美成品价格贵么。全球化的意义就在于把世界上任何一个角落的便宜都占遍了——除非你没能力占，只能待在一个地方。疫情期间，如果一个人在三个地方有落脚地，那他必然选最安全的那个，这就是最一开始投资三个地方的原因。而一个在美国接受教育、赚了大钱的华人，经此一事，也可能感慨还是国内安全，把从美国赚的钱全倒腾回中国，搬回中国，又该怎么理解这种行为呢？不也是一种风险控制的计算吗？说到这里，大家想必也能体会到对冲风险、多元投资这种理性计算，以及说走就走的mobility，和“对地方的忠诚”，如何水火不容了。</p>
+<p>有人离开中国去了美国，美国一有不好的事情，总有somewhere people暗暗希望这些anywhere people被打脸，“你们把一腔热情给了美国，看看美国是怎么对你们的？”问题是，“一腔热情”是somewhere people的文化，anywhere people才不在乎美国呢，他们或许在乎自己孩子上学的学区有没有钱，但是你看这次疫情，那些在美国的华人在网上看热闹看得多hi，三百多万在餐厅端盘子的美国人失业了，看到美国“同胞”受苦，facebook的中国码农会思虑过度、夜不能眠么？如果美国真的不好到待不下去了，他们会马上get the fuck out of there，硅谷的码农会去多伦多找份工作继续写代码，他们也可能回中国，不是灰头土脸回来了，而是因为他们有mobility，他们转头就能在北上广深找份工作。这就是为什么我们不把它解读为国家之间的矛盾，而是somewhere和anywhere的矛盾；这也是这次舆论针对“留学生”这个整体的原因，甭管你是哪国留学生，你有mobility，你“脚踩两只船”，就要被放在火上烤。这也是为什么会有中国人支持特朗普，因为他代言somewhere people，而不是anywhere people，他要修墙，“大家各管各的，谁也别乱跑”。</p>
+<p>你如何看待一个美国读本科，英国读博士，刚刚在悉尼找到工作买了房，疫情爆发以后因为中国比较安全，所以回中国避险，遵守了一切隔离规定，但完事儿就要回去上班的，土生土长的中国人？</p>
+<p>他是精致的利己主义者吗？他是忠诚的吗？他是罪恶的吗？他是优秀的吗？他应该被指责吗？他应该被欢迎吗？他有可能是一个爱国主义者吗？你讨厌他吗？如果有机会你希望成为他吗？</p>
+<p>留给各位想想。如果你发现这件事很难以理性来理解，那没必要这么做，这本来就是一个屁股在哪的问题，只不过这个屁股不是中国vs美国，而是somewhere vs anywhere。世界是这两种群体微妙的平衡，而此时又是一个很有意思的时候。幸运的是，这只是一个观点之争，或者一天一变的舆论口水仗，法律与秩序还在那里，不会轻易变化。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AF%BB%E4%B9%A6%E7%9C%8B%E6%8A%A5/">读书看报</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/31/%E6%9C%89%E6%B2%A1%E6%9C%89%E4%B8%80%E5%8F%A5%E8%AF%9D-%E5%BD%B1%E5%93%8D%E4%BD%A0%E5%BE%88%E5%A4%9A%E5%B9%B4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">有没有一句话 影响你很多年</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/31/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E9%80%9A%E4%BF%A1%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">进程同步与进程、线程通信问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/31/somewhere-vs-anywhere/';
+        this.page.identifier = '/2020/03/31/somewhere-vs-anywhere/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

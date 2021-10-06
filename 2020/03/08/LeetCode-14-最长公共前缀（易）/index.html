@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="无知者">
+  <meta name="keywords" content="">
+  <title>LeetCode 14. 最长公共前缀（易） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 14. 最长公共前缀（易）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-08 19:36" pubdate>
+        2020年3月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 14. 最长公共前缀（易）</h1>
+            
+            <div class="markdown-body">
+              <p> 垂直扫描、水平扫描、二分查找、字典树多种方法都可以解决。 </p>
+<a id="more"></a>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 “”。<br>说明:所有输入只包含小写字母 a-z 。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>示例 1:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-string">&quot;flower&quot;</span>,<span class="hljs-string">&quot;flow&quot;</span>,<span class="hljs-string">&quot;flight&quot;</span>]<br>输出: <span class="hljs-string">&quot;fl&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-string">&quot;dog&quot;</span>,<span class="hljs-string">&quot;racecar&quot;</span>,<span class="hljs-string">&quot;car&quot;</span>]<br>输出: <span class="hljs-string">&quot;&quot;</span><br></code></pre></div></td></tr></table></figure><br>解释: 输入不存在公共前缀。</p>
+<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>字符串、分治思想、二分查找</p>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="方法类型一：扫描匹配法"><a href="#方法类型一：扫描匹配法" class="headerlink" title="方法类型一：扫描匹配法"></a>方法类型一：扫描匹配法</h3><ul>
+<li>垂直扫描，思路简单，直接对比每个字符串前n个字符，如果相同就n+1，直到不相同为止。</li>
+<li><p>利用set、zip等Python3内建方法实现垂直扫描，利用set去重，利用zip将每个字符串前n个（n为最小字符串长度）个字符匹配，这个方法太依赖Python的内建函数，<font color='red'><strong>不推荐</strong></font>。</p>
+</li>
+<li><p>水平扫描，思路清奇，简而言之就是设置第一个字符串为最大prefix，根据匹配结果一个字符一个字符的缩小，<font color='green'><strong>推荐</strong></font>。</p>
+</li>
+</ul>
+<p>公共子串前缀的关键在于前缀必须是公共的，这就意味着，前面几个子串的公共前缀也必须满足后面的要求，所以可以依次遍历字符串$[S_1, S_2, S_3,…,S_n]$，当遍历到第 $i$ 个字符串的时候，找到最长公共前缀 $LCP(S_1,,,S_i)$。一旦$LCP(S_1,,,S_i)$ 为空，意味着前$i$个字符串没有公共子串，后面就没必要找了，直接<code>return &quot;&quot;</code>。否则，在执行了 $n$ 次遍历之后，算法就会返回最终答案 $LCP(S_1,,,S_n)$。</p>
+<p><img src="https://i.loli.net/2020/02/19/C46kvIzls1tmUNg.png" srcset="/img/loading.gif" alt="1.png"></p>
+<p>关键一句<code>while strs[i].find(prefix) != 0: # 用这句话判断当前prefix是不是也是其他字符串的前缀</code></p>
+<h3 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h3><script type="math/tex; mode=display">
+LCP(S_1,,,S_n)=LCP(LCP(S_1,,,S_k),  LCP(S_{k+1},,,S_n))</script><p>将原问题 $LCP(S<em>1,,,S_n)$ 分成两个子问题 $LCP(S_1,,,S</em>{mid})$ 与 $LCP(S_{mid+1},,,S_n)$ ，其中 $mid = \frac{i+j}{2}$ 。 我们用子问题的解 <code>lcpLeft</code> 与<code>lcpRight</code> 构造原问题的解 。 从头到尾挨个比较 <code>lcpLeft</code>与 <code>lcpRight</code> 中的字符，直到不能再匹配为止。 计算所得的 <code>lcpLeft</code> 与 <code>lcpRight</code> 最长公共前缀就是原问题的解。  </p>
+<p><img src="https://i.loli.net/2020/02/19/udYLOkh9SEopv6w.png" srcset="/img/loading.gif" alt="8bb79902c99719a923d835b9265b2dea6f20fe7f067f313cddcf9dd2a8124c94-file_1555694229984.png"></p>
+<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>应用二分查找法找到所有字符串的公共前缀的最大长度 L。 算法的查找区间是 $(0 \ldots minLen)$，其中 minLen 是输入数据中最短的字符串的长度，同时也是答案的最长可能长度。 每一次将查找区间一分为二，然后丢弃一定不包含最终答案的那一个。算法进行的过程中一共会出现两种可能情况：</p>
+<p>$S[1…mid]$ 不是所有串的公共前缀。 <strong>这表明对于所有的 $j &gt; i\ S[1..j]$ 也不是公共前缀</strong>，于是我们就可以丢弃后半个查找区间，缩小前区间的范围，继续往前寻找。</p>
+<p>$S[1…mid]$ <strong>是所有串的公共前缀</strong>。 这表示对于所有的 $i &lt; j S[1..i]$ 都是可行的公共前缀，因为我们要找最长的公共前缀，所以我们可以把前半个查找区间丢弃，继续往后寻找。</p>
+<p>这里判断<strong>是否所有串的公共前缀</strong>的方法是垂直扫描。</p>
+<p><img src="https://i.loli.net/2020/02/19/r8lackxzmo71Igd.png" srcset="/img/loading.gif" alt="e41778494b56890e2bb7616504e2a0169bbdb409710262eaf5250c635adab9d6-file_1555694009677.png"></p>
+<h3 id="基于字典树的方法"><a href="#基于字典树的方法" class="headerlink" title="基于字典树的方法"></a>基于字典树的方法</h3><p>我们可以通过将所有的键值 S 存储到一颗字典树中来优化最长公共前缀查询操作。 如果你想学习更多关于字典树的内容，可以从 <a href="/2020/05/31/LeetCode-208-实现-Trie-前缀树-（中）/">208. 实现 Trie (前缀树)</a> 开始。在字典树中，从根向下的每一个节点都代表一些键值的公共前缀。 但是我们需要找到字符串q 和所有键值字符串的最长公共前缀。 这意味着我们需要从根找到一条最深的路径，满足以下条件：</p>
+<ul>
+<li>这是所查询的字符串 q 的一个前缀</li>
+<li>路径上的每一个节点都有且仅有一个孩子。 否则，找到的路径就不是所有字符串的公共前缀</li>
+<li>路径不包含被标记成某一个键值字符串结尾的节点。 因为最长公共前缀不可能比某个字符串本身长</li>
+</ul>
+<p>最后的问题就是如何找到字典树中满足上述所有要求的最深节点。 最有效的方法就是建立一颗包含字符串 $[S_1 \ldots S_n]$ 的字典树。 然后在这颗树中匹配 q 的前缀。 我们从根节点遍历这颗字典树，直到因为不能满足某个条件而不能再遍历为止。</p>
+<p><img src="https://i.loli.net/2020/02/19/gQrSl6Is4nJhX5U.png" srcset="/img/loading.gif" alt="093a52aeacfa1f4b5489bbee3a6d0de22c9dcde6dd72a1c1887f3b75f3eec749-file_1555694178934.png"></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-prefix/solution/zui-chang-gong-gong-qian-zhui-by-leetcode/">LeetCode题解</a></p>
+<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="自己完成的一个版本，基于垂直扫描思想。"><a href="#自己完成的一个版本，基于垂直扫描思想。" class="headerlink" title="自己完成的一个版本，基于垂直扫描思想。"></a>自己完成的一个版本，基于垂直扫描思想。</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs: <span class="hljs-built_in">list</span></span>) -&gt; str:</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(strs):  <span class="hljs-comment"># 如果传入的list本身就是空的 直接返回空</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br><br>            min_len = <span class="hljs-built_in">min</span>(<span class="hljs-built_in">len</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> strs)<br>            _flag = <span class="hljs-literal">True</span><br>            i = <span class="hljs-number">0</span><br><br>            <span class="hljs-keyword">while</span> i &lt; min_len:<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> _flag:<br>                    <span class="hljs-keyword">break</span><br>                _char = strs[<span class="hljs-number">0</span>][i]<br>                <span class="hljs-comment"># 一个一个的检查str</span><br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> strs:<br>                    <span class="hljs-keyword">if</span> j[i]!=_char:<br>                        _flag = <span class="hljs-literal">False</span><br>                        <span class="hljs-keyword">break</span>  <span class="hljs-comment"># 只要有一个不满足 就不是最大公共前缀了 直接去掉</span><br>                <br>                <span class="hljs-comment"># 一个一个的检查过后，发现_flag==True，说明没有问题</span><br>                <span class="hljs-keyword">if</span> _flag:<br>                    i += <span class="hljs-number">1</span><br><br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">if</span> i==<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> strs[<span class="hljs-number">0</span>][:i]<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度$O(n)$</p>
+<p>执行用时 :20 ms, 在所有 Python3 提交中击败了<strong>99.88%</strong>的用户</p>
+<p>内存消耗 :13.2 MB, 在所有 Python3 提交中击败了41.86%的用户</p>
+<h3 id="垂直扫描的另一种写法，更加简洁。"><a href="#垂直扫描的另一种写法，更加简洁。" class="headerlink" title="垂直扫描的另一种写法，更加简洁。"></a>垂直扫描的另一种写法，更加简洁。</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(strs):  <span class="hljs-comment"># 如果传入的list本身就是空的 直接返回空</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(strs[<span class="hljs-number">0</span>])):  <span class="hljs-comment"># 遍历strs[0]的所有字符 比对匹配情况</span><br>            c = strs[<span class="hljs-number">0</span>][i]  <span class="hljs-comment"># 取strs[0]当前第i个字符与其他字符串第i个字符对比</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(strs)):<br>                <span class="hljs-keyword">if</span> i == <span class="hljs-built_in">len</span>(strs[j]) <span class="hljs-keyword">or</span> strs[j][i] != c:  <span class="hljs-comment"># i == len(strs[j])为遍历完最小字串的情况， strs[j][i] != c为匹配不成功的情况，这两种情况都直接返回现有的匹配结果即可</span><br>                    <span class="hljs-keyword">return</span> strs[<span class="hljs-number">0</span>][: i]<br>        <br>        <span class="hljs-keyword">return</span> strs[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 默认返回第一个字符串</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(S)$，$S$ 是所有字符串中字符数量的总和。</p>
+<p>空间复杂度：$O(1)$，我们只需要使用常数级别的额外空间。</p>
+<h3 id="利用Python内建函数set、zip函数实现的垂直扫描。"><a href="#利用Python内建函数set、zip函数实现的垂直扫描。" class="headerlink" title="利用Python内建函数set、zip函数实现的垂直扫描。"></a>利用Python内建函数set、zip函数实现的垂直扫描。</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 复杂版本</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs: <span class="hljs-built_in">list</span></span>) -&gt; str:</span><br>        <span class="hljs-comment"># zip(): Return a zip object whose .next() method returns a tuple where the i-th element comes from the i-th iterable argument. The .next() method continues until the shortest iterable in the argument sequence is exhausted and then it raises StopIteration.</span><br>        <span class="hljs-comment"># *strs：先把str list解包为一个个str object</span><br>        <span class="hljs-comment"># zip：再使用zip函数，传入解包之后的一个个str object，将str object中对应的元素打包成一个个元组，然后返回由这些元组组成的对象，</span><br>        zip_strs = <span class="hljs-built_in">zip</span>(*strs)<br>        match_list = []<br>        <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> zip_strs:<br>            match_list.append(<span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(c))==<span class="hljs-number">1</span>)  <span class="hljs-comment"># 如果这一个元组只有一个类型的char，说明每个输入str在这个位置的char是一样的。即匹配成功。</span><br>        match_list.append(<span class="hljs-number">0</span>)  <span class="hljs-comment"># 留一个0作为定位符</span><br>        <span class="hljs-keyword">return</span> strs[<span class="hljs-number">0</span>][:match_list.index(<span class="hljs-number">0</span>)] <span class="hljs-keyword">if</span> strs <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;&#x27;</span>  <span class="hljs-comment"># 取0前面那一位的下标，作为终止位置。</span><br><br><span class="hljs-comment"># 2行的简洁版本</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs: List[<span class="hljs-built_in">str</span>]</span>) -&gt; str:</span><br>        r = [<span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(c)) == <span class="hljs-number">1</span> <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(*strs)] + [<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">return</span> strs[<span class="hljs-number">0</span>][:r.index(<span class="hljs-number">0</span>)<br>                      ] <span class="hljs-keyword">if</span> strs <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;&#x27;</span><br><br><span class="hljs-comment"># 甚至os模块自己就提供最长公共前缀的匹配函数</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs: List[<span class="hljs-built_in">str</span>]</span>) -&gt; str:</span><br> 		<span class="hljs-keyword">return</span> os.path.commonprefix(strs)<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度$O(n)$</p>
+<h3 id="水平扫描"><a href="#水平扫描" class="headerlink" title="水平扫描"></a>水平扫描</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs: <span class="hljs-built_in">list</span></span>) -&gt; str:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(strs):  <span class="hljs-comment"># 如果传入的list本身就是空的 直接返回空</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>        prefix = strs[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 设置第1个字符串为默认最长公共前缀</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(strs)):  <span class="hljs-comment"># 第0个就不用匹配了，从第1个开始一直匹配到第len(strs)个</span><br>            <span class="hljs-keyword">while</span> strs[i].find(prefix) != <span class="hljs-number">0</span>:  <span class="hljs-comment"># 用这句话判断当前prefix是不是也是其他字符串的前缀</span><br>                prefix = prefix[:-<span class="hljs-number">1</span>]  <span class="hljs-comment"># 减少前缀</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> prefix:  <span class="hljs-comment"># 当 prefix为空时，匹配不成功，直接返回&quot;&quot;。</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-keyword">return</span> prefix<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(S)$，$S$ 是所有字符串中字符数量的总和。</p>
+<p>空间复杂度：$O(1)$，我们只需要使用常数级别的额外空间。</p>
+<h3 id="分治算法实现"><a href="#分治算法实现" class="headerlink" title="分治算法实现"></a>分治算法实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(strs) == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 如果传入的list本身就是空的 直接返回空</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>        <br>        <span class="hljs-keyword">return</span> self.divide_rule(strs, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(strs)-<span class="hljs-number">1</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">divide_rule</span>(<span class="hljs-params">self, strs, l, r</span>):</span><br>        <span class="hljs-keyword">if</span> l == r:<br>            <span class="hljs-keyword">return</span> strs[l]<br>        <span class="hljs-keyword">else</span>:<br>            mid = (l+r)//<span class="hljs-number">2</span>  <span class="hljs-comment"># 注意，这里整除以要用//</span><br>            lcpLeft = self.divide_rule(strs, l, mid)<br>            lcpRight = self.divide_rule(strs, mid+<span class="hljs-number">1</span>, r)<br>            <span class="hljs-keyword">return</span> self.commonPrefix(lcpLeft, lcpRight)<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">commonPrefix</span>(<span class="hljs-params">self, left, right</span>):</span><br>        _min = <span class="hljs-built_in">min</span>(<span class="hljs-built_in">len</span>(left), <span class="hljs-built_in">len</span>(right))<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_min):<br>            <span class="hljs-keyword">if</span> left[i] != right[i]:<br>                <span class="hljs-keyword">return</span> left[: i]<br>        <span class="hljs-keyword">return</span> left[: _min]<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(S)$，$S$ 是所有字符串中字符数量的总和，$S=m*n$。</p>
+<p>时间复杂度的递推式为 $T(n)=2\cdot T(\frac{n}{2})+O(m)$，化简后可知其就是 $O(S)$。最好情况下，算法会进行 $minLen\cdot n$ 次比较，其中 $minLen$ 是数组中最短字符串的长度。</p>
+<p>空间复杂度：$O(m \cdot log(n))$</p>
+<p>内存开支主要是递归过程中使用的栈空间所消耗的。 一共会进行 $log(n)$ 次递归，每次需要 mm 的空间存储返回结果，所以空间复杂度为 $O(m\cdot log(n))$。</p>
+<h3 id="二分查找算法实现（结合了垂直扫描）"><a href="#二分查找算法实现（结合了垂直扫描）" class="headerlink" title="二分查找算法实现（结合了垂直扫描）"></a>二分查找算法实现（结合了垂直扫描）</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(strs) == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 如果传入的list本身就是空的 直接返回空</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br><br>        minLen = <span class="hljs-built_in">min</span>([<span class="hljs-built_in">len</span>(s) <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> strs])<br>        low = <span class="hljs-number">0</span><br>        high = minLen<br>        <span class="hljs-keyword">while</span> low &lt;= high:<br>            middle = (low + high) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> self.isCommonPrefix(strs, middle):  <span class="hljs-comment"># 前面是有效的，继续找后面。</span><br>                low = middle + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 前面是无效的，那后面的部分必定也无用缩小前区间的范围，继续往前寻找。</span><br>                high = middle - <span class="hljs-number">1</span> <br><br>        <span class="hljs-keyword">return</span> strs[<span class="hljs-number">0</span>][: (low + high) // <span class="hljs-number">2</span>]<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isCommonPrefix</span>(<span class="hljs-params">self, strs, _len</span>):</span><br>        tmp_str = strs[<span class="hljs-number">0</span>][: _len]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(strs)):  <span class="hljs-comment"># 这里做的是垂直扫描</span><br>            <span class="hljs-keyword">if</span> strs[i].find(tmp_str) != <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
+<p>最坏情况下，我们有 n 个长度为 m 的相同字符串。</p>
+<p>时间复杂度：$O(S \cdot log(n))$，其中 $S$ 所有字符串中字符数量的总和。</p>
+<p>算法一共会进行 $log(n)$ 次迭代，每次一都会进行 $S = m*n$ 次比较，所以总时间复杂度为 $O(S \cdot log(n))$。</p>
+<p>空间复杂度：$O(1)$，我们只需要使用常数级别的额外空间。</p>
+<h2 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h2><p>1、<strong>set()</strong>函数可以去重</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = (<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br>(<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = <span class="hljs-built_in">set</span>(a)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(b)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">set</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">b</span></span><br>&#123;&#x27;3&#x27;, &#x27;5&#x27;, &#x27;4&#x27;, &#x27;2&#x27;, &#x27;1&#x27;&#125;<br></code></pre></div></td></tr></table></figure>
+<p>2、<strong>zip()</strong> 函数用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个元组，然后返回由这些元组组成的对象，这样做的好处是节约了不少的内存。我们可以使用 list() 转换来输出列表。如果各个迭代器的元素个数不一致，则返回列表长度与最短的对象相同，利用 <strong>*</strong> 号操作符，可以将元组解压为列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>c = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>zipped = <span class="hljs-built_in">zip</span>(a,b)     <span class="hljs-comment"># 返回一个对象</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>zipped<br>&lt;<span class="hljs-built_in">zip</span> <span class="hljs-built_in">object</span> at <span class="hljs-number">0x103abc288</span>&gt;<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(zipped)  <span class="hljs-comment"># list() 转换为列表</span><br>[(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">5</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">6</span>)]<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(a,c))              <span class="hljs-comment"># 元素个数与最短的列表一致</span><br>[(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">5</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">6</span>)]<br> <br><span class="hljs-meta">&gt;&gt;&gt; </span>a1, a2 = <span class="hljs-built_in">zip</span>(*<span class="hljs-built_in">zip</span>(a,b))          <span class="hljs-comment"># 与 zip 相反，zip(*) 可理解为解压，返回二维矩阵式</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(a1)<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(a2)<br>[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]<br>&gt;&gt;&gt;<br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%92%8C%E6%90%9C%E7%B4%A2/">二分查找和搜索</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/08/LeetCode-15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 15. 三数之和（中）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/08/LeetCode-13-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 13. 罗马数字转整数（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/08/LeetCode-14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80%EF%BC%88%E6%98%93%EF%BC%89/';
+        this.page.identifier = '/2020/03/08/LeetCode-14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80%EF%BC%88%E6%98%93%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

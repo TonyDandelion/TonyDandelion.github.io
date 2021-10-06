@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>改变命运的方法：精力管理 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="改变命运的方法：精力管理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-13 13:09" pubdate>
+        2020年12月13日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">改变命运的方法：精力管理</h1>
+            
+            <div class="markdown-body">
+              <p>如何进行有效的精力管理，提升整体的生命质量。</p>
+<a id="more"></a>
+<blockquote>
+<p> 转载自B站课代表（<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mT4y1F7X1）">https://www.bilibili.com/video/BV1mT4y1F7X1）</a></p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv8165516">UP主实践手册・精力管理 | 4 个秘诀让你全天不困，精力充沛一整天</a></p>
+<p>原视频</p>
+<iframe src="//player.bilibili.com/player.html?aid=927681497&bvid=BV1mT4y1F7X1&cid=251165869&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+<h1 id="精力管理四大核心原则"><a href="#精力管理四大核心原则" class="headerlink" title="精力管理四大核心原则"></a>精力管理四大核心原则</h1><p><strong>定好目标</strong>就<strong>不假思索</strong>的去做，做的时候一定要<strong>全力投入</strong>，定好目标<strong>劳逸结合</strong>，时不时<strong>突破极限</strong>。<strong>习惯驱动</strong>，不要依靠意志力。</p>
+<h2 id="第一-全情投入"><a href="#第一-全情投入" class="headerlink" title="第一 全情投入"></a>第一 全情投入</h2><p>调动四种独立且相关联的 精力源</p>
+<p>体能 情感 思维 意志</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/reYwgP"><img src="https://s3.ax1x.com/2020/12/13/reYwgP.png" srcset="/img/loading.gif" alt="reYwgP.png"></a></p>
+<h2 id="第二-平衡消耗是关键"><a href="#第二-平衡消耗是关键" class="headerlink" title="第二 平衡消耗是关键"></a>第二 平衡消耗是关键</h2><p>使用过度和使用不足都会削弱精力，平衡消耗是关键。</p>
+<p>把生活当作一系列短跑冲刺，每次都全力以赴，然后再好好的休整恢复</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/reYa9I"><img src="https://s3.ax1x.com/2020/12/13/reYa9I.png" srcset="/img/loading.gif" alt="reYa9I.png"></a></p>
+<h2 id="第三-突破自己的极限"><a href="#第三-突破自己的极限" class="headerlink" title="第三 突破自己的极限"></a>第三 突破自己的极限</h2><p>像健身锻炼身体一样锻炼情感、思维和意志能力</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/reYN4A"><img src="https://s3.ax1x.com/2020/12/13/reYN4A.png" srcset="/img/loading.gif" alt="reYN4A.png"></a></p>
+<h2 id="第四-积极的精力仪式习惯"><a href="#第四-积极的精力仪式习惯" class="headerlink" title="第四 积极的精力仪式习惯"></a>第四 积极的精力仪式习惯</h2><p>即细致具体的精力管理方法是全情投入、保持高效表现的诀窍</p>
+<p><strong>不是依靠自律、而是依靠习惯，让他成为自然。</strong></p>
+<p>我们的意志力、自制力远远要比我们想象的要单薄的多。</p>
+<p><strong>如果你每件事需要坚持做，每次都思考一下的话，就很有可能很难坚持下来。</strong></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/reYd3t"><img src="https://s3.ax1x.com/2020/12/13/reYd3t.png" srcset="/img/loading.gif" alt="reYd3t.png"></a></p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="一、体能精力"><a href="#一、体能精力" class="headerlink" title="一、体能精力"></a>一、体能精力</h2><p>人体精力来自氧气和血糖的化学反应，取决于呼吸、饮食、睡眠等要素。</p>
+<p>1、呼吸方法：呼吸时分三次吸入，呼气时分六次呼出。</p>
+<p>2、选择升糖指数低的食物，缓慢的释放糖分，提供更稳定的精力来源。</p>
+<p>3、<strong>按照睡眠周期睡觉</strong>，固定每日的睡觉时间。调控身心进入易睡模式。固定自己的起床和睡觉时间，在睡前进行科学的例行程序，把身心调控到易睡模式。</p>
+<iframe src="//player.bilibili.com/player.html?aid=414909569&bvid=BV1tV41127CQ&cid=244000018&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<ul>
+<li>90分钟一个周期，每晚睡4-5个周期。也就是6个小时到7个半小时。</li>
+<li>每晚5个周期，7个半小时，每周35个周期，是最为理想的。</li>
+<li>起床时间固定，提前于工作学习时间90分钟到60分钟。</li>
+<li>假设早上7点半起床，则晚上12点必然入睡。正常来说如果是不容易入入睡的话，建议提前半小时睡觉，也就是晚上11点半就要入睡了。</li>
+<li>如何快速入睡？缩小体表和体内温度（洗热水澡，泡脚，做运动），正念冥想，写下心中的想法再睡觉。</li>
+<li>关于冥想的指导音频：<br>  <a target="_blank" rel="noopener" href="https://www.bilibili.com/audio/au1397301?type=3&amp;spm_id_from=333.788.b_636f6d6d656e74.5">https://www.bilibili.com/audio/au1397301?type=3</a><br>  <a target="_blank" rel="noopener" href="https://www.bilibili.com/audio/au1574486?type=3">https://www.bilibili.com/audio/au1574486?type=3</a><br>  <a target="_blank" rel="noopener" href="https://www.bilibili.com/audio/au1397434?type=3">https://www.bilibili.com/audio/au1397434?type=3</a><br>  <a target="_blank" rel="noopener" href="https://www.bilibili.com/audio/au1574646?type=3">https://www.bilibili.com/audio/au1574646?type=3</a></li>
+<li>朝我们有利手的反方向侧卧，膝盖弯曲，两条手臂轻轻交叉放在身前。颈部、脊柱和臀部形成一条平滑的直线。</li>
+</ul>
+<p>4、高强度的间歇性训练（HIT）</p>
+<p>高强度的间歇性训练，对于改善心脑血管、提高免疫力、改善情绪都有显著的积极影响。相比传统的有氧运动、时间段、效果好。</p>
+<h2 id="二、情感经历"><a href="#二、情感经历" class="headerlink" title="二、情感经历"></a>二、情感经历</h2><p>1、<strong>远离肤浅娱乐</strong>，看电视、刷手机。</p>
+<p>2、想一想，什么是滋养你的？什么能给你带来内心平静、喜悦和满足？<strong>音乐，亲近大自然。</strong></p>
+<p>3、经营深度、稳固的关系。良好的关系会培养我们的精力。</p>
+<h2 id="三、思维精力"><a href="#三、思维精力" class="headerlink" title="三、思维精力"></a>三、思维精力</h2><p>每天脑子里有很多小剧场，进行自我内耗。</p>
+<p>改善方法：</p>
+<p>1、<strong>学会让大脑间歇性的休息</strong>，我们的灵感往往来自最不可以寻找答案的时刻，比如：保持投入和抽离；思考和放松；活跃和休息之间有节奏的交替。</p>
+<p>2、<strong>通过正面冥想训练专注力</strong>。</p>
+<p>3、每天列出危机处理清单，把潜在的威胁解读为机遇，既然控制不住胡思乱性，不如好好的思考</p>
+<h2 id="四、意志精力"><a href="#四、意志精力" class="headerlink" title="四、意志精力"></a>四、意志精力</h2><p>压力只是表面，<strong>更深层次的原因是找不到人生的方向</strong>，对手头正在做的事充满怀疑，所以才会感到心累。精力最持久的来源：人生的意义感、方向感。</p>
+<p><strong>知晓生命的意义，方能忍耐一切。</strong>—— 尼采</p>
+<p>怎么寻找生命的意义：</p>
+<ul>
+<li><p><strong>如果你的生命只剩下三天，你会如何度过？</strong></p>
+</li>
+<li><p><strong>你希望如何写下你的墓志铭，来总结你的一生？</strong></p>
+</li>
+<li><p><strong>如果现在就是人生的尽头，你学到的最重要的三件事是什么？你又留给了这个世界什么？</strong></p>
+</li>
+<li><p><strong>你能做到的最好的自己是什么样的？</strong></p>
+</li>
+</ul>
+<p>也许，很多人来说，找不到生活的热情，没有真实沉浸其中，这才是丧、累、乏、困的真正原因。——《无问西东》</p>
+<p>愿你每天爱你所爱，元气满满。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/">生活感悟</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/20/2020-12-20-Seminar/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2020-12-20 Seminar</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/12/%E5%8E%86%E5%8F%B2%E4%B8%AD%E6%83%8A%E4%BA%BA%E7%9A%84%E5%B7%A7%E5%90%88/">
+                        <span class="hidden-mobile">历史中惊人的巧合</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/12/13/%E6%94%B9%E5%8F%98%E5%91%BD%E8%BF%90%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A%E7%B2%BE%E5%8A%9B%E7%AE%A1%E7%90%86/';
+        this.page.identifier = '/2020/12/13/%E6%94%B9%E5%8F%98%E5%91%BD%E8%BF%90%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A%E7%B2%BE%E5%8A%9B%E7%AE%A1%E7%90%86/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

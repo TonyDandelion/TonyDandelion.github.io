@@ -1,0 +1,2689 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>分类 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/categories.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="分类">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+
+
+
+
+
+<div class="category-list">
+  
+  
+  
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77970047v4vcepcc9sw6" role="tab" data-toggle="collapse" href="#collapse-cknob77970047v4vcepcc9sw6"
+        aria-expanded="false"
+      >
+        LeetCode
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/LeetCode/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>142</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77970047v4vcepcc9sw6" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77970047v4vcepcc9sw6">
+    
+    
+    
+      
+      
+        <a href="/2020/06/29/LeetCode2020-0629-0706/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode2020-0629-0706</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/26/LeetCode2020-0622-0628/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode2020 0622-0628</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/08/LeetCode2020-0608-0614/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 每日一题 0608-0614(2020)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/01/LeetCode2020-0601-0607/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 每日一题 0601-0607(2020)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/27/LeetCode2020-0525-0531/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 每日一题 0525-0531(2020)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/26/LeetCode-103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 103. 二叉树的锯齿形层次遍历（中）&amp; 剑指offer 面试题32 III. 从上到下打印二叉树 III</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/20/LeetCode-1371-%E6%AF%8F%E4%B8%AA%E5%85%83%E9%9F%B3%E5%8C%85%E5%90%AB%E5%81%B6%E6%95%B0%E6%AC%A1%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 1371. 每个元音包含偶数次的最长子字符串（中）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/18/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9863-%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E5%88%A9%E6%B6%A6%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题63. 股票的最大利润（中）&amp; LeetCode 121. 买卖股票的最佳时机（易）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/16/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9859-I-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题59 - I. 滑动窗口的最大值（易）&amp; LeetCode 239. 滑动窗口最大值（难）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/16/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9858-I-%E7%BF%BB%E8%BD%AC%E5%8D%95%E8%AF%8D%E9%A1%BA%E5%BA%8F%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题58 - I. 翻转单词顺序（易）&amp; LeetCode 151. 翻转字符串里的单词（易）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/LeetCode/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77ac007mv4vc73ug5b66" role="tab" data-toggle="collapse" href="#collapse-cknob77ac007mv4vc73ug5b66"
+        aria-expanded="false"
+      >
+        剑指offer
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%89%91%E6%8C%87offer/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>70</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77ac007mv4vc73ug5b66" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77ac007mv4vc73ug5b66">
+    
+    
+    
+      
+      
+        <a href="/2020/05/26/LeetCode-103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 103. 二叉树的锯齿形层次遍历（中）&amp; 剑指offer 面试题32 III. 从上到下打印二叉树 III</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/18/%E5%89%91%E6%8C%87offer-%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 第六章总结</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/18/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9866-%E6%9E%84%E5%BB%BA%E4%B9%98%E7%A7%AF%E6%95%B0%E7%BB%84%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题66. 构建乘积数组（易）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/18/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9865-%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E5%81%9A%E5%8A%A0%E6%B3%95%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面面试题65. 不用加减乘除做加法（易）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/18/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9864-%E6%B1%821-2-%E2%80%A6-n%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题64. 求1+2+…+n（中）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/18/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9863-%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E5%88%A9%E6%B6%A6%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题63. 股票的最大利润（中）&amp; LeetCode 121. 买卖股票的最佳时机（易）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/17/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9862-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post"></span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/17/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9861-%E6%89%91%E5%85%8B%E7%89%8C%E4%B8%AD%E7%9A%84%E9%A1%BA%E5%AD%90%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题61. 扑克牌中的顺子（易）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/16/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9860-n%E4%B8%AA%E9%AA%B0%E5%AD%90%E7%9A%84%E7%82%B9%E6%95%B0%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题60. n个骰子的点数（易）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/16/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9859-I-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题59 - I. 滑动窗口的最大值（易）&amp; LeetCode 239. 滑动窗口最大值（难）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/%E5%89%91%E6%8C%87offer/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob777n000hv4vcdle60fmd" role="tab" data-toggle="collapse" href="#collapse-cknob777n000hv4vcdle60fmd"
+        aria-expanded="false"
+      >
+        Python后端开发
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Python%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>19</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob777n000hv4vcdle60fmd" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob777n000hv4vcdle60fmd">
+    
+    
+    
+      
+      
+        <a href="/2020/04/25/uWSGI%E8%AF%A6%E8%A7%A3/" class="list-group-item list-group-item-action">
+          <span class="category-post">uWSGI详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/25/Django%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E4%B8%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django源码阅读笔记一</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/Django%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django中间件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E5%85%AD%E8%AF%BE%EF%BC%9ASaaS%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第六课：SaaS移动应用端开发</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%BA%94%E8%AF%BE%EF%BC%9ASaaS%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第五课：SaaS进阶开发</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E5%9B%9B%E8%AF%BE%EF%BC%9ADjango%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第四课：Django基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/08/%E5%90%9E%E5%90%90%E9%87%8F%EF%BC%88TPS%EF%BC%89%E3%80%81QPS%E3%80%81%E5%B9%B6%E5%8F%91%E6%95%B0%E3%80%81%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%EF%BC%88RT%EF%BC%89%E6%A6%82%E5%BF%B5/" class="list-group-item list-group-item-action">
+          <span class="category-post">吞吐量（TPS）、QPS、并发数、响应时间（RT）概念</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/07/14/%E8%B4%A7%E6%BB%B4%E5%B9%B3%E5%8F%B0%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+          <span class="category-post">项目开发总结</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/07/13/Django%E6%8B%BE%E9%81%97/" class="list-group-item list-group-item-action">
+          <span class="category-post">Django拾遗</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/06/14/template-gramer-in-Tornado/" class="list-group-item list-group-item-action">
+          <span class="category-post">Template gramer in Tornado</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/Python%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77ax009fv4vc8cheefl7" role="tab" data-toggle="collapse" href="#collapse-cknob77ax009fv4vc8cheefl7"
+        aria-expanded="false"
+      >
+        python
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/python/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>15</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77ax009fv4vc8cheefl7" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77ax009fv4vc8cheefl7">
+    
+    
+    
+      
+      
+        <a href="/2020/04/25/%E6%B5%85%E8%AE%AEPython-unittest%E6%B5%8B%E8%AF%95%E5%8D%95%E5%85%83/" class="list-group-item list-group-item-action">
+          <span class="category-post">浅议Python unittest测试单元</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/23/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%BA%8C%E8%AF%BE%EF%BC%9APython%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第二课：Python基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/22/Python%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python的面向对象编程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/17/Python%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python的装饰器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/14/Python%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python的函数式编程思想</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/12/Python%E5%9F%BA%E7%A1%80%E7%AE%80%E5%8D%95%E6%95%B4%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python基础简单整理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/12/Python%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python异常处理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/12/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python爬虫入门</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/11/LeetCode-146-LRU%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 146. LRU缓存机制（中）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/09/Python-PEP8/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python PEP8</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/python/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77gv00qlv4vccrpobjiu" role="tab" data-toggle="collapse" href="#collapse-cknob77gv00qlv4vccrpobjiu"
+        aria-expanded="false"
+      >
+        算法与数据结构
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>15</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77gv00qlv4vccrpobjiu" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77gv00qlv4vccrpobjiu">
+    
+    
+    
+      
+      
+        <a href="/2020/04/14/%E7%AE%97%E6%B3%95%EF%BC%9A%E4%B8%8D%E5%B8%B8%E8%A7%81%E7%B1%BB%E5%9E%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">算法：不常见类型</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/12/%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" class="list-group-item list-group-item-action">
+          <span class="category-post">算法复杂度分析</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/" class="list-group-item list-group-item-action">
+          <span class="category-post">数据结构：字符串与哈希表</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" class="list-group-item list-group-item-action">
+          <span class="category-post">数据结构：栈和队列</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E6%A0%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">数据结构：树</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E4%BD%8D%E8%BF%90%E7%AE%97/" class="list-group-item list-group-item-action">
+          <span class="category-post">算法：位运算</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%8E%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">算法：二分查找与搜索算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">算法：动态规划算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">算法：分治算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">算法：贪心算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob778w003cv4vc6gp36w5s" role="tab" data-toggle="collapse" href="#collapse-cknob778w003cv4vc6gp36w5s"
+        aria-expanded="false"
+      >
+        系统运维
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>13</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob778w003cv4vc6gp36w5s" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob778w003cv4vc6gp36w5s">
+    
+    
+    
+      
+      
+        <a href="/2020/08/19/nginx-%E9%85%8D%E7%BD%AE%E9%80%BB%E8%BE%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">nginx 使用指北</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/25/uWSGI%E8%AF%A6%E8%A7%A3/" class="list-group-item list-group-item-action">
+          <span class="category-post">uWSGI详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E5%85%AD%E8%AF%BE%EF%BC%9ASaaS%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第六课：SaaS移动应用端开发</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%BA%94%E8%AF%BE%EF%BC%9ASaaS%E8%BF%9B%E9%98%B6%E5%BC%80%E5%8F%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第五课：SaaS进阶开发</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E5%9B%9B%E8%AF%BE%EF%BC%9ADjango%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第四课：Django基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/23/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%BA%8C%E8%AF%BE%EF%BC%9APython%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第二课：Python基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/22/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%B8%80%E8%AF%BE%EF%BC%9A%E4%BC%81%E4%B8%9A%E7%BA%A7PaaS%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第一课：企业级PaaS解决方案</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/22/Ngix%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">Ngix基础（转载）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/07/18/%E5%85%81%E8%AE%B8%E6%97%A0%E5%AF%86%E7%A0%81%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="list-group-item list-group-item-action">
+          <span class="category-post">允许无密码远程登录服务器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/06/07/Little-Git/" class="list-group-item list-group-item-action">
+          <span class="category-post">常用Git命令整理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77e900j6v4vc5t1w6upy" role="tab" data-toggle="collapse" href="#collapse-cknob77e900j6v4vc5t1w6upy"
+        aria-expanded="false"
+      >
+        生活感悟
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>13</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77e900j6v4vc5t1w6upy" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77e900j6v4vc5t1w6upy">
+    
+    
+    
+      
+      
+        <a href="/2021/07/04/shendu/" class="list-group-item list-group-item-action">
+          <span class="category-post">改变命运的方法：培养慎独之心</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/12/13/%E6%94%B9%E5%8F%98%E5%91%BD%E8%BF%90%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A%E7%B2%BE%E5%8A%9B%E7%AE%A1%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">改变命运的方法：精力管理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/12/10/%E5%85%B3%E4%BA%8E%E6%83%85%E7%BB%AA%E5%8C%96%E7%9A%84%E4%B8%80%E5%88%87/" class="list-group-item list-group-item-action">
+          <span class="category-post">关于情绪化的一切</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/08/%E6%8A%8A%E6%88%91%E4%BB%AC%E7%9A%84%E8%A1%80%E8%82%89%E7%AD%91%E6%88%90%E6%88%91%E4%BB%AC%E6%96%B0%E7%9A%84%E9%95%BF%E5%9F%8E%EF%BC%81/" class="list-group-item list-group-item-action">
+          <span class="category-post">新的长城</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/06/%E6%AF%8F%E6%97%A5%E4%B8%80%E8%A8%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">每日一言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/30/%E4%BA%BA%E6%98%AF%E5%A6%82%E4%BD%95%E5%BA%9F%E6%8E%89%E7%9A%84/" class="list-group-item list-group-item-action">
+          <span class="category-post">人是如何废掉的</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/26/%E8%BF%99%E4%B8%96%E7%95%8C%E4%B8%8A%E6%B2%A1%E6%9C%89%E9%A2%84%E8%A8%80%E8%80%85%EF%BC%8C%E5%8F%AA%E6%9C%89%E7%8B%AC%E7%AB%8B%E6%80%9D%E8%80%83%E7%9A%84%E4%BA%BA%E3%80%82/" class="list-group-item list-group-item-action">
+          <span class="category-post">这世界上 没有神奇的预言者 只有独立思考的人</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/20/%E5%85%B3%E4%BA%8E%E6%81%90%E6%83%A7/" class="list-group-item list-group-item-action">
+          <span class="category-post">关于恐惧</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/18/%E3%80%8A%E9%AB%98%E5%B1%B1%E4%B8%8B%E7%9A%84%E8%8A%B1%E7%8E%AF%E3%80%8B-%E6%97%B6%E4%BB%A3%E4%B8%8E%E9%B2%9C%E8%A1%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">《高山下的花环》- 时代矛盾与英雄主义</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/17/%E8%A7%82%E3%80%8A%E6%9C%AC%E6%9D%B0%E6%98%8E%C2%B7%E5%B7%B4%E9%A1%BF%E5%A5%87%E4%BA%8B%E3%80%8B%E6%9C%89%E6%84%9F/" class="list-group-item list-group-item-action">
+          <span class="category-post">《本杰明·巴顿奇事》有感</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob777p000mv4vc8oh80jr3" role="tab" data-toggle="collapse" href="#collapse-cknob777p000mv4vc8oh80jr3"
+        aria-expanded="false"
+      >
+        前端开发
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>11</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob777p000mv4vc8oh80jr3" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob777p000mv4vc8oh80jr3">
+    
+    
+    
+      
+      
+        <a href="/2020/06/30/%E5%89%8D%E7%AB%AF%E9%82%A3%E4%BA%9B%E4%BA%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">前端那些事</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/27/Ant-Design-Pro-Guide/" class="list-group-item list-group-item-action">
+          <span class="category-post">Ant Design Pro</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/24/%E5%89%8D%E7%AB%AF%E7%9A%84%E8%BD%AE%E5%AD%90%E4%BB%AC/" class="list-group-item list-group-item-action">
+          <span class="category-post">前端的轮子们</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/23/%E7%9C%9FN%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8React/" class="list-group-item list-group-item-action">
+          <span class="category-post">真N分钟入门Ant Design</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/23/React%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%EF%BC%9A%E5%AE%8C%E6%88%90%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/" class="list-group-item list-group-item-action">
+          <span class="category-post">React官方教程：完成井字棋游戏</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/23/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8Cthis%E7%9A%84%E5%8C%BA%E5%88%AB/" class="list-group-item list-group-item-action">
+          <span class="category-post">箭头函数和this的区别</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%B8%89%E8%AF%BE%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">蓝鲸运维SaaS开发实战公开课第三课：前端基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/07/05/%E5%89%8D%E7%AB%AF%E5%B0%8Ftips/" class="list-group-item list-group-item-action">
+          <span class="category-post">CSS小Tips</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/05/22/pits-in-javascript/" class="list-group-item list-group-item-action">
+          <span class="category-post">error occurred in javascript</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/05/18/Javascript-Tips/" class="list-group-item list-group-item-action">
+          <span class="category-post">Javascript Tips</span>
+        </a>
+      
+    
+      
+      
+        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">More...</span>
+        </a>
+        
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob777r000sv4vcdygg7lhy" role="tab" data-toggle="collapse" href="#collapse-cknob777r000sv4vcdygg7lhy"
+        aria-expanded="false"
+      >
+        C++
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/C/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>10</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob777r000sv4vcdygg7lhy" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob777r000sv4vcdygg7lhy">
+    
+    
+    
+      
+      
+        <a href="/2020/05/30/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="list-group-item list-group-item-action">
+          <span class="category-post">Linux高性能服务器编程 第一章</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/30/C-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91-%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="list-group-item list-group-item-action">
+          <span class="category-post">C++后台开发 核心技术与应用实践 第一章</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/30/C-%E6%8B%BE%E9%81%97/" class="list-group-item list-group-item-action">
+          <span class="category-post">C++拾遗</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/28/The-Complete-C-Training-Course-chapter-11/" class="list-group-item list-group-item-action">
+          <span class="category-post">The Complete C++ Training Course chapter 1</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/25/%E5%AD%A6%E4%B9%A0C-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%9A%84%E7%9A%84%E5%8D%81%E6%9C%AC%E6%9C%80%E7%BB%8F%E5%85%B8%E4%B9%A6%E7%B1%8D/" class="list-group-item list-group-item-action">
+          <span class="category-post">学习C++从入门到精通的的十本最经典书籍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/24/%E5%A6%82%E4%BD%95%E6%B1%82%E8%81%8CC%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B2%97%E4%BD%8D/" class="list-group-item list-group-item-action">
+          <span class="category-post">如何求职 C++ 后端开发岗位</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/19/C-%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/" class="list-group-item list-group-item-action">
+          <span class="category-post">C++面试考点</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/19/Visual-Studio-Code-C-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="list-group-item list-group-item-action">
+          <span class="category-post">Visual Studio Code C++环境搭建</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/03/29/Primer-%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AD%94%E6%A1%88/" class="list-group-item list-group-item-action">
+          <span class="category-post">C++ Primer 第一章答案</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/09/26/C-C-%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/" class="list-group-item list-group-item-action">
+          <span class="category-post">C++拾遗</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob7789001sv4vch3e1c5pp" role="tab" data-toggle="collapse" href="#collapse-cknob7789001sv4vch3e1c5pp"
+        aria-expanded="false"
+      >
+        caffe
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/caffe/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>9</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob7789001sv4vch3e1c5pp" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob7789001sv4vch3e1c5pp">
+    
+    
+    
+      
+      
+        <a href="/2018/03/31/finetune%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">finetune训练模型</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/31/%E4%BD%95%E5%88%A9%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AE%AD%E7%BB%83%E4%B8%80%E4%B8%AA%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C/" class="list-group-item list-group-item-action">
+          <span class="category-post">如何利用自己的数据训练一个分类网络</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/28/%E7%94%A8PyCaffe%E8%BF%9B%E8%A1%8C%E7%89%B9%E5%BE%81%E5%8F%8A%E5%AD%A6%E4%B9%A0%E6%9B%B2%E7%BA%BF%E5%8F%AF%E8%A7%86%E5%8C%96/" class="list-group-item list-group-item-action">
+          <span class="category-post">使用PyCaffe进行特征图及学习曲线可视化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/27/ubuntu16-04%E5%AE%89%E8%A3%85GPU%E7%89%88%E6%9C%AC%E7%9A%84caffe/" class="list-group-item list-group-item-action">
+          <span class="category-post">ubuntu16-04安装GPU版本的caffe</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/27/Caffe%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+          <span class="category-post">caffe技巧总结</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/27/Matcaffe%E9%A3%9F%E7%94%A8%E6%8C%87%E5%8D%97/" class="list-group-item list-group-item-action">
+          <span class="category-post">Matcaffe食用指南</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/27/PyCaffe%E9%A3%9F%E7%94%A8%E6%8C%87%E5%8D%97/" class="list-group-item list-group-item-action">
+          <span class="category-post">PyCaffe食用指南</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/27/Caffe%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" class="list-group-item list-group-item-action">
+          <span class="category-post">Caffe文件详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/02/28/Caffe%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+          <span class="category-post">Caffe官方教程总结</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77e300irv4vch95601km" role="tab" data-toggle="collapse" href="#collapse-cknob77e300irv4vch95601km"
+        aria-expanded="false"
+      >
+        读书看报
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%9C%8B%E6%8A%A5/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>9</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77e300irv4vch95601km" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77e300irv4vch95601km">
+    
+    
+    
+      
+      
+        <a href="/2020/04/22/%E5%8F%8D%E6%B6%88%E8%B4%B9%E4%B8%BB%E4%B9%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">反消费主义</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/31/%E6%9C%89%E6%B2%A1%E6%9C%89%E4%B8%80%E5%8F%A5%E8%AF%9D-%E5%BD%B1%E5%93%8D%E4%BD%A0%E5%BE%88%E5%A4%9A%E5%B9%B4/" class="list-group-item list-group-item-action">
+          <span class="category-post">有没有一句话 影响你很多年</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/31/somewhere-vs-anywhere/" class="list-group-item list-group-item-action">
+          <span class="category-post">somewhere vs anywhere</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/26/%E5%85%B3%E4%BA%8E%E7%BE%8E%E5%9B%BD%E7%9F%AD%E5%B0%8F%E7%9A%84%E5%9B%BD%E5%AE%B6%E5%8E%86%E5%8F%B2/" class="list-group-item list-group-item-action">
+          <span class="category-post">关于美国短小的国家历史</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/07/09/%E4%B8%BA%E4%BD%A0%E8%AF%BB%E8%AF%97-%E7%B2%BE%E9%80%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">为你读诗 精选</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/04/12/%E6%8A%97%E6%88%98%E4%B8%AD%E7%9A%84%E4%B8%AD%E5%9B%BD%E5%B0%86%E9%A2%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">抗战中的中国将领</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/10/%E5%AF%8C%E7%88%B8%E7%88%B8%E5%92%8C%E7%A9%B7%E7%88%B8%E7%88%B8/" class="list-group-item list-group-item-action">
+          <span class="category-post">富爸爸和穷爸爸</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/02/28/%E7%9C%8B%E7%9C%8B%E4%B9%A6-%E8%AF%BB%E8%AF%BB%E6%8A%A5-2018-02-28/" class="list-group-item list-group-item-action">
+          <span class="category-post">看看书 读读报 2018-02-28</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/06/17/%E7%9C%8B%E7%9C%8B%E4%B9%A6-%E8%AF%BB%E8%AF%BB%E6%8A%A5-2017-06-17/" class="list-group-item list-group-item-action">
+          <span class="category-post">看看书 读读报 2017-06-17</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77b800a5v4vc14oe10fd" role="tab" data-toggle="collapse" href="#collapse-cknob77b800a5v4vc14oe10fd"
+        aria-expanded="false"
+      >
+        操作系统
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>8</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77b800a5v4vc14oe10fd" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77b800a5v4vc14oe10fd">
+    
+    
+    
+      
+      
+        <a href="/2020/04/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" class="list-group-item list-group-item-action">
+          <span class="category-post">操作系统常用名词解释</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/15/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">进程调度算法</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/11/LeetCode-146-LRU%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 146. LRU缓存机制（中）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/02/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">从存储器到页面置换</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%90%84%E9%83%A8%E5%88%86%E5%85%B3%E7%B3%BB/" class="list-group-item list-group-item-action">
+          <span class="category-post">操作系统基础理论思维导图</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/01/%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E8%BF%9B%E7%A8%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">从代码到进程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/01/%E8%AF%B4%E9%81%93%E8%AF%B4%E9%81%93%E6%AD%BB%E9%94%81/" class="list-group-item list-group-item-action">
+          <span class="category-post">说道说道死锁</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/31/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E9%80%9A%E4%BF%A1%E9%97%AE%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">进程同步与进程、线程通信问题</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77ee00jlv4vc2sfxase3" role="tab" data-toggle="collapse" href="#collapse-cknob77ee00jlv4vc2sfxase3"
+        aria-expanded="false"
+      >
+        计算机科学入门
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E5%85%A5%E9%97%A8/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>8</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77ee00jlv4vc2sfxase3" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77ee00jlv4vc2sfxase3">
+    
+    
+    
+      
+      
+        <a href="/2020/04/08/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%BB%A5%E5%8F%8A%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">三次握手以及四次挥手</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/08/select%E3%80%81poll%E3%80%81epoll%E7%9A%84%E5%8E%9F%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">select、poll、epoll的原理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/07/Mysql%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">SQL &amp; DBMS &amp; Mysql &amp; Redis 相关知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/02/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">从存储器到页面置换</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%90%84%E9%83%A8%E5%88%86%E5%85%B3%E7%B3%BB/" class="list-group-item list-group-item-action">
+          <span class="category-post">操作系统基础理论思维导图</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/01/%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E8%BF%9B%E7%A8%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">从代码到进程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/01/%E8%AF%B4%E9%81%93%E8%AF%B4%E9%81%93%E6%AD%BB%E9%94%81/" class="list-group-item list-group-item-action">
+          <span class="category-post">说道说道死锁</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/31/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E4%B8%8E%E9%80%9A%E4%BF%A1%E9%97%AE%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">进程同步与进程、线程通信问题</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob778g002gv4vc8h684pim" role="tab" data-toggle="collapse" href="#collapse-cknob778g002gv4vc8h684pim"
+        aria-expanded="false"
+      >
+        数据库
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>6</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob778g002gv4vc8h684pim" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob778g002gv4vc8h684pim">
+    
+    
+    
+      
+      
+        <a href="/2020/06/29/Mysql%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mysql用户管理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/11/Redis%E5%AD%97%E5%85%B8%E8%AF%A6%E8%A7%A3/" class="list-group-item list-group-item-action">
+          <span class="category-post">Redis 字典详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/07/Mysql%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">SQL &amp; DBMS &amp; Mysql &amp; Redis 相关知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/07/%E8%B7%B3%E8%A1%A8/" class="list-group-item list-group-item-action">
+          <span class="category-post">Redis 跳表详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/03/17/MongoDB%E7%9B%B8%E5%85%B3/" class="list-group-item list-group-item-action">
+          <span class="category-post">MongoDB相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/06/18/CentOS-Mysql%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mysql安装</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77b4009vv4vc2sxr9aii" role="tab" data-toggle="collapse" href="#collapse-cknob77b4009vv4vc2sxr9aii"
+        aria-expanded="false"
+      >
+        统计学
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>6</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77b4009vv4vc2sxr9aii" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77b4009vv4vc2sxr9aii">
+    
+    
+    
+      
+      
+        <a href="/2020/05/16/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9860-n%E4%B8%AA%E9%AA%B0%E5%AD%90%E7%9A%84%E7%82%B9%E6%95%B0%EF%BC%88%E6%98%93%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer 面试题60. n个骰子的点数（易）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/05/15/LeetCode-470-%E7%94%A8-Rand7-%E5%AE%9E%E7%8E%B0-Rand10-%EF%BC%88%E4%B8%AD%EF%BC%89/" class="list-group-item list-group-item-action">
+          <span class="category-post">LeetCode 470. 用 Rand7() 实现 Rand10()（中）</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/05/21/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="list-group-item list-group-item-action">
+          <span class="category-post">概率论和数理统计的相关概念</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/05/14/R%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="list-group-item list-group-item-action">
+          <span class="category-post">R语言笔记之数据可视化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/05/14/R%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E4%B9%8B%E8%AF%AD%E6%B3%95%E7%AF%87/" class="list-group-item list-group-item-action">
+          <span class="category-post">R语言笔记之语法篇</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/05/14/R%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%AF%87/" class="list-group-item list-group-item-action">
+          <span class="category-post">R语言笔记之数据篇</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob778m002nv4vc2w22gjx9" role="tab" data-toggle="collapse" href="#collapse-cknob778m002nv4vc2w22gjx9"
+        aria-expanded="false"
+      >
+        Linux
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Linux/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>5</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob778m002nv4vc2w22gjx9" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob778m002nv4vc2w22gjx9">
+    
+    
+    
+      
+      
+        <a href="/2019/06/02/Ubuntu18-04%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%85%B8%E9%85%B8%E4%B9%B3%E5%92%8Cprivoxy%E5%AE%9E%E7%8E%B0ubuntu%E7%BB%88%E7%AB%AF/" class="list-group-item list-group-item-action">
+          <span class="category-post">SSR+privoxy=scientific surf the global Internet on Ubuntu terminal</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/07/06/%E5%AE%89%E8%A3%85Ubuntu18-04%E4%B9%8B%E5%90%8E%E8%A6%81%E5%81%9A%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85/" class="list-group-item list-group-item-action">
+          <span class="category-post">安装Ubuntu18.04之后要做的一些事情</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/10/03/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" class="list-group-item list-group-item-action">
+          <span class="category-post">一篇文章</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/07/15/Ubuntu16-04%E4%B8%8B%E4%BD%BF%E7%94%A8VPN/" class="list-group-item list-group-item-action">
+          <span class="category-post">Ubuntu16.04下使用VPN</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/05/18/Common-commands-in-Linux/" class="list-group-item list-group-item-action">
+          <span class="category-post">Common commands in Linux</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77dc00g8v4vc77rl3uug" role="tab" data-toggle="collapse" href="#collapse-cknob77dc00g8v4vc77rl3uug"
+        aria-expanded="false"
+      >
+        Java后端开发
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>5</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77dc00g8v4vc77rl3uug" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77dc00g8v4vc77rl3uug">
+    
+    
+    
+      
+      
+        <a href="/2020/08/26/Mybatis%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">Mybatis基本原理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/08/23/Spring-Boot-AOP-mechanism/" class="list-group-item list-group-item-action">
+          <span class="category-post">Spring Boot AOP mechanism</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/08/23/Spring-Boot-IoC-mechanism/" class="list-group-item list-group-item-action">
+          <span class="category-post">Spring Boot IoC mechanism</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/29/Spring-boot-CrudRepository/" class="list-group-item list-group-item-action">
+          <span class="category-post">Spring boot CrudRepository</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/29/The-Annotation-in-Spring-boot/" class="list-group-item list-group-item-action">
+          <span class="category-post">The Annotation in Spring boot</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77di00gvv4vc0lfyc6tj" role="tab" data-toggle="collapse" href="#collapse-cknob77di00gvv4vc0lfyc6tj"
+        aria-expanded="false"
+      >
+        深度学习
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>5</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77di00gvv4vc0lfyc6tj" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77di00gvv4vc0lfyc6tj">
+    
+    
+    
+      
+      
+        <a href="/2019/08/08/Tensorflow%E4%B8%AD%E7%9A%84tensor_Dimension%E9%97%AE%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">Tensorflow中的tensor Dimension问题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/27/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8C%96%E5%99%A8/" class="list-group-item list-group-item-action">
+          <span class="category-post">深度学习中的优化器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E5%90%91/" class="list-group-item list-group-item-action">
+          <span class="category-post">深度学习理论向</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/07/VGG%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%E8%A7%A3%E6%9E%90/" class="list-group-item list-group-item-action">
+          <span class="category-post">VGG模型结构解析</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/07/%E5%85%B3%E4%BA%8E%E5%8D%B7%E7%A7%AF%E5%92%8C%E6%B1%A0%E5%8C%96/" class="list-group-item list-group-item-action">
+          <span class="category-post">关于卷积和池化</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob778p002tv4vc4mvo8oos" role="tab" data-toggle="collapse" href="#collapse-cknob778p002tv4vc4mvo8oos"
+        aria-expanded="false"
+      >
+        计算机网络
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>4</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob778p002tv4vc4mvo8oos" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob778p002tv4vc4mvo8oos">
+    
+    
+    
+      
+      
+        <a href="/2020/04/15/TCP%E7%B2%98%E5%8C%85%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">TCP粘包和拆包是怎么回事</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/08/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%BB%A5%E5%8F%8A%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="list-group-item list-group-item-action">
+          <span class="category-post">三次握手以及四次挥手</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/08/select%E3%80%81poll%E3%80%81epoll%E7%9A%84%E5%8E%9F%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">select、poll、epoll的原理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2017/05/23/Congestion-control-of-TCP/" class="list-group-item list-group-item-action">
+          <span class="category-post">TCP协议流量控制过程</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77cy00f3v4vc1sw3ak7p" role="tab" data-toggle="collapse" href="#collapse-cknob77cy00f3v4vc1sw3ak7p"
+        aria-expanded="false"
+      >
+        论术求道
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E8%AE%BA%E6%9C%AF%E6%B1%82%E9%81%93/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>4</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77cy00f3v4vc1sw3ak7p" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77cy00f3v4vc1sw3ak7p">
+    
+    
+    
+      
+      
+        <a href="/2020/04/24/%E3%80%8A%E9%87%8D%E6%9E%84%EF%BC%9A%E6%94%B9%E5%96%84%E6%97%A2%E6%9C%89%E4%BB%A3%E7%A0%81%E7%9A%84%E6%8A%80%E6%9C%AF%E3%80%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
+          <span class="category-post">《重构：改善既有代码的技术》第一章读书笔记</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/24/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="list-group-item list-group-item-action">
+          <span class="category-post">设计模式</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/18/%E3%80%8A%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91%E3%80%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
+          <span class="category-post">《编程珠玑》第一章读书笔记</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/09/Python-PEP8/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python PEP8</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob7784001cv4vc2x8r984t" role="tab" data-toggle="collapse" href="#collapse-cknob7784001cv4vc2x8r984t"
+        aria-expanded="false"
+      >
+        移动开发
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>3</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob7784001cv4vc2x8r984t" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob7784001cv4vc2x8r984t">
+    
+    
+    
+      
+      
+        <a href="/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%89%EF%BC%9A%E4%BD%BF%E7%94%A8Tensorflow-Lite-%E5%B0%86%E8%87%AA%E5%B7%B1%E7%9A%84%E8%AE%AD%E7%BB%83%E5%BE%97%E5%88%B0%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%A7%BB%E6%A4%8D%E5%88%B0Android%E4%B8%8A/" class="list-group-item list-group-item-action">
+          <span class="category-post">CV深度学习模型Android端落地第三步：使用Tensorflow Lite 将自己的训练得到的模型移植到Android上</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8Face%E7%B1%BB%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%B9%B6%E5%B0%86%E4%BA%BA%E8%84%B8%E6%A1%86%E5%87%BA/" class="list-group-item list-group-item-action">
+          <span class="category-post">CV深度学习模型Android端落地第二步：使用Face类进行实时人脸检测并将人脸框出</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8Android-Camera2%E6%8E%A5%E5%8F%A3%E8%8E%B7%E5%BE%97%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88%E5%9B%BE%E5%83%8F/" class="list-group-item list-group-item-action">
+          <span class="category-post">CV深度学习模型Android端落地第一步：使用Android Camera2接口获得实时预览图像</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob778q002zv4vcd6uu64lj" role="tab" data-toggle="collapse" href="#collapse-cknob778q002zv4vcd6uu64lj"
+        aria-expanded="false"
+      >
+        地球简史
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%9C%B0%E7%90%83%E7%AE%80%E5%8F%B2/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>3</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob778q002zv4vcd6uu64lj" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob778q002zv4vcd6uu64lj">
+    
+    
+    
+      
+      
+        <a href="/2020/04/03/Earth-2020-03/" class="list-group-item list-group-item-action">
+          <span class="category-post">Earth-2020-03</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/03/Earth-2020-02/" class="list-group-item list-group-item-action">
+          <span class="category-post">Earth-2020-02</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/03/30/Earth-2020/" class="list-group-item list-group-item-action">
+          <span class="category-post">Earth-2020-01</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77eh00jyv4vch75k51wx" role="tab" data-toggle="collapse" href="#collapse-cknob77eh00jyv4vch75k51wx"
+        aria-expanded="false"
+      >
+        语音算法
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E8%AF%AD%E9%9F%B3%E7%AE%97%E6%B3%95/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>3</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77eh00jyv4vch75k51wx" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77eh00jyv4vch75k51wx">
+    
+    
+    
+      
+      
+        <a href="/2020/04/09/%E5%9F%BA%E6%9C%AC%E5%A3%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">基本声学知识</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/04/02/%E4%BB%8EGMM-HMM%E5%88%B0%E7%AB%AF%E5%AF%B9%E7%AB%AF/" class="list-group-item list-group-item-action">
+          <span class="category-post">从GMM-HMM到端对端</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/09/06/%E8%AF%AD%E8%A8%80%E8%AF%AD%E6%96%99%E9%A2%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" class="list-group-item list-group-item-action">
+          <span class="category-post">语音数据振幅归一化方法</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob7790003nv4vcbg5ff36e" role="tab" data-toggle="collapse" href="#collapse-cknob7790003nv4vcbg5ff36e"
+        aria-expanded="false"
+      >
+        Java
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Java/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob7790003nv4vcbg5ff36e" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob7790003nv4vcbg5ff36e">
+    
+    
+    
+      
+      
+        <a href="/2020/06/26/Java%E8%AF%AD%E6%B3%95%E5%BF%AB%E6%9F%A5/" class="list-group-item list-group-item-action">
+          <span class="category-post">Java语法快查</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/06/04/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%E4%B8%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">Java入门笔记一</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77dk00h3v4vc0bmndijg" role="tab" data-toggle="collapse" href="#collapse-cknob77dk00h3v4vc0bmndijg"
+        aria-expanded="false"
+      >
+        tensorflow
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/tensorflow/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77dk00h3v4vc0bmndijg" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77dk00h3v4vc0bmndijg">
+    
+    
+    
+      
+      
+        <a href="/2018/03/27/Tensorflow%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" class="list-group-item list-group-item-action">
+          <span class="category-post">Tensorflow技巧总结</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2018/03/22/Ubuntu16-04%E4%B8%8B%E5%AE%89%E8%A3%85tensorflow-gpu-1-6/" class="list-group-item list-group-item-action">
+          <span class="category-post">Ubuntu16.04下安装tensorflow-gpu==1.6</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob777h0008v4vc0tvghe13" role="tab" data-toggle="collapse" href="#collapse-cknob777h0008v4vc0tvghe13"
+        aria-expanded="false"
+      >
+        统计学原理
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E5%8E%9F%E7%90%86/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob777h0008v4vc0tvghe13" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob777h0008v4vc0tvghe13">
+    
+    
+    
+      
+      
+        <a href="/2020/08/05/3-sigma-Anomaly-Detect/" class="list-group-item list-group-item-action">
+          <span class="category-post">3-sigma Anomaly Detect</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob777k000dv4vc7ddm0q5k" role="tab" data-toggle="collapse" href="#collapse-cknob777k000dv4vc7ddm0q5k"
+        aria-expanded="false"
+      >
+        基础算法论文
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E8%AE%BA%E6%96%87/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob777k000dv4vc7ddm0q5k" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob777k000dv4vc7ddm0q5k">
+    
+    
+    
+      
+      
+        <a href="/2020/05/25/ACM-IOI-%E5%8E%86%E5%B9%B4%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F%E8%AE%BA%E6%96%87%E9%9B%86%E5%92%8C%E8%AE%BA%E6%96%87%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB%E6%95%B4%E7%90%86/" class="list-group-item list-group-item-action">
+          <span class="category-post">ACM/IOI 历年国家集训队论文集和论文算法分类整理</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77dm00hav4vc96ki0o9j" role="tab" data-toggle="collapse" href="#collapse-cknob77dm00hav4vc96ki0o9j"
+        aria-expanded="false"
+      >
+        地球观察报告
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%9C%B0%E7%90%83%E8%A7%82%E5%AF%9F%E6%8A%A5%E5%91%8A/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77dm00hav4vc96ki0o9j" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77dm00hav4vc96ki0o9j">
+    
+    
+    
+      
+      
+        <a href="/2021/02/23/The-root-cause-of-the-disintegration-of-the-Soviet-Union/" class="list-group-item list-group-item-action">
+          <span class="category-post">苏联解体的根本原因</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77dr00hmv4vc391d51sq" role="tab" data-toggle="collapse" href="#collapse-cknob77dr00hmv4vc391d51sq"
+        aria-expanded="false"
+      >
+        开发工具
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77dr00hmv4vc391d51sq" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77dr00hmv4vc391d51sq">
+    
+    
+    
+      
+      
+        <a href="/2020/04/19/Visual-Studio-Code-C-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="list-group-item list-group-item-action">
+          <span class="category-post">Visual Studio Code C++环境搭建</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77e000ihv4vc0jfo09z8" role="tab" data-toggle="collapse" href="#collapse-cknob77e000ihv4vc0jfo09z8"
+        aria-expanded="false"
+      >
+        java后端开发
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77e000ihv4vc0jfo09z8" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77e000ihv4vc0jfo09z8">
+    
+    
+    
+      
+      
+        <a href="/2020/06/29/pom-xml%E9%85%8D%E7%BD%AE/" class="list-group-item list-group-item-action">
+          <span class="category-post">pom.xml配置</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77eg00jsv4vcf91x1k5g" role="tab" data-toggle="collapse" href="#collapse-cknob77eg00jsv4vcf91x1k5g"
+        aria-expanded="false"
+      >
+        电影
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%94%B5%E5%BD%B1/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77eg00jsv4vcf91x1k5g" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77eg00jsv4vcf91x1k5g">
+    
+    
+    
+      
+      
+        <a href="/2018/02/28/%E4%BA%9B%E7%94%B5%E5%BD%B1/" class="list-group-item list-group-item-action">
+          <span class="category-post">那些电影</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77ej00k4v4vcejyrekmt" role="tab" data-toggle="collapse" href="#collapse-cknob77ej00k4v4vcejyrekmt"
+        aria-expanded="false"
+      >
+        Ngix
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Ngix/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77ej00k4v4vcejyrekmt" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77ej00k4v4vcejyrekmt">
+    
+    
+    
+      
+      
+        <a href="/2017/08/26/%E4%BD%BF%E7%94%A8supervisor%E5%92%8Cngix%E9%85%8D%E7%BD%AE%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="list-group-item list-group-item-action">
+          <span class="category-post">使用supervisor和ngix配置多线程的负载均衡</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77h500r9v4vccregf7ej" role="tab" data-toggle="collapse" href="#collapse-cknob77h500r9v4vccregf7ej"
+        aria-expanded="false"
+      >
+        生活小贴士
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%94%9F%E6%B4%BB%E5%B0%8F%E8%B4%B4%E5%A3%AB/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77h500r9v4vccregf7ej" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77h500r9v4vccregf7ej">
+    
+    
+    
+      
+      
+        <a href="/2020/10/07/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%952020-10-07/" class="list-group-item list-group-item-action">
+          <span class="category-post">生活记录2020-10-07</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77hx00szv4vc5hz0e08o" role="tab" data-toggle="collapse" href="#collapse-cknob77hx00szv4vc5hz0e08o"
+        aria-expanded="false"
+      >
+        面试
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E9%9D%A2%E8%AF%95/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77hx00szv4vc5hz0e08o" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77hx00szv4vc5hz0e08o">
+    
+    
+    
+      
+      
+        <a href="/2020/04/16/%E9%9D%A2%E8%AF%95%E4%B8%AD%E7%9A%84%E6%99%BA%E5%8A%9B%E9%A2%98/" class="list-group-item list-group-item-action">
+          <span class="category-post">面试中的逻辑思维题目</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-cknob77j700w1v4vce44jepq0" role="tab" data-toggle="collapse" href="#collapse-cknob77j700w1v4vce44jepq0"
+        aria-expanded="false"
+      >
+        软件工程
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-cknob77j700w1v4vce44jepq0" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-cknob77j700w1v4vce44jepq0">
+    
+    
+    
+      
+      
+        <a href="/2020/07/09/UML%E7%BB%98%E5%9B%BE/" class="list-group-item list-group-item-action">
+          <span class="category-post">基于Mermaid的UML图像绘制</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>R语言笔记之语法篇 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="R语言笔记之语法篇">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-05-14 11:46" pubdate>
+        2016年5月14日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      69
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">R语言笔记之语法篇</h1>
+            
+            <div class="markdown-body">
+              <p>R语言的语法结构</p>
+<a id="more"></a>
+<h1 id="R语言基础之语法"><a href="#R语言基础之语法" class="headerlink" title="R语言基础之语法"></a>R语言基础之语法</h1><h2 id="分支结构If…else…和-Ifelse-函数"><a href="#分支结构If…else…和-Ifelse-函数" class="headerlink" title="分支结构If…else…和 Ifelse()函数"></a>分支结构If…else…和 Ifelse()函数</h2><blockquote>
+<p>Ifelse()函数是支持向量化计算的，ifelse(判断条件,为真的时候返回的变量,条件为假的时候返回的变量)。</p>
+</blockquote>
+<p><strong>举例</strong><br><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">&gt; (Brand=paste(c(<span class="hljs-string">&#x27;Brand&#x27;</span>),<span class="hljs-number">1</span>:<span class="hljs-number">9</span>,sep=<span class="hljs-string">&#x27;&#x27;</span>))<br><span class="hljs-selector-attr">[1]</span> <span class="hljs-string">&quot;Brand1&quot;</span> <span class="hljs-string">&quot;Brand2&quot;</span> <span class="hljs-string">&quot;Brand3&quot;</span> <span class="hljs-string">&quot;Brand4&quot;</span> <span class="hljs-string">&quot;Brand5&quot;</span> <span class="hljs-string">&quot;Brand6&quot;</span> <span class="hljs-string">&quot;Brand7&quot;</span> <span class="hljs-string">&quot;Brand8&quot;</span> <span class="hljs-string">&quot;Brand9&quot;</span><br>&gt; (PName=paste(c(<span class="hljs-string">&#x27;Dell&#x27;</span>),<span class="hljs-number">1</span>:<span class="hljs-number">9</span>,sep=<span class="hljs-string">&#x27;&#x27;</span>))<br><span class="hljs-selector-attr">[1]</span> <span class="hljs-string">&quot;Dell1&quot;</span> <span class="hljs-string">&quot;Dell2&quot;</span> <span class="hljs-string">&quot;Dell3&quot;</span> <span class="hljs-string">&quot;Dell4&quot;</span> <span class="hljs-string">&quot;Dell5&quot;</span> <span class="hljs-string">&quot;Dell6&quot;</span> <span class="hljs-string">&quot;Dell7&quot;</span> <span class="hljs-string">&quot;Dell8&quot;</span> <span class="hljs-string">&quot;Dell9&quot;</span><br>&gt; (Men=rep(c(<span class="hljs-string">&#x27;1G&#x27;</span>,<span class="hljs-string">&#x27;2G&#x27;</span>,<span class="hljs-string">&#x27;4G&#x27;</span>),times=<span class="hljs-number">3</span>))<br><span class="hljs-selector-attr">[1]</span> <span class="hljs-string">&quot;1G&quot;</span> <span class="hljs-string">&quot;2G&quot;</span> <span class="hljs-string">&quot;4G&quot;</span> <span class="hljs-string">&quot;1G&quot;</span> <span class="hljs-string">&quot;2G&quot;</span> <span class="hljs-string">&quot;4G&quot;</span> <span class="hljs-string">&quot;1G&quot;</span> <span class="hljs-string">&quot;2G&quot;</span> <span class="hljs-string">&quot;4G&quot;</span><br>&gt; (Feq=rep(c(<span class="hljs-string">&#x27;2.2G&#x27;</span>,<span class="hljs-string">&#x27;2.8G&#x27;</span>,<span class="hljs-string">&#x27;3.3G&#x27;</span>),each=<span class="hljs-number">3</span>))<br><span class="hljs-selector-attr">[1]</span> <span class="hljs-string">&quot;2.2G&quot;</span> <span class="hljs-string">&quot;2.2G&quot;</span> <span class="hljs-string">&quot;2.2G&quot;</span> <span class="hljs-string">&quot;2.8G&quot;</span> <span class="hljs-string">&quot;2.8G&quot;</span> <span class="hljs-string">&quot;2.8G&quot;</span> <span class="hljs-string">&quot;3.3G&quot;</span> <span class="hljs-string">&quot;3.3G&quot;</span> <span class="hljs-string">&quot;3.3G&quot;</span><br>&gt; (Price=rep(c(<span class="hljs-number">1000</span>,<span class="hljs-number">2000</span>,<span class="hljs-number">5000</span>),<span class="hljs-number">3</span>))<br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">1000</span> <span class="hljs-number">2000</span> <span class="hljs-number">5000</span> <span class="hljs-number">1000</span> <span class="hljs-number">2000</span> <span class="hljs-number">5000</span> <span class="hljs-number">1000</span> <span class="hljs-number">2000</span> <span class="hljs-number">5000</span><br>&gt; PC=data<span class="hljs-selector-class">.frame</span>(Brand,PName,Men,Feq,Price)<br>&gt; #初始化，先为每个电脑都先打上Cheap标签<br>&gt; PC<span class="hljs-variable">$PD</span> = rep(<span class="hljs-string">&#x27;Cheap&#x27;</span>,<span class="hljs-number">9</span>)<br>&gt; <span class="hljs-keyword">for</span> (<span class="hljs-selector-tag">i</span> <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:nrow(PC))&#123;  #遍历PC数据框<br>+   <span class="hljs-keyword">if</span>(PC<span class="hljs-selector-attr">[i,<span class="hljs-string">&#x27;Price&#x27;</span>]</span>&gt;<span class="hljs-number">3000</span>)&#123; <br>+     #当价格大于<span class="hljs-number">3000</span>的时候，就改成Expensive<br>+     PC<span class="hljs-selector-attr">[i,<span class="hljs-string">&#x27;PD&#x27;</span>]</span>=<span class="hljs-string">&#x27;Expensive&#x27;</span><br>+   &#125;<br>+ &#125;<br>&gt; PC #从输出结果来看，每个品牌的电脑，都被标定了价格。<br>   Brand PName Men  Feq Price        PD<br><span class="hljs-number">1</span> Brand1 Dell1  <span class="hljs-number">1</span>G <span class="hljs-number">2.2</span>G  <span class="hljs-number">1000</span>     Cheap<br><span class="hljs-number">2</span> Brand2 Dell2  <span class="hljs-number">2</span>G <span class="hljs-number">2.2</span>G  <span class="hljs-number">2000</span>     Cheap<br><span class="hljs-number">3</span> Brand3 Dell3  <span class="hljs-number">4</span>G <span class="hljs-number">2.2</span>G  <span class="hljs-number">5000</span> Expensive<br><span class="hljs-number">4</span> Brand4 Dell4  <span class="hljs-number">1</span>G <span class="hljs-number">2.8</span>G  <span class="hljs-number">1000</span>     Cheap<br><span class="hljs-number">5</span> Brand5 Dell5  <span class="hljs-number">2</span>G <span class="hljs-number">2.8</span>G  <span class="hljs-number">2000</span>     Cheap<br><span class="hljs-number">6</span> Brand6 Dell6  <span class="hljs-number">4</span>G <span class="hljs-number">2.8</span>G  <span class="hljs-number">5000</span> Expensive<br><span class="hljs-number">7</span> Brand7 Dell7  <span class="hljs-number">1</span>G <span class="hljs-number">3.3</span>G  <span class="hljs-number">1000</span>     Cheap<br><span class="hljs-number">8</span> Brand8 Dell8  <span class="hljs-number">2</span>G <span class="hljs-number">3.3</span>G  <span class="hljs-number">2000</span>     Cheap<br><span class="hljs-number">9</span> Brand9 Dell9  <span class="hljs-number">4</span>G <span class="hljs-number">3.3</span>G  <span class="hljs-number">5000</span> Expensive<br><br>&gt; PC<span class="hljs-variable">$PD2</span>=ifelse(PC<span class="hljs-variable">$Price</span>&gt;<span class="hljs-number">3000</span>,<span class="hljs-string">&#x27;Expensive&#x27;</span>,<span class="hljs-string">&#x27;Cheap&#x27;</span>) #用ifelse函数来实现相同的功能更方便<br>&gt; PC<br>   Brand PName Men  Feq Price        PD       PD2<br><span class="hljs-number">1</span> Brand1 Dell1  <span class="hljs-number">1</span>G <span class="hljs-number">2.2</span>G  <span class="hljs-number">1000</span>     Cheap     Cheap<br><span class="hljs-number">2</span> Brand2 Dell2  <span class="hljs-number">2</span>G <span class="hljs-number">2.2</span>G  <span class="hljs-number">2000</span>     Cheap     Cheap<br><span class="hljs-number">3</span> Brand3 Dell3  <span class="hljs-number">4</span>G <span class="hljs-number">2.2</span>G  <span class="hljs-number">5000</span> Expensive Expensive<br><span class="hljs-number">4</span> Brand4 Dell4  <span class="hljs-number">1</span>G <span class="hljs-number">2.8</span>G  <span class="hljs-number">1000</span>     Cheap     Cheap<br><span class="hljs-number">5</span> Brand5 Dell5  <span class="hljs-number">2</span>G <span class="hljs-number">2.8</span>G  <span class="hljs-number">2000</span>     Cheap     Cheap<br><span class="hljs-number">6</span> Brand6 Dell6  <span class="hljs-number">4</span>G <span class="hljs-number">2.8</span>G  <span class="hljs-number">5000</span> Expensive Expensive<br><span class="hljs-number">7</span> Brand7 Dell7  <span class="hljs-number">1</span>G <span class="hljs-number">3.3</span>G  <span class="hljs-number">1000</span>     Cheap     Cheap<br><span class="hljs-number">8</span> Brand8 Dell8  <span class="hljs-number">2</span>G <span class="hljs-number">3.3</span>G  <span class="hljs-number">2000</span>     Cheap     Cheap<br><span class="hljs-number">9</span> Brand9 Dell9  <span class="hljs-number">4</span>G <span class="hljs-number">3.3</span>G  <span class="hljs-number">5000</span> Expensive Expensive<br><br>&gt; PC<span class="hljs-variable">$Price</span> #PC<span class="hljs-variable">$Prince</span>是一个向量ifelse能完成向量化计算，对每一个元素作比较返回相应的值。<br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">1000</span> <span class="hljs-number">2000</span> <span class="hljs-number">5000</span> <span class="hljs-number">1000</span> <span class="hljs-number">2000</span> <span class="hljs-number">5000</span> <span class="hljs-number">1000</span> <span class="hljs-number">2000</span> <span class="hljs-number">5000</span><br><br></code></pre></div></td></tr></table></figure></p>
+<h2 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h2><h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><blockquote>
+<p>从向量x中取出单个数据存到临时变量n当中，每取出一次，就执行一次循环体。  </p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs R"><span class="hljs-keyword">for</span>(n <span class="hljs-keyword">in</span> x)&#123;<br>	&gt; ...<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>举例</strong></p>
+<figure class="highlight r"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs R">&gt; <span class="hljs-keyword">for</span>(x <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">5</span>)&#123;<br>+   print (x^<span class="hljs-number">2</span>)<br>+ &#125;<br>[<span class="hljs-number">1</span>] <span class="hljs-number">1</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">4</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">9</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">16</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">25</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><blockquote>
+<p>condition为真的时候执行循环体  </p>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">while</span><span class="hljs-params">(condition)</span></span>&#123;<br>&gt; ....<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>举例</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">&gt; <span class="hljs-selector-tag">i</span> = <span class="hljs-number">1</span><br>&gt; while(i&lt;<span class="hljs-number">6</span>)&#123;<br>+   print (x^<span class="hljs-number">2</span>)<br>+   <span class="hljs-selector-tag">i</span> = <span class="hljs-selector-tag">i</span> + <span class="hljs-number">1</span><br>+ &#125;<br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">25</span><br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">25</span><br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">25</span><br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">25</span><br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">25</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="repeat循环"><a href="#repeat循环" class="headerlink" title="repeat循环"></a>repeat循环</h3><p>repeat是死循环，只有用break来打断<br><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">repeat&#123;<br><span class="hljs-meta">	&gt;</span><span class="bash"> ...</span><br><span class="hljs-meta">	&gt;</span><span class="bash"><span class="hljs-built_in">break</span></span><br>&#125;<br></code></pre></div></td></tr></table></figure><br><strong>举例</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">&gt; <span class="hljs-selector-tag">i</span> = <span class="hljs-number">1</span><br>&gt; repeat&#123;<br>+   print (i^<span class="hljs-number">2</span>)<br>+   <span class="hljs-selector-tag">i</span> = <span class="hljs-selector-tag">i</span> + <span class="hljs-number">1</span><br>+   <span class="hljs-keyword">if</span> (i&gt;<span class="hljs-number">5</span>) break<br>+ &#125;<br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">1</span><br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">4</span><br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">9</span><br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">16</span><br><span class="hljs-selector-attr">[1]</span> <span class="hljs-number">25</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="break、next"><a href="#break、next" class="headerlink" title="break、next"></a>break、next</h3><blockquote>
+<p>break是终止整个循环<br>next是终止当前的循环，不执行循环体中next后面的部分。</p>
+</blockquote>
+<h2 id="函数和包"><a href="#函数和包" class="headerlink" title="函数和包"></a>函数和包</h2><h3 id="1、函数"><a href="#1、函数" class="headerlink" title="1、函数"></a>1、函数</h3><p><strong>向量、因子、矩阵、数据框、数组、列表以及函数都是一类对象，可以随时创建，可以作为函数的参数。也就是说，R语言中的函数因为是一类对象，所以可以在函数中再创造函数，在C语言和C++等语言中函数就不是一类对象，必须提前编译。</strong></p>
+<h4 id="1）、创建"><a href="#1）、创建" class="headerlink" title="1）、创建"></a>1）、创建</h4><p><strong>在R语言中，没有return语句的时候，会把整个函数的最后一句作为返回语句。</strong></p>
+<figure class="highlight actionscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs actionscript">myfunction = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(par1,par2)</span></span>&#123;<br>	......<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>举例子<br><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs plain">&gt; myadd &#x3D; function(a,b,c)&#123;<br>+   return (a+b+c)<br>+ &#125;<br>&gt; (a &#x3D; myadd(1,2,3))<br>[1] 6<br></code></pre></div></td></tr></table></figure><br>举例子<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">&gt; mystat = function(x,na.<span class="hljs-attribute">omit</span>=<span class="hljs-literal">FALSE</span>)&#123;<br>+   <span class="hljs-keyword">if</span> (na.omit)&#123;<br>+     <span class="hljs-attribute">x</span>=x[!is.na(x)] #是否忽略向量中的缺省值<br>+   &#125;<br>+   <span class="hljs-attribute">m</span>=mean(x)<br>+   <span class="hljs-attribute">n</span>=length(x)<br>+   <span class="hljs-attribute">s</span>=sd(x)<br>+   <span class="hljs-attribute">skew</span>=sum((x-m)^3/s^3)/n<br>+   return (list(<span class="hljs-attribute">n</span>=n,mean=m,stdev=s,skew=skew))<br>+ &#125;<br>&gt; <span class="hljs-attribute">x</span>=rnorm(1000,100,10) #创建一个正太分布的随机向量，有1000个数，平均数是100，标准差是10<br>&gt; mystat(x)<br><span class="hljs-variable">$n</span><br>[1] 1000<br><br><span class="hljs-variable">$mean</span><br>[1] 100.4087<br><br><span class="hljs-variable">$stdev</span><br>[1] 9.899276<br><br><span class="hljs-variable">$skew</span><br>[1] 0.03952049<br></code></pre></div></td></tr></table></figure></p>
+<h4 id="2）、查看函数代码"><a href="#2）、查看函数代码" class="headerlink" title="2）、查看函数代码"></a>2）、查看函数代码</h4><ul>
+<li><strong>不带括号的函数名</strong></li>
+<li><strong>使用page函数，打开编辑器查看代码。</strong></li>
+</ul>
+<figure class="highlight sas"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sas">&gt; mystat  #通过不带括号的函数名来调用<br>mystat = functi<span class="hljs-meta">on(</span><span class="hljs-meta">x</span>,na.omit=FALSE)&#123;<br>  <span class="hljs-meta">if</span> (na.omit)&#123;<br>    <span class="hljs-meta">x</span>=<span class="hljs-meta">x</span>[!is.na(<span class="hljs-meta">x</span>)] #是否忽略向量中的缺省值<br>  &#125;<br>  m<span class="hljs-meta">=mean(</span><span class="hljs-meta">x</span>)  			  	#调<span class="hljs-meta">用mean(</span>)函数计算均值<br>  n<span class="hljs-meta">=length(</span><span class="hljs-meta">x</span>)			  	#调<span class="hljs-meta">用length(</span>)函数计算长度<br>  s=sd(<span class="hljs-meta">x</span>)    			  	#调用sa()函数计算标准差<br>  skew<span class="hljs-meta">=sum(</span>(<span class="hljs-meta">x</span>-m)^3/s^3)/n 	#计算偏度系数 偏度系数是描述分布偏离对称性程度的一个特征数。当分布左右对称时，偏度系数为0。当偏度系数大于0时，即重尾在右侧时，该分布为右偏。当偏度系数小于0时，即重尾在左侧时，该分布左偏。<br>  <span class="hljs-meta">return</span> (<span class="hljs-meta">list</span>(n=n,mean=m,stdev=s,skew=skew))<br>&#125;<br>myadd = functi<span class="hljs-meta">on(</span>a,b,c)&#123;<br>  <span class="hljs-meta">return</span> (a+b+c)<br>&#125;<br><br>&gt;<span class="hljs-meta">page</span>(mystat) #使用<span class="hljs-meta">page</span>函数，调用系统的编辑器查看代码。<br></code></pre></div></td></tr></table></figure>
+<h4 id="3）、导入-R文件"><a href="#3）、导入-R文件" class="headerlink" title="3）、导入.R文件"></a>3）、导入.R文件</h4><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">source</span><span class="hljs-params">(<span class="hljs-string">&#x27;G:/TestFunction.r&#x27;</span>)</span></span><br></code></pre></div></td></tr></table></figure>
+<h3 id="2、包的安装和加载"><a href="#2、包的安装和加载" class="headerlink" title="2、包的安装和加载"></a>2、包的安装和加载</h3><h4 id="1）、包的安装"><a href="#1）、包的安装" class="headerlink" title="1）、包的安装"></a>1）、包的安装</h4><blockquote>
+<p>R语言中包的安装会自动解决依赖</p>
+</blockquote>
+<p><strong>使用R自带的编辑器安装包</strong></p>
+<ul>
+<li>第一步、程序包 ————&gt; 设定CRAN镜像 </li>
+<li>第二步、程序包 ————&gt; 安装程序包 </li>
+</ul>
+<p><strong>使用命令安装</strong></p>
+<ul>
+<li><code>install.packages(&#39;abc&#39;)</code></li>
+</ul>
+<h4 id="2）、包的加载"><a href="#2）、包的加载" class="headerlink" title="2）、包的加载"></a>2）、包的加载</h4><blockquote>
+<p>安装包的时候需要用’’将包的名称包裹，加载包的时候不需要。</p>
+</blockquote>
+<p><strong>Rstudio中使用命令加载包</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">&gt; library(abc)<br>载入需要的程辑包：abc.data<br>载入需要的程辑包：nnet<br>载入需要的程辑包：quantreg<br>载入需要的程辑包：SparseM<br><br>载入程辑包：‘SparseM’<br><br>The following <span class="hljs-built_in">object</span> <span class="hljs-keyword">is</span> masked <span class="hljs-keyword">from</span> ‘package:<span class="hljs-keyword">base</span>’:<br><br>    backsolve<br><br>载入需要的程辑包：MASS<br>载入需要的程辑包：locfit<br>locfit <span class="hljs-number">1.5</span><span class="hljs-number">-9.1</span> 	 <span class="hljs-number">2013</span><span class="hljs-number">-03</span><span class="hljs-number">-22</span><br>&gt;<br></code></pre></div></td></tr></table></figure>
+<p><strong>Rstudio中，使用右下角的面板来加载包。</strong></p>
+<p>直接勾选就好。</p>
+<h2 id="向量化计算"><a href="#向量化计算" class="headerlink" title="向量化计算"></a>向量化计算</h2><h3 id="1、普通的加减乘除"><a href="#1、普通的加减乘除" class="headerlink" title="1、普通的加减乘除"></a>1、普通的加减乘除</h3><blockquote>
+<p>所谓向量化运算就是对向量中的每一个元素都进行运算处理</p>
+</blockquote>
+<p><strong>举例</strong></p>
+<figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">&gt; (x=1:5)<br>[1]<span class="hljs-number"> 1 </span>2<span class="hljs-number"> 3 </span>4 5<br>&gt; (x=x^2)<br>[1] <span class="hljs-number"> 1 </span><span class="hljs-number"> 4 </span><span class="hljs-number"> 9 </span>16 25<br>&gt; (y=matrix(1:20,4,5))<br>     [,1] [,2] [,3] [,4] [,5]<br>[1,]   <span class="hljs-number"> 1 </span>  <span class="hljs-number"> 5 </span>  <span class="hljs-number"> 9 </span> <span class="hljs-number"> 13 </span>  17<br>[2,]   <span class="hljs-number"> 2 </span>  <span class="hljs-number"> 6 </span> <span class="hljs-number"> 10 </span> <span class="hljs-number"> 14 </span>  18<br>[3,]   <span class="hljs-number"> 3 </span>  <span class="hljs-number"> 7 </span> <span class="hljs-number"> 11 </span> <span class="hljs-number"> 15 </span>  19<br>[4,]   <span class="hljs-number"> 4 </span>  <span class="hljs-number"> 8 </span> <span class="hljs-number"> 12 </span> <span class="hljs-number"> 16 </span>  20<br>&gt; (y=y^2)<br>     [,1] [,2] [,3] [,4] [,5]<br>[1,]   <span class="hljs-number"> 1 </span> <span class="hljs-number"> 25 </span> <span class="hljs-number"> 81 </span><span class="hljs-number"> 169 </span> 289<br>[2,]   <span class="hljs-number"> 4 </span> <span class="hljs-number"> 36 </span><span class="hljs-number"> 100 </span><span class="hljs-number"> 196 </span> 324<br>[3,]   <span class="hljs-number"> 9 </span> <span class="hljs-number"> 49 </span><span class="hljs-number"> 121 </span><span class="hljs-number"> 225 </span> 361<br>[4,]  <span class="hljs-number"> 16 </span> <span class="hljs-number"> 64 </span><span class="hljs-number"> 144 </span><span class="hljs-number"> 256 </span> 400<br><br>&gt; (y=11:15)<br>[1]<span class="hljs-number"> 11 </span>12<span class="hljs-number"> 13 </span>14 15<br>&gt; (x+y) <span class="hljs-comment">#相同长度的向量可以直接+-*/</span><br>[1]<span class="hljs-number"> 12 </span>16<span class="hljs-number"> 22 </span>30 40<br>&gt; y&gt;=13<br>[1] FALSE FALSE  TRUE  TRUE  TRUE<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>向量化运算支持哪些运算：+-*/等四则运算  &gt;&lt;!=等逻辑运算</p>
+</blockquote>
+<h3 id="2、apply家族"><a href="#2、apply家族" class="headerlink" title="2、apply家族"></a>2、apply家族</h3><ul>
+<li><strong>apply</strong>  </li>
+<li><strong>sapply</strong> <strong>lapply</strong>  </li>
+<li><strong>mapply</strong> <strong>tapply</strong>  </li>
+</ul>
+<h4 id="1-、-apply-x-MARGIN-2-…"><a href="#1-、-apply-x-MARGIN-2-…" class="headerlink" title="1)、 apply(x,MARGIN=2,…)"></a>1)、 <strong>apply(x,MARGIN=2,…)</strong></h4><p><strong>apply(数组，维度，函数/函数名)</strong></p>
+<blockquote>
+<p>沿着数组的某一维度来处理数据，利用设置MARGIN的值来改变数据。MARGIN=2表示在列（域）的层面上处理数据</p>
+</blockquote>
+<p><strong>举例</strong><br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">&gt; x=data.frame(pv=rnorm(<span class="hljs-number">100,20,3</span>), #先生成一个有三个域的数据框<br>&gt;			 + uv=rnorm(<span class="hljs-number">100,40,4</span>),<br>&gt;		     + ip=runif(<span class="hljs-number">100,40,50</span>))<br>&gt; apply(x,MARGIN = <span class="hljs-number">2</span>,mean)  #MARGIN=<span class="hljs-number">1</span>表示在行（记录）层面上处理数据，MARGIN=<span class="hljs-number">2</span>表示在列（域）的层面上处理数据。处理方式是，mean，求均值。<br>      pv       uv       ip <br><span class="hljs-number">20.45526 39</span>.<span class="hljs-number">81572 45</span>.<span class="hljs-number">30480</span> <br>#quantile是查看一组数据的百分位点，probs=c(<span class="hljs-number">0.1,0.5</span>,<span class="hljs-number">0</span>.<span class="hljs-number">9</span>)设置想查看的百分位点<br>&gt; apply(x,MARGIN = <span class="hljs-number">2</span>,quantile,probs=c(<span class="hljs-number">0.1,0.5</span>,<span class="hljs-number">0</span>.<span class="hljs-number">9</span>))  <br>          pv       uv       ip<br><span class="hljs-number">10</span>% <span class="hljs-number">16.90155 35</span>.<span class="hljs-number">17513 41</span>.<span class="hljs-number">02527</span><br><span class="hljs-number">50</span>% <span class="hljs-number">20.09723 39</span>.<span class="hljs-number">38737 45</span>.<span class="hljs-number">19671</span><br><span class="hljs-number">90</span>% <span class="hljs-number">24.70416 44</span>.<span class="hljs-number">82648 49</span>.<span class="hljs-number">37066</span><br>#可以看到pv、uv、ip在<span class="hljs-number">0.1、0.5</span>、<span class="hljs-number">0</span>.<span class="hljs-number">9</span>处的百分位点<br><br>#数据降维<br>&gt; (x=array(rnorm(<span class="hljs-number">2</span>*<span class="hljs-number">3</span>*<span class="hljs-number">4</span>),c(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))) #生成一个三维的列表<br>, , <span class="hljs-number">1</span><br><br>            [,<span class="hljs-number">1</span>]      [,<span class="hljs-number">2</span>]       [,<span class="hljs-number">3</span>]<br>[<span class="hljs-number">1</span>,] -<span class="hljs-number">0.04255047</span> -<span class="hljs-number">1.407329</span> -<span class="hljs-number">0.9931210</span><br>[<span class="hljs-number">2</span>,] -<span class="hljs-number">1.65621498</span>  <span class="hljs-number">1.479997</span>  <span class="hljs-number">0.5501781</span><br><br>, , <span class="hljs-number">2</span><br><br>           [,<span class="hljs-number">1</span>]      [,<span class="hljs-number">2</span>]       [,<span class="hljs-number">3</span>]<br>[<span class="hljs-number">1</span>,] -<span class="hljs-number">0.4668323</span> <span class="hljs-number">0.7451938</span>  <span class="hljs-number">0.9585998</span><br>[<span class="hljs-number">2</span>,] -<span class="hljs-number">0.4205612</span> <span class="hljs-number">0.3414420</span> -<span class="hljs-number">1.1822220</span><br><br>, , <span class="hljs-number">3</span><br><br>          [,<span class="hljs-number">1</span>]     [,<span class="hljs-number">2</span>]        [,<span class="hljs-number">3</span>]<br>[<span class="hljs-number">1</span>,]  <span class="hljs-number">0.596996</span> <span class="hljs-number">0.233922</span>  <span class="hljs-number">0.03285836</span><br>[<span class="hljs-number">2</span>,] -<span class="hljs-number">1.534795</span> <span class="hljs-number">1.598219</span> -<span class="hljs-number">1.89555578</span><br><br>, , <span class="hljs-number">4</span><br><br>           [,<span class="hljs-number">1</span>]       [,<span class="hljs-number">2</span>]      [,<span class="hljs-number">3</span>]<br>[<span class="hljs-number">1</span>,]  <span class="hljs-number">0.6793028</span>  <span class="hljs-number">0.4429203</span> -<span class="hljs-number">0.605179</span><br>[<span class="hljs-number">2</span>,] -<span class="hljs-number">0.4042032</span> -<span class="hljs-number">0.6241099</span>  <span class="hljs-number">1.257368</span><br><br>&gt; apply(x,c(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>),mean)  #将列表沿着<span class="hljs-number">3</span>维的方向来处理数据，求均值。<br>          [,<span class="hljs-number">1</span>]       [,<span class="hljs-number">2</span>]       [,<span class="hljs-number">3</span>]<br>[<span class="hljs-number">1</span>,]  <span class="hljs-number">0.191729 0</span>.<span class="hljs-number">00367673</span> -<span class="hljs-number">0.1517105</span><br>[<span class="hljs-number">2</span>,] -<span class="hljs-number">1.003944</span> <span class="hljs-number">0.69888709</span> -<span class="hljs-number">0.3175580</span><br>&gt; apply(x,c(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>),mean)  #将列表沿着<span class="hljs-number">2</span>维的方向来处理数据，求均值。<br>           [,<span class="hljs-number">1</span>]       [,<span class="hljs-number">2</span>]       [,<span class="hljs-number">3</span>]       [,<span class="hljs-number">4</span>]<br>[<span class="hljs-number">1</span>,] -<span class="hljs-number">0.8143335</span>  <span class="hljs-number">0.4123204</span>  <span class="hljs-number">0.2879255</span> <span class="hljs-number">0.17234803</span><br>[<span class="hljs-number">2</span>,]  <span class="hljs-number">0.1246534</span> -<span class="hljs-number">0.4204471</span> -<span class="hljs-number">0.6107106</span> <span class="hljs-number">0.07635149</span><br>&gt; apply(x,c(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>),mean)  #将列表沿着<span class="hljs-number">1</span>维的方向来处理数据，求均值。<br>            [,<span class="hljs-number">1</span>]       [,<span class="hljs-number">2</span>]       [,<span class="hljs-number">3</span>]        [,<span class="hljs-number">4</span>]<br>[<span class="hljs-number">1</span>,] -<span class="hljs-number">0.84938273</span> -<span class="hljs-number">0.4436968</span> -<span class="hljs-number">0.4688996</span>  <span class="hljs-number">0.13754980</span><br>[<span class="hljs-number">2</span>,]  <span class="hljs-number">0.03633396</span>  <span class="hljs-number">0.5433179</span>  <span class="hljs-number">0.9160706</span> -<span class="hljs-number">0.09059479</span><br>[<span class="hljs-number">3</span>,] -<span class="hljs-number">0.22147144</span> -<span class="hljs-number">0.1118111</span> -<span class="hljs-number">0.9313487</span>  <span class="hljs-number">0.32609427</span><br></code></pre></div></td></tr></table></figure></p>
+<h4 id="2-、-lapply-列表-函数名-函数-其他参数"><a href="#2-、-lapply-列表-函数名-函数-其他参数" class="headerlink" title="2)、  lapply(列表,函数名/函数,其他参数)"></a>2)、  <strong>lapply(列表,函数名/函数,其他参数)</strong></h4><blockquote>
+<p>lapply总是返回一个列表</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">&gt; (x=list(a=<span class="hljs-number">1</span>:<span class="hljs-number">10</span>,b=c(<span class="hljs-number">11</span>,<span class="hljs-number">21</span>,<span class="hljs-number">31</span>,<span class="hljs-number">41</span>,<span class="hljs-number">51</span>))) #创建一个列表<br>$a<br> [<span class="hljs-number">1</span>]  <span class="hljs-number">1</span>  <span class="hljs-number">2</span>  <span class="hljs-number">3</span>  <span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">6</span>  <span class="hljs-number">7</span>  <span class="hljs-number">8</span>  <span class="hljs-number">9</span> <span class="hljs-number">10</span><br><br>$b<br>[<span class="hljs-number">1</span>] <span class="hljs-number">11</span> <span class="hljs-number">21</span> <span class="hljs-number">31</span> <span class="hljs-number">41</span> <span class="hljs-number">51</span><br><br>&gt; lapply(x,mean)  #对列表的成分求均值，lappy返回值也是一个列表。<br>$a<br>[<span class="hljs-number">1</span>] <span class="hljs-number">5.5</span><br><br>$b<br>[<span class="hljs-number">1</span>] <span class="hljs-number">31</span><br><br>&gt; (x=<span class="hljs-number">1</span>:<span class="hljs-number">4</span>)<br>[<span class="hljs-number">1</span>] <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span><br><br>&gt; lapply(x,runif) #runif函数是从均匀分布的总体中抽取若干个数字。runif函数一次作用于x中的每一个元素。<br><span class="hljs-string">[[1]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">0.1420802</span> #x=<span class="hljs-number">1</span>的时候抽出<span class="hljs-number">0.1420802</span> <br><br><span class="hljs-string">[[2]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">0.5706941</span> <span class="hljs-number">0.5051777</span> #x等于<span class="hljs-number">2</span>的时候，抽出两个数<br><br><span class="hljs-string">[[3]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">0.9835877</span> <span class="hljs-number">0.5630008</span> <span class="hljs-number">0.2712130</span> #x等于<span class="hljs-number">3</span>的时候，抽出<span class="hljs-number">3</span>个数<br><br><span class="hljs-string">[[4]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">0.3299968</span> <span class="hljs-number">0.6336621</span> <span class="hljs-number">0.3345203</span> <span class="hljs-number">0.4135361</span> #x等于<span class="hljs-number">4</span>的时候，抽出<span class="hljs-number">4</span>个数<br><br>&gt; lapply(x,runif,<span class="hljs-built_in">min</span>=<span class="hljs-number">0</span>,<span class="hljs-built_in">max</span>=<span class="hljs-number">100</span>)<br><span class="hljs-string">[[1]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">0.9995915</span><br><br><span class="hljs-string">[[2]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">17.17236</span> <span class="hljs-number">85.43321</span><br><br><span class="hljs-string">[[3]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">95.25653</span> <span class="hljs-number">52.58847</span> <span class="hljs-number">48.70183</span><br><br><span class="hljs-string">[[4]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">79.50202</span> <span class="hljs-number">96.41646</span> <span class="hljs-number">56.94763</span> <span class="hljs-number">38.45675</span><br><br>&gt; lapply(x,runif,<span class="hljs-built_in">min</span>=<span class="hljs-number">0</span>,<span class="hljs-built_in">max</span>=<span class="hljs-number">100</span>)  #<span class="hljs-built_in">min</span>=<span class="hljs-number">0</span>,<span class="hljs-built_in">max</span>=<span class="hljs-number">100</span>是作用于runif函数的。从<span class="hljs-number">0</span><span class="hljs-number">-100</span>中间选择。<br><span class="hljs-string">[[1]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">10.90927</span><br><br><span class="hljs-string">[[2]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">13.579156</span>  <span class="hljs-number">5.199927</span><br><br><span class="hljs-string">[[3]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">74.93334</span> <span class="hljs-number">67.08987</span> <span class="hljs-number">91.84644</span><br><br><span class="hljs-string">[[4]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">41.47904</span> <span class="hljs-number">90.65402</span> <span class="hljs-number">44.92566</span> <span class="hljs-number">79.38730</span><br><br>#在lapply中书写匿名函数获取列表中每个矩阵的第一行。<br>&gt; (x=list(a=matrix(<span class="hljs-number">1</span>:<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>),b=matrix(<span class="hljs-number">4</span>:<span class="hljs-number">7</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)))<br>$a<br>     [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>] [,<span class="hljs-number">3</span>]<br>[<span class="hljs-number">1</span>,]    <span class="hljs-number">1</span>    <span class="hljs-number">3</span>    <span class="hljs-number">5</span><br>[<span class="hljs-number">2</span>,]    <span class="hljs-number">2</span>    <span class="hljs-number">4</span>    <span class="hljs-number">6</span><br><br>$b<br>     [,<span class="hljs-number">1</span>] [,<span class="hljs-number">2</span>]<br>[<span class="hljs-number">1</span>,]    <span class="hljs-number">4</span>    <span class="hljs-number">6</span><br>[<span class="hljs-number">2</span>,]    <span class="hljs-number">5</span>    <span class="hljs-number">7</span><br><br>&gt; lapply(x,<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(m)</span></span> m[<span class="hljs-number">1</span>,])<br>$a<br>[<span class="hljs-number">1</span>] <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span><br><br>$b<br>[<span class="hljs-number">1</span>] <span class="hljs-number">4</span> <span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="3-、sapply-列表-函数名-函数-其他参数"><a href="#3-、sapply-列表-函数名-函数-其他参数" class="headerlink" title="3)、sapply(列表,函数名/函数,其他参数)"></a>3)、<strong>sapply(列表,函数名/函数,其他参数)</strong></h4><p><strong>sapply和lapply的差不多，但是sapply可以自动化简函数，</strong></p>
+<ul>
+<li>当结果列表长度为一的时候，返回向量。</li>
+<li>当结果列表长度相同且大于一的时候返回矩阵。</li>
+<li>当结果列表不等的时候仍然返回一个列表。</li>
+</ul>
+<figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">&gt; (x=list(a=1:10,b=c(11,21,31,41,51)))<br>$a<br> [1] <span class="hljs-number"> 1 </span><span class="hljs-number"> 2 </span><span class="hljs-number"> 3 </span><span class="hljs-number"> 4 </span><span class="hljs-number"> 5 </span><span class="hljs-number"> 6 </span><span class="hljs-number"> 7 </span><span class="hljs-number"> 8 </span><span class="hljs-number"> 9 </span>10<br><br>$b<br>[1]<span class="hljs-number"> 11 </span>21<span class="hljs-number"> 31 </span>41 51<br><br>&gt; sapply(x,mean)  <span class="hljs-comment">#返回结果变成了向量</span><br>   a    b <br> 5.5 31.0 <br>&gt; class(sapply(x,mean))<br>[1] &quot;numeric&quot;<br></code></pre></div></td></tr></table></figure>
+<h4 id="4-、mapply-列表-函数名-函数-其他参数"><a href="#4-、mapply-列表-函数名-函数-其他参数" class="headerlink" title="4)、mapply(列表,函数名/函数,其他参数)"></a>4)、<strong>mapply(列表,函数名/函数,其他参数)</strong></h4><blockquote>
+<p>mapply(函数/函数名,数据,函数相关的参数) ，mapply是apply的多元版本。</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">&gt; (u=list(<span class="hljs-built_in">rep</span>(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>),<span class="hljs-built_in">rep</span>(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>),<span class="hljs-built_in">rep</span>(<span class="hljs-number">3</span>,<span class="hljs-number">2</span>),<span class="hljs-built_in">rep</span>(<span class="hljs-number">4</span>,<span class="hljs-number">1</span>)))<br><span class="hljs-string">[[1]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span><br><br><span class="hljs-string">[[2]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span><br><br><span class="hljs-string">[[3]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">3</span> <span class="hljs-number">3</span><br><br><span class="hljs-string">[[4]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">4</span><br><br>&gt; (o=mapply(<span class="hljs-built_in">rep</span>,<span class="hljs-number">1</span>:<span class="hljs-number">4</span>,<span class="hljs-number">4</span>:<span class="hljs-number">1</span>)) #<span class="hljs-number">4</span>:<span class="hljs-number">1</span>对应设置了前面的<span class="hljs-number">1</span>:<span class="hljs-number">4</span>重复次数，和上面的结果是一样的。<br><span class="hljs-string">[[1]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span><br><br><span class="hljs-string">[[2]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span><br><br><span class="hljs-string">[[3]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">3</span> <span class="hljs-number">3</span><br><br><span class="hljs-string">[[4]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">4</span><br><br>#自己写函数，再由mapply来调用<br>&gt; s=<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n,mean,std)</span></span>&#123;<br>+   rnorm(n,mean,std) #从均值为mean，标准差为std的总体里抽取n个元素。<br>+ &#125;<br>&gt; s(<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>) #测试函数<br>[<span class="hljs-number">1</span>]  <span class="hljs-number">2.1789096</span>  <span class="hljs-number">0.3389229</span>  <span class="hljs-number">3.3318089</span> <span class="hljs-number">-2.4226340</span><br><br>#在mapply中调用自己写的函数，返回一个列表。<br>&gt; mapply(s,<span class="hljs-number">1</span>:<span class="hljs-number">5</span>,<span class="hljs-number">5</span>:<span class="hljs-number">1</span>,<span class="hljs-number">2</span>) #<span class="hljs-number">1</span>:<span class="hljs-number">5</span>表示一次抽取<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>个元素，<span class="hljs-number">5</span>:<span class="hljs-number">1</span>表示对应前面五次每次的均值，<span class="hljs-number">2</span>表示，这<span class="hljs-number">5</span>次抽取的每个总体的标准差。<br><span class="hljs-string">[[1]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">4.89449</span>  #从均值为<span class="hljs-number">5</span>标准差为<span class="hljs-number">2</span>的整体中随机抽取<span class="hljs-number">1</span>个<br><br><span class="hljs-string">[[2]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">2.465339</span> <span class="hljs-number">6.585427</span> #从均值为<span class="hljs-number">4</span>标准差为<span class="hljs-number">2</span>的整体中随机抽取<span class="hljs-number">2</span>个<br><br><span class="hljs-string">[[3]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">3.054207</span> <span class="hljs-number">1.269529</span> <span class="hljs-number">5.044077</span> #从均值为<span class="hljs-number">3</span>标准差为<span class="hljs-number">2</span>的整体中随机抽取<span class="hljs-number">3</span>个<br><br><span class="hljs-string">[[4]]</span><br>[<span class="hljs-number">1</span>]  <span class="hljs-number">0.6101787</span>  <span class="hljs-number">2.7211071</span>  <span class="hljs-number">1.6095973</span> <span class="hljs-number">-0.4073418</span> #从均值为<span class="hljs-number">2</span>标准差为<span class="hljs-number">2</span>的整体中随机抽取<span class="hljs-number">4</span>个<br><br><span class="hljs-string">[[5]]</span><br>[<span class="hljs-number">1</span>]  <span class="hljs-number">1.6578902</span>  <span class="hljs-number">0.9364415</span> <span class="hljs-number">-2.8377756</span>  <span class="hljs-number">2.5111859</span> <span class="hljs-number">-1.1535675</span> #从均值为<span class="hljs-number">1</span>标准差为<span class="hljs-number">2</span>的整体中随机抽取<span class="hljs-number">5</span>个<br><br>list(s(<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>),s(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>),s(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>),s(<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>),s(<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)) #效果和上面用mapply是一样的。<br><span class="hljs-string">[[1]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">4.380181</span><br><br><span class="hljs-string">[[2]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">-1.345394</span>  <span class="hljs-number">4.906018</span><br><br><span class="hljs-string">[[3]]</span><br>[<span class="hljs-number">1</span>]  <span class="hljs-number">2.7507204</span> <span class="hljs-number">-0.8917604</span>  <span class="hljs-number">3.4670050</span><br><br><span class="hljs-string">[[4]]</span><br>[<span class="hljs-number">1</span>] <span class="hljs-number">2.589484</span> <span class="hljs-number">3.014790</span> <span class="hljs-number">6.153610</span> <span class="hljs-number">2.452525</span><br><br><span class="hljs-string">[[5]]</span><br>[<span class="hljs-number">1</span>]  <span class="hljs-number">2.2042391</span> <span class="hljs-number">-1.9790139</span> <span class="hljs-number">-1.6326908</span>  <span class="hljs-number">0.9025792</span>  <span class="hljs-number">2.4117260</span><br><br></code></pre></div></td></tr></table></figure>
+<h4 id="5-、tapply-向量-因子-因子列表-函数-函数名"><a href="#5-、tapply-向量-因子-因子列表-函数-函数名" class="headerlink" title="5)、tapply(向量,因子/因子列表,函数/函数名)"></a>5)、<strong>tapply(向量,因子/因子列表,函数/函数名)</strong></h4><blockquote>
+<p>对<strong>向量的子集</strong>进行操作</p>
+</blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns"> &gt; (x=c(rnorm(<span class="hljs-number">5</span>),runif(<span class="hljs-number">5</span>),rnorm(<span class="hljs-number">5</span>,<span class="hljs-number">1</span>)))<br> [<span class="hljs-number">1</span>] -<span class="hljs-number">1.1003527</span> -<span class="hljs-number">0.6135971</span>  <span class="hljs-number">0.9259782</span> -<span class="hljs-number">0.6880730</span> -<span class="hljs-number">1.1620147</span>  <span class="hljs-number">0.5222504</span>  <span class="hljs-number">0.6076465</span>  <span class="hljs-number">0.6647177</span><br> [<span class="hljs-number">9</span>]  <span class="hljs-number">0.3104704</span>  <span class="hljs-number">0.5861854</span>  <span class="hljs-number">1.7122914</span>  <span class="hljs-number">1.0757132</span>  <span class="hljs-number">2.1427658</span>  <span class="hljs-number">2.6782741</span> -<span class="hljs-number">1.0646930</span><br>&gt; (f=gl(<span class="hljs-number">3</span>,<span class="hljs-number">5</span>))<br> [<span class="hljs-number">1</span>] <span class="hljs-number">1 1 1 1</span> <span class="hljs-number">1 2 2 2</span> <span class="hljs-number">2 2 3 3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span><br>Levels: <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span><br>&gt; tapply(x,f,mean) #对x这个向量按照f的水平因子进行求均值的操作，<span class="hljs-number">1</span>下面是x中前<span class="hljs-number">5</span>个数的均值，<span class="hljs-number">2</span>下面是x中间<span class="hljs-number">5</span>个数的均值，<span class="hljs-number">3</span>下面是x中后面<span class="hljs-number">5</span>个数的均值。<br>&gt; <br>         <span class="hljs-number">1</span>          <span class="hljs-number">2</span>          <span class="hljs-number">3</span> <br>-<span class="hljs-number">0.5276119</span>  <span class="hljs-number">0.5382541</span>  <span class="hljs-number">1.3088703</span> <br>&gt; tapply(x,f,mean,simplify=FALSE) #tapply函数中simplify的默认值是TRUE，完成了简化，否则返回的也是一个列表。<br>$`<span class="hljs-number">1</span>`<br>[<span class="hljs-number">1</span>] -<span class="hljs-number">0.5276119</span><br><br>$`<span class="hljs-number">2</span>`<br>[<span class="hljs-number">1</span>] <span class="hljs-number">0.5382541</span><br><br>$`<span class="hljs-number">3</span>`<br>[<span class="hljs-number">1</span>] <span class="hljs-number">1.30887</span><br><br></code></pre></div></td></tr></table></figure>
+<h3 id="3、split"><a href="#3、split" class="headerlink" title="3、split"></a>3、split</h3><ul>
+<li><strong>根据因子或者因子列表将向量或者其他对象进行分组操作</strong></li>
+<li><strong>通常与lappy一起使用</strong></li>
+<li><strong>spilt(向量/列表/数据框,因子/因子列表)</strong></li>
+</ul>
+<blockquote>
+<p>一般split函数是和lapply/sapply函数配合使用的，lapply(split(x,f),mean)，将x先按照f分组，再使用mean函数求均值，最后以列表的形式输出。</p>
+</blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns"> &gt; (x=c(rnorm(<span class="hljs-number">5</span>),runif(<span class="hljs-number">5</span>),rnorm(<span class="hljs-number">5</span>,<span class="hljs-number">1</span>)))<br> [<span class="hljs-number">1</span>] -<span class="hljs-number">1.1003527</span> -<span class="hljs-number">0.6135971</span>  <span class="hljs-number">0.9259782</span> -<span class="hljs-number">0.6880730</span> -<span class="hljs-number">1.1620147</span>  <span class="hljs-number">0.5222504</span>  <span class="hljs-number">0.6076465</span>  <span class="hljs-number">0.6647177</span><br> [<span class="hljs-number">9</span>]  <span class="hljs-number">0.3104704</span>  <span class="hljs-number">0.5861854</span>  <span class="hljs-number">1.7122914</span>  <span class="hljs-number">1.0757132</span>  <span class="hljs-number">2.1427658</span>  <span class="hljs-number">2.6782741</span> -<span class="hljs-number">1.0646930</span><br><br>&gt; f<br> [<span class="hljs-number">1</span>] <span class="hljs-number">1 1 1 1</span> <span class="hljs-number">1 2 2 2</span> <span class="hljs-number">2 2 3 3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span><br>Levels: <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span><br><br>&gt; split(x,f)  #将x根据f分成相应的组<br>$`<span class="hljs-number">1</span>`<br>[<span class="hljs-number">1</span>] -<span class="hljs-number">1.1003527</span> -<span class="hljs-number">0.6135971</span>  <span class="hljs-number">0.9259782</span> -<span class="hljs-number">0.6880730</span> -<span class="hljs-number">1.1620147</span> #$`<span class="hljs-number">1</span>`水平<span class="hljs-number">1</span>在x中对应的五个值<br><br>$`<span class="hljs-number">2</span>`<br>[<span class="hljs-number">1</span>] <span class="hljs-number">0.5222504</span> <span class="hljs-number">0.6076465</span> <span class="hljs-number">0.6647177</span> <span class="hljs-number">0.3104704</span> <span class="hljs-number">0.5861854</span> #$`<span class="hljs-number">2</span>`水平<span class="hljs-number">2</span>在x中对应的五个值<br><br>$`<span class="hljs-number">3</span>`<br>[<span class="hljs-number">1</span>]  <span class="hljs-number">1.712291</span>  <span class="hljs-number">1.075713</span>  <span class="hljs-number">2.142766</span>  <span class="hljs-number">2.678274</span> -<span class="hljs-number">1.064693</span> #$`<span class="hljs-number">3</span>`水平<span class="hljs-number">3</span>在x中对应的五个值<br><br>#将x先按照f分组，再使用mean函数求均值，最后以列表的形式输出。<br>&gt; lapply(split(x,f),mean)<br>$`<span class="hljs-number">1</span>`<br>[<span class="hljs-number">1</span>] -<span class="hljs-number">0.5276119</span><br><br>$`<span class="hljs-number">2</span>`<br>[<span class="hljs-number">1</span>] <span class="hljs-number">0.5382541</span> <br><br>$`<span class="hljs-number">3</span>`<br>[<span class="hljs-number">1</span>] <span class="hljs-number">1.30887</span><br><br># colMeans是计算列的平均值的函数<br>&gt; lapply(s,function(x) colMeans(x[,c(&quot;Ozone&quot;,&quot;Wind&quot;,&quot;Temp&quot;)]))<br>$`<span class="hljs-number">5</span>`<br>   Ozone     Wind     Temp <br>      NA <span class="hljs-number">11.62258 65</span>.<span class="hljs-number">54839</span> <br><br>$`<span class="hljs-number">6</span>`<br>   Ozone     Wind     Temp <br>      NA <span class="hljs-number">10.26667 79</span>.<span class="hljs-number">10000</span> <br><br>$`<span class="hljs-number">7</span>`<br>    Ozone      Wind      Temp <br>       NA  <span class="hljs-number">8.941935</span> <span class="hljs-number">83.903226</span> <br><br>$`<span class="hljs-number">8</span>`<br>    Ozone      Wind      Temp <br>       NA  <span class="hljs-number">8.793548</span> <span class="hljs-number">83.967742</span> <br><br>$`<span class="hljs-number">9</span>`<br>Ozone  Wind  Temp   <br>   NA <span class="hljs-number">10.18 76.90</span> <br>#所有Ozone的均值都是NA，说明是有确实存在，所以导致计算列均值的时候也是缺失值。<br><br>&gt; sapply(s,function(x) colMeans(x[,c(&quot;Ozone&quot;,&quot;Wind&quot;,&quot;Temp&quot;)],na.rm = TRUE)) <br>             <span class="hljs-number">5</span>        <span class="hljs-number">6</span>         <span class="hljs-number">7</span>         <span class="hljs-number">8</span>        <span class="hljs-number">9</span><br>Ozone <span class="hljs-number">23.61538 29</span>.<span class="hljs-number">44444 59</span>.<span class="hljs-number">115385 59</span>.<span class="hljs-number">961538 31</span>.<span class="hljs-number">44828</span><br>Wind  <span class="hljs-number">11.62258 10</span>.<span class="hljs-number">26667</span>  <span class="hljs-number">8.941935</span>  <span class="hljs-number">8.793548</span> <span class="hljs-number">10.18000</span><br>Temp  <span class="hljs-number">65.54839 79</span>.<span class="hljs-number">10000 83</span>.<span class="hljs-number">903226 83</span>.<span class="hljs-number">967742 76</span>.<span class="hljs-number">90000</span><br>#设置sapply函数的na.rm属性为TRUE是可以忽略缺失值的。<br><br>#当然，比较<span class="hljs-number">6</span>的做法是我们自己是我们自己手动清洗数据<br>&gt; g=complete.cases(airquality) #第一步，调用complete.cases()清洗数据<br>&gt; s_tmp=split(airquality[g,],airquality$Month) #第二步，调用split方法来将已经清洗过的数据根据月份来分组。<br>&gt; sapply(s_tmp,function(x) colMeans(x[,c(&quot;Ozone&quot;,&quot;Wind&quot;,&quot;Temp&quot;)])) #调用sapply方法并且自己写一个匿名函数来求特定域的均值。<br>             <span class="hljs-number">5</span>         <span class="hljs-number">6</span>         <span class="hljs-number">7</span>        <span class="hljs-number">8</span>   <span class="hljs-number">9</span><br>Ozone <span class="hljs-number">26.41935 53</span>.<span class="hljs-number">666667 59</span>.<span class="hljs-number">258065 21</span>.<span class="hljs-number">42105</span> NaN<br>Wind  <span class="hljs-number">11.73871</span>  <span class="hljs-number">8.803333</span>  <span class="hljs-number">8.619355</span> <span class="hljs-number">10.95263</span> NaN<br>Temp  <span class="hljs-number">69.35484 83</span>.<span class="hljs-number">066667 84</span>.<span class="hljs-number">161290 72</span>.<span class="hljs-number">84211</span> NaN<br> <br></code></pre></div></td></tr></table></figure>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
+<li><strong>sort：对向量进行排序，返回排好序的内容。</strong></li>
+<li><strong>order：返回排序好的内容的下标/多个排序标准。</strong></li>
+</ul>
+<figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">&gt; (x=data.frame(v1=1:5,v2=c(10,7,9,6,8),v3=11:15,v4=c(1,1,2,2,1)))<br>  v1 v2 v3 v4<br>1 <span class="hljs-number"> 1 </span>10<span class="hljs-number"> 11 </span> 1<br>2 <span class="hljs-number"> 2 </span><span class="hljs-number"> 7 </span>12  1<br>3 <span class="hljs-number"> 3 </span><span class="hljs-number"> 9 </span>13  2<br>4 <span class="hljs-number"> 4 </span><span class="hljs-number"> 6 </span>14  2<br>5 <span class="hljs-number"> 5 </span><span class="hljs-number"> 8 </span>15  1<br>&gt; (sort(x$v2)) <span class="hljs-comment">#按升序排列</span><br>[1] <span class="hljs-number"> 6 </span><span class="hljs-number"> 7 </span><span class="hljs-number"> 8 </span><span class="hljs-number"> 9 </span>10<br>&gt; (sort(x$v2,decreasing=TRUE)) <span class="hljs-comment">#按降序排列</span><br>[1]<span class="hljs-number"> 10 </span><span class="hljs-number"> 9 </span><span class="hljs-number"> 8 </span><span class="hljs-number"> 7 </span> 6<br>&gt; order(x$v2) <span class="hljs-comment">#order是返回下标的，不返回内容。</span><br>[1]<span class="hljs-number"> 4 </span>2<span class="hljs-number"> 5 </span>3 1<br>&gt; x[order(x$v2),] <span class="hljs-comment">#调用得到的下标打印</span><br>  v1 v2 v3 v4<br>4 <span class="hljs-number"> 4 </span><span class="hljs-number"> 6 </span>14  2<br>2 <span class="hljs-number"> 2 </span><span class="hljs-number"> 7 </span>12  1<br>5 <span class="hljs-number"> 5 </span><span class="hljs-number"> 8 </span>15  1<br>3 <span class="hljs-number"> 3 </span><span class="hljs-number"> 9 </span>13  2<br>1 <span class="hljs-number"> 1 </span>10<span class="hljs-number"> 11 </span> 1<br>&gt; x[order(x$v4,x$v2),]  <span class="hljs-comment">#先按照v4进行排序，v4中有相同的再按照v2进行排序。</span><br>  v1 v2 v3 v4<br>2 <span class="hljs-number"> 2 </span><span class="hljs-number"> 7 </span>12  1<br>5 <span class="hljs-number"> 5 </span><span class="hljs-number"> 8 </span>15  1<br>1 <span class="hljs-number"> 1 </span>10<span class="hljs-number"> 11 </span> 1<br>4 <span class="hljs-number"> 4 </span><span class="hljs-number"> 6 </span>14  2<br>3 <span class="hljs-number"> 3 </span><span class="hljs-number"> 9 </span>13  2<br>&gt; x[order(x$v4,x$v2,decreasing=TRUE),] <span class="hljs-comment">#降序排列。</span><br>  v1 v2 v3 v4<br>3 <span class="hljs-number"> 3 </span><span class="hljs-number"> 9 </span>13  2<br>4 <span class="hljs-number"> 4 </span><span class="hljs-number"> 6 </span>14  2<br>1 <span class="hljs-number"> 1 </span>10<span class="hljs-number"> 11 </span> 1<br>5 <span class="hljs-number"> 5 </span><span class="hljs-number"> 8 </span>15  1<br>2 <span class="hljs-number"> 2 </span><span class="hljs-number"> 7 </span>12  1<br></code></pre></div></td></tr></table></figure>
+<h2 id="数据处理流程"><a href="#数据处理流程" class="headerlink" title="数据处理流程"></a>数据处理流程</h2><p><strong>原始数据（raw dataset）</strong>  <strong>—-&gt;</strong> <strong>预处理后的数据（clean dataset）</strong></p>
+<h2 id="构建子集-subsetting"><a href="#构建子集-subsetting" class="headerlink" title="构建子集 subsetting"></a>构建子集 subsetting</h2><h3 id="1、构建方法"><a href="#1、构建方法" class="headerlink" title="1、构建方法"></a>1、构建方法</h3><ul>
+<li>[] 提取一个或者多类型相同的元素  <strong>R语言中下标是从1开始的。</strong></li>
+<li>[[]] 从列表或者数据框中提取数据</li>
+<li>$按照名字从列表或者数据框中提取元素</li>
+</ul>
+<p><strong>举例</strong></p>
+<p><strong>1. 设置条件进行子集提取</strong><br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">&gt; (x=c(rnorm(<span class="hljs-number">20</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>)))<br> [<span class="hljs-number">1</span>] -<span class="hljs-number">1.63156732</span>  <span class="hljs-number">3.76807795</span>  <span class="hljs-number">6.17118143</span>  <span class="hljs-number">2.43515444</span>  <span class="hljs-number">3.59313881</span>  <span class="hljs-number">4.16966527</span>  <span class="hljs-number">0.41943174</span>  <span class="hljs-number">4.81982118</span>  <span class="hljs-number">0.10841749</span><br>[<span class="hljs-number">10</span>] <span class="hljs-number">11.16069947</span>  <span class="hljs-number">0.09089112</span>  <span class="hljs-number">4.62378612</span>  <span class="hljs-number">8.43299270</span>  <span class="hljs-number">5.97803844</span>  <span class="hljs-number">2.64061372</span>  <span class="hljs-number">2.85256809</span>  <span class="hljs-number">7.55771969</span>  <span class="hljs-number">7.94601703</span><br>[<span class="hljs-number">19</span>]  <span class="hljs-number">3.93132473</span>  <span class="hljs-number">2.63224266</span><br><br>&gt; x[x&gt;<span class="hljs-number">5</span>] #设置条件进行子集提取<br>[<span class="hljs-number">1</span>]  <span class="hljs-number">6.171181 11</span>.<span class="hljs-number">160699</span>  <span class="hljs-number">8.432993</span>  <span class="hljs-number">5.978038</span>  <span class="hljs-number">7.557720</span>  <span class="hljs-number">7.946017</span><br><br>&gt; x&gt;<span class="hljs-number">5</span> #直接输入x&gt;<span class="hljs-number">5</span>可以得到对向量中每个元素的大小的判断<br> [<span class="hljs-number">1</span>] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE<br>[<span class="hljs-number">20</span>] FALSE<br><br>&gt; (y=<span class="hljs-number">1</span>:<span class="hljs-number">5</span>)<br>[<span class="hljs-number">1</span>] <span class="hljs-number">1 2 3 4</span> <span class="hljs-number">5</span><br>&gt; y[y&lt;=<span class="hljs-number">2</span>|y&gt;=<span class="hljs-number">4</span>]<br>[<span class="hljs-number">1</span>] <span class="hljs-number">1 2 4 5</span><br>&gt; y[-<span class="hljs-number">3</span>]  #加负号代表将数据去除<br>[<span class="hljs-number">1</span>] <span class="hljs-number">1 2 4 5</span><br></code></pre></div></td></tr></table></figure></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/">统计学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/05/14/R%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">R语言笔记之数据可视化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/05/14/R%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%AF%87/">
+                        <span class="hidden-mobile">R语言笔记之数据篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2016/05/14/R%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E4%B9%8B%E8%AF%AD%E6%B3%95%E7%AF%87/';
+        this.page.identifier = '/2016/05/14/R%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E4%B9%8B%E8%AF%AD%E6%B3%95%E7%AF%87/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

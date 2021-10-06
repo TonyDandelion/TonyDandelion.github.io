@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 72. 编辑距离（难） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 72. 编辑距离（难）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-19 14:18" pubdate>
+        2020年3月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 72. 编辑距离（难）</h1>
+            
+            <div class="markdown-body">
+              <p>经典的动态规划问题，有递归、非递归两种解法，注意状态转移方程的求解的逻辑。<br><code>dp[i-1][j] -&gt; dp[i][j]</code>是删除操作<br><code>dp[i][j-1] -&gt; dp[i][j]</code>是插入操作<br><code>dp[i][j] -&gt; dp[i][j]</code>是修改操作  </p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定两个单词 word1 和 word2，计算出<strong>将 word1 转换成 word2</strong> 所使用的最少操作数 。<br>你可以对一个单词进行如下三种操作：  </p>
+<ol>
+<li>插入一个字符  </li>
+<li>删除一个字符  </li>
+<li>替换一个字符  </li>
+</ol>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">word1</span> = <span class="hljs-string">&quot;horse&quot;</span>, <span class="hljs-attr">word2</span> = <span class="hljs-string">&quot;ros&quot;</span><br>输出: <span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure><br>解释:<br><figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl"><span class="hljs-number">1</span>.<span class="hljs-function"><span class="hljs-title">horse</span> -&gt;</span> rorse (将 <span class="hljs-string">&#x27;h&#x27;</span> 替换为 <span class="hljs-string">&#x27;r&#x27;</span>)  <br><span class="hljs-number">2</span>.<span class="hljs-function"><span class="hljs-title">rorse</span> -&gt;</span> rose (删除 <span class="hljs-string">&#x27;r&#x27;</span>)  <br><span class="hljs-number">3</span>.<span class="hljs-function"><span class="hljs-title">rose</span> -&gt;</span> ros (删除 <span class="hljs-string">&#x27;e&#x27;</span>)  <br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">word1</span> = <span class="hljs-string">&quot;intention&quot;</span>, <span class="hljs-attr">word2</span> = <span class="hljs-string">&quot;execution&quot;</span><br>输出: <span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure><br>解释:<br><figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl"><span class="hljs-number">1</span>.<span class="hljs-function"><span class="hljs-title">intention</span> -&gt;</span> inention (删除 <span class="hljs-string">&#x27;t&#x27;</span>)  <br><span class="hljs-number">2</span>.<span class="hljs-function"><span class="hljs-title">inention</span> -&gt;</span> enention (将 <span class="hljs-string">&#x27;i&#x27;</span> 替换为 <span class="hljs-string">&#x27;e&#x27;</span>)  <br><span class="hljs-number">3</span>.<span class="hljs-function"><span class="hljs-title">enention</span> -&gt;</span> exention (将 <span class="hljs-string">&#x27;n&#x27;</span> 替换为 <span class="hljs-string">&#x27;x&#x27;</span>)  <br><span class="hljs-number">4</span>.<span class="hljs-function"><span class="hljs-title">exention</span> -&gt;</span> exection (将 <span class="hljs-string">&#x27;n&#x27;</span> 替换为 <span class="hljs-string">&#x27;c&#x27;</span>)  <br><span class="hljs-number">5</span>. <span class="hljs-function"><span class="hljs-title">exection</span> -&gt;</span> execution (插入 <span class="hljs-string">&#x27;u&#x27;</span>)  <br></code></pre></div></td></tr></table></figure></p>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>字符串、动态规划</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>用动态规划 Dynamic Programming 来解。维护一个二维的数组 <code>dp</code>，其大小为 $m \times n$，$m$ 和 $n$ 分别为 <code>word1</code> 和 <code>word2</code> 的长度。<strong><code>dp[i][j]</code> 表示从 <code>word1</code> 的前 <code>i</code> 个字符转换到 <code>word2</code> 的前 <code>j</code> 个字符所需要的最少步骤（或者说是<code>word1</code> 的前 <code>i</code> 个字母和 <code>word2</code> 的前 <code>j</code> 个字母之间的<font color='red'>最小编辑距离</font>）。</strong><br>先给这个二维数组 <code>dp</code> 的第一行和第一列赋值，这个很简单，因为第一行和第一列对应的总有一个字符串是空串，一个空串和一个非空串的编辑距离为 <code>d[i][0] = i</code> 和 <code>d[0][j] = j</code> 于是转换步骤完全是另一个字符串的长度，下图的 <code>#</code> 代表空串。<br>第一行是 <code>word1</code> 为空变成 <code>word2</code> 最少步数，就是插入操作。<strong>换而言之，每一行从左往右就是在 <code>insert</code>，因此 <code>dp[i][j-1] -&gt; dp[i][j]</code> 执行的是插入操作。</strong><br>第一列，是 <code>word2</code> 为空，<code>word1</code> 变成 <code>word2</code> 需要的最少步数，就是删除操作。<strong>换而言之，每一列从下往上就是在 <code>delete</code> ，因此 <code>dp[i-1][j] -&gt; dp[i][j]</code> 执行的是删除操作。</strong>  </p>
+<p><img src="https://i.loli.net/2020/03/19/1jrpQCFsJ7tUoyB.png" srcset="/img/loading.gif" alt="dp.png"></p>
+<p>初始化了dp 的第一行和第一列之后，就要确定<strong>状态转移方程</strong>，由前述可知。  </p>
+<ul>
+<li><code>dp[i-1][j] -&gt; dp[i][j]</code>是删除操作  </li>
+<li><code>dp[i][j-1] -&gt; dp[i][j]</code>是插入操作  </li>
+<li><code>dp[i][j] -&gt; dp[i][j]</code>是修改操作  </li>
+</ul>
+<p>所以，通过观察可以发现， 当第<code>i</code> 个字符 和 第 <code>j</code> 个字符不等时， 状态转移方程是 $dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])$ 。  </p>
+<p><img src="https://i.loli.net/2020/03/19/8gLw7cYvo4z1G3J.png" srcset="/img/loading.gif" alt="1"></p>
+<p>当第<code>i</code> 个字符 和 第 <code>j</code> 个字符相等时，不需要做任何操作， 所以状态转移方程是 $dp[i][j] = dp[i-1][j-1]$ 该状态转移方程等效于 $dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]-1)$ 。  </p>
+<p><img src="https://i.loli.net/2020/03/19/YuMRlyafZHtQ6o9.png" srcset="/img/loading.gif" alt="dp1.png"></p>
+<p>在动态规划之前，可以做个优化，循环判断 <code>word1</code> 和 <code>word2</code> 最后一位字母是否相同，可以通过 <code>word1 = word1[:-1]</code> 和 <code>word2 = word2[:-1]</code>  去除掉最后一位，因为最后一位如果相同，就不用编辑最后一位了，去掉也不影响 <code>res</code> 计算，还能减少 <code>dp</code> 占用内存的大小。  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">res = <span class="hljs-number">0</span><br><span class="hljs-keyword">while</span> word1[-<span class="hljs-number">1</span>] == word2[-<span class="hljs-number">1</span>]:<br>	word1 = word1[:-<span class="hljs-number">1</span>]<br>	word2 = word2[:-<span class="hljs-number">1</span>]<br><span class="hljs-comment"># 开展后续计算res的操作</span><br></code></pre></div></td></tr></table></figure>
+<p>清楚了<strong>状态转移方程</strong>之后，就可以写代码了。该动态规划算法的实现，可以以<strong>循环形式</strong>实现，也可以<strong>递归形式</strong>实现。  </p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<li>循环形式的动态规划</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minDistance</span>(<span class="hljs-params">self, word1: <span class="hljs-built_in">str</span>, word2: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        <span class="hljs-comment"># 进行预处理 缩小额外空间大小</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(word1) <span class="hljs-keyword">and</span> <span class="hljs-built_in">len</span>(word2) <span class="hljs-keyword">and</span> word1[-<span class="hljs-number">1</span>] == word2[-<span class="hljs-number">1</span>]:<br>            word1 = word1[:-<span class="hljs-number">1</span>]<br>            word2 = word2[:-<span class="hljs-number">1</span>]<br>        <span class="hljs-comment"># 进行特判</span><br>        <span class="hljs-keyword">if</span> word1 == <span class="hljs-string">&quot;&quot;</span>: <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(word2)<br>        <span class="hljs-keyword">if</span> word2 == <span class="hljs-string">&quot;&quot;</span>: <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(word1)<br>        <span class="hljs-comment"># 声明dp矩阵</span><br>        m = <span class="hljs-built_in">len</span>(word1)<br>        n = <span class="hljs-built_in">len</span>(word2)<br>        dp = [[<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n+<span class="hljs-number">1</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m+<span class="hljs-number">1</span>)]<br>        <span class="hljs-comment"># 初始化dp矩阵的</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m+<span class="hljs-number">1</span>): dp[i][<span class="hljs-number">0</span>] = i<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n+<span class="hljs-number">1</span>): dp[<span class="hljs-number">0</span>][j] = j<br>        <span class="hljs-comment"># 开始循环进行动态规划</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, m+<span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>):<br>                <span class="hljs-keyword">if</span> word1[i-<span class="hljs-number">1</span>] == word2[j-<span class="hljs-number">1</span>]:<br>                    dp[i][j] = dp[i-<span class="hljs-number">1</span>][j-<span class="hljs-number">1</span>]<br>                <span class="hljs-keyword">else</span>:<br>                    dp[i][j] = <span class="hljs-number">1</span> + <span class="hljs-built_in">min</span>(dp[i-<span class="hljs-number">1</span>][j], dp[i][j-<span class="hljs-number">1</span>], dp[i-<span class="hljs-number">1</span>][j-<span class="hljs-number">1</span>])<br><br>        <span class="hljs-keyword">return</span> dp[-<span class="hljs-number">1</span>][-<span class="hljs-number">1</span>]<br><br>Input = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;horse&quot;</span>, <span class="hljs-string">&quot;inten&quot;</span>, <span class="hljs-string">&quot;intention&quot;</span>]<br>Input1 = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;ros&quot;</span>, <span class="hljs-string">&quot;execu&quot;</span>, <span class="hljs-string">&quot;execution&quot;</span>]<br>Answer = [<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.minDistance(Input[i], Input1[i])<br>        <span class="hljs-keyword">if</span> reslut == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(Answer[i])<br>            print(reslut)<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(m’ \times n’)$，$m’$ 和 $n’$ 分别是去掉尾部同样字符之后的 <code>word1</code> 和 <code>word2</code> 的长度。<br>空间复杂度：$O(m’ \times n’)$，关于$m’$ 和 $n’$，同上。<br>执行用时 :192 ms, 在所有 Python3 提交中击败了68.49%的用户<br>内存消耗 :17.1 MB, 在所有 Python3 提交中击败了12.41%的用户  </p>
+<ul>
+<li>递归形式的动态规划  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minDistance</span>(<span class="hljs-params">self, word1: <span class="hljs-built_in">str</span>, word2: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dp</span>(<span class="hljs-params">word1, i, word2, j, memo</span>):</span><br>            <span class="hljs-keyword">if</span> i == <span class="hljs-built_in">len</span>(word1): <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(<span class="hljs-built_in">len</span>(word2) - j)  <span class="hljs-comment"># 判断是否达到边界</span><br>            <span class="hljs-keyword">if</span> j == <span class="hljs-built_in">len</span>(word2): <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(<span class="hljs-built_in">len</span>(word1) - i)  <span class="hljs-comment"># 判断是否达到边界</span><br>            <span class="hljs-keyword">if</span> memo[i][j] &gt; <span class="hljs-number">0</span>: <span class="hljs-keyword">return</span> memo[i][j]  <span class="hljs-comment"># if memo中保存了该状态 return mono中该状态的保存结果</span><br>            res = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">if</span> word1[i] == word2[j]:<br>                <span class="hljs-keyword">return</span> dp(word1, i+<span class="hljs-number">1</span>, word2, j+<span class="hljs-number">1</span>, memo)<br>            <span class="hljs-keyword">else</span>:<br>                insertCnt = dp(word1, i, word2, j+<span class="hljs-number">1</span>, memo)<br>                deletaCnt = dp(word1, i+<span class="hljs-number">1</span>, word2, j, memo)<br>                replaceCnt = dp(word1, i+<span class="hljs-number">1</span>, word2, j+<span class="hljs-number">1</span>, memo)<br>                res = <span class="hljs-built_in">min</span>(insertCnt, deletaCnt, replaceCnt) + <span class="hljs-number">1</span><br>            memo[i][j] = res<br>            <span class="hljs-keyword">return</span> res<br><br>        m, n = <span class="hljs-built_in">len</span>(word1), <span class="hljs-built_in">len</span>(word2)<br>        memo = [[<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n+<span class="hljs-number">1</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m+<span class="hljs-number">1</span>)] <span class="hljs-comment"># 声明dp矩阵 保存计算结果</span><br>        <span class="hljs-keyword">return</span> dp(word1, <span class="hljs-number">0</span>, word2, <span class="hljs-number">0</span>, memo)  <span class="hljs-comment"># 开始递归进行动态规划</span><br></code></pre></div></td></tr></table></figure>
+<p>执行用时 :328 ms, 在所有 Python3 提交中击败了11.84%的用户<br>内存消耗 :16.7 MB, 在所有 Python3 提交中击败了13.40%的用户  </p>
+<blockquote>
+<p>参考连接</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4344107.html">Grandyang</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av48541010">花花酱</a><br><a target="_blank" rel="noopener" href="http://bangbingsyb.blogspot.com/2014/11/leetcode-edit-distance.html">喜刷刷</a>  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/19/LeetCode-73-%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 73. 矩阵置零（中）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/19/LeetCode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 71. 简化路径（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/19/LeetCode-72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%EF%BC%88%E9%9A%BE%EF%BC%89/';
+        this.page.identifier = '/2020/03/19/LeetCode-72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%EF%BC%88%E9%9A%BE%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

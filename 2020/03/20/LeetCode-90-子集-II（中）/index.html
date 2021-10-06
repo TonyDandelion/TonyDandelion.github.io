@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 90. 子集 II（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 90. 子集 II（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-20 22:07" pubdate>
+        2020年3月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 90. 子集 II（中）</h1>
+            
+            <div class="markdown-body">
+              <p>78题改进，出现了重复数字，需要添加限制条件。<br>之前一直在for架构下，在选择之前想办法做判断。<br>试了很多次都不成功，原来要修改的地方在“退出回溯 撤销选择”之后。</p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。<br>说明：解集不能包含重复的子集。  </p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例:</strong></p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: <span class="hljs-comment">[1,2,2]</span><br><br>输出:<br><span class="hljs-comment">[</span><br><span class="hljs-comment">  <span class="hljs-comment">[2]</span>,</span><br><span class="hljs-comment">  <span class="hljs-comment">[1]</span>,</span><br><span class="hljs-comment">  <span class="hljs-comment">[1,2,2]</span>,</span><br><span class="hljs-comment">  <span class="hljs-comment">[2,2]</span>,</span><br><span class="hljs-comment">  <span class="hljs-comment">[1,2]</span>,</span><br><span class="hljs-comment">  <span class="hljs-comment">[]</span></span><br><span class="hljs-comment">]</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>回溯、数组</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>这道题和 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/">Leecode 第78题 子集 </a>  差不多一样，区别是本题出现了重复数字，且结果不允许重复。78题的解题方法包括递归回溯、循环迭代、状态分配（基于字典、矩阵、位运算）三种方法。本题在78题代码的基础上添加某些限制条件即可。  </p>
+<p><strong>方法一、递归回溯</strong>  </p>
+<p>相较于<strong>78题</strong>的区别是：<br>1、在调用 <code>backtrack()</code> 之前先将 <code>nums</code> 数组排序<br>2、当退出回溯函数 <code>backtrack</code> 并撤销选择 <code>path.pop()</code> 之后，判断后面是否有相同的数字，如果有，就跳过。  </p>
+<p>78题代码  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, n - (k - cur_len) + <span class="hljs-number">1</span>):<br>    path.append(nums[i])  <span class="hljs-comment"># 选择</span><br>    backtrack(i + <span class="hljs-number">1</span>, path)  <span class="hljs-comment"># 回溯</span><br>    path.pop()  <span class="hljs-comment"># 退出回溯 撤销选择</span><br></code></pre></div></td></tr></table></figure>
+<p>90题代码</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 在调用 backtrack() 之前先将nums数组排序</span><br>nums.sort()<br>i = first<br><span class="hljs-keyword">while</span> i &lt; n - (k - path_len) + <span class="hljs-number">1</span>:  <span class="hljs-comment"># 改成while循环</span><br>    path.append(nums[i])  <span class="hljs-comment"># 选择</span><br>    backtrack(i + <span class="hljs-number">1</span>, path, last)  <span class="hljs-comment"># 回溯</span><br>    path.pop()  <span class="hljs-comment"># 退出回溯 撤销选择</span><br>    <span class="hljs-keyword">while</span> i + <span class="hljs-number">1</span> &lt; <span class="hljs-built_in">len</span>(nums) <span class="hljs-keyword">and</span> nums[i] == nums[i+<span class="hljs-number">1</span>]:  <span class="hljs-comment"># 添加的部分限制条件，如果当前位置后面有相同数字，就跳过。</span><br>        i += <span class="hljs-number">1</span><br>    i += <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>总结：之前一直在for架构下，在选择之前想办法做判断，试了很多次都不成功，原来要修改的地方在“退出回溯 撤销选择”之后。  </p>
+<p><strong>方法二、循环迭代</strong>  </p>
+<p>相较于<strong>78题</strong>的区别是：</p>
+<p>1、循环开始前先对 <code>nums</code> 进行排序<br>2、判断当前数字和前一个数字是否相似<br>2.1、如果和前一个数字一样，就在前一次循环产生的增量数组 <code>tmp</code> 上添加。<br>2.2、如果和前一个数字不一样，就在前一次循环产生的结果 <code>output</code> 上添加。  </p>
+<p><img src="https://i.loli.net/2020/03/20/iHeQpMcjYbJUA54.jpg" srcset="/img/loading.gif" alt="QQ图片20200320214359.jpg"></p>
+<p>78题代码  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>    output += [curr + [num] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> output]<br>    <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
+<p>90题代码</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 循环开始前先对nums进行排序</span><br>nums.sort()<br>tmp = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):<br>    <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i - <span class="hljs-number">1</span>] == nums[i]:  <br>        tmp = [curr + [nums[i]] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> tmp]<br>    <span class="hljs-keyword">else</span>:<br>        tmp = [curr + [nums[i]] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> output]<br>    output += tmp<br><span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
+<p><strong>方法三、状态分配（字典排序（二进制排序） 子集）</strong>   </p>
+<p>暂无</p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<li>方法一递归回溯的实现</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsetsWithDup</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">first = <span class="hljs-number">0</span>, path = [], last=[]</span>):</span><br>            path_len = <span class="hljs-built_in">len</span>(path)<br>            <span class="hljs-keyword">if</span> path_len == k:<br>                output.append(path[:])<br>                <span class="hljs-keyword">return</span><br>            i = first<br>            <span class="hljs-keyword">while</span> i &lt; n - (k - path_len) + <span class="hljs-number">1</span>:<br>                path.append(nums[i])<br>                backtrack(i + <span class="hljs-number">1</span>, path, last)<br>                path.pop()<br>                <span class="hljs-keyword">while</span> i + <span class="hljs-number">1</span> &lt; <span class="hljs-built_in">len</span>(nums) <span class="hljs-keyword">and</span> nums[i] == nums[i+<span class="hljs-number">1</span>]:<br>                    i += <span class="hljs-number">1</span><br>                i += <span class="hljs-number">1</span><br><br>        nums.sort()<br>        output = []<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n + <span class="hljs-number">1</span>):<br>            backtrack()<br>        <span class="hljs-keyword">return</span> output<br><br><br>Input = [[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>]]<br>Answer = [<br>    [[],[<span class="hljs-number">1</span>],[<span class="hljs-number">2</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>],],<br>    [[], [<span class="hljs-number">1</span>], [<span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>]]<br>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.subsetsWithDup(Input[i])<br>        <span class="hljs-keyword">if</span> reslut == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(reslut)<br>            print(Answer[i])<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N \times 2^N)$，考虑最坏的情况，不存在任何重复，就和78题一样了。<br>空间复杂度：$O(N \times 2^N)$，同上，考虑最坏的情况，不存在任何重复，就和78题一样了。<br>执行用时 :48 ms, 在所有 Python3 提交中击败了42.99%的用户<br>内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.83%的用户  </p>
+<p><strong>另一种简单回溯的写法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsetsWithDup</span>(<span class="hljs-params">self, nums</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type nums: List[int]</span><br><span class="hljs-string">        :rtype: List[List[int]]</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:<br>            <span class="hljs-keyword">return</span> []<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        res = []<br>        nums.sort()<br>        <span class="hljs-comment"># 思路1</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack1</span>(<span class="hljs-params">idx, n, temp_list</span>):</span><br>            <span class="hljs-keyword">if</span> temp_list <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:  <span class="hljs-comment"># 此处去重</span><br>                res.append(temp_list)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(idx, n):<br>                backtrack1(i + <span class="hljs-number">1</span>, n, temp_list + [nums[i]])<br>        <span class="hljs-comment"># 思路2</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack2</span>(<span class="hljs-params">idx, n, temp_list</span>):</span><br>            res.append(temp_list)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(idx, n):<br>                <span class="hljs-keyword">if</span> i &gt; idx <span class="hljs-keyword">and</span>  nums[i] == nums[i - <span class="hljs-number">1</span>]:  <span class="hljs-comment"># 此处去重</span><br>                    <span class="hljs-keyword">continue</span><br>                backtrack2(i + <span class="hljs-number">1</span>, n, temp_list + [nums[i]])<br><br>        helper2(<span class="hljs-number">0</span>, n, [])<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N \times 2^N)$<br>空间复杂度：$O(N \times 2^N)$<br>执行用时 :32 ms, 在所有 Python3 提交中击败了97.05%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.83%的用户  </p>
+<ul>
+<li>方法二循环迭代的实现</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsetsWithDup</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums: <span class="hljs-keyword">return</span> []<br>        output = [[]]<br>        nums.sort()<br>        tmp = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):<br>            <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i - <span class="hljs-number">1</span>] == nums[i]:  <span class="hljs-comment"># 如果和前一个数字一样</span><br>                tmp = [curr + [nums[i]] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> tmp]  <span class="hljs-comment"># 就在前一次循环产生的增量数组 tmp 上添加。</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 如果和前一个数字不一样</span><br>                tmp = [curr + [nums[i]] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> output]  <span class="hljs-comment"># 就在前一次循环产生的结果 output 上添加</span><br>            output += tmp<br>        <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N \times 2^N)$ ，生成所有子集，并复制到输出结果中。<br>空间复杂度：$O(N \times 2^N)$ ，这是子集的数量。<br>执行用时 :40 ms, 在所有 Python3 提交中击败了74.98%的用户<br>内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.83%的用户  </p>
+<blockquote>
+<p>参考链接  </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets-ii/solution/c-hui-su-by-yuexiwen/">LeetCode用户 岳席文 题解</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets-ii/solution/hui-su-suan-fa-by-powcai-6/">LeetCode用户 powcai 题解</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">回溯算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/20/LeetCode-83-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 83. 删除排序链表中的重复元素（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/20/LeetCode-78-%E5%AD%90%E9%9B%86%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 78. 子集（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/20/LeetCode-90-%E5%AD%90%E9%9B%86-II%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/20/LeetCode-90-%E5%AD%90%E9%9B%86-II%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

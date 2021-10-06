@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>ubuntu16-04安装GPU版本的caffe - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ubuntu16-04安装GPU版本的caffe">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-03-27 16:43" pubdate>
+        2018年3月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      46
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ubuntu16-04安装GPU版本的caffe</h1>
+            
+            <div class="markdown-body">
+              <p>记录一下GPU版本的caffe的安装过程, 路慢慢其修远兮, 吾将上下而求索。<br>参考链接如下:  <a target="_blank" rel="noopener" href="http://blog.csdn.net/zly_kemgine/article/details/78795855">大佬一</a>  <a target="_blank" rel="noopener" href="http://blog.csdn.net/a_z666666/article/details/72853346">大佬二</a></p>
+<a id="more"></a>
+<h1 id="安装opencv"><a href="#安装opencv" class="headerlink" title="安装opencv"></a>安装opencv</h1><p>安装需要的两个opencv文件在我的百度云中可以下载，百度云链接地址：链接：链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1o8ZK76E">https://pan.baidu.com/s/1o8ZK76E</a> 密码: hswb</p>
+<p>具体安装教程见百度云中Linux下OpenCV安装PPT所示，讲解的很详细。编译成功之后可以用例子测试一下，PPT中也有具体讲解。</p>
+<p>如何测试？</p>
+<p>Ubuntu16.04下安装opncv</p>
+<p>(1) Create a directory DisplayImagefor test project:</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> DisplayImage<br></code></pre></div></td></tr></table></figure>
+<p>(2) Create DisplayImage.cpp and edit it:  </p>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">vim <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">DisplayImage</span>.</span></span>cpp<br></code></pre></div></td></tr></table></figure>
+<p>Then edit the DisplayImage.cpp:  </p>
+<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/opencv.hpp&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> cv;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>** argv)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(argc!= <span class="hljs-number">2</span>)&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;usage:DisplayImage.out &lt;Image_Path&gt;\n&quot;</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>	&#125;<br>	Mat <span class="hljs-built_in">image</span>;<br>	<span class="hljs-built_in">image</span>= imread(argv[<span class="hljs-number">1</span>], <span class="hljs-number">1</span>);<br>	<span class="hljs-keyword">if</span>(!<span class="hljs-built_in">image</span>.data)<br>	&#123;<br>		  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Noimage data\n&quot;</span>);<br>		  <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>	&#125;<br>	namedWindow(<span class="hljs-string">&quot;DisplayImage&quot;</span>,CV_WINDOW_AUTOSIZE);<br>	imshow(<span class="hljs-string">&quot;DisplayImage&quot;</span>,<span class="hljs-built_in">image</span>);<br>	waitKey(<span class="hljs-number">0</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	&#125;<br></code></pre></div></td></tr></table></figure>
+<p>(3) Create a CMake file:  </p>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">vim <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">CMakeLists</span>.</span></span>txt<br></code></pre></div></td></tr></table></figure>
+<p>Then edit the CMakeLists.txt:<br><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">cmake_minimum_required</span><span class="hljs-params">(VERSION <span class="hljs-number">2.8</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">project</span><span class="hljs-params">(DisplayImage)</span></span><br><span class="hljs-function"><span class="hljs-title">find_package</span><span class="hljs-params">(OpenCV REQUIRED)</span></span><br><span class="hljs-function"><span class="hljs-title">add_executable</span><span class="hljs-params">(DisplayImage DisplayImage.cpp)</span></span><br><span class="hljs-function"><span class="hljs-title">target_link_libraries</span><span class="hljs-params">(DisplayImage $&#123;OpenCV_LIBS&#125;)</span></span><br></code></pre></div></td></tr></table></figure></p>
+<p>(4) Generate the executable file:  </p>
+<figure class="highlight erlang"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs erlang">cmake .<br>make<br></code></pre></div></td></tr></table></figure>
+<p>如果编译时cmake报错<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-regexp">//u</span>sr<span class="hljs-regexp">/lib/</span>x86_64-linux-gnu/libstdc++.so.<span class="hljs-number">6</span>: error adding symbols: DSO missing from command line<br></code></pre></div></td></tr></table></figure><br>直接使用g++进行编译  </p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs brainfuck"><span class="hljs-comment">gcc</span> <span class="hljs-comment">test</span><span class="hljs-string">.</span><span class="hljs-comment">cpp</span> <span class="hljs-literal">-</span><span class="hljs-comment">o</span> <span class="hljs-comment">test</span> <span class="hljs-comment">`pkg</span><span class="hljs-literal">-</span><span class="hljs-comment">config</span> <span class="hljs-comment">opencv</span> --<span class="hljs-comment">cflags</span> --<span class="hljs-comment">libs`</span> <span class="hljs-literal">-</span><span class="hljs-comment">fopenmp</span> <span class="hljs-literal">-</span><span class="hljs-comment">ansi</span> <span class="hljs-literal">-</span><span class="hljs-comment">pedantic</span> <span class="hljs-literal">-</span><span class="hljs-comment">Wall</span> <span class="hljs-literal">-</span><span class="hljs-comment">Wextra</span> <span class="hljs-literal">-</span><span class="hljs-comment">Werror</span> <span class="hljs-literal">-</span><span class="hljs-comment">pipe</span> <span class="hljs-literal">-</span><span class="hljs-comment">lrt</span> <span class="hljs-literal">-</span><span class="hljs-comment">lm</span> <span class="hljs-literal">-</span><span class="hljs-comment">O2</span> <span class="hljs-literal">-</span><span class="hljs-comment">lstdc</span>++<br></code></pre></div></td></tr></table></figure>
+<p>(5) Execute it:</p>
+<figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">./DisplayImage lena.jpg<br>lena.jpg <span class="hljs-built_in">is</span> the test <span class="hljs-built_in">image</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="安装显卡驱动"><a href="#安装显卡驱动" class="headerlink" title="安装显卡驱动"></a>安装显卡驱动</h1><h2 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h2><p>(1)查询NVIDIA驱动型号:<br>首先去官网 <a target="_blank" rel="noopener" href="http://www.nvidia.com/Download/index.aspx?lang=en-us">http://www.nvidia.com/Download/index.aspx?lang=en-us</a> 查看适合自己显卡的驱动并下载：<br>驱动文件后缀名应当是以.run结尾的（即现在选项第一个）。我们要把这个文件移动到家目录下，原因是下面我们要切换到文字界面下，如果放到~/下载下面，我们没有办法进入下载这个目录（没有中文输入法，且中文全部是乱码）<br>图1.输入显卡型号<br><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2018-48-14%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt=""></p>
+<p>图2.显卡驱动搜索结果<br><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2018-48-28%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt=""></p>
+<p>(2)禁止集成的nouveau驱动<br>Ubuntu系统集成的显卡驱动程序是nouveau，它是第三方为NVIDIA开发的开源驱动，我们需要先将其屏蔽才能安装NVIDIA官方驱动。<br>将驱动添加到黑名单blacklist.conf中，但是由于该文件的属性不允许修改。所以需要先修改文件属性。</p>
+<p>查看属性<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-variable">$sudo</span> ls -lh <span class="hljs-regexp">/etc/m</span>odprobe.d/blacklist.conf<br></code></pre></div></td></tr></table></figure><br>修改属性<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-variable">$sudo</span> chmod <span class="hljs-number">666</span> <span class="hljs-regexp">/etc/m</span>odprobe.d/blacklist.conf<br></code></pre></div></td></tr></table></figure><br>用vim/gedit编辑器打开<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-variable">$sudo</span> vim <span class="hljs-regexp">/etc/m</span>odprobe.d/blacklist.conf<br></code></pre></div></td></tr></table></figure><br>在该文件后添加一下几行：<br><figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-keyword">blacklist </span>vga<span class="hljs-symbol">16f</span>b<br><span class="hljs-keyword">blacklist </span>nouveau<br><span class="hljs-keyword">blacklist </span>rivafb<br><span class="hljs-keyword">blacklist </span>rivatv<br><span class="hljs-keyword">blacklist </span>nvidiafb<br></code></pre></div></td></tr></table></figure><br>执行以下命令,重新加载内核:<br><figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo update-initramfs -u</span><br></code></pre></div></td></tr></table></figure><br>重启后，执行：lsmod | grep nouveau。如果没有屏幕输出，说明禁用nouveau成功。</p>
+<p>(3)接下来就是自己安装显卡驱动了：</p>
+<p>1).卸载你电脑中此刻有的nvidia的驱动。（复制命令就行，方便，后面也一样）<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> <span class="hljs-builtin-name">remove</span> –purge nvidia*<br>或者针对不同的安装方式有不同的卸载方法<br>sudo chmod +x NVIDIA-Linux-*.run<br>sudo ./NVIDIA-Linux-*.<span class="hljs-builtin-name">run</span> --uninstall<br></code></pre></div></td></tr></table></figure><br>运行了这个命令之后，你系统中的NVIDIA的一些驱动就应该被卸载了。</p>
+<p>2).添加一个PPA到系统，等一下安装驱动要用的。复制下面的话命令就行（放在这里是因为你现在还在图形界面，复制方便）<br><figure class="highlight smali"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smali">sudo<span class="hljs-built_in"> add-apt-repository </span>ppa:graphics-drivers/ppa<br>sudo apt-get update <br></code></pre></div></td></tr></table></figure><br><strong>重启电脑</strong></p>
+<p>3).上面的准备工作做完，马上就要脱离图形界面进入字符界面了，要是这个时候你看不到教程，还是推荐用手机或者平板边看教程边操作。按CTRL+ATL+F1进入终端1（输入用户名和密码后和终端很相似，可以大胆进去）， CTRL+ATL+F7是进入图形页面.<br>在终端下面运行：<br><figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino">sudo service lightdm <span class="hljs-built_in">stop</span>（关闭图形界面）<br></code></pre></div></td></tr></table></figure><br>查看适合自己的最新版NVIDIA显卡驱动<br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">sudo apt-cache <span class="hljs-built_in">search</span> nvidia*<br></code></pre></div></td></tr></table></figure><br>对照搜索结果和之前下载的文件编号, 然后输入:<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install nvidia-390（你下载的驱动是什么版本这里就写什么）<br></code></pre></div></td></tr></table></figure><br>然后就等待驱动安装好。。。。。<br>安装好之后，运行sudo service lightdm start来启动图形界面，并且登录。然后，你这个时候应该又回到图形界面了。<br>这时候你可以运行：nvidia-smi来看是不是能够输出你的GPU的一些信息。要是不能够输出的话，<strong>重启</strong>。能够输出的话，也建议<strong>重启一次</strong>。  </p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2018-59-22%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="自动安装"><a href="#自动安装" class="headerlink" title="自动安装"></a>自动安装</h2><p>选择系统自动更新即可<br><img src="http://oke9xbto1.bkt.clouddn.com/%E5%9B%BE%E5%83%8F%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E5%AE%89%E8%A3%85%E9%A9%B1%E5%8A%A8.png" srcset="/img/loading.gif" alt=""><br>输入以下指令进行验证：<br><figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo nvidia-smi</span><br></code></pre></div></td></tr></table></figure></p>
+<h2 id="安装过程可能遇到的问题"><a href="#安装过程可能遇到的问题" class="headerlink" title="安装过程可能遇到的问题"></a>安装过程可能遇到的问题</h2><blockquote>
+<p>如果在安装过程中, 提示驱动与电脑的secure boot模式冲突, 驱动无法生效, 进入bios, 设置 secure boot 为 not enable, 否则即使安装成功了, 也无法正常使用驱动.   </p>
+</blockquote>
+<p>关于secure boot和UEIF以及BIOS的种种可以参考这个<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zengkefu/p/5859954.html">博客</a></p>
+<h2 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h2><figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c">nvidia-smi <span class="hljs-meta">#若列出GPU的信息列表，表示驱动安装成功</span><br>nvidia-settings <span class="hljs-meta">#若弹出设置对话框，亦表示驱动安装成功</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="安装cuda8-0"><a href="#安装cuda8-0" class="headerlink" title="安装cuda8.0"></a>安装cuda8.0</h1><p>(1) 首先在官网上(<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a>)  下载CUDA(1G以上那个)：<br><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2019-02-41%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt=""></p>
+<p>(2)下载完成后执行以下命令：<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> chmod <span class="hljs-number">777</span> cuda_<span class="hljs-number">8</span>.<span class="hljs-number">0</span>.<span class="hljs-number">44</span>_linux.run（输入自己下载的cuda文件名，因为软件要进行更新优化，所以过一段时间名字就会略有不同）<br></code></pre></div></td></tr></table></figure><br>特别注意: 下面安装时要注意：执行后会有一系列提示让你确认，但是注意，<strong>有个让你选择是否安装nvidia367驱动时，一定要选择否</strong>：<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Install</span> NVIDIA Accelerated Graphics Driver for Linux-x<span class="hljs-number">86</span>_<span class="hljs-number">64</span> <span class="hljs-number">390</span>.<span class="hljs-number">25</span><br></code></pre></div></td></tr></table></figure><br>因为前面我们已经安装了更加新的nvidia390，所以这里不要选择安装。其余的都直接默认或者选择是即可。<br>安装：<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> sh cuda_<span class="hljs-number">9</span>.<span class="hljs-number">1</span>.<span class="hljs-number">85</span>_<span class="hljs-number">387</span>.<span class="hljs-number">26</span>_linux.run<br></code></pre></div></td></tr></table></figure><br>(3)环境变量配置<br>打开~/.bashrc文件： sudo gedit ~/.bashrc<br>将以下内容写入到~/.bashrc尾部：<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">export  PATH=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/cuda-8.0/</span>bin<span class="hljs-variable">$&#123;PATH:+:$&#123;PATH&#125;</span>&#125;<br>export  LD_LIBRARY_PATH=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/cuda8.0/</span>lib64<span class="hljs-variable">$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;</span>&#125;<br></code></pre></div></td></tr></table></figure><br>(4)测试CUDA的samples<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">cd <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/cuda-8.0/</span>samples<span class="hljs-regexp">/1_Utilities/</span>deviceQuery <br>make <br>sudo ./deviceQuery <br></code></pre></div></td></tr></table></figure><br>如果显示一些关于GPU的信息，则说明安装成功。<br><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2019-10-04%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt="">  </p>
+<p>cuda版本安装错误, 如何卸载?<br>在目录：<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/cuda-7.0/</span>bin<br></code></pre></div></td></tr></table></figure><br>有CUDA自带的卸载工具uninstall_cuda_toolkit_7.0.pl，使用命令：<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> ./uninstall_cuda_toolkit_<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.pl<br><br></code></pre></div></td></tr></table></figure></p>
+<p>(5)配置cuDNN<br>首先，看看自己电脑的计算能力，如果自己电脑计算能力不超过3就不要进行这一步了，因为cuDNN仅能在计算能力为3以上的电脑上运行，强行装的话后面安装Caffe时会报错。查看自己电脑显卡的计算能力：<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-gpus">https://developer.nvidia.com/cuda-gpus</a><br><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2019-16-09%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt="">  </p>
+<p>cuDNN是GPU加速计算深层神经网络的库。<br>首先去官网 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-download">https://developer.nvidia.com/rdp/cudnn-download</a> 下载cuDNN，需要注册一个账号才能下载。下载版本号如下图：<br><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2019-23-55%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt=""><br>下载cuDNN5.1之后进行解压：<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> tar -zxvf ./cudnn-<span class="hljs-number">8</span>.<span class="hljs-number">0</span>-linux-x<span class="hljs-number">64</span>-v<span class="hljs-number">5</span>.<span class="hljs-number">1</span>.tgz<br><span class="hljs-comment"># 把刚刚解压的那个cuda文件更名为cuda-9.0</span><br><span class="hljs-attribute">mv</span> cuda cuda-<span class="hljs-number">8</span>.<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure><br>然后执行:<br><figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">cd cuda-<span class="hljs-number">8.0</span><br>sudo cp lib64<span class="hljs-regexp">/lib* /u</span>sr<span class="hljs-regexp">/local/</span>cuda<span class="hljs-regexp">/lib64/</span><br>sudo cp <span class="hljs-keyword">include</span><span class="hljs-regexp">/cudnn.h /u</span>sr<span class="hljs-regexp">/local/</span>cuda<span class="hljs-regexp">/include/</span> <br># 建议进行如下操作<br>cuda-<span class="hljs-number">8.0</span><br>sudo cp lib64<span class="hljs-regexp">/lib* /u</span>sr<span class="hljs-regexp">/local/</span>cuda-<span class="hljs-number">8.0</span><span class="hljs-regexp">/lib64/</span><br>sudo cp <span class="hljs-keyword">include</span><span class="hljs-regexp">/cudnn.h /u</span>sr<span class="hljs-regexp">/local/</span>cuda-<span class="hljs-number">8.0</span><span class="hljs-regexp">/include/</span> <br></code></pre></div></td></tr></table></figure><br>更新软连接:<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">cd</span> /usr/local/cuda-<span class="hljs-number">8</span>.<span class="hljs-number">0</span>/lib<span class="hljs-number">64</span>/<br><span class="hljs-attribute">sudo</span> chmod +r libcudnn.so.<span class="hljs-number">5</span>.<span class="hljs-number">1</span>.<span class="hljs-number">10</span><br><span class="hljs-attribute">sudo</span> ln -sf libcudnn.so.<span class="hljs-number">5</span>.<span class="hljs-number">1</span>.<span class="hljs-number">10</span> libcudnn.so.<span class="hljs-number">5</span><br><span class="hljs-attribute">sudo</span> ln -sf libcudnn.so.<span class="hljs-number">5</span> libcudnn.so<br><span class="hljs-attribute">sudo</span> ldconfig<br><span class="hljs-attribute">sudo</span> ldconfig /usr/local/cuda-<span class="hljs-number">8</span>.<span class="hljs-number">0</span>/lib<span class="hljs-number">64</span>/<br></code></pre></div></td></tr></table></figure><br>请注意，请到自己解压后的lib64文件夹看这个文件libcudnn.so.5.0.5 ，电脑配置不同后面的数字型号不同，进行相应的修改，否则会报错。</p>
+<h1 id="安装caffe"><a href="#安装caffe" class="headerlink" title="安装caffe"></a>安装caffe</h1><blockquote>
+<p>目标安装caffe、pycaffe、matcaffe</p>
+</blockquote>
+<h2 id="1-安装依赖包"><a href="#1-安装依赖包" class="headerlink" title="(1) 安装依赖包"></a>(1) 安装依赖包</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler<br>sudo apt-get install --no-install-recommends libboost-all-dev<br>sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev<br>sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev<br></code></pre></div></td></tr></table></figure>
+<p>参看<a target="_blank" rel="noopener" href="http://caffe.berkeleyvision.org/installation.html">caffe官网</a></p>
+<h2 id="2-设置Makefile-config文件"><a href="#2-设置Makefile-config文件" class="headerlink" title="(2) 设置Makefile.config文件"></a>(2) 设置Makefile.config文件</h2><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">sudo cp <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Makefile</span>.</span></span>config.example <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Makefile</span>.</span></span>config<br>sudo gedit <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Makefile</span>.</span></span>config #打开<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Makefile</span>.</span></span>config文件 <br></code></pre></div></td></tr></table></figure>
+<p>修改如下:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile">USE_CUDNN := 1  <span class="hljs-comment">#去掉#号</span><br>OPENCV_VERSION := 3<br>WITH_PYTHON_LAYER := 1   <span class="hljs-comment">#使用python来编写层</span><br></code></pre></div></td></tr></table></figure><br><strong>重要的:</strong><br>将 # Whatever else you find you need goes here. 下面的<br><figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">INCLUDE_DIRS := $(PYTHON_INCLUDE) <span class="hljs-regexp">/usr/</span>local/<span class="hljs-keyword">include</span><br>LIBRARY_DIRS := $(PYTHON_LIB) <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/lib /u</span>sr/lib <br></code></pre></div></td></tr></table></figure><br>修改为：（主要路径间的空格）<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">INCLUDE_DIRS := $(PYTHON_INCLUDE) <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/include /u</span>sr<span class="hljs-regexp">/include/</span>hdf5/serial<br>LIBRARY_DIRS := $(PYTHON_LIB) <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/lib /u</span>sr<span class="hljs-regexp">/lib /u</span>sr<span class="hljs-regexp">/lib/</span>x86_64-linux-gnu <span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/x86_64-linux-gnu/</span>hdf5/serial<br></code></pre></div></td></tr></table></figure><br>matcaffe部分需要修改的是：<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">$ vim Makefile.config<br>MATLAB_DIR := <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/MATLAB/</span>R2016b<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="3-修改Makefile文件"><a href="#3-修改Makefile文件" class="headerlink" title="(3) 修改Makefile文件"></a>(3) 修改Makefile文件</h2><p>修改一:<br><figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc">$ vim Makefile  <br><span class="hljs-bullet">- </span>opencv_core opencv_highgui opencv_imgproc  <br>+ opencv_core opencv_highgui opencv_imgproc opencv_imgcodecs  <br>在位置（(LIBRARIES += glog gflags protobuf leveldb snappy \<br>lmdb boost_system hdf5_hl hdf5 m \<br>opencv_core opencv_highgui opencv_imgproc opencv_imgcodecs)）处添加 opencv_imgcodecs<br></code></pre></div></td></tr></table></figure><br>修改二:<br><figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">$ vim examples<span class="hljs-regexp">/cpp_classification/</span>classification.cpp  <br>+ #<span class="hljs-keyword">include</span> &lt;opencv2<span class="hljs-regexp">/imgproc/</span>types_c.h&gt;  <br>+ #<span class="hljs-keyword">include</span> &lt;opencv2<span class="hljs-regexp">/objdetect/</span>objdetect_c.h&gt;<br></code></pre></div></td></tr></table></figure><br>matcaffe部分需要修改的：<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">vim Makefile<br>- NVCCFLAGS += <span class="hljs-attribute">-ccbin</span>=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)  <br>+ NVCCFLAGS += -D_FORCE_INLINES <span class="hljs-attribute">-ccbin</span>=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)<br><span class="hljs-comment"># 这个操作是为了解决版本过低的问题</span><br>410 CXXFLAGS += -MMD -MP<br>在410行下面加上 CXXFLAGS += <span class="hljs-attribute">-std</span>=c++11<br></code></pre></div></td></tr></table></figure><br>引入一下路径：<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo vim ~/.bashrc<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">LD_LIBRARY_PATH</span>=<span class="hljs-string">&quot;/lib/x86_64-linux-gnu:<span class="hljs-variable">$LD_LIBRARY_PATH</span>&quot;</span><br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:/usr/local/MATLAB/R2016b/bin<br>source ~/.bashrc<br>sudo ldconfig<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="4-编译"><a href="#4-编译" class="headerlink" title="(4) 编译"></a>(4) 编译</h2><p>查看物理cpu个数<br><figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span> <span class="hljs-string">&#x27;physical id&#x27;</span> <span class="hljs-regexp">/proc/</span>cpuinfo | <span class="hljs-keyword">sort</span> -u<br></code></pre></div></td></tr></table></figure><br>查看核心数量<br><figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span> <span class="hljs-string">&#x27;core id&#x27;</span> <span class="hljs-regexp">/proc/</span>cpuinfo | <span class="hljs-keyword">sort</span> -u | wc -l<br></code></pre></div></td></tr></table></figure><br>查看线程数<br><figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span> <span class="hljs-string">&#x27;processor&#x27;</span> <span class="hljs-regexp">/proc/</span>cpuinfo | <span class="hljs-keyword">sort</span> -u | wc -l<br></code></pre></div></td></tr></table></figure><br>开始编译<br><figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> caffe-master<br><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-keyword">cd</span> build<br>cmake ..<br><span class="hljs-keyword">cd</span> ..<br><span class="hljs-keyword">make</span> <span class="hljs-keyword">all</span> -j6<br><span class="hljs-keyword">make</span> test -j6<br><span class="hljs-keyword">make</span> runtest -j6<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="5-安装python接口"><a href="#5-安装python接口" class="headerlink" title="(5) 安装python接口"></a>(5) 安装python接口</h2><p>首先回到caffe的根目录，然后执行安装代码：<br><figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">cd</span> ~/caffe<br>sudo apt<span class="hljs-literal">-get</span> install gfortran<br><span class="hljs-built_in">cd</span> ./python<br><span class="hljs-keyword">for</span> req <span class="hljs-keyword">in</span> <span class="hljs-variable">$</span>(<span class="hljs-built_in">cat</span> requirements.txt); <span class="hljs-keyword">do</span> sudo pip install <span class="hljs-variable">$req</span>; done<br></code></pre></div></td></tr></table></figure><br>安装完成以后，再次回到caffe根目录我们可以执行：<br><figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams"><span class="hljs-function"><span class="hljs-title">cd</span></span> ..<br>sudo pip install -r python/requirements.txt<br></code></pre></div></td></tr></table></figure><br>编译python接口:<br><figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">make pycaffe</span><br></code></pre></div></td></tr></table></figure><br>配置环境变量，以便python调用：<br><figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">sudo gedit ~<span class="hljs-string">/.bashrc</span><br></code></pre></div></td></tr></table></figure><br>将以下内容添加到文件中<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=/user/local/cuda-8.0/bin:$PATH<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">LD_LIBRARY_PATH</span>=/user/local/cuda/lib64:$LD_LIBRARY_PATH<br><span class="hljs-comment"># 以上两个也要有</span><br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PYTHONPATH</span>=/home/caffe/python:$PYTHONPATH<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PYTHONPATH</span>=~/caffe/python<br></code></pre></div></td></tr></table></figure><br>然后执行<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></div></td></tr></table></figure></p>
+<blockquote>
+<p>重启  </p>
+</blockquote>
+<p>然后就能import caffe了<br><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2019-49-33%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="6-安装matcaffe接口"><a href="#6-安装matcaffe接口" class="headerlink" title="(6) 安装matcaffe接口"></a>(6) 安装matcaffe接口</h2><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">cd <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/MATLAB/</span>R2014a<span class="hljs-regexp">/sys/</span>os<span class="hljs-regexp">/glnxa64/</span>  <br>sudo mv libstdc++.so.<span class="hljs-number">6</span> libstdc++.so.<span class="hljs-number">6</span>_back  <br>sudo ldconfig  <br>cd ~<span class="hljs-regexp">/caffe/</span><br>sudo make matcaffe -j5<br></code></pre></div></td></tr></table></figure>
+<p>如果执行了上面的命令，提示gcc版本过低的话，不用管它，看/home/weijian/caffe/matlab/+caffe/privat下面，有没有caffe_.mexa64这个文件，如果有的话，可以开始测试了。</p>
+<blockquote>
+<p>测试  </p>
+</blockquote>
+<p>打开matlib如何使用matcaffe?<br>在Caffe根目录启动Matlab之后需要增加路径：<br><figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">addpath <span class="hljs-string">./matlab</span>  <br></code></pre></div></td></tr></table></figure><br>然后执行命令：<br><figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">savepath</span>  <br></code></pre></div></td></tr></table></figure><br>以后就不用每次都输入addpath ./matlabl了<br>接着，执行：<br><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">gpu_id = <span class="hljs-number">0</span><br>caffe.set<span class="hljs-constructor">_mode_gpu()</span>;<br>caffe.set<span class="hljs-constructor">_device(<span class="hljs-params">gpu_id</span>)</span>;<br></code></pre></div></td></tr></table></figure><br>没有报错，意味着编译成功了。</p>
+<blockquote>
+<p>编译mattest  </p>
+</blockquote>
+<p>执行<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> make mattest -j<span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure><br>如果执行 sudo make mattest -j5出错<br>执行下面几个句子<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">export LD_LIBRARY_PATH=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/R2016b/</span>sys<span class="hljs-regexp">/os/g</span>lnxa64  <br>export LD_PRELOAD=<span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/x86_64-linux-gnu/</span>libstdc++.so.<span class="hljs-number">6</span>  <br></code></pre></div></td></tr></table></figure><br>再次执行，仍然出错的话，执行下面的句子，注意路径<br><figure class="highlight ruby"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ruby">export LD_LIBRARY_PATH=<span class="hljs-regexp">/usr/lib</span><span class="hljs-regexp">/x86_64-linux-gnu/</span><span class="hljs-symbol">:/usr/local/cuda-</span><span class="hljs-number">8.0</span>/lib64  <br>export LD_PRELOAD=<span class="hljs-regexp">/usr/lib</span><span class="hljs-regexp">/x86_64-linux-gnu/libopencv</span>_highgui.so.<span class="hljs-number">2.4</span><span class="hljs-symbol">:/usr/lib/x86_64-linux-gnu/libopencv_imgproc</span>.so.<span class="hljs-number">2.4</span><span class="hljs-symbol">:/usr/lib/x86_64-linux-gnu/libopencv_core</span>.so.<span class="hljs-number">2.4</span><span class="hljs-symbol">:/usr/lib/x86_64-linux-gnu/libstdc++</span>.so.<span class="hljs-number">6</span><span class="hljs-symbol">:/usr/lib/x86_64-linux-gnu/libfreetype</span>.so.<span class="hljs-number">6</span> <br></code></pre></div></td></tr></table></figure><br>参考这个<a target="_blank" rel="noopener" href="http://blog.csdn.net/rt5rte54654/article/details/54742981">http://blog.csdn.net/rt5rte54654/article/details/54742981</a></p>
+<h1 id="MNIST数据集测试"><a href="#MNIST数据集测试" class="headerlink" title="MNIST数据集测试"></a>MNIST数据集测试</h1><p>配置caffe完成后，我们可以利用MNIST数据集对caffe进行测试，过程如下：<br>1.将终端定位到Caffe根目录<br><figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> ~<span class="hljs-string">/caffe</span> <br></code></pre></div></td></tr></table></figure><br>2.下载MNIST数据库并解压缩<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/data/m</span>nist/get_mnist.sh <br></code></pre></div></td></tr></table></figure><br>3.将其转换成Lmdb数据库格式<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/examples/m</span>nist/create_mnist.sh <br></code></pre></div></td></tr></table></figure><br>4.训练网络<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/examples/m</span>nist/train_lenet.sh <br></code></pre></div></td></tr></table></figure><br>训练的时候可以看到损失与精度数值，如下图：<br><img src="http://oke9xbto1.bkt.clouddn.com/2018-02-21%2019-59-22%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt=""><br>可以看到最终训练精度是0.9906。</p>
+<h1 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h1><h2 id="ImportError-libcudart-so-8-0-cannot-open-shared-object-file-No-such-file-or-directory"><a href="#ImportError-libcudart-so-8-0-cannot-open-shared-object-file-No-such-file-or-directory" class="headerlink" title="ImportError: libcudart.so.8.0: cannot open shared object file: No such file or directory"></a>ImportError: libcudart.so.8.0: cannot open shared object file: No such file or directory</h2><blockquote>
+<p>场景1: 在命令行里进入python，输入“import caffe” 或者 直接使用caffe/build/tools/caffe 出现错误: ImportError: libcudart.so.8.0: cannot open shared object file: No such file or directory</p>
+</blockquote>
+<p>使用这个命令:<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo ldconfig <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/cuda/</span>lib64<br></code></pre></div></td></tr></table></figure></p>
+<blockquote>
+<p>场景2: 在jupyter中import caffe 报错如下:error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory  </p>
+</blockquote>
+<p>解决办法：首先确认/etc/profile中的路径包含了cuda8.0的安装路径及相应的库文件<br><figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">export PATH=<span class="hljs-variable">$PATH</span><span class="hljs-symbol">:/usr/local/cuda-</span><span class="hljs-number">8.0</span>/bin<br>export LD_LIBRARY_PATH=<span class="hljs-variable">$LD_LIBRARY_PATH</span><span class="hljs-symbol">:/usr/local/cuda-</span><span class="hljs-number">8.0</span>/lib64<br>export LIBRARY_PATH=<span class="hljs-variable">$LIBRARY_PATH</span><span class="hljs-symbol">:/usr/local/cuda-</span><span class="hljs-number">8.0</span>/lib64<br></code></pre></div></td></tr></table></figure><br>然后<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-variable">$source</span> <span class="hljs-regexp">/etc/</span>profile<br></code></pre></div></td></tr></table></figure><br>使配置文件生效，再次执行。</p>
+<p>然后在当前命令窗下启动jupyter<br><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">jupyter notebook <span class="hljs-comment">--allow-root</span><br></code></pre></div></td></tr></table></figure><br>若仍提示相同的错误，则执行以下命令，将相应的库文件复制到/usr/lib<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo cp <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/cuda-8.0/</span>lib64<span class="hljs-regexp">/libcudart.so.8.0 /u</span>sr<span class="hljs-regexp">/local/</span>lib/libcudart.so.<span class="hljs-number">8.0</span> &amp;&amp; sudo ldconfig<br>sudo cp <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/cuda-8.0/</span>lib64<span class="hljs-regexp">/libcublas.so.8.0 /u</span>sr<span class="hljs-regexp">/local/</span>lib/libcublas.so.<span class="hljs-number">8.0</span> &amp;&amp; sudo ldconfig<br>sudo cp <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/cuda-8.0/</span>lib64<span class="hljs-regexp">/libcurand.so.8.0 /u</span>sr<span class="hljs-regexp">/local/</span>lib/libcurand.so.<span class="hljs-number">8.0</span> &amp;&amp; sudo ldconfig<br></code></pre></div></td></tr></table></figure><br>ps. ldconfig命令是一个动态链接库管理命令，是为了让动态链接库为系统共享</p>
+<p><strong>如果仍然不行, 关掉此终端, 重新开启一个试一试. </strong></p>
+<h2 id="build-release-tools-caffe-error-while-loading-shared-libraries-libcudart"><a href="#build-release-tools-caffe-error-while-loading-shared-libraries-libcudart" class="headerlink" title=".build_release/tools/caffe: error while loading shared libraries: libcudart."></a>.build_release/tools/caffe: error while loading shared libraries: libcudart.</h2><p>解决方法：在/usr/lib/下建立一个 软链接将 libopenblas.so.0指向/openbls安装目录/lib/ libopenblas.so.0</p>
+<h2 id="ImportError-cannot-import-name-cbook"><a href="#ImportError-cannot-import-name-cbook" class="headerlink" title="ImportError: cannot import name cbook"></a>ImportError: cannot import name cbook</h2><blockquote>
+<p>问题描述：caffe环境编译成功，运行具体项目时，出现错误ImportError: cannot import name cbook。后来进入python环境发现，运行import caffe 和 import matplotlib 出现Import： No module named functools_lru_cache </p>
+</blockquote>
+<p>找了好久才找到的解决方法，亲测有效：<br>卸载之前的matplotlib：<br><figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo pip uninstall matplotlib</span><br></code></pre></div></td></tr></table></figure><br>使用该命令重新安装：<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install python-matplotlib<br></code></pre></div></td></tr></table></figure><br>这样就解决了</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/caffe/">caffe</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/03/27/Tensorflow%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Tensorflow技巧总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/03/27/Caffe%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">caffe技巧总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/03/27/ubuntu16-04%E5%AE%89%E8%A3%85GPU%E7%89%88%E6%9C%AC%E7%9A%84caffe/';
+        this.page.identifier = '/2018/03/27/ubuntu16-04%E5%AE%89%E8%A3%85GPU%E7%89%88%E6%9C%AC%E7%9A%84caffe/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1114 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>基于Mermaid的UML图像绘制 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="基于Mermaid的UML图像绘制">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-09 11:08" pubdate>
+        2020年7月9日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      104
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于Mermaid的UML图像绘制</h1>
+            
+            <div class="markdown-body">
+              <p>如何用Mermaid绘制各种各样的UML图像</p>
+<a id="more"></a>
+<p><em>如何绘制UML的类图、用例图和时序图?</em></p>
+<p>UML图有很多种，根据二八定律，掌握其中20%的部分就能处理80%的工作了。这里重点说明UML类图、UML用例图、UML时序图以及甘特图的样式和用法。甘特图可以用来规划项目时间。</p>
+<blockquote>
+<p>关于Mermaid绘制UML类图、用例图、时序图的教程，参看<a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/?id=mermaid">Mermaid Official Document</a>。本文的使用的Mermaid版本为8.5.2。</p>
+</blockquote>
+<p><em>refrence</em></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109655171">https://zhuanlan.zhihu.com/p/109655171</a></li>
+</ul>
+<h1 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h1><p>类图是面向对象系统建模中最常用和最重要的图，是定义其它图的基础。类图主要是用来显示系统中的类、接口以及它们之间的静态结构和关系的一种静态模型。类图中最基本的元素是类、接口。软件设计师设计出类图后，程序员就可以用代码实现类图中包含的内容。</p>
+<ul>
+<li>UML具体类由矩形框表示，矩形框分为三层：第一层是类名字。第二层是类的成员变量；第三层是类的方法。</li>
+<li>成员变量以及方法前的<strong>访问权限修饰符（可见性）</strong>用符号来表示：<ul>
+<li>“+”表示 <code>public</code>；</li>
+<li>“-”表示 <code>private</code>；</li>
+<li>“#”表示 <code>protected</code>；</li>
+<li>不带符号表示 <code>default</code>；</li>
+<li>“~” 表示 <code>Package/Internal</code>。</li>
+</ul>
+</li>
+<li>类的修饰符<ul>
+<li><code>&lt;&lt;Interface&gt;&gt;</code> To represent an Interface class  接口</li>
+<li><code>&lt;&lt;abstract&gt;&gt;</code> To represent an abstract class  抽象类</li>
+<li><code>&lt;&lt;Service&gt;&gt;</code> To represent a service class  </li>
+<li><code>&lt;&lt;enumeration&gt;&gt;</code> To represent an enum  枚举类</li>
+</ul>
+</li>
+</ul>
+<h2 id="具体类"><a href="#具体类" class="headerlink" title="具体类"></a>具体类</h2><p>具体类是Java中最常见的类</p>
+<p><strong><em>Java Code</em></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> age;<br>    <span class="hljs-keyword">private</span> String gender;<br>    <span class="hljs-keyword">protected</span> String skill;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isMammal</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> String <span class="hljs-title">mate</span><span class="hljs-params">()</span> </span>&#123;<br>    	<span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Animal</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> String beakColor;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swim</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-comment">// ...</span><br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quack</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>&#125; <br><br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zebra</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Animal</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>     	<span class="hljs-comment">// ...   </span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">is_wild</span><span class="hljs-params">()</span> </span>&#123;<br>    	<span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong><em>UML 类图</em></strong></p>
+<pre><code class=" mermaid">classDiagram
+      Animal &lt;|-- Duck
+      Animal &lt;|-- Zebra
+      
+      class Animal&#123;
+      	+int age
+      	-String gendar
+      	#String skill
+      	+isMammal()
+      	-mate()
+      &#125;
+      
+      class Duck &#123;
+      	+beakColor String
+      	+swim()
+      	+quack()
+      &#125;
+      
+      class Zebra &#123;
+      	+run()
+      	+is_wild()
+      &#125;
+</code></pre>
+<p>源码</p>
+<figure class="highlight haskell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haskell"><span class="hljs-title">classDiagram</span><br>      <span class="hljs-type">Animal</span> &lt;|<span class="hljs-comment">-- Duck;</span><br>      <span class="hljs-type">Animal</span> &lt;|<span class="hljs-comment">-- Zebra</span><br>      <br><span class="hljs-class">      <span class="hljs-keyword">class</span> <span class="hljs-type">Animal</span>&#123;</span><br><span class="hljs-class">      	+int age</span><br><span class="hljs-class">      	-<span class="hljs-type">String</span> gendar</span><br><span class="hljs-class">      	#<span class="hljs-type">String</span> skill</span><br><span class="hljs-class">      	+isMammal()</span><br><span class="hljs-class">      	-mate()</span><br><span class="hljs-class">      &#125; %% 正常写法应该是+isMammal(): boolean</span><br><span class="hljs-class">      </span><br><span class="hljs-class">      <span class="hljs-keyword">class</span> <span class="hljs-type">Duck</span> &#123;</span><br><span class="hljs-class">      	+beakColor <span class="hljs-type">String</span></span><br><span class="hljs-class">      	+swim()</span><br><span class="hljs-class">      	+quack()</span><br><span class="hljs-class">      &#125;</span><br><span class="hljs-class">      </span><br><span class="hljs-class">      <span class="hljs-keyword">class</span> <span class="hljs-type">Zebra</span> &#123;</span><br><span class="hljs-class">      	+run()</span><br><span class="hljs-class">      	+is_wild()</span><br><span class="hljs-class">      &#125;</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>抽象类在UML类图中同样用矩形框表示，但是抽象类的类名以及抽象方法的名字都用斜体字表示，如下所示。</p>
+<p><strong><em>抽象类</em></strong></p>
+<p>Java code</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> String address；<br>    <span class="hljs-keyword">private</span> String name;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">double</span> <span class="hljs-title">computePay</span><span class="hljs-params">()</span>  </span>&#123;<br>        <span class="hljs-comment">//...</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mainCheck</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//...</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>UML类图</p>
+<pre><code class=" mermaid">classDiagram
+
+class Employee &#123;
+	-String address
+	-String name
+	+computePay()
+	+mainCheck()
+&#125;
+&lt;&lt;abstract&gt;&gt; Employee  %% 声明放到后面
+
+</code></pre>
+<p>源码<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">classDiagram<br><br><span class="hljs-keyword">class</span> Employee &#123;<br>	-String address<br>	-String <span class="hljs-type">name</span><br>	+computePay()<br>	+mainCheck()<br>&#125; %% 这里实际上应该是 +computePay() <span class="hljs-type">double</span> 代表这是一个抽象类<br><span class="hljs-symbol">&lt;&lt;abstract&gt;&gt;</span> Employee  %% 声明放到后面<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="静态类"><a href="#静态类" class="headerlink" title="静态类"></a>静态类</h2><p>static作为静态成员变量和成员函数的修饰符，意味着它为该类的所有实例所共享，也就是说当某个类的实例修改了该静态成员变量，其修改值为该类的其它所有实例所见。静态有一些特点：</p>
+<ol>
+<li>全局唯一，任何一次的修改都是全局性的影响</li>
+<li>只加载一次，优先于非静态</li>
+<li>使用方式上不依赖于实例对象。</li>
+<li>生命周期属于类级别，从JVM 加载开始到JVM卸载结束。</li>
+</ol>
+<p>静态类只能是内部类，如果在外部类声明为static，程序会编译都不会过。</p>
+<p>Java Code</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Outer</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span> </span>&#123;<br>        <span class="hljs-keyword">private</span> String name;<br>        <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Builder</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.age = age;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> Builder <span class="hljs-title">withName</span><span class="hljs-params">(String name)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.name = name;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> Builder <span class="hljs-title">withAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.age = age;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> Outer <span class="hljs-title">build</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Outer(<span class="hljs-keyword">this</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Outer</span><span class="hljs-params">(Builder b)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.age = b.age;<br>        <span class="hljs-keyword">this</span>.name = b.name;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>UML类图</p>
+<pre><code class=" mermaid">classDiagram
+	class Builder &#123;
+		-String name
+		-int age
+		+Builder(age)
+		+withName(name)
+		+withAge(age)
+		+build(b)
+	&#125;
+	&lt;&lt;static&gt;&gt; Builder  %%声明放到最后面
+</code></pre>
+<p>源码</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">classDiagram<br>	<span class="hljs-keyword">class</span> Builder &#123;<br>		-String <span class="hljs-type">name</span><br>		-<span class="hljs-type">int</span> age<br>		+Builder(age)<br>		+withName(<span class="hljs-type">name</span>)<br>		+withAge(age)<br>		+build(b)<br>	&#125;<br>	<span class="hljs-symbol">&lt;&lt;static&gt;&gt;</span> Builder  %%声明放到最后面<br></code></pre></div></td></tr></table></figure>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口（英文：Interface），在JAVA编程语言中是一个抽象类型，是抽象方法的集合，接口通常以interface来声明。一个类通过继承接口的方式，从而来继承接口的抽象方法。接口并不是类，编写接口的方式和类很相似，但是它们属于不同的概念。类描述对象的属性和方法。接口则包含类要实现的方法。接口不能包含成员变量，除了 static 和 final 变量。接口不是被类继承了，而是要被类实现。接口支持多种实现。</p>
+<p>Java</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Sports</span> </span>&#123;<br>    <span class="hljs-comment">//任何类型 final, static 字段</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> type;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> number;<br>    <span class="hljs-comment">//抽象方法</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setHomeTeam</span><span class="hljs-params">(String name)</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setVisitingTeam</span><span class="hljs-params">(String name)</span></span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>UML 类图</p>
+<pre><code class=" mermaid">classDiagram
+class Sports &#123;
+	+int type
+	-int number
+	+setHomeTeam(name)
+	+setVisitingTeam(name)
+&#125;
+&lt;&lt;interface&gt;&gt; Sports
+</code></pre>
+<p>源码</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">classDiagram<br><span class="hljs-keyword">class</span> Sports &#123;<br>	+<span class="hljs-type">int</span> <span class="hljs-keyword">type</span><br>	-<span class="hljs-type">int</span> number<br>	+setHomeTeam(<span class="hljs-type">name</span>)<br>	+setVisitingTeam(<span class="hljs-type">name</span>)<br>&#125;<br><span class="hljs-symbol">&lt;&lt;interface&gt;&gt;</span> Sports<br></code></pre></div></td></tr></table></figure>
+<h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><p>枚举是实现单例的最简便的方式。</p>
+<p><strong><em>Java Code</em></strong></p>
+<p>用枚举类进行定义</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Season1</span></span>&#123;<br><br>    SPRING,<span class="hljs-comment">//枚举常量之间用逗号隔开</span><br>    SUMMER(<span class="hljs-string">&quot;夏天&quot;</span>),<br>    AUTUMN,<br>    WINTER(<span class="hljs-string">&quot;冬天&quot;</span>);<span class="hljs-comment">//最后一个枚举常量后写分号</span><br>    String name;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br>    Season1()&#123;&#125;<span class="hljs-comment">//此处默认构造方法为私有的（自动添加上了private）(无参构造)</span><br>    Season1(String name)&#123;<span class="hljs-comment">//此处默认构造方法为私有的（自动添加上了private）(有参构造)</span><br>        <span class="hljs-keyword">this</span>.name = name;<br>    &#125;<br>    <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>用类class实现相同的定义</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Season2</span></span>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Season2 SPRING = <span class="hljs-keyword">new</span> Season2();<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Season2 SUMMER = <span class="hljs-keyword">new</span> Season2(<span class="hljs-string">&quot;夏天&quot;</span>);<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Season2 AUTUMN = <span class="hljs-keyword">new</span> Season2(<span class="hljs-string">&quot;秋天&quot;</span>);<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Season2 WINTER = <span class="hljs-keyword">new</span> Season2(<span class="hljs-string">&quot;冬天&quot;</span>);<br><br>    String name;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Season2</span><span class="hljs-params">(String name)</span></span>&#123;<span class="hljs-keyword">this</span>.name = name;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Season2</span><span class="hljs-params">()</span></span>&#123;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong><em>UML 类图</em></strong></p>
+<pre><code class=" mermaid">classDiagram
+	class Season1 &#123;
+		+Season2 SPRING
+		+Season2 SUMMER
+		+Season2 AUTUMN
+		+Season2 WINTER
+		String name
+		Season1()
+		Season1(name)
+	&#125;
+	&lt;&lt;enumeration&gt;&gt; Season1
+</code></pre>
+<p>源码</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">classDiagram<br>	<span class="hljs-keyword">class</span> Season1 &#123;<br>		+Season2 SPRING<br>		+Season2 SUMMER<br>		+Season2 AUTUMN<br>		+Season2 WINTER<br>		String <span class="hljs-type">name</span><br>		Season1()<br>		Season1(<span class="hljs-type">name</span>)<br>	&#125; %% <span class="hljs-type">name</span>属性前没有任何表示，代表<span class="hljs-type">name</span>字段的访问修饰符是`<span class="hljs-keyword">default</span>`。<br>	<span class="hljs-symbol">&lt;&lt;enumeration&gt;&gt;</span> Season1<br></code></pre></div></td></tr></table></figure>
+<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p><strong><em>Java Code</em></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> BusinessObject;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> String name;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> gender;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong><em>UML</em></strong></p>
+<p>mermaid并不支持UML类图中的包</p>
+<h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>类和类、类和接口、接口和接口之间存在一定关系，UML类图中一般会有连线指明它们之间的关系。关系共有六种类型，分别是</p>
+<ul>
+<li><p>实现关系（Realization）</p>
+</li>
+<li><p>继承/泛化关系（Inheritance）</p>
+</li>
+<li>关联关系（Association）<ul>
+<li>依赖关系（Dependency）</li>
+<li>组合关系（Composition）</li>
+<li>聚合关系（Aggregation）</li>
+</ul>
+</li>
+</ul>
+<p>单纯的链接关系也可以分为实链接和虚链接</p>
+<ul>
+<li>链接关系（Link(Solid)/Link(Dashed)）</li>
+</ul>
+<pre><code class=" mermaid">graph LR
+	关系 --&gt; 接口和类之间 --&gt; 实现关系
+	关系 --&gt; 对象与对象之间
+	对象与对象之间 --&gt; A[继承&#x2F;泛化关系 is a]
+	对象与对象之间 --&gt; B[关联关系]
+	B --&gt; c[聚合关系 has a]
+	B --&gt; D[组合关系 contains a]
+	B --&gt; E[依赖关系 use a]
+</code></pre>
+<p>源码<br><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">graph LR<br>	关系 <span class="hljs-comment">--&gt; 接口和类之间 --&gt; 实现关系</span><br>	关系 <span class="hljs-comment">--&gt; 对象与对象之间</span><br>	对象与对象之间 <span class="hljs-comment">--&gt; A[继承/泛化关系 is a]</span><br>	对象与对象之间 <span class="hljs-comment">--&gt; B[关联关系]</span><br>	B <span class="hljs-comment">--&gt; c[聚合关系 has a]</span><br>	B <span class="hljs-comment">--&gt; D[组合关系 contains a]</span><br>	B <span class="hljs-comment">--&gt; E[依赖关系 use a]</span><br></code></pre></div></td></tr></table></figure></p>
+<hr>
+<p><strong><em>UML</em></strong></p>
+<pre><code class=" mermaid">classDiagram
+	classM ..|&gt; classN : 实现（虚线）
+	classA --|&gt; classB : 继承（实线）
+	classG --&gt; classH : 关联（实线）
+    classE o--&gt; classF : 聚合
+</code></pre>
+<p>源码<br><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">classDiagram<br>	classM ..<span class="hljs-pattern-match"><span class="hljs-operator">|&gt;</span> <span class="hljs-keyword">class</span><span class="hljs-constructor">N</span> : 实现（虚线）</span><br><span class="hljs-pattern-match">	<span class="hljs-keyword">class</span><span class="hljs-constructor">A</span> --<span class="hljs-operator">|&gt;</span> <span class="hljs-keyword">class</span><span class="hljs-constructor">B</span> : 继承（实线）</span><br><span class="hljs-pattern-match">	<span class="hljs-keyword">class</span><span class="hljs-constructor">G</span> --&gt; <span class="hljs-keyword">class</span><span class="hljs-constructor">H</span> : 关联（实线）</span><br><span class="hljs-pattern-match">    <span class="hljs-keyword">class</span><span class="hljs-constructor">E</span> o--&gt; <span class="hljs-keyword">class</span><span class="hljs-constructor">F</span> : 聚合</span><br></code></pre></div></td></tr></table></figure><br><pre><code class=" mermaid">classDiagram
+	classC *--&gt; classD : 组合
+	classK ..&gt; classL : 依赖（虚线）
+	classI -- classJ : 实链接（实线）
+	classO .. classP : 弱链接（虚线）
+	%% 实链接和弱链接不属于
+</code></pre><br>源码</p>
+<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">classDiagram<br>	classC *<span class="hljs-comment">--&gt; classD : 组合</span><br>	classK ..&gt; classL : 依赖（虚线）<br>	classI <span class="hljs-comment">-- classJ : 实链接（实线）</span><br>	classO .. classP : 弱链接（虚线）<br>	%% 实链接和弱链接不属于<br></code></pre></div></td></tr></table></figure>
+<p>关系注释可以通过 <code>classO .. classP : 弱链接（虚线）</code> 这样的形式来实现。</p>
+<h3 id="实现关系"><a href="#实现关系" class="headerlink" title="实现关系"></a>实现关系</h3><p>实现关系是指接口及其实现类之间的关系</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Runnable</span> </span>&#123;<br>    <br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;<br>    <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>实现关系的UML</p>
+<pre><code class=" mermaid">classDiagram
+	class Runnable &#123;
+		
+	&#125;
+	&lt;&lt;interface&gt;&gt; Runnable
+	class MyThread&#123;
+	
+	&#125;
+	MyThread ..|&gt; Runnable : 实现关系
+</code></pre>
+<p>源码</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">classDiagram<br>	<span class="hljs-keyword">class</span> Runnable &#123;<br>		<br>	&#125;<br>	<span class="hljs-symbol">&lt;&lt;interface&gt;&gt;</span> Runnable<br>	<span class="hljs-keyword">class</span> MyThread&#123;<br>	<br>	&#125;<br>	MyThread ..|&gt; Runnable : 实现关系<br></code></pre></div></td></tr></table></figure>
+<h3 id="泛化-继承关系"><a href="#泛化-继承关系" class="headerlink" title="泛化/继承关系"></a>泛化/继承关系</h3><p>泛化关系（Generalization）是指对象与对象之间的继承关系。如果对象A和对象B之间的“is a”关系成立，那么二者之间就存在继承关系，对象B是父对象，对象A是子对象。例如，一个教授“is a”老师，很显然教授 <code>Professor</code> 对象和员工 <code>Teacher</code> 对象之间存在继承关系，<code>Teacher</code> 对象是父对象，<code>Professor</code>对象是子对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Teacher</span> </span>&#123;<br>    <br>&#125;<br><br><span class="hljs-keyword">public</span> Professor extends Teacher &#123;<br>    <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>UML</p>
+<pre><code class=" mermaid">classDiagram
+	class Teacher &#123;
+		
+	&#125;
+	class Professor&#123;
+	
+	&#125;
+	Teacher --|&gt; Professor : 继承关
+</code></pre>
+<p>源码</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">classDiagram<br>	<span class="hljs-keyword">class</span> <span class="hljs-symbol">Teacher</span> &#123;<br>		<br>	&#125;<br>	<span class="hljs-keyword">class</span> <span class="hljs-symbol">Professor</span>&#123;<br>	<br>	&#125;<br>	Teacher --|&gt; Professor : 继承关系<br></code></pre></div></td></tr></table></figure>
+<h3 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h3><p>关联关系（Association）是指对象和对象之间的连接，它使一个对象知道另一个对象的属性和方法。<strong>在Java中，关联关系的代码表现形式为一个对象含有另一个对象的引用。也就是说，如果一个对象的类代码中，包含有另一个对象的引用，那么这两个对象之间就是关联关系。</strong></p>
+<p>关联关系有单向关联和双向关联。如果两个对象都知道（即可以调用）对方的公共属性和操作，那么二者就是双向关联。如果只有一个对象知道（即可以调用）另一个对象的公共属性和操作，那么就是单向关联。大多数关联都是单向关联，单向关联关系更容易建立和维护，有助于寻找可重用的类。</p>
+<p>在UML图中，双向关联关系用带<strong>双箭头</strong>的实线或者<strong>无箭头的实线双线</strong>表示。单向关联用一个带箭头的实线表示，<strong>箭头指向被关联的对象</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> TimeCard _tc;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">maintainTimeCard</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>UML</p>
+<pre><code class=" mermaid">classDiagram
+	class Employee &#123;
+	
+	&#125;
+	class TimeCard &#123;
+	
+	&#125;
+	
+	Employee --&gt; TimeCard : 0...*
+</code></pre>
+<p>源码</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">classDiagram<br>	<span class="hljs-keyword">class</span> <span class="hljs-symbol">Employee</span> &#123;<br>	<br>	&#125;<br>	<span class="hljs-keyword">class</span> <span class="hljs-symbol">TimeCard</span> &#123;<br>	<br>	&#125;<br>	<br>	Employee --&gt; TimeCard : <span class="hljs-number">0.</span>..*<br></code></pre></div></td></tr></table></figure>
+<p>一个对象可以持有其它对象的数组或者集合。在UML中，通过放置多重性（multipicity）表达式在关联线的末端来表示。多重性表达式可以是一个数字、一段范围或者是它们的组合。多重性允许的表达式示例如下：</p>
+<ul>
+<li>数字：精确的数量</li>
+<li><code>*</code>或者<code>0..*</code>：表示0到多个</li>
+<li><code>0..1</code>：表示0或者1个，在Java中经常用一个空引用来实现</li>
+<li><code>1..*</code>：表示1到多个</li>
+</ul>
+<h3 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h3><p>依赖（Dependency）关系是一种弱关联关系。如果对象A用到对象B，但是和B的关系不是太明显的时候，就可以把这种关系看作是依赖关系。如果对象A依赖于对象B，则 A “use a” B。比如驾驶员和汽车的关系，驾驶员使用汽车，二者之间就是依赖关系。</p>
+<p>依赖关系在Java中的具体代码表现形式为<strong>B为A的构造器</strong>或<strong>方法中的局部变量</strong>、<strong>方法或构造器的参数</strong>、<strong>方法的返回值</strong>，或者<strong>A调用B的静态方法</strong>，满足以上条件，则A依赖B。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Driver</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">driver</span><span class="hljs-params">(Car c)</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>UML</p>
+<pre><code class=" mermaid">classDiagram
+	class Driver &#123;
+	
+	&#125;
+	class Car &#123;
+	
+	&#125;
+	
+	Driver ..&gt; Car : 虚线
+</code></pre>
+<p>源码</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">classDiagram<br>	<span class="hljs-keyword">class</span> <span class="hljs-symbol">Driver</span> &#123;<br>	<br>	&#125;<br>	<span class="hljs-keyword">class</span> <span class="hljs-symbol">Car</span> &#123;<br>	<br>	&#125;<br>	<br>	Driver ..&gt; Car : 虚线<br></code></pre></div></td></tr></table></figure>
+<p>代码清单1所示的B类定义了一个成员变量 field1，一个普通方法 method1() 和一个静态方法 method2()。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//代码清单1 B.java</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> </span>&#123;<br>  <span class="hljs-keyword">public</span> String field1;   <span class="hljs-comment">//成员变量</span><br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method1</span><span class="hljs-params">()</span> </span>&#123;<br>    System.println(<span class="hljs-string">&quot;在类B的方法1中&quot;</span>);<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method2</span><span class="hljs-params">()</span> </span>&#123;                 <span class="hljs-comment">//静态方法</span><br>    System.out.println(<span class="hljs-string">&quot;在类B的静态方法2中&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>代码清单2所示的A类依赖于B类，在A类中定义了四个方法，分别演示四种依赖形式。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 代码清单2 A.java</span><br><span class="hljs-comment">  A依赖于B</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method1</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//A依赖于B的第一种表现形式：B为A的局部变量</span><br>    B b = <span class="hljs-keyword">new</span> B();<br>    b.method1();<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method2</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//A依赖于B的第二种表现形式： 调用B的静态方法</span><br>    B.method2();<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method3</span><span class="hljs-params">(B b)</span>  </span>&#123;<br>    <span class="hljs-comment">//A依赖于B的第三种表现形式：B作为A的方法参数</span><br>    String s = b.field1;<br>  &#125;<br><br>  <span class="hljs-comment">//A依赖于B的第四种表现形式：B作为A的方法的返回值</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> B <span class="hljs-title">method4</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> B();<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="聚合关系"><a href="#聚合关系" class="headerlink" title="聚合关系"></a>聚合关系</h3><p>聚合（Aggregation）是关联关系的一种特例，它体现的是<strong>整体与部分的拥有关系</strong>，即 “has a” 的关系。此时整体与部分之间是可分离的，它们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享，所以<strong>聚合关系也常称为共享关系</strong>。例如，公司部门与员工的关系，一个员工可以属于多个部门，一个部门撤消了，员工可以转到其它部门。</p>
+<p>聚合关系用空心菱形加<strong>实线箭头</strong>表示，<strong>空心菱形在整体(部门)一方，箭头指向部分(员工)一方</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Department</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> Employee e;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Employee <span class="hljs-title">getEmployee</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>UML</p>
+<pre><code class=" mermaid">classDiagram
+	class Department
+	class Employee
+	Department o--&gt; Employee 
+
+</code></pre>
+<p>源码</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Department</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> Employee e;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Employee <span class="hljs-title">getEmployee</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>聚合是可分开的，员工可以从部门分开。</p>
+<p>组合是不可分的，轮胎不能从汽车中分开。</p>
+<h3 id="组合关系"><a href="#组合关系" class="headerlink" title="组合关系"></a>组合关系</h3><p>组合（Composition）也是关联关系的一种特例，它同样体现整体与部分间的包含关系，即 “contains a” 的关系。但此时整体与部分是不可分的，部分也不能给其它整体共享，作为整体的对象负责部分的对象的生命周期。这种关系比聚合更强，也称为强聚合。如果<code>A</code>组合<code>B</code>，则<code>A</code>需要知道<code>B</code>的生存周期，即可能<code>A</code>负责生成或者释放<code>B</code>，或者<code>A</code>通过某种途径知道<code>B</code>的生成和释放。</p>
+<p>例如，人包含头、躯干、四肢，它们的生命周期一致。当人出生时，头、躯干、四肢同时诞生。当人死亡时，作为人体组成部分的头、躯干、四肢同时死亡。</p>
+<p>在UML图中，组合关系用实心菱形加<strong>实线箭头</strong>表示，实心菱形在整体(汽车)一方，箭头指向部分(轮胎)一方。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Car</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> Tire t;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Tire <span class="hljs-title">cangeTire</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>UML</p>
+<pre><code class=" mermaid">classDiagram
+	class Car
+	class Tire
+	Car *--&gt; Tire : 0...*
+</code></pre>
+<p>源码</p>
+<figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">classDiagram<br>	<span class="hljs-built_in">class</span> Car<br>	<span class="hljs-built_in">class</span> Tire<br>	Car *<span class="hljs-comment">--&gt; Tire : 0...*</span><br></code></pre></div></td></tr></table></figure>
+<p>在Java代码形式上，聚合和组合关系中的部分对象是整体对象的一个成员变量。但是，在实际应用开发时，两个对象之间的关系到底是聚合还是组合，有时候很难区别。在Java中，仅从类代码本身是区分不了聚合和组合的。如果一定要区分，那么<strong>如果在删除整体对象的时候，必须删掉部分对象，那么就是组合关系，否则可能就是聚合关系。从业务角度上来看，如果作为整体的对象必须要部分对象的参与，才能完成自己的职责，那么二者之间就是组合关系，否则就是聚合关系。</strong></p>
+<p>例如，汽车与轮胎，汽车作为整体，轮胎作为部分。如果用在二手车销售业务环境下，二者之间就是聚合关系。因为轮胎作为汽车的一个组成部分，它和汽车可以分别生产以后装配起来使用，但汽车可以换新轮胎，轮胎也可以卸下来给其它汽车使用。如果用在驾驶系统业务环境上，汽车如果没有轮胎，就无法完成行驶任务，二者之间就是一个组合关系。再比如网上书店业务中的订单和订单项之间的关系，如果订单没有订单项，也就无法完成订单的业务，所以二者之间是组合关系。而购物车和商品之间的关系，因为商品的生命周期并不被购物车控制，商品可以被多个购物车共享，因此，二者之间是聚合关系。</p>
+<h1 id="UML用例图"><a href="#UML用例图" class="headerlink" title="UML用例图"></a>UML用例图</h1><p>TODO</p>
+<h1 id="UML时序图"><a href="#UML时序图" class="headerlink" title="UML时序图"></a>UML时序图</h1><p>UML时序图的组成部分</p>
+<h2 id="参与者-对象"><a href="#参与者-对象" class="headerlink" title="参与者 / 对象"></a>参与者 / 对象</h2><p>参与者（Actor) / 对象（Object）按照一定顺序从左到右排列。UML中并没有对排列顺序作出任何要求，但是经过长期的积累得出以下经验： </p>
+<ol>
+<li>活动的起始点放在最左侧。</li>
+<li>交互频繁的参与者或对象靠拢。</li>
+</ol>
+<p>在UML中，参与者通常使用以下表示方法：</p>
+<figure class="highlight pony"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pony"><span class="hljs-keyword">actor</span> 测试工程师 <span class="hljs-keyword">as</span> te<br>participant 用例系统 <span class="hljs-keyword">as</span> tcms<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>在UML中，对于参与者或对象，我们可以使用 <strong>as</strong> 来给对象起别名，方便后面的引用。<br>除了使用 actor 和 participant 声明参与者和对象外，还可以通过 <strong>boundary</strong>、<strong>control</strong>、<strong>entity</strong> 和 <strong>database</strong> 来声明，仅图标差异。</p>
+</blockquote>
+<p>完整mermaid代码</p>
+<figure class="highlight sas"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sas">sequenceDiagram<br>	<span class="hljs-meta">title</span>: 声明对象<br>	participant te <span class="hljs-meta">as</span> 测试工程师<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	title: 声明对象
+	participant te as 测试工程师
+</code></pre>
+<h2 id="生命线"><a href="#生命线" class="headerlink" title="生命线"></a>生命线</h2><p><strong>生命线（lifeline）</strong>：<a href="https://link.zhihu.com/?target=https%3A//www.uml-diagrams.org/sequence-diagrams.html%23lifeline">对象</a>表示<strong>一个具体的实例对象</strong>，时序图只表达其中一个实例对象的交互流程。(<font color="red"><strong>垂直虚线</strong></font>)</p>
+<ul>
+<li>如果系统中有多个实例对象，每个实例对象流程有所区别，那么应该画多个时序图。</li>
+<li>时序图表达的是系统某一时段，对象的交互过程。<ul>
+<li>这个对象不仅是一个 class 的实例</li>
+<li>也有可能是一个子系统</li>
+<li>分布式集群里的某个节点</li>
+</ul>
+</li>
+</ul>
+<p>下图总的Alice和John就是两条生命线.</p>
+<p>完整mermaid代码</p>
+<figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl">sequenceDiagram<br>    A<span class="hljs-function"><span class="hljs-title">lice</span>-&gt;</span>&gt;John: Hello John, how are you?<br>    J<span class="hljs-function"><span class="hljs-title">ohn</span>--&gt;</span>&gt;Alice: Great!<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+    Alice-&gt;&gt;John: Hello John, how are you?
+    John--&gt;&gt;Alice: Great!
+</code></pre>
+<h2 id="激活期"><a href="#激活期" class="headerlink" title="激活期"></a>激活期</h2><p>激活期是指对象<strong>在整个活动中获得了焦点</strong>，需要一段时间来执行某个动作，在UML图中是一个空心的矩形表示。</p>
+<p>下图中的John就存在一段时间的激活期(<font color="red"><strong>空心灰色的矩形</strong></font>)。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">sequenceDiagram<br>    Alice-&gt;&gt;<span class="hljs-keyword">John: </span>Hello <span class="hljs-keyword">John, </span>how are you?<br>    activate <span class="hljs-keyword">John</span><br><span class="hljs-keyword"> </span>   <span class="hljs-keyword">John--&gt;&gt;Alice: </span>Great!<br>    deactivate <span class="hljs-keyword">John</span><br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+    Alice-&gt;&gt;John: Hello John, how are you?
+    activate John
+    John--&gt;&gt;Alice: Great!
+    deactivate John
+</code></pre>
+<h2 id="系统边界"><a href="#系统边界" class="headerlink" title="系统边界"></a>系统边界</h2><p><strong>系统边界</strong>（gate）：表明消息从外部对象产生，最终返回给外部对象。</p>
+<h2 id="控制焦点"><a href="#控制焦点" class="headerlink" title="控制焦点"></a>控制焦点</h2><p><strong>控制焦点（execution specification，informally called activation）</strong>：简单的理解为调用了该对象的某个方法，该方法终止的标志为执行完相关的过程，完成方法调用，并且收到了相关的消息。</p>
+<h2 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h2><p><strong>消息（interaction message）</strong>：只是表明了发送者向接收者进行了一次通讯，可能会代表一次 http 请求，也可能代表一个函数调用。对象之间的交互是通过相互发消息来实现的。一个对象通过发送消息请求另一个对象做事件。消息从源对象指向目标对象。消息一旦发送便将控制从源对象转移到目标对象。消息不仅可以从A对象发给B对象，还可以自己发给自己(<strong>下图中开发工程师发送信息给自己</strong>)。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">sequenceDiagram<br>	participant <span class="hljs-keyword">te</span> <span class="hljs-keyword">as</span> 测试工程师<br>    participant <span class="hljs-keyword">de</span> <span class="hljs-keyword">as</span> 开发工程师<br>    <span class="hljs-keyword">te</span>-&gt;&gt;<span class="hljs-keyword">de</span>: There is a bug!<br>    activate <span class="hljs-keyword">de</span><br>    <span class="hljs-keyword">de</span> -&gt;&gt; <span class="hljs-keyword">de</span>:  Fixing the Bug...<br>    <span class="hljs-keyword">de</span>--&gt;&gt;<span class="hljs-keyword">te</span>: Wait a minute. I am try to fix it.<br>    deactivate <span class="hljs-keyword">de</span><br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	participant te as 测试工程师
+    participant de as 开发工程师
+    te-&gt;&gt;de: There is a bug!
+    activate de
+    de -&gt;&gt; de:  Fixing the Bug...
+    de--&gt;&gt;te: Wait a minute. I am try to fix it.
+    deactivate de
+</code></pre>
+<p>消息分为</p>
+<ul>
+<li><strong>同步消息</strong></li>
+<li><strong>异步消息</strong></li>
+<li><strong>返回消息</strong></li>
+<li><a target="_blank" rel="noopener" href="https://www.uml-diagrams.org/interaction-message.html#create">创建消息</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.uml-diagrams.org/interaction-message.html#delete">删除消息</a></li>
+</ul>
+<p>mermaid中有以下几种箭头</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Chinese</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-&gt;</td>
+<td>Solid line without arrow</td>
+<td>无箭头实线</td>
+<td>异步消息</td>
+</tr>
+<tr>
+<td>—&gt;</td>
+<td>Dotted line without arrow</td>
+<td>无箭头虚线</td>
+<td>无实义</td>
+</tr>
+<tr>
+<td>-&gt;&gt;</td>
+<td>Solid line with arrowhead</td>
+<td>有箭头实线</td>
+<td>同步消息</td>
+</tr>
+<tr>
+<td>—&gt;&gt;</td>
+<td>Dotted line with arrowhead</td>
+<td>有箭头虚线</td>
+<td>返回消息</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>Solid line with a cross at the end (async)</td>
+<td>带叉的有箭头实线</td>
+<td>无实义</td>
+</tr>
+<tr>
+<td>—x</td>
+<td>Dotted line with a cross at the end (async)</td>
+<td>带叉的有箭头虚线</td>
+<td>删除消息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="同步消息"><a href="#同步消息" class="headerlink" title="同步消息"></a>同步消息</h3><p>直到等待接收者返回消息，譬如 测试工程师 准备写测试用例，发了消息“给我需求文档”给产品经理，只有等待产品经理返回消息后，测试工程师才可以继续后续的操作。也可以视为<strong>函数调用</strong>：消息发送后，等待消息的回复。从代码的角度来说，就是执行了一个函数调用，并且等待函数的返回。（<font color="red"><strong>实线箭头</strong></font> <code>-&gt;&gt;</code>）</p>
+<p>完整mermaid代码</p>
+<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">sequenceDiagram<br>	participant <span class="hljs-keyword">te</span> <span class="hljs-keyword">as</span> 测试工程师<br>	participant pm <span class="hljs-keyword">as</span> 产品经理<br>	<span class="hljs-keyword">te</span> -&gt;&gt; pm : 给我需求文档<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	participant te as 测试工程师
+	participant pm as 产品经理
+	te -&gt;&gt; pm : 给我需求文档
+</code></pre>
+<h3 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h3><p>无需等待，发送消息后继续操作。譬如 测试工程师 拿到需求文档后，发消息“给我详细设计文档”给 开发工程师，此时测试工程师不需要等开发工程师给详设文档，在开发准备的过程中进行验收用例设计。发送了消息后不等待返回，立即处理后续的事情。从代码的角度来说，就是<strong>开了另一个线程执行函数调用</strong>不等待函数的返回结果。在UML中，使用<font color="red"><strong>空心箭头</strong></font>，mermaid中没有空心箭头, 所以选用直线表示 <code>-&gt;</code>。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">sequenceDiagram<br>	participant <span class="hljs-keyword">te</span> <span class="hljs-keyword">as</span> 测试工程师<br>	participant <span class="hljs-keyword">de</span> <span class="hljs-keyword">as</span> 开发工程师<br>	<span class="hljs-keyword">te</span> -&gt; <span class="hljs-keyword">de</span> : 给我详细设计文档<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	participant te as 测试工程师
+	participant de as 开发工程师
+	te -&gt; de : 给我详细设计文档
+</code></pre>
+<h3 id="返回消息"><a href="#返回消息" class="headerlink" title="返回消息"></a>返回消息</h3><p>表示完成某个活动或动作后，给予消息源反馈内容。表明消息接受者已经处理完消息，把结果返回给发送者。从代码的角度来说，就是 A 调用了 B，B 返回了结果（无论是通过函数返回或函数回调的方式）。（虚线主干线条箭头）（<font color="red"><strong>虚线箭头</strong></font> <code>--&gt;&gt;</code>）</p>
+<p>完整mermaid代码</p>
+<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">sequenceDiagram<br>	participant <span class="hljs-keyword">te</span> <span class="hljs-keyword">as</span> 测试工程师<br>    participant <span class="hljs-keyword">de</span> <span class="hljs-keyword">as</span> 开发工程师<br>    <span class="hljs-keyword">te</span> -&gt;&gt; <span class="hljs-keyword">de</span>: 出Bug了!<br>    activate <span class="hljs-keyword">de</span><br>    <span class="hljs-keyword">de</span> -&gt;&gt; <span class="hljs-keyword">de</span>: 改bug中<br>    <span class="hljs-keyword">de</span> --&gt;&gt; <span class="hljs-keyword">te</span>: Bug已修复, 麻烦回归一下.<br>    deactivate <span class="hljs-keyword">de</span><br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	participant te as 测试工程师
+    participant de as 开发工程师
+    te -&gt;&gt; de: 出Bug了!
+    activate de
+    de -&gt;&gt; de: 改bug中
+    de --&gt;&gt; te: Bug已修复, 麻烦回归一下.
+    deactivate de
+</code></pre>
+<h3 id="创建消息"><a href="#创建消息" class="headerlink" title="创建消息"></a>创建消息</h3><p>即创建对象，A 给 B 发送了创建消息，从代码的角度来说就是在 A 的方法里，执行了 <code>new B()</code> 的操作。 （<font color="red"><strong>带注释实线箭头</strong></font> <code>-&gt;&gt;</code>）</p>
+<p>完整mermaid代码</p>
+<figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">sequenceDiagram<br>	<span class="hljs-built_in">activate</span> Teacher<br>	Teacher -&gt;&gt; Professor : Create<br>	<span class="hljs-built_in">deactivate</span> Teacher<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	activate Teacher
+	Teacher -&gt;&gt; Professor : Create
+	deactivate Teacher
+</code></pre>
+<h3 id="删除消息"><a href="#删除消息" class="headerlink" title="删除消息"></a>删除消息</h3><p>和创建对象相反，A 给 B 发送了删除的消息，从代码的角度来说就是在 A 的方法里，执行了 <code>release B</code> 的操作，在 C++等手动内存管理的场景会比较好举例，等价于释放了对象的内存。（<font color="red"><strong>带叉实线箭头加注释</strong></font> <code>--x</code>）</p>
+<p>完整mermaid代码</p>
+<figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">sequenceDiagram<br>	<span class="hljs-built_in">activate</span> Teacher<br>	Teacher <span class="hljs-comment">--x Professor : Delete</span><br>	deactivate Teacher<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	activate Teacher
+	Teacher --x Professor : Delete
+	deactivate Teacher
+</code></pre>
+<h2 id="顺序图操作"><a href="#顺序图操作" class="headerlink" title="顺序图操作"></a>顺序图操作</h2><h3 id="添加标题"><a href="#添加标题" class="headerlink" title="添加标题"></a>添加标题</h3><p>通过 title 关键字为顺序图设定名字。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">sequenceDiagram<br>	Title: Bug修复简易流程123<br>	participant <span class="hljs-keyword">te</span> <span class="hljs-keyword">as</span> 测试工程师<br>    participant <span class="hljs-keyword">de</span> <span class="hljs-keyword">as</span> 开发工程师<br>    <span class="hljs-keyword">te</span> -&gt;&gt; <span class="hljs-keyword">de</span>: 出Bug了!<br>    activate <span class="hljs-keyword">de</span><br>    <span class="hljs-keyword">de</span> -&gt;&gt; <span class="hljs-keyword">de</span>: 改bug中<br>    <span class="hljs-keyword">de</span> --&gt;&gt; <span class="hljs-keyword">te</span>: Bug已修复, 麻烦回归一下.<br>    deactivate <span class="hljs-keyword">de</span><br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	Title: Bug修复简易流程123
+	participant te as 测试工程师
+    participant de as 开发工程师
+    te -&gt;&gt; de: 出Bug了!
+    activate de
+    de -&gt;&gt; de: 改bug中
+    de --&gt;&gt; te: Bug已修复, 麻烦回归一下.
+    deactivate de
+</code></pre>
+<h3 id="添加注释"><a href="#添加注释" class="headerlink" title="添加注释"></a>添加注释</h3><p>完整mermaid代码</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">sequenceDiagram<br>    participant <span class="hljs-keyword">John</span><br><span class="hljs-keyword"> </span>   participant Tom<br>    Note left of <span class="hljs-keyword">John: </span>Text in note<br>    <span class="hljs-keyword">John </span>-&gt;&gt; Tom: 提了个<span class="hljs-keyword">Bug</span><br><span class="hljs-keyword">	</span>Note over Tom,<span class="hljs-keyword">John: </span>A typical interaction<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+    participant John
+    participant Tom
+    Note left of John: Text in note
+    John -&gt;&gt; Tom: 提了个Bug
+	Note over Tom,John: A typical interaction
+</code></pre>
+<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>使用分割线可以把一个顺序图划分为不同的阶段。分割线使用 <strong>== 阶段名称 ==</strong> 的形式来表示。<strong>Mermid似乎不支持分割线。</strong></p>
+<h3 id="消息数字序号"><a href="#消息数字序号" class="headerlink" title="消息数字序号"></a>消息数字序号</h3><p>当时序图中存在很多消息时，会产生很大的理解障碍。通过 autonumber 关键字，可以自动把消息按先后顺序加上数字序号。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl">sequenceDiagram<br>    autonumber<br>    A<span class="hljs-function"><span class="hljs-title">lice</span>-&gt;</span>&gt;John: Hello John, how are you?<br>    <span class="hljs-keyword">loop</span> Healthcheck<br>        J<span class="hljs-function"><span class="hljs-title">ohn</span>-&gt;</span>&gt;John: Fight against hypochondria<br>    end<br>    Note right of John: Rational thoughts!<br>    J<span class="hljs-function"><span class="hljs-title">ohn</span>--&gt;</span>&gt;Alice: Great!<br>    J<span class="hljs-function"><span class="hljs-title">ohn</span>-&gt;</span>&gt;Bob: How about you?<br>    B<span class="hljs-function"><span class="hljs-title">ob</span>--&gt;</span>&gt;John: Jolly good!<br></code></pre></div></td></tr></table></figure>
+<p>效果如下:</p>
+<p>todo</p>
+<h3 id="添加底色"><a href="#添加底色" class="headerlink" title="添加底色"></a>添加底色</h3><p>使用以下语法为区块添加底色</p>
+<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-built_in">rect</span> <span class="hljs-title">rgb</span><span class="hljs-params">(<span class="hljs-number">100</span>, <span class="hljs-number">255</span>, <span class="hljs-number">100</span>, <span class="hljs-number">0.1</span>)</span></span><br><span class="hljs-function">...</span><br><span class="hljs-function"><span class="hljs-built_in">end</span></span><br></code></pre></div></td></tr></table></figure>
+<p>完整mermaid代码</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sequenceDiagram</span><br>    <span class="hljs-attribute">participant</span> John<br>    <span class="hljs-attribute">participant</span> Tom<br>    <span class="hljs-attribute">rect</span> rgb(<span class="hljs-number">100</span>, <span class="hljs-number">255</span>, <span class="hljs-number">100</span>, <span class="hljs-number">0</span>.<span class="hljs-number">1</span>)<br>	    <span class="hljs-attribute">Note</span> left of John: Text in note<br>    	<span class="hljs-attribute">John</span> -&gt;&gt; Tom: 提了个Bug<br>		<span class="hljs-attribute">Note</span> over Tom,John: A typical interaction<br>	<span class="hljs-attribute">end</span><br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+    participant John
+    participant Tom
+    rect rgb(100, 255, 100, 0.1)
+	    Note left of John: Text in note
+    	John -&gt;&gt; Tom: 提了个Bug
+		Note over Tom,John: A typical interaction
+	end
+
+</code></pre>
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>利用分组功能，可以把开发顺序分成不同的阶段。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">sequenceDiagram<br>	title:需求分析建议流程（不完全）<br>	participant <span class="hljs-keyword">te</span> <span class="hljs-keyword">as</span> 测试工程师<br>	participant pm <span class="hljs-keyword">as</span> 产品经理<br>    participant <span class="hljs-keyword">de</span> <span class="hljs-keyword">as</span> 开发工程师<br>	par 需求文档获取<br>	rect rgb(0, 255, 0, 0.1)<br>		<span class="hljs-keyword">te</span> -&gt;&gt; pm: 需求文档<br>		activate pm<br>		pm -&gt;&gt; pm: 写需求<br>		pm --&gt;&gt; <span class="hljs-keyword">te</span>: 返回需求<br>		deactivate pm<br>	end<br>	and 需求分析<br>		rect rgba(0, 0, 255, 0.1)<br>            activate <span class="hljs-keyword">te</span><br>            <span class="hljs-keyword">te</span> -&gt;&gt; <span class="hljs-keyword">de</span>: 详细设计文档<br>	        par 需求澄清        	<br>		        rect rgba(255, 0, 0, 0.1)<br>    	            <span class="hljs-keyword">te</span> -&gt;&gt; <span class="hljs-keyword">te</span>: 了解需求<br>        	        <span class="hljs-keyword">te</span> -&gt;&gt; <span class="hljs-keyword">te</span>: 需求反串讲解<br>            	end<br>            end<br>		end<br>		<span class="hljs-keyword">Note</span> over <span class="hljs-keyword">te</span>,pm: 需求分析<br>		<span class="hljs-keyword">Note</span> over <span class="hljs-keyword">te</span>,<span class="hljs-keyword">de</span>: 测试设计与分析<br>		deactivate <span class="hljs-keyword">te</span><br>	end<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	title:需求分析建议流程（不完全）
+	participant te as 测试工程师
+	participant pm as 产品经理
+    participant de as 开发工程师
+	par 需求文档获取
+	rect rgb(0, 255, 0, 0.1)
+		te -&gt;&gt; pm: 需求文档
+		activate pm
+		pm -&gt;&gt; pm: 写需求
+		pm --&gt;&gt; te: 返回需求
+		deactivate pm
+	end
+	and 需求分析
+		rect rgba(0, 0, 255, 0.1)
+            activate te
+            te -&gt;&gt; de: 详细设计文档
+	        par 需求澄清        	
+		        rect rgba(255, 0, 0, 0.1)
+    	            te -&gt;&gt; te: 了解需求
+        	        te -&gt;&gt; te: 需求反串讲解
+            	end
+            end
+		end
+		Note over te,pm: 需求分析
+		Note over te,de: 测试设计与分析
+		deactivate te
+	end
+</code></pre>
+<h3 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h3><p>条件判断为顺序图提供了强大的逻辑判断能力，极大丰富了顺序图的使用范围。在UML中使用 <code>alt</code> 关键字来进行条件判断。<code>alt</code> 就是抉择的意思，用来指明在两个或更多的消息序列之间的互斥的选择，相当于经典的 <code>if..else..</code>。抉择在任何场合下只发生一个序列。 可以在每个片段中设置一个临界来指示该片段可以运行的条件。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl">sequenceDiagram<br>	<span class="hljs-built_in">title</span>: 提交bug规范（不完全）<br>	participant te <span class="hljs-keyword">as</span> 测试工程师<br>    participant dev <span class="hljs-keyword">as</span> 开发工程师<br>    <span class="hljs-function"><span class="hljs-title">te</span> -&gt;</span>&gt; dev: 提交bug<br>    alt bug提交规范<br>    	rect rgb(<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>)<br>            <span class="hljs-function"><span class="hljs-title">dev</span> -&gt;</span>&gt; dev: 修改bug<br>            <span class="hljs-function"><span class="hljs-title">dev</span> --&gt;</span>&gt; te: 修改完成,返回<br>    	end<br>    <span class="hljs-keyword">else</span> bug提交不规范<br>        rect rgb(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.1</span>)<br>    		<span class="hljs-function"><span class="hljs-title">dev</span> -&gt;</span>&gt; te: 无效bug,信息不完整,请重新提交<br>    	end<br>    end<br>    <br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	title: 提交bug规范（不完全）
+	participant te as 测试工程师
+    participant dev as 开发工程师
+    te -&gt;&gt; dev: 提交bug
+    alt bug提交规范
+    	rect rgb(0, 255, 0, 0.1)
+            dev -&gt;&gt; dev: 修改bug
+            dev --&gt;&gt; te: 修改完成,返回
+    	end
+    else bug提交不规范
+        rect rgb(0, 100, 255, 0.1)
+    		dev -&gt;&gt; te: 无效bug,信息不完整,请重新提交
+    	end
+    end
+    
+</code></pre>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>循环进行某一项活动，在UML中使用 loop 关键字对内部活动进行循环操作，直到条件满足后退出。类似 <code>while</code> 或者 <code>for</code>。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl">sequenceDiagram<br>	<span class="hljs-built_in">title</span>:提交bug规范（不完全）<br>	participant te <span class="hljs-keyword">as</span> 测试工程师<br>    participant tesys <span class="hljs-keyword">as</span> 测试系统<br>    <span class="hljs-function"><span class="hljs-title">te</span> -&gt;</span>&gt; te: 探索性测试<br>    <span class="hljs-keyword">loop</span> 直到测试完所有bug<br>    	rect rgb(<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>)<br>    		<span class="hljs-function"><span class="hljs-title">te</span> -&gt;</span>&gt; tesys: 提交一个bug<br>    		<span class="hljs-function"><span class="hljs-title">tesys</span> --&gt;</span>&gt; te: 提交成功<br>    	end<br>    end<br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	title:提交bug规范（不完全）
+	participant te as 测试工程师
+    participant tesys as 测试系统
+    te -&gt;&gt; te: 探索性测试
+    loop 直到测试完所有bug
+    	rect rgb(255, 0, 0, 0.1)
+    		te -&gt;&gt; tesys: 提交一个bug
+    		tesys --&gt;&gt; te: 提交成功
+    	end
+    end
+</code></pre>
+<h3 id="超时"><a href="#超时" class="headerlink" title="超时"></a>超时</h3><p>在两条消息之间添加延时，可以提高顺序图的阅读性。在UML中使用 … 来添加时延。</p>
+<p>完整mermaid代码</p>
+<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">sequenceDiagram<br>	title:回归测试<br>	participant <span class="hljs-keyword">te</span> <span class="hljs-keyword">as</span> 测试工程师<br>    participant dev <span class="hljs-keyword">as</span> 开发工程师<br>    <span class="hljs-keyword">te</span> -&gt;&gt; de<span class="hljs-variable">v:</span> 提交bug<br>    dev -&gt;&gt; de<span class="hljs-variable">v:</span> 修改bug<br>    dev --&gt;&gt; <span class="hljs-keyword">te</span>: 修改完成,提交测试<br>    Note over <span class="hljs-keyword">te</span>, de<span class="hljs-variable">v:</span> 回归测试(一天)<br>    <span class="hljs-keyword">te</span> -&gt;&gt; de<span class="hljs-variable">v:</span> 回归不通过, 重新修正bug    <br></code></pre></div></td></tr></table></figure>
+<p>实际效果</p>
+<pre><code class=" mermaid">sequenceDiagram
+	title:回归测试
+	participant te as 测试工程师
+    participant dev as 开发工程师
+    te -&gt;&gt; dev: 提交bug
+    dev -&gt;&gt; dev: 修改bug
+    dev --&gt;&gt; te: 修改完成,提交测试
+    Note over te, dev: 回归测试(一天)
+    te -&gt;&gt; dev: 回归不通过, 重新修正bug    
+</code></pre>
+<p>可以把 <code>alt</code> 和 <code>loop</code> 视为特殊的group分组</p>
+<h3 id="参与组分组"><a href="#参与组分组" class="headerlink" title="参与组分组"></a>参与组分组</h3><p><code>mermaid</code> 没有实现参与者分组功能</p>
+<h3 id="box"><a href="#box" class="headerlink" title="box"></a>box</h3><p><code>mermaid</code> 中没有 <code>box</code> 组件，但是语雀中有这个组件。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>引用（Interaction use）：引用是表示<strong>在现有时序图里嵌入一个子流程，主要是用于简化时序图的表达。</strong>因为有些流程相对复杂，如果都画在一起，显得复杂，不好阅读。另一种场景就是复用流程。</p>
+<h1 id="甘特图"><a href="#甘特图" class="headerlink" title="甘特图"></a>甘特图</h1><p>甘特图（Gantt chart）又称为横道图、条状图(Bar chart)。其通过条状图来显示项目，进度，和其他时间相关的系统进展的内在关系随着时间进展的情况。以提出者亨利·劳伦斯·甘特（Henry Laurence Gantt）先生的名字命名。</p>
+<p>甘特图以图示通过活动列表和时间刻度表示出特定项目的顺序与持续时间。一条线条图，横轴表示时间，纵轴表示项目，线条表示期间计划和实际完成情况。直观表明计划何时进行，进展与要求的对比。便于管理者弄清项目的剩余任务，评估工作进度。</p>
+<p>甘特图是以作业排序为目的，将活动与时间联系起来的最早尝试的工具之一，帮助企业描述工作中心、超时工作等资源的使用。甘特图包含以下三个含义：</p>
+<ol>
+<li>以图形或表格的形式显示活动；</li>
+<li>通用的显示进度的方法；</li>
+<li>构造时含日历天和持续时间，不将周末节假算在进度内。<br> 简单、醒目、便于编制，在管理中广泛应用。<br> 甘特图按内容不同，分为计划图表、负荷图表、机器闲置图表、人员闲置图表和进度表五种形式</li>
+</ol>
+<p>效果图<br><pre><code class=" mermaid">gantt
+title 软件开发甘特图
+dateFormat  YYYY-MM-DD
+
+section 设计
+
+需求: done, des1, 2014-01-06,2014-01-08
+原型: active,des2, 2014-01-09, 3d
+UI设计: des3, after des2, 5d
+未来任务: des4, after des3, 5d
+
+section 开发
+学习准备理解需求: crit, done, 2014-01-06,24h
+设计框架: crit, done, after des2, 2d
+开发: crit, active, 3d
+未来任务: crit, 5d
+休息: 2d
+
+section 测试
+功能测试: active, a1, after des3, 3d
+压力测试: after a1, 20h
+测试报告: 48h
+</code></pre><br>源码<br><figure class="highlight x86asm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs x86asm">gantt<br>title 软件开发甘特图<br>dateFormat  YYYY-MM-<span class="hljs-built_in">DD</span><br><br><span class="hljs-meta">section</span> 设计<br><br>需求: done, des1, <span class="hljs-number">2014</span>-<span class="hljs-number">01</span>-<span class="hljs-number">06</span>,<span class="hljs-number">2014</span>-<span class="hljs-number">01</span>-<span class="hljs-number">08</span><br>原型: active,des2, <span class="hljs-number">2014</span>-<span class="hljs-number">01</span>-<span class="hljs-number">09</span>, <span class="hljs-number">3d</span><br>UI设计: des3, after des2, <span class="hljs-number">5d</span><br>未来任务: des4, after des3, <span class="hljs-number">5d</span><br><br><span class="hljs-meta">section</span> 开发<br>学习准备理解需求: crit, done, <span class="hljs-number">2014</span>-<span class="hljs-number">01</span>-<span class="hljs-number">06</span>,<span class="hljs-number">24h</span><br>设计框架: crit, done, after des2, <span class="hljs-number">2d</span><br>开发: crit, active, <span class="hljs-number">3d</span><br>未来任务: crit, <span class="hljs-number">5d</span><br>休息: <span class="hljs-number">2d</span><br><br><span class="hljs-meta">section</span> 测试<br>功能测试: active, a1, after des3, <span class="hljs-number">3d</span><br>压力测试: after a1, <span class="hljs-number">20h</span><br>测试报告: <span class="hljs-number">48h</span><br></code></pre></div></td></tr></table></figure></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/05/3-sigma-Anomaly-Detect/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">3-sigma Anomaly Detect</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/30/%E5%89%8D%E7%AB%AF%E9%82%A3%E4%BA%9B%E4%BA%8B/">
+                        <span class="hidden-mobile">前端那些事</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/07/09/UML%E7%BB%98%E5%9B%BE/';
+        this.page.identifier = '/2020/07/09/UML%E7%BB%98%E5%9B%BE/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

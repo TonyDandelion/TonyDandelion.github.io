@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>LeetCode 1371. 每个元音包含偶数次的最长子字符串（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 1371. 每个元音包含偶数次的最长子字符串（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-20 15:50" pubdate>
+        2020年5月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 1371. 每个元音包含偶数次的最长子字符串（中）</h1>
+            
+            <div class="markdown-body">
+              <p>bitmask哈希表解决字符串问题</p>
+<a id="more"></a>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/">1371. 每个元音包含偶数次的最长子字符串</a></p>
+<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>我们先来考虑暴力方法怎么做。最直观的方法无非就是枚举所有子串，遍历子串中的所有字符，统计元音字母出现的个数。如果符合条件，我们就更新答案，但这样肯定会因为超时而无法通过所有测试用例。</p>
+<p>再回顾一下上面的操作，其实每个子串对应着一个区间，那么有什么方法可以在不重复遍历子串的前提下，快速求出这个区间里元音字母出现的次数呢？答案就是前缀和，对于一个区间，我们可以用两个前缀和的差值，得到其中某个字母的出现次数。</p>
+<p>我们对每个元音字母维护一个前缀和，定义 $pre[i][k]$ 表示在字符串前 $i$ 个字符中，第 $k$ 个元音字母一共出现的次数。假设我们需要求出 $[l,r]$ 这个区间的子串是否满足条件，那么我们可以用 $pre[r][k]-pre[l-1][k]$，在 $O(1)$ 的时间得到第 $k$ 个元音字母出现的次数。对于每一个元音字母，我们都判断一下其是否出现偶数次即可。</p>
+<p>我们利用前缀和优化了统计子串的时间复杂度，然而枚举所有子串的复杂度仍需要 $O(n^2)$，不足以通过本题，还需要继续进行优化，避免枚举所有子串。我们考虑枚举字符串的每个位置 $i$ ，计算以它结尾的满足条件的最长字符串长度。其实我们要做的就是快速找到最小的 $j \in [0,i)$，满足 $pre[i][k]-pre[j][k]$（即每一个元音字母出现的次数）均为偶数，那么以 $i$ 结尾的最长字符串 $s[j+1,i]$ 长度就是 $i-j$。</p>
+<p>有经验的读者可能马上就想到了利用哈希表来优化查找的复杂度，但是单单利用前缀和，我们无法找到 $i$ 和 $j$ 相关的恒等式，像 <strong>LeetCode 1248. 统计优美子数组</strong> 这道题我们是能明确知道两个前缀的差值是恒定的。那难道就没办法了么？其实不然，这道题我们还有一个性质没有充分利用：我们需要找的子串中，每个元音字母都恰好出现了偶数次。</p>
+<p>偶数这个条件其实告诉了我们，对于满足条件的子串而言，两个前缀和 $pre[i][k]$ 和 $pre[j][k]$ 的奇偶性一定是相同的，因为小学数学的知识告诉我们：奇数减奇数等于偶数，偶数减偶数等于偶数。因此我们可以对前缀和稍作修改，从维护元音字母出现的次数改作维护元音字母出现次数的奇偶性。这样我们只要实时维护每个元音字母出现的奇偶性，那么 $s[j+1,i]$ 满足条件当且仅当对于所有的 $k$，$pre[i][k]$ 和 $pre[j][k]$ 的奇偶性都相等，此时我们就可以利用哈希表存储每一种奇偶性（即考虑所有的元音字母）对应最早出现的位置，边遍历边更新答案。</p>
+<p>题目做到这里基本上做完了，但是我们还可以进一步优化我们的编码方式，如果直接以每个元音字母出现次数的奇偶性为哈希表中的键，难免有些冗余，我们可能需要额外定义一个状态：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++">&#123;<br>  a: cnta, <span class="hljs-comment">// a 出现次数的奇偶性</span><br>  e: cnte, <span class="hljs-comment">// e 出现次数的奇偶性</span><br>  i: cnti, <span class="hljs-comment">// i 出现次数的奇偶性</span><br>  o: cnto, <span class="hljs-comment">// o 出现次数的奇偶性</span><br>  u: cntu  <span class="hljs-comment">// u 出现次数的奇偶性</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>将这么一个结构当作我们哈希表存储的键值，如果题目稍作修改扩大了字符集，那么维护起来可能会比较吃力。考虑到出现次数的奇偶性其实无非就两个值，<code>0</code> 代表出现了偶数次，<code>1</code> 代表出现了奇数次，我们可以将其压缩到一个二进制数中，第 <code>k</code> 位的 <code>0</code> 或 <code>1</code> 代表了第 <code>k</code> 个元音字母出现的奇偶性。举一个例子，假如到第 <code>i</code> 个位置，<code>u o i e a</code> 出现的奇偶性分别为 <code>1 1 0 0 1</code>，那么我们就可以将其压成一个二进制数 $(11001)<em>2=(25)</em>{10}$(11001) 作为它的状态。这样我们就可以将 $5$ 个元音字母出现次数的奇偶性压缩到了一个二进制数中，且连续对应了二进制数的 $[(00000)_2,(11111)_2]$ 的范围，转成十进制数即 $[0,31]$。因此我们也不再需要使用哈希表，直接用一个长度为 $32$ 的数组来存储对应状态出现的最早位置即可。</p>
+<p>时间复杂度：$O(n)$，其中 $n$ 为字符串 $s$ 的长度。我们只需要遍历一遍字符串即可求得答案，因此时间复杂度为 $O(n)$。 <br><br>空间复杂度：$O(S)$，其中 $S$ 表示元音字母压缩成一个状态数的最大值，在本题中 $S = 32$。我们需要对应 $S$ 大小的空间来存放每个状态第一次出现的位置，因此需要 $O(S)$ 的空间复杂度。</p>
+<p>作者：LeetCode-Solution<br>来源：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/solution/mei-ge-yuan-yin-bao-han-ou-shu-ci-de-zui-chang-z-2/">力扣（LeetCode）</a><br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<li>我写的不成功版本</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findTheLongestSubstring</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        hash_map = &#123;<span class="hljs-string">&quot;a&quot;</span>:<span class="hljs-number">0</span>, <span class="hljs-string">&quot;e&quot;</span>:<span class="hljs-number">0</span>, <span class="hljs-string">&quot;i&quot;</span>:<span class="hljs-number">0</span>, <span class="hljs-string">&quot;o&quot;</span>:<span class="hljs-number">0</span>, <span class="hljs-string">&quot;u&quot;</span>:<span class="hljs-number">0</span>&#125;<br>        start = <span class="hljs-number">0</span> <br>        i = <span class="hljs-number">0</span> <br>        _max = <span class="hljs-number">0</span><br>        position = []<br>        <span class="hljs-keyword">while</span> i &lt; <span class="hljs-built_in">len</span>(s):<br>            <span class="hljs-keyword">if</span> s[i] <span class="hljs-keyword">in</span> [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>]:<br>                hash_map[s[i]] += <span class="hljs-number">1</span><br>                position.append(i)<br>            <span class="hljs-comment"># 每个元音字母，即 &#x27;a&#x27;, &#x27;e&#x27;, &#x27;i&#x27;, &#x27;o&#x27;, &#x27;u&#x27;，在子字符串中都恰好出现了偶数次，有效。</span><br>            <span class="hljs-comment"># if hash_map[&quot;a&quot;] % 2 == 0 and hash_map[&quot;e&quot;] % 2 == 0 and hash_map[&quot;i&quot;] % 2 == 0 and hash_map[&quot;o&quot;] % 2 == 0 and hash_map[&quot;u&quot;] % 2 == 0:</span><br>            <span class="hljs-comment"># if (hash_map[&quot;a&quot;] + hash_map[&quot;e&quot;] + hash_map[&quot;i&quot;] + hash_map[&quot;o&quot;] + hash_map[&quot;u&quot;]) % 2 == 0:</span><br>            <span class="hljs-keyword">if</span> hash_map[<span class="hljs-string">&quot;a&quot;</span>] % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> hash_map[<span class="hljs-string">&quot;e&quot;</span>] % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> hash_map[<span class="hljs-string">&quot;i&quot;</span>] % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> hash_map[<span class="hljs-string">&quot;o&quot;</span>] % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> hash_map[<span class="hljs-string">&quot;u&quot;</span>] % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">if</span> _max &lt; i - start:<br>                    _max = i - start + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> s[i] <span class="hljs-keyword">in</span> [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>] <span class="hljs-keyword">and</span> <span class="hljs-built_in">len</span>(position) &gt; <span class="hljs-number">2</span>:<br>                start = position[-<span class="hljs-number">3</span>] + <span class="hljs-number">1</span><br>                hash_map[position[-<span class="hljs-number">3</span>]] -= <span class="hljs-number">1</span><br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> _max<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>题解版本</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findTheLongestSubstring</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        ans, status, n = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(s)<br>        pos = [-<span class="hljs-number">1</span>] * (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">5</span>)<br>        pos[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            <span class="hljs-keyword">if</span> s[i] == <span class="hljs-string">&#x27;a&#x27;</span>:<br>                status ^= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">0</span><br>            <span class="hljs-keyword">elif</span> s[i] == <span class="hljs-string">&#x27;e&#x27;</span>:<br>                status ^= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> s[i] == <span class="hljs-string">&#x27;i&#x27;</span>:<br>                status ^= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">2</span><br>            <span class="hljs-keyword">elif</span> s[i] == <span class="hljs-string">&#x27;o&#x27;</span>:<br>                status ^= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">3</span><br>            <span class="hljs-keyword">elif</span> s[i] == <span class="hljs-string">&#x27;u&#x27;</span>:<br>                status ^= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span><br>            <span class="hljs-keyword">if</span> pos[status] != -<span class="hljs-number">1</span>:<br>                ans = <span class="hljs-built_in">max</span>(ans, i + <span class="hljs-number">1</span> - pos[status])<br>            <span class="hljs-keyword">else</span>:<br>                pos[status] = i + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/24/%E5%A6%82%E4%BD%95%E6%B1%82%E8%81%8CC%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B2%97%E4%BD%8D/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何求职 C++ 后端开发岗位</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/18/%E5%89%91%E6%8C%87offer-%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">剑指offer 第六章总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/05/20/LeetCode-1371-%E6%AF%8F%E4%B8%AA%E5%85%83%E9%9F%B3%E5%8C%85%E5%90%AB%E5%81%B6%E6%95%B0%E6%AC%A1%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/05/20/LeetCode-1371-%E6%AF%8F%E4%B8%AA%E5%85%83%E9%9F%B3%E5%8C%85%E5%90%AB%E5%81%B6%E6%95%B0%E6%AC%A1%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,710 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>React官方教程：完成井字棋游戏 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="React官方教程：完成井字棋游戏">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-24 00:22" pubdate>
+        2020年6月24日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      108
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">React官方教程：完成井字棋游戏</h1>
+            
+            <div class="markdown-body">
+              <p>对React官方教程 <a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/tutorial/tutorial.html">入门教程: 认识 React</a> 的总结。</p>
+<a id="more"></a>
+<ul>
+<li>整体的组件关系</li>
+</ul>
+<pre><code class=" mermaid">graph TB;
+	React[ReactDOM] --包含--&gt; Game[Game class Component] --包含--&gt; Board[Board class Component] --包含--&gt; Square[Square class&#x2F;function Component]
+</code></pre>
+<ul>
+<li>核心逻辑</li>
+</ul>
+<p>Game调用Board，传入props.squares和props.onClick(this.handleClick)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">return (<br>    &#x2F;&#x2F; ...<br>    &lt;Board<br>        squares&#x3D;&#123;current.squares&#125;<br>        onClick&#x3D;&#123;i &#x3D;&gt; this.handleClick(i)&#125;<br>    &#x2F;&gt;<br>    &#x2F;&#x2F; ...<br>)<br></code></pre></div></td></tr></table></figure>
+<p>Board调用Square，传入props.value和props.onClick(Game.handleClick)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">renderSquare(i) &#123;<br>  return (<br>    &lt;Square<br>      &#x2F;&#x2F; 这里就传入了props.value和props.onClick这两个参数<br>      value&#x3D;&#123;this.state.squares[i]&#125;<br>      &#x2F;&#x2F; onClick&#x3D;&#123;() &#x3D;&gt; this.handleClick(i)&#125;  &#x2F;&#x2F; 状态还在 Board 的时候，传入Square的props.onClick就是Board.handleClick(i)。<br>      onClick&#x3D;&#123;() &#x3D;&gt; this.props.onClick(i)&#125;  &#x2F;&#x2F; 状态不在 Board 的时候，传入Square的props.onClick变成this.props.onClick(i)，也就是Game.handleClick(i)。<br>    &#x2F;&gt;<br>  );<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Square返回一个Button，设置了props.value为button显示的值，设置props.onClick为button的点击事件触发函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">function Square(props) &#123;<br>  return (<br>    &lt;button <br>    	className&#x3D;&quot;square&quot; <br>    	onClick&#x3D;&#123;props.onClick&#125;<br>		&gt;<br>      &#123;props.value&#125;<br>    &lt;&#x2F;button&gt;<br>  );<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>可以发现，状态（数据）从Game先传到Board，再从Board传递到Square。而触发事件绑定从Square上传到Board，再从Board上传到Game。最终游戏判定和信息更新的相关逻辑都在Game组件中得以实现，而数据展示只在下层被控组件中完成。</p>
+<h1 id="第一阶段：展示效果"><a href="#第一阶段：展示效果" class="headerlink" title="第一阶段：展示效果"></a>第一阶段：展示效果</h1><p>这个阶段，主要完成基础九宫格展示和点击事件响应（无论如何都设置为“X”）。</p>
+<blockquote>
+<p>组件作用</p>
+</blockquote>
+<ul>
+<li>ReactDOM 负责调用 Game 组件</li>
+<li>Game组件<ul>
+<li>Game.render() 负责调用 Board 组件</li>
+</ul>
+</li>
+<li>Board组件<ul>
+<li>Board.constructor() 负责初始化状态（属性）this.state.squares。</li>
+<li>Board.renderSquare() 负责渲染一个Square组件。</li>
+<li>Board.render() 负责调用九次Board.renderSquare()渲染出一个完整的九宫格。</li>
+</ul>
+</li>
+<li>Square组件<ul>
+<li>Square.constructor() 负责初始化this.state.value。</li>
+<li>Square.render() 负责渲染一个Button作为九宫格的一个小格子。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>核心代码</p>
+</blockquote>
+<p><code>index.js</code> </p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">class Square extends React.Component &#123;<br>  &#x2F;&#x2F; TODO: remove the constructor<br>  constructor(props) &#123;<br>    super(props);<br>    this.state &#x3D; &#123;<br>      value: null,<br>    &#125;;<br>  &#125;<br><br>  render() &#123;<br>    &#x2F;&#x2F; TODO: use onClick&#x3D;&#123;this.props.onClick&#125;<br>    &#x2F;&#x2F; TODO: replace this.state.value with this.props.value<br>    return (<br>      &lt;button className&#x3D;&quot;square&quot; onClick&#x3D;&#123;() &#x3D;&gt; this.setState(&#123;value: &#39;X&#39;&#125;)&#125;&gt;  &#123;&#x2F;* Square最终渲染一个button，并绑定其点击事件为return外层Square的setState()。 *&#x2F;&#125;<br>        &#123;this.state.value&#125;<br>      &lt;&#x2F;button&gt;<br>    );<br>  &#125;<br>&#125;<br><br>class Board extends React.Component &#123;<br>  constructor(props) &#123;<br>    super(props);<br>    this.state &#x3D; &#123;<br>      squares: Array(9).fill(null),<br>    &#125;;<br>  &#125;<br><br>  renderSquare(i) &#123;<br>    &#123;&#x2F;* Board返回Square组件 *&#x2F;&#125;<br>    return &lt;Square value&#x3D;&#123;this.state.squares[i]&#125; &#x2F;&gt;;<br>  &#125;<br>  <br>  render() &#123;<br>    const status &#x3D; &#39;Next player: X&#39;;<br><br>    return (<br>      &lt;div&gt;<br>        &lt;div className&#x3D;&quot;status&quot;&gt;&#123;status&#125;&lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(0)&#125;&#123;this.renderSquare(1)&#125;&#123;this.renderSquare(2)&#125;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(3)&#125;&#123;this.renderSquare(4)&#125;&#123;this.renderSquare(5)&#125;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(6)&#125;&#123;this.renderSquare(7)&#125;&#123;this.renderSquare(8)&#125;<br>        &lt;&#x2F;div&gt;<br>      &lt;&#x2F;div&gt;<br>    );<br>  &#125;<br>&#125;<br><br>class Game extends React.Component &#123;<br>  render() &#123;<br>    return (<br>      &lt;div className&#x3D;&quot;game&quot;&gt;<br>        &lt;div className&#x3D;&quot;game-board&quot;&gt;<br>          &#123;&#x2F;* Game返回Board组件 *&#x2F;&#125;<br>          &lt;Board &#x2F;&gt;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;game-info&quot;&gt;<br>          &lt;div&gt;&#123;&#x2F;* status *&#x2F;&#125;&lt;&#x2F;div&gt;<br>          &lt;ol&gt;&#123;&#x2F;* TODO *&#x2F;&#125;&lt;&#x2F;ol&gt;<br>        &lt;&#x2F;div&gt;<br>      &lt;&#x2F;div&gt;<br>    );<br>  &#125;<br>&#125;<br><br>&#x2F;&#x2F; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><br>ReactDOM.render(<br>  &#x2F;&#x2F; ReactDOM返回Game组件<br>  &lt;Game &#x2F;&gt;,<br>  document.getElementById(&#39;root&#39;)<br>);<br><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p> 主要效果</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/06/23/GsaDuAMNT3qnmKv.png" srcset="/img/loading.gif" alt="image-20200623162737674"></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/gaearon/pen/gWWQPY?editors=0010">在线代码</a></p>
+<h1 id="第二阶段：-完成基本功能"><a href="#第二阶段：-完成基本功能" class="headerlink" title="第二阶段： 完成基本功能"></a>第二阶段： 完成基本功能</h1><p>这一阶段，将状态从Square组件提升到了Board组件（<strong>状态提升</strong>）。<strong>Square 组件不再持有 state，因此每次它们被点击的时候，Square 组件就会从 Board 组件中接收值，并且通知 Board 组件。</strong></p>
+<p>实现了游戏中“X”和“O”的交替出现，完成了游戏胜负的判定。</p>
+<blockquote>
+<p>组件作用</p>
+</blockquote>
+<ul>
+<li><p>ReactDOM 负责调用 Game 组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">ReactDOM.render(<br>  &lt;Game &#x2F;&gt;,<br>  document.getElementById(&#39;root&#39;)<br>);<br></code></pre></div></td></tr></table></figure></li>
+<li><p>Game组件</p>
+<ul>
+<li><p>Game.render() 负责调用 Board 组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">return (<br>	&#x2F;&#x2F; ...<br>  &lt;div className&#x3D;&quot;game-board&quot;&gt;<br>  	&lt;Board &#x2F;&gt;<br>  &lt;&#x2F;div&gt;<br>  &#x2F;&#x2F; ...<br>)<br></code></pre></div></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Board组件</p>
+<ul>
+<li><p>Board.constructor() 构造函数，初始化了xIsNext状态和squares状态。</p>
+</li>
+<li><p>Board.handleClick() 负责响应从Square传递上来的点击事件。进行了胜负判定并更新了xIsNext状态和squares状态。</p>
+</li>
+<li><p>Board.renderSquare() 向 Square 组件传递了两个 props 参数：props.value 和 props.onClick。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">renderSquare(i) &#123;<br>  return (<br>    &lt;Square<br>      &#x2F;&#x2F; 这里就传入了props.value和props.onClick这两个参数<br>      value&#x3D;&#123;this.state.squares[i]&#125;<br>      onClick&#x3D;&#123;() &#x3D;&gt; this.handleClick(i)&#125;<br>    &#x2F;&gt;<br>  );<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<li>Board.render() 对胜负进行了判定，并九次调用了Board.renderSquare()，完成了九宫格的渲染。</li>
+</ul>
+</li>
+<li><p>Square组件（从class组件变成了function组件）</p>
+<ul>
+<li><p>接收了从Board传入的两个参数props.value和props.onClick，接收props.value设置了点击之后的应该设置的值，接收props.onClick完成向上的点击事件绑定，最终ruturn了一个button标签。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">function Square(props) &#123;<br>  return (<br>    &lt;button <br>    	className&#x3D;&quot;square&quot; <br>    	onClick&#x3D;&#123;props.onClick&#125;<br>		&gt;<br>      &#123;props.value&#125;<br>    &lt;&#x2F;button&gt;<br>  );<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>核心代码</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><code>index.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">function Square(props) &#123;<br>  return (<br>    &lt;button <br>    	className&#x3D;&quot;square&quot; <br>    	onClick&#x3D;&#123;props.onClick&#125;<br>		&gt;<br>      &#123;props.value&#125;<br>    &lt;&#x2F;button&gt;<br>  );<br>&#125;<br><br>class Board extends React.Component &#123;<br>  constructor(props) &#123;<br>    super(props);<br>    this.state &#x3D; &#123;<br>      squares: Array(9).fill(null),<br>      xIsNext: true,<br>    &#125;;<br>  &#125;<br><br>  handleClick(i) &#123;<br>    const squares &#x3D; this.state.squares.slice();<br>    if (calculateWinner(squares) || squares[i]) &#123;<br>      return;<br>    &#125;<br>    squares[i] &#x3D; this.state.xIsNext ? &#39;X&#39; : &#39;O&#39;;<br>    this.setState(&#123;<br>      squares: squares,<br>      xIsNext: !this.state.xIsNext,<br>    &#125;);<br>  &#125;<br><br>  renderSquare(i) &#123;<br>    return (<br>      &lt;Square<br>        &#x2F;&#x2F; 这里就传入了props.value和props.onClick这两个参数<br>        value&#x3D;&#123;this.state.squares[i]&#125;<br>        onClick&#x3D;&#123;() &#x3D;&gt; this.handleClick(i)&#125;<br>      &#x2F;&gt;<br>    );<br>  &#125;<br><br>  render() &#123;<br>    const winner &#x3D; calculateWinner(this.state.squares);<br>    let status;<br>    if (winner) &#123;<br>      status &#x3D; &#39;Winner: &#39; + winner;<br>    &#125; else &#123;<br>      status &#x3D; &#39;Next player: &#39; + (this.state.xIsNext ? &#39;X&#39; : &#39;O&#39;);<br>    &#125;<br><br>    return (<br>      &lt;div&gt;<br>        &lt;div className&#x3D;&quot;status&quot;&gt;&#123;status&#125;&lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(0)&#125;<br>          &#123;this.renderSquare(1)&#125;<br>          &#123;this.renderSquare(2)&#125;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(3)&#125;<br>          &#123;this.renderSquare(4)&#125;<br>          &#123;this.renderSquare(5)&#125;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(6)&#125;<br>          &#123;this.renderSquare(7)&#125;<br>          &#123;this.renderSquare(8)&#125;<br>        &lt;&#x2F;div&gt;<br>      &lt;&#x2F;div&gt;<br>    );<br>  &#125;<br>&#125;<br><br>class Game extends React.Component &#123;<br>  render() &#123;<br>    return (<br>      &lt;div className&#x3D;&quot;game&quot;&gt;<br>        &lt;div className&#x3D;&quot;game-board&quot;&gt;<br>          &lt;Board &#x2F;&gt;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;game-info&quot;&gt;<br>          &lt;div&gt;&#123;&#x2F;* status *&#x2F;&#125;&lt;&#x2F;div&gt;<br>          &lt;ol&gt;&#123;&#x2F;* TODO *&#x2F;&#125;&lt;&#x2F;ol&gt;<br>        &lt;&#x2F;div&gt;<br>      &lt;&#x2F;div&gt;<br>    );<br>  &#125;<br>&#125;<br><br>&#x2F;&#x2F; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><br>ReactDOM.render(<br>  &lt;Game &#x2F;&gt;,<br>  document.getElementById(&#39;root&#39;)<br>);<br><br>function calculateWinner(squares) &#123;<br>  const lines &#x3D; [<br>    [0, 1, 2],<br>    [3, 4, 5],<br>    [6, 7, 8],<br>    [0, 3, 6],<br>    [1, 4, 7],<br>    [2, 5, 8],<br>    [0, 4, 8],<br>    [2, 4, 6],<br>  ];<br>  for (let i &#x3D; 0; i &lt; lines.length; i++) &#123;<br>    const [a, b, c] &#x3D; lines[i];<br>    if (squares[a] &amp;&amp; squares[a] &#x3D;&#x3D;&#x3D; squares[b] &amp;&amp; squares[a] &#x3D;&#x3D;&#x3D; squares[c]) &#123;<br>      return squares[a];<br>    &#125;<br>  &#125;<br>  return null;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>主要效果</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/06/23/FkS9DOaXcJ5Ms8V.png" srcset="/img/loading.gif" alt="image-20200623170141198"></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/gaearon/pen/LyyXgK?editors=0010">在线代码</a></p>
+<h1 id="第三阶段：添加回溯功能"><a href="#第三阶段：添加回溯功能" class="headerlink" title="第三阶段：添加回溯功能"></a>第三阶段：添加回溯功能</h1><p>基于数据不变性，添加了 <code>history</code> 变量，再次进行状态提升，将状态提升到Game组件中，Board 中不再保留 constructor、handleClick等函数，只保留renderSquare和render来向下传递数据。</p>
+<blockquote>
+<p>组件作用</p>
+</blockquote>
+<ul>
+<li><p>ReactDOM 负责调用 Game 组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">ReactDOM.render(<br>  &lt;Game &#x2F;&gt;,<br>  document.getElementById(&#39;root&#39;)<br>);<br></code></pre></div></td></tr></table></figure></li>
+<li><p>Game组件</p>
+<ul>
+<li><p>Game.constructor() 负责初始化squares和stepNumber、xIsNext等状态。</p>
+</li>
+<li><p>Game.handleClick() 负责游戏结束判定，更新history（保存游戏历史数据）、current（当前游戏结果）、squares等状态。</p>
+</li>
+<li><p>Game.jumpTo() 负责进行游戏步骤跳转。</p>
+</li>
+<li><p>Game.render() 在渲染之前照常先进行了游戏结束判定，然后获取了history、current，更新了游戏信息，更新了跳转的button。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">const moves &#x3D; history.map((step, move) &#x3D;&gt; &#123;<br>  const desc &#x3D; move ?<br>    &#39;Go to move #&#39; + move :<br>    &#39;Go to game start&#39;;<br>  return (<br>    &lt;li key&#x3D;&#123;move&#125;&gt;<br>      &lt;button <br>        onClick&#x3D;&#123;() &#x3D;&gt; this.jumpTo(move)&#125;<br>      &gt;<br>        &#123;desc&#125;<br>      &lt;&#x2F;button&gt;<br>    &lt;&#x2F;li&gt;<br>  );<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p>最后，调用了Board组件，从Game组件向Board组件，传入了props.squares 和 props.onClick，而props.onClick绑定了Game.handleClick()，因此，Borad接收了点击事件的触发就会交由Game.handleClick()处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">return (<br>    &#x2F;&#x2F; ...<br>    &lt;Board<br>        squares&#x3D;&#123;current.squares&#125;<br>        onClick&#x3D;&#123;i &#x3D;&gt; this.handleClick(i)&#125;<br>    &#x2F;&gt;<br>    &#x2F;&#x2F; ...<br>)<br></code></pre></div></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Board组件</p>
+<ul>
+<li><p>Board.renderSquare() 向 Square 组件传递了两个 props 参数：props.value 和 props.onClick。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">renderSquare(i) &#123;<br>  return (<br>    &lt;Square<br>      &#x2F;&#x2F; 这里就传入了props.value和props.onClick这两个参数<br>      value&#x3D;&#123;this.state.squares[i]&#125;<br>      &#x2F;&#x2F; onClick&#x3D;&#123;() &#x3D;&gt; this.handleClick(i)&#125;  &#x2F;&#x2F; 状态还在 Board 的时候，传入Square的就是Board.handleClick(i)。<br>      onClick&#x3D;&#123;() &#x3D;&gt; this.props.onClick(i)&#125;  &#x2F;&#x2F; 状态不在 Board 的时候，传入Square的就是this.props.onClick(i)，也就是Game.handleClick(i)。<br>    &#x2F;&gt;<br>  );<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<li>Board.render() 对胜负进行了判定，并九次调用了Board.renderSquare()，完成了九宫格的渲染。</li>
+</ul>
+</li>
+<li><p>Square组件（从class组件变成了function组件）</p>
+<ul>
+<li><p>接收了从Board传入的两个参数props.value和props.onClick，接收props.value设置了点击之后的应该设置的值，接收props.onClick完成向上的点击事件绑定，最终ruturn了一个button标签。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">function Square(props) &#123;<br>  return (<br>    &lt;button <br>    	className&#x3D;&quot;square&quot; <br>    	onClick&#x3D;&#123;props.onClick&#125;<br>		&gt;<br>      &#123;props.value&#125;<br>    &lt;&#x2F;button&gt;<br>  );<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>核心代码</p>
+</blockquote>
+<p><code>index.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">function Square(props) &#123;<br>  return (<br>    &lt;button className&#x3D;&quot;square&quot; onClick&#x3D;&#123;props.onClick&#125;&gt;<br>      &#123;props.value&#125;<br>    &lt;&#x2F;button&gt;<br>  );<br>&#125;<br><br>class Board extends React.Component &#123;<br>  renderSquare(i) &#123;<br>    return (<br>      &lt;Square<br>        value&#x3D;&#123;this.props.squares[i]&#125;<br>        onClick&#x3D;&#123;() &#x3D;&gt; this.props.onClick(i)&#125;<br>      &#x2F;&gt;<br>    );<br>  &#125;<br><br>  render() &#123;<br>    return (<br>      &lt;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(0)&#125;<br>          &#123;this.renderSquare(1)&#125;<br>          &#123;this.renderSquare(2)&#125;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(3)&#125;<br>          &#123;this.renderSquare(4)&#125;<br>          &#123;this.renderSquare(5)&#125;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>          &#123;this.renderSquare(6)&#125;<br>          &#123;this.renderSquare(7)&#125;<br>          &#123;this.renderSquare(8)&#125;<br>        &lt;&#x2F;div&gt;<br>      &lt;&#x2F;div&gt;<br>    );<br>  &#125;<br>&#125;<br><br>class Game extends React.Component &#123;<br>  constructor(props) &#123;<br>    super(props);<br>    this.state &#x3D; &#123;<br>      history: [<br>        &#123;<br>          squares: Array(9).fill(null)<br>        &#125;<br>      ],<br>      stepNumber: 0,<br>      xIsNext: true<br>    &#125;;<br>  &#125;<br><br>  handleClick(i) &#123;<br>    const history &#x3D; this.state.history.slice(0, this.state.stepNumber + 1);<br>    const current &#x3D; history[history.length - 1];<br>    const squares &#x3D; current.squares.slice();<br>    if (calculateWinner(squares) || squares[i]) &#123;<br>      return;<br>    &#125;<br>    squares[i] &#x3D; this.state.xIsNext ? &quot;X&quot; : &quot;O&quot;;<br>    this.setState(&#123;<br>      history: history.concat([<br>        &#123;<br>          squares: squares<br>        &#125;<br>      ]),<br>      stepNumber: history.length,<br>      xIsNext: !this.state.xIsNext<br>    &#125;);<br>  &#125;<br><br>  jumpTo(step) &#123;<br>    this.setState(&#123;<br>      stepNumber: step,<br>      xIsNext: (step % 2) &#x3D;&#x3D;&#x3D; 0<br>    &#125;);<br>  &#125;<br><br>  render() &#123;<br>    const history &#x3D; this.state.history;<br>    const current &#x3D; history[this.state.stepNumber];<br>    const winner &#x3D; calculateWinner(current.squares);<br><br>    const moves &#x3D; history.map((step, move) &#x3D;&gt; &#123;<br>      const desc &#x3D; move ?<br>        &#39;Go to move #&#39; + move :<br>        &#39;Go to game start&#39;;<br>      return (<br>        &lt;li key&#x3D;&#123;move&#125;&gt;<br>          &lt;button onClick&#x3D;&#123;() &#x3D;&gt; this.jumpTo(move)&#125;&gt;&#123;desc&#125;&lt;&#x2F;button&gt;<br>        &lt;&#x2F;li&gt;<br>      );<br>    &#125;);<br><br>    let status;<br>    if (winner) &#123;<br>      status &#x3D; &quot;Winner: &quot; + winner;<br>    &#125; else &#123;<br>      status &#x3D; &quot;Next player: &quot; + (this.state.xIsNext ? &quot;X&quot; : &quot;O&quot;);<br>    &#125;<br><br>    return (<br>      &lt;div className&#x3D;&quot;game&quot;&gt;<br>        &lt;div className&#x3D;&quot;game-board&quot;&gt;<br>          &lt;Board<br>            squares&#x3D;&#123;current.squares&#125;<br>            onClick&#x3D;&#123;i &#x3D;&gt; this.handleClick(i)&#125;<br>          &#x2F;&gt;<br>        &lt;&#x2F;div&gt;<br>        &lt;div className&#x3D;&quot;game-info&quot;&gt;<br>          &lt;div&gt;&#123;status&#125;&lt;&#x2F;div&gt;<br>          &lt;ol&gt;&#123;moves&#125;&lt;&#x2F;ol&gt;<br>        &lt;&#x2F;div&gt;<br>      &lt;&#x2F;div&gt;<br>    );<br>  &#125;<br>&#125;<br><br>&#x2F;&#x2F; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><br>ReactDOM.render(&lt;Game &#x2F;&gt;, document.getElementById(&quot;root&quot;));<br><br>function calculateWinner(squares) &#123;<br>  const lines &#x3D; [<br>    [0, 1, 2],<br>    [3, 4, 5],<br>    [6, 7, 8],<br>    [0, 3, 6],<br>    [1, 4, 7],<br>    [2, 5, 8],<br>    [0, 4, 8],<br>    [2, 4, 6]<br>  ];<br>  for (let i &#x3D; 0; i &lt; lines.length; i++) &#123;<br>    const [a, b, c] &#x3D; lines[i];<br>    if (squares[a] &amp;&amp; squares[a] &#x3D;&#x3D;&#x3D; squares[b] &amp;&amp; squares[a] &#x3D;&#x3D;&#x3D; squares[c]) &#123;<br>      return squares[a];<br>    &#125;<br>  &#125;<br>  return null;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>主要效果</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/06/23/sH3fNEaUjpBoMl9.png" srcset="/img/loading.gif" alt="image-20200623175403690"></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/gaearon/pen/gWWZgR?editors=0010">在线代码</a></p>
+<h1 id="关键点回顾"><a href="#关键点回顾" class="headerlink" title="关键点回顾"></a>关键点回顾</h1><blockquote>
+<p>这个history变量要放到哪里?</p>
+</blockquote>
+<p>我们希望顶层 Game 组件展示出一个历史步骤的列表。这个功能需要访问 <code>history</code> 的数据，因此我们把 <code>history</code> 这个 state 放在顶层 Game 组件中。</p>
+<p>我们把 <code>history</code> state 放在了 Game 组件中，这样就可以从它的子组件 Board 里面删除掉 <code>square</code> 中的 state。把 state 从 Board 组件提升到顶层的 Game 组件里。这样，Game 组件就拥有了对 Board 组件数据的完全控制权，除此之外，还可以让 Game 组件控制 Board 组件，并根据 <code>history</code> 渲染历史步骤。</p>
+<p>下一步，我们让 Board 组件从 Game 组件中接收 <code>squares</code> 和 <code>onClick</code> 这两个 props。</p>
+<p>因为当前在 Board 组件中已经有一个对 Square 点击事件的监听函数了，所以我们需要把每一个 Square 的对应位置传递给 <code>onClick</code> 监听函数，这样监听函数就知道具体哪一个 Square 被点击了。</p>
+<p> 状态从 Board组件 提升到 Game组件，需要完成以下三个步骤</p>
+<ol>
+<li>不在Board组件中初始化状态了，删除 Board 组件中的 <code>constructor</code> 构造函数。</li>
+<li>Board组件<code>renderSquare</code> 函数中对状态的调用都从 <code>this.state.squares[i]</code> 变为 <code>this.props.squares[i]</code>，从此，状态都是从 Game组件传递过来的了。</li>
+<li>在Board组件中，将状态传递给Game组件，把 Board 组件的 <code>renderSquare</code> 中的 <code>this.handleClick(i)</code> 替换为 <code>this.props.onClick(i)</code>。</li>
+</ol>
+<blockquote>
+<p>养成好习惯，用箭头函数来替代this。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">&#x2F;&#x2F; 箭头函数<br>&lt;button className&#x3D;&quot;square&quot; onClick&#x3D;&#123;() &#x3D;&gt; alert(&#39;click&#39;) &#125;&gt;<br><br>&#x2F;&#x2F; this函数<br>&lt;button className&#x3D;&quot;square&quot; onClick&#x3D;&#123;function() &#123;alert(&#39;click&#39;)&#125;&#125;&gt;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>React构造函数</p>
+</blockquote>
+<p>在 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">JavaScript class</a> 中，每次你定义其子类的构造函数时，都需要调用 <code>super</code> 方法。因此，在所有含有构造函数的的 React 组件中，构造函数必须以 <code>super(props)</code> 开头。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">constructor(props) &#123;<br>  super(props);<br>  this.state &#x3D; &#123;<br>    value: null,<br>  &#125;;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>renturn的格式</p>
+</blockquote>
+<p>为了提高可读性，我们把返回的 React 元素拆分成了多行，同时在最外层加了小括号，这样 JavaScript 解析的时候就不会在 <code>return</code> 的后面自动插入一个分号从而破坏代码结构了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">return (<br>  &lt;Square <br>    value&#x3D;&#123;this.state.squares[i]&#125;<br>    onClick&#x3D;&#123;() &#x3D;&gt; this.handleClick(i)&#125;<br>  &#x2F;&gt;<br>);<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>事件绑定</p>
+</blockquote>
+<p><em>React的事件绑定和普通JS的事件绑定有所不同</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">&#x2F;&#x2F; JS Style<br>&lt;button onclick&#x3D;&quot;activateLasers()&quot;&gt;<br>  Activate Lasers<br>&lt;&#x2F;button&gt;<br><br>&#x2F;&#x2F; React Style<br>&lt;button onClick&#x3D;&#123;activateLasers&#125;&gt;<br>  Activate Lasers<br>&lt;&#x2F;button&gt;<br></code></pre></div></td></tr></table></figure>
+<p><code>handleClick()</code></p>
+<p><code>handleClick</code> 是React中默认的点击事件组件响应的方法。这种方式的好处是：每次render方法的调用，不会重新创建一个新的事件响应函数，没有额外的性能损失。但是，使用这种方式要在构造函数中为作为事件响应的方法(handleClick)，手动绑定this:  <code>this.handleClick = this.handleClick.bind(this)</code>，这是因为ES6 语法的缘故，ES6  Class 的方法默认不会把this绑定到当前的实例对象上，需要我们手动绑定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">handleClick(i) &#123;<br>		const squares &#x3D; this.state.squares.slice();<br>		squares[i] &#x3D; &#39;X&#39;;<br>		this.setState(&#123;squares: squares&#125;);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>数据的不可变性</p>
+</blockquote>
+<p>修改数据有两种方式</p>
+<ol>
+<li><p>在原来的数据上修改</p>
+</li>
+<li><p>复制之后修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">var player &#x3D; &#123;score: 1, name: &#39;Jeff&#39;&#125;;<br><br>var newPlayer &#x3D; Object.assign(&#123;&#125;, player, &#123;score: 2&#125;);<br>&#x2F;&#x2F; player 的值没有改变, 但是 newPlayer 的值是 &#123;score: 2, name: &#39;Jeff&#39;&#125;<br><br>&#x2F;&#x2F; 使用对象展开语法，就可以写成：<br>var newnewPlayer &#x3D; &#123;...player, score: 5&#125;;<br>&#x2F;&#x2F; player 的值没有改变, 但是 newnewPlayer 的值是 &#123;score: 5, name: &#39;Jeff&#39;&#125;<br></code></pre></div></td></tr></table></figure>
+<p>第二种方法有以下几种好处</p>
+</li>
+<li><p>保持数据的不可变性质，不可变性<strong>使得复杂的特性更容易实现</strong>。撤销和恢复功能在开发中是一个很常见的需求。保持了数据的不变性能够很容易的实现这些需求。</p>
+</li>
+<li><strong>易于跟踪数据的改变</strong>，发现有新的对象复制，就可以判定发生了数据改变。</li>
+<li>由于数据的变化十分易于跟踪，因此可以很轻松的确定不可变数据是否发生了改变，从而确定渲染时机，即何时对组件进行重新渲染。</li>
+</ol>
+<p>在js中，使用<code>slice()</code> 方法返回一个新的数组对象，这一对象是一个由 <code>begin</code> 和 <code>end</code> 决定的原数组的<strong>浅拷贝</strong>（包括 <code>begin</code>，不包括<code>end</code>）。<code>slice</code> 不会修改原数组，只会返回一个浅复制了原数组中的元素的一个新数组。拷贝原则是，如果要拷贝的是可变对象，就拷贝其引用。否则是不可变对象，拷贝的就是其本身。</p>
+<blockquote>
+<p>从 class组件 到 function组件</p>
+</blockquote>
+<p><strong>如果你想写的组件只包含一个 <code>render</code> 方法，并且不包含 state，那么使用函数组件就会更简单。</strong>我们不需要定义一个继承于 <code>React.Component</code> 的类，我们可以定义一个函数，这个函数接收 <code>props</code> 作为参数，然后返回需要渲染的元素。函数组件写起来并不像 class 组件那么繁琐，<strong>很多组件都可以使用函数组件来写。</strong></p>
+<blockquote>
+<p>class组件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">class Square extends React.Component &#123;<br>    render() &#123;<br>        return (<br>            &lt;button<br>                className&#x3D;&quot;square&quot; <br>                onClick&#x3D;&#123;() &#x3D;&gt; this.props.onClick()&#125;<br>            &gt;<br>                &#123;this.props.value&#125;<br>            &lt;&#x2F;button&gt;<br>        );<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>function组件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">function Square(props) &#123;<br>    &#x2F;&#x2F; 把两个 this.props 都替换成了 props。<br>    return (<br>        &lt;button <br>            className&#x3D;&quot;square&quot; <br>            &#123;% 函数绑定也变得更简单了 PS: 这里绑定的是onClick不是onClick() %&#125;<br>            onClick&#x3D;&#123;props.onClick&#125;  <br>        &gt;<br>            &#123;props.value&#125;<br>        &lt;&#x2F;button&gt;<br>    )<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>JS三段表达式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">var a &#x3D; true;<br>undefined<br>a ? &quot;X&quot; : &quot;O&quot;<br>&quot;X&quot;<br>var a &#x3D; false;<br>undefined<br>a ? &quot;X&quot; : &quot;O&quot;<br>&quot;O&quot;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>React组件渲染原理</p>
+</blockquote>
+<p>React 元素被视为 JavaScript 一等公民中的对象（first-class JavaScript objects）。因此我们可以把 React 元素在应用程序中当作参数来传递。在 React 中，我们还可以使用 React 元素的数组来渲染多个元素。</p>
+<p>每当一个列表重新渲染时，React 会根据每一项列表元素的 key 来检索上一次渲染时与每个 key 所匹配的列表项。如果 React 发现当前的列表有一个之前不存在的 key，那么就会创建出一个新的组件。如果 React 发现和之前对比少了一个 key，那么就会销毁之前对应的组件。如果一个组件的 key 发生了变化，这个组件会被销毁，然后使用新的 state 重新创建一份。</p>
+<p><strong>我们强烈推荐，每次只要你构建动态列表的时候，都要指定一个合适的 key。</strong></p>
+<p>如果你没有指定任何 key，React 会发出警告，并且会把数组的索引当作默认的 key。但是如果想要对列表进行重新排序、新增、删除操作时，把数组索引作为 key 是有问题的。显式地使用 <code>key=&#123;i&#125;</code> 来指定 key 确实会消除警告，但是仍然和数组索引存在同样的问题，所以大多数情况下最好不要这么做。</p>
+<p>组件的 key 值并不需要在全局都保证唯一，只需要在当前的同一级元素之前保证唯一即可。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">import React from &#39;react&#39;;<br>import ReactDOM from &#39;react-dom&#39;;<br>import &#39;.&#x2F;index.css&#39;;<br>import &#123; mockComponent &#125; from &#39;react-dom&#x2F;test-utils&#39;;<br><br><br>&#x2F;&#x2F; 如果你想写的组件只包含一个 render 方法，并且不包含 state，那么使用函数组件就会更简单。我们不需要定义一个继承于 React.Component 的类，我们可以定义一个函数，这个函数接收 props 作为参数，然后返回需要渲染的元素。<br>&#x2F;&#x2F; class Square extends React.Component &#123;<br>&#x2F;&#x2F;     &#x2F;&#x2F; 我们用 state 来实现所谓“记忆”的功能。<br>&#x2F;&#x2F;     &#x2F;&#x2F; constructor函数会初始化this.state<br>&#x2F;&#x2F;     &#x2F;&#x2F; this.state 中存储当前每个方格（Square）的值，并且在每次方格被点击的时候改变这个值。<br>&#x2F;&#x2F;     &#x2F;&#x2F; 删掉 Square 组件中的构造函数 constructor，因为该组件不需要再保存游戏的 state。数据被放到Board中了，Square就只是起到一个接收点击事件触发的作用。<br>&#x2F;&#x2F;     &#x2F;&#x2F; constructor(props) &#123;<br>&#x2F;&#x2F;     &#x2F;&#x2F;     super(props);<br>&#x2F;&#x2F;     &#x2F;&#x2F;     this.state &#x3D; &#123;<br>&#x2F;&#x2F;     &#x2F;&#x2F;         value: null,<br>&#x2F;&#x2F;     &#x2F;&#x2F;     &#125;;<br>&#x2F;&#x2F;     &#x2F;&#x2F; &#125;<br>    <br>&#x2F;&#x2F;     render() &#123;<br>&#x2F;&#x2F;         &#x2F;&#x2F; Square组件渲染了一个单独的&lt;button&gt;<br>&#x2F;&#x2F;         &#x2F;&#x2F; 在 Square 组件 render 方法中的 onClick 事件监听函数中调用 this.setState，<br>&#x2F;&#x2F;         &#x2F;&#x2F; 我们就可以在每次 &lt;button&gt; 被点击的时候通知 React 去重新渲染 Square 组件。<br>&#x2F;&#x2F;         return (<br>&#x2F;&#x2F;             &lt;button<br>&#x2F;&#x2F;                 className&#x3D;&quot;square&quot; <br>&#x2F;&#x2F;                 onClick&#x3D;&#123;() &#x3D;&gt; this.props.onClick()&#125;<br>&#x2F;&#x2F;             &gt;<br>&#x2F;&#x2F;                 &#123;&#x2F;* &#123;this.states.value&#125; *&#x2F;&#125;<br>&#x2F;&#x2F;                 &#123;&#x2F;* 不再使用this.states.value进行数据绑定了，直接进行用props进行数据绑定。 *&#x2F;&#125;<br>&#x2F;&#x2F;                 &#123;this.props.value&#125;<br>&#x2F;&#x2F;             &lt;&#x2F;button&gt;<br>&#x2F;&#x2F;         );<br>&#x2F;&#x2F;     &#125;<br>&#x2F;&#x2F; &#125;<br><br><br>function Square(props) &#123;<br>    &#x2F;&#x2F; 把两个 this.props 都替换成了 props。<br>    return (<br>        &lt;button <br>            className&#x3D;&quot;square&quot; <br>            onClick&#x3D;&#123;props.onClick&#125;  &#x2F;&#x2F; 函数绑定也变得更简单了 这里绑定的是onClick不是onClick()<br>        &gt;<br>            &#123;props.value&#125;<br>        &lt;&#x2F;button&gt;<br>    )<br>&#125;;<br><br>&#x2F;&#x2F; Board组件渲染了9个方块。<br>class Board extends React.Component &#123;<br><br>    &#x2F;&#x2F; version 1.0 状态提升之后，this.state就不在 Board 中做处理了。<br>    &#x2F;&#x2F; constructor(props) &#123;<br>    &#x2F;&#x2F;     super(props);<br>    &#x2F;&#x2F;     this.state &#x3D; &#123;<br>    &#x2F;&#x2F;         &#x2F;&#x2F; 在构造函数中新建了一个dict，保存下棋结果，其中this.state.squares是一个list。<br>    &#x2F;&#x2F;         squares: Array(9).fill(null),<br>    &#x2F;&#x2F;         xIsNext: true,  &#x2F;&#x2F; 构造函数中的初始 state 来设置默认的第一步棋子为 “X”<br>    &#x2F;&#x2F;     &#125;;<br>    &#x2F;&#x2F; &#125;<br><br>    &#x2F;&#x2F; 在状态由 Board 提升到 Game 之后，Board组件不在负责处理 Square 的点击事件响应。<br>    &#x2F;&#x2F; 而是交由上一级组件 Game组件 来处理。<br>    &#x2F;&#x2F; handleClick是点击事件的默认响应的方法<br>    &#x2F;&#x2F; square触发的点击事件，就是由handleClick来处理的。<br>    &#x2F;&#x2F; Board.handleClick组件中都是调用本组件的state。<br>    &#x2F;&#x2F; 所以用的都是this.setState。<br>    &#x2F;&#x2F; handleClick(i) &#123;<br>    &#x2F;&#x2F;     &#x2F;&#x2F; 调用 slice() 方法创建了 squares 数组的一个副本，而不是直接在现有的数组上进行修改。<br>    &#x2F;&#x2F;     const squares &#x3D; this.state.squares.slice();<br>    &#x2F;&#x2F;     &#x2F;&#x2F; 当有玩家胜出时，或者某个 Square 已经被填充时，该函数不做任何处理直接返回。<br>    &#x2F;&#x2F;     if (calculateWinner(squares) || squares[i]) &#123;<br>    &#x2F;&#x2F;         return;<br>    &#x2F;&#x2F;     &#125;<br>    &#x2F;&#x2F;     &#x2F;&#x2F; squares[i] 不再固定，“X”和“O”依次切换，棋子每移动一步，xIsNext（布尔值）都会反转，该值将确定下一步轮到哪个玩家，并且游戏的状态会被保存下来。<br>    &#x2F;&#x2F;     squares[i] &#x3D; this.state.xIsNext ? &#39;X&#39; : &#39;O&#39;;<br>    &#x2F;&#x2F;     &#x2F;&#x2F; squares[i] &#x3D; &#39;X&#39;;<br>    &#x2F;&#x2F;     this.setState(&#123;<br>    &#x2F;&#x2F;         squares: squares,<br>    &#x2F;&#x2F;         &#x2F;&#x2F; 每次操作，都翻转一次xIsNext的值。<br>    &#x2F;&#x2F;         xIsNext: !this.state.xIsNext,<br>    &#x2F;&#x2F;     &#125;);<br>    &#x2F;&#x2F; &#125;<br>    <br>    renderSquare(i) &#123;<br>        &#x2F;&#x2F; 传递一个名为 value 的 prop 渲染到 Square 当中<br>        &#x2F;&#x2F; 把一个 prop 从父组件 Board “传递”给了子组件 Square。<br>        &#x2F;&#x2F; return &lt;Square value&#x3D;&#123;i&#125;&#x2F;&gt;;  &#x2F;&#x2F; 这种方式是默认填写输入数字 i 的<br>        return (<br>            &lt;Square<br>                value&#x3D;&#123;this.props.squares[i]&#125;<br>                &#x2F;&#x2F; 这里绑定的事件从handleClick变成onClick<br>                &#x2F;&#x2F; Board不再负责处理点击事件了，而是向上将点击事件传递到Game组件。<br>                onClick&#x3D;&#123;() &#x3D;&gt; this.props.onClick(i)&#125;<br>            &#x2F;&gt;<br>        );<br>    &#125;<br><br>    render() &#123;<br>        &#x2F;&#x2F; 在状态由 Board 提升到 Game 之后，游戏状态更新由Game负责，这一部分代码就可以注释掉了。<br>        &#x2F;&#x2F; 在渲染之前先做一次胜负判定 更新游戏状态<br>        &#x2F;&#x2F; const winner &#x3D; calculateWinner(this.state.squares);<br>        &#x2F;&#x2F; let status;<br>        &#x2F;&#x2F; if(winner) &#123;<br>        &#x2F;&#x2F;     status &#x3D; &quot;Winner: &quot; + winner;<br>        &#x2F;&#x2F; &#125; else &#123;<br>        &#x2F;&#x2F;     status &#x3D; &quot;Next player: &quot; + (this.state.xIsNext ? &quot;X&quot; : &quot;0&quot;);<br>        &#x2F;&#x2F; &#125;<br>        <br>        &#x2F;&#x2F; 开始渲染<br>        return (<br>            &#x2F;&#x2F; return的是一个完整的div<br>            &lt;div&gt;<br>                &#123;&#x2F;* 在状态由 Board 提升到 Game 之后，游戏状态更新由Game负责，这一行展示代码就可以注释掉了。 *&#x2F;&#125;<br>                &#123;&#x2F;* &lt;div className&#x3D;&quot;status&quot;&gt;&#123;status&#125;&lt;&#x2F;div&gt; *&#x2F;&#125;<br>                &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>                    &#123;&#x2F;* 调用renderSquare函数渲染 *&#x2F;&#125;<br>                    &#123;&#x2F;* 里面的数字i锚定在renderSquare函数中要更新了this.state.squares[]中的第i个元素。 *&#x2F;&#125;<br>                    &#123;this.renderSquare(0)&#125;<br>                    &#123;this.renderSquare(1)&#125;<br>                    &#123;this.renderSquare(2)&#125;<br>                &lt;&#x2F;div&gt;<br>                &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>                    &#123;this.renderSquare(3)&#125;<br>                    &#123;this.renderSquare(4)&#125;<br>                    &#123;this.renderSquare(5)&#125;<br>                &lt;&#x2F;div&gt;<br>                &lt;div className&#x3D;&quot;board-row&quot;&gt;<br>                    &#123;this.renderSquare(6)&#125;<br>                    &#123;this.renderSquare(7)&#125;<br>                    &#123;this.renderSquare(8)&#125;<br>                &lt;&#x2F;div&gt;<br>            &lt;&#x2F;div&gt;<br>        );<br>    &#125;<br>&#125;<br><br>&#x2F;&#x2F; Game组件渲染了含有默认值的一个棋盘<br>&#x2F;&#x2F; Game组件调用了&lt;Board &#x2F;&gt;组件<br>class Game extends React.Component &#123;<br>    &#x2F;&#x2F; 将状态state从this.state从Board提升到Game。<br>    constructor(props) &#123;<br>        super(props);<br>        this.state &#x3D; &#123;<br>            history: [&#123;<br>                squares: Array(9).fill(null),<br>            &#125;],<br>            xIsNext: true,  &#x2F;&#x2F; X先行<br>            stepNumber: 0,  &#x2F;&#x2F; 记录当前查看哪一行<br>        &#125;;<br>    &#125;<br><br>    &#x2F;&#x2F; Square组件触发的点击事件，被层层向上传递，最终由Game组件的handleClick函数来处理。<br>    handleClick(i) &#123;<br>        &#x2F;&#x2F; 更新 State 状态。<br>        &#x2F;&#x2F; 调用 slice() 方法创建了 squares 数组的一个副本，而不是直接在现有的数组上进行修改。<br>        const history &#x3D; this.state.history.slice(0, this.state.stepNumber + 1);<br>        const current &#x3D; history[history.length - 1];<br>        const squares &#x3D; current.squares.slice();<br><br>        &#x2F;&#x2F; 更新游戏状态<br>        &#x2F;&#x2F; 当有玩家胜出时，或者某个 Square 已经被填充时，该函数不做任何处理直接返回。<br>        if (calculateWinner(squares) || squares[i]) &#123;<br>            return;<br>        &#125;<br>        &#x2F;&#x2F; squares[i] &#x2F;&#x2F; 固定要填入的字符<br>        &#x2F;&#x2F; 不再固定要填入的字符，“X”和“O”依次切换，棋子每移动一步，xIsNext（布尔值）都会反转，<br>        &#x2F;&#x2F; 该值将确定下一步轮到哪个玩家，并且游戏的状态会被保存下来。<br>        squares[i] &#x3D; this.state.xIsNext ? &#39;X&#39; : &#39;O&#39;;  &#x2F;&#x2F; squares中保存的就是要填入的数据。<br>        this.setState(&#123;<br>            &#x2F;&#x2F; concat() 方法与 push() 方法不太一样，它并不会改变原数组，所以推荐使用 concat()。<br>            history: history.concat([&#123;<br>                squares: squares,<br>            &#125;]),<br>            &#x2F;&#x2F; 每次操作都更新stepNumber<br>            stepNumber: history.length, <br>            &#x2F;&#x2F; 每次操作，都翻转一次xIsNext的值。<br>            xIsNext: !this.state.xIsNext,<br>        &#125;);<br>    &#125;<br><br>    jumpTo(step) &#123;<br>        this.setState (&#123;<br>            stepNumber: step,<br>            xIsNext: (step % 2) &#x3D;&#x3D;&#x3D; 0,<br>        &#125;);<br>    &#125;<br><br>    &#x2F;&#x2F; 更新 Game 组件的 render 函数，<br>    &#x2F;&#x2F; 使用最新一次历史记录来确定并展示游戏的状态。<br>    render() &#123;<br>        &#x2F;&#x2F; 保存游戏数据<br>        const history &#x3D; this.state.history;<br>        &#x2F;&#x2F; 最后，修改 Game 组件的 render 方法，将代码从始终根据<br>        &#x2F;&#x2F; 最后一次移动渲染修改为根据当前 stepNumber 渲染。<br>        &#x2F;&#x2F; const current &#x3D; history[history.length-1];<br>        const current &#x3D; history[this.state.stepNumber];<br><br>        &#x2F;&#x2F; 更新游戏跳转步骤<br>        const moves &#x3D; history.map((step, move) &#x3D;&gt; &#123;<br>            const desc &#x3D; move ? <br>                &quot;Go to move #&quot; + move : <br>                &quot;Go to game Start&quot;<br>            return (<br>                &lt;li key&#x3D;&#123;move&#125;&gt;<br>                    &lt;button onClick&#x3D;&#123;() &#x3D;&gt; this.jumpTo(move)&#125;&gt;<br>                        &#123;desc&#125;<br>                    &lt;&#x2F;button&gt;<br>                &lt;&#x2F;li&gt;<br>            );<br>        &#125;);<br>        &#x2F;&#x2F; 更新游戏状态<br>        let status;<br>        const winner &#x3D; calculateWinner(current.squares);<br>        if (winner) &#123;<br>            status &#x3D; &quot;Winner: &quot; + winner;<br>        &#125; else &#123;<br>            status &#x3D; &quot;Next player: &quot; + (this.state.xIsNext ? &quot;X&quot; : &quot;0&quot;);<br>        &#125; <br>        &#x2F;&#x2F; 开始渲染  <br>        return (<br>            &lt;div className&#x3D;&quot;game&quot;&gt;<br>                &lt;div className&#x3D;&quot;game-board&quot;&gt;<br>                    &lt;Board<br>                        squares&#x3D;&#123;current.squares&#125;<br>                        onClick&#x3D;&#123;(i) &#x3D;&gt; this.handleClick(i)&#125;<br>                    &#x2F;&gt;<br>                &lt;&#x2F;div&gt;<br>                &lt;div className&#x3D;&quot;game-info&quot;&gt;<br>                    &#123;&#x2F;* 展示游戏状态 *&#x2F;&#125;<br>                    &lt;div&gt;&#123;status&#125;&lt;&#x2F;div&gt;<br>                    &lt;ol&gt;&#123;moves&#125;&lt;&#x2F;ol&gt;<br>                &lt;&#x2F;div&gt;<br>            &lt;&#x2F;div&gt;<br>        );<br>    &#125;<br>&#125;<br><br>&#x2F;&#x2F; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br><br>ReactDOM.render(<br>  &lt;Game &#x2F;&gt;,<br>  document.getElementById(&#39;root&#39;)<br>);<br><br>&#x2F;&#x2F; 传入长度为 9 的数组，此函数将判断出获胜者，并根据情况返回 “X”，“O” 或 “null”。<br>function calculateWinner(squares) &#123;<br>    const lines &#x3D; [<br>        [0, 1, 2],<br>        [3, 4, 5],<br>        [6, 7, 8],<br>        [0, 3, 6],<br>        [1, 4, 7],<br>        [2, 5, 8],<br>        [0, 4, 8],<br>        [2, 4, 6],<br>    ];<br>    for (let i&#x3D;0; i&lt;lines.length; i++) &#123;<br>        const [a, b, c] &#x3D; lines[i];<br>        if (squares[a] &amp;&amp; squares[a] &#x3D;&#x3D;&#x3D; squares[b] &amp;&amp; squares[a] &#x3D;&#x3D;&#x3D; squares[c]) &#123;<br>            return squares[a];<br>        &#125;<br>    &#125;<br>    return null;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/24/%E7%9C%9FN%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8React/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">真N分钟入门Ant Design</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/23/Python3-%E6%89%A7%E8%A1%8CLinux%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Python3 执行Linux系统命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/06/24/React%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%EF%BC%9A%E5%AE%8C%E6%88%90%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/';
+        this.page.identifier = '/2020/06/24/React%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%EF%BC%9A%E5%AE%8C%E6%88%90%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

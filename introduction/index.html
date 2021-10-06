@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>计算机科学与技术入门 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/introduction.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算机科学与技术入门">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <p>这世界上最难的事情便是入门 ——— 沃兹 • 格硕德<br>The hardest thing in the world is getting  started. ——— Wlatz · Githord</p>
+<h1 id="三大基础"><a href="#三大基础" class="headerlink" title="三大基础"></a>三大基础</h1><h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><ul>
+<li><a href="/2020/04/16/操作系统常用名词解释/">操作系统常用名词解释</a>（CPU和处理机到底啥关系？指令和程序又是什么关系？ 简单介绍了操作系统的常用专业术语的解释。）</li>
+<li><a href="/2020/04/16/进程、线程与协程/">作业、进程、线程与协程</a></li>
+<li><a href="/2020/04/02/页面置换算法/">从存储器到页面置换</a>（多层存储结构、程序装载方式、内存数据存储方式、虚拟存储器、<strong>页面置换算法</strong>）</li>
+<li><a href="/2020/04/01/从代码到进程/">从代码到进程</a>（预编译、编译、汇编、链接、加载、虚拟内存的存储结构、Python的解释执行过程）</li>
+<li><a href="/2020/04/01/说道说道死锁/">说道说道死锁</a>（<strong>基础中的基础</strong>）</li>
+<li><a href="/2020/03/31/进程同步与通信问题/">进程同步与进程、线程通信问题</a>（临界区与邻接资源、互斥与同步、软硬件/信号量同步机制、<strong>经典的进程同步问题如生产者和消费者/哲学家进餐/读者-写者</strong>等、进程通信方法） </li>
+<li><a href="/2020/04/15/进程调度算法/">进程调度算法</a>（非剥夺（非抢占）式调用、剥夺（抢占）式调用、可剥夺可不剥夺（可抢占可不抢占）式调用、应用场景）</li>
+<li><a href="/2020/04/16/Linux常见命令/">Linux常见命令</a></li>
+</ul>
+<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><ul>
+<li><a href="/2020/04/08/三次握手以及四次挥手/">三次握手以及四次挥手</a>（<strong>基础中的基础</strong>）</li>
+<li><a href="/2017/05/23/Congestion-control-of-TCP/">TCP拥塞控制</a>（<strong>面试必问</strong>）</li>
+<li><a href="/2020/04/08/select、poll、epoll的原理/">select、poll、epoll的原理</a>（socket编程：多路I/O复用模型）</li>
+<li><a href="/2020/04/15/TCP粘包是怎么回事/">TCP粘包是怎么回事</a></li>
+<li>面试相关链接整理<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/137118361">很用心的为你写了 9 道 MySQL 面试题</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><blockquote>
+<p>汇总</p>
+</blockquote>
+<p>数据库主要考察SQL、DBMS、Mysql、Redis四个方面的知识。</p>
+<ul>
+<li><a href="/2020/04/07/Mysql相关知识/">SQL &amp; DBMS &amp; Mysql &amp; Redis 相关知识</a><ul>
+<li>SQL：连接查询、分组查询、视图、触发器、存储过程</li>
+<li>DBMS：事务管理、AICD、隔离级别、常见的并发问题（脏读、不可重复读、幻读）、封锁、<strong>悲观锁和乐观锁</strong>、MVCC原理和实现、<strong>范式理论</strong>、SQL与NoSQL</li>
+<li>Mysql：常用命令、Mysql索引以及优化、B+树原理、查询优化原则、<strong>InnoDB和MyISAM比较</strong>、切分、水平切分与垂直切分、日志系统</li>
+<li>Redis原理、<strong>Redis使用场景</strong>、 跳表/字典/哈希冲突/基本数据类型、线程安全、持久化、事件驱动模式、事物实现原理、数据淘汰原则、主从复制过程1）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Redis</p>
+</blockquote>
+<p>Redis是C语言开发的一个开源的（遵从<a href="/2020/04/11/各种开源协议/#BSD（Berkeley-Software-Distribution）">BSD协议</a>）高性能键值对（key-value）的内存数据库，可以用作数据库、缓存、消息中间件等。它是一种NoSQL（not-only sql，泛指非关系型数据库）的数据库。（Redis的定义和特点）</p>
+<p>Redis作为一个内存数据库。1、性能优秀，数据在内存中，读写速度非常快，支持并发10W <a href="/2020/04/08/吞吐量（TPS）、QPS、并发数、响应时间（RT）概念/">QPS</a>；2、单进程单线程，是线程安全的，采用IO多路复用机制；3、丰富的数据类型，支持字符串（strings）、散列（hashes）、列表（lists）、集合（sets）、有序集合（sorted sets）等；4、支持数据持久化，可以将内存中数据保存在磁盘中，重启时加载；5、主从复制，哨兵，高可用；6、可以用作分布式锁；7、可以作为消息中间件使用，支持发布订阅。（Redis的优点）</p>
+<ul>
+<li><a href="/2020/04/07/跳表/">Redis 跳表详解</a></li>
+<li><a href="/2020/04/11/Redis字典详解/">Redis 字典详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/118561398">我和面试官的博弈：Redis 篇</a></li>
+</ul>
+<h1 id="算法与数据结构"><a href="#算法与数据结构" class="headerlink" title="算法与数据结构"></a>算法与数据结构</h1><h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="回溯算法（高频）"><a href="#回溯算法（高频）" class="headerlink" title="回溯算法（高频）"></a>回溯算法（高频）</h3><blockquote>
+<p>参考链接</p>
+</blockquote>
+<ul>
+<li><a href="/2020/04/10/算法：回溯算法/">回溯算法总结</a></li>
+<li><a href="/tags/回溯算法/page/2/">相关题目</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/tag/backtracking/">LeetCode回溯算法题目</a></li>
+</ul>
+<h3 id="贪心算法总结"><a href="#贪心算法总结" class="headerlink" title="贪心算法总结"></a>贪心算法总结</h3><ul>
+<li><a href="/2020/04/10/算法：贪心算法/">贪心算法总结</a></li>
+<li><a href="/tags/贪心算法/">相关题目</a></li>
+</ul>
+<h3 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h3><ul>
+<li><a href="/2020/04/10/算法：分治算法/">分治算法总结</a></li>
+<li><a href="/tags/分治算法/">相关题目</a></li>
+</ul>
+<h3 id="动态规划算法（高频）"><a href="#动态规划算法（高频）" class="headerlink" title="动态规划算法（高频）"></a>动态规划算法（高频）</h3><ul>
+<li><a href="/2020/04/10/算法：动态规划算法/">动态规划算法总结</a></li>
+<li><a href="/2020/04/09/动态规划题目汇总/">LeetCode动态规划题目准确汇总表</a></li>
+<li><a href="/tags/动态规划/">相关题目</a></li>
+<li><a href="/2020/04/10/力扣-DP问题分类汇总/">力扣-DP问题分类汇总</a></li>
+</ul>
+<h3 id="二分查找与搜索算法（高频）"><a href="#二分查找与搜索算法（高频）" class="headerlink" title="二分查找与搜索算法（高频）"></a>二分查找与搜索算法（高频）</h3><ul>
+<li><a href="/2020/04/10/算法：二分查找与搜索算法/">二分查找与搜索算法总结</a></li>
+<li><a href="/tags/二分查找和搜索/">相关题目</a></li>
+</ul>
+<h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><ul>
+<li><a href="/2020/04/05/排序算法精讲/">排序算法总结</a></li>
+<li><a href="/2017/09/18/数据结构复习之排序/">10大排序算法的C++实现</a></li>
+<li><a href="/tags/排序算法/">相关题目</a></li>
+</ul>
+<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><ul>
+<li><a href="/2020/04/10/算法：位运算/">位运算知识点总结</a></li>
+<li><a href="/tags/位运算/">相关题目</a></li>
+</ul>
+<h3 id="不常见算法"><a href="#不常见算法" class="headerlink" title="不常见算法"></a>不常见算法</h3><ul>
+<li><a href="/2020/04/14/算法：不常见类型/">不常见的特殊类型题目总结</a></li>
+</ul>
+<p>阶乘系统、格雷编码、数字1的个数求解。</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><blockquote>
+<p>参考链接</p>
+</blockquote>
+<ul>
+<li><a href="/2020/04/10/数据结构：链表/">和链表有关的一切</a></li>
+<li><a href="/tags/链表/">已完成的题目</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/tag/linked-list/">LeetCode链表题目</a></li>
+</ul>
+<blockquote>
+<p>总结</p>
+</blockquote>
+<p>1、见到链表就要想到指针 ，双指针、快慢指针等等。</p>
+<ul>
+<li>双指针的奇妙作用<ul>
+<li>LeetCode 19. 删除链表的倒数第N个节点（中）：利用双指针间隔进行控制慢指针停下来的位置。</li>
+<li>LeetCode 142. 环形链表 II（中）：检测循环节点位置。</li>
+</ul>
+</li>
+<li>hash map作用<ul>
+<li>LeetCode 23，把一个链表操作处理成了排序问题。</li>
+<li>LeetCode 141，把一个链表操作处理成了计数统计问题。</li>
+</ul>
+</li>
+</ul>
+<p>2、保持声明哑结点的好习惯，使用哑结点可以防止特殊情况。<br>3、姐链表节点操作（LeetCode 19）、链表合并（LeetCode 23）、链表翻转（LeetCode 24/25/92/206）、循环链表检测（LeetCode 141/142）。<br>4、特别注意链表翻转类型题目的<strong>递归、迭代</strong>写法。<br>5、链表中用hash map解决问题（链表合并/环链表检测），用空间换取时间，如果要优化，可以用指针操作避免使用hash map。</p>
+<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><ul>
+<li><a href="/2020/04/10/数据结构：树/">程序猿与他的树</a></li>
+<li><a href="/tags/树/">相关题目</a></li>
+</ul>
+<h3 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h3><ul>
+<li><a href="/2020/04/10/数据结构：栈和队列/">栈和队列的奥义</a></li>
+<li><a href="/tags/栈和队列/">相关题目</a></li>
+</ul>
+<h3 id="字符串与哈希表（重点）"><a href="#字符串与哈希表（重点）" class="headerlink" title="字符串与哈希表（重点）"></a>字符串与哈希表（重点）</h3><ul>
+<li><a href="/2020/04/10/数据结构：字符串与哈希表/">字符串与哈希表</a></li>
+<li><a href="/tags/字符串与哈希表/">相关题目</a></li>
+</ul>
+<blockquote>
+<p> 数组去重的几种方法</p>
+</blockquote>
+<p>1、最简单的方法就是开辟一个动态新数组，遍历原来的数组，未出现的才添加，时间复杂度为线性 $O(n)$。本质就是hash map。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">new = []<br>nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> nums:<br>    <span class="hljs-keyword">if</span> i <span class="hljs-keyword">in</span> new:<br>        <span class="hljs-keyword">continue</span><br>    <span class="hljs-keyword">else</span>:<br>        new.append(i)<br>print(new)<br></code></pre></div></td></tr></table></figure>
+<p>2、基于排序，将数组排序，然后遍历，重复的元素一定连续分布着，连续跳过就好了。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">new = []<br>nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br>nums.sort()<br>i = <span class="hljs-number">0</span> <br><span class="hljs-keyword">while</span> i &lt; <span class="hljs-built_in">len</span>(nums):<br>    new.append(nums[i])<br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> i &lt; <span class="hljs-built_in">len</span>(nums) <span class="hljs-keyword">and</span> nums[i] == nums[i-<span class="hljs-number">1</span>]:<br>            <span class="hljs-keyword">pass</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">break</span><br>print(new)<br></code></pre></div></td></tr></table></figure>
+<p>3、对于海量的数据，可以先分桶，然后再分治的使用上面两种方法中的一种去层层处理。</p>
+<h3 id="图与堆"><a href="#图与堆" class="headerlink" title="图与堆"></a>图与堆</h3><ul>
+<li><a href="/2020/04/10/数据结构：图和堆/">图与堆的初探</a></li>
+<li><a href="/tags/图与堆/">相关题目</a></li>
+</ul>
+<h2 id="算法复杂度分析"><a href="#算法复杂度分析" class="headerlink" title="算法复杂度分析"></a>算法复杂度分析</h2><blockquote>
+<p>参考链接</p>
+</blockquote>
+<p><a href="/2020/04/12/算法时间复杂度分析/">算法复杂度分析</a>    </p>
+<h2 id="高频题目整理"><a href="#高频题目整理" class="headerlink" title="高频题目整理"></a>高频题目整理</h2><p><a href="/2020/05/29/LeetCode统计的面试高频题目/">LeetCode统计的面试高频题目</a></p>
+<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><p>系统设计类问题是利用现有的数据结构，基于问题本身出发，考虑实际情况解决问题。</p>
+<p><a href="/tags/系统设计/">系统设计相关题目</a></p>
+<h1 id="论术求道"><a href="#论术求道" class="headerlink" title="论术求道"></a>论术求道</h1><p><strong>有道无术，术尚可求也，有术无道，止于术。</strong></p>
+<p>《神雕侠侣》中的杨过在石壁上发现了剑魔独孤求败刻下的字，其中有这么几句：</p>
+<blockquote>
+<p>「紫薇软剑」三十岁前所用，误伤义士不祥，悔恨无已，乃弃之深谷。 重剑无锋，大巧不工。四十岁前恃之横行天下<strong>。</strong> 四十岁后，不滞于物，草木竹石均可为剑。自此精修，渐进于无剑胜有剑之境。</p>
+</blockquote>
+<p>其中有三把剑：紫薇软剑、玄铁重剑、无剑。这三把剑似乎能解释这个问题：</p>
+<p><strong>紫薇软剑</strong><br>三十岁前，独孤求败用紫薇软剑来驰骋天下，这时，他依靠的是剑，是用剑作为“器”的性状来发挥威力。没有这把剑，也许他的战斗力就会下降很多。</p>
+<p><strong>这时，对于剑的运用，他只达到了“器”的层面。</strong></p>
+<p><strong>玄铁重剑</strong><br>三十岁到四十岁，他开始用玄铁重剑。剑只是一个介质，本身并不锋利，大巧不工。他是用本身的招数在驱动着剑，恃之横行天下。这些招数，这些使用剑的方法，就是“术”。</p>
+<p><strong>这时，对于剑的运用，他已经达到了“术”的层面。</strong></p>
+<p><strong>无剑</strong><br>四十岁后，他终于做到了受众无剑，心中有剑，草木竹石皆可为剑，以无剑胜有剑。他掌握的，是达到目标的“道”，这个“道”，不会因为对象（器）而改变、也不会因为方法（术）而改变。</p>
+<p><strong>这时，对于剑的运用，他终于达到了“道”的层面。</strong></p>
+<p>举两个现实的例子：</p>
+<p>1、编程<br>Java、C++、C# 这些编程语言，就是“器”；<br><strong>设计模式</strong>等方法，就是“术”；<br>面向对象等思想，就是“道”。</p>
+<p>2、设计<br>PS/AI/FW 等软件，就是“器”；<br>任务分析、可用性测试、卡片分类法等，就是“术”；<br>以用户为中心的思想、各种启发式原则，就是“道”；</p>
+<p>作者：马力和知群<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19805899/answer/13020652">https://www.zhihu.com/question/19805899/answer/13020652</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p><a href="/categories/论术求道/">相关文章汇总</a></p>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p>设计模式是解决问题的方案，学习现有的设计模式可以做到经验复用。拥有设计模式词汇，在沟通时就能用更少的词汇来讨论，并且不需要了解底层细节。</p>
+<p><a href="/2020/04/24/设计模式/">设计模式</a></p>
+<h2 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/代码可读性.md">代码可读性</a></li>
+<li><a href="/2020/04/09/Python-PEP8/">Python代码格式</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/styleguide.md">Twitter Java Style Guide</a></li>
+<li><a target="_blank" rel="noopener" href="http://google.github.io/styleguide/javaguide.html">Google Java Style Guide</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/p3c">阿里巴巴Java开发手册</a></li>
+</ul>
+<h2 id="《编程珠玑》系列文章"><a href="#《编程珠玑》系列文章" class="headerlink" title="《编程珠玑》系列文章"></a>《编程珠玑》系列文章</h2><p><a href="/tags/编程珠玑/">相关文章</a></p>
+<h2 id="《重构：改善既有代码的技术》系列文章"><a href="#《重构：改善既有代码的技术》系列文章" class="headerlink" title="《重构：改善既有代码的技术》系列文章"></a>《重构：改善既有代码的技术》系列文章</h2><p><a href="/tags/重构/">相关文章</a></p>
+<h1 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言"></a>编程语言</h1><p>Python和C++是编程语言的两个极端，Python作为基于Python解释器的解释型语言，学习成本低，开发难度低，但是运行效率很低。C++作为编译型语言，接近底层，内存也交由程序员管理，学习成本高，开发难度高，但是运行图效率高。Java则是开发效率和执行效率折中的选择。私以为，Python和C++是程序员必须掌握了两门编程语言。</p>
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><p><a target="_blank" rel="noopener" href="http://naotu.baidu.com/file/3257dee55627006beaabeec23c5eb852?token=f4159e268fe9688e">Python语言学习百度脑图：密码（ 0vUF）</a></p>
+<ul>
+<li><a href="/2020/04/12/Python基础简单整理/">Python基础整理</a></li>
+<li>Python高级特性<ul>
+<li><a href="/2020/04/17/Python的装饰器/">装饰器</a></li>
+<li><a href="/2020/04/12/Python基础简单整理/#Python的列表解析式">列表生成式</a></li>
+<li><a href="/2020/04/12/Python基础简单整理/#python的生成器和迭代器">可迭代对象、迭代器、生成器</a></li>
+</ul>
+</li>
+<li><a href="/2020/04/14/Python的函数式编程思想/">Python函数编程</a><ul>
+<li><a href="/2020/04/14/Python的-Lambda-函数/">Python的 Lambda 函数</a></li>
+</ul>
+</li>
+<li><a href="/2020/04/22/Python的面向对象编程/">Python面向对象</a></li>
+<li>Python进程与线程<ul>
+<li><a href="/2020/03/30/Python多线程/">Python多线程</a></li>
+<li><a href="/2020/03/31/Python协程编程/">Python协程编程</a></li>
+</ul>
+</li>
+<li>Python解释器原理<ul>
+<li><a href="/2020/03/25/Python的垃圾回收机制/">Python的垃圾回收机制</a></li>
+<li><a href="/2020/04/01/从代码到进程/#Python程序与C-程序执行过程的不同">Python程序与C++程序执行过程的不同</a></li>
+<li><a href="/2020/04/01/说道说道死锁/#Python检测和解除死锁">Python检测和解除死锁</a></li>
+<li><a href="/2020/04/02/页面置换算法/#Python实现LRU（最近最少使用）页面置换算法">Python实现LRU（最近最少使用）页面置换算法</a></li>
+</ul>
+</li>
+<li>Python网络编程<ul>
+<li><a href="/2020/04/12/Python爬虫入门/">Python爬虫入门</a></li>
+</ul>
+</li>
+<li>Python的错误、调试和测试<ul>
+<li><a href="/2020/04/12/Python异常处理/">Python异常处理</a></li>
+<li><a href="/2020/04/25/浅议Python-unittest测试单元/">Python unittest单元测试模块</a></li>
+</ul>
+</li>
+<li><a href="/2020/04/09/Python-PEP8/">代码格式</a></li>
+<li>Python面试真题<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29693078">17个新手常见Python运行时错误</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54430650">110道Python面试题（真题）</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/86826683">Python面试40问</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39681064">Python找工作并不容易，面试了很多企业，总结了些宝贵经验</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/86826683">40道Python经典面试题（附答案）</a></li>
+</ul>
+</li>
+<li>正则（适用于不同语言）<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/143300217">不再为正则烦恼</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><ul>
+<li>C++面试<ul>
+<li><a href="/2020/04/19/C-面试考点/">C++的一些面试常问问题和容易混淆的基础</a></li>
+<li><a target="_blank" rel="noopener" href="https://interview.huihut.com/">C++ interview </a></li>
+</ul>
+</li>
+<li>C++基本语法<ul>
+<li><a href="/2020/05/30/C-拾遗/">C++拾遗</a></li>
+<li><a href="/tags/The-Complete-C-Training-Course/">C++大学教程</a></li>
+</ul>
+</li>
+<li>C++后台开发<ul>
+<li><a href="/tags/C-backend-development/">《C++后台开发 核心技术与应用实践》</a></li>
+<li>[《Linux高性能服务器编程》](</li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

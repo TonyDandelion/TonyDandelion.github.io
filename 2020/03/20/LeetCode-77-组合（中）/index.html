@@ -1,0 +1,550 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 77. 组合（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 77. 组合（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-20 12:48" pubdate>
+        2020年3月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 77. 组合（中）</h1>
+            
+            <div class="markdown-body">
+              <p>经典问题，从常规解到剪枝优化再到非回溯解法进行了记录，需要特别关注。</p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。  </p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 输入</span><br>n = <span class="hljs-number">4</span>, k = <span class="hljs-number">2</span><br><span class="hljs-comment"># 输出:</span><br>[<br>  [<span class="hljs-number">2</span>,<span class="hljs-number">4</span>],<br>  [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],<br>  [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">4</span>],<br>]<br></code></pre></div></td></tr></table></figure>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>回溯算法</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、回溯法</strong><br>不设置 <code>is_validate</code> 函数和 <code>used</code> 变量，每次都从下一个位置开始遍历，这样就跳过了重复的情况。例如，取了1，从[2, 3, 4]中匹配，跳过了1本身，避免了 <code>[1, 1]</code> 这样的答案。输出 <code>[1, 2]</code>、<code>[1, 3]</code> 、<code>[1, 4]</code> 三种情况之后，再取2，就要从[3, 4]中匹配，跳过了1和2，避免了<code>[2, 1]</code>、<code>[2, 2]</code> 这样的答案。  </p>
+<p><img src="https://i.loli.net/2020/03/20/GHPRUW8T7pjSgDO.png" srcset="/img/loading.gif" alt="fcdaa96defd9caacec12eb6c86cac6b8932c93d7a6da7a649791e1031a8da2b5-image.png">  </p>
+<p><strong>方法二、回溯加剪枝</strong>  </p>
+<p>其中绿色的部分，是不能产生结果的分支，但是我们的代码确实又执行到了这部分。<br>上面的代码中，我们发现：其实如果 <code>pre</code> 已经选择到 <code>[1,4,5]</code> 或者 <code>[2,4,5]</code> 或者 <code>[3,4,5]</code> ，后序的代码就没有必要执行，继续走也不能发现新的满足题意的组合。<code>[1,4,5]</code>之后的<strong>多余步骤</strong>如下：<br>1、选择了 <code>[1,4,5]</code> 以后， <code>5</code> 弹出 <code>[1,4,5]</code> 成为 <code>[1,4]</code><br>2、<code>4</code> 弹出 <code>[1,4]</code> 成为 <code>[1]</code> ，然后 <code>5</code> 进来，成为 <code>[1,5]</code>。<br>3、再继续循环，会发现 <code>for</code> 循环都进不了（因为没有可选的元素），然后 <code>5</code> 又弹出，接着 <code>1</code> 弹出。<br>以上几步其实都是<strong>多余步骤</strong>。  </p>
+<p><img src="https://i.loli.net/2020/03/20/RmE2VorJenthUDp.png" srcset="/img/loading.gif" alt="3ddd55697423b5831cbbd42f4b901ebbade0daa456c651a70c758fe359d8a0d1-image.png"></p>
+<p>发现多余操作：那么我们如何发现多余的步骤呢，其实也是有规律可寻的，就在 for 循环中：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n+<span class="hljs-number">1</span>):<br>    pre.append(i)<br>    backtrack(i + <span class="hljs-number">1</span>, selects)<br>    pre.pop()<br></code></pre></div></td></tr></table></figure><br>这个for循环干的事情，是从 <code>[i, n]</code> 这个区间里（注意，左右都是闭区间），找到 <code>k - len(selects)</code>个元素。 <code>i</code> 不是每一次都要走到 <code>n</code> 的， <code>i</code> 有一个上限。那这个上限是多少呢？通过观察可以发现：<br>当选定了一个元素，即 <code>len(selects) == 1</code> 的时候，接下来要选择 2 个元素， i 最大的值是 4 ，因为从 5 开始选择，就无解了。<br>当选定了两个元素，即 <code>len(selects) == 2</code> 的时候，接下来要选择 1 个元素， i 最大的值是 5 ，因为从 6 开始选择，就无解了。  </p>
+<p><img src="https://i.loli.net/2020/03/20/J7ir3mKBZh4YwTt.png" srcset="/img/loading.gif" alt="3ddd55697423b5831cbbd42f4b901ebbade0daa456c651a70c758fe359d8a0d1-image - 副本.png"></p>
+<p>再如：如果 <code>n = 6 ，k = 4</code>，<br><code>len(selects) == 1</code> 的时候，接下来要选择 3 个元素， <code>i</code> 最大的值是 4，最后一个被选的是 <code>[4,5,6]</code>；<br><code>len(selects) == 2</code> 的时候，接下来要选择 2 个元素， <code>i</code> 最大的值是 5，最后一个被选的是 <code>[5,6]</code>；<br><code>len(selects) == 3</code> 的时候，接下来要选择 1 个元素， <code>i</code> 最大的值是 6，最后一个被选的是 <code>[6]</code>；<br>再如：如果 <code>n = 15</code> ，<code>k = 4</code>，<br><code>len(selects) == 1</code> 的时候，接下来要选择 3 个元素，<code>i</code> 最大的值是 13，最后一个被选的是 <code>[13,14,15]</code>；<br><code>len(selects) == 2</code> 的时候，接下来要选择 2 个元素， <code>i</code> 最大的值是 14，最后一个被选的是 <code>[14,15]</code>；<br><code>len(selects) == 3</code> 的时候，接下来要选择 1 个元素， <code>i</code> 最大的值是 15，最后一个被选的是 <code>[15]</code>；<br>多写几遍（发现 <code>max(i)</code> 是我们倒着写出来），我么就可以发现 <code>max(i)</code> 与 接下来要选择的元素貌似有一点关系，很容易知道：<br><code>max(i) + 接下来要选择的元素个数 - 1 = n</code>，其中， 接下来要选择的元素个数就是<code>k - len(selects)</code>，整理可得：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-built_in">max</span>(i) = n - (k -<span class="hljs-built_in">len</span>(selects)) + <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>所以，我们的剪枝过程就是：把for循环的终止条件从 <code>i &lt; n+1</code> 改成 <code>i &lt; n - (k - len(selects)) + 2</code>  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n - (k - <span class="hljs-built_in">len</span>(selects)) + <span class="hljs-number">2</span>):<br>    pre.append(i)<br>    backtrack(i + <span class="hljs-number">1</span>, selects)<br>    pre.pop()<br></code></pre></div></td></tr></table></figure>
+<p><strong>方法三、字典序 (二进制排序) 组合</strong>  </p>
+<p>主要思路是以字典序的顺序获得全部组合。  </p>
+<p><img src="https://i.loli.net/2020/03/20/8ao12dGI45tSpqc.png" srcset="/img/loading.gif" alt="ab26203eb768a3153fe704cfee97158429d08e886f7e5b453b2256ee658f0598-image.png"></p>
+<p><strong>算法</strong><br>算法非常直截了当 :  </p>
+<ul>
+<li>将 <code>nums</code> 初始化为从 <code>1</code> 到 <code>k</code>的整数序列。 将 <code>n + 1</code>添加为末尾元素，起到“哨兵”的作用。将指针设为列表的开头 <code>j = 0</code>.</li>
+<li>While <code>j &lt; k</code> :<ul>
+<li>将<code>nums</code> 中的前k个元素添加到输出中，换而言之，除了“哨兵”之外的全部元素。</li>
+<li>找到<code>nums</code>中的第一个满足 <code>nums[j] + 1 != nums[j + 1]</code>的元素，并将其加一<br><code>nums[j]++</code> 以转到下一个组合。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<li>方法一的实现</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">first=<span class="hljs-number">1</span>, selects=[]</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(selects) == k:<br>                res.append(selects[:])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n+<span class="hljs-number">1</span>):<br>                selects.append(i)<br>                backtrack(i+<span class="hljs-number">1</span>, selects)<br>                selects.pop()<br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))]<br>        res = []<br>        backtrack()<br>        <span class="hljs-keyword">return</span> res<br><br>Input = [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>]<br>Input1 = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]<br>Answer = [<br>    [[<span class="hljs-number">1</span>],[<span class="hljs-number">2</span>]],<br>    [<br>        [<span class="hljs-number">2</span>,<span class="hljs-number">4</span>],<br>        [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],<br>        [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">4</span>],<br>    ],<br>    [[<span class="hljs-number">1</span>]]<br>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.combine(Input[i], Input1[i])<br>        <span class="hljs-keyword">if</span> reslut == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(reslut)<br>            print(Answer[i])<br></code></pre></div></td></tr></table></figure>
+<p><strong>时间复杂度</strong> : $O(k C_N^k)$，其中 $C_N^k = \frac{N!}{(N - k)! k!}$ 是要构成的组合数。<code>append / pop</code> (<code>add / removeLast</code>) 操作使用常数时间，唯一耗费时间的是将长度为 <code>k</code> 的组合添加到输出中。<br><strong>空间复杂度</strong> : $O(C_N^k)$ ，用于保存全部组合数以输出。<br><strong>这里有两组运行结果：</strong><br>1、执行用时 :604 ms, 在所有 Python3 提交中击败了<strong>37.44%</strong>的用户<br>内存消耗 :15.1 MB, 在所有 Python3 提交中击败了5.06%的用户<br>这一组代码在 <code>res.append(selects[:])</code> 之后，没有 <code>return</code>。<br>2、执行用时 :508 ms, 在所有 Python3 提交中击败了<strong>66.70%</strong>的用户<br>内存消耗 :14.8 MB, 在所有 Python3 提交中击败了7.09%的用户<br>这一组代码在 <code>res.append(selects[:])</code> 之后， <code>return</code>了，就没有执行后面的无效循环了，效率高了一些。  </p>
+<ul>
+<li>方法二的实现：剪枝版本的回溯算法  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">first=<span class="hljs-number">1</span>, selects=[]</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(selects) == k:<br>                res.append(selects[:])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-comment"># for i in range(first, n + 1):  # 剪枝之前 66.70%</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n - (k - <span class="hljs-built_in">len</span>(selects)) + <span class="hljs-number">2</span>):  <span class="hljs-comment"># 剪枝之后 97.27%</span><br>                selects.append(i)<br>                backtrack(i+<span class="hljs-number">1</span>, selects)<br>                selects.pop()<br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))]<br>        res = []<br>        backtrack()<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p><strong>时间复杂度</strong> : $O(k C_N^k)$。<br><strong>空间复杂度</strong> : $O(C_N^k)$ ，用于保存全部组合数以输出。<br>执行用时 :52 ms, 在所有 Python3 提交中击败了<strong>97.27%</strong>的用户<br>内存消耗 :15 MB, 在所有 Python3 提交中击败了5.31%的用户  </p>
+<ul>
+<li>方法三的实现：字典序 (二进制排序) 组合  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))]<br>         <br>        <span class="hljs-comment"># init first combination</span><br>        nums = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, k + <span class="hljs-number">1</span>)) + [n + <span class="hljs-number">1</span>]<br>        <br>        output, j = [], <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> j &lt; k:<br>            <span class="hljs-comment"># add current combination</span><br>            output.append(nums[:k])<br>            <span class="hljs-comment"># increase first nums[j] by one</span><br>            <span class="hljs-comment"># if nums[j] + 1 != nums[j + 1]</span><br>            j = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">while</span> j &lt; k <span class="hljs-keyword">and</span> nums[j + <span class="hljs-number">1</span>] == nums[j] + <span class="hljs-number">1</span>:<br>                nums[j] = j + <span class="hljs-number">1</span><br>                j += <span class="hljs-number">1</span><br>            nums[j] += <span class="hljs-number">1</span><br>            <br>        <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
+<p><strong>时间复杂度</strong> : $O(k C<em>N^k)$，其中 $C_N^k = \frac{N!}{(N - k)! k!}$ 是要构建的组合数。由于组合数是 $C_N^k$ ，外层的 <code>while</code> 循环执行了 $C_N^k$ 次 。对给定的一个<code>j</code>，内层的 <code>while</code> 循环执行了 $C</em>{N - j}^{k - j}$。外层循环超过 $C_N^k$次访问，平均而言每次访问的执行次数少于1。因此，最耗费时间的部分是将每个长度为 $k$的组合(共计 $C_N^k$ 个组合) 添加到输出中，消耗 $O(k C_N^k)$ 的时间。你可能注意到，尽管方法三的时间复杂度与方法一相同，但方法三却要快上许多。<strong>这是由于基于回溯算法的方法一需要处理递归调用栈，且其带来的影响在Python中比在Java中更为显著。</strong><br><strong>空间复杂度</strong> : $O(C_N^k)$ ，用于保存全部组合数以输出。<br><strong>这里有两组运行结果：</strong><br>第一组是没有特判的，第二组是加上特判的结果。<br>1、执行用时 :68 ms, 在所有 Python3 提交中击败了93.57% 的用户<br>内存消耗 :14.9 MB, 在所有 Python3 提交中击败了6.58%的用户<br>2、执行用时 :40 ms, 在所有 Python3 提交中击败了 <font color='green'><strong>99.17%</strong></font>的用户<br>内存消耗 :14.9 MB, 在所有 Python3 提交中击败了5.82%的用户  </p>
+<p><strong>剪枝和特判都会有效的提升算法运行效率。</strong>   </p>
+<blockquote>
+<p>参考链接   </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-ma-/">回溯算法 + 剪枝</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/solution/zu-he-by-leetcode/">LeetCode题解</a>  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">回溯算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/20/LeetCode-76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2%EF%BC%88%E9%9A%BE%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 76. 最小覆盖子串（难）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/20/LeetCode-75-%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 75. 颜色分类（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/20/LeetCode-77-%E7%BB%84%E5%90%88%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/20/LeetCode-77-%E7%BB%84%E5%90%88%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

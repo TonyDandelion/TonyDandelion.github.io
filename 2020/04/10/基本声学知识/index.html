@@ -1,0 +1,756 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>基本声学知识 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="基本声学知识">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-10 00:11" pubdate>
+        2020年4月10日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      48
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基本声学知识</h1>
+            
+            <div class="markdown-body">
+              <p>记录一下声波、信噪比、声音信号强度、白噪音等概念。</p>
+<a id="more"></a>
+<h1 id="声波"><a href="#声波" class="headerlink" title="声波"></a>声波</h1><p>声波是机械波，同时，声波也是压力波（pressure wave）。震动源通过震动压缩空气，这部分空气的总体压力会增大。同时，压缩空气的过程也会使另一部分的空气气压下降。声波在传播过程中对原本静止的压力之上叠加了即时的影响，我们叫它即时压力。这里的介质也可以是任何东西（水、钢铁）。</p>
+<p>但是，除了机械震动，雷电和热效应等都能够产生声波。例如吹笛子，引发了空气颗粒震动制造了声波，但是种振动导致的空气颗粒运动的模型与机械振动是不同的，所以要分开讨论。</p>
+<p>在讨论声学问题的时候，我们考虑的两个最基本参数是声压（p）与空气颗粒速度（v）。<strong>空气颗粒速度不是声波的传播速度</strong></p>
+<h1 id="信噪比"><a href="#信噪比" class="headerlink" title="信噪比"></a>信噪比</h1><h1 id="声音信号的强度"><a href="#声音信号的强度" class="headerlink" title="声音信号的强度"></a>声音信号的强度</h1><blockquote>
+<p>表述声音信号强度的几个概念</p>
+</blockquote>
+<p>用来描述声音强度的物理量有很多：声压，功率，产生声音信号的电压等，使用不同的物理量来表示声音的强度，其得到的分贝也是不同的。</p>
+<h2 id="分贝（decibel）"><a href="#分贝（decibel）" class="headerlink" title="分贝（decibel）"></a>分贝（decibel）</h2><blockquote>
+<p> 什么是分贝？</p>
+</blockquote>
+<p>​     分贝（dB）是一个对数单位（logarithmic unit）, 它和很多常见的单位如“米”，“秒”或者“千克”等物理单位是不同的，它并不能直接用来描述一个物理量的大小或者多少，它<strong>表示的是两个相同单位物理量的比值</strong>。分贝经常用来描述声音，如超过50dB的噪声就会影响人的睡眠和休息，但分贝不仅仅用来描述声音，它还被用来描述电子学等其他领域的物理量，如描述信号强度的衰减 、信噪比等等。分贝表示的是两个物理量的比值，作为分母的那个量通常是一个标准的基准值（<strong>standard reference value</strong>），分贝描述的就是作为分子的物理量相对于这个基准值的大小，分贝的计算公式如下：</p>
+<script type="math/tex; mode=display">
+dB = 10 × log_{10}\frac{value}{value_{ref}}</script><p>其中$value_{ref}$是基准值。无论是用分贝来描述什么，基准值都是0dB。</p>
+<blockquote>
+<p> dBSPL是什么？</p>
+</blockquote>
+<p>声音本质上来说是一种波，通过空气传播，传到人耳朵里引发鼓膜的振动。所以，声音的大小，实际就是对这种振动强度的反映。而<strong>由于空气的振动会引起大气压强的变换</strong>，可以使用<strong>压强变化的程度来描述声音的大小，这就是“声压(SPL,Sound Pressure Levels)”概念，其单位是Pa。</strong>例如：1米外步枪射击的声音大约是7000Pa；10米外开过汽车大约是0.2Pa。使用<strong>声压作为测量量的分贝</strong>就是dBSPL，通常用来表示声音大小的dB多说指的就是dBSPL。声压和声音大小的关系，可以使用如下公式表示</p>
+<script type="math/tex; mode=display">
+I(dB) = 10 \times \log_{10}(\frac{P^2}{P_{ref}^2}) = 20 \times \log_{10}\frac{P}{P_{ref}}</script><p>其中，$I$是分贝，$P$是该声音的声压测量值，$P_{ref}$是表示基准值（0dBSPL），这里选择的声压标准值为$2×10^{−5}Pa,20μPa$，是人耳在1KHz这个频率下能听到的最小的声音，大致相当于3米外一只蚊子在飞的声音。将标准值代入上式：</p>
+<script type="math/tex; mode=display">
+I(dBSPL) = 20 \times \log_{10}(\frac{P}{2 \times 10^{-5}})，\mbox{P是被测声压值}</script><p>分贝只是一个单位，连物理量都不是，非常广泛，不仅用于声学，多用于衡量各种信号的强度、增益等；分贝是一种<strong>描述物理量比值</strong>的单位。一般我们<strong>用分贝来作为</strong>测量得到的<strong>振幅的单位</strong>。</p>
+<blockquote>
+<p>dBm,dBu,dBV又是什么？</p>
+</blockquote>
+<ul>
+<li>dBm</li>
+</ul>
+<p>根据声音的振动，在传播的过程引起大气压强的变化，使用声压作为测量量来计算声音的分贝值。除了自然产生的声音外，现在大多数的声音都是使用电信号作为存储和传播的载体的，例如电视广播，各种音频文件等。dBm,dBu,dBV是使用和电信号相关的物理量作为被测物理量，计算其产生声音的分贝值。<strong>dBm是使用产生声音信号的功率作为被测物理量</strong>，选择1毫瓦(1mW)作为基准值，计算分贝值。计算公式:</p>
+<script type="math/tex; mode=display">
+dBm = 10 \times \log_{10}(\frac{P}{1 \times 10^{-3}})),\ \mbox{P是被测电工率}</script><ul>
+<li>dBu</li>
+</ul>
+<p>电功率可以由电压<script type="math/tex">V</script>和电阻<script type="math/tex">R</script>计算得到：<script type="math/tex">P = \frac{V^2}{R}</script>，由该公式可以得到<strong>dBu，使用电压作为测量量，计算声音的分贝值</strong>。在十九世纪三十年代，音频设备的输入电阻都是600欧姆，也就上面公式中的 <code>R = 600</code> 欧姆。在dBm中，使用 <code>1mW</code> 作为基准值，那么在 R = 600 欧姆时就可以得到此时的电压为<strong><script type="math/tex">\sqrt{PR}=\sqrt{10^{-3}\times 600}=0.775V</script></strong>。所以，<strong>dBu</strong>是以电压作为测量量，计算声音的分贝值，<strong>选择的基准电压为0.775V</strong>。计算公式：</p>
+<script type="math/tex; mode=display">
+dBu = 20 \times \log_{10}(\frac{V}{0.775}),\mbox{V是被测电压}</script><ul>
+<li>dBv</li>
+</ul>
+<p>上上个世纪音频设备的输入阻抗都是600欧姆，是固定不变的。但是到了现代，就有了更高阻抗的设备，例如1000欧姆，这样再选择0.775作为电压的基准值，显然是不合理的。所以，就有了<strong>一个新基准值1V</strong>。本质上<strong>dBu</strong>和<strong>dBV</strong>是没有区别的，都是选择电压作为被测单位，只是选择的基准值不同罢了。<strong>dBV</strong>仍然是以电压作为被测量，计算声音的分贝值，<strong>选择1V作为基准值</strong>。计算公式：</p>
+<script type="math/tex; mode=display">
+dBV = 20 \times \log_{10}(\frac{V}{1})</script><blockquote>
+<p>dBFS是什么?</p>
+</blockquote>
+<p>前面的几个被测量都是模拟量，在数字时代更多的音频分贝表示是<strong>dBFS</strong>。<strong>dBFS的全称为Decibels Full Scale</strong>，<strong>全分贝刻度</strong>，是<strong>数值音频分贝值</strong>的表示方法。和前面几个不一样的时，<strong><font color=red>dBFS的基准并不是最小的或者是中间的某一个值，是最大的那个值！</font></strong>也就是说<strong>0dBFS是数字设备能达到的最大值</strong>，除了最大值外都是负值。以数字音频采样位为无符号16位（即位深为2 byte/16 bit，用16位2进制数字刻画音频信号，范围是0-65536），16位的无符号的最大值为$65536(2^{16})$，因此dBFS的计算公式：</p>
+<script type="math/tex; mode=display">
+dBFS = 20 \times \log_{10}(\frac{sample}{65536})</script><p>这样，$min\ dBFS=20 \times \log_{10}{\frac{1}{65536}} = -96dBFS$。也就是说16位无符号音频的动态范围为$0dBFS\sim-96dBFS$。</p>
+<p>dBFs和dBu之间的转换</p>
+<p>dBu是度量模拟信号的，而dBFS是度量数字信号的，并且dBFS不会用于度量模拟信号，所以没有在dBu和dBFS之间没有统一的转换公式，依赖于具体的数字设备。<strong>在dBu和dBFS转换时，需要规定一个峰值电压，该电压下产生的音频信号经过AD转换后得到的sample为0dBFS。</strong>例如，+18dBu对应于0dBFS，在该条件下 求 xdBu对应于ydBFS，那么就有$y=x-18$。</p>
+<blockquote>
+<p>总结</p>
+</blockquote>
+<p>本文主要介绍和声音相关的分贝概念，分贝不同于其他的物理单位，表示的是相同物理量的比值，其具体的值依赖于选择的被测量。</p>
+<ul>
+<li>dBSPL，通常所说的dB，使用声压作为被测量，选择20μPa20μPa作为基准值。</li>
+<li>dBm，使用功率作为被测量，选择1mW作为基准值。</li>
+<li>dBu，使用电压作为被测量，选择0.775V作为基准值。</li>
+<li>dBV，和dBu一样，使用电压作为被测量，选择1V作为基准值。</li>
+<li>dBFS，和上面的量都不相同，上面的量都是测量模拟值的，dBFS是测量数字音频的，其选择的基准值为sample的最大值为0dBFS，其他的值都为负值。</li>
+</ul>
+<p>dBFS和模拟量之间的转换，例如dBu，需要规定一个基础的对应关系。例如+18dBu 对应于0dBFS，则<script type="math/tex">ydBFS = x - 18</script>。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>测量单位</th>
+<th>基准值</th>
+<th>物理符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>声压 SPL (Pa/帕斯卡)</td>
+<td><script type="math/tex">2×10^{−5}Pa/20μPa</script></td>
+<td>dBSPL</td>
+</tr>
+<tr>
+<td>电功率  (W/瓦特)</td>
+<td><script type="math/tex">1mW</script></td>
+<td>dBm</td>
+</tr>
+<tr>
+<td>电压(V/伏特)</td>
+<td><script type="math/tex">0.775V</script></td>
+<td>dBu</td>
+</tr>
+<tr>
+<td>电压(V/伏特)</td>
+<td>1V</td>
+<td>dBV</td>
+</tr>
+<tr>
+<td>数字信号测量值(bit/比特)</td>
+<td>65536</td>
+<td>dBFS</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="声（音）强级-声（音）强等级（sound-intensity-level）"><a href="#声（音）强级-声（音）强等级（sound-intensity-level）" class="headerlink" title="声（音）强级/声（音）强等级（sound intensity level）"></a>声（音）强级/声（音）强等级（sound intensity level）</h2><ul>
+<li>声强的单位是瓦/米，声强级的单位是分贝。</li>
+</ul>
+<p>声强级（SIL）是声音的<strong>声强</strong>与<strong>基准声强</strong>的比值取常用对数再乘以10的值，也是一种描述声音强弱的单位，定义为单位面积上的声音功率。在物理学中，把单位时间内通过垂直于声波传播方向的单位面积的平均声能，称为声强。声强用<script type="math/tex">I</script>表示，单位为<strong>瓦/平米</strong>。实验的研究表明，人对声音强弱的感觉并不是与声强成正比，而是与其对数成正比的。这正是人们使用声强级来表示声强的原因。其单位为<strong>贝尔声强级</strong>（贝尔，Bel）。</p>
+<script type="math/tex; mode=display">
+L = log_{10}(\frac{I}{I_{ref}})</script><p>一般人对强度相差十倍贝尔的两个声音便可区别出来，因此用贝尔的十倍来作为声强的单位则更为方便，这个单位称为<strong>分贝尔（decibel），简称分贝（dB）</strong>，即：</p>
+<script type="math/tex; mode=display">
+SIL = 10 \times log_{10}(\frac{I}{I_{ref}})</script><p>式中<script type="math/tex">I</script>为声强，<script type="math/tex">I_ref=10^{-12} 瓦/平米</script>称为基准声强，声强级的常用单位是分贝（dB）。从物理上说，音强决定于发音体振动的振幅。振幅越大，音强越强。从生理上说，音强取决于发音时声门下压力的大小。发音时发音器官的肌肉活动增强（用力大），呼出的气流量大，则气流对发音器官的压力大，则发音体振幅大，于是音强就强；反之，音强就弱。</p>
+<h2 id="声（音）压级-声（音）压等级（sound-pressure-level）"><a href="#声（音）压级-声（音）压等级（sound-pressure-level）" class="headerlink" title="声（音）压级/声（音）压等级（sound pressure level）"></a>声（音）压级/声（音）压等级（sound pressure level）</h2><ul>
+<li>声压的单位是帕斯卡 ，声压级的单位是分贝。</li>
+</ul>
+<p>声压等级是我们用来科学描述声音大小的物理量。<strong>声压等级（SPL）</strong>和<strong>即时压力的均方根（rms）</strong>直接联系。在分贝这种单位下，声压等级为零时，<strong>大概</strong>是一个<strong>听力正常的人刚好不能听到声音的声音大小</strong>。也就是说，当即时压力的均方根与刚好听不到的声音比值为1时，计声压等级为0。由于人的听力由基因和后天环境决定，所以人和人的听力都是有差异的，科学家对很多人进行了统计，从而规定了一个大概人们刚好不能听到声音的大小为</p>
+<script type="math/tex; mode=display">
+dBSPL = 0</script><p>两个 50dB 的声压级加在一起不是 100dB 而是 53dB。</p>
+<h2 id="响度（loudness）"><a href="#响度（loudness）" class="headerlink" title="响度（loudness）"></a>响度（loudness）</h2><p>响度又称音响，是与声强相对应的声音大小的<strong><font color=red>知觉量</font></strong>。声强是客观的物理量，<strong><font color=red>响度是主观的心理量</font></strong>。响度不仅跟声强有关，还与振幅/声压和频率相关，以1kHz为基准值；</p>
+<p>为了在数量上估计一个纯音的响度，<strong>就把这个纯音和1000Hz的某个声强级的纯音在响度上作比较。这两个声音<font color=red>在听觉上认为是相同的响度时</font>，就可以把1000Hz纯音的这个声强级规定为该频率纯音的响度级。</strong>响度级的单位为方（Phon）。响度是和听感相关的量，与振幅/声压和频率相关，以1kHz为基准值。</p>
+<p><strong><font color=blue>也就是说声强级可以直接用于表示响度。</font></strong></p>
+<p><strong>响度由固定的赫兹来表示，决定因素的人的听觉，不同的人可能会产生不同的结果。</strong></p>
+<ul>
+<li>以下内容存疑：</li>
+</ul>
+<font color=green>空气颗粒移动速度的导数就是空气颗粒速度(v)。特性声阻（specific acoustic impedance）等于声压（p）与空气颗粒速度（v）的比值。</font>
+$$
+\textcolor{Green} {Specific\ Acoustic\ Impedance = p / v}
+$$
+<font color=green>可以推得振幅与声压的关系，从而推得其与声压等级，进而与响度的关系。</font>
+
+
+
+<h2 id="增益（gain）"><a href="#增益（gain）" class="headerlink" title="增益（gain）"></a>增益（gain）</h2><p>增益（GAIN）是调整信号电压，控制小信号放大的倍数。处于放大电路的最前端，决定了灵敏度和信噪比，决定了灵敏度和信噪比，调整时强音偶尔点亮指示灯，最强音刚好常亮即可，过大容易破声、削波，过小信噪比低。</p>
+<p>话筒利用磁生电将声音产生的震动转化成微弱的电压变化，增益负责将这种微弱的震动放大。</p>
+<h2 id="音量（volume）"><a href="#音量（volume）" class="headerlink" title="音量（volume）"></a>音量（volume）</h2><ul>
+<li>百度百科解释：</li>
+</ul>
+<p>音量又称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/响度/1669728">响度</a>、音强，是指人耳对所听到的声音大小强弱的主观感受，其客观评价尺度是声音的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/振幅/548505">振幅</a>大小。这种感受源自物体振动时所产生的压力，即声压。物体振动通过不同的介质，将其振动能量传导开去。人们为了对声音的感受量化成可以监测的指标，就把声压分成“级”——<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/声压级/2005936">声压级</a>，以便能客观的表示声音的强弱，其单位称为“分贝”（dB）。<strong>也就是说音量就是响度、音强的别称。</strong></p>
+<ul>
+<li>音频电路中的音量控制：</li>
+</ul>
+<p>音量调节音频设备的输入阻抗，是衰减器。阻抗是电阻和电抗的总和。电阻是指在直流电中，物体对电流的阻碍作用。在交流点中，除了电阻会阻碍电流，电容和电感也会阻碍电流，这就是电抗了。阻抗值其实对音质没有关键性影响。但是，如果阻抗过低，造成电流过大，也容易使声音失真。音量旋钮，位于前置放大电路前端，有刻度且0dB为最大的话，-10dB是正常演出的音量最佳（也就是保留10dB的动态裕量。耳放道理相同，音源的输出电平高，增益应该调低，反之调高。</p>
+<p>阻抗高，意味着同样的输出功率，加到耳机上的电流就小了，要更大的功率才能充分驱动。低阻耳机只要一点点功率就足以驱动起来。 听感上你是听不出耳机阻抗高低的。录音室使用的耳机很多是300欧或600欧，但这只是因为调音台的阻抗匹配</p>
+<h1 id="白噪音"><a href="#白噪音" class="headerlink" title="白噪音"></a>白噪音</h1><p>非周期性的振动产生的声波由于杂乱无章，又称为噪音，其中含有各种频率，且每种频率的强度一致的噪音成为白色噪音(white noise).</p>
+<h1 id="声音的三大主观属性"><a href="#声音的三大主观属性" class="headerlink" title="声音的三大主观属性"></a>声音的三大主观属性</h1><p>声音的三个主要的主观属性，包括音量（响度）、音调、音色（也称音品）。</p>
+<h2 id="音量（volume）-1"><a href="#音量（volume）-1" class="headerlink" title="音量（volume）"></a>音量（volume）</h2><p><a href="/2020/04/09/基本声学知识/#音量（volume）">同上</a></p>
+<h2 id="音调（pitch）"><a href="#音调（pitch）" class="headerlink" title="音调（pitch）"></a>音调（pitch）</h2><p>表示人的听觉分辨一个声音的调子高低的程度。<strong>音调主要由声音的频率决定，同时也与声音强度有关。</strong></p>
+<p><em>频率影响音调</em><br>对一定强度的纯音，<strong>音调随频率的升降而升降</strong>，物体振动的快，发出声音的音调就高。振动的慢，发出声音的音调就低。</p>
+<p><em>响度影响音调</em><br>对<strong>一定频率的纯音、低频纯音的音调随声强增加而下降</strong>，<strong>高频纯音的音调却随强度增加而上升</strong>。大体上，500 赫兹以下的低频纯音的音调随响度的增加而下降，1500 赫兹以上高频纯音的音调随响度的增加而上升。</p>
+<p>对音调可以进行定量的判断。音调的单位称为美（mel）：取频率1000赫兹、声压级为40 分贝的纯音的音调作标准，称为1000 美，另一些纯音，听起来调子高一倍的称为2000 美，调子低一倍的称为500 美，依此类推，可建立起整个可听频率内的音调标度。这样得到的声压级40 分贝的纯音音调与频率的关系见下表：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>频率f/Hz</th>
+<th>音调/mel</th>
+<th>频率/fHz</th>
+<th>音调/mel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20</td>
+<td>0</td>
+<td>900</td>
+<td>929</td>
+</tr>
+<tr>
+<td>30</td>
+<td>24</td>
+<td>1000</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>40</td>
+<td>46</td>
+<td>1250</td>
+<td>1154</td>
+</tr>
+<tr>
+<td>60</td>
+<td>87</td>
+<td>1500</td>
+<td>1296</td>
+</tr>
+<tr>
+<td>80</td>
+<td>126</td>
+<td>1750</td>
+<td>1428</td>
+</tr>
+<tr>
+<td>100</td>
+<td>161</td>
+<td>2000</td>
+<td>1545</td>
+</tr>
+<tr>
+<td>150</td>
+<td>237</td>
+<td>2500</td>
+<td>1771</td>
+</tr>
+<tr>
+<td>200</td>
+<td>301</td>
+<td>3000</td>
+<td>1962</td>
+</tr>
+<tr>
+<td>250</td>
+<td>358</td>
+<td>3500</td>
+<td>2116</td>
+</tr>
+<tr>
+<td>300</td>
+<td>409</td>
+<td>4000</td>
+<td>2250</td>
+</tr>
+<tr>
+<td>350</td>
+<td>460</td>
+<td>5000</td>
+<td>2478</td>
+</tr>
+<tr>
+<td>400</td>
+<td>508</td>
+<td>6000</td>
+<td>2657</td>
+</tr>
+<tr>
+<td>500</td>
+<td>602</td>
+<td>7000</td>
+<td>2800</td>
+</tr>
+<tr>
+<td>600</td>
+<td>690</td>
+<td>10000</td>
+<td>3075</td>
+</tr>
+<tr>
+<td>700</td>
+<td>775</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>800</td>
+<td>854</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>音调高：空灵，清凉，纤细<br>音调低：雄浑，澎湃，粗犷</p>
+<h2 id="音色-音品（Timbre）"><a href="#音色-音品（Timbre）" class="headerlink" title="音色/音品（Timbre）"></a>音色/音品（Timbre）</h2><p><strong>声音</strong>的品质叫做音色，又叫音品，它反映了每个物体发出的声音特有的品质。</p>
+<p>音色是指不同声音表现在波形方面总是有与众不同的特性，不同的物体振动都有不同的特点。</p>
+<p>不同的发声体由于其材料、结构不同，则发出声音的音色也不同。例如钢琴、小提琴和人发出的声音不一样，每一个人发出的声音也不一样。因此，<strong>可以把音色理解为声音的特征。</strong></p>
+<h1 id="频谱和功率谱"><a href="#频谱和功率谱" class="headerlink" title="频谱和功率谱"></a>频谱和功率谱</h1><p>频谱是频率谱密度的简称，就是频率的分布曲线。复杂振荡分解为振幅不同和频率不同的谐振荡，这些谐振荡的幅值按频率排列的图形叫做频谱。广泛应用在声学、光学和无线电技术等方面。它对信号的研究从时域引到频域，从而带来更直观的认识。</p>
+<p>频谱是从频域范围对音频进行分析的结果，</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/topic/20467654/intro">频谱</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AF%AD%E9%9F%B3%E7%AE%97%E6%B3%95/">语音算法</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/10/Python%E5%A4%9A%E8%A1%8C%E8%BE%93%E5%85%A5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python多行输入</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/09/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">
+                        <span class="hidden-mobile">动态规划题目汇总</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/10/%E5%9F%BA%E6%9C%AC%E5%A3%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/';
+        this.page.identifier = '/2020/04/10/%E5%9F%BA%E6%9C%AC%E5%A3%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

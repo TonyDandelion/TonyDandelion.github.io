@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>LeetCode 每日一题 0601-0607(2020) - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 每日一题 0601-0607(2020)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-01 10:05" pubdate>
+        2020年6月1日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      62
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 每日一题 0601-0607(2020)</h1>
+            
+            <div class="markdown-body">
+              <p>2020-06-01 至 2020-06-07 LeetCode 每日一题</p>
+<a id="more"></a> 
+<h1 id="0601-1431-Kids-With-the-Greatest-Number-of-Candies（easy）"><a href="#0601-1431-Kids-With-the-Greatest-Number-of-Candies（easy）" class="headerlink" title="[0601] 1431. Kids With the Greatest Number of Candies（easy）"></a>[0601] 1431. Kids With the Greatest Number of Candies（easy）</h1><p>儿童节专题题目：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kids-with-the-greatest-number-of-candies/">1431.Kids With the Greatest Number of Candies(拥有最多糖果的孩子)</a></p>
+<p><em>keyword</em>：数组与指针</p>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>Given the array candies and the integer extraCandies, where candies[i] represents the number of candies that the ith kid has.</p>
+<p>For each kid check if there is a way to distribute extraCandies among the kids such that he or she can have the greatest number of candies among them. Notice that multiple kids can have the greatest number of candies.</p>
+<p>Example 1:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input: <span class="hljs-attr">candies</span> = [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>], <span class="hljs-attr">extraCandies</span> = <span class="hljs-number">3</span><br>Output: [<span class="hljs-literal">true</span>,<span class="hljs-literal">true</span>,<span class="hljs-literal">true</span>,<span class="hljs-literal">false</span>,<span class="hljs-literal">true</span>] <br></code></pre></div></td></tr></table></figure><br>Explanation:<br>Kid 1 has 2 candies and if he or she receives all extra candies (3) will have 5 candies —- the greatest number of candies among the kids.<br>Kid 2 has 3 candies and if he or she receives at least 2 extra candies will have the greatest number of candies among the kids.<br>Kid 3 has 5 candies and this is already the greatest number of candies among the kids.<br>Kid 4 has 1 candy and even if he or she receives all extra candies will only have 4 candies.<br>Kid 5 has 3 candies and if he or she receives at least 2 extra candies will have the greatest number of candies among the kids. </p>
+<p>Example 2:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input: <span class="hljs-attr">candies</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <span class="hljs-attr">extraCandies</span> = <span class="hljs-number">1</span><br>Output: [<span class="hljs-literal">true</span>,<span class="hljs-literal">false</span>,<span class="hljs-literal">false</span>,<span class="hljs-literal">false</span>,<span class="hljs-literal">false</span>] <br></code></pre></div></td></tr></table></figure><br>Explanation: There is only 1 extra candy, therefore only kid 1 will have the greatest number of candies among the kids regardless of who takes the extra candy.</p>
+<p>Example 3:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">Input: <span class="hljs-attr">candies</span> = [<span class="hljs-number">12</span>,<span class="hljs-number">1</span>,<span class="hljs-number">12</span>], <span class="hljs-attr">extraCandies</span> = <span class="hljs-number">10</span><br>Output: [<span class="hljs-literal">true</span>,<span class="hljs-literal">false</span>,<span class="hljs-literal">true</span>]<br></code></pre></div></td></tr></table></figure><br>Constraints:<br>2 &lt;= candies.length &lt;= 100<br>1 &lt;= candies[i] &lt;= 100<br>1 &lt;= extraCandies &lt;= 50</p>
+<h2 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h2><p>Children’s day special, simple question.<br>Find the maximum value firstly, and then walk through it to make judgment one by one.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; <span class="hljs-title">kidsWithCandies</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; candies, <span class="hljs-keyword">int</span> extraCandies)</span> </span>&#123;<br>        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; res;<br>        <span class="hljs-keyword">if</span>(candies.empty())<br>            <span class="hljs-keyword">return</span> res;<br>        <span class="hljs-comment">// 求出candies的最大值</span><br>        <span class="hljs-keyword">int</span> _max = *max_element(candies.begin(), candies.end());<br>        <span class="hljs-comment">// 循环candies比较结果</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;candies.size(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(candies[i]+extraCandies&gt;=_max)&#123;<br>                res.push_back(<span class="hljs-literal">true</span>);<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                res.push_back(<span class="hljs-literal">false</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<h1 id="0602-面试题64-求1-2-…-n"><a href="#0602-面试题64-求1-2-…-n" class="headerlink" title="[0602] 面试题64. 求1+2+…+n"></a>[0602] 面试题64. 求1+2+…+n</h1><p><a href="/2020/05/18/剑指offer-面试题64-求1-2-…-n（中）/">剑指offer 面试题64. 求1+2+…+n（中）</a></p>
+<h1 id="0603-837-New-21-Game（medium）"><a href="#0603-837-New-21-Game（medium）" class="headerlink" title="[0603] 837. New 21 Game（medium）"></a>[0603] 837. New 21 Game（medium）</h1><h2 id="Question-1"><a href="#Question-1" class="headerlink" title="Question"></a>Question</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/new-21-game/">837. 新21点</a></p>
+<p><em>keyword</em>：动态规划</p>
+<p>Alice plays the following game, loosely based on the card game “21”.</p>
+<p>Alice starts with <code>0</code> points, and draws numbers while she has less than <code>K</code> points.  During each draw, she gains an integer number of points randomly from the range <code>[1, W]</code>, where W is an integer.  Each draw is independent and the outcomes have equal probabilities.</p>
+<p>Alice stops drawing numbers when she gets <code>K</code> or more points.  What is the probability that she has <code>N</code> or less points?</p>
+<p>Example 1:<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: N = <span class="hljs-number">10</span>, K = <span class="hljs-number">1</span>, W = <span class="hljs-number">10</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">1</span>.<span class="hljs-number">00000</span><br></code></pre></div></td></tr></table></figure><br>Explanation:  Alice gets a single card, then stops.</p>
+<p>Example 2:<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: N = <span class="hljs-number">6</span>, K = <span class="hljs-number">1</span>, W = <span class="hljs-number">10</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">0</span>.<span class="hljs-number">60000</span><br></code></pre></div></td></tr></table></figure><br>Explanation:  Alice gets a single card, then stops.<br>In 6 out of W = 10 possibilities, she is at or below N = 6 points.</p>
+<p>Example 3:<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: N = <span class="hljs-number">21</span>, K = <span class="hljs-number">17</span>, W = <span class="hljs-number">10</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">0</span>.<span class="hljs-number">73278</span><br></code></pre></div></td></tr></table></figure><br>Note：0 &lt;= K &lt;= N &lt;= 10000，1 &lt;= W &lt;= 10000。</p>
+<p>Answers will be accepted as correct if they are within 10^-5 of the correct answer.<br>The judging time limit has been reduced for this question.</p>
+<h2 id="Intuition-1"><a href="#Intuition-1" class="headerlink" title="Intuition"></a>Intuition</h2><p><code>w</code>: 抽牌范围为 <code>0-w</code><br><code>k</code>: 抽牌条件得分小于<code>k</code><br><code>N</code>: 计算得分小于等于<code>N</code>的概率</p>
+<blockquote>
+<p> 动态规划问题的求解分为三步</p>
+</blockquote>
+<p><strong>1、确定状态</strong></p>
+<p><img src="https://i.loli.net/2020/06/03/ij5rgqLonwvVW9R.png" srcset="/img/loading.gif" alt="Snipaste_2020-06-03_10-23-57"></p>
+<p><strong>设 $f(s)$ 为得分为 $s$ 时，再抽取一次，新的得分小于等于 $N$ 的概率。</strong>则爱丽丝以 <code>0</code> 分开始，并在她的得分少于 <code>K</code> 分时抽取数字，爱丽丝的分数不超过 <code>N</code> 的概率就是 $f(0)$ 。以 <code>N = 21, K = 17, W = 10</code>，为例子$f(16) = \frac{1}{10} \times (1+1+1+1+1+0+0+0+0+0)=\frac{}{}$ 。第一个 $+1$ 代表抽到 $1$ 之后，新得分（17）小于等于 $N$ （21）的概率为 $1$（也就是100%）。同理，第二个 $+1$ 代表抽到 $2$ 之后，新得分（18）小于等于 $N$（21）的概率为 $1$（也就是100%）。第一个 $+0$ 代表抽到 $6$ 之后，新得分（22）小于等于 $N$ （21）的概率为 $0$，以此类推。则上述过程可公式化为 $f(s) = \frac{1}{w} \times f(s+1) + f(s+2) + … + f(s+w)$。</p>
+<p><strong>2、确定状态转移方程</strong></p>
+<p><img src="https://i.loli.net/2020/06/03/wIWfAk35dK4anYt.png" srcset="/img/loading.gif" alt="Snipaste_2020-06-03_10-23-39"></p>
+<p>$f(15) = \frac{1}{10} \times (\frac{1}{2} + 1 + 1 + 1  + 1  + 1 + 0 + 0 + 0 + 0)$。第一个 $+\frac{1}{2}$ 代表抽到 $1$ 之后，新得分（16）小于等于 $N$ （21）的概率为 $f(16)=\frac{1}{2}$。第一个 $+1$ 代表抽到 $2$ 之后，新得分（17）小于等于 $N$ （21）的概率为  $1$（也就是100%）。综上，可得状态转移方程为：</p>
+<script type="math/tex; mode=display">
+f(s-1) = \frac{1}{w} \times (f(s) + f(s) + ... + f(x+w-1))</script><p>则，$f(0) = \frac{1}{10} \times (f(1) + f(2) + … + f(10))$，从后（$f(16)$ ）往前计算 $f(0)$。这里可以做个优化，$f(s)$ 和 $f(s-1)$ 之间存在重复部分，去掉重复部分之后，状态转移方程为：</p>
+<script type="math/tex; mode=display">
+f(s-1) = f(s) - \frac{1}{w} \times (f(s+w) - f(s))</script><p><img src="https://i.loli.net/2020/06/03/FIuy7oMax3Z1lGv.png" srcset="/img/loading.gif" alt="Snipaste_2020-06-03_10-50-18"></p>
+<p><strong>3、确定初始化状态</strong></p>
+<p><strong>由于是从后往前计算，所以要初始化一个 <code>k+w</code> 的数组，初始化为0。</strong>然后，再将 <code>k-N</code> （17-21）部分改为 1。接着计算 <code>k-1</code> 位置（ $f(16)$ ）的值， <code>f(k-1) = min(N - K + 1, W) / w</code> ，<code>min(N - K + 1, W)</code> 为 $f(16)$ 要 $+1$ 的个数，<code>N = 21, K = 17, W = 10</code> 时，<code>min(N - K + 1, W)=5</code>，也就是 $f(16)$  $+1$ 的个数为 $5$，最终 $f(16) = \frac{5}{10} = \frac{1}{2}$/。</p>
+<p>完成以上步骤之后，就可以从$k-2$往前，利用 $f(s-1) = f(s) - \frac{1}{w} \times (f(s+w) - f(s))$ 计算  $f(0)$ 了。</p>
+<blockquote>
+<p>复杂度分析</p>
+</blockquote>
+<p>时间复杂度：$O(\min(N, K+W))$。即需要计算的 <code>dp</code> 值的数量 $\min(N, K+W-1)$。<br>空间复杂度：$O(K+W)$。创建了一个长度为 $K+W+1$ 的数组 <code>dp</code>。</p>
+<blockquote>
+<p>参考连接</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/new-21-game/solution/xin-21dian-by-leetcode-solution/">LeetCode-Solution</a></p>
+<h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">new21Game</span><span class="hljs-params">(<span class="hljs-keyword">int</span> N, <span class="hljs-keyword">int</span> K, <span class="hljs-keyword">int</span> W)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(K==<span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1.0</span>;<br>        &#125;<br>        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">double</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(K+W+<span class="hljs-number">1</span>)</span></span>;  <span class="hljs-comment">// 通过vector&lt;int&gt; dp(length); 可以声明一个长度为length的数组。</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=K; i&lt;=N &amp;&amp; i&lt;K+W; i++)&#123;<br>            dp[i] = <span class="hljs-number">1.0</span>;<br>        &#125;<br>        dp[K<span class="hljs-number">-1</span>] = <span class="hljs-number">1.0</span> * min(N-K+<span class="hljs-number">1</span>, W) / W;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=K<span class="hljs-number">-2</span>; i&gt;=<span class="hljs-number">0</span>; i--)&#123;<br>            dp[i] = dp[i+<span class="hljs-number">1</span>] - (dp[i+<span class="hljs-number">1</span>+W] - dp[i+<span class="hljs-number">1</span>]) / W;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">0</span>];<br>    &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    Solution so;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; so.new21Game(<span class="hljs-number">21</span>, <span class="hljs-number">17</span>, <span class="hljs-number">10</span>) &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-keyword">int</span> a;<br>    <span class="hljs-built_in">cin</span> &gt;&gt; a;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<h1 id="0604-238-Product-of-Array-Except-Self-medium"><a href="#0604-238-Product-of-Array-Except-Self-medium" class="headerlink" title="[0604] 238. Product of Array Except Self (medium)"></a>[0604] 238. Product of Array Except Self (medium)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/product-of-array-except-self/">238.除自身以外数组的乘积</a></p>
+<p><em>keyword</em>: 数组与指针</p>
+<h2 id="Question-2"><a href="#Question-2" class="headerlink" title="Question"></a>Question</h2><p>Given an array nums of n integers where n &gt; 1,  return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].</p>
+<p>Example:<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>: <span class="hljs-meta"> [1,2,3,4]</span><br><span class="hljs-attribute">Output</span>:<span class="hljs-meta"> [24,12,8,6]</span><br></code></pre></div></td></tr></table></figure><br><strong>Constraint</strong>: It’s guaranteed that the product of the elements of any prefix or suffix of the array (including the whole array) fits in a 32 bit integer.(题目数据保证数组之中任意元素的全部前缀元素和后缀（甚至是整个数组）的乘积都在 32 位整数范围内。)</p>
+<p><strong>Note</strong>: Please <strong>solve it without division and in $O(n)$.</strong></p>
+<p><strong>Follow up</strong>: Could you solve it with <strong>constant space complexity (常数空间复杂度)</strong>? (The output array does not count as extra space for the purpose of space complexity analysis.)</p>
+<h2 id="Intuition-2"><a href="#Intuition-2" class="headerlink" title="Intuition"></a>Intuition</h2><p>我们不必将所有数字的乘积除以给定索引处的数字得到相应的答案，而是利用索引左侧所有数字的乘积和右侧所有数字的乘积（即前缀与后缀）相乘得到答案。</p>
+<p><em>算法</em></p>
+<ul>
+<li>初始化两个空数组 <code>L</code> 和 <code>R</code>。对于给定索引 <code>i</code>，<code>L[i]</code> 代表的是 <code>i</code> 左侧所有数字的乘积，<code>R[i]</code> 代表的是 <code>i</code> 右侧所有数字的乘积。</li>
+<li>我们需要用两个循环来填充 <code>L</code> 和 <code>R</code> 数组的值。对于数组 <code>L</code>，<code>L[0]</code> 应该是 <code>1</code>，因为第一个元素的左边没有元素。对于其他元素：<code>L[i] = L[i-1] * nums[i-1]</code>。</li>
+<li>同理，对于数组 <code>R</code>，<code>R[length-1]</code> 应为 <code>1</code>。<code>length</code> 指的是输入数组的大小。其他元素：<code>R[i] = R[i+1] * nums[i+1]</code>。</li>
+<li>当 <code>R</code> 和 <code>L</code> 数组填充完成，我们只需要在输入数组上迭代，且索引 <code>i</code> 处的值为：<code>L[i] * R[i]</code>。</li>
+</ul>
+<p>时间复杂度：$O(N)$，空间复杂度：$O(N)$。</p>
+<p>由于输出数组不算在空间复杂度内，那么我们可以将 <code>L</code> 或 <code>R</code> 数组用输出数组来计算。先把输出数组当作 <code>L</code> 数组来计算，然后再动态构造 <code>R</code> 数组得到结果。让我们来看看基于这个思想的算法。</p>
+<p><em>算法</em></p>
+<ul>
+<li>初始化 <code>answer</code> 数组，对于给定索引 <code>i</code>，<code>answer[i]</code> 代表的是 <code>i</code> 左侧所有数字的乘积。</li>
+<li>构造方式与之前相同，只是我们试图节省空间，先把 <code>answer</code> 作为方法一的 <code>L</code> 数组。</li>
+<li><strong>这种方法的唯一变化就是我们没有构造 <code>R</code> 数组。而是用一个遍历来跟踪右边元素的乘积。并更新数组<code>answer[i]=answer[i]</code>。然后 <code>R</code> 更新为 <code>R=R*nums[i]</code>，其中变量 <code>R</code> 表示的就是索引右侧数字的乘积。</strong></li>
+</ul>
+<h2 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">productExceptSelf</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> length = nums.size();<br>        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(length)</span></span>;<br>        res[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;length; i++)&#123;<br>            res[i] = res[i<span class="hljs-number">-1</span>] * nums[i<span class="hljs-number">-1</span>];<br>        &#125;<br>        <span class="hljs-comment">// R 为右侧所有元素的乘积</span><br>        <span class="hljs-comment">// 刚开始右边没有元素，所以 R = 1</span><br>        <span class="hljs-keyword">int</span> R = <span class="hljs-number">1</span>;  <span class="hljs-comment">// 变量 R 表示的就是索引右侧数字的乘积。</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=length<span class="hljs-number">-1</span>; i&gt;=<span class="hljs-number">0</span>; i--)&#123;<br>            res[i] = res[i] * R;<br>            R *= nums[i];<br>        &#125;<br>    <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; input = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>&#125;;<br>    Solution so;<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; res;<br>    res = so.productExceptSelf(input);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;res.size(); i++)&#123;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; res[i] &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    &#125;<br>    <span class="hljs-keyword">int</span> a;<br>    <span class="hljs-built_in">cin</span> &gt;&gt; a;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="0605-54-Spiral-Matrix-easy"><a href="#0605-54-Spiral-Matrix-easy" class="headerlink" title="[0605] 54. Spiral Matrix (easy)"></a>[0605] 54. Spiral Matrix (easy)</h1><p><a href="/2020/03/10/LeetCode-54.-螺旋矩阵（中）/">LeetCode 54. 螺旋矩阵（中）&amp; 剑指offer 面试题29. 顺时针打印矩阵</a></p>
+<p><em>keyword</em>: 数组与指针</p>
+<h1 id="0606-128-Longest-Consecutive-Sequence-hard"><a href="#0606-128-Longest-Consecutive-Sequence-hard" class="headerlink" title="[0606] 128. Longest Consecutive Sequence (hard)"></a>[0606] 128. Longest Consecutive Sequence (hard)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">最长连续序列</a></p>
+<p><em>keyword</em>: 数组与指针，并查集</p>
+<h2 id="Question-3"><a href="#Question-3" class="headerlink" title="Question"></a>Question</h2><p>Given an unsorted array of integers, find the length of the longest consecutive elements sequence.<br>Your algorithm should run in $O(n)$ complexity.</p>
+<p>示例:<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Input</span>:<span class="hljs-meta"> [100, 4, 200, 1, 3, 2]</span><br><span class="hljs-attribute">Output</span>: <span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure><br>Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.</p>
+<h2 id="Intuition-3"><a href="#Intuition-3" class="headerlink" title="Intuition"></a>Intuition</h2><p><em>方法一</em></p>
+<p>初始化的时候先把数组里每个元素初始化为他的下一个数；<br>并的时候找他能到达的最远的数字就可以了。</p>
+<p><em>方法二</em></p>
+<p>用一个哈希表存储数组中的数，这样查看一个数是否存在即能优化至 $O(1)$ 的时间复杂度。</p>
+<p>仅仅是这样我们的算法时间复杂度最坏情况下还是会达到 $O(n^2)$（即外层需要枚举 $O(n)$ 个数，内层需要暴力匹配 $O(n)$ 次），无法满足题目的要求。但仔细分析这个过程，我们会发现其中执行了很多不必要的枚举，如果已知有一个 $x, x+1, x+2, \cdots, x+y$ 的连续序列，而我们却重新从 $x+1，x+2$或者是 $x+y$ 处开始尝试匹配，那么得到的结果肯定不会优于枚举 $x$ 为起点的答案，因此<strong>我们在外层循环的时候碰到这种情况跳过即可。</strong>那么怎么判断是否跳过呢？由于我们要枚举的数 $x$ 一定是在数组中不存在前驱数 $x-1$ 的，不然按照上面的分析我们会从 $x-1$ 开始尝试匹配，<strong>因此我们每次在哈希表中检查是否存在 $x-1$ 即能判断是否需要跳过了。</strong></p>
+<p>增加了判断跳过的逻辑之后，时间复杂度是多少呢？外层循环需要 $O(n)$ 的时间复杂度<strong>，只有当一个数是连续序列的第一个数的情况下才会进入内层循环，然后在内层循环中匹配连续序列中的数，因此数组中的每个数只会进入内层循环一次。</strong>根据上述分析可知，总时间复杂度为 $O(n)$，符合题目要求。</p>
+<h2 id="Code-3"><a href="#Code-3" class="headerlink" title="Code"></a>Code</h2><ul>
+<li>方法一</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;unordered_map&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;  <br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; a,b;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>&#123;<br>        <span class="hljs-keyword">return</span> a.count(x)?a[x]=find(a[x]):x;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> i:nums)<br>            a[i]=i+<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> i:nums)&#123;<br>            <span class="hljs-keyword">int</span> y=find(i+<span class="hljs-number">1</span>);<br>            ans=max(ans,y-i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>方法二</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-built_in">unordered_set</span>&lt;<span class="hljs-keyword">int</span>&gt; num_set;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; num : nums) &#123;<br>            num_set.insert(num);<br>        &#125;<br><br>        <span class="hljs-keyword">int</span> longestStreak = <span class="hljs-number">0</span>;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; num : num_set) &#123;<br>            <span class="hljs-keyword">if</span> (!num_set.count(num - <span class="hljs-number">1</span>)) &#123;<br>                <span class="hljs-keyword">int</span> currentNum = num;<br>                <span class="hljs-keyword">int</span> currentStreak = <span class="hljs-number">1</span>;<br><br>                <span class="hljs-keyword">while</span> (num_set.count(currentNum + <span class="hljs-number">1</span>)) &#123;<br>                    currentNum += <span class="hljs-number">1</span>;<br>                    currentStreak += <span class="hljs-number">1</span>;<br>                &#125;<br><br>                longestStreak = max(longestStreak, currentStreak);<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> longestStreak;           <br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<h1 id="0607-Word-Ladder-II-hard"><a href="#0607-Word-Ladder-II-hard" class="headerlink" title="[0607] Word Ladder II (hard)"></a>[0607] Word Ladder II (hard)</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-ladder-ii/">单词接龙 II</a></p>
+<p><em>keyword</em>: 广度优先搜索、回溯算法</p>
+<h2 id="Question-4"><a href="#Question-4" class="headerlink" title="Question"></a>Question</h2><p>Given two words (beginWord and endWord), and a dictionary’s word list, find all shortest transformation sequence(s) from beginWord to endWord, such that:</p>
+<p>Only one letter can be changed at a time<br>Each transformed word must exist in the word list. Note that beginWord is not a transformed word.<br>Note:</p>
+<p>Return an empty list if there is no such transformation sequence.<br>All words have the same length.<br>All words contain only lowercase alphabetic characters.<br>You may assume no duplicates in the word list.<br>You may assume beginWord and endWord are non-empty and are not the same.</p>
+<p>Example 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">Input:</span><br>beginWord = <span class="hljs-string">&quot;hit&quot;</span>,<br>endWord = <span class="hljs-string">&quot;cog&quot;</span>,<br>wordList = [<span class="hljs-string">&quot;hot&quot;</span>,<span class="hljs-string">&quot;dot&quot;</span>,<span class="hljs-string">&quot;dog&quot;</span>,<span class="hljs-string">&quot;lot&quot;</span>,<span class="hljs-string">&quot;log&quot;</span>,<span class="hljs-string">&quot;cog&quot;</span>]<br></code></pre></div></td></tr></table></figure><br>Output:<br><figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">[<br>  [<span class="hljs-string">&quot;hit&quot;</span>,<span class="hljs-string">&quot;hot&quot;</span>,<span class="hljs-string">&quot;dot&quot;</span>,<span class="hljs-string">&quot;dog&quot;</span>,<span class="hljs-string">&quot;cog&quot;</span>],<br>  [<span class="hljs-string">&quot;hit&quot;</span>,<span class="hljs-string">&quot;hot&quot;</span>,<span class="hljs-string">&quot;lot&quot;</span>,<span class="hljs-string">&quot;log&quot;</span>,<span class="hljs-string">&quot;cog&quot;</span>]<br>]<br></code></pre></div></td></tr></table></figure><br>Example 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">Input:</span><br>beginWord = <span class="hljs-string">&quot;hit&quot;</span><br>endWord = <span class="hljs-string">&quot;cog&quot;</span><br>wordList = [<span class="hljs-string">&quot;hot&quot;</span>,<span class="hljs-string">&quot;dot&quot;</span>,<span class="hljs-string">&quot;dog&quot;</span>,<span class="hljs-string">&quot;lot&quot;</span>,<span class="hljs-string">&quot;log&quot;</span>]<br></code></pre></div></td></tr></table></figure><br>Output:<br><figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">[]<br></code></pre></div></td></tr></table></figure><br>Explanation: The endWord “cog” is not in wordList, therefore no possible transformation.</p>
+<h2 id="Intuition-4"><a href="#Intuition-4" class="headerlink" title="Intuition"></a>Intuition</h2><p>本题要求的是最短转换序列，看到最短首先想到的就是 BFS。想到 BFS 自然而然的就能想到图，但是本题并没有直截了当的给出图的模型，因此我们需要把它抽象成图的模型。</p>
+<p>我们可以把每个单词都抽象为一个点，如果两个单词可以只改变一个字母进行转换，那么说明他们之间有一条双向边。因此我们只需要把满足转换条件的点相连，就形成了一张图。根据示例 1 中的输入，我们可以建出下图：</p>
+<p><img src="https://i.loli.net/2020/06/07/EZmNFPzLU7herYp.png" srcset="/img/loading.gif" alt="126_fig1"></p>
+<p>基于该图，我们以 <code>hit</code> 为图的起点， 以<code>cog</code> 为终点进行<strong>广度优先搜索（BFS）</strong>，寻找 <code>hit</code> 到 <code>cog</code> 的最短路径。下图即为答案中的一条路径。</p>
+<p><img src="https://i.loli.net/2020/06/07/MnjdyxbwUKu9vi8.png" srcset="/img/loading.gif" alt="126_fig2"></p>
+<p><strong>时间复杂度</strong>：$O(N^2 \times C)$。其中 $N$ 为 wordList 的长度，$C$ 为列表中单词的长度。构建映射关系的时间复杂度为 $O(N)$。建图首先两层遍历 wordList，复杂度为 $O(N^2)$，里面比较两个单词是否可以转换的时间复杂度为 $O(C)$，总的时间复杂度为 $O(N^2\times C)$。广度优先搜索的时间复杂度最坏情况下是 $O(N^2)$，因此总时间复杂度为 $O(N^2 \times C)$</p>
+<p><strong>空间复杂度</strong>：$O(N^2)$，其中 $N$ 为 wordList 的大小。数组和哈希表的复杂度都为 $O(N)$，图 edges 的复杂度最坏为 $O(N^2)$。广度优先搜索队列的复杂度最坏情况下，即每两个路径都有很多重叠的节点时，也是 $O(N^2)$，因此总的空间复杂度为 $O(N^2)$。</p>
+<p><strong>拓展</strong></p>
+<p>由于本题起点和终点固定，所以可以从起点和终点同时开始进行双向广度优先搜索，可以进一步降低时间复杂度。</p>
+<h2 id="Code-4"><a href="#Code-4" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">20</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>&gt; wordId;<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; idWord;<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; edges;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt; findLadders(<span class="hljs-built_in">string</span> beginWord, <span class="hljs-built_in">string</span> endWord, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; wordList) &#123;<br>        <span class="hljs-keyword">int</span> id = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; word : wordList) &#123;<br>            <span class="hljs-keyword">if</span> (!wordId.count(word)) &#123;<br>                wordId[word] = id++;<br>                idWord.push_back(word);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (!wordId.count(endWord)) &#123;<br>            <span class="hljs-keyword">return</span> &#123;&#125;;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (!wordId.count(beginWord)) &#123;<br>            wordId[beginWord] = id++;<br>            idWord.push_back(beginWord);<br>        &#125;<br>        edges.resize(idWord.size());<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; idWord.size(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; idWord.size(); j++) &#123;<br>                <span class="hljs-keyword">if</span> (transformCheck(idWord[i], idWord[j])) &#123;<br>                    edges[i].push_back(j);<br>                    edges[j].push_back(i);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> dest = wordId[endWord];<br>        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt; res;<br>        <span class="hljs-built_in">queue</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; q;<br>        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">cost</span><span class="hljs-params">(id, INF)</span></span>;<br>        q.push(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&#123;wordId[beginWord]&#125;);<br>        cost[wordId[beginWord]] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (!q.empty()) &#123;<br>            <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; now = q.front();<br>            q.pop();<br>            <span class="hljs-keyword">int</span> last = now.back();<br>            <span class="hljs-keyword">if</span> (last == dest) &#123;<br>                <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; tmp;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> index : now) &#123;<br>                    tmp.push_back(idWord[index]);<br>                &#125;<br>                res.push_back(tmp);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; edges[last].size(); i++) &#123;<br>                    <span class="hljs-keyword">int</span> to = edges[last][i];<br>                    <span class="hljs-keyword">if</span> (cost[last] + <span class="hljs-number">1</span> &lt;= cost[to]) &#123;<br>                        cost[to] = cost[last] + <span class="hljs-number">1</span>;<br>                        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">tmp</span><span class="hljs-params">(now)</span></span>;<br>                        tmp.push_back(to);<br>                        q.push(tmp);<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">transformCheck</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; str1, <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; str2)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> differences = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; str1.size() &amp;&amp; differences &lt; <span class="hljs-number">2</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (str1[i] != str2[i]) &#123;<br>                ++differences;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> differences == <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">回溯算法</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/04/Java%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0%E4%B8%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java入门笔记一</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/31/LeetCode-208-%E5%AE%9E%E7%8E%B0-Trie-%E5%89%8D%E7%BC%80%E6%A0%91-%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 208. 实现 Trie (前缀树)（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/06/01/LeetCode2020-0601-0607/';
+        this.page.identifier = '/2020/06/01/LeetCode2020-0601-0607/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

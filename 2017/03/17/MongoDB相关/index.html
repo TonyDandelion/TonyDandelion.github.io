@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>MongoDB相关 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MongoDB相关">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-03-17 01:25" pubdate>
+        2017年3月17日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MongoDB相关</h1>
+            
+            <div class="markdown-body">
+              <p>MongoDB 是一个基于分布式文件存储的数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。 MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。</p>
+<a id="more"></a>
+<p>MongoDB是一个Nosql数据库</p>
+<p><code>self.write(greeting + &#39;, friendly user!&#39;)</code></p>
+<p>RequestHandler的另一个有用的方法是write，它以一个字符串作为函数的参数，并将其写入到HTTP响应中。  </p>
+<p><code>self.write(greeting + &#39;, friendly user!&#39;)</code></p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><blockquote>
+<p>启动mongodb，在bin目录下输入下面的命令。</p>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/mongod --dbpath=/u</span>sr<span class="hljs-regexp">/local/m</span>ongodb<span class="hljs-regexp">/data/</span> --fork --logpath=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/mongodb/</span>logs<br></code></pre></div></td></tr></table></figure>
+<p>— dbpath=/usr/local/mongodb/data/ 用于指定存放的mongodb数据库</p>
+<p>— fork 是后台执行，不然一直在前台</p>
+<p>— logpath=/usr/local/mongodb/logs 用于指定mongodb的日志记录文件</p>
+<blockquote>
+<p>进入mongodb，以及常用命令。  </p>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> 在bin目录下输入./mongo<br>root@tony:<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/mongodb/</span>bin<span class="hljs-comment"># ./mongo</span><br><br><span class="hljs-regexp">//</span> 显示所有的数据库<br>&gt; show dbs<br>admin  <span class="hljs-number">0.000</span>GB<br>local  <span class="hljs-number">0.000</span>GB<br><br><span class="hljs-regexp">//</span> 切换数据库<br>&gt; use local<br>switched to db local<br><br><span class="hljs-regexp">//</span> 执行 <span class="hljs-string">&quot;db&quot;</span> 命令可以显示当前数据库对象或集合。<br>&gt; db<br>local<br><br><span class="hljs-regexp">//</span> <br><br></code></pre></div></td></tr></table></figure>
+<h1 id="Mongodb注意事项"><a href="#Mongodb注意事项" class="headerlink" title="Mongodb注意事项"></a>Mongodb注意事项</h1><ul>
+<li>数据库命名事项：数据库也通过名字来标识。数据库名可以是满足以下条件的任意UTF-8字符串。  </li>
+<li>不能是空字符串（””)。</li>
+<li>不得含有 <code>&#39; &#39;</code>（空格)、<code>.</code>、<code>$</code>、<code>/</code>、<code>\</code> 和 <code>\0</code> (空宇符)。</li>
+<li>应全部小写。</li>
+<li>最多64字节。</li>
+<li>下表列出了 RDBMS 与 MongoDB 对应的术语：  </li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">RDBMS</th>
+<th style="text-align:left">MongoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">数据库</td>
+</tr>
+<tr>
+<td style="text-align:left">表格</td>
+<td style="text-align:left">集合</td>
+</tr>
+<tr>
+<td style="text-align:left">行</td>
+<td style="text-align:left">文档</td>
+</tr>
+<tr>
+<td style="text-align:left">列</td>
+<td style="text-align:left">字段</td>
+</tr>
+<tr>
+<td style="text-align:left">表联合</td>
+<td style="text-align:left">嵌入文档</td>
+</tr>
+<tr>
+<td style="text-align:left">主键</td>
+<td style="text-align:left">主键 (MongoDB 提供了 key 为 _id )</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>集合没有固定的结构，这意味着你在对集合可以插入不同格式和类型的数据，但通常情况下我们插入集合的数据都会有一定的关联性。</p>
+</li>
+<li><p>集合的起名规则</p>
+<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">集合名不能是空字符串<span class="hljs-string">&quot;&quot;</span>。<br>集合名不能含有\0字符（空字符)，这个字符表示集合名的结尾。<br>集合名不能以<span class="hljs-string">&quot;system.&quot;</span>开头，这是为系统集合保留的前缀。<br>用户创建的集合名字不能含有保留字符。有些驱动程序的确支持在集合名里面包含，这是因为某些系统生成的集合中包含该字符。除非你要访问这种系统创建的集合，否则千万不要在名字里出现<span class="hljs-variable">$。</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>元数据<br>数据库的信息是存储在集合中。它们使用了系统的命名空间：<code>dbname.system.*</code>  </p>
+</li>
+<li><p>在MongoDB数据库中名字空间 <code>&lt;dbname&gt;.system.*</code> 是包含多种系统信息的特殊集合(Collection)，如下:  </p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">集合命名空间</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">dbname.system.namespaces</td>
+<td style="text-align:left">列出所有名字空间</td>
+</tr>
+<tr>
+<td style="text-align:left">dbname.system.indexes</td>
+<td style="text-align:left">列出所有索引</td>
+</tr>
+<tr>
+<td style="text-align:left">dbname.system.profile</td>
+<td style="text-align:left">包含数据库概要(profile)信息</td>
+</tr>
+<tr>
+<td style="text-align:left">dbname.system.users</td>
+<td style="text-align:left">列出所有可访问数据库的用户</td>
+</tr>
+<tr>
+<td style="text-align:left">dbname.local.sources</td>
+<td style="text-align:left">包含复制对端（slave）的服务器信息和状态</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>对于修改系统集合中的对象有如下限制。  </li>
+</ul>
+<p>在 <code>system.indexes</code>  插入数据，可以创建索引。但除此之外该表信息是不可变的（特殊的drop index命令将自动更新相关信息）。<br><code>system.users</code> 是可修改的，<code>system.profile</code>是可删除的。</p>
+<ul>
+<li>MongoDB 数据类型</li>
+</ul>
+<p>下表为MongoDB中常用的几种数据类型。  </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">数据类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">字符串。存储数据常用的数据类型。在 MongoDB 中，UTF-8 编码的字符串才是合法的。</td>
+</tr>
+<tr>
+<td style="text-align:left">Integer</td>
+<td style="text-align:left">整型数值。用于存储数值。根据你所采用的服务器，可分为 32 位或 64 位。</td>
+</tr>
+<tr>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">布尔值。用于存储布尔值（真/假）。</td>
+</tr>
+<tr>
+<td style="text-align:left">Double</td>
+<td style="text-align:left">双精度浮点值。用于存储浮点值。</td>
+</tr>
+<tr>
+<td style="text-align:left">Min/Max keys</td>
+<td style="text-align:left">将一个值与 BSON（二进制的 JSON）元素的最低值和最高值相对比。</td>
+</tr>
+<tr>
+<td style="text-align:left">Arrays</td>
+<td style="text-align:left">用于将数组或列表或多个值存储为一个键。</td>
+</tr>
+<tr>
+<td style="text-align:left">Timestamp</td>
+<td style="text-align:left">时间戳。记录文档修改或添加的具体时间。</td>
+</tr>
+<tr>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">用于内嵌文档。</td>
+</tr>
+<tr>
+<td style="text-align:left">Null</td>
+<td style="text-align:left">用于创建空值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Symbol</strong></td>
+<td style="text-align:left"><strong>符号。该数据类型基本上等同于字符串类型，但不同的是，它一般用于采用特殊符号类型的语言。</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Date</td>
+<td style="text-align:left">日期时间。用 UNIX 时间格式来存储当前日期或时间。你可以指定自己的日期时间：创建 Date 对象，传入年月日信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">Object ID</td>
+<td style="text-align:left">对象 ID。用于创建文档的 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left">Binary Data</td>
+<td style="text-align:left">二进制数据。用于存储二进制数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">Code</td>
+<td style="text-align:left">代码类型。用于在文档中存储 JavaScript 代码。</td>
+</tr>
+<tr>
+<td style="text-align:left">Regular expression</td>
+<td style="text-align:left">正则表达式类型。用于存储正则表</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MongoDB/">MongoDB</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/05/16/books/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">books</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/07/18/Django%E7%9F%A5%E8%AF%86%E7%82%B9/">
+                        <span class="hidden-mobile">Django 知识点</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2017/03/17/MongoDB%E7%9B%B8%E5%85%B3/';
+        this.page.identifier = '/2017/03/17/MongoDB%E7%9B%B8%E5%85%B3/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

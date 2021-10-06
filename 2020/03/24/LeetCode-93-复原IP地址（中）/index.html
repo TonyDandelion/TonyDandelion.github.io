@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 93. 复原IP地址（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 93. 复原IP地址（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-24 15:02" pubdate>
+        2020年3月24日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 93. 复原IP地址（中）</h1>
+            
+            <div class="markdown-body">
+              <p>这个题要一个字符一个字符的截取，所以关键是要想清楚有哪些剪枝条件，以用来缩小解空间。  </p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。<br>Given a string containing only digits, restore it by returning all possible valid IP address combinations.  </p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例:<br><figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">输入: <span class="hljs-string">&quot;25525511135&quot;</span><br>输出: [<span class="hljs-string">&quot;255.255.11.135&quot;</span>, <span class="hljs-string">&quot;255.255.111.35&quot;</span>]<br></code></pre></div></td></tr></table></figure></p>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>回溯算法</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>方法一、回溯算法<br><em>直觉</em><br>IP地址由32位二进制数组成，为便于使用，常以 <code>XXX.XXX.XXX.XXX</code> 形式表现，每组 <code>XXX</code> 代表小于或等于255的10进制数。<br>所以说IP地址总共有四段，每一段可能有一位，两位或者三位，范围是[0, 255]。<br>题目明确指出输入字符串只含有数字，所以当某段是三位时，我们要判断其是否越界（&gt;255)。<br>还有一点很重要的是，当只有一位时，0可以成某一段，如果有两位或三位时，像 00， 01， 001， 011， 000等都是不合法的。  </p>
+<p><em>剪枝</em><br>由以上条件可知，我们有以下几种需要剪枝的情况  </p>
+<ol>
+<li>P地址总共有四段，由于最大地址不过 255，所以单次截取的字符串的长度不能超过3，超过3就可以剪枝了。 <code>if len(clip_s) &gt; 3:  break</code></li>
+<li>前方法截取字符串之后，剩余的字符个数不能过多，例如还有三个ip段需要确定，最多需要 $3 \times 3$ 也就是9个字符，但是按照当前方法截取之后还剩10个字符，就可以剪枝了（当确定最后一个ip段时，可以不考虑这个剪枝条件）。<code>if depth !=3 and len(s[i:]) &gt; (4 - depth - 1) * 3:  continue</code></li>
+<li>截取出来的字符如果是三位数字且大于255，也需要剪枝。<code>if len(clip_s) == 3 and int(clip_s) &gt; 255:  continue</code>  </li>
+<li>如果有两位或三位时，像 <code>00， 01， 001， 011， 000</code> 等都是不合法的。<code>len(clip_s) &gt; 1 and clip_s[0] == &quot;0&quot;:  continue</code>  </li>
+<li>如果是确定最后一个ip段，那么截取的就应该是全部剩余字符，否则 <code>i</code>自增，继续截取，直到截取完所有剩余字符之后再判断是否添加。<code>if depth == 3 and clip_s != s:  continue</code>   </li>
+</ol>
+<p><img src="https://i.loli.net/2020/03/24/JjOyWexovmndgMb.png" srcset="/img/loading.gif" alt="b581bdde1cef982f0af3182af17fc3c41960c76a7445af0dcfd445c89b4c2eaa-「力扣」第 93 题：复原 IP 地址-1.png"></p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<li><strong>方法一回溯法的实现</strong>  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># backtrak()为内部匿名函数的形式</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">restoreIpAddresses</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; List[str]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">s, path =  [], depth = <span class="hljs-number">0</span> </span>):</span><br>            <span class="hljs-keyword">if</span> depth == <span class="hljs-number">4</span>:<br>                res.append(<span class="hljs-string">&quot;.&quot;</span>.join(path))<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(s)+<span class="hljs-number">1</span>):<br>                clip_s = s[:i]<br>                <span class="hljs-comment"># 剪枝</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(clip_s) &gt; <span class="hljs-number">3</span>:  <span class="hljs-comment"># 最基本条件放在最前面，因为IP地址总共有四段，由于最大地址不过 255，所以clip_s的长度不能超过3。</span><br>                    <span class="hljs-keyword">break</span><br>                <span class="hljs-keyword">if</span> depth == <span class="hljs-number">3</span> <span class="hljs-keyword">and</span> clip_s != s:<br>                    <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> depth !=<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">len</span>(s[i:]) &gt; (<span class="hljs-number">4</span> - depth - <span class="hljs-number">1</span>) * <span class="hljs-number">3</span>:  <span class="hljs-comment"># 到最后一层之前都要考虑这个剪枝条件。</span><br>                    <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span>  <span class="hljs-built_in">int</span>(clip_s) &gt; <span class="hljs-number">255</span>:<br>                    <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(clip_s) &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> clip_s[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;0&quot;</span>:<br>                    <span class="hljs-keyword">continue</span><br>                <span class="hljs-comment"># 选择</span><br>                path.append(clip_s)<br>                <span class="hljs-comment"># 回溯</span><br>                backtrack(s[i:], path, depth+<span class="hljs-number">1</span>)  <span class="hljs-comment"># start+i这里不能加i</span><br>                <span class="hljs-comment"># 撤销选择</span><br>                path.pop()<br>        res = []<br>        backtrack(s)<br>        <span class="hljs-keyword">return</span> res<br><br><br><span class="hljs-comment"># backtrak()为外部函数的形式</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-comment"># 回溯函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">self, s = <span class="hljs-string">&quot;&quot;</span>, path =  [], depth = <span class="hljs-number">0</span>, res = []</span>):</span><br>        <span class="hljs-keyword">if</span> depth == <span class="hljs-number">4</span>:<br>            res.append(<span class="hljs-string">&quot;.&quot;</span>.join(path))<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(s)+<span class="hljs-number">1</span>):<br>                clip_s = s[:i]<br>                pruning_result = self.pruning(clip_s, s, i, depth)  <span class="hljs-comment"># 剪枝</span><br>                <span class="hljs-keyword">if</span> pruning_result == <span class="hljs-number">0</span>:<br>                    <span class="hljs-keyword">break</span><br>                <span class="hljs-keyword">if</span> pruning_result == -<span class="hljs-number">1</span>:<br>                    <span class="hljs-keyword">continue</span><br>                path.append(clip_s)  <span class="hljs-comment"># 选择</span><br>                self.backtrack(s[i:], path, depth + <span class="hljs-number">1</span>, res)  <span class="hljs-comment"># 回溯</span><br>                path.pop()  <span class="hljs-comment"># 撤销选择</span><br><br>    <span class="hljs-comment"># 剪枝函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pruning</span>(<span class="hljs-params">self, clip_s, s, i, depth</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(clip_s) &gt; <span class="hljs-number">3</span>:  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> depth == <span class="hljs-number">3</span> <span class="hljs-keyword">and</span> clip_s != s:  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># continue</span><br>        <span class="hljs-keyword">if</span> depth !=<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">len</span>(s[i:]) &gt; (<span class="hljs-number">4</span> - depth - <span class="hljs-number">1</span>) * <span class="hljs-number">3</span>:  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># continue</span><br>        <span class="hljs-keyword">if</span>  <span class="hljs-built_in">int</span>(clip_s) &gt; <span class="hljs-number">255</span>:  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># continuereturn -1  # continue</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(clip_s) &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> clip_s[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;0&quot;</span>:  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># continue</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>  <span class="hljs-comment"># go on</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">restoreIpAddresses</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; List[str]:</span><br>        <span class="hljs-comment"># 特判</span><br>        size = <span class="hljs-built_in">len</span>(s)<br>        <span class="hljs-keyword">if</span> size &lt; <span class="hljs-number">4</span> <span class="hljs-keyword">or</span> size &gt; <span class="hljs-number">12</span>:<br>            <span class="hljs-keyword">return</span> []<br>        path = []<br>        res = []<br>        self.backtrack(s, path, <span class="hljs-number">0</span>, res)<br>        <span class="hljs-keyword">return</span> res<br><br>Input = [<span class="hljs-string">&quot;25525511135&quot;</span>]<br>Answer = [[<span class="hljs-string">&quot;255.255.11.135&quot;</span>, <span class="hljs-string">&quot;255.255.111.35&quot;</span>]]<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.restoreIpAddresses(Input[i])<br>        print(result == Answer[i])<br></code></pre></div></td></tr></table></figure>
+<p><strong>liweiwei1419大佬的版本，更加简洁</strong>  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">restoreIpAddresses</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; List[str]:</span><br>        size = <span class="hljs-built_in">len</span>(s)<br>        <span class="hljs-keyword">if</span> size &lt; <span class="hljs-number">4</span> <span class="hljs-keyword">or</span> size &gt; <span class="hljs-number">12</span>:<br>            <span class="hljs-keyword">return</span> []<br>        path = []<br>        res = []<br>        self.__dfs(s, size, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, path, res)<br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__dfs</span>(<span class="hljs-params">self, s, size, split_times, begin, path, res</span>):</span><br>        <span class="hljs-keyword">if</span> begin == size:<br>            <span class="hljs-keyword">if</span> split_times == <span class="hljs-number">4</span>:<br>                res.append(<span class="hljs-string">&#x27;.&#x27;</span>.join(path))<br>            <span class="hljs-keyword">return</span><br>        <span class="hljs-keyword">if</span> size - begin &lt; (<span class="hljs-number">4</span> - split_times) <span class="hljs-keyword">or</span> size - begin &gt; <span class="hljs-number">3</span> * (<span class="hljs-number">4</span> - split_times):<br>            <span class="hljs-keyword">return</span><br><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):<br>            <span class="hljs-keyword">if</span> begin + i &gt;= size:<br>                <span class="hljs-keyword">break</span><br>            ip_segment = self.__judge_if_ip_segment(s, begin, begin + i)<br>            <span class="hljs-keyword">if</span> ip_segment != -<span class="hljs-number">1</span>:<br>                path.append(<span class="hljs-built_in">str</span>(ip_segment))<br>                self.__dfs(s, size, split_times + <span class="hljs-number">1</span>, begin + i + <span class="hljs-number">1</span>, path, res)<br>                path.pop()<br><br>    <span class="hljs-comment"># 专门写了一个负责剪枝的函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__judge_if_ip_segment</span>(<span class="hljs-params">self, s, left, right</span>):</span><br>        size = right - left + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> size &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> s[left] == <span class="hljs-string">&#x27;0&#x27;</span>:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        res = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(left, right + <span class="hljs-number">1</span>):<br>            res = res * <span class="hljs-number">10</span> + <span class="hljs-built_in">ord</span>(s[i]) - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;0&#x27;</span>)<br>        <span class="hljs-keyword">if</span> res &gt; <span class="hljs-number">255</span>:<br>            <span class="hljs-keyword">return</span> - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度 : 如上文所述，需要检查的组合不多于<code>27</code>个。<br>空间复杂度 : 常数空间存储解，不多于<code>19</code> 个有效IP地址。  </p>
+<p><img src="https://i.loli.net/2020/03/24/xJ3D2qSBj8m4eME.png" srcset="/img/loading.gif" alt="3baa385fecae6239495c19c88a279f4b76752a7a089fabdf15685e829b8e0a73-image.png"></p>
+<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><p>1、Python中字符串、list的截取位置的起止关系。<br>如果是从第 <code>i</code> 位开始往后面截取，那么第 <code>i</code> 位是不包含在截取结果中的。<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-string">&#x27;25525511135&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b = <span class="hljs-built_in">list</span>(<span class="hljs-string">&#x27;25525511135&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br><span class="hljs-string">&#x27;25525511135&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b<br>[<span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>i = <span class="hljs-number">1</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a[i:]<br><span class="hljs-string">&#x27;5525511135&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b[i:]<br>[<span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(a)<br><span class="hljs-number">11</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(b)<br><span class="hljs-number">11</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(a[i:])<br><span class="hljs-number">10</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(b[i:])<br><span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure></p>
+<blockquote>
+<p>参考链接  </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/restore-ip-addresses/solution/hui-su-suan-fa-hua-tu-fen-xi-jian-zhi-tiao-jian-by/">liweiwei1419题解</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/restore-ip-addresses/solution/fu-yuan-ipdi-zhi-by-leetcode/">LeetCode官方题解</a>  </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">回溯算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/24/LeetCode-94-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 94. 二叉树的中序遍历（中）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/24/LeetCode-92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-II%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 92. 反转链表 II（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/24/LeetCode-93-%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/24/LeetCode-93-%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

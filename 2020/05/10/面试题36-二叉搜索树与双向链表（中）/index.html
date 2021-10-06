@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>面试题36. 二叉搜索树与双向链表（中）&amp; LeetCode 426. 将二叉搜索树转化为排序的双向链表（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="面试题36. 二叉搜索树与双向链表（中）& LeetCode 426. 将二叉搜索树转化为排序的双向链表（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-10 17:55" pubdate>
+        2020年5月10日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">面试题36. 二叉搜索树与双向链表（中）&amp; LeetCode 426. 将二叉搜索树转化为排序的双向链表（中）</h1>
+            
+            <div class="markdown-body">
+              <p>我们可以把树分为3部分：根节点、左子树和右子树，然后把左子树中最大的节点、根节点、右子树中最小的节点链接起来。至于如何把左子树和右子树内部的节点链接成链表，那和原来的问题的实质是一样的，因此可以递归解决。解决这个问题的关键在于把一个大的问题分解成几个小问题，并递归地解决小问题。</p>
+<a id="more"></a>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个<strong>排序的循环双向链表</strong>。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p>
+<p>为了让您更好地理解问题，以下面的二叉搜索树为例：</p>
+<p><img src="https://i.loli.net/2020/05/10/WsaiqlLpwxFrEh7.png" srcset="/img/loading.gif" alt="bstdlloriginalbst.png" style="zoom:50%;" /></p>
+<p>我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。</p>
+<p>下图展示了上面的二叉搜索树转化成的链表。 “head” 表示指向链表中有最小元素的节点。</p>
+<p><img src="https://i.loli.net/2020/05/10/odGBUOaC7jvSItD.png" srcset="/img/loading.gif" alt="bstdllreturndll" style="zoom:50%;" /></p>
+<p>特别地，我们希望可以就地完成转换操作。当转化完成以后，树中节点的左指针需要指向前驱，树中节点的右指针需要指向后继。还需要返回链表中的第一个节点的指针。</p>
+<blockquote>
+<p><strong><em>测试用例</em></strong></p>
+</blockquote>
+<p>功能测试（输入的二叉树是完全二叉树；所有节点都没有左/右子树的二叉树：只有一个节点的二叉树）。<br>特殊输入测试（指向二叉树根节点的指针为 nullptr 指针）。</p>
+<blockquote>
+<p><strong><em>本题考点</em></strong></p>
+</blockquote>
+<p>考查应聘者分析复杂问题的能力。无论是二叉树还是双向链表，都有很多指针。要实现这两种不同数据结构的转换，需要调整大量的指针，因此这个过程会很复杂。为了把这个复杂的问题分析清楚，我们可以把树分为3部分：根节点、左子树和右子树，然后把左子树中最大的节点、根节点、右子树中最小的节点链接起来。至于如何把左子树和右子树内部的节点链接成链表，那和原来的问题的实质是一样的，因此可以递归解决。解决这个问题的关键在于把一个大的问题分解成几个小问题，并递归地解决小问题。<br>考查应聘者对二叉树和双向链表的理解及编程能力。</p>
+<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><img src="https://i.loli.net/2020/05/10/cOYCxMA6b3GZsyf.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_18-44-17"></p>
+<p>理论上有可能实现二叉搜索树和排序双向链表的转换。在搜索二叉树中，左子节点的值总是小于父节点的值，右子节点的值总是大于父节点的值。因此，我们在将二叉搜索树转换成排序双向链表时，原先指向左子节点的指针调整为链表中指向前一个节点的指针，原先指向右子节点的指针调整为链表中指向后一个节点的指针。</p>
+<p>中序遍历算法的特点是按照从小到大的顺序遍历二叉树的每个节点。当遍历到根节点的时候，我们把树看成3部分：值为10的节点；根节点值为6的左子树；根节点值为14的右子树。根据排序链表的定义，值为10的节点将和它的左子树的最大一个节点（值为8的节点）链接起来，同时它还将和右子树最小的节点（值为12的节点）链接起来，如图4.16所示。</p>
+<p><img src="https://i.loli.net/2020/05/10/OU28HgJY4ZxPNoD.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_18-44-05"></p>
+<p>按照中序遍历的顺序，<strong><em>1.</em> 当我们遍历转换到根节点（值为10的节点）时，它的左子树已经转换成一个排序的链表了，并且处在链表中的最后一个节点是当前值最大的节点。</strong> <strong><em>2.</em></strong> 我们把值为8的节点和根节点链接起来，此时链表中的最后一个节点就是10了。<strong><em>3.</em></strong> 接着我们去遍历转换右子树，并把根节点和右子树中最小的节点链接起来。至于怎么去转换它的左子树和右子树，由于遍历和转换过程是一样的，我们很自然地想到<strong>可以用递归</strong>。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<li>剑指offer版本</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">treeToDoublyList</span>(<span class="hljs-params">self, root: <span class="hljs-string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span> <br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root.left <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> root.right:<br>            <span class="hljs-keyword">return</span> root<br>        <br>        <span class="hljs-comment"># 处理左子树</span><br>        self.treeToDoublyList(root.left)<br>        left = root.left<br><br><br>        <span class="hljs-comment"># 连接根与左子树最大节点</span><br>        <span class="hljs-keyword">if</span> left:<br>            <span class="hljs-keyword">while</span> left.right:<br>                left = left.right<br>            root.left, left.right = left, root<br>        <br>        <span class="hljs-comment"># 处理右子树</span><br>        self.treeToDoublyList(root.right)<br>        right = root.right<br><br>        <span class="hljs-comment"># 连接根与右子树最小节点</span><br>        <span class="hljs-keyword">if</span> right:<br>            <span class="hljs-keyword">while</span> right.left:<br>                right = right.left<br>            root.right, right.left = right, root<br>        <br>        <span class="hljs-keyword">while</span> root.left:<br>            root = root.left<br>        <br>        <span class="hljs-keyword">return</span> root<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>LeetCode版本，要求双向链表是循环的。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">treeToDoublyList</span>(<span class="hljs-params">self, root: <span class="hljs-string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">cur</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> cur: <span class="hljs-keyword">return</span><br>            dfs(cur.left) <span class="hljs-comment"># 递归左子树</span><br>            <span class="hljs-keyword">if</span> self.pre: <span class="hljs-comment"># 修改节点引用</span><br>                self.pre.right, cur.left = cur, self.pre<br>            <span class="hljs-keyword">else</span>: <span class="hljs-comment"># 记录头节点，到达树的最左下角叶子了</span><br>                self.head = cur<br>            self.pre = cur <span class="hljs-comment"># 保存 cur</span><br>            dfs(cur.right) <span class="hljs-comment"># 递归右子树</span><br>        <br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span><br>        self.pre = <span class="hljs-literal">None</span><br>        dfs(root)<br>        self.head.left, self.pre.right = self.pre, self.head<br>        <span class="hljs-keyword">return</span> self.head<br></code></pre></div></td></tr></table></figure>
+<p><strong><em>参考连接</em></strong><br>作者：jyd<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/solution/mian-shi-ti-36-er-cha-sou-suo-shu-yu-shuang-xian-5/">https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/solution/mian-shi-ti-36-er-cha-sou-suo-shu-yu-shuang-xian-5/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91/">树</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/10/%E9%9D%A2%E8%AF%95%E9%A2%9837-%E5%BA%8F%E5%88%97%E5%8C%96%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E9%9A%BE%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">面试题37. 序列化二叉树（难）& LeetCode 297. 二叉树的序列化与反序列化（难）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/10/LeetCode-236-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 236. 二叉树的最近公共祖先（中）& 剑指offer 面试题68 - II. 二叉树的最近公共祖先（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/05/10/%E9%9D%A2%E8%AF%95%E9%A2%9836-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/05/10/%E9%9D%A2%E8%AF%95%E9%A2%9836-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

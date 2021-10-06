@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="无知者">
+  <meta name="keywords" content="">
+  <title>LeetCode 15. 三数之和（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 15. 三数之和（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-09 03:44" pubdate>
+        2020年3月9日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 15. 三数之和（中）</h1>
+            
+            <div class="markdown-body">
+              <p> 双指针经典题目，用二分查找解决将three sum转换成two sum的问题再解决。 </p>
+<a id="more"></a>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>示例：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">给定数组 nums = [-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">4</span>]，<br><br>满足要求的三元组集合为：<br>[<br>  [-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>],<br>  [-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br>]<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>排序、双指针、数组</p>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>先排序，后用双指针解决将three sum转换成two sum的问题。</p>
+<p>先对数组进行排序，然后使用双指针进行处理，排序之后可以帮助排除一些情况。<br>算法流程<br>1、特判，对于数组长度 <code>n</code>，如果数组为 <code>null</code> 或者数组长度小于 3，返回 [][]。<br>2、对数组进行排序。<br>3、遍历排序后数组：  </p>
+<ul>
+<li>若 <code>nums[i]&gt;0</code>：<strong>因为已经排序好，所以后面不可能有三个数加和等于 0，直接返回结果。</strong>    </li>
+<li>对于<strong>重复元素：跳过</strong>，避免出现重复解</li>
+<li>令左指针<code>L=i+1</code>，右指针 <code>R=n-1</code>，当<code>L&lt;R</code>时，执行循环：<ul>
+<li>当 <code>nums[i]+nums[L]+nums[R]==0</code>，执行循环，<strong>判断左界和右界是否和下一位置重复</strong>，去除重复解。并同时将 <code>L,R</code>移到下一位置，寻找新的解</li>
+<li>因为<strong>整体左小右大</strong>，所以若和大于 0，说明 <code>nums[R]</code> 太大，<code>R</code> 左移， <code>nums[R]</code> 减小。</li>
+<li>同上，若和小于 0，说明 <code>nums[L]</code> 太小，<code>L</code> 右移， <code>nums[L]</code> 增大。</li>
+</ul>
+</li>
+</ul>
+<p><strong>做这个题目的关键，是要把握规律，有时候，提前排序，可以减少很多可能性，提升性能。</strong></p>
+<p>定义三个指针，i，j，k。遍历i，那么这个问题就可以转化为在i之后的数组中寻找<code>nums[j]+nums[k]=-nums[i]</code>，这个问题，也就将三数之和问题转变为二数之和。（可以使用双指针）</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>先排序，然后用二分查找解决将three sum转换成two sum的问题</p>
+<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="先排序后双指针"><a href="#先排序后双指针" class="headerlink" title="先排序后双指针"></a>先排序后双指针</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">threeSum</span>(<span class="hljs-params">self, nums: <span class="hljs-built_in">list</span></span>) -&gt; list:</span><br>        <br>        _len = <span class="hljs-built_in">len</span>(nums)<br>        res=[]<br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> nums <span class="hljs-keyword">or</span> _len&lt;<span class="hljs-number">3</span>):<br>            <span class="hljs-keyword">return</span> []<br>        nums.sort()<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_len):<br>            <span class="hljs-keyword">if</span>(nums[i]&gt;<span class="hljs-number">0</span>):  <span class="hljs-comment"># 因为已经排序好，所以后面不可能有三个数加和等于 0，直接返回结果。</span><br>                <span class="hljs-keyword">return</span> res<br>            <span class="hljs-keyword">if</span>(i&gt;<span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i]==nums[i-<span class="hljs-number">1</span>]):  <span class="hljs-comment"># 注意这里是i-1 如果和前面的一样，也就是出现重复元素 直接跳过</span><br>                <span class="hljs-keyword">continue</span><br>            L = i + <span class="hljs-number">1</span>  <span class="hljs-comment"># 左指针</span><br>            R = _len - <span class="hljs-number">1</span>  <span class="hljs-comment"># 右指针</span><br>            <span class="hljs-keyword">while</span>(L&lt;R):<br>                <span class="hljs-keyword">if</span>(nums[i]+nums[L]+nums[R]==<span class="hljs-number">0</span>):<br>                    res.append([nums[i],nums[L],nums[R]])  <span class="hljs-comment"># 当nums[i]+nums[L]+nums[R]==0时，执行循环，判断左界和右界是否和下一位置重复，去除重复解。并同时将 L,R移到下一位置，寻找新的解。</span><br>                    <span class="hljs-keyword">while</span>(L&lt;R <span class="hljs-keyword">and</span> nums[L]==nums[L+<span class="hljs-number">1</span>]):  <span class="hljs-comment"># 去除重复解</span><br>                        L = L + <span class="hljs-number">1</span><br>                    <span class="hljs-keyword">while</span>(L&lt;R <span class="hljs-keyword">and</span> nums[R]==nums[R-<span class="hljs-number">1</span>]):  <span class="hljs-comment"># 去除重复解  注意右指针去重复是R = R -1</span><br>                        R = R - <span class="hljs-number">1</span><br>                    L = L + <span class="hljs-number">1</span><br>                    R = R - <span class="hljs-number">1</span><br>                <span class="hljs-keyword">elif</span>(nums[i]+nums[L]+nums[R]&gt;<span class="hljs-number">0</span>):  <span class="hljs-comment"># 因为整体左小右大，所以若和大于 0，说明 nums[R] 太大。R 左移， nums[R]减小。</span><br>                    R=R-<span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 若和小于 0，说明 nums[L] 太小，L 右移， nums[L] 增大。</span><br>                    L=L+<span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [[-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">4</span>]]<br>Answer = [<br>    [<br>        [-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>], <br>        [-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br>    ]<br>]<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.threeSum(Input[i])<br>        print(result)<br>        print(Answer[i])<br></code></pre></div></td></tr></table></figure>
+<h3 id="一个基于bisect实现二分查找的方法"><a href="#一个基于bisect实现二分查找的方法" class="headerlink" title="一个基于bisect实现二分查找的方法"></a>一个基于bisect实现二分查找的方法</h3><p>前期的预处理很重要，构建了输入字符和出现次数的关系。减少不必要的计算。预处理和二分查找使得这个算法的运行速度在前<strong>98.18%</strong>。但是，可读性太差了。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> bisect<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">threeSum</span>(<span class="hljs-params">self, nums: <span class="hljs-built_in">list</span></span>) -&gt; list:</span><br>        ans = []<br>        counts = &#123;&#125;<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-comment"># Input nums: [-1, 0, 1, 2, -1, -4]</span><br>            <span class="hljs-comment"># counts: &#123;-4: 1, -1: 2, 0: 1, 1: 1, 2: 1&#125;</span><br>            counts[i] = counts.get(i, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>  <span class="hljs-comment"># 构建一个以输入nums的value为key、输入nums的出现次数为value的dict。</span><br><br>        nums = <span class="hljs-built_in">sorted</span>(counts)  <span class="hljs-comment"># 对counts的key进行排序，到这里的预处理，一方面记录了nums的每个值出现的次数，一方面还在去重的基础上进行了排序，当输入数据较多时，这种先去重并记录并发值，后排序的方法就能赢得性能优势</span><br><br>        <span class="hljs-keyword">for</span> i, num <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nums):<br>            <span class="hljs-keyword">if</span> counts[num] &gt; <span class="hljs-number">1</span>:  <span class="hljs-comment"># 先判断该数字出现次数是否大于1</span><br>                <span class="hljs-keyword">if</span> num == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> counts[num] &gt; <span class="hljs-number">2</span>:  <span class="hljs-comment"># 若该数字为0且出现次数大于2时，可以得到一个[0, 0, 0]的答案</span><br>                    ans.append([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>])<br>                <span class="hljs-keyword">elif</span> -num * <span class="hljs-number">2</span> <span class="hljs-keyword">in</span> counts:  <span class="hljs-comment"># 由于counts[num] &gt; 1 则该数字至少出现2次，判断0-2*num是否存在，如果存在，则可以得到一个[num, num, -2*num]的答案</span><br>                    ans.append([num, num, -<span class="hljs-number">2</span> * num])<br><br>            <span class="hljs-comment"># 使用bisect.bisect_left和bisect.bisect_right就可以实现二分查找，bisect不会真的插入，但是会返回插入值的位置。</span><br>            <span class="hljs-keyword">if</span> num &lt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 再判断该数字是否小于0 只有小于0 才能用于将three sum转化成two sum</span><br>                two_sum = -num  <span class="hljs-comment"># 转化为两数之和问题 two_sum为要求解的和</span><br>                <span class="hljs-comment"># bisect.bisect_left(a, x, lo=0, hi=len(a)) 查找在有序列表 a 中插入 x 的index。lo 和 hi 用于指定列表的区间，默认是使用整个列表。如果 x 已经存在，在其左边插入。返回插入位置。</span><br>                <span class="hljs-comment"># 由于nums是有序的，所以nums[-1]为nums最大的数，two_sum - nums[-1]为剩下需要的数值，找不到就默认返回i + 1</span><br>                left = bisect.bisect_left(nums, (two_sum - nums[-<span class="hljs-number">1</span>]), i + <span class="hljs-number">1</span>)<br>                <span class="hljs-comment"># bisect.bisect_right(a, x, lo=0, hi=len(a)) 类似于 bisect_left()，但是返回的插入点是 a 中已存在元素 x 的右侧。</span><br>                <span class="hljs-comment"># bisect.bisect_right(nums, (two_sum // 2), left) 会返回一个往nums中插入two_sum // 2时的插入点，默认是left</span><br>                <span class="hljs-comment"># 从nums[left: 返回值]子list中寻找满足 j + i = two_sum 且 j在counts中 且 j != i  以此构造新的答案</span><br>                <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> nums[left: bisect.bisect_right(nums, (two_sum // <span class="hljs-number">2</span>), left)]:<br>                    j = two_sum - i<br>                    <span class="hljs-keyword">if</span> j <span class="hljs-keyword">in</span> counts <span class="hljs-keyword">and</span> j != i:<br>                        ans.append([num, i, j])<br><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
+<p>执行用时 :432 ms, 在所有 Python3 提交中击败了<strong>98.18%</strong>的用户<br>内存消耗 :33 MB, 在所有 Python3 提交中击败了5.01%的用户</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/09/LeetCode-16-%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 16. 最接近的三数之和（中）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/09/LeetCode-14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 14. 最长公共前缀（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/09/LeetCode-15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/09/LeetCode-15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

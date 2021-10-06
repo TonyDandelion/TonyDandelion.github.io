@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>finetune训练模型 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="finetune训练模型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-03-31 20:40" pubdate>
+        2018年3月31日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      996 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">finetune训练模型</h1>
+            
+            <div class="markdown-body">
+              <p>在已有模型上finetune自己的数据训练一个模型</p>
+<a id="more"></a>
+<h1 id="准备训练数据和测试数据"><a href="#准备训练数据和测试数据" class="headerlink" title="准备训练数据和测试数据"></a>准备训练数据和测试数据</h1><h1 id="制作标签"><a href="#制作标签" class="headerlink" title="制作标签"></a>制作标签</h1><h1 id="数据转换-将图片转为LMDB格式"><a href="#数据转换-将图片转为LMDB格式" class="headerlink" title="数据转换,将图片转为LMDB格式"></a>数据转换,将图片转为LMDB格式</h1><p>前三步的过程和  <a href="/2018/03/31/何利用自己的数据训练一个分类网络/">如何利用自己的数据训练一个分类网络</a>  是一样的，参考处理即可。</p>
+<h1 id="修改网络模型文件"><a href="#修改网络模型文件" class="headerlink" title="修改网络模型文件"></a>修改网络模型文件</h1><p>复制/caffe-root/models/finetune_flickr_style文件夹下面的deploy.prototxt  readme.md  solver.prototxt  train_val.prototxt四个文件到自己的finetune项目根目录/caffe-root/models/finetune_test/下</p>
+<blockquote>
+<p>vim train_val.prototxt  </p>
+</blockquote>
+<ul>
+<li>修改train_val.prototxt中的数据层，设置成caffeNet中的train_val.prototxt一样，使用lmdb输入数据。  </li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-class">layer </span>&#123;<br><span class="hljs-symbol">  name:</span> <span class="hljs-string">&quot;data&quot;</span><br><span class="hljs-symbol">  type:</span> <span class="hljs-string">&quot;Data&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;data&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;label&quot;</span><br>  <span class="hljs-class">include </span>&#123;<br><span class="hljs-symbol">    phase:</span> TRAIN<br>  &#125;<br>  <span class="hljs-class">transform_param </span>&#123;<br><span class="hljs-symbol">    crop_size:</span> <span class="hljs-number">227</span>  <span class="hljs-meta"># 传入的图片是256*256，现在在其中框出一个227*227的小图片 以此来增大训练集</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">104</span>  <span class="hljs-meta"># 通用均值</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">117</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">123</span><br><span class="hljs-symbol">    mirror:</span> true  <span class="hljs-meta"># 镜像操作 扩大数据集</span><br>  &#125;<br>  <span class="hljs-class">data_param </span>&#123;<br><span class="hljs-symbol">    source:</span> <span class="hljs-string">&quot;/home/weijian/caffe/models/classification_CNN/lmdb/train&quot;</span><br><span class="hljs-symbol">    batch_size:</span> <span class="hljs-number">100</span><br><span class="hljs-symbol">    backend:</span> LMDB<br>  &#125;<br>&#125;<br><span class="hljs-class">layer </span>&#123;<br><span class="hljs-symbol">  name:</span> <span class="hljs-string">&quot;data&quot;</span><br><span class="hljs-symbol">  type:</span> <span class="hljs-string">&quot;Data&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;data&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;label&quot;</span><br>  <span class="hljs-class">include </span>&#123;<br><span class="hljs-symbol">    phase:</span> TEST<br>  &#125;<br>  <span class="hljs-class">transform_param </span>&#123;<br><span class="hljs-symbol">    crop_size:</span> <span class="hljs-number">227</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">104</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">117</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">123</span><br><span class="hljs-symbol">    mirror:</span> false<br>  &#125;<br>  <span class="hljs-class">data_param </span>&#123;<br><span class="hljs-symbol">    source:</span> <span class="hljs-string">&quot;/home/weijian/caffe/models/classification_CNN/lmdb/test&quot;</span><br><span class="hljs-symbol">    batch_size:</span> <span class="hljs-number">50</span><br><span class="hljs-symbol">    backend:</span> LMDB<br>  &#125;<br>&#125;  <br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>修改最后的一个全连接层fc8_flickr，finetune的目的是重塑最后这个全连接层fc8_flickr，其他层的参数不变。  </li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-class">layer </span>&#123;<br><span class="hljs-symbol">  name:</span> <span class="hljs-string">&quot;fc8_flickr&quot;</span> <span class="hljs-meta"># 原网络结构文件中，最后的一层就是fc8，我们在这里希望自行设计最后一层，所以我们齐了另外一个名字fc8_flickr，如果还是继续沿用fc8这个名字，就会造成finetune的时候，以前caffemodel里面的参数和权值直接填充进去。</span><br><span class="hljs-symbol">  type:</span> <span class="hljs-string">&quot;InnerProduct&quot;</span><br><span class="hljs-symbol">  bottom:</span> <span class="hljs-string">&quot;fc7&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;fc8_flickr&quot;</span><br>  <span class="hljs-meta"># lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained</span><br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">10</span>  <span class="hljs-meta"># 基本学习率乘以10</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">1</span><br>  &#125;<br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">20</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">0</span><br>  &#125;<br>  <span class="hljs-class">inner_product_param </span>&#123;<br><span class="hljs-symbol">    num_output:</span> <span class="hljs-number">5</span>  <span class="hljs-meta"># 这里根据实际情况，有几种数据，就改成几。因为有house、flower、animal、guitar、plane五种数据，所以改成了5。</span><br>    <span class="hljs-class">weight_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;gaussian&quot;</span><br><span class="hljs-symbol">      std:</span> <span class="hljs-number">0.01</span><br>    &#125;<br>    <span class="hljs-class">bias_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;constant&quot;</span><br><span class="hljs-symbol">      value:</span> <span class="hljs-number">0</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>注意，这个fc8_flickr层下面的Accuracy层的bottom是fc8_flickr。</p>
+<blockquote>
+<p>vim deploy.prototxt  </p>
+</blockquote>
+<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-class">layer </span>&#123;<br><span class="hljs-symbol">  name:</span> <span class="hljs-string">&quot;fc8_flickr&quot;</span><br><span class="hljs-symbol">  type:</span> <span class="hljs-string">&quot;InnerProduct&quot;</span><br><span class="hljs-symbol">  bottom:</span> <span class="hljs-string">&quot;fc7&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;fc8_flickr&quot;</span><br>  <span class="hljs-meta"># lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained</span><br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">10</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">1</span><br>  &#125;<br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">20</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">0</span><br>  &#125;<br>  <span class="hljs-class">inner_product_param </span>&#123;<br><span class="hljs-symbol">    num_output:</span> <span class="hljs-number">5</span>  <span class="hljs-meta"># 这里只是修改num_output为5即可。</span><br>    <span class="hljs-class">weight_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;gaussian&quot;</span><br><span class="hljs-symbol">      std:</span> <span class="hljs-number">0.01</span><br>    &#125;<br>    <span class="hljs-class">bias_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;constant&quot;</span><br><span class="hljs-symbol">      value:</span> <span class="hljs-number">0</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="修改超参数文件"><a href="#修改超参数文件" class="headerlink" title="修改超参数文件"></a>修改超参数文件</h1><p>修改net为刚刚我们修改的那个train_val.prototxt  </p>
+<p>还需要修改test_iter、test_interval、snapshot_prefix、solver_mode、type等内容  </p>
+<p><strong>因为是在做微调，所以设置base_lr很小，仅为0.001。</strong></p>
+<figure class="highlight vbnet"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vbnet"><span class="hljs-symbol">net:</span> <span class="hljs-string">&quot;/home/weijian/caffe/models/finetune_test/train_val.prototxt&quot;</span><br><span class="hljs-symbol">test_iter:</span> <span class="hljs-number">30</span><br><span class="hljs-symbol">test_interval:</span> <span class="hljs-number">250</span> <br># lr <span class="hljs-keyword">for</span> fine-tuning should be lower than <span class="hljs-keyword">when</span> starting <span class="hljs-keyword">from</span> scratch<br><span class="hljs-symbol">base_lr:</span> <span class="hljs-number">0.001</span><br><span class="hljs-symbol">lr_policy:</span> <span class="hljs-string">&quot;step&quot;</span><br><span class="hljs-symbol">gamma:</span> <span class="hljs-number">0.1</span><br># stepsize should also be lower, <span class="hljs-keyword">as</span> we<span class="hljs-comment">&#x27;re closer to being done</span><br><span class="hljs-symbol">stepsize:</span> <span class="hljs-number">1000</span>   每<span class="hljs-number">1000</span>的迭代降低学习率：乘以gamma<br><span class="hljs-symbol">display:</span> <span class="hljs-number">100</span><br><span class="hljs-symbol">max_iter:</span> <span class="hljs-number">150000</span><br><span class="hljs-symbol">momentum:</span> <span class="hljs-number">0.9</span><br><span class="hljs-symbol">weight_decay:</span> <span class="hljs-number">0.0005</span><br><span class="hljs-symbol">snapshot:</span> <span class="hljs-number">5000</span><br><span class="hljs-symbol">snapshot_prefix:</span> <span class="hljs-string">&quot;/home/weijian/caffe/models/finetune_flickr_style/models/type&quot;</span><br># uncomment the following <span class="hljs-keyword">to</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">to</span> CPU mode solving<br><span class="hljs-symbol">type:</span> <span class="hljs-string">&quot;AdaDelta&quot;</span><br><span class="hljs-symbol">solver_mode:</span> GPU<br></code></pre></div></td></tr></table></figure>
+<h1 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h1><p>vim train.sh<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-comment">#!/usr/bin/env sh</span><br><span class="hljs-builtin-name">set</span> -e<br><br><span class="hljs-attribute">log_path</span>=<span class="hljs-string">&quot;logs/&quot;</span><br>mkdir -p <span class="hljs-variable">$log_path</span><br><br><span class="hljs-attribute">save_model_path</span>=<span class="hljs-string">&quot;caffemodel/&quot;</span><br>mkdir -p <span class="hljs-variable">$save_model_path</span><br><br><span class="hljs-comment"># training log</span><br><span class="hljs-attribute">file_prefix</span>=<span class="hljs-string">&quot;classification_CNN&quot;</span><br><span class="hljs-attribute">log_file</span>=$(date -d <span class="hljs-string">&quot;today&quot;</span> +<span class="hljs-string">&quot;%Y-%m-%d-%H:%M:%S&quot;</span>)<br><span class="hljs-attribute">log_file</span>=<span class="hljs-variable">$log_path</span><span class="hljs-variable">$file_prefix</span><span class="hljs-variable">$log_file</span><span class="hljs-string">&quot;.log&quot;</span><br><br><span class="hljs-comment"># caffe execute file path</span><br><span class="hljs-attribute">caffe_bin</span>=<span class="hljs-string">&quot;/home/weijian/caffe/build/tools/caffe&quot;</span><br><br><br><span class="hljs-comment"># finetune</span><br><span class="hljs-variable">$caffe_bin</span> train <span class="hljs-attribute">--solver</span>=solver.prototxt <span class="hljs-attribute">--weights</span>=bvlc_reference_caffenet.caffemodel 2&gt;&amp;1 | tee ./logs/finetune_test.log<br></code></pre></div></td></tr></table></figure></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>修改以下部分，其余和 <a target="_blank" rel="noopener" href="http://onclick.ac.cn/2018/03/31/何利用自己的数据训练一个分类网络/#7%E3%80%81%E6%B5%8B%E8%AF%95%E6%A8%A1%E5%9E%8B">这里</a> 一样。<br><figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-comment">#网络结构描述文件</span><br><span class="hljs-attr">deploy_file</span> = caffe_root+<span class="hljs-string">&#x27;models/finetune_test/deploy.prototxt&#x27;</span><br><span class="hljs-comment">#训练好的模型</span><br><span class="hljs-attr">model_file</span> = caffe_root+<span class="hljs-string">&#x27;models/finetune_test/models/solver_iter_15000.caffemodel&#x27;</span><br></code></pre></div></td></tr></table></figure></p>
+<h1 id="finetune的好处"><a href="#finetune的好处" class="headerlink" title="finetune的好处"></a>finetune的好处</h1><p>如果我们想自己训练一个效果较好的模型，需要大量的数据，非常优秀的硬件条件，以及漫长的训练时间，但是，我们可以利用现有的caffemodel模型训练利用较少的数据训练一个效果较好的模型。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/caffe/">caffe</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/04/12/%E6%8A%97%E6%88%98%E4%B8%AD%E7%9A%84%E4%B8%AD%E5%9B%BD%E5%B0%86%E9%A2%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">抗战中的中国将领</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/03/31/%E5%9B%BE%E5%83%8F%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87SSIM-PSNR-MSE%E5%88%86%E6%9E%90%E7%9A%84python%E5%AE%9E%E7%8E%B0/">
+                        <span class="hidden-mobile">图像质量评估指标MSE/SSIM/PSNR的分析和python实现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/03/31/finetune%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/';
+        this.page.identifier = '/2018/03/31/finetune%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>Caffe文件详解 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Caffe文件详解">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-03-27 15:46" pubdate>
+        2018年3月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Caffe文件详解</h1>
+            
+            <div class="markdown-body">
+              <p>对caffe的超参数文件 <code>***solver.prototxt</code> 和网络结构文件 <code>***_train_test.prototxt</code> 进行详解。</p>
+<a id="more"></a>
+<blockquote>
+<p>超参文件详解  </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#网络模型描述文件</span><br><span class="hljs-comment">#也可以用train_net和test_net来对训练模型和测试模型分别设定</span><br><span class="hljs-comment">#train_net: &quot;xxxxxxxxxx&quot;</span><br><span class="hljs-comment">#test_net: &quot;xxxxxxxxxx&quot;</span><br>net: <span class="hljs-string">&quot;E:/Caffe-windows/caffe-windows/examples/mnist/lenet_train_test.prototxt&quot;</span><br><span class="hljs-comment">#这个参数要跟test_layer结合起来考虑，在test_layer中一个batch是100，而总共的测试图片是10000张</span><br><span class="hljs-comment">#所以这个参数就是10000/100=100</span><br>test_iter: <span class="hljs-number">100</span><br><span class="hljs-comment">#每训练500次进行一次测试</span><br>test_interval: <span class="hljs-number">500</span><br><span class="hljs-comment">#学习率</span><br>base_lr: <span class="hljs-number">0.01</span><br><span class="hljs-comment">#动力</span><br>momentum: <span class="hljs-number">0.9</span><br><span class="hljs-comment">#type:SGD #优化算法的选择。这一行可以省略，因为默认值就是SGD，Caffe中一共有6中优化算法可以选择</span><br><span class="hljs-comment">#Stochastic Gradient Descent (type: &quot;SGD&quot;), 在Caffe中SGD其实应该是Momentum</span><br><span class="hljs-comment">#AdaDelta (type: &quot;AdaDelta&quot;),</span><br><span class="hljs-comment">#Adaptive Gradient (type: &quot;AdaGrad&quot;),</span><br><span class="hljs-comment">#Adam (type: &quot;Adam&quot;),</span><br><span class="hljs-comment">#Nesterov’s Accelerated Gradient (type: &quot;Nesterov&quot;)</span><br><span class="hljs-comment">#RMSprop (type: &quot;RMSProp&quot;)</span><br><span class="hljs-comment">#权重衰减项，其实也就是正则化项。作用是防止过拟合</span><br>weight_decay: <span class="hljs-number">0.0005</span><br><span class="hljs-comment">#学习率调整策略</span><br><span class="hljs-comment">#如果设置为inv,还需要设置一个power, 返回base_lr * (1 + gamma * iter) ^ (- power)，其中iter表示当前的迭代次数</span><br>lr_policy: <span class="hljs-string">&quot;inv&quot;</span><br>gamma: <span class="hljs-number">0.0001</span><br>power: <span class="hljs-number">0.75</span><br><span class="hljs-comment">#每训练100次屏幕上显示一次，如果设置为0则不显示</span><br>display: <span class="hljs-number">100</span><br><span class="hljs-comment">#最大迭代次数</span><br>max_iter: <span class="hljs-number">2000</span><br><span class="hljs-comment">#快照。可以把训练的model和solver的状态进行保存。每迭代5000次保存一次，如果设置为0则不保存</span><br>snapshot: <span class="hljs-number">5000</span><br>snapshot_prefix: <span class="hljs-string">&quot;E:/Caffe-windows/caffe-windows/examples/mnist/models&quot;</span><br><span class="hljs-comment">#选择运行模式</span><br>solver_mode: GPU<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>网络结构文件详解  </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">name: <span class="hljs-string">&quot;LeNet&quot;</span>               <span class="hljs-comment">#网络的名字&quot;LeNet&quot;</span><br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;mnist&quot;</span>             <span class="hljs-comment">#层的名字&quot;mnist&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;Data&quot;</span>              <span class="hljs-comment">#层的类型&quot;Data&quot;，表明数据来源于LevelDB或LMDB。另外数据的来源还可能是来自内存，HDF5，图片等</span><br>  top: <span class="hljs-string">&quot;data&quot;</span>               <span class="hljs-comment">#输出data</span><br>  top: <span class="hljs-string">&quot;label&quot;</span>              <span class="hljs-comment">#输出label</span><br>  include &#123;<br>    phase: TRAIN            <span class="hljs-comment">#该层只在TRAIN训练的时候有效</span><br>  &#125;<br>  transform_param &#123;         <span class="hljs-comment">#数据的预处理</span><br>    scale: <span class="hljs-number">0.00390625</span>       <span class="hljs-comment">#1/256，将输入的数据0-255归一化到0-1之间</span><br>  &#125;<br>  data_param &#123;<br>    source: <span class="hljs-string">&quot;E:/Caffe-windows/caffe-windows/examples/mnist/lmdb/train_lmdb&quot;</span> <span class="hljs-comment">#数据来源</span><br>    batch_size: <span class="hljs-number">64</span>          <span class="hljs-comment">#每个批次处理64张图片</span><br>    backend: LMDB           <span class="hljs-comment">#数据格式LMDB</span><br>  &#125;<br>&#125;<br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;mnist&quot;</span>             <span class="hljs-comment">#层的名字&quot;mnist&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;Data&quot;</span>              <span class="hljs-comment">#层的类型&quot;Data&quot;，表明数据来源于LevelDB或LMDB</span><br>  top: <span class="hljs-string">&quot;data&quot;</span>               <span class="hljs-comment">#输出dada</span><br>  top: <span class="hljs-string">&quot;label&quot;</span>              <span class="hljs-comment">#输出label</span><br>  include &#123;                 <br>    phase: TEST             <span class="hljs-comment">#该层只在TEST测试的时候有效</span><br>  &#125;                         <br>  transform_param &#123;         <span class="hljs-comment">#数据的预处理</span><br>    scale: <span class="hljs-number">0.00390625</span>       <span class="hljs-comment">#1/256，将输入的数据0-255归一化到0-1之间</span><br>  &#125;<br>  data_param &#123;<br>    source: <span class="hljs-string">&quot;E:/Caffe-windows/caffe-windows/examples/mnist/lmdb/test_lmdb&quot;</span> <span class="hljs-comment">#数据来源</span><br>    batch_size: <span class="hljs-number">100</span>         <span class="hljs-comment">#每个批次处理100张图片</span><br>    backend: LMDB           <span class="hljs-comment">#数据格式LMDB</span><br>  &#125;<br>&#125;<br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;conv1&quot;</span>             <span class="hljs-comment">#层的名字&quot;conv1&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;Convolution&quot;</span>       <span class="hljs-comment">#层的类型&quot;Convolution&quot;</span><br>  bottom: <span class="hljs-string">&quot;data&quot;</span>            <span class="hljs-comment">#输入data</span><br>  top: <span class="hljs-string">&quot;conv1&quot;</span>              <span class="hljs-comment">#输出conv1</span><br>  param &#123;                   <span class="hljs-comment">#这个是权值的学习率</span><br>    lr_mult: <span class="hljs-number">1</span>              <span class="hljs-comment">#学习率系数。最终的学习率是这个学习率系数lr_mult乘以solver.prototxt里面的base_lr</span><br>  &#125;<br>  param &#123;                   <span class="hljs-comment">#这个是偏置的学习率</span><br>    lr_mult: <span class="hljs-number">2</span>              <span class="hljs-comment">#学习率系数。最终的学习率是这个学习率系数lr_mult乘以solver.prototxt里面的base_lr</span><br>  &#125;<br>  convolution_param &#123;<br>    num_output: <span class="hljs-number">20</span>          <span class="hljs-comment">#卷积核的个数为20，或者表示输出特征平面的个数为20</span><br>    kernel_size: <span class="hljs-number">5</span>          <span class="hljs-comment">#卷积核的大小5*5。如果卷积核长和宽不等，则需要用kernel_h和kernel_w分别设置</span><br>    stride: <span class="hljs-number">1</span>               <span class="hljs-comment">#步长为1。也可以用stride_h和stride_w来设置</span><br>    weight_filler &#123;         <span class="hljs-comment">#权值初始化</span><br>      <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;xavier&quot;</span>        <span class="hljs-comment">#使用&quot;Xavier&quot;算法，也可以设置为&quot;gaussian&quot;</span><br>    &#125;<br>    bias_filler &#123;           <span class="hljs-comment">#偏置初始化</span><br>      <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;constant&quot;</span>      <span class="hljs-comment">#一般设置为&quot;constant&quot;,取值为0</span><br>    &#125;<br>  &#125;<br>&#125;<br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;pool1&quot;</span>             <span class="hljs-comment">#层的名字&quot;pool1&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;Pooling&quot;</span>           <span class="hljs-comment">#层的类型&quot;Pooling&quot;</span><br>  bottom: <span class="hljs-string">&quot;conv1&quot;</span>           <span class="hljs-comment">#输入conv1</span><br>  top: <span class="hljs-string">&quot;pool1&quot;</span>              <span class="hljs-comment">#输出pool1</span><br>  pooling_param &#123;           <br>    pool: MAX               <span class="hljs-comment">#池化方法。常用的方法有MAX,AVE或STOCHASTIC</span><br>    kernel_size: <span class="hljs-number">2</span>          <span class="hljs-comment">#池化核的大小2*2。如果池化核长和宽不等，则需要用kernel_h和kernel_w分别设置</span><br>    stride: <span class="hljs-number">2</span>               <span class="hljs-comment">#池化的步长。也可以用stride_h和stride_w来设置</span><br>  &#125;<br>&#125;<br>layer &#123;<br>  name: <span class="hljs-string">&quot;conv2&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;Convolution&quot;</span><br>  bottom: <span class="hljs-string">&quot;pool1&quot;</span><br>  top: <span class="hljs-string">&quot;conv2&quot;</span><br>  param &#123;<br>    lr_mult: <span class="hljs-number">1</span><br>  &#125;<br>  param &#123;<br>    lr_mult: <span class="hljs-number">2</span><br>  &#125;<br>  convolution_param &#123;<br>    num_output: <span class="hljs-number">50</span>          <span class="hljs-comment">#卷积核的个数为50，或者表示输出特征平面的个数为50</span><br>    kernel_size: <span class="hljs-number">5</span><br>    stride: <span class="hljs-number">1</span><br>    weight_filler &#123;<br>      <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;xavier&quot;</span><br>    &#125;<br>    bias_filler &#123;<br>      <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;constant&quot;</span><br>    &#125;<br>  &#125;<br>&#125;<br>layer &#123;<br>  name: <span class="hljs-string">&quot;pool2&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;Pooling&quot;</span><br>  bottom: <span class="hljs-string">&quot;conv2&quot;</span><br>  top: <span class="hljs-string">&quot;pool2&quot;</span><br>  pooling_param &#123;<br>    pool: MAX<br>    kernel_size: <span class="hljs-number">2</span><br>    stride: <span class="hljs-number">2</span><br>  &#125;<br>&#125;<br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;ip1&quot;</span>               <span class="hljs-comment">#层的名字&quot;ip1&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;InnerProduct&quot;</span>      <span class="hljs-comment">#层的类型&quot;InnerProduct&quot;，全连接层</span><br>  bottom: <span class="hljs-string">&quot;pool2&quot;</span>           <span class="hljs-comment">#输入pool2</span><br>  top: <span class="hljs-string">&quot;ip1&quot;</span>                <span class="hljs-comment">#输出ip1</span><br>  param &#123;<br>    lr_mult: <span class="hljs-number">1</span><br>  &#125;<br>  param &#123;<br>    lr_mult: <span class="hljs-number">2</span><br>  &#125;<br>  inner_product_param &#123;<br>    num_output: <span class="hljs-number">500</span>         <span class="hljs-comment">#500个神经元</span><br>    weight_filler &#123;<br>      <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;xavier&quot;</span><br>    &#125;<br>    bias_filler &#123;<br>      <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;constant&quot;</span><br>    &#125;<br>  &#125;<br>&#125;<br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;relu1&quot;</span>             <span class="hljs-comment">#层的名字&quot;relu1&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;ReLU&quot;</span>              <span class="hljs-comment">#层的类型&quot;ReLU&quot;，激活函数</span><br>  bottom: <span class="hljs-string">&quot;ip1&quot;</span>             <span class="hljs-comment">#输入ip1</span><br>  top: <span class="hljs-string">&quot;ip1&quot;</span>                <span class="hljs-comment">#输出ip1</span><br>&#125;<br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;ip2&quot;</span>               <span class="hljs-comment">#层的名字&quot;ip2&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;InnerProduct&quot;</span>      <span class="hljs-comment">#层的类型&quot;InnerProduct&quot;，全连接层</span><br>  bottom: <span class="hljs-string">&quot;ip1&quot;</span>             <span class="hljs-comment">#输入ip1</span><br>  top: <span class="hljs-string">&quot;ip2&quot;</span>                <span class="hljs-comment">#输出ip2</span><br>  param &#123;<br>    lr_mult: <span class="hljs-number">1</span><br>  &#125;<br>  param &#123;<br>    lr_mult: <span class="hljs-number">2</span><br>  &#125;<br>  inner_product_param &#123;<br>    num_output: <span class="hljs-number">10</span>          <span class="hljs-comment">#10个输出，代表10个分类</span><br>    weight_filler &#123;<br>      <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;xavier&quot;</span><br>    &#125;<br>    bias_filler &#123;<br>      <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;constant&quot;</span><br>    &#125;<br>  &#125;<br>&#125;<br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;accuracy&quot;</span>          <span class="hljs-comment">#层的名字&quot;accuracy&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;Accuracy&quot;</span>          <span class="hljs-comment">#层的类型&quot;Accuracy&quot;，用来判断准确率</span><br>  bottom: <span class="hljs-string">&quot;ip2&quot;</span>             <span class="hljs-comment">#层的输入ip2</span><br>  bottom: <span class="hljs-string">&quot;label&quot;</span>           <span class="hljs-comment">#层的输入label</span><br>  top: <span class="hljs-string">&quot;accuracy&quot;</span>           <span class="hljs-comment">#层的输出accuracy</span><br>  include &#123;<br>    phase: TEST             <span class="hljs-comment">#该层只在TEST测试的时候有效</span><br>  &#125;<br>&#125;<br>layer &#123;                     <span class="hljs-comment">#定义一个层</span><br>  name: <span class="hljs-string">&quot;loss&quot;</span>              <span class="hljs-comment">#层的名字&quot;loss&quot;</span><br>  <span class="hljs-built_in">type</span>: <span class="hljs-string">&quot;SoftmaxWithLoss&quot;</span>   <span class="hljs-comment">#层的类型&quot;SoftmaxWithLoss&quot;，输出loss值</span><br>  bottom: <span class="hljs-string">&quot;ip2&quot;</span>             <span class="hljs-comment">#层的输入ip2</span><br>  bottom: <span class="hljs-string">&quot;label&quot;</span>           <span class="hljs-comment">#层的输入label</span><br>  top: <span class="hljs-string">&quot;loss&quot;</span>               <span class="hljs-comment">#层的输出loss</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/caffe/">caffe</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/03/27/PyCaffe%E9%A3%9F%E7%94%A8%E6%8C%87%E5%8D%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PyCaffe食用指南</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/03/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E5%90%91/">
+                        <span class="hidden-mobile">深度学习理论向</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/03/27/Caffe%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/';
+        this.page.identifier = '/2018/03/27/Caffe%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

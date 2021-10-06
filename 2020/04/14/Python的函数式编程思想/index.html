@@ -1,0 +1,666 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>Python的函数式编程思想 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Python的函数式编程思想">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-14 15:54" pubdate>
+        2020年4月14日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      95
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python的函数式编程思想</h1>
+            
+            <div class="markdown-body">
+              <p>这篇博客中每一行代码都值得反复学习。</p>
+<p>函数是Python内建支持的一种封装，我们通过把大段代码拆成函数，通过一层一层的函数调用，就可以把复杂任务分解成简单的任务，<strong>这种分解可以称之为面向过程的程序设计。</strong>函数就是面向过程的程序设计的基本单元。</p>
+<a id="more"></a>
+<p><em>参考连接</em></p>
+<p>全文整理自<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017328525009056">廖雪峰大佬的函数式编程教程</a></p>
+<h1 id="何为函数式编程"><a href="#何为函数式编程" class="headerlink" title="何为函数式编程"></a>何为函数式编程</h1><p><strong>函数式编程</strong>（请注意多了一个“式”字）——Functional Programming，虽然也可以归结到面向过程的程序设计，但其思想更接近数学计算。</p>
+<p>函数式编程与命令式编程最大的不同其实在于：<br><strong>函数式编程关心数据的映射，命令式编程关心解决问题的步骤</strong><br>这里的映射就是数学上「函数」的概念，即一种东西和另一种东西之间的对应关系。<br>这也是为什么「函数式编程」叫做「函数」式编程，核心思想就是要代码体现这种映射关系。</p>
+<blockquote>
+<p>举个例子</p>
+</blockquote>
+<p>假如，现在你来面试，面试官让你把二叉树镜像反转一下？</p>
+<p><em>命令式编程：描述「从旧树得到新树应该怎样做」来实现</em></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">invertTree</span>(<span class="hljs-params">root</span>):</span><br>    <span class="hljs-keyword">if</span> root <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>    root.left, root.right = invertTree(root.right), invertTree(root.left)<br>    <span class="hljs-keyword">return</span> root<br></code></pre></div></td></tr></table></figure>
+<p>好了，现在停下来看看这段代码究竟代表着什么——<br>它的含义是：首先判断节点是否为空；然后翻转左树；然后翻转右树；最后左右互换。<br>这就是命令式编程——你要做什么事情，你得把达到目的的步骤详细的描述出来，然后交给机器去运行。<br>这也正是命令式编程的理论模型——图灵机的特点。一条写满数据的纸带，一条根据纸带内容运动的机器，机器每动一步都需要纸带上写着如何达到。</p>
+<p><em>函数式编程：通过描述一个 旧树-&gt;新树 的映射来实现</em></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">invert</span>(<span class="hljs-params">node</span>):</span><br>    <span class="hljs-keyword">if</span> node <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> Tree(node.value, invert(node.right), invert(node.left))<br></code></pre></div></td></tr></table></figure>
+<p>所谓“翻转二叉树”，可以看做是要得到一颗和原来二叉树对称的新二叉树。这颗新二叉树的特点是每一个节点都递归地和原树相反。<strong>这段代码体现的思维，就是旧树到新树的映射——对一颗二叉树而言，它的镜像树就是左右节点递归镜像的树。</strong><br>Haskell（发音为/ˈhæskəl/）是一种标准化的，通用的纯函数编程语言，有非限定性语义和强静态类型。它的命名源自美国逻辑学家哈斯凯尔·加里，他在数理逻辑方面上的工作使得函数式编程语言有了广泛的基础。在Haskell中，“函数是第一类对象”。作为一门函数编程语言，主要控制结构是函数。Haskell语言是1990年在编程语言Miranda的基础上标准化的，并且<strong>以 $\lambda$ 演算为基础</strong>发展而来。这也是为什么Haskell语言以希腊字母 $\lambda$（Lambda）作为自己的标志。Haskell具有 “证明即程序、命题为类型” 的特征。</p>
+<p><strong>那么这样有什么好处呢？</strong></p>
+<ul>
+<li>首先，最直观的角度来说，<strong>函数式风格的代码可以写得很精简</strong>，大大减少了键盘的损耗？？？</li>
+<li>函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！</li>
+<li>其次，<strong>函数式的代码是“对映射的描述”，它不仅可以描述二叉树这样的数据结构之间的对应关系，任何能在计算机中体现的东西之间的对应关系都可以描述</strong>——比如函数和函数之间的映射（比如 <a href="https://link.zhihu.com/?target=https%3A//zh.wikipedia.org/wiki/%E5%87%BD%E5%AD%90">functor</a>）；比如外部操作到 GUI 之间的映射（就是现在前端热炒的所谓 FRP）。<strong>它的抽象程度可以很高，这就意味着函数式的代码可以更方便的复用。</strong> <font color='red'><strong>抽象程度越高越容易被复用，离计算机硬件越近，离人类越远。</strong></font></li>
+<li>另外还有其他答主提到的，<strong>可以方便的并行</strong>。</li>
+<li>同时，将代码写成这种样子可以方便用数学的方法进行研究（不能理解 monad 就是自函子范畴上的一个幺半群你还想用 Haskell 写出 Hello world ？）</li>
+<li>至于什么科里化、什么数据不可变，都只是外延体现而已。</li>
+</ul>
+<p><strong>那么这样处理有什么坏处？</strong></p>
+<ul>
+<li>在处理I/O时，要么引入可变变量，要么通过Monad来进行封装（如State Monad和IO Monad）。单纯依靠函数式编程是不行的。</li>
+<li>Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。</li>
+</ul>
+<p>来源：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28292740/answer/100284611">知乎 nameoverflow</a></p>
+<h1 id="Python中的高阶函数"><a href="#Python中的高阶函数" class="headerlink" title="Python中的高阶函数"></a>Python中的高阶函数</h1><h2 id="map-reduce"><a href="#map-reduce" class="headerlink" title="map/reduce"></a>map/reduce</h2><p>相传Google Search的技术栈有三驾马车，分别是Google File System、BigTable、MapReduce[1]，这三种技术共同支撑起了Google search business的江山，MapReduce实际上就是一个分布式的计算框架。</p>
+<p>[1] Dean J , Ghemawat S . MapReduce: Simplified Data Processing on Large Clusters[C]// Sixth Symposium on Operating System Design &amp; Implementation. USENIX Association, 2004.</p>
+<p><strong>map函数</strong>：接受一个键值对（key-value pair）(文本名:文本内容)，产生<strong>一组</strong>中间键值对（单词:出现次数）。MapReduce框架会将map函数产生的中间键值对里键相同的值传递给一个reduce函数。 </p>
+<p><strong>reduce函数</strong>：接受一个键key，以及相关的一组值（value list）（单词A:(1,2,3)），将这组值进行合并产生一组规模更小的值（通常只有一个或零个值）(单词A:6)。 </p>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p><code>map</code> 到底在干啥？$map(func, (1, 2, 3)) = (func(1), func(2), func(3))$</p>
+<p><code>map()</code>函数接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>map</code> 将传入的函数依次作用到序列的每个元素，<strong>并把结果作为新的 <code>Iterator</code> 返回A。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 基于map函数生成 生成器</span><br>print(<span class="hljs-string">&quot;基于map函数生成 生成器&quot;</span>)<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span>(<span class="hljs-params">x</span>):</span><br>    <span class="hljs-keyword">return</span> x * x<br>iterabel = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br>    _generator = <span class="hljs-built_in">map</span>(f, iterabel)<br>print(_generator)<br>print(<span class="hljs-string">&quot;可迭代：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;__iter__&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">dir</span>(_generator)))<br>print(<span class="hljs-string">&quot;可生成：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;__next__&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">dir</span>(_generator)))<br>print(<span class="hljs-built_in">next</span>(_generator))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> _generator:<br>    print(i)<br><br><br><span class="hljs-comment"># 基于()生成 生成器</span><br>print(<span class="hljs-string">&quot;基于()生成 生成器&quot;</span>)<br>_generator2 = (x*x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>print(_generator2)<br>print(<span class="hljs-string">&quot;可迭代：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;__iter__&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">dir</span>(_generator2)))<br>print(<span class="hljs-string">&quot;可生成：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;__next__&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">dir</span>(_generator2)))<br>print(<span class="hljs-built_in">next</span>(_generator2))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> _generator2:<br>    print(i)<br><br><br><span class="hljs-comment"># 基于yiled生成 生成器</span><br>print(<span class="hljs-string">&quot;基于yiled生成 生成器&quot;</span>)<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fun</span>(<span class="hljs-params">nums</span>):</span><br>    index = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> index &lt; <span class="hljs-built_in">len</span>(nums):<br>        x = nums[index]<br>        <span class="hljs-keyword">yield</span> x * x<br>        index += <span class="hljs-number">1</span>  <span class="hljs-comment"># 下次迭代进来才会执行这一句</span><br>_generator3 = fun([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>print(_generator3)<br>print(<span class="hljs-string">&quot;可迭代：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;__iter__&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">dir</span>(_generator3)))<br>print(<span class="hljs-string">&quot;可生成：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;__next__&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">dir</span>(_generator3)))<br>print(<span class="hljs-built_in">next</span>(_generator3))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> _generator3:<br>    print(i)<br><br><span class="hljs-comment"># Output</span><br>基于<span class="hljs-built_in">map</span>函数生成 生成器<br>&lt;<span class="hljs-built_in">map</span> <span class="hljs-built_in">object</span> at <span class="hljs-number">0x000001C7AFF25520</span>&gt;<br>可迭代：<span class="hljs-literal">True</span><br>可生成：<span class="hljs-literal">True</span><br><span class="hljs-number">1</span><br><span class="hljs-number">4</span><br><span class="hljs-number">9</span><br>基于()生成 生成器<br>&lt;generator <span class="hljs-built_in">object</span> &lt;genexpr&gt; at <span class="hljs-number">0x000001C7AFEA92E0</span>&gt;<br>可迭代：<span class="hljs-literal">True</span><br>可生成：<span class="hljs-literal">True</span><br><span class="hljs-number">1</span><br><span class="hljs-number">4</span><br><span class="hljs-number">9</span><br>基于yiled生成 生成器<br>&lt;generator <span class="hljs-built_in">object</span> fun at <span class="hljs-number">0x000001C7AFEA9350</span>&gt;<br>可迭代：<span class="hljs-literal">True</span><br>可生成：<span class="hljs-literal">True</span><br><span class="hljs-number">1</span><br><span class="hljs-number">4</span><br><span class="hljs-number">9</span><br></code></pre></div></td></tr></table></figure>
+<p><code>map()</code>传入的第一个参数是<code>f</code>，即函数对象本身。由于结果<code>r</code>是一个<code>Iterator</code>，<code>Iterator</code>是惰性序列，因此通过<code>list()</code>函数让它把整个序列都计算出来并返回一个 <code>list</code>。</p>
+<p><strong>可以发现</strong>，通过 <code>map</code> 函数返回得到的是一个生成器和通过 <code>()</code> 生成一个生成器、基于<code>yiled</code>生成一个生成器的效果是一样的。</p>
+<p><code>map()</code>作为高阶函数，事实上它把运算规则抽象了，因此，我们不但可以计算简单的 $f(x)=x^2$，还可以计算任意复杂的函数，比如，把这个 <code>list</code> 所有数字转为字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-built_in">str</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]))<br>[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;6&#x27;</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>[<span class="hljs-built_in">str</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]] <br>[<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>, <span class="hljs-string">&#x27;6&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
+<p><strong>可以发现</strong>，<code>map</code> 也可以完成列表解析式的工作。</p>
+<h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3><p><code>reduce</code> 到底在干啥？$reduce(func, (1, 2, 3, 4, 5))=func(func(func(func(1, 2), 3), 4), 5)$</p>
+<p><code>reduce</code>函数和<code>map</code>函数一样，也接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>reduce</code>函数把一个函数<code>func</code>作用在一个序列<code>[x1, x2, x3, ...]</code>上，<strong>这个 <code>func</code> 函数必须接收两个参数，<code>reduce</code>把结果继续和序列的下一个元素做累积计算</strong>，其效果就是：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)<br></code></pre></div></td></tr></table></figure>
+<p>一个简单的例子，把序列<code>[1, 3, 5, 7, 9]</code>变换成整数<code>13579</code>，<code>reduce</code>就可以派上用场：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">list2num</span>(<span class="hljs-params">x, y</span>):</span><br>    <span class="hljs-keyword">return</span> x * <span class="hljs-number">10</span> + y<br><br>print(reduce(list2num, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]))<br></code></pre></div></td></tr></table></figure>
+<p>注意，装饰器中的 <code>wraps</code> 函数也在 <code>functools</code> 模块中，<code>wraps</code> 函数负责<strong>将原始函数的<code>__name__</code>等属性复制到<code>wrapper()</code>函数中，否则，有些依赖函数签名的代码执行就会出错。</strong></p>
+<p> <code>reduce</code> 和 <code>map</code> 结合，将str转换成int，<code>map</code>将str转换成list，<code>reduce</code>将list转换成int。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">str2list</span>(<span class="hljs-params">x</span>):</span><br>    digit = &#123;<span class="hljs-string">&#x27;0&#x27;</span>:<span class="hljs-number">0</span>, <span class="hljs-string">&quot;1&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;2&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;3&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;4&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&quot;5&quot;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&quot;6&quot;</span>: <span class="hljs-number">6</span>, <span class="hljs-string">&quot;7&quot;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&quot;8&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-string">&quot;9&quot;</span>: <span class="hljs-number">9</span>&#125;<br>    <span class="hljs-keyword">return</span> digit[x]<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">list2num</span>(<span class="hljs-params">x, y</span>):</span><br>    <span class="hljs-keyword">return</span> x * <span class="hljs-number">10</span> + y<br><br><span class="hljs-comment"># map/reduce 先map后rudece</span><br>step1 = <span class="hljs-built_in">map</span>(str2list, <span class="hljs-string">&quot;123&quot;</span>)  <span class="hljs-comment"># &lt;class &#x27;map&#x27;&gt;</span><br>res = reduce(list2num, step1)  <span class="hljs-comment"># &lt;class &#x27;int&#x27;&gt;</span><br><br><span class="hljs-comment"># map&amp;reduce  一次搞定</span><br>res = reduce(list2num, <span class="hljs-built_in">map</span>(str2list, <span class="hljs-string">&quot;123&quot;</span>))  <span class="hljs-comment"># &lt;class &#x27;int&#x27;&gt;</span><br><br><span class="hljs-comment"># one fuction  定义为函数</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">str2int</span>(<span class="hljs-params">_str</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">list2num</span>(<span class="hljs-params">x, y</span>):</span><br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">10</span> + y<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">str2list</span>(<span class="hljs-params">x</span>):</span><br>        digit = &#123;<span class="hljs-string">&#x27;0&#x27;</span>:<span class="hljs-number">0</span>, <span class="hljs-string">&quot;1&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;2&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;3&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;4&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&quot;5&quot;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&quot;6&quot;</span>: <span class="hljs-number">6</span>, <span class="hljs-string">&quot;7&quot;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&quot;8&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-string">&quot;9&quot;</span>: <span class="hljs-number">9</span>&#125;<br>        <span class="hljs-keyword">return</span> digit[x]<br>    <span class="hljs-keyword">return</span> reduce(list2num, <span class="hljs-built_in">map</span>(str2list, _str))<br><br>res = str2int(<span class="hljs-string">&quot;12345&quot;</span>)<br>print(<span class="hljs-built_in">type</span>(res))<br>print(res)<br></code></pre></div></td></tr></table></figure>
+<h3 id="practice"><a href="#practice" class="headerlink" title="practice"></a>practice</h3><p>利用<code>map()</code>函数，把用户输入的不规范的英文名字，变为首字母大写，其他小写的规范名字。输入：<code>[&#39;adam&#39;, &#39;LISA&#39;, &#39;barT&#39;]</code>，输出：<code>[&#39;Adam&#39;, &#39;Lisa&#39;, &#39;Bart&#39;]</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">format</span>(<span class="hljs-params">_name</span>):</span><br>    <span class="hljs-comment"># str是不可变对象 先调整成list 再操作</span><br>    _name = <span class="hljs-built_in">list</span>(_name)<br>    <span class="hljs-comment"># 首字母 需大写</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">ord</span>(_name[<span class="hljs-number">0</span>]) &gt; <span class="hljs-number">90</span>:  <span class="hljs-comment"># ord(&#x27;Z&#x27;)=90  若首字母为小写 则需要更正 将小写转大写</span><br>        _name[<span class="hljs-number">0</span>] = <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(_name[<span class="hljs-number">0</span>])-<span class="hljs-number">32</span>)<br>    <span class="hljs-comment"># 非首字母 需小写</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(_name)):<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">ord</span>(_name[i]) &lt; <span class="hljs-number">97</span>:  <span class="hljs-comment"># ord(&#x27;a&#x27;)=97  若非首字母为大写 则需要更正 将大写转小写</span><br>            _name[i] = <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(_name[i])+<span class="hljs-number">32</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.join(_name)  <span class="hljs-comment"># 最后再将结果拼接成str</span><br><br>names = [<span class="hljs-string">&#x27;adam&#x27;</span>, <span class="hljs-string">&#x27;LISA&#x27;</span>, <span class="hljs-string">&#x27;barT&#x27;</span>]<br>a = <span class="hljs-built_in">map</span>(<span class="hljs-built_in">format</span>, names)<br>print(<span class="hljs-built_in">list</span>(a))<br><br><span class="hljs-comment"># output</span><br>[<span class="hljs-string">&#x27;Adam&#x27;</span>, <span class="hljs-string">&#x27;Lisa&#x27;</span>, <span class="hljs-string">&#x27;Bart&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
+<p>Python提供的<code>sum()</code>函数可以接受一个list并求和，请编写一个<code>prod()</code>函数，可以接受一个list并利用<code>reduce()</code>求积：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">prod</span>(<span class="hljs-params">nums</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">product</span>(<span class="hljs-params">x, y</span>):</span><br>        <span class="hljs-keyword">return</span> x * y<br>    <span class="hljs-keyword">return</span> reduce(product, nums)<br><br>print(<span class="hljs-string">&#x27;3 * 5 * 7 * 9 =&#x27;</span>, prod([<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>]))<br><span class="hljs-keyword">if</span> prod([<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>]) == <span class="hljs-number">945</span>:<br>    print(<span class="hljs-string">&#x27;测试成功!&#x27;</span>)<br><span class="hljs-keyword">else</span>:<br>    print(<span class="hljs-string">&#x27;测试失败!&#x27;</span>)<br><br><span class="hljs-comment"># output</span><br><span class="hljs-number">3</span> * <span class="hljs-number">5</span> * <span class="hljs-number">7</span> * <span class="hljs-number">9</span> = <span class="hljs-number">945</span><br>测试成功!<br></code></pre></div></td></tr></table></figure>
+<p>利用<code>map</code>和<code>reduce</code>编写一个<code>str2float</code>函数，把字符串<code>&#39;123.456&#39;</code>转换成浮点数<code>123.456</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce<br><br><span class="hljs-comment"># 全局变量</span><br>is_decimal = <span class="hljs-literal">False</span><br>carry = <span class="hljs-number">1</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">numstr2list</span>(<span class="hljs-params">x</span>):</span><br>    digit = &#123;<span class="hljs-string">&#x27;0&#x27;</span>:<span class="hljs-number">0</span>, <span class="hljs-string">&quot;1&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;2&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;3&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;4&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&quot;5&quot;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&quot;6&quot;</span>: <span class="hljs-number">6</span>, <span class="hljs-string">&quot;7&quot;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&quot;8&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-string">&quot;9&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;.&quot;</span>: <span class="hljs-string">&quot;.&quot;</span>&#125;<br>    <span class="hljs-keyword">return</span> digit[x]<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">list2float</span>(<span class="hljs-params">x, y</span>):</span><br>    <span class="hljs-keyword">if</span> y == <span class="hljs-string">&#x27;.&#x27;</span>:  <span class="hljs-comment"># 切换成小数模式 然后直接返回</span><br>        <span class="hljs-keyword">global</span> is_decimal<br>        is_decimal = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">return</span> x<br>    <span class="hljs-keyword">if</span> is_decimal:  <span class="hljs-comment"># 小数模式</span><br>        <span class="hljs-keyword">global</span> carry<br>        carry /= <span class="hljs-number">10</span><br>        <span class="hljs-keyword">return</span> x + y * carry<br>    <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 整数模式</span><br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">10</span> + y<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">str2float</span>(<span class="hljs-params">_nums</span>):</span><br>    <span class="hljs-keyword">return</span> reduce(list2float, <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(numstr2list, <span class="hljs-string">&#x27;123.456&#x27;</span>)))<br><br>res = str2float(<span class="hljs-string">&#x27;123.456&#x27;</span>)<br>print(<span class="hljs-string">&#x27;str2float(\&#x27;123.456\&#x27;) =&#x27;</span>, res)<br><span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(res - <span class="hljs-number">123.456</span>) &lt; <span class="hljs-number">0.00001</span>:<br>    print(<span class="hljs-string">&#x27;测试成功!&#x27;</span>)<br><span class="hljs-keyword">else</span>:<br>    print(<span class="hljs-string">&#x27;测试失败!&#x27;</span>)<br> <br><span class="hljs-comment"># output</span><br>str2float(<span class="hljs-string">&#x27;123.456&#x27;</span>) = <span class="hljs-number">123.456</span><br>测试成功!<br></code></pre></div></td></tr></table></figure>
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p><code>filter()</code>函数用于过滤序列。$filter(func, (1, 2, 3))=(1\ if\ func(1),\ 2\ if\ func(2),\ 3\ if\ func(3))$</p>
+<p>和<code>map()</code>类似，<code>filter()</code>也接收一个函数和一个序列。和<code>map()</code>不同的是，<code>filter()</code>把传入的函数依次作用于每个元素，然后根据返回值是<code>True</code>还是<code>False</code>决定保留还是丢弃该元素。</p>
+<p>例如，在一个list中，删掉偶数，只保留奇数，可以这么写：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br>res = [x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums <span class="hljs-keyword">if</span> x%<span class="hljs-number">2</span> != <span class="hljs-number">0</span>]<br>print(res)<br><br><span class="hljs-comment"># output</span><br>[<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>]<br></code></pre></div></td></tr></table></figure>
+<p>这是列表解析器的写法，使用 <code>filter()</code> 函数，可以这么写：</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_odd</span>(<span class="hljs-params">x</span>):</span><br>    <span class="hljs-keyword">return</span> x % <span class="hljs-number">2</span> != <span class="hljs-number">0</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_enve</span>(<span class="hljs-params">x</span>):</span><br>    <span class="hljs-keyword">return</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span><br><br>nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br>res = <span class="hljs-built_in">filter</span>(is_odd, nums)  <span class="hljs-comment"># 返回的&lt;class &#x27;filter&#x27;&gt;也是一个generator</span><br>print(<span class="hljs-built_in">type</span>(res))<br>print(<span class="hljs-string">&#x27;__next__&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">dir</span>(res))<br>print(res)<br><br><span class="hljs-comment"># output</span><br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">filter</span>&#x27;&gt;</span><br><span class="hljs-class"><span class="hljs-title">True</span></span><br>[1, 3, 5]<br></code></pre></div></td></tr></table></figure>
+<h3 id="practice-1"><a href="#practice-1" class="headerlink" title="practice"></a>practice</h3><p><strong>只用 <code>filter</code> 求素数</strong></p>
+<p>计算<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/10626.htm">素数</a>的一个方法是<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/3784258.htm">埃氏筛法</a>，它的算法理解起来非常简单：</p>
+<p>首先，列出从<code>2</code>开始的所有自然数，构造一个序列：<br>2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, …<br>取序列的第一个数<code>2</code>，它一定是素数，然后用<code>2</code>把序列的<code>2</code>的倍数筛掉：<br>3, <del>4</del>, 5, <del>6</del>, 7, <del>8</del>, 9, <del>10</del>, 11, <del>12</del>, 13, <del>14</del>, 15, <del>16</del>, 17, <del>18</del>, 19, <del>20</del>, …<br>取新序列的第一个数<code>3</code>，它一定是素数，然后用<code>3</code>把序列的<code>3</code>的倍数筛掉：<br>5, <del>6</del>, 7, <del>8</del>, <del>9</del>, <del>10</del>, 11, <del>12</del>, 13, <del>14</del>, <del>15</del>, <del>16</del>, 17, <del>18</del>, 19, <del>20</del>, …<br>取新序列的第一个数<code>5</code>，然后用<code>5</code>把序列的<code>5</code>的倍数筛掉：<br>7, <del>8</del>, <del>9</del>, <del>10</del>, 11, <del>12</del>, 13, <del>14</del>, <del>15</del>, <del>16</del>, 17, <del>18</del>, 19, <del>20</del>, …<br>不断筛下去，就可以得到所有的素数。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 使用filter形式</span><br><span class="hljs-comment"># 先构造一个从3开始的奇数序列，这是一个generator，且产生无限序列。</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_odd_iter</span>():</span><br>    n = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        n = n + <span class="hljs-number">2</span><br>        <span class="hljs-keyword">yield</span> n<br><br><span class="hljs-comment"># 定义一个筛选函数</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_not_divisible</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-comment"># lambda 中的 x 是迭代器 it 里遍历的各个值 </span><br>    <span class="hljs-comment"># 如果x%n大于0为True，代表该数不是n的倍数，保留。</span><br>    <span class="hljs-comment"># 如果x%n等于0为False，代表该数是n的倍数，舍弃。</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">lambda</span> x: x % n &gt; <span class="hljs-number">0</span> <br><br><span class="hljs-comment"># 定义一个素数生成器，不断返回下一个素数</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">primes</span>():</span><br>    <span class="hljs-keyword">yield</span> <span class="hljs-number">2</span>  <span class="hljs-comment"># 第一次必须返回2</span><br>    it = _odd_iter()  <span class="hljs-comment"># 从3开始的奇数序列</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        n = <span class="hljs-built_in">next</span>(it)<br>        <span class="hljs-keyword">yield</span> n<br>        it = <span class="hljs-built_in">filter</span>(_not_divisible(n), it)  <span class="hljs-comment"># 用n把序列it的n的倍数筛掉</span><br><br>_max = <span class="hljs-number">100</span><br>res = []<br><span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> primes():<br>    <span class="hljs-keyword">if</span> n &lt; _max:<br>        res += [n]<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">break</span><br>print(<span class="hljs-string">&quot; &quot;</span>.join([<span class="hljs-built_in">str</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> res]))<br><br><br><span class="hljs-comment"># output</span><br><span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">7</span> <span class="hljs-number">11</span> <span class="hljs-number">13</span> <span class="hljs-number">17</span> <span class="hljs-number">19</span> <span class="hljs-number">23</span> <span class="hljs-number">29</span> <span class="hljs-number">31</span> <span class="hljs-number">37</span> <span class="hljs-number">41</span> <span class="hljs-number">43</span> <span class="hljs-number">47</span> <span class="hljs-number">53</span> <span class="hljs-number">59</span> <span class="hljs-number">61</span> <span class="hljs-number">67</span> <span class="hljs-number">71</span> <span class="hljs-number">73</span> <span class="hljs-number">79</span> <span class="hljs-number">83</span> <span class="hljs-number">89</span> <span class="hljs-number">97</span><br></code></pre></div></td></tr></table></figure>
+<p>同时用<code>filter</code>、<code>map</code>、<code>lambda</code>求100以内的素数。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = [item <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <br>    <span class="hljs-built_in">filter</span>(<br>        <span class="hljs-keyword">lambda</span> x:<span class="hljs-built_in">all</span>(  <span class="hljs-comment"># all(): Return True if bool(x) is True for all values x in the iterable. If the iterable is empty, return True.</span><br>            <span class="hljs-built_in">map</span>(<br>                <span class="hljs-keyword">lambda</span> p: x % p !=<span class="hljs-number">0</span>,<br>                <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, x)<br>            )<br>        ),<br>        <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, <span class="hljs-number">101</span>)  <span class="hljs-comment"># 1不是素数 从2开始</span><br>    )<br>]<br>a<br><br><span class="hljs-comment"># output</span><br>[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">13</span>, <span class="hljs-number">17</span>, <span class="hljs-number">19</span>, <span class="hljs-number">23</span>, <span class="hljs-number">29</span>, <span class="hljs-number">31</span>, <span class="hljs-number">37</span>, <span class="hljs-number">41</span>, <span class="hljs-number">43</span>, <span class="hljs-number">47</span>, <span class="hljs-number">53</span>, <span class="hljs-number">59</span>, <span class="hljs-number">61</span>, <span class="hljs-number">67</span>, <span class="hljs-number">71</span>, <span class="hljs-number">73</span>, <span class="hljs-number">79</span>, <span class="hljs-number">83</span>, <span class="hljs-number">89</span>, <span class="hljs-number">97</span>]<br></code></pre></div></td></tr></table></figure>
+<p>回数是指从左向右读和从右向左读都是一样的数，例如<code>12321</code>，<code>909</code>。请利用<code>filter()</code>筛选出回数：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">int2list</span>(<span class="hljs-params">_int</span>):</span><br>    res = []<br>    <span class="hljs-keyword">while</span> _int:<br>        res.insert(<span class="hljs-number">0</span>, _int % <span class="hljs-number">10</span>)<br>        _int //= <span class="hljs-number">10</span><br>    <span class="hljs-keyword">return</span> res<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_palindrome</span>(<span class="hljs-params">nums</span>):</span><br>    nums = int2list(nums)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(nums) == <span class="hljs-number">1</span>:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(nums) == <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> nums[<span class="hljs-number">0</span>] == nums[<span class="hljs-number">1</span>]:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-comment"># 三位以上 将list reverse 之后再做对比</span><br>    copy_nums = nums[:]<br>    copy_nums.reverse()<br>    <span class="hljs-keyword">return</span> copy_nums == nums<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_is_palindrome</span>(<span class="hljs-params">n</span>):</span><br>    m = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">str</span>(n)[::-<span class="hljs-number">1</span>])  <span class="hljs-comment"># 字符串切片的表达式  s[开始:结束:步长]  s[::-1]就是从尾到头输出s 效果和s逆序差不多</span><br>    <span class="hljs-keyword">return</span> m == n<br><br><br><span class="hljs-comment"># 测试:</span><br>output = <span class="hljs-built_in">filter</span>(is_palindrome, <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1000</span>))<br>print(<span class="hljs-string">&#x27;1~1000:&#x27;</span>, <span class="hljs-built_in">list</span>(output))<br><span class="hljs-keyword">if</span> <span class="hljs-built_in">list</span>(<span class="hljs-built_in">filter</span>(is_palindrome, <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">200</span>))) == [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>, <span class="hljs-number">22</span>, <span class="hljs-number">33</span>, <span class="hljs-number">44</span>, <span class="hljs-number">55</span>, <span class="hljs-number">66</span>, <span class="hljs-number">77</span>, <span class="hljs-number">88</span>, <span class="hljs-number">99</span>, <span class="hljs-number">101</span>, <span class="hljs-number">111</span>, <span class="hljs-number">121</span>, <span class="hljs-number">131</span>, <span class="hljs-number">141</span>, <span class="hljs-number">151</span>, <span class="hljs-number">161</span>, <span class="hljs-number">171</span>, <span class="hljs-number">181</span>, <span class="hljs-number">191</span>]:<br>    print(<span class="hljs-string">&#x27;测试成功!&#x27;</span>)<br><span class="hljs-keyword">else</span>:<br>    print(<span class="hljs-string">&#x27;测试失败!&#x27;</span>)<br>    <br><span class="hljs-comment"># output</span><br><span class="hljs-number">1</span>~<span class="hljs-number">1000</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>, <span class="hljs-number">22</span>, <span class="hljs-number">33</span>, <span class="hljs-number">44</span>, <span class="hljs-number">55</span>, <span class="hljs-number">66</span>, <span class="hljs-number">77</span>, <span class="hljs-number">88</span>, <span class="hljs-number">99</span>, <span class="hljs-number">101</span>, <span class="hljs-number">111</span>, <span class="hljs-number">121</span>, <span class="hljs-number">131</span>, <span class="hljs-number">141</span>, <span class="hljs-number">151</span>, <span class="hljs-number">161</span>, <span class="hljs-number">171</span>, <span class="hljs-number">181</span>, <span class="hljs-number">191</span>, <span class="hljs-number">202</span>, <span class="hljs-number">212</span>, <span class="hljs-number">222</span>, <span class="hljs-number">232</span>, <span class="hljs-number">242</span>, <span class="hljs-number">252</span>, <span class="hljs-number">262</span>, <span class="hljs-number">272</span>, <span class="hljs-number">282</span>, <span class="hljs-number">292</span>, <span class="hljs-number">303</span>, <span class="hljs-number">313</span>, <span class="hljs-number">323</span>, <span class="hljs-number">333</span>, <span class="hljs-number">343</span>, <span class="hljs-number">353</span>, <span class="hljs-number">363</span>, <span class="hljs-number">373</span>, <span class="hljs-number">383</span>, <span class="hljs-number">393</span>, <span class="hljs-number">404</span>, <span class="hljs-number">414</span>, <span class="hljs-number">424</span>, <span class="hljs-number">434</span>, <span class="hljs-number">444</span>, <span class="hljs-number">454</span>, <span class="hljs-number">464</span>, <span class="hljs-number">474</span>, <span class="hljs-number">484</span>, <span class="hljs-number">494</span>, <span class="hljs-number">505</span>, <span class="hljs-number">515</span>, <span class="hljs-number">525</span>, <span class="hljs-number">535</span>, <span class="hljs-number">545</span>, <span class="hljs-number">555</span>, <span class="hljs-number">565</span>, <span class="hljs-number">575</span>, <span class="hljs-number">585</span>, <span class="hljs-number">595</span>, <span class="hljs-number">606</span>, <span class="hljs-number">616</span>, <span class="hljs-number">626</span>, <span class="hljs-number">636</span>, <span class="hljs-number">646</span>, <span class="hljs-number">656</span>, <span class="hljs-number">666</span>, <span class="hljs-number">676</span>, <span class="hljs-number">686</span>, <span class="hljs-number">696</span>, <span class="hljs-number">707</span>, <span class="hljs-number">717</span>, <span class="hljs-number">727</span>, <span class="hljs-number">737</span>, <span class="hljs-number">747</span>, <span class="hljs-number">757</span>, <span class="hljs-number">767</span>, <span class="hljs-number">777</span>, <span class="hljs-number">787</span>, <span class="hljs-number">797</span>, <span class="hljs-number">808</span>, <span class="hljs-number">818</span>, <span class="hljs-number">828</span>, <span class="hljs-number">838</span>, <span class="hljs-number">848</span>, <span class="hljs-number">858</span>, <span class="hljs-number">868</span>, <span class="hljs-number">878</span>, <span class="hljs-number">888</span>, <span class="hljs-number">898</span>, <span class="hljs-number">909</span>, <span class="hljs-number">919</span>, <span class="hljs-number">929</span>, <span class="hljs-number">939</span>, <span class="hljs-number">949</span>, <span class="hljs-number">959</span>, <span class="hljs-number">969</span>, <span class="hljs-number">979</span>, <span class="hljs-number">989</span>, <span class="hljs-number">999</span>]<br>测试成功!<br></code></pre></div></td></tr></table></figure>
+<h2 id="sorted"><a href="#sorted" class="headerlink" title="sorted"></a>sorted</h2><p>Python内置的<code>sorted()</code>也是一个高阶函数。用<code>sorted()</code>排序的关键在于实现一个映射函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">sorted</span>([<span class="hljs-number">36</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">12</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">21</span>])<br>[-<span class="hljs-number">21</span>, -<span class="hljs-number">12</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9</span>, <span class="hljs-number">36</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">sorted</span>([<span class="hljs-number">36</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">12</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">21</span>], reverse=<span class="hljs-literal">True</span>)<br>[<span class="hljs-number">36</span>, <span class="hljs-number">9</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">12</span>, -<span class="hljs-number">21</span>]<br></code></pre></div></td></tr></table></figure>
+<p>作为一个高阶函数，sorted可以接收一个<code>key</code>函数来实现自定义的排序，key指定的函数将作用于list的每一个元素上，并根据key函数返回的结果进行排序。对比原始的list和经过<code>key=abs</code>处理过的list，例如按绝对值大小排序：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">sorted</span>([<span class="hljs-number">36</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">12</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">21</span>], key=<span class="hljs-built_in">abs</span>)<br>[<span class="hljs-number">5</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">12</span>, -<span class="hljs-number">21</span>, <span class="hljs-number">36</span>]<br></code></pre></div></td></tr></table></figure>
+<p>对比原始的 list 和经过<code>key=abs</code>处理过的 list：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>[<span class="hljs-built_in">abs</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> _list]<br>[<span class="hljs-number">36</span>, <span class="hljs-number">5</span>, <span class="hljs-number">12</span>, <span class="hljs-number">9</span>, <span class="hljs-number">21</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>_list<br>[<span class="hljs-number">36</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">12</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">21</span>]<br></code></pre></div></td></tr></table></figure>
+<p>字符串排序</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">sorted</span>([<span class="hljs-string">&#x27;bob&#x27;</span>, <span class="hljs-string">&#x27;about&#x27;</span>, <span class="hljs-string">&#x27;Zoo&#x27;</span>, <span class="hljs-string">&#x27;Credit&#x27;</span>])<br>[<span class="hljs-string">&#x27;Credit&#x27;</span>, <span class="hljs-string">&#x27;Zoo&#x27;</span>, <span class="hljs-string">&#x27;about&#x27;</span>, <span class="hljs-string">&#x27;bob&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
+<p>默认情况下，对字符串排序，是按照ASCII的大小比较的，由于<code>&#39;Z&#39; &lt; &#39;a&#39;</code>，结果，大写字母<code>Z</code>会排在小写字母<code>a</code>的前面。 <code>str.lower()</code> 方法将字符串中所有<strong>大写字符转换为小写字符</strong>。<code>str.upper()</code>方法将字符串中所有<strong>小写字符转换为大写字符</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">sorted</span>([<span class="hljs-string">&#x27;bob&#x27;</span>, <span class="hljs-string">&#x27;about&#x27;</span>, <span class="hljs-string">&#x27;Zoo&#x27;</span>, <span class="hljs-string">&#x27;Credit&#x27;</span>], key=<span class="hljs-built_in">str</span>.lower)<br>[<span class="hljs-string">&#x27;about&#x27;</span>, <span class="hljs-string">&#x27;bob&#x27;</span>, <span class="hljs-string">&#x27;Credit&#x27;</span>, <span class="hljs-string">&#x27;Zoo&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
+<h3 id="practice-2"><a href="#practice-2" class="headerlink" title="practice"></a>practice</h3><p>假设我们用一组tuple表示学生名字和成绩： </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">L = [(<span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-number">75</span>), (<span class="hljs-string">&#x27;Adam&#x27;</span>, <span class="hljs-number">92</span>), (<span class="hljs-string">&#x27;Bart&#x27;</span>, <span class="hljs-number">66</span>), (<span class="hljs-string">&#x27;Lisa&#x27;</span>, <span class="hljs-number">88</span>)]<br></code></pre></div></td></tr></table></figure>
+<p>请用<code>sorted()</code>对上述列表分别按名字排序：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">L = [(<span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-number">75</span>), (<span class="hljs-string">&#x27;Adam&#x27;</span>, <span class="hljs-number">92</span>), (<span class="hljs-string">&#x27;Bart&#x27;</span>, <span class="hljs-number">66</span>), (<span class="hljs-string">&#x27;Lisa&#x27;</span>, <span class="hljs-number">88</span>)]<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">item</span>):</span><br>    <span class="hljs-keyword">return</span> item[<span class="hljs-number">0</span>]<br><br>res = <span class="hljs-built_in">sorted</span>(L, key=func)<br>print(res)<br><br><span class="hljs-comment"># output</span><br>[(<span class="hljs-string">&#x27;Adam&#x27;</span>, <span class="hljs-number">92</span>), (<span class="hljs-string">&#x27;Bart&#x27;</span>, <span class="hljs-number">66</span>), (<span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-number">75</span>), (<span class="hljs-string">&#x27;Lisa&#x27;</span>, <span class="hljs-number">88</span>)]<br></code></pre></div></td></tr></table></figure>
+<p>再按成绩从高到低排序：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">by_score</span>(<span class="hljs-params">t</span>):</span><br>    <span class="hljs-keyword">return</span> -t[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 由于sorted默认是由小到大进行排序的，所以这里进行一次取反。</span><br>L2 = <span class="hljs-built_in">sorted</span>(L, key=by_score)<br>print(L2)<br><br><span class="hljs-comment"># 或者</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">by_score</span>(<span class="hljs-params">t</span>):</span><br>    <span class="hljs-keyword">return</span> t[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 由于sorted默认是由小到大进行排序的，所以这里进行一次取反。</span><br>L2 = <span class="hljs-built_in">sorted</span>(L, key=by_score, reverse=<span class="hljs-literal">True</span>)<br>print(L2)<br><br><span class="hljs-comment"># output</span><br>[(<span class="hljs-string">&#x27;Adam&#x27;</span>, <span class="hljs-number">92</span>), (<span class="hljs-string">&#x27;Lisa&#x27;</span>, <span class="hljs-number">88</span>), (<span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-number">75</span>), <br>(<span class="hljs-string">&#x27;Bart&#x27;</span>, <span class="hljs-number">66</span>)]<br></code></pre></div></td></tr></table></figure>
+<p>一个保存学生姓名和成绩的字典，根据成绩对学生进行排序：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">d = &#123;<span class="hljs-string">&#x27;Bob&#x27;</span>: <span class="hljs-number">75</span>, <span class="hljs-string">&#x27;Adam&#x27;</span>: <span class="hljs-number">92</span>, <span class="hljs-string">&#x27;Bart&#x27;</span>: <span class="hljs-number">66</span>, <span class="hljs-string">&#x27;Lisa&#x27;</span>: <span class="hljs-number">88</span>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">by_score</span>(<span class="hljs-params">item</span>):</span><br>    <span class="hljs-keyword">return</span> -item[<span class="hljs-number">1</span>]<br><br>d2 = <span class="hljs-built_in">sorted</span>(d.items(), key=by_score,)<br>print(d2)<br><br><span class="hljs-comment"># output</span><br>[(<span class="hljs-string">&#x27;Adam&#x27;</span>, <span class="hljs-number">92</span>), (<span class="hljs-string">&#x27;Lisa&#x27;</span>, <span class="hljs-number">88</span>), (<span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-number">75</span>), (<span class="hljs-string">&#x27;Bart&#x27;</span>, <span class="hljs-number">66</span>)]<br></code></pre></div></td></tr></table></figure>
+<p>从1-100中选出所有的素数</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = [<span class="hljs-built_in">str</span>(item) <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-built_in">filter</span>(<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">all</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> p: x % p != <span class="hljs-number">0</span>, <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, x))), <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, <span class="hljs-number">101</span>))]  <span class="hljs-comment"># 1不是素数</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="返回函数（闭包）"><a href="#返回函数（闭包）" class="headerlink" title="返回函数（闭包）"></a>返回函数（闭包）</h1><p>高阶函数除了可以接受函数作为参数外，还可以把函数作为结果值返回。</p>
+<p>在外部函数<code>outter_func</code>中又定义了内部函数<code>inner_func</code>，并且，内部函数<code>inner_func</code>可以引用外部函数<code>outter_func</code>的<strong>参数和局部变量</strong>，当<code>outter_func</code>返回<code>inner_func</code>时，<strong>相关参数和变量都保存在返回的函数中</strong>，这种程序结构被称为“闭包（Closure）”，拥有极大的威力。</p>
+<p><strong>举个栗子</strong></p>
+<p>通常情况下，求和的函数是这样定义的：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_sum</span>(<span class="hljs-params">*args</span>):</span><br>    ax = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> args:<br>        ax = ax + n<br>    <span class="hljs-keyword">return</span> ax<br></code></pre></div></td></tr></table></figure>
+<p>如果想惰性求和，怎么办？</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lazy_sum</span>(<span class="hljs-params">*args</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sum</span>():</span><br>        ax = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> args:<br>            ax = ax + n<br>        <span class="hljs-keyword">return</span> ax<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span><br></code></pre></div></td></tr></table></figure>
+<p>当我们调用<code>lazy_sum()</code>时，返回的并不是求和结果，而是求和函数，执行求和函数时，才真正开始求和：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>f = lazy_sum(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>f<br>&lt;function lazy_sum.&lt;<span class="hljs-built_in">locals</span>&gt;.<span class="hljs-built_in">sum</span> at <span class="hljs-number">0x0000021C61BB0160</span>&gt;<br><span class="hljs-meta">&gt;&gt;&gt; </span>f()<br><span class="hljs-number">21</span><br></code></pre></div></td></tr></table></figure>
+<p>在这个例子中，我们在函数<code>lazy_sum</code>中又定义了函数<code>sum</code>，并且，内部函数<code>sum</code>可以引用外部函数<code>lazy_sum</code>的参数和局部变量，当<code>lazy_sum</code>返回函数<code>sum</code>时，相关参数和变量都保存在返回的函数中，这就是典型的“闭包（Closure）”程序结构。</p>
+<p>请再注意一点，当我们调用<code>lazy_sum()</code>时，每次调用都会返回一个<strong>新的函数</strong>，即使传入相同的参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>f1 = lazy_sum(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>f2 = lazy_sum(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>f1==f2<br><span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+<p><code>f1()</code>和<code>f2()</code>的调用结果互不影响。<br><strong>函数在其定义内部引用了局部变量<code>args</code>，所以，当一个函数返回了一个函数后，其内部的局部变量还被新函数引用。返回的函数并没有立刻执行，而是直到调用了<code>f()</code>才执行。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count</span>():</span><br>    fs = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>):<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span>():</span><br>             <span class="hljs-keyword">return</span> i * i<br>        fs.append(f)<br>    <span class="hljs-keyword">return</span> fs<br><br>f1, f2, f3 = count()<br></code></pre></div></td></tr></table></figure>
+<p>在上面的例子中，每次循环，都创建了一个新的函数，然后，把创建的3个函数都返回了。<br>你可能认为调用<code>f1()</code>，<code>f2()</code>和<code>f3()</code>结果应该是<code>1</code>，<code>4</code>，<code>9</code>，但实际结果是：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>f1, f2, f3 = count()<br><span class="hljs-meta">&gt;&gt;&gt; </span>f1()<br><span class="hljs-number">9</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>f2()<br><span class="hljs-number">9</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>f3()<br></code></pre></div></td></tr></table></figure>
+<p>全部都是<code>9</code>！原因就在于返回的函数引用了变量<code>i</code>，但它并非立刻执行。等到3个函数都返回时，它们所引用的变量<code>i</code>已经变成了<code>3</code>，因此最终结果为<code>9</code>。<br><strong><font color='red'>返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。</font></strong><br>如果一定要引用循环变量怎么办？<strong>方法是再创建一个函数，用该函数的参数绑定循环变量当前的值，无论该循环变量后续如何更改，已绑定到函数参数的值不变：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count</span>():</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span>(<span class="hljs-params">j</span>):</span>  <span class="hljs-comment"># j就是当前的i</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">g</span>():</span><br>            <span class="hljs-keyword">return</span> j * j<br>        <span class="hljs-keyword">return</span> g<br>    fs = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>):<br>        fs.append(f(i))  <span class="hljs-comment"># f(i)立刻被执行，因此i的当前值被传入f()</span><br>    <span class="hljs-keyword">return</span> fs<br><br>f1, f2, f3 = count()<br></code></pre></div></td></tr></table></figure>
+<p>再看看结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>f1, f2, f3 = count()<br><span class="hljs-meta">&gt;&gt;&gt; </span>f1()<br><span class="hljs-number">1</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>f2()<br><span class="hljs-number">4</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>f3()<br><span class="hljs-number">9</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>缺点</strong>是代码较长，可利用lambda函数缩短代码。</p>
+<blockquote>
+<p>practice</p>
+</blockquote>
+<p>利用闭包返回一个计数器函数，每次调用它返回递增整数：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">createCounter</span>():</span><br>    i = [<span class="hljs-number">0</span>]  <span class="hljs-comment"># 这里必须要用一个可变对象，之前用的int就不行，每次进这个createCounter就初始化一个新的int，不能在原来的基础上修改，但是用可变对象就不存在这个问题了。</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">counter</span>():</span> <br>        i[<span class="hljs-number">0</span>] += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> i[<span class="hljs-number">0</span>]<br>    <span class="hljs-keyword">return</span> counter<br><br><span class="hljs-comment"># 测试:</span><br>counterA = createCounter()<br>print(counterA(), counterA(), counterA(), counterA(), counterA()) <span class="hljs-comment"># 1 2 3 4 5</span><br>counterB = createCounter()<br><span class="hljs-keyword">if</span> [counterB(), counterB(), counterB(), counterB()] == [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]:<br>    print(<span class="hljs-string">&#x27;测试通过!&#x27;</span>)<br><span class="hljs-keyword">else</span>:<br>    print(<span class="hljs-string">&#x27;测试失败!&#x27;</span>)<br><br><span class="hljs-comment"># output</span><br><span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span><br>测试通过!<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>小结</p>
+</blockquote>
+<p>一个函数可以返回一个计算结果，也可以返回一个函数。<br>返回一个函数时，牢记该函数并未执行，返回函数中不要引用任何可能会变化的变量。</p>
+<h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><p>当我们在传入函数时，有些时候，不需要显式地定义函数，直接传入匿名函数更方便。（Python3好像是不推荐使用了）</p>
+<p>在Python中，对匿名函数提供了有限支持。还是以<code>map()</code>函数为例，计算$f(x)=x^2$ 时，除了定义一个<code>f(x)</code>的函数外，还可以直接传入匿名函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x: x*x, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]))<br>[<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>]<br></code></pre></div></td></tr></table></figure>
+<p>关键字<code>lambda</code>表示匿名函数，冒号前面的<code>x</code>表示函数参数。</p>
+<p>匿名函数有个限制，就是只能有一个表达式，不用写<code>return</code>，返回值就是该表达式的结果。</p>
+<p>用匿名函数有个好处，因为函数没有名字，不必担心函数名冲突。此外，匿名函数也是一个函数对象，也可以把匿名函数赋值给一个变量，再利用变量来调用该函数：</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>f = <span class="hljs-keyword">lambda</span> x: x*x<br><span class="hljs-meta">&gt;&gt;&gt; </span>f<br>&lt;function &lt;<span class="hljs-keyword">lambda</span>&gt; at <span class="hljs-number">0x0000020778980160</span>&gt;<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(f)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">function</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">list</span>(<span class="hljs-params"><span class="hljs-built_in">map</span>(<span class="hljs-params">f, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]</span>)</span>)</span><br>[1, 4, 9, 16, 25]<br></code></pre></div></td></tr></table></figure>
+<p>同样，也可以把匿名函数作为返回值返回，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build</span>(<span class="hljs-params">x, y</span>):</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">lambda</span>: x * x + y * y<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>practice</p>
+</blockquote>
+<p>请用匿名函数改造下面的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_odd</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-keyword">return</span> n % <span class="hljs-number">2</span> == <span class="hljs-number">1</span><br><br>L = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">filter</span>(<span class="hljs-keyword">lambda</span> x: x%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>, <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">20</span>)))<br></code></pre></div></td></tr></table></figure>
+<p>改造完成</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_odd</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-keyword">return</span> n % <span class="hljs-number">2</span> == <span class="hljs-number">1</span><br><br>L = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">filter</span>(<span class="hljs-keyword">lambda</span> x: x%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>, <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">20</span>)))<br><br><span class="hljs-comment"># output</span><br>[<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>, <span class="hljs-number">13</span>, <span class="hljs-number">15</span>, <span class="hljs-number">17</span>, <span class="hljs-number">19</span>]<br></code></pre></div></td></tr></table></figure>
+<h1 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h1><p>在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持decorator。Python的decorator可以用函数实现，也可以用类实现。<br>decorator可以增强函数的功能，定义起来虽然有点复杂，但使用起来非常灵活和方便。<br><a href="/2020/04/17/Python的装饰器/">详解参看这篇文章</a></p>
+<h1 id="偏函数"><a href="#偏函数" class="headerlink" title="偏函数"></a>偏函数</h1><p><strong>简单总结<code>functools.partial</code>的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。</strong></p>
+<p>Python的<code>functools</code>模块提供了很多有用的功能，其中一个就是偏函数（Partial function）。要注意，这里的偏函数和数学意义上的偏函数不一样。</p>
+<p>在介绍函数参数的时候，我们讲到，通过设定参数的默认值，可以降低函数调用的难度。而偏函数也可以做到这一点。举例如下：</p>
+<p><code>int()</code>函数可以把字符串转换为整数，当仅传入字符串时，<code>int()</code>函数默认按十进制转换：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;12345&#x27;</span>)<br><span class="hljs-number">12345</span><br></code></pre></div></td></tr></table></figure>
+<p>但 <code>int()</code> 函数还提供额外的 <code>base</code> 参数，默认值为 <code>10</code>。如果传入 <code>base</code> 参数，就可以做 <code>N</code> 进制的转换：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">int</span>(<span class="hljs-string">&quot;12345&quot;</span>, base=<span class="hljs-number">10</span>)  <span class="hljs-comment"># 把一个10进制字符串转换成10进制int</span><br><span class="hljs-number">12345</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">int</span>(<span class="hljs-string">&quot;12345&quot;</span>, base=<span class="hljs-number">8</span>)  <span class="hljs-comment"># 把一个8进制字符串转换成10进制int</span><br><span class="hljs-number">5349</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">int</span>(<span class="hljs-string">&quot;12345&quot;</span>, base=<span class="hljs-number">16</span>)  <span class="hljs-comment"># 把一个16进制字符串转换成10进制int</span><br><span class="hljs-number">74565</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">int</span>(<span class="hljs-string">&quot;1011&quot;</span>, base=<span class="hljs-number">2</span>)  <span class="hljs-comment"># 把一个2进制字符串转换成10进制int</span><br><span class="hljs-number">11</span><br></code></pre></div></td></tr></table></figure>
+<p>假设要转换大量的二进制字符串，每次都传入<code>int(x, base=2)</code>非常麻烦，于是，我们想到，可以定义一个<code>int2()</code>的函数，默认把<code>base=2</code>传进去：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">int2</span>(<span class="hljs-params">x, base=<span class="hljs-number">2</span></span>):</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(x, base)<br></code></pre></div></td></tr></table></figure>
+<p>这样，我们转换二进制就非常方便了：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>int2(<span class="hljs-string">&#x27;1000000&#x27;</span>)<br><span class="hljs-number">64</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>int2(<span class="hljs-string">&#x27;1010101&#x27;</span>)<br><span class="hljs-number">85</span><br></code></pre></div></td></tr></table></figure>
+<p><code>functools.partial</code>就是帮助我们创建一个偏函数的，不需要我们自己定义<code>int2()</code>，可以直接使用下面的代码创建一个新的函数<code>int2</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> functools<br><span class="hljs-meta">&gt;&gt;&gt; </span>int2 = functools.partial(<span class="hljs-built_in">int</span>, base=<span class="hljs-number">2</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>int2(<span class="hljs-string">&#x27;1011&#x27;</span>)<br><span class="hljs-number">11</span><br></code></pre></div></td></tr></table></figure>
+<p>所以，简单总结<code>functools.partial</code>的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。</p>
+<p>注意到上面的新的<code>int2</code>函数，仅仅是把<code>base</code>参数重新设定默认值为<code>2</code>，但也可以在函数调用时传入其他值：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>int2(<span class="hljs-string">&#x27;1000000&#x27;</span>, base=<span class="hljs-number">10</span>)<br><span class="hljs-number">1000000</span><br></code></pre></div></td></tr></table></figure>
+<p>最后，创建偏函数时，实际上可以接收<strong>函数对象、<a href="/2020/04/12/Python基础简单整理/#arg-和-kwargs的区别">*args和**kw</a>这3个参数</strong>，当传入：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">int2 = functools.partial(<span class="hljs-built_in">int</span>, base=<span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
+<p>实际上固定了int()函数的关键字参数<code>base</code>，也就是：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">int2(<span class="hljs-string">&#x27;10010&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">kw = &#123; <span class="hljs-string">&#x27;base&#x27;</span>: <span class="hljs-number">2</span> &#125;<br><span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;10010&#x27;</span>, **kw)<br></code></pre></div></td></tr></table></figure>
+<p>当传入：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">min3 = functools.partial(<span class="hljs-built_in">min</span>, <span class="hljs-number">3</span>)<br></code></pre></div></td></tr></table></figure>
+<p>实际上会把<code>3</code>作为<code>*args</code>的一部分<strong>自动加到左边</strong>，也就是：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">min3(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>)<br></code></pre></div></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">args = (<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>)<br>min3(*args)<br></code></pre></div></td></tr></table></figure>
+<p>结果为<code>3</code>，这样就能控制返回的最小结果不小于 <code>3</code> 了。</p>
+<blockquote>
+<p>小结</p>
+</blockquote>
+<p>当函数的参数个数太多，需要简化时，使用<code>functools.partial</code>可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/15/%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">进程调度算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/14/%E7%AE%97%E6%B3%95%EF%BC%9A%E4%B8%8D%E5%B8%B8%E8%A7%81%E7%B1%BB%E5%9E%8B/">
+                        <span class="hidden-mobile">算法：不常见类型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/14/Python%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/';
+        this.page.identifier = '/2020/04/14/Python%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

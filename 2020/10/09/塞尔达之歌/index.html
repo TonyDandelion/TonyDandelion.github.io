@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>塞尔达之歌 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="塞尔达之歌">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-10-09 12:22" pubdate>
+        2020年10月9日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">塞尔达之歌</h1>
+            
+            <div class="markdown-body">
+              <p>塞尔达，世界第一游戏！！！</p>
+<a id="more"></a>
+<p>作者：RX-0<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/285703427/answer/463500694">https://www.zhihu.com/question/285703427/answer/463500694</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>我叫林克，我本来…… 也没想去救塞尔达，只是去楼顶拿近卫套的时候失手摔下去了…… 只好把加农给日了。</p>
+<p><img src="https://pic1.zhimg.com/50/v2-6d2b95ea4aceeca8df790a782d4d2d89_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>一开始我是打算找齐 120 神庙 900 呀哈哈再去日它的。</p>
+<p>因为摸鱼捉虫令我忘记了要去救。</p>
+<p>但后来我想去救。</p>
+<p>不是因为我收集齐了神庙呀哈哈回忆那些，而是这个世界的人希望我去救。</p>
+<p>越是深入去玩，救的心情越迫切。</p>
+<p>我是指<strong>拯救这个世界</strong>。</p>
+<p>米法死了，卓拉族全族依然当我是驸马爷。</p>
+<p>璐菊希望我平定一切后再来格鲁德小镇玩。</p>
+<p>五小只在爸爸的伴奏下歌唱，我喜欢他们可爱的模样，</p>
+<p>鼓隆族人生活在火山之下，他们饱受火山喷发的折磨。</p>
+<p>卓拉族和格鲁德人知道我是百年前的英杰，鼓隆族和利特族认为我是英杰后裔。<strong>无论何种身份，我都要去拯救这个世界。</strong></p>
+<p>听卡西瓦演奏完英杰之诗，我来到阿卡莱研究所，看了一场日出。那一段被遗忘的时光，渐渐地，回升出我心坎。</p>
+<p>然后我去利特族找卡西瓦，原来他也知道，一直知道我就是那个近卫骑士。</p>
+<p><img src="https://pic3.zhimg.com/50/v2-72e960b2985012797d4c4878a4fc9df0_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>他希望我接受他师父的道歉，而他师父，早已饱含希望死去。</p>
+<p>我到迷失森林，长老说塞尔达在等我。在森林里我受到最高待遇，他们叫我<strong>勇者大人</strong>，他们总是问我一些奇怪又可爱的问题。<strong>既是勇者，就要行勇者之事。</strong></p>
+<p>我在七贤者的注视之下，解放了大师之剑的真正力量，这份力量，是用来解放这个世界的。</p>
+<p>米法在为我祈祷续命，达尔克尔使我不动如山，力巴尔助我扶摇直上，乌尔波扎令我无坚不摧，希卡石板在我手上发挥了最大效用。</p>
+<p>如果我还是那个一无所有，连记忆都没有的林克，我可能会选择摸鱼捉虫度过一生。而事实上，林克一人，身兼六份责任，我必须去救。</p>
+<p><strong>我跑遍山川河海，遇到了无数在旅途中被袭击的旅人，他们需要一个和平的世界。</strong></p>
+<p>那对挖掘生命松露的姐妹、那个妄想着衣锦还乡的乞丐，那对苦苦追寻着静谧公主的夫妻，还有那个寻找着怪物商人的少女。他们都渴望和平的世界。我不进入海拉鲁城堡，还有不知道多少这样的旅人遭难。</p>
+<p>那个喜欢跑去外面看川流不息的大河的女孩每次回驿站都会被怪物追得到处躲。</p>
+<p>那日我站在桥边看风景，哈西默误以为我要跳河自尽，苦苦相劝。我很感激他所做的一切。</p>
+<p>小桃红很怀念她爷爷，也很喜欢这个蓝天白云的世界；纳卜和他妹妹说我手中的蓝色火焰绮丽，格鲁德小镇有个小女孩说，城外那只大马影响了她的生活。</p>
+<p>我觉得三叶不应该冒着生命危险四处冒险写旅游攻略。</p>
+<p><strong>我参与建立的一始村，她的和平需要我来维护。</strong></p>
+<p>莱尼尔威胁着这个世界，除了我，我想不到还有谁能杀死他们。</p>
+<p>有个傻子送了我两双鞋，我欠他一次不可能的约会，我唯有去拯救这个世界来报答他，希望他早日找到生命中的瓦伊。</p>
+<p>我一次次击杀的怪物们，也都是被加农操纵的可怜生命。他们有自己的生活，会因为烤肉手舞足蹈，会因为狩猎兴高采烈。他们不一定每一只都是邪恶的，他们也会为了看夕阳而爬上山丘。但是每一次血月，他们都要遭受一次重生又死去的痛苦。为了他们不再受痛，我也要去打败加农。</p>
+<p>我找吉尔顿买了几个面具，伪装成这些怪物的同类接近他们，和他们分别度过了一个夜晚。</p>
+<p>我每次回卡卡利科村探望英帕祖孙，我都会去拜访西陀拉老婆婆。尽管没有需要，但我都会把她店里的所有商品买走。老婆婆说<strong>没有比这更令人开心的事了</strong>。我很希望她有朝一日能看到村里有更多游客到访，每天都可以脱销，不再为生计发愁。那时，这个世界也许就没有怪物肆虐了吧。</p>
+<p>培帕帕从不肯收我住宿费，我在那里度过了许多个美好又舒服的夜晚，在德库树长老的肚脐里睡觉，有种异样的安心感。</p>
+<p>我在沃里村借走了那只竹筏，我飘到一个无名小岛上，在海滩边生了一堆火，看着夜色苍茫。天高海阔，何处更相逢。幸有花前，一杯芳酒，欢计莫匆匆。</p>
+<p>萨托利山极光醉人。那里是这片土地最后一块净土。群鸦起舞，樱花树下，山之主和卢咪们戏水，如幻似真。谢谢你，Satoru 。</p>
+<p><img src="https://pic3.zhimg.com/50/v2-b9711b62d06aa1088a6a51bfead4e607_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>我在哈特诺村转了一圈，那个胖子万作还没有追到旅馆看板娘。我背上大师之剑去探望纳卜，这个小小的武器迷，他找我借看过许多千奇百怪的武器。我在他家门口放了一把戒心小刀，<strong>他也想成为勇者吧。</strong> 我在邪神像前放了几分水果，她独坐夕阳，有一种说不尽的哀伤。临行前我取了一把蓝焰，点燃了村子里全部烛台。浅色的火光在雨夜，依然为我守望着哈特诺。</p>
+<p><img src="https://pic4.zhimg.com/50/v2-b23c18900a127001c2a4c9d5495adbfd_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>我找璐菊借走了雷鸣头盔，璐菊在睡前依然会和沙海象玩偶玩过家家。<strong>乌尔波扎，你的后代除了像你一样坚韧，也还有可爱的一面。</strong>格鲁德酒吧的芙洛丝， 她怎么也不允许我试试 “瓦伊迷兹沃伊” 是什么滋味，她说我这个百岁老人是个未成年的小姐。我真的很想尝尝，这种酒的滋味是不是如其酒名一样，有一种女孩爱上男孩的浪漫。</p>
+<p>我去了飞行训练场，特巴的儿子很可爱，我每次百步穿杨，百发百中的时候都会偷瞄他惊羡的眼神。他长大以后，肯定会成为一个出色的战士吧。<strong>力巴尔，他会像你一样乘着飓风，直上九万里。</strong></p>
+<p>我和阿陨站在属于我们两个人的秘密基地，静静眺望神兽瓦・鲁达尼亚。它仿佛静止了一般，<strong>达尔克尔啊，你的后代已经成长为独当一面的男子汉了啊。</strong>我买了鼓隆调味粉，鼓隆调味粉做出来的料理可口美味。我也去泡了一次温泉。鼓隆族人天生乐观，我想我可以和他们大排筵席，吃喝几天。<strong>以我现在的身体状况，再吃下几块里脊岩应该没什么大问题。</strong></p>
+<p>临行前我最后一次卓拉族领地探望米法。我读了她的日记，也和希多谈了许多。卓拉族人从来没有责怪我从他们身边抢走了米法，导致她玉殒香消的事也既往不咎。希多是我的好朋友，但我看得出，他很想叫我姐夫。<strong>卓拉族的未来，最终由希多来延续。</strong>对不起，米法。</p>
+<p>四英杰的惨剧的确是我大意了，<strong>所以我要去那里，战胜我们的敌人。</strong></p>
+<p>我驰骋在山原，再一次回望这个世界。</p>
+<p>谢谢你们，各个驿站的朋友们。</p>
+<p><img src="https://pic4.zhimg.com/50/v2-f1f55b39c5e98d2344b05edec907ce98_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>我换上了荒野服装，那套绿色的衣服。据说先代的勇者们都穿着绿衣，去战胜灾厄。<strong>不论是在天空中翱翔，还是在时光中回转，又或是沾染黄昏的余晖，运命之剑都将与勇者同在。与我这个在荒野中独行的勇者同在。</strong></p>
+<p>我再次持大师之剑闯进城堡主殿。</p>
+<p>我骑着伊波娜，独面魔兽加农。</p>
+<p><img src="https://pic2.zhimg.com/50/v2-fa97ef272d7a4c60764d55b2f72d7066_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>百年后安排我醒来，在这茫茫荒野之中踽踽独行，是要我完成百年前的约定。</strong></p>
+<p><strong>这不是一场拯救世界的旅程，这是我的救赎之旅。为了这个世界，为了我失去的记忆。</strong></p>
+<p><strong>塞尔达，是我拯救世界的证明。</strong></p>
+<p>她问我记不记得她，我想我是记得的。</p>
+<p>但我不知道百年前我对她是何种感情，我也不知道她是不是心系于我。</p>
+<p>但不管怎么样，<strong>我是她的近卫骑士，我必须救她。</strong></p>
+<p>最后我同她一起离开海拉鲁城堡，国王和四英杰站在楼上，远送我的离开，我回过身来，也送他们离去。</p>
+<p><img src="https://pic2.zhimg.com/50/v2-f4f750699981359f9f7b2a6f63c1e836_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/50/v2-c6cdc058713d33bc3baef382ca1e0b79_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/50/v2-dfd50d49401fa01f5d62e2307582d3b1_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>他们的英魂最终消失在缤纷落英之中</p>
+<p><img src="https://pic4.zhimg.com/50/v2-1a8cd1c0db566236fa8312829d86762e_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>米法说这一百年来她都以泪洗面，直到再见到我。如今她的灵魂，也许可以安息了。</p>
+<p>我回到自己买下的小别墅里，看着那张泛黄的照片，那个时候，应该是我这一生最快乐的时候。</p>
+<p><img src="https://pic4.zhimg.com/50/v2-a9f1d692cec401faf79c91f5ca634ace_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>或许我可以把英杰们的武器送回给他们的传人，英杰的故事，应该由新的英杰来继承。但我会留下光鳞之枪。</p>
+<p>因为<strong>米法就是米法，四海列国，千秋万载，就只有一个米法。</strong></p>
+<p><img src="https://pic2.zhimg.com/50/v2-df1e92a8e1aa3248b2b2e43f9f65f25e_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" alt="img"></p>
+<p>静谧公主长遍了山坡，最后我也没有知道米法没有说出口的那句话是什么。</p>
+<p>如果塞尔达可以创造一个更美好的世界，我愿意成为她的剑。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/10/%E5%85%B3%E4%BA%8E%E6%83%85%E7%BB%AA%E5%8C%96%E7%9A%84%E4%B8%80%E5%88%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于情绪化的一切</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/07/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%952020-10-07/">
+                        <span class="hidden-mobile">生活记录2020-10-07</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/10/09/%E5%A1%9E%E5%B0%94%E8%BE%BE%E4%B9%8B%E6%AD%8C/';
+        this.page.identifier = '/2020/10/09/%E5%A1%9E%E5%B0%94%E8%BE%BE%E4%B9%8B%E6%AD%8C/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

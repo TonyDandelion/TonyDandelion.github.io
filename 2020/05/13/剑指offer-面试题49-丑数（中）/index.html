@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>剑指offer 面试题49. 丑数（中）&amp; LeetCode 264. 丑数 II（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="剑指offer 面试题49. 丑数（中）& LeetCode 264. 丑数 II（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-13 14:02" pubdate>
+        2020年5月13日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">剑指offer 面试题49. 丑数（中）&amp; LeetCode 264. 丑数 II（中）</h1>
+            
+            <div class="markdown-body">
+              <p>这道题的关键是利用之前的丑数去生成之后的丑数，想清楚这个关系很重要。</p>
+<a id="more"></a>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>我们把只包含因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。</p>
+<p>示例:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: n = 10</span><br><span class="hljs-section">输出: 12</span><br><span class="hljs-section">解释: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 是前 10 个丑数。</span><br></code></pre></div></td></tr></table></figure><br>说明:  1 是丑数（PS：《剑指offer》上1也被认为是一个丑数）；n 不超过1690。</p>
+<blockquote>
+<p><strong><em>测试用例</em></strong></p>
+</blockquote>
+<p>功能测试（输入2、3、4、5、6等）。<br>特殊输入测试（边界值1；无效输入0）。<br>性能测试（输入较大的数字，如1500）。</p>
+<blockquote>
+<p><strong><em>本题考点</em></strong></p>
+</blockquote>
+<p><strong>考查应聘者对时间复杂度的理解。</strong>绝大部分应聘者都能想出第一种思路。在面试官提示还有更快的解法之后，应聘者能否分析出时间效率的瓶颈，并找出解决方案，是能否通过这轮面试的关键。<br><strong>考查应聘者的学习能力和沟通能力。</strong>丑数对很多人而言是一个新概念。有些面试官喜欢在面试的时候定义一个新概念，然后针对这个新概念出面试题。这就要求应聘者听到不熟悉的概念之后，要有主动积极的态度，大胆向面试官提问，经过几次思考、提问、再思考的循环，在短时间内理解这个新概念。这个过程就体现了应聘者的学习能力和沟通能力。</p>
+<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="逐个判断"><a href="#逐个判断" class="headerlink" title="逐个判断"></a>逐个判断</h2><p>从2开始，逐个判断当前数字是否是丑数，如果是就将变量 <code>uglyCount</code> 加1。直到 <code>uglyCount</code> 等于 <code>n</code>。</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p><strong>状态定义</strong>：设动态规划数组 <code>dp</code>， <code>dp[i]</code> 为第 <code>i+1</code> 个丑数。<br><strong>转移方程</strong>：当索引 <code>a、b、c</code> 满足以下条件时，<code>dp[i]</code> 为三种情况的最小值；<br>每轮计算 <code>d1p[i]</code> 后，需要更新索引 <code>a, b, c</code> 的值，使其始终满足方程条件。实现方法：分别独立判断 <code>dp[i]</code> 和 <code>dp[a]×2</code> , <code>dp[b]×3</code> , <code>dp[c]×5</code> 的大小关系，若相等则将对应索引 <code>a , b , c</code> 加 1 。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">dp[a] × <span class="hljs-number">2</span> &gt; dp[i-<span class="hljs-number">1</span>] &gt;= dp[a-<span class="hljs-number">1</span>] × <span class="hljs-number">2</span><br>dp[b] × <span class="hljs-number">3</span> &gt; dp[i-<span class="hljs-number">1</span>] &gt;= dp[b-<span class="hljs-number">1</span>] × <span class="hljs-number">2</span><br>dp[c] × <span class="hljs-number">5</span> &gt; dp[i-<span class="hljs-number">1</span>] &gt;= dp[c-<span class="hljs-number">1</span>] × <span class="hljs-number">2</span><br>dp[i] = <span class="hljs-built_in">min</span>(dp[a] × <span class="hljs-number">2</span>, dp[b] × <span class="hljs-number">3</span>, dp[c] × <span class="hljs-number">5</span>)<br></code></pre></div></td></tr></table></figure>
+<p><strong>初始状态</strong>：<code>dp[0]=1</code>，即第一个丑数为1；<br><strong>返回值</strong>：<code>dp[n-1]</code>，即返回的第<code>n</code>个丑数<br><strong>复杂度分析</strong>：<br>时间复杂度 $O(N)$ ： 其中 $N = n$ ，动态规划需遍历计算 <code>dp</code> 列表。<br>空间复杂度 $O(N)$ ： 长度为 $N$ 的 <code>dp</code> 列表使用 $O(N)$ 的额外空间。</p>
+<p><strong>参考连接</strong>：<br>作者：Krahets<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/chou-shu-lcof/solution/mian-shi-ti-49-chou-shu-dong-tai-gui-hua-qing-xi-t/">https://leetcode-cn.com/problems/chou-shu-lcof/solution/mian-shi-ti-49-chou-shu-dong-tai-gui-hua-qing-xi-t/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<li>逐个判断</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isUgly</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; bool:</span><br>        <span class="hljs-keyword">if</span> num &lt; <span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        divisors = [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>]<br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            <span class="hljs-keyword">if</span> num == <span class="hljs-number">1.0</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            is_ugly = <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">for</span> divisor <span class="hljs-keyword">in</span> divisors:<br>                <span class="hljs-keyword">if</span> num % divisor == <span class="hljs-number">0</span>:<br>                    num /= divisor<br>                    is_ugly = <span class="hljs-literal">True</span><br>                    <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> is_ugly:<br>                <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">nthUglyNumber</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-string">&quot;&quot;&quot;逐个判断</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        index = n<br>        <span class="hljs-keyword">if</span> index &lt; <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        number = <span class="hljs-number">0</span><br>        uglyFound = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> uglyFound &lt; index:<br>            number += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> self.isUgly(number):<br>                uglyFound += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> number<br></code></pre></div></td></tr></table></figure>
+<p>这种方法会超时，时间复杂度为 $O(N \times k)$，$N$ 为第 $n$ 个丑数值，$k$ 为 <code>isUgly</code> 函数中循环次数的平均值。</p>
+<ul>
+<li>动态规划</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">nthUglyNumber</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        dp, a, b, c = [<span class="hljs-number">1</span>] * n, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>            n2, n3, n5 = dp[a] * <span class="hljs-number">2</span>, dp[b] * <span class="hljs-number">3</span>, dp[c] * <span class="hljs-number">5</span> <br>            dp[i] = <span class="hljs-built_in">min</span>(n2, n3, n5)<br>            <span class="hljs-keyword">if</span> dp[i] == n2: a += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> dp[i] == n3: b += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> dp[i] == n5: c += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> dp[-<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure>
+<h1 id="Related-Question"><a href="#Related-Question" class="headerlink" title="Related Question"></a>Related Question</h1><h2 id="LeetCode-263-丑数（易）"><a href="#LeetCode-263-丑数（易）" class="headerlink" title="LeetCode 263. 丑数（易）"></a>LeetCode 263. 丑数（易）</h2><blockquote>
+<p>Question</p>
+</blockquote>
+<p>编写一个程序判断给定的数是否为丑数，丑数就是只包含质因数 2, 3, 5 的正整数。</p>
+<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: 6</span><br><span class="hljs-section">输出: true</span><br><span class="hljs-section">解释: 6 = 2 × 3</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: 8</span><br><span class="hljs-section">输出: true</span><br><span class="hljs-section">解释: 8 = 2 × 2 × 2</span><br></code></pre></div></td></tr></table></figure><br>示例 3:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: 14</span><br><span class="hljs-section">输出: false </span><br></code></pre></div></td></tr></table></figure><br>解释: 14 不是丑数，因为它包含了另外一个质因数 7。<br>说明：1 是丑数，输入不会超过 32 位有符号整数的范围: [$−2^{31}$,  $2^{31} − 1$]。</p>
+<blockquote>
+<p>Intuition</p>
+</blockquote>
+<p>所谓一个数 $m$ 是另一个数 $n$ 的因子，是指 $n$ 能被 $m$ 整除，也就是 $n \% m = 0$。根据丑数的定义，丑数只能被2、3和5整除。也就是说，如果一个数拥有2、3、5之外的因数，那这个数就不是丑数了。</p>
+<blockquote>
+<p>Code</p>
+</blockquote>
+<ul>
+<li>简单版本</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isUgly</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; bool:</span><br>        <span class="hljs-keyword">if</span> num &lt; <span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            <span class="hljs-keyword">if</span> num == <span class="hljs-number">1.0</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> num % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:<br>                num /= <span class="hljs-number">2</span><br>            <span class="hljs-keyword">elif</span> num % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>:<br>                num /= <span class="hljs-number">3</span><br>            <span class="hljs-keyword">elif</span> num % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>:<br>                num /= <span class="hljs-number">5</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">break</span><br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>可扩展版</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isUgly</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; bool:</span><br>        <span class="hljs-keyword">if</span> num &lt; <span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        divisors = [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>]<br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            <span class="hljs-keyword">if</span> num == <span class="hljs-number">1.0</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            is_ugly = <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">for</span> divisor <span class="hljs-keyword">in</span> divisors:<br>                <span class="hljs-keyword">if</span> num % divisor == <span class="hljs-number">0</span>:<br>                    num /= divisor<br>                    is_ugly = <span class="hljs-literal">True</span><br>                    <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> is_ugly:<br>                <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSolution</span>(<span class="hljs-params">unittest.TestCase</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setUp</span>(<span class="hljs-params">self</span>):</span><br>        self.test_class = Solution()<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_solution</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-comment"># 功能测试</span><br>        inputs = [<span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">14</span>]<br>        <span class="hljs-comment"># 边界值的测试</span><br>        <span class="hljs-comment"># inputs += []</span><br>        <span class="hljs-comment"># 特殊样例</span><br>        inputs += [-<span class="hljs-number">1</span>]<br>        <span class="hljs-comment"># 输出的答案</span><br>        answers = [<span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>]<br>        res = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(inputs)):<br>            res.append(self.test_class.isUgly(inputs[i]))<br>        self.assertEqual(res, answers)<br> <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tearDown</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">del</span> self.test_class<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    unittest.main()<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/13/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9850-%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">剑指offer 面试题50. 第一个只出现一次的字符（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/13/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9847-%E7%A4%BC%E7%89%A9%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">剑指offer 面试题47. 礼物的最大价值（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/05/13/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9849-%E4%B8%91%E6%95%B0%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/05/13/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9849-%E4%B8%91%E6%95%B0%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

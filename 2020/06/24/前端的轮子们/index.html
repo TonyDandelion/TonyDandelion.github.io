@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>前端的轮子们 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="前端的轮子们">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-24 10:28" pubdate>
+        2020年6月24日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端的轮子们</h1>
+            
+            <div class="markdown-body">
+              <p>前端的新轮子层出不穷，这里集中记录一下。</p>
+<a id="more"></a>
+<h1 id="Mock"><a href="#Mock" class="headerlink" title="Mock"></a>Mock</h1><blockquote>
+<p>如果将mock单独翻译过来，其意义为 <em>“虚假、虚设”</em>，因此在软件开发领域，我们也可以将其理解成 <em>“虚假数据”</em>，或者 <em>“真实数据的替身”</em>。</p>
+</blockquote>
+<h2 id="Mock的好处"><a href="#Mock的好处" class="headerlink" title="Mock的好处"></a>Mock的好处</h2><ul>
+<li>团队可以更好地并行工作</li>
+</ul>
+<p>当使用mock之后，各团队之间可以不需要再互相等待对方的进度，只需要约定好相互之间的数据规范（文档），即可使用mock构建一个可用的接口，然后尽快的进行开发和调试以及自测，提升开发进度的的同时，也将发现缺陷的时间点大大提前。</p>
+<ul>
+<li>开启TDD（Test-Driven Development）模式，即测试驱动开发</li>
+</ul>
+<p>单元测试是TDD实现的基石，而TDD经常会碰到协同模块尚未开发完成的情况，但是有了mock，这些一切都不是问题。当接口定义好后，测试人员就可以创建一个Mock，把接口添加到自动化测试环境，提前创建测试。</p>
+<ul>
+<li>测试覆盖率</li>
+</ul>
+<p>比如一个接口在各种不同的状态下要返回不同的值，之前我们的做法是复现这种状态然后再去请求接口，这是非常不科学的做法，而且这种复现方法很大可能性因为操作的时机或者操作方式不当导致失败，甚至污染之前数据库中的数据。如果我们使用mock，就完全不用担心这些问题。</p>
+<ul>
+<li>方便演示</li>
+</ul>
+<p>通过使用Mock模拟数据接口，我们即可在只开发了UI的情况下，无须服务端的开发就可以进行产品的演示。</p>
+<ul>
+<li>隔离系统</li>
+</ul>
+<p>在使用某些接口的时候，为了避免系统中数据库被污染，我们可以将这些接口调整为Mock的模式，以此保证数据库的干净。</p>
+<p>在吹了这么多的Mock之后，相信大家一定跃跃欲试了，那么接下来我们谈一谈实现Mock的几种方法。</p>
+<h2 id="Mock实现"><a href="#Mock实现" class="headerlink" title="Mock实现"></a>Mock实现</h2><p><a target="_blank" rel="noopener" href="http://mockjs.com/">mockJs</a>，通过使用mockJs我们能根据模板和规则生成复杂的接口数据，而无需我们自己动手去书写，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// api</span><br><span class="hljs-keyword">import</span> api <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../api/index&#x27;</span>;<br><span class="hljs-keyword">import</span> Mock <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mockjs&#x27;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getApiMessage</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> &#123;<br>        resolve(Mock.mock(&#123;<br>            list|<span class="hljs-number">1</span>-<span class="hljs-number">20</span>: [<span class="hljs-string">&#x27;mock数据&#x27;</span>]<br>        &#125;);<br>    &#125;)<br>    <span class="hljs-comment">// return api.getApiMessage();</span><br>&#125;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 通过 Mock.mock 方法和 list|1-20: [&#x27;mock数据&#x27;] 模板</span><br><span class="hljs-comment">* 我们将生成一个长度为 1-20, 每个值都为 &#x27;mock数据&#x27; 数组</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+<p>但是这样做始终只不过是方便了我们“造假”而已，并不能将“假货”真的从我们的业务代码中移除出去。为了实现这个目的，我们不妨先来分析我们的需求：</p>
+<ul>
+<li>模拟数据与业务代码完全分离</li>
+<li>通过一些配置，达到只mock部分数据，大部分的数据还是从请求中获取</li>
+</ul>
+<p>首先，如果我们要想要模拟数据和业务代码完全分离，我们必须要想办法在请求的时候做一些文章，让其在请求的时候去获取mock数据而非去请求真正的接口，也就是所谓的“请求拦截”，而实现请求拦截也同样有两种方式：</p>
+<ul>
+<li>修改请求链接到mock-server，在mock-server配置mock数据和路由</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// api/index.js</span><br><span class="hljs-comment">// 通过新增getDataUseMock方法来说明使用了mock方法</span><br><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../request&#x27;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDataUseMock</span>(<span class="hljs-params">data</span>) </span>&#123;<br>    request(&#123;<br>        mock: <span class="hljs-literal">true</span><br>    &#125;);<br>&#125;<br><span class="hljs-comment">// request/index.js</span><br><span class="hljs-keyword">const</span> mockServer = <span class="hljs-string">&#x27;http://127.0.0.1:8081&#x27;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params">opt</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (opt.mock) &#123;<br>        <span class="hljs-keyword">const</span> apiName = opt.api;<br>        opt.url = <span class="hljs-string">`<span class="hljs-subst">$&#123;mockServer&#125;</span>/<span class="hljs-subst">$&#123;apiName&#125;</span>`</span>;<br>    &#125;<br>    ...<br>&#125;<br>复制代码<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>直接在检测使用mock时，从mock数据文件中取出对应key值的数据</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// api/index.js</span><br><span class="hljs-comment">// 通过新增getDataUseMock方法来说明使用了mock方法</span><br><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../request&#x27;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDataUseMock</span>(<span class="hljs-params">data</span>) </span>&#123;<br>    request(&#123;<br>        mock: <span class="hljs-literal">true</span><br>    &#125;);<br>&#125;<br><br><span class="hljs-comment">// request/index.js</span><br><span class="hljs-keyword">import</span> mockData <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mock/db.js&#x27;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params">opt</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (opt.mock) &#123;<br>        <span class="hljs-keyword">const</span> apiName = opt.api;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> &#123;<br>            resolve(mockData.apiName)<br>        &#125;)<br>    &#125;<br>    ...<br>&#125;<br><br><span class="hljs-comment">//mock/db.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-string">&#x27;/api/test&#x27;</span>: &#123;<br>        msg: <span class="hljs-string">&#x27;请求成功&#x27;</span><br>    &#125;<br>&#125;<br>复制代码<br></code></pre></div></td></tr></table></figure>
+<p>乍一看好像第二种方式似乎更简单，事实也确实如此，但是考虑到如果我是直接从文件中直接读取数据，那么业务上的行为也会改变，该发请求的地方并没有发请求，所以我还是选择了自己搭建一个本地的服务，通过控制路由返回不同的mock数据来处理，并且通过为请求增加一个额外<code>mock</code>参数通知业务哪些接口应当被自建的<code>mock-server</code>拦截，从而尽量减少对原有业务的影响。</p>
+<p>在<code>mock-server</code>开发之前，我们需要明白我们的<code>mock-server</code>应当能做哪些事情：</p>
+<ul>
+<li>所改即所得，具有热更新的能力，每次增加 /修改 mock 接口时不需要重启 mock 服务，更不用重启前端构建服务</li>
+<li>mock 数据可以由工具生成不需要自己手动写</li>
+<li>能模拟 POST、GET 请求</li>
+</ul>
+<p>因为mock的模拟数据都在本地维护，我们所需要的只要是个无界面的能够响应请求的server即可，所以我选择了<code>json-server</code></p>
+<p>在构建<code>server</code>之前，我们先要明确我们需要模拟的数据是什么，以及用什么（mockjs）去维护</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// db.js</span><br><span class="hljs-keyword">var</span> Mock = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mockjs&#x27;</span>);<br><br><span class="hljs-comment">// 通过使用mock.js，来避免手写数据</span><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  getComment: Mock.mock(&#123;<br>    <span class="hljs-string">&quot;error&quot;</span>: <span class="hljs-number">0</span>,<br>    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;success&quot;</span>,<br>    <span class="hljs-string">&quot;result|40&quot;</span>: [&#123;<br>      <span class="hljs-string">&quot;author&quot;</span>: <span class="hljs-string">&quot;@name&quot;</span>,<br>      <span class="hljs-string">&quot;comment&quot;</span>: <span class="hljs-string">&quot;@cparagraph&quot;</span>,<br>      <span class="hljs-string">&quot;date&quot;</span>: <span class="hljs-string">&quot;@datetime&quot;</span><br>    &#125;]<br>  &#125;)<br>&#125;;<br>复制代码<br></code></pre></div></td></tr></table></figure>
+<p>其次我们要知道我们跳转的访问路由是哪些：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// routes.js</span><br><span class="hljs-comment">// 根据db.js中的key值，自动生成的路由便是/[key]，在route.js中的声明只是为了重定向</span><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  <span class="hljs-string">&quot;/comment/get&quot;</span>: <span class="hljs-string">&quot;/getComment&quot;</span><br>&#125;<br>复制代码<br></code></pre></div></td></tr></table></figure>
+<p>然后我们就可以书写我们启动server的主要代码了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// server.js</span><br><span class="hljs-keyword">const</span> jsonServer = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;json-server&#x27;</span>)<br><span class="hljs-keyword">const</span> db = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./db.js&#x27;</span>)<br><span class="hljs-keyword">const</span> routes = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes.js&#x27;</span>)<br><span class="hljs-keyword">const</span> port = <span class="hljs-number">3000</span>;<br><br><span class="hljs-keyword">const</span> server = jsonServer.create()<br><span class="hljs-comment">// 使用mock的数据生成对应的路由</span><br><span class="hljs-keyword">const</span> router = jsonServer.router(db)<br><span class="hljs-keyword">const</span> middlewares = jsonServer.defaults()<br><span class="hljs-comment">// 根据路由列表重写路由</span><br><span class="hljs-keyword">const</span> rewriter = jsonServer.rewriter(routes)<br><br>server.use(middlewares)<br><span class="hljs-comment">// 将 POST 请求转为 GET，满足可以接受 POST 和 GET 请求的需求</span><br>server.use(<span class="hljs-function">(<span class="hljs-params">request, res, next</span>) =&gt;</span> &#123;<br>  request.method = <span class="hljs-string">&#x27;GET&#x27;</span>;<br>  next();<br>&#125;)<br><br>server.use(rewriter) <span class="hljs-comment">// 注意：rewriter 的设置一定要在 router 设置之前</span><br>server.use(router)<br><br>server.listen(port, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;open mock server at localhost:&#x27;</span> + port)<br>&#125;)<br>复制代码<br></code></pre></div></td></tr></table></figure>
+<p>由此，只要使用<code>node server.js</code>便能够启动一个<code>mock-server</code>了，但是这样启动的<code>server</code>，并不能因为我修改<code>route.js</code>或者<code>db.js</code>而实时更新，也就是说，我需要每次都重启一次才能更新我的<code>server</code>，这里还需要我们进行一个小操作，比如使用<code>nodemon</code>来监控我们的<code>mock-server</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 将所有和mock相关的文件：db.js route.js server.js 放入mock文件夹</span><br><span class="hljs-comment">// 然后执行：</span><br>$ nodemon --watch mock mock/server.js<br><br><span class="hljs-comment">// 就能够启动一个能自动热更新的mock-server了。</span><br>复制代码<br></code></pre></div></td></tr></table></figure>
+<p>这之后，我们只需要在自己的业务代码中，使用我们之前定义的类似于<code>getDataUseMock</code>的方法，就可以对指定API进行mock啦。</p>
+<p>虽然我们这样做已经完成了mock数据和业务代码的完全分离，但是还是不可避免的在业务代码中使用了特殊的方法来声明我需要mock某个接口，还是同样要面对当不需要mock时，要删除这些方法并替换成正式请求的方法的问题。而且mock数据的部分仍然放在和业务代码一个git目录下，只有开发者才有权限去修改和增加，并没有很好地达到mock应当有的作用。</p>
+<p>为此，我征求了部门Leader和“广大”开发者的意见，确定了我们需要的mock应当是怎样的：</p>
+<ul>
+<li>尽量少的修改业务中的代码就能使用<code>mock</code></li>
+<li>修改的业务代码不会影响正常的业务流程</li>
+<li><code>mock-server</code> 应当是面向所有人，而不只是前端开发者</li>
+<li>能够可视化的修改和增加 <code>mock</code> 接口和 <code>mock</code> 数据</li>
+<li>能够同时支持多个项目使用</li>
+</ul>
+<p>在这几个基本原则的帮助下，我们的mock终于晋级到了“永恒钻石”段位。</p>
+<p>类似mockjs的mock工具还有 <a target="_blank" rel="noopener" href="https://easymock.org/">EasyMock</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>作者：santree<br>链接：<a target="_blank" rel="noopener" href="https://juejin.im/post/5bd82d796fb9a05d25682a66">https://juejin.im/post/5bd82d796fb9a05d25682a66</a><br>来源：掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="Lint"><a href="#Lint" class="headerlink" title="Lint"></a>Lint</h1><p>代码检查工具</p>
+<h1 id="TypeScript-amp-JavaScript"><a href="#TypeScript-amp-JavaScript" class="headerlink" title="TypeScript &amp; JavaScript"></a>TypeScript &amp; JavaScript</h1><p>JS就是蹭当年Java的热度起的名字，JavaScript这个名字和Java没半点关系，Java里的接口、继承、强类型，它都没有。而TS是JS的超集，正是补全了上面那些缺失的部分，强调的是<strong>Type</strong>Script。有了强类型，就有了更好的IDE支持，包括语法提示和编译时错误信息。有了接口和继承，代码就更易读易维护。这些都是大型复杂前端工程急需的特性。</p>
+<ul>
+<li>语言层面：JavaScript和TypeScript都是ECMAScript（ECMA-262）的具体实现。</li>
+<li>执行环境层面：浏览器引擎和Node.js都能够直接运行JavaScript，但无法直接运行TypeScript。</li>
+<li>时序层面：TypeScript被真正执行前，会通过编译转换生成JavaScript，之后才能被解释执行。</li>
+<li>厂商层面：JavaScript由Netscape率先推出，现在主要由各大浏览器厂商实现。而TypeScript is a trademark of Microsoft Corporation，目前由微软进行设计和维护。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/06/24/GU9oW6MIxCiLHZF.png" srcset="/img/loading.gif" alt=""></p>
+<p>作者：郭凯<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/334938460/answer/782030856">https://www.zhihu.com/question/334938460/answer/782030856</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/26/Java%E8%AF%AD%E6%B3%95%E5%BF%AB%E6%9F%A5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java语法快查</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/23/%E7%9C%9FN%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8React/">
+                        <span class="hidden-mobile">真N分钟入门Ant Design</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/06/24/%E5%89%8D%E7%AB%AF%E7%9A%84%E8%BD%AE%E5%AD%90%E4%BB%AC/';
+        this.page.identifier = '/2020/06/24/%E5%89%8D%E7%AB%AF%E7%9A%84%E8%BD%AE%E5%AD%90%E4%BB%AC/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

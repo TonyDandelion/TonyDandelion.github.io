@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>Ant Design Pro - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Ant Design Pro">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-27 17:00" pubdate>
+        2020年6月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      35
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Ant Design Pro</h1>
+            
+            <div class="markdown-body">
+              <p>Ant Design Pro笔记</p>
+<a id="more"></a>
+<h1 id="研发资产：区块和模版"><a href="#研发资产：区块和模版" class="headerlink" title="研发资产：区块和模版"></a>研发资产：区块和模版</h1><p><em>什么是区块？</em></p>
+<p>区块就是代码片段</p>
+<p>区块是Ant Design Pro中，研发资产的一种，它是一系列快速搭建页面的代码片段，<strong>它可以帮助你快速的在项目中初始化好一个页面</strong>，帮助你更快速的开发代码。当前的区块都是页面级别的区块，你可以理解为它是一些项目中经常会用到的典型页面的模板，<strong>使用区块其实相当于从已有的项目中复制一些页面的代码到你当前的项目中。</strong></p>
+<ul>
+<li>以前开发一个页面：创建 JS -&gt; 创建 CSS -&gt; 创建 Model -&gt; 创建 service -&gt; 写页面组件。</li>
+<li>现在开发一个页面：下载区块 -&gt; 基于区块初始化好的页面组件修改代码。</li>
+</ul>
+<p><em>什么是模版？</em></p>
+<p>在 Pro 中资产被分为了两种，区块和模板。<strong>区块可以类比为一个组件，而模板代表一个页面。</strong>区块现在支持所有 antd 中的 demo，可以更加快速的将 demo 导入到项目中去。</p>
+<h1 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h1><p>页面整体布局是一个产品最外层的框架结构，往往会包含导航、页脚、侧边栏、通知栏以及内容等。在页面之中，也有很多区块的布局结构。在真实项目中，页面布局通常统领整个应用的界面，有非常重要的作用。</p>
+<p>在 Ant Design Pro 中，我们抽离了使用过程中的通用布局，都放在 <code>layouts</code> 目录中，分别为：</p>
+<ul>
+<li>BasicLayout：基础页面布局，包含了头部导航，侧边栏和通知栏。</li>
+<li>UserLayout：抽离出用于登录注册页面的通用布局。</li>
+<li>BlankLayout：空白的布局</li>
+</ul>
+<h1 id="路由和菜单"><a href="#路由和菜单" class="headerlink" title="路由和菜单"></a>路由和菜单</h1><p>在这一部分，脚手架通过结合一些配置文件、基本算法及工具函数，搭建好了路由和菜单的基本框架，主要涉及以下几个模块/功能：</p>
+<ul>
+<li><p><code>路由管理</code> 通过约定的语法根据在 <a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-pro/blob/33f562974d1c72e077652223bd816a57933fe242/config/config.ts"><code>config.ts</code></a> 中配置路由。</p>
+</li>
+<li><p><code>菜单生成</code> 根据路由配置来生成菜单。<strong>菜单项名称，嵌套路径与路由高度耦合。</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ts"><span class="hljs-comment">// 二级菜单管理页面</span><br>&#123;<br>  path: <span class="hljs-string">&#x27;/admin&#x27;</span>,<br>  name: <span class="hljs-string">&#x27;admin&#x27;</span>,<br>  icon: <span class="hljs-string">&#x27;crown&#x27;</span>,<br>  access: <span class="hljs-string">&#x27;canAdmin&#x27;</span>,<br>  component: <span class="hljs-string">&#x27;./Admin&#x27;</span>,<br>  routes: [<br>    &#123;<br>    path: <span class="hljs-string">&#x27;/admin/sub-page&#x27;</span>,<br>    name: <span class="hljs-string">&#x27;sub-page&#x27;</span>,<br>    icon: <span class="hljs-string">&#x27;smile&#x27;</span>,<br>    component: <span class="hljs-string">&#x27;./Welcome&#x27;</span>,<br>    &#125;,<br>  ],<br>&#125;,<br></code></pre></div></td></tr></table></figure></li>
+<li><code>面包屑</code> 组件 <a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-pro-layout#pageheaderwrapper">PageHeaderWrapper</a> 中内置的面包屑,也可通过 <a target="_blank" rel="noopener" href="https://pro.ant.design/blog/new-pro-use-cn#routecontext">RouteContext</a> 提供的信息自定义生成。</li>
+</ul>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>目前脚手架中所有的路由都通过 <a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-pro/blob/33f562974d1c72e077652223bd816a57933fe242/config/config.ts"><code>config.ts</code></a> 来统一管理，在 umi 的配置中我们增加了一些参数，如 <code>name</code>，<code>icon</code>，<code>hideChildrenInMenu</code>，<code>authority</code>，来辅助生成菜单。其中：</p>
+<ul>
+<li><code>hideInMenu</code> 可以在菜单中不展示这个路由，包括子路由。</li>
+<li><code>authority</code> 用来配置这个路由的权限，如果配置了将会验证当前用户的权限，并决定是否展示。</li>
+</ul>
+<blockquote>
+<p>配置中的 <code>name</code> 和菜单实际展示的不同，这是因为我们使用了全球化组件的原因，具体参见 <a target="_blank" rel="noopener" href="https://pro.ant.design/docs/i18n">i18n</a></p>
+</blockquote>
+<h2 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h2><p>菜单根据 <a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-pro/blob/33f562974d1c72e077652223bd816a57933fe242/config/config.ts"><code>config.ts</code></a> 生成。</p>
+<blockquote>
+<p>如果你的项目并不需要菜单，你可以在 <a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-pro/blob/master/src/layouts/BasicLayout.tsx#L116">src/layouts/BasicLayout.tsx</a> 中设置 <code>menuRender=&#123;false&#125;</code>。</p>
+</blockquote>
+<h2 id="从服务器请求菜单"><a href="#从服务器请求菜单" class="headerlink" title="从服务器请求菜单"></a>从服务器请求菜单</h2><p>你可以在 <a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-pro/blob/4420ae2c224144c4114e5384bddc3e8ab0e1dc1c/src/layouts/BasicLayout.tsx#L116">src/layouts/BasicLayout.tsx</a> 中修改 <code>menuDataRender</code>，并在代码中发起 http 请求，只需服务器返回下面格式的 json 即可。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> [menuData, setMenuData] = useState([]);<br><br>useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// 这里是一个演示用法</span><br>  <span class="hljs-comment">// 真实项目中建议使用 dva dispatch 或者 umi-request</span><br>  fetch(<span class="hljs-string">&#x27;/api/example.json&#x27;</span>)<br>    .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.json())<br>    .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>      setMenuData(data || []);<br>    &#125;);<br>&#125;, []);<br><br>...<br><br><span class="hljs-keyword">return</span> (<br>  &lt;ProLayout<br>    <span class="hljs-comment">// ...</span><br>    menuDataRender=&#123;<span class="hljs-function">() =&gt;</span> menuData&#125;<br>    <span class="hljs-comment">// ...</span><br>  /&gt;<br>);<br></code></pre></div></td></tr></table></figure>
+<p><code>menuData</code> 数据格式如下，ts 定义在此：<a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-pro-layout/blob/56590a06434c3d0e77dbddcd2bc60827c9866706/src/typings.ts#L18">MenuDataItem</a>.</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">[<br>  &#123;<br>    <span class="hljs-attr">&quot;path&quot;</span>: <span class="hljs-string">&quot;/dashboard&quot;</span>,<br>    <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;dashboard&quot;</span>,<br>    <span class="hljs-attr">&quot;icon&quot;</span>: <span class="hljs-string">&quot;dashboard&quot;</span>,<br>    <span class="hljs-attr">&quot;children&quot;</span>: [<br>      &#123;<br>        <span class="hljs-attr">&quot;path&quot;</span>: <span class="hljs-string">&quot;/dashboard/analysis&quot;</span>,<br>        <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;analysis&quot;</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">&quot;path&quot;</span>: <span class="hljs-string">&quot;/dashboard/monitor&quot;</span>,<br>        <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;monitor&quot;</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">&quot;path&quot;</span>: <span class="hljs-string">&quot;/dashboard/workplace&quot;</span>,<br>        <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;workplace&quot;</span><br>      &#125;<br>    ]<br>  &#125;<br>  <span class="hljs-comment">// ....</span><br>]<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>注意 path 必须要在 config.ts 中定义。（约定式路由不需要，只需页面真实有效即可）注意 如果没有选用 typescript，config.js 中菜单的嵌套写法，需要把 “children” 换成 “routes”</p>
+</blockquote>
+<h2 id="包屑"><a href="#包屑" class="headerlink" title="包屑"></a>包屑</h2><p>面包屑由 <code>PageHeaderWrapper</code> 实现，<code>Layout</code> 将 根据 <code>MenuData</code> 生成的 <code>breadcrumb</code>，并通过 PageHeaderWrapper 将其展现。 PageHeaderWrapper 封装至 Ant Design 的 <a target="_blank" rel="noopener" href="https://ant.design/components/page-header-cn">PageHeader</a>，api 完全相同。</p>
+<h1 id="添加页面-布局"><a href="#添加页面-布局" class="headerlink" title="添加页面/布局"></a>添加页面/布局</h1><h2 id="添加空白布局页面"><a href="#添加空白布局页面" class="headerlink" title="添加空白布局页面"></a>添加空白布局页面</h2><p>step 1</p>
+<p>修改<code>config.ts</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ts">routes: [<br>  &#123;<br>    path: <span class="hljs-string">&#x27;/user&#x27;</span>,  <span class="hljs-comment">// 设置上级路由</span><br>    layout: <span class="hljs-literal">false</span>,  <span class="hljs-comment">// 设置为false，意味着是自定义的UserLayout或者BlankLayout布局</span><br>    routes: [<br>      &#123;<br>        name: <span class="hljs-string">&#x27;login&#x27;</span>,<br>        path: <span class="hljs-string">&#x27;/user/login&#x27;</span>,<br>        component: <span class="hljs-string">&#x27;./user/login&#x27;</span>,<br>      &#125;,<br>      <span class="hljs-comment">// 新增路由</span><br>      &#123;<br>        name: <span class="hljs-string">&#x27;newpage&#x27;</span>,<br>        icon: <span class="hljs-string">&#x27;smile&#x27;</span>,<br>        path: <span class="hljs-string">&#x27;/user/newpage&#x27;</span>,<br>        component: <span class="hljs-string">&#x27;./user/newpage&#x27;</span>,<br>      &#125;,<br>    ],<br>  &#125;,<br>  <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>step 2</p>
+<p>添加静态资源</p>
+<p><img src="https://i.loli.net/2020/06/27/Dw1hZJAW348BSzE.png" srcset="/img/loading.gif" alt="image-20200627204703187" style="zoom:50%;" /></p>
+<p><code>index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> () =&gt; &#123;<br>    <span class="hljs-comment">// eslint-disable-next-line react/react-in-jsx-scope</span><br>    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>This is the New Page!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p><code>Index.less</code></p>
+<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-keyword">@import</span> <span class="hljs-string">&#x27;~antd/lib/style/themes/default.less&#x27;</span>; <span class="hljs-comment">// 引入默认样式</span><br></code></pre></div></td></tr></table></figure>
+<p>输入URL即可打开对应页面</p>
+<p><img src="https://i.loli.net/2020/06/27/lqsgaJAXju9BohW.png" srcset="/img/loading.gif" alt="image-20200627204938886"></p>
+<h2 id="向空白布局中添加组件"><a href="#向空白布局中添加组件" class="headerlink" title="向空白布局中添加组件"></a>向空白布局中添加组件</h2><p>使用umiJS可视化工具，可以直接向页面中添加组件即可。</p>
+<p><img src="https://i.loli.net/2020/06/27/PZNrpmDyL796jtu.png" srcset="/img/loading.gif" alt="image-20200627210832996"></p>
+<p>效果如下</p>
+<p><img src="https://i.loli.net/2020/06/27/uMg7dSwePaIzyAK.png" srcset="/img/loading.gif" alt="image-20200627210743980" style="zoom:50%;" /></p>
+<h2 id="添加带布局的页面"><a href="#添加带布局的页面" class="headerlink" title="添加带布局的页面"></a>添加带布局的页面</h2><p>同样使用umiJS的可视化布局方法，就能加载预先设置好的带有布局的页面。</p>
+<figure class="highlight ts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ts">routes: [<br>  &#123;<br>    name: <span class="hljs-string">&#x27;个人中心&#x27;</span>,<br>    icon: <span class="hljs-string">&#x27;smile&#x27;</span>,<br>    path: <span class="hljs-string">&#x27;/accountcenter&#x27;</span>,<br>    component: <span class="hljs-string">&#x27;./AccountCenter&#x27;</span>,<br>  &#125;,<br>]<br></code></pre></div></td></tr></table></figure>
+<p>添加之后的静态资源情况</p>
+<p><img src="https://i.loli.net/2020/06/27/yMrbJ2KEI1OGFYx.png" srcset="/img/loading.gif" alt="image-20200627213113086" style="zoom:50%;" /></p>
+<p>实际效果</p>
+<p><img src="https://i.loli.net/2020/06/27/fh1rUg9tyECdQOA.png" srcset="/img/loading.gif" alt="image-20200627212935003" style="zoom: 33%;" /></p>
+<h2 id="添加空白页面再编辑的方法"><a href="#添加空白页面再编辑的方法" class="headerlink" title="添加空白页面再编辑的方法"></a>添加空白页面再编辑的方法</h2><p>先添加一个空白页面</p>
+<p><img src="https://i.loli.net/2020/06/27/erP2IV1yb8oLAZC.png" srcset="/img/loading.gif" alt="image-20200627213228066" style="zoom:50%;" /></p>
+<p>添加之后的静态资源情况</p>
+<p><img src="https://i.loli.net/2020/06/27/4HjUeaAXYRn2p98.png" srcset="/img/loading.gif" alt="image-20200627213304929" style="zoom:50%;" /></p>
+<p>就会得到这样一个空白页面</p>
+<p><img src="https://i.loli.net/2020/06/27/oZ3CKueEhH9QVkz.png" srcset="/img/loading.gif" alt="image-20200627213936816" style="zoom: 33%;" /></p>
+<p>然后再进入空白页面，向空白页面中添加组件。</p>
+<p><img src="https://i.loli.net/2020/06/27/b8vNOwe9asx1tlr.png" srcset="/img/loading.gif" alt="image-20200627213650169" style="zoom: 50%;" /></p>
+<p>最终就得到一个含有组件的页面了。</p>
+<p><img src="https://i.loli.net/2020/06/27/tekLE4JGXz29CQM.png" srcset="/img/loading.gif" alt="image-20200627213837543" style="zoom: 42%;" /></p>
+<h1 id="修改样式"><a href="#修改样式" class="headerlink" title="修改样式"></a>修改样式</h1><p><strong><em>为什么要用CSS Modules？</em></strong></p>
+<p>传统CSS主要问题：</p>
+<ul>
+<li><strong>全局污染</strong> —— CSS 文件中的选择器是全局生效的，<strong>不同文件中的同名选择器，根据 build 后生成文件中的先后顺序，后面的样式会将前面的覆盖</strong>，越早申明优先级越高；</li>
+<li><strong>选择器复杂</strong> —— 为了避免上面的问题，我们在编写样式的时候不得不小心翼翼，类名里会带上限制范围的标识，变得越来越长，多人开发时还很容易导致命名风格混乱，一个元素上使用的选择器个数也可能越来越多。</li>
+</ul>
+<p>为了解决以上问题，脚手架默认使用 CSS Modules 模块化方案，先来看下在这种模式下怎么写样式。</p>
+<p>less文件</p>
+<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-comment">// exmaple.less</span><br><span class="hljs-selector-class">.title</span> &#123;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-variable">@heading-color</span>;<br>  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">600</span>;<br>  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">16px</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>ts/tsx文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tsx">&#x2F;&#x2F; exmaple.ts<br>import styles from &#39;.&#x2F;exmaple.less&#39;<br>export default (&#123;title&#125;) &#x3D;&gt; &lt;div className&#x3D;&#123;&#123;style.title&#125;&#125;&gt;&#123;&#123;title&#125;&#125;&lt;&#x2F;div&gt;<br></code></pre></div></td></tr></table></figure>
+<p>在设置 className 时，用一个对象属性取代了原来的字符串，属性名跟 less 文件中对应的类名相同，对象从 less 文件中引入。<code>.title</code> 只会在本文件生效，你可以在其他任意文件中使用同名选择器，也不会对这里造成影响。不过有的时候，我们就是想要一个全局生效的样式呢？可以使用 <code>:global</code>。</p>
+<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-comment">// exmaple.less</span><br><span class="hljs-selector-class">.title</span> &#123;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-variable">@heading-color</span>;<br>  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">600</span>;<br>  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">16px</span>;<br>&#125;<br><br><span class="hljs-comment">/* 定义全局样式 */</span><br>:<span class="hljs-selector-tag">global</span> &#123;<br>  <span class="hljs-selector-class">.footer</span> &#123;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-number">#ccc</span>;<br>  &#125;<br>  <span class="hljs-selector-class">.sider</span> &#123;<br>    <span class="hljs-attribute">background</span>: <span class="hljs-number">#ebebeb</span>;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong><em>怎么用CSS Modules清楚了，原理是怎样的呢？</em></strong></p>
+<p>CSS Modules机制对每个类名（<strong>非 :global 声明</strong>）按照一定规则进行转换，保证它的唯一性。如果在浏览器里查看这个示例的 dom 结构，你会发现实际渲染出来是这样的：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;title___3TqAx&quot;</span>&gt;</span>title<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>类名被自动添加了一个 hash 值，这保证了它的唯一性。需要注意的关键点</p>
+<ul>
+<li>CSS Modules 只会对 <code>className</code> 以及 <code>id</code> 进行转换，其他的比如属性选择器，标签选择器都不进行处理，推荐尽量使用 className。</li>
+<li>由于不用担心类名重复，你的 className 可以在基本语意化的前提下尽量简单一点儿。</li>
+</ul>
+<p><strong><em>详细教程有哪些？</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/css-modules/css-modules">github/css-modules</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/06/css_modules.html">CSS Modules 用法教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/camsong/blog/issues/5">CSS Modules 详解及 React 中实践</a></li>
+</ul>
+<h1 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h1><p>Ant Desing Pro默认使用react-intl实现组件国际化。</p>
+<p>如果在工程中直接使用中文</p>
+<figure class="highlight ts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ts">routes: [     <br>  <span class="hljs-comment">// ...</span><br>  &#123;<br>    name: <span class="hljs-string">&#x27;newpage&#x27;</span>,<br>    icon: <span class="hljs-string">&#x27;smile&#x27;</span>,<br>    path: <span class="hljs-string">&#x27;/user/newpage&#x27;</span>,<br>    component: <span class="hljs-string">&#x27;./user/newpage&#x27;</span>,<br>  &#125;,&#123;<br>    name: <span class="hljs-string">&#x27;注册页&#x27;</span>,<br>    icon: <span class="hljs-string">&#x27;smile&#x27;</span>,<br>    path: <span class="hljs-string">&#x27;/user/forget&#x27;</span>,<br>    component: <span class="hljs-string">&#x27;./user/forget&#x27;</span>,<br>  &#125;,<br>  <span class="hljs-comment">// ...		</span><br>]<br></code></pre></div></td></tr></table></figure>
+<p>就会出现各种报错。</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">devScripts.js:<span class="hljs-number">5035</span> [React <span class="hljs-built_in">Intl</span>] Missing message: <span class="hljs-string">&quot;menu.注册页&quot;</span> <span class="hljs-keyword">for</span> locale: <span class="hljs-string">&quot;zh-CN&quot;</span>, using <span class="hljs-keyword">default</span> message <span class="hljs-keyword">as</span> fallback.<br><br>devScripts.js:<span class="hljs-number">5035</span> [React <span class="hljs-built_in">Intl</span>] Missing message: <span class="hljs-string">&quot;menu.newpage&quot;</span> <span class="hljs-keyword">for</span> locale: <span class="hljs-string">&quot;zh-CN&quot;</span>, using <span class="hljs-keyword">default</span> message <span class="hljs-keyword">as</span> fallback.<br></code></pre></div></td></tr></table></figure>
+<p>这时候就要去修改</p>
+<p><code>src/locales/zh-CN|en-US/</code> 路径下的对应配置文件。</p>
+<p><code>src/locales/zh-CN/menu.ts</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-string">&#x27;menu.welcome&#x27;</span>: <span class="hljs-string">&#x27;欢迎&#x27;</span>,<br>  <span class="hljs-string">&#x27;menu.more-blocks&#x27;</span>: <span class="hljs-string">&#x27;更多区块&#x27;</span>,<br>  <span class="hljs-string">&#x27;menu.home&#x27;</span>: <span class="hljs-string">&#x27;首页&#x27;</span>,<br>  <span class="hljs-comment">// ...</span><br>  <span class="hljs-string">&#x27;menu.newpage&#x27;</span>: <span class="hljs-string">&quot;新页面&quot;</span>,<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p><code>src/locales/en-US/menu.ts</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-string">&#x27;menu.welcome&#x27;</span>: <span class="hljs-string">&#x27;Welcome&#x27;</span>,<br>  <span class="hljs-string">&#x27;menu.more-blocks&#x27;</span>: <span class="hljs-string">&#x27;More Blocks&#x27;</span>,<br>  <span class="hljs-string">&#x27;menu.home&#x27;</span>: <span class="hljs-string">&#x27;Home&#x27;</span>,<br>  <span class="hljs-comment">// ...</span><br>  <span class="hljs-string">&#x27;menu.newpage&#x27;</span>: <span class="hljs-string">&quot;New Page&quot;</span>,<br>&#125;;<br></code></pre></div></td></tr></table></figure>
+<p>重新加载之后，报错就会消失。</p>
+<h1 id="与后端交互"><a href="#与后端交互" class="headerlink" title="与后端交互"></a>与后端交互</h1><p>一个完整的前端 UI 交互到服务端处理流程是这样的：</p>
+<ol>
+<li>UI 组件交互操作；</li>
+<li>调用 model 的 effect；</li>
+<li>调用统一管理的 service 请求函数；</li>
+<li>使用封装的 request.ts 发送请求；</li>
+<li>获取服务端返回；</li>
+<li>然后调用 reducer 改变 state；</li>
+<li>更新 model。</li>
+</ol>
+<p>统一的请求处理都放在 <code>services</code> 文件夹中，并且一般按照 model 维度进行拆分文件，如：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">services/<br>  user.ts<br>  api.ts<br>  ...<br></code></pre></div></td></tr></table></figure>
+<p>其中，<code>utils/request.ts</code> 是基于 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">fetch</a> 的封装，便于统一处理 POST，GET 等请求参数，请求头，以及错误提示信息等。具体可以参看</p>
+<p>例如在 services 中的一个请求用户信息的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-comment">// services/user.ts</span><br><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../utils/request&#x27;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">query</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> request(<span class="hljs-string">&#x27;/api/users&#x27;</span>);<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">queryCurrent</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> request(<span class="hljs-string">&#x27;/api/currentUser&#x27;</span>);<br>&#125;<br><br><span class="hljs-comment">// models/user.ts</span><br><span class="hljs-keyword">import</span> &#123; queryCurrent &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../services/user&#x27;</span>;<br>...<br>effects: &#123;<br>  *<span class="hljs-function"><span class="hljs-title">fetch</span>(<span class="hljs-params">&#123; payload &#125;, &#123; call, put &#125;</span>)</span> &#123;<br>    ...<br>    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">yield</span> call(queryCurrent);<br>    ...<br>  &#125;,<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>异步请求</strong></p>
+<p>在处理复杂的异步请求的时候，很容易让逻辑混乱，陷入嵌套陷阱，所以 Ant Design Pro 的底层基础框架 <a target="_blank" rel="noopener" href="https://github.com/dvajs/dva">dva</a> 使用 <code>effect</code> 的方式来管理同步化异步请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tsx">effects: &#123;<br>  *fetch(&#123; payload &#125;, &#123; call, put &#125;) &#123;<br>    yield put(&#123;<br>      type: &#39;changeLoading&#39;,<br>      payload: true,<br>    &#125;);<br>    &#x2F;&#x2F; 异步请求 1<br>    const response &#x3D; yield call(queryFakeList, payload);<br>    yield put(&#123;<br>      type: &#39;save&#39;,<br>      payload: response,<br>    &#125;);<br>    &#x2F;&#x2F; 异步请求 2<br>    const response2 &#x3D; yield call(queryFakeList2, payload);<br>    yield put(&#123;<br>      type: &#39;save2&#39;,<br>      payload: response2,<br>    &#125;);<br>    yield put(&#123;<br>      type: &#39;changeLoading&#39;,<br>      payload: false,<br>    &#125;);<br>  &#125;,<br>&#125;,<br></code></pre></div></td></tr></table></figure>
+<ol>
+<li>Ajax怎么配置？</li>
+<li>数据怎么传到后台？</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/29/LeetCode2020-0629-0706/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode2020-0629-0706</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/26/LeetCode2020-0622-0628/">
+                        <span class="hidden-mobile">LeetCode2020 0622-0628</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/06/27/Ant-Design-Pro-Guide/';
+        this.page.identifier = '/2020/06/27/Ant-Design-Pro-Guide/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

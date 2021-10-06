@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>Redis 字典详解 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis 字典详解">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-11 00:17" pubdate>
+        2020年4月11日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      35
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis 字典详解</h1>
+            
+            <div class="markdown-body">
+              <p>转载自：知乎：<a target="_blank" rel="noopener" href="https://www.zhihu.com/people/liu-shuai-99-72">呼延十</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/103367975">Redis系列(六)底层数据结构之字典</a></p>
+<a id="more"></a>
+<h2 id="转载连接"><a href="#转载连接" class="headerlink" title="转载连接"></a>转载连接</h2><p>知乎：<a target="_blank" rel="noopener" href="https://www.zhihu.com/people/liu-shuai-99-72">呼延十</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/103367975">Redis系列(六)底层数据结构之字典</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Redis 已经是大家耳熟能详的东西了，日常工作也都在使用，面试中也是高频的会涉及到，那么我们对它究竟了解有多深刻呢？</p>
+<p>我读了几本 Redis 相关的书籍，尝试去了解它的具体实现，将一些底层的数据结构及实现原理记录下来。</p>
+<p>本文将介绍 Redis 中底层的 <strong>dict（字典）</strong> 的实现方法。 它是 Redis 中哈希键和有序集合键的底层实现之一。</p>
+<p>可以看到图中，当我给一个 哈希结构中放了两个短的值，此时 哈希的编码方式是 <strong>ziplist</strong>, 而当我插入一个比较长的值，哈希的编码方式成为了 <strong>hashtable</strong>.</p>
+<p><em>注：本文默认读者对于 hashtable 这一数据结构有基本的了解，因此不会详细讲解这块内容</em></p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>字典作为一种常用的数据结构，也被内置在很多编程语言中，比如 Java 的 HashMap 和 Python 的 dict. 然而 C 语言又没有（知道为什么大家更喜欢写 Java,Python 等高级语言了吧）.</p>
+<p>所以 Redis 自己实现了一个字典：</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dict</span>&#123;</span><br>  <span class="hljs-comment">// 类型特定函数</span><br>  dictType *type;<br>  <span class="hljs-comment">// 私有数据</span><br>  <span class="hljs-keyword">void</span> *<span class="hljs-keyword">private</span>;<br>  <span class="hljs-comment">// 哈希表</span><br>  dictht ht[<span class="hljs-number">2</span>];<br>  <span class="hljs-comment">// rehash 索引，当当前的字典不在 rehash 时，值为-1</span><br>  <span class="hljs-keyword">int</span> trehashidx;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>type 和 private</li>
+</ul>
+<p>这两个属性是为了实现字典多态而设置的，当字典中存放着不同类型的值，对应的一些复制，比较函数也不一样，这两个属性配合起来可以实现多态的方法调用。</p>
+<ul>
+<li>ht[2]</li>
+</ul>
+<p>这是一个长度为 2 的 <code>dictht</code>结构的数组，<code>dictht</code>就是哈希表。</p>
+<ul>
+<li>trehashidx</li>
+</ul>
+<p>这是一个辅助变量，用于记录 rehash 过程的进度，以及是否正在进行 rehash 等信息。</p>
+<p>看完字段介绍，我们发现，<strong>字典</strong>这个数据结构，本质上是对 <strong>hashtable</strong>的一个简单封装，因此字典的实现细节主要就来到了 哈希表上。</p>
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>哈希表的定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dictht</span>&#123;</span><br>  <span class="hljs-comment">// 哈希表的数组</span><br>  dictEntry **table;<br>  <span class="hljs-comment">// 哈希表的大小</span><br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> size;<br>  <span class="hljs-comment">// 哈希表的大小的掩码，用于计算索引值，总是等于 size-1</span><br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> sizemasky;<br>  <span class="hljs-comment">// 哈希表中已有的节点数量</span><br>  <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">long</span> used;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>其中哈希表中的节点的定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dictEntry</span>&#123;</span><br>  <span class="hljs-comment">// 键</span><br>  <span class="hljs-keyword">void</span> *key;<br>  <span class="hljs-comment">// 值</span><br>  <span class="hljs-class"><span class="hljs-keyword">union</span> &#123;</span><br>    <span class="hljs-keyword">void</span> *val;<br>    uint64_tu64;<br>    int64_ts64;<br>  &#125;v;<br><br>  <span class="hljs-comment">// 指向下一个节点的指针</span><br>  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dictEntry</span> *<span class="hljs-title">next</span>;</span><br>&#125; dictEntry;<br></code></pre></div></td></tr></table></figure>
+<p>如果你看过 Java 中 HashMap 的源码，你会发现这一切是如此的熟悉。因此我不对其中的每个属性进行详细的解释了。</p>
+<p><img src="https://i.loli.net/2020/04/11/W7EnS1PhoCutj3Z.jpg" srcset="/img/loading.gif" alt="v2-427573f98c678c5d3cc8c1e68c8e2a25_720w.jpg"></p>
+<p>上图是一个没有处在 rehash 状态下的字典。可以看到，字典持有两张哈希表，其中一个的值为 null, 另外一个哈希表的 size=4, 其中两个位置上已经存放了具体的键值对，而且没有发生 hash 冲突。</p>
+<h2 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h2><p>哈希表添加一个元素首先需要计算当前键值的 hash 值，之后根据 hash 值来定位即将它即将被放入的槽。由于 hash 值可能冲突，因此 hash 算法的选择尤其重要，要将 key 值打散的足够均匀。</p>
+<p>Redis 选用了业内的一些算法来实现 hash 过程。</p>
+<p>在 Redis 5.0 以及 4.0 版本，都使用了 siphash 哈希算法。siphash 可以在输入的 key 值很小的情况下，产生随机性比较好的输出。</p>
+<p>在 Redis 3.2, 3.0 以及 2.8 版本，使用 Murmurhash2 哈希算法，Murmurhash 可以在输入值是有规律时，也能给出比较好的随机分布。</p>
+<p>当然以上两个算法，都有一个共同点，就是计算性能很好，这才符合 Redis 的产品特性。</p>
+<p>hash 结束之后，会根据当前哈希表的长度，来确定当前键值所在的 index, 而由于长度有限，那么迟早会产生两个键值要放到同一个位置的问题，也就是常说的 hash 冲突问题。</p>
+<h2 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h2><p>既然是哈希表，那么就也有 hash 冲突问题。</p>
+<p>Redis 的哈希表处理 Hash 冲突的方式和 Java 中的 HashMap 一样，选择了分桶的方式，也就是常说的链地址法。Hash 表有两维，第一维度是个数组，第二维度是个链表，当发生了 Hash 冲突的时候，将冲突的节点使用链表连接起来，放在同一个桶内。</p>
+<p>由于第二维度是链表，我们都知道链表的查找效率相比于数组的查找效率是比较差的。那么如果 hash 冲突比较严重，导致单个链表过长，那么此时 hash 表的查询效率就会急速下降。</p>
+<p>除了<strong>拉链法</strong>，还可以用</p>
+<p>1、<strong>开放定址法</strong>：当冲突发生时，使用某种探查(亦称探测)技术在散列表中形成一个探查(测)序列。沿此序列逐个单元地查找，直到找到给定的关键字，或者碰到一个开放的地址(即该地址单元为空)为止（若要插入，在探查到开放的地址，则可将待插入的新结点存人该地址单元）。查找时探查到开放的 地址则表明表中无待查的关键字，即查找失败。 </p>
+<p>2、<strong>再哈希</strong>：即在原来哈希值的基础上，添加一些当前文件的特性（创建、修改时间等）进行再次哈希。</p>
+<h2 id="扩容与缩容"><a href="#扩容与缩容" class="headerlink" title="扩容与缩容"></a>扩容与缩容</h2><p>当哈希表过于拥挤，查找效率就会下降，当 hash 表过于稀疏，对内存就有点太浪费了，此时就需要进行相应的扩容与缩容操作。</p>
+<p>想要进行扩容缩容，那么就需要描述当前 hasd 表的一个填充程度，总不能靠感觉。这就有了 <code>负载因子</code> 这个概念。</p>
+<p><code>负载因子</code>是用来描述哈希表当前被填充的程度。计算公式是：<code>负载因子=哈希表以保存节点数量 / 哈希表的大小</code>.</p>
+<p>在 Redis 的实现里，扩容缩容有三条规则：</p>
+<ol>
+<li>当 Redis 没有进行 BGSAVE 相关操作，且 <code>负载因子&gt;1</code>的时候进行扩容。</li>
+<li>当<code>负载因子&gt;5</code>的时候，强行进行扩容。</li>
+<li>当<code>负载因子&lt;0.1</code>的时候，进行缩容。</li>
+</ol>
+<p>根据程序当前是否在进行 BGSAVE 相关操作，扩容需要的负载因子条件不相同。</p>
+<p>这是因为在进行 BGSAVE 操作时，存在子进程，操作系统会使用 写时复制 (Copy On Write) 来优化子进程的效率。Redis 尽量避免在存在子进程的时候进行扩容，尽量的节省内存。</p>
+<p>熟悉 hash 表的读者们应该知道，扩容期间涉及到到 rehash 的问题。</p>
+<p>因为需要将当前的所有节点挪到一个大小不一致的哈希表中，且需要尽量保持均匀，因此需要将当前哈希表中的所有节点，重新进行一次 hash. 也就是 rehash.</p>
+<h2 id="渐进式-hash"><a href="#渐进式-hash" class="headerlink" title="渐进式 hash"></a>渐进式 hash</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>在 Java 的 HashMap 中，实现方式是 新建一个哈希表，一次性的将当前所有节点 rehash 完成，之后释放掉原有的 hash 表，而持有新的表。</p>
+<p>而 Redis 不是，Redis 使用了一种名为渐进式 hash 的方式来满足自己的性能需求。</p>
+<p>这是一个我亲历的面试原题：Redis 的字典结构，在 rehash 时和 Java 的 HashMap 的 Rehash 有什么不同？</p>
+<p>rehash 需要重新定位所有的元素，这是一个 O(N) 效率的问题，当对数据量很大的字典进行这一操作的时候，比较耗时。</p>
+<p>对于单线程的 Redis 来说，表示很难接受这样的延时，因此 Redis 选择使用 一点一点搬的策略。</p>
+<p>Redis 实现了渐进式 hash. 过程如下：</p>
+<ol>
+<li>假如当前数据在 ht[0] 中，那么首先为 ht[1] 分配足够的空间。</li>
+<li>在字典中维护一个变量，rehashindex = 0. 用来指示当前 rehash 的进度。</li>
+<li>在 rehash 期间，每次对 字典进行 增删改查操作，在完成实际操作之后，都会进行 一次 rehash 操作，将 ht[0] 在<code>rehashindex</code> 位置上的值 rehash 到 ht[1] 上。将 rehashindex 递增一位。</li>
+<li>随着不断的执行，原来的 ht[0] 上的数值总会全部 rehash 完成，此时结束 rehash 过程。 将 rehashindex 置为-1.</li>
+</ol>
+<p>在上面的过程中有两个问题没有提到：</p>
+<ol>
+<li>假如这个服务器很空余呢？中间几小时都没有请求进来，那么同时保持两个 table, 岂不是很浪费内存？</li>
+</ol>
+<p>解决办法是：在 redis 的定时函数里，也加入帮助 rehash 的操作，这样子如果服务器空闲，就会比较快的完成 rehash.</p>
+<ol>
+<li>在保持两个 table 期间，该哈希表怎么对外提供服务呢？</li>
+</ol>
+<p>解决办法：对于添加操作，直接添加到 ht[1] 上，因此这样才能保证 ht[0] 的数量只会减少不会增加，才能保证 rehash 过程可以完结。而删除，修改，查询等操作会在 ht[0] 上进行，如果得不到结果，会去 ht[1] 再执行一遍。</p>
+<p>渐进式 hash 带来的好处是显而易见的，他采用了分而治之的思想，将 rehash 操作分散到每一个对该哈希表的操作上以及定时函数上，避免了集中式 rehash 带来的性能压力。</p>
+<p>与此同时，渐进式 hash 也带来了一个问题，那就是 在 rehash 的时间内，需要保存两个 hash 表，对内存的占用稍大，而且如果在 redis 服务器本来内存满了的时候，突然进行 rehash 会造成大量的 key 被抛弃。</p>
+<h3 id="小应用"><a href="#小应用" class="headerlink" title="小应用"></a>小应用</h3><p>我们学习渐进式 hash 是为了面试吗？如果不是为了面试，那么我们又不用去设计一个 Redis, 为啥要知道这个？</p>
+<p>我个人觉得，我们是为了理解它的思想。在我学习完渐进式 hash 之后的某一天，在某论坛回答了一位网友的问题。</p>
+<p>他的问题是这样一个场景：</p>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">有两张表，一张工作量表，一张积分表，积分=工作量*系数。<br>系数是有可能改变的，当系数发生变化之后，需要重新计算所有过往工作量的对应新系数的积分情况。<br>而工作量表的数据量比较大，如果在系数发生变化的一瞬间开始重新计算，可以会导致系统卡死，或者系统负载上升，影响到在线服务。<br>怎么解决这个问题？<br></code></pre></div></td></tr></table></figure>
+<p>我个人的理解是，这个可以用 redis 渐进式 rehash 的思路来解决。</p>
+<p>原数据（原有的工作量表）, 负载因子达到某个值（系数改变）, 进行 rehash（重新计算所有值）</p>
+<p>所有的元素都齐活了。</p>
+<p>我们只需要额外记录一个标志着正在进行重新计算过程中的变量即可。之后的思路就完全和 Redis 一致了。</p>
+<ol>
+<li>首先我们可以在某个用户请求自己的积分的时候，再帮他计算新的积分。来分散系统压力。</li>
+<li>如果系统压力并不大，可以在系统定时任务里重算一小部分（一个 batch), 具体多少可以由数据量决定。</li>
+</ol>
+<p>这样完美的解决了性能压力，代码层面只是加一个记录参数以及给一个接口加个”触发器”而已，也算不上麻烦~.</p>
+<h2 id="思考问题：为什么缩容不用考虑-bgsave"><a href="#思考问题：为什么缩容不用考虑-bgsave" class="headerlink" title="思考问题：为什么缩容不用考虑 bgsave?"></a>思考问题：为什么缩容不用考虑 bgsave?</h2><p>这是我看的《Redis 深度历险：核心原理和应用实践》中的一个思考问题，我在这里写下个人的一点理解。</p>
+<p>扩容时考虑 BGSAVE 是因为，扩容需要申请额外的很多内存，且会重新链接链表（如果会冲突的话）, 这样会造成很多内存碎片，也会占用更多的内存，造成系统的压力。</p>
+<p>而缩容过程中，由于申请的内存比较小，同时会释放掉一些已经使用的内存，不会增大系统的压力。因此不用考虑是否在进行 BGSAVE 操作。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Redis 的字典数据结构，和下一篇文章要将的跳跃表数据结构一样，是面试中的高频问题。</p>
+<p>Redis 字典中，用 table[2] 的数组保存着两张 hash 表，正常情况下只使用其中一张，在 rehash 的时候使用另外一张表。</p>
+<p>Redis 为了提高自己的性能，rehash 过程不是一次性完成的，而是使用了渐进式 hash 的策略，逐步的将原有元素 rehash 到新的哈希表中，直到完成。</p>
+<p>至于其他方面，和其他语言中的哈希表区别不是特别大，比如 hash 算法以及如何解决哈希冲突。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>《Redis 的设计与实现（第二版）》</p>
+<p>《Redis 深度历险：核心原理和应用实践》</p>
+<p>完</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/11/%E5%90%84%E7%A7%8D%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">各种开源协议</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">
+                        <span class="hidden-mobile">数据结构：字符串与哈希表</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/11/Redis%E5%AD%97%E5%85%B8%E8%AF%A6%E8%A7%A3/';
+        this.page.identifier = '/2020/04/11/Redis%E5%AD%97%E5%85%B8%E8%AF%A6%E8%A7%A3/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

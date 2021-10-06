@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>Matcaffe食用指南 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Matcaffe食用指南">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-03-28 00:40" pubdate>
+        2018年3月28日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Matcaffe食用指南</h1>
+            
+            <div class="markdown-body">
+              <p>非官方的matcaffe食用教程</p>
+<a id="more"></a>
+<h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><blockquote>
+<p>设置运算模式  </p>
+</blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-keyword">if</span> exist(&#x27;use_gpu&#x27;, &#x27;var&#x27;)<span class="hljs-operator"> &amp;&amp; </span>use_gpu<br>    caffe.set<span class="hljs-constructor">_mode_gpu()</span>;<br>    gpu_id = <span class="hljs-number">0</span>;<br>    caffe.set<span class="hljs-constructor">_device(<span class="hljs-params">gpu_id</span>)</span>;<br><span class="hljs-keyword">else</span><br>    caffe.set<span class="hljs-constructor">_mode_cpu()</span>;<br><span class="hljs-keyword">end</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>设置网络结构和对应的参数  </p>
+</blockquote>
+<p>bvlc_alexnet.caffemodel就是对应的网络权重文件<br>deploy.prototxt就是对应的网络结构文件<br><figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">model_dir</span> = <span class="hljs-string">&#x27;/home/weijian/caffe/models/bvlc_alexnet/&#x27;</span><span class="hljs-comment">;</span><br><span class="hljs-attr">net_model</span> = [model_dir <span class="hljs-string">&#x27;deploy.prototxt&#x27;</span>]<span class="hljs-comment">;</span><br><span class="hljs-attr">net_weights</span> = [model_dir <span class="hljs-string">&#x27;bvlc_alexnet.caffemodel&#x27;</span>]<span class="hljs-comment">;</span><br></code></pre></div></td></tr></table></figure></p>
+<blockquote>
+<p>开始创建一个网络  </p>
+</blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">net = caffe.<span class="hljs-constructor">Net(<span class="hljs-params">net_model</span>, <span class="hljs-params">net_weights</span>, &#x27;<span class="hljs-params">test</span>&#x27;)</span>;<br>% 或者这样也是可以的<br>net = caffe.<span class="hljs-constructor">Net(<span class="hljs-params">model</span>, &#x27;<span class="hljs-params">test</span>&#x27;)</span>;<br>net.copy<span class="hljs-constructor">_from(<span class="hljs-params">weights</span>)</span>;<br></code></pre></div></td></tr></table></figure>
+<h2 id="操作参数与模型保存"><a href="#操作参数与模型保存" class="headerlink" title="操作参数与模型保存"></a>操作参数与模型保存</h2><blockquote>
+<p>输出网路结构和blob、layer名称  </p>
+</blockquote>
+<figure class="highlight dos"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dos"><span class="hljs-built_in">net</span><br><span class="hljs-built_in">net</span>.blob_names<br><span class="hljs-built_in">net</span>.layer_names<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>操作blobs  </p>
+</blockquote>
+<figure class="highlight haskell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haskell">% 将<span class="hljs-class"><span class="hljs-keyword">data</span>类型的blob统一填充为1</span><br><span class="hljs-title">net</span>.blobs(&#x27;<span class="hljs-class"><span class="hljs-keyword">data</span>&#x27;).set_data(<span class="hljs-title">ones</span>(<span class="hljs-title">net</span>.<span class="hljs-title">blobs</span>(&#x27;<span class="hljs-title">data&#x27;</span>).shape));</span><br>% 将<span class="hljs-class"><span class="hljs-keyword">data</span>的blob统一乘以10</span><br><span class="hljs-title">net</span>.blobs(&#x27;<span class="hljs-class"><span class="hljs-keyword">data</span>&#x27;).set_data(<span class="hljs-title">net</span>.<span class="hljs-title">blobs</span>(&#x27;<span class="hljs-title">data&#x27;</span>).get_data() * 10);</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>操作层的参数  </p>
+</blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">% 获取conv1层的第<span class="hljs-number">1</span>个blob也就是weights<br>net.params(&#x27;conv1&#x27;, <span class="hljs-number">1</span>).set<span class="hljs-constructor">_data(<span class="hljs-params">net</span>.<span class="hljs-params">params</span>(&#x27;<span class="hljs-params">conv1</span>&#x27;, 1)</span>.get<span class="hljs-constructor">_data()</span><span class="hljs-operator"> * </span><span class="hljs-number">10</span>); % set weights<br>% 获取conv1层的第<span class="hljs-number">2</span>个blob也就是bias<br>net.params(&#x27;conv1&#x27;, <span class="hljs-number">2</span>).set<span class="hljs-constructor">_data(<span class="hljs-params">net</span>.<span class="hljs-params">params</span>(&#x27;<span class="hljs-params">conv1</span>&#x27;, 2)</span>.get<span class="hljs-constructor">_data()</span><span class="hljs-operator"> * </span><span class="hljs-number">10</span>); % set bias<br>% 也可以如下图所示 利用layer来操作参数<br>% net.layers(&#x27;conv1&#x27;).params(<span class="hljs-number">1</span>).set<span class="hljs-constructor">_data(<span class="hljs-params">net</span>.<span class="hljs-params">layers</span>(&#x27;<span class="hljs-params">conv1</span>&#x27;)</span>.params(<span class="hljs-number">1</span>).get<span class="hljs-constructor">_data()</span><span class="hljs-operator"> * </span><span class="hljs-number">10</span>);<br>% net.layers(&#x27;conv1&#x27;).params(<span class="hljs-number">2</span>).set<span class="hljs-constructor">_data(<span class="hljs-params">net</span>.<span class="hljs-params">layers</span>(&#x27;<span class="hljs-params">conv1</span>&#x27;)</span>.params(<span class="hljs-number">2</span>).get<span class="hljs-constructor">_data()</span><span class="hljs-operator"> * </span><span class="hljs-number">10</span>);<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>在当前目录下保存经过调整的模型  </p>
+</blockquote>
+<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">net</span><span class="hljs-selector-class">.save</span>(<span class="hljs-string">&#x27;my_new_net.caffemodel&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+<h2 id="卷积核的显示"><a href="#卷积核的显示" class="headerlink" title="卷积核的显示"></a>卷积核的显示</h2><blockquote>
+<p> 获取层：通过名字获取下标—-&gt;通过下标获取对应的层  </p>
+</blockquote>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">% name2layer_index是名字到层下标(layer_index)的映射<br>% net.name2layer<span class="hljs-constructor">_index(&#x27;<span class="hljs-params">conv2</span>&#x27;)</span>就是conv2的层下标，通过net.layer<span class="hljs-constructor">_vec()</span>函数就能获取对应的层的数据。<br>% 因此nth_layer就是conv2层，是一个caffe.Layer对象。<br>nth_layer = net.layer<span class="hljs-constructor">_vec(<span class="hljs-params">net</span>.<span class="hljs-params">name2layer_index</span>(&#x27;<span class="hljs-params">conv2</span>&#x27;)</span>);<br>nth_layer<br>% 获得一层的类型(<span class="hljs-built_in">string</span>)<br>layer_type = net.layers(&#x27;conv1&#x27;).<span class="hljs-keyword">type</span>;<br>layer_type<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>获取卷积核：这一层的第一个卷积核，也就是caffe.Blob对象。  </p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">% 提取conv2层的参数组的第1个数据得到nth_layer_blob1_data是一个caffe.Blob对象 </span><br>nth_layer_blob1_data = nth_layer.params(<span class="hljs-number">1</span>).get_data();<br><br><span class="hljs-comment">% 取nth_layer_blob1_data的大小</span><br>sizeB = <span class="hljs-built_in">size</span>(nth_layer_blob1_data); <span class="hljs-comment">% 利用size函数得到nth_layer_blob1_data的每一维的大小</span><br>GridL = <span class="hljs-built_in">ceil</span>(<span class="hljs-built_in">sqrt</span>(sizeB(<span class="hljs-number">4</span>)));  <span class="hljs-comment">% 对sizeB的第四维数据求出平方根 再向右取整ceil(3.5)=4</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>对卷积核(caffe.Blob)进行数据处理和并实现可视化  </p>
+</blockquote>
+<figure class="highlight xquery"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xquery">% 缩放sizeB(<span class="hljs-number">1</span>)和sizeB(<span class="hljs-number">2</span>)的大小<br>scale = <span class="hljs-number">4</span>;<br>border = <span class="hljs-number">2</span>; % 设置border为<span class="hljs-number">2</span>为Padding操作做准备 实现只卷积不降维的效果<br>sizeB(<span class="hljs-number">1</span>) = sizeB(<span class="hljs-number">1</span>) * scale;<br>sizeB(<span class="hljs-number">2</span>) = sizeB(<span class="hljs-number">2</span>) * scale;<br><br>% zeros生成零矩阵<br>% 矩阵大小为(border+sizeB(<span class="hljs-number">1</span>))*GridL+border乘以(border+sizeB(<span class="hljs-number">2</span>))*GridL+border乘以<span class="hljs-number">1</span><br>background = zeros((border+sizeB(<span class="hljs-number">1</span>))*GridL+border,(border+sizeB(<span class="hljs-number">2</span>))*GridL+border,<span class="hljs-number">1</span>);<br><br>% 求出矩阵nth_layer_blob1_data的最大值和最小值<br>minV =<span class="hljs-built_in"> min</span>(nth_layer_blob1_data<span class="hljs-comment">(:));</span><br><span class="hljs-comment">maxV = max(nth_layer_blob1_data(:)</span>);<br><br>% 求均值<br>nth_layer_blob1_data = (nth_layer_blob1_data - minV) / (maxV - minV);<br><span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>:sizeB(<span class="hljs-number">4</span>)<br>    x = ceil(i / GridL);<br>    y = mod(i - <span class="hljs-number">1</span>,GridL) + <span class="hljs-number">1</span>;  % mod函数进行求余数操作<br>    patch = imresize(nth_layer_blob1_data<span class="hljs-comment">(:,:,1,i),[sizeB(1) sizeB(2)],&#x27;nearest&#x27;);</span><br><span class="hljs-comment">    patch = (patch - min(patch(:)</span>)) / <span class="hljs-built_in">(max</span>(patch<span class="hljs-comment">(:)) - min(patch(:)</span>));<br>    background(border + (x-<span class="hljs-number">1</span>)*(border+sizeB(<span class="hljs-number">1</span>)) + <span class="hljs-number">1</span> : x*(border+sizeB(<span class="hljs-number">1</span>)),border + (y-<span class="hljs-number">1</span>)*(border+sizeB(<span class="hljs-number">2</span>)) + <span class="hljs-number">1</span> : y*(border+sizeB(<span class="hljs-number">2</span>)),:) = patch;<br><span class="hljs-keyword">end</span>;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>展示可视化效果  </p>
+</blockquote>
+<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">figure</span>(<span class="hljs-number">1</span>);<br><span class="hljs-selector-tag">imshow</span>(background);  <br><span class="hljs-selector-tag">colormap</span>(<span class="hljs-string">&#x27;jet&#x27;</span>);<br><span class="hljs-selector-tag">colorbar</span>();<br></code></pre></div></td></tr></table></figure>
+<h2 id="前向和后向计算"><a href="#前向和后向计算" class="headerlink" title="前向和后向计算"></a>前向和后向计算</h2><blockquote>
+<p>前向计算</p>
+</blockquote>
+<p>前向和后向计算可以使用net.forward或者net.forward_prefilled实现。<br>函数net.forward将一个包含输入blob(s)的cell数组作为输入，并输出一个包含输出blob(s)的cell数组。<br>函数net.forward_prefilled将使用输入blob(s)中的已有数据进行计算，没有输入数据，没有输出数据。<br>在通过一些方法（如：data = rand(net.blobs(‘data’).shape);）产生输入数据后，你可以运行：<br><figure class="highlight haskell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haskell"><span class="hljs-class"><span class="hljs-keyword">data</span> = rand(<span class="hljs-title">net</span>.<span class="hljs-title">blobs</span>(&#x27;<span class="hljs-title">data&#x27;</span>).shape);</span><br>% <span class="hljs-keyword">class</span>(<span class="hljs-class"><span class="hljs-keyword">data</span>)=double class(&#123;<span class="hljs-title">data</span>&#125;)=cell</span><br><span class="hljs-title">res</span> = net.forward(&#123;<span class="hljs-class"><span class="hljs-keyword">data</span>&#125;);</span><br>% prob = res&#123;<span class="hljs-number">1</span>&#125;;<br>% 或者<br><span class="hljs-title">net</span>.blobs(&#x27;<span class="hljs-class"><span class="hljs-keyword">data</span>&#x27;).set_data(<span class="hljs-title">data</span>);</span><br><span class="hljs-title">net</span>.forward_prefilled();<br><span class="hljs-title">prob</span> = net.blobs(&#x27;prob&#x27;).get_data();<br></code></pre></div></td></tr></table></figure></p>
+<blockquote>
+<p>后向计算</p>
+</blockquote>
+<p>后向计算使用net.backward或者net.backward_prefilled，并且把get_data和set_data替换为get_diff和set_diff。<br>在通过一些方法（例如prob_diff = rand(net.blobs(‘prob’).shape);）产生输出blobs的梯度<br><figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">prob_diff = rand(<span class="hljs-keyword">net</span>.blobs(&#x27;<span class="hljs-keyword">prob</span>&#x27;).shape);<br>res = <span class="hljs-keyword">net</span>.backward(&#123;prob_diff&#125;);<br>data_diff = res&#123;1&#125;;<br>% 或者<br><span class="hljs-keyword">net</span>.blobs(&#x27;<span class="hljs-keyword">prob</span>&#x27;).set_diff(prob_diff);<br><span class="hljs-keyword">net</span>.backward_prefilled();<br>data_diff = <span class="hljs-keyword">net</span>.blobs(&#x27;data&#x27;).get_diff();<br></code></pre></div></td></tr></table></figure><br>然而，如上的后向计算并不能得到正确的结果，因为Caffe默认网络不需要后向计算。为了获取正确的后向计算结果，你需要在你的网络prototxt文件中设置force_backward: true</p>
+<h2 id="Reshape"><a href="#Reshape" class="headerlink" title="Reshape"></a>Reshape</h2><p>Reshape层的作用：在不改变数据的情况下，改变输入的维度<br><figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">% 假设你想要运行1幅图像，而不是10幅时：<br><span class="hljs-keyword">net</span>.blobs(&#x27;data&#x27;).<span class="hljs-keyword">reshape</span>([227 227 3 1]); % <span class="hljs-keyword">reshape</span> blob &#x27;data&#x27;<br><span class="hljs-keyword">net</span>.<span class="hljs-keyword">reshape</span>();<br>% 然后，整个网络就<span class="hljs-keyword">reshape</span>了，此时<span class="hljs-keyword">net</span>.blobs(&#x27;<span class="hljs-keyword">prob</span>&#x27;).shape应该是[1000 1];<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="开始训练"><a href="#开始训练" class="headerlink" title="开始训练"></a>开始训练</h2><blockquote>
+<p>开始训练</p>
+</blockquote>
+<figure class="highlight mercury"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mercury"><span class="hljs-keyword">solver</span> <span class="hljs-built_in">=</span> caffe.Solver(<span class="hljs-string">&#x27;./models/bvlc_reference_caffenet/solver.prototxt&#x27;</span>);<br><span class="hljs-keyword">solver</span><br><span class="hljs-keyword">solver</span>.solve();  <span class="hljs-comment">% 执行训练</span><br><span class="hljs-keyword">solver</span>.step(<span class="hljs-number">500</span>);  <span class="hljs-comment">% 如果只想训练迭代1000次</span><br>iter <span class="hljs-built_in">=</span> <span class="hljs-keyword">solver</span>.iter();  <span class="hljs-comment">%来获取迭代数量：</span><br>train_net <span class="hljs-built_in">=</span> <span class="hljs-keyword">solver</span>.net;  <span class="hljs-comment">% 来获取这个网络</span><br>test_net <span class="hljs-built_in">=</span> <span class="hljs-keyword">solver</span>.test_nets(<span class="hljs-number">1</span>);<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>假设从一个snapshot中恢复网络训练：<br><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">solver</span><span class="hljs-selector-class">.restore</span>(<span class="hljs-string">&#x27;your_snapshot.solverstate&#x27;</span>);<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="清除nets和solvers"><a href="#清除nets和solvers" class="headerlink" title="清除nets和solvers"></a>清除nets和solvers</h2></blockquote>
+<p>调用caffe.reset_all()来清理你所创建的所有的solvers，和stand-alone nets。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/caffe/">caffe</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/03/28/Caffe%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">caffe技巧总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/03/28/PyCaffe%E9%A3%9F%E7%94%A8%E6%8C%87%E5%8D%97/">
+                        <span class="hidden-mobile">PyCaffe食用指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/03/28/Matcaffe%E9%A3%9F%E7%94%A8%E6%8C%87%E5%8D%97/';
+        this.page.identifier = '/2018/03/28/Matcaffe%E9%A3%9F%E7%94%A8%E6%8C%87%E5%8D%97/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

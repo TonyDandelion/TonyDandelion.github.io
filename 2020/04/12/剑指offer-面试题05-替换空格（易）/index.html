@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>剑指offer 面试题05. 替换空格（易） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="剑指offer 面试题05. 替换空格（易）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-12 12:37" pubdate>
+        2020年4月12日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">剑指offer 面试题05. 替换空格（易）</h1>
+            
+            <div class="markdown-body">
+              <p>手工实现字符串 <code>replace</code> 方法</p>
+<a id="more"></a>
+<blockquote>
+<p>字符串、双指针</p>
+</blockquote>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof">https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>请实现一个函数，把字符串 s 中的每个空格替换成”%20”。</p>
+<p>示例 1：<br><figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">输入：s = <span class="hljs-string">&quot;We are happy.&quot;</span><br>输出：<span class="hljs-string">&quot;We%20are%20happy.&quot;</span><br></code></pre></div></td></tr></table></figure><br>限制：0 &lt;= s 的长度 &lt;= 10000</p>
+<h1 id="直觉"><a href="#直觉" class="headerlink" title="直觉"></a>直觉</h1><p>这种重写基础方法的问题，可以先用现有的内建方法实现一下，然后在其基础上改写自己的方法。<br>1、无脑调用 python字符串的replace方法<br>2、基于Python字符串 <code>splite</code> 方法 和 <code>join</code> 方法 解决<br>3、不依赖任何Python内建函数实现 <code>replace</code>（<strong>多一层函数栈调用，性能就会下降一点。</strong>）<br>4、以上都是从前往后遍历，由于是基于Python的，所以做字符串操作比较简单，时间复杂度是  $O(n)$。但是如果是C++来实现这个代码，从前往后遍历的时间复杂度就是 $O(n^2)$，看了《剑指offer》这本书之后，书中提到了一个思路，是从后往前遍历，无论用哪一种语言，时间复杂度都是 $O(n)$。</p>
+<ol>
+<li>从’ ‘到’%20’增加了2位，如果有n个空格，就会增加n*2的位置。</li>
+<li>将长度为len的字符串，增加到长度为len + 2*n，新增的2*n的位置为’ ‘</li>
+<li>双指针P1指向字符串末尾，在前。P2指向新增长度末尾，在后。</li>
+<li>同时前移P1和P2且将P1位置的字符复制到P2位置，当碰到P1空格时，P1往前移动一格，P2往前移动3格。在这三格分别填充’%’、’2’、’0’。</li>
+<li>一直往前移动，直到P2赶上P1，即可结束。</li>
+</ol>
+<p><strong>注意这几种特殊情况</strong>，<code>&quot;cad eaeb&quot;, &quot;a   b&quot;, &quot;a b  &quot;, &quot;  a b&quot;, &quot;     &quot;, &quot;&quot;</code>。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>1、无脑调用 python字符串的replace方法</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">replaceSpace</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        <span class="hljs-keyword">return</span> s.replace(<span class="hljs-string">&quot; &quot;</span>, <span class="hljs-string">&quot;%20&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+<p>2、基于Python字符串 <code>splite</code> 方法 和 <code>join</code> 方法 解决</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">replaceSpace</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        s = s.split(<span class="hljs-string">&quot; &quot;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;%20&#x27;</span>.join(s)<br></code></pre></div></td></tr></table></figure>
+<p>3、不依赖任何Python内建函数实现 <code>replace</code></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">split</span>(<span class="hljs-params">self, target, s</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot; split str according special divider</span><br><span class="hljs-string">        :param target: str</span><br><span class="hljs-string">        :param s: str</span><br><span class="hljs-string">        :return: list</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        start = <span class="hljs-number">0</span><br>        segments = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s)):<br>            <span class="hljs-keyword">if</span> s[i] == target:<br>                segments.append(s[start:i])<br>                start = i + <span class="hljs-number">1</span><br>        segments.append(s[start:])<br>        <span class="hljs-keyword">return</span> segments<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">join</span>(<span class="hljs-params">self, link, lists</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;join items in the list by special linker</span><br><span class="hljs-string">        :param link: str</span><br><span class="hljs-string">        :param lists: list</span><br><span class="hljs-string">        :return: str</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        res = <span class="hljs-string">&#x27;&#x27;</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> lists:<br>            res += (i+link)<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(link):<br>            res = res[:-<span class="hljs-built_in">len</span>(link)]<br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">replace</span>(<span class="hljs-params">self, target, replce, string</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;replace character in the str with anoteher charcter</span><br><span class="hljs-string">        :param target: str</span><br><span class="hljs-string">        :param replace: str</span><br><span class="hljs-string">        :param string: str</span><br><span class="hljs-string">        :return: str</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        segments = self.split(target, string)<br>        res = self.join(replce, segments)<br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">replaceSpace</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        <span class="hljs-keyword">return</span> self.replace(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-string">&#x27;%20&#x27;</span>, s)<br></code></pre></div></td></tr></table></figure>
+<p>4、从后往前遍历</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> unittest<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">replaceSpace</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        <span class="hljs-comment"># 特判输入字符为&#x27;&#x27;的情况</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(s):  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span><br>        padding = <span class="hljs-string">&#x27;%20&#x27;</span><br>        <span class="hljs-comment"># 1. 从&#x27; &#x27;到&#x27;%20&#x27;增加了2位，如果有n个空格，就会增加n*2的位置。</span><br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> s:<br>            <span class="hljs-keyword">if</span> i == <span class="hljs-string">&#x27; &#x27;</span>:<br>                count += <span class="hljs-number">1</span><br>        <span class="hljs-comment"># 2. 将长度为len的字符串，增加到长度为len + 2*n，新增的2*n的位置为&#x27; &#x27;</span><br>        p1 = <span class="hljs-built_in">len</span>(s) - <span class="hljs-number">1</span><br>        s += <span class="hljs-string">&#x27; &#x27;</span> * count * <span class="hljs-number">2</span><br>        <span class="hljs-comment"># 3. 双指针P1指向字符串末尾，在前。P2指向新增长度末尾，在后。</span><br>        p2 = <span class="hljs-built_in">len</span>(s) - <span class="hljs-number">1</span><br>        <span class="hljs-comment"># 5. 一直往前移动，直到P2赶上P1，即可结束。</span><br>        s = <span class="hljs-built_in">list</span>(s)  <span class="hljs-comment"># 由于str是不可变对象，所以要先转换成list</span><br>        <span class="hljs-keyword">while</span> p1 != p2 <span class="hljs-keyword">or</span> (s[p1] == <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-keyword">and</span> s[p2] == <span class="hljs-string">&#x27; &#x27;</span>):  <span class="hljs-comment"># 排除空格位于字符串最前面、最后面、中间连续位置的情况</span><br>            <span class="hljs-comment"># 4. 同时前移P1和P2且将P1位置的字符复制到P2位置</span><br>            <span class="hljs-keyword">if</span> s[p1] != <span class="hljs-string">&quot; &quot;</span>:<br>                s[p2] = s[p1]<br>                p1 -= <span class="hljs-number">1</span><br>                p2 -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 当碰到P1空格时，P1往前移动一格，P2往前移动3格。在这三格分别填充&#x27;%&#x27;、&#x27;2&#x27;、&#x27;0&#x27;。</span><br>                p1 -= <span class="hljs-number">1</span><br>                <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                    s[p2] = padding[i]<br>                    p2 -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.join(s)<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSulotion</span>(<span class="hljs-params">unittest.TestCase</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;声明Python UnitTest Class用于测试</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setUp</span>(<span class="hljs-params">self</span>):</span><br>        self.test_class = Solution()<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_replaceSpace</span>(<span class="hljs-params">self</span>):</span><br>        s = [<span class="hljs-string">&quot;cad eaeb&quot;</span>, <span class="hljs-string">&quot;a   b&quot;</span>, <span class="hljs-string">&quot;a b  &quot;</span>, <span class="hljs-string">&quot;  a b&quot;</span>, <span class="hljs-string">&quot;     &quot;</span>, <span class="hljs-string">&quot;We are happy.&quot;</span>, <span class="hljs-string">&quot;&quot;</span>]<br>        answer = [<span class="hljs-string">&quot;cad%20eaeb&quot;</span>, <span class="hljs-string">&quot;a%20%20%20b&quot;</span>, <span class="hljs-string">&quot;a%20b%20%20&quot;</span>, <span class="hljs-string">&quot;%20%20a%20b&quot;</span>, <span class="hljs-string">&quot;%20%20%20%20%20&quot;</span>, <span class="hljs-string">&quot;We%20are%20happy.&quot;</span>, <span class="hljs-string">&quot;&quot;</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s)):<br>            self.assertEqual(self.test_class.replaceSpace(s[i]), answer[i])<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tearDown</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">del</span> self.test_class<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># 简单测试的方法</span><br>    unittest.main()<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/12/Python%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python爬虫入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/12/%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">
+                        <span class="hidden-mobile">算法复杂度分析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/12/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9805-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%98%93%EF%BC%89/';
+        this.page.identifier = '/2020/04/12/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9805-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%98%93%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

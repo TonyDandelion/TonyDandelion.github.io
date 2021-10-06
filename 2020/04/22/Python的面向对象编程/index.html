@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>Python的面向对象编程 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Python的面向对象编程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-22 11:08" pubdate>
+        2020年4月22日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python的面向对象编程</h1>
+            
+            <div class="markdown-body">
+              <p>面向对象编程——Object Oriented Programming，简称OOP，是一种程序设计思想。OOP把对象作为程序的基本单元，一个对象包含了数据和操作数据的函数。</p>
+<a id="more"></a>
+<p><em>参考连接</em></p>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017328525009056">廖雪峰Python面向对象编程教程</a></p>
+<p>面向过程的程序设计把计算机程序视为一系列的命令集合，即一组函数的顺序执行。为了简化程序设计，面向过程把函数继续切分为子函数，即把大块函数通过切割成小块函数来降低系统的复杂度。</p>
+<p>而面向对象的程序设计把计算机程序视为一组对象的集合，而每个对象都可以接收其他对象发过来的消息，并处理这些消息，计算机程序的执行就是一系列消息在各个对象之间传递。</p>
+<p>在Python中，所有数据类型都可以视为对象，当然也可以自定义对象。<strong>自定义的对象数据类型就是面向对象中的类（Class）的概念。</strong></p>
+<h1 id="对象：类与实例"><a href="#对象：类与实例" class="headerlink" title="对象：类与实例"></a>对象：类与实例</h1><p>python中，一切皆对象，所以类和实例，本质也还是对象，被称为类对象和实例对象。</p>
+<p><strong>类对象（class）是用来描述具有相同的属性和方法的对象的集合。</strong>它定义了该集合中每个对象所共有的属性和方法。</p>
+<p><strong><font color='red'>实例对象（object）是指通过类定义的数据结构实例。</font></strong>python中的对象都会有三个特征：</p>
+<ul>
+<li>身份，即是存储地址，可以通过<strong>id()</strong>函数来查询。</li>
+<li>类型，即对象所属的类型，可以用<strong>type()</strong>函数来查询。</li>
+<li>值，都会有各自的数据，由魔法函数 <code>__str__</code> 决定，默认会输出<strong>引用的对象</strong>。</li>
+</ul>
+<p>反过来说，<strong>实例</strong>就是对象在内存中开辟了空间。</p>
+<p>父母口中的女朋友（对象），怀里搂着的她（实例）。</p>
+<h1 id="Python类方法、类属性、静态方法"><a href="#Python类方法、类属性、静态方法" class="headerlink" title="Python类方法、类属性、静态方法"></a>Python类方法、类属性、静态方法</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>实例方法</th>
+<th>类方法</th>
+<th>静态方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义</td>
+<td>第一个参数必须是实例对象，该参数名一般约定为<code>self</code>，通过它来传递实例的属性和方法</td>
+<td>使用装饰器@classmethod。第一个参数必须是当前类对象，该参数名一般约定为 <code>cls</code>，通过它来传递类的属性和方法</td>
+<td>使用装饰器@staticmethod。参数随意，没有 <code>self</code> 和 <code>cls</code> 参数，但是方法体中不能使用类或实例的任何属性和方法</td>
+</tr>
+<tr>
+<td>调用</td>
+<td><strong>只能由实例对象调用</strong></td>
+<td>实例对象和类对象都可以调用</td>
+<td>实例对象和类对象都可以调用</td>
+</tr>
+<tr>
+<td>属性及方法传递</td>
+<td>（也可以传类的属性和方法）</td>
+<td>（不能传实例的属性和方法）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>代码演示</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Province</span>:</span><br>    memo = <span class="hljs-string">&#x27;One of China\&#x27;s 23 provinces&#x27;</span> <span class="hljs-comment">#静态字段</span><br>     <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, name, capital, leadership</span>):</span><br>        self.Name = name <span class="hljs-comment">#动态字段</span><br>        self.Capital = capital <span class="hljs-comment">#动态字段</span><br>        self.Leadership = leadership <span class="hljs-comment">#动态字段</span><br>    <br>    <span class="hljs-comment"># 这是实例方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sports</span>(<span class="hljs-params">self</span>):</span> <span class="hljs-comment"># 定义一个实例方法，类不能访问动态方法 self是实例本身</span><br>        print(self.Name + <span class="hljs-string">&#x27;The sports meeting&#x27;</span>)<br><br>    <span class="hljs-comment"># 定义类方法</span><br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build</span>(<span class="hljs-params">cls</span>):</span>  <span class="hljs-comment"># cls是类本身</span><br>        p = cls(<span class="hljs-string">&#x27;SiChuan&#x27;</span>, <span class="hljs-string">&#x27;Chengdu&#x27;</span>, <span class="hljs-string">&#x27;Pengqinghua&#x27;</span>)<br>        print(<span class="hljs-string">&#x27;cls:&#x27;</span>, cls)<br>        <span class="hljs-keyword">return</span> p<br><br>    <span class="hljs-comment"># 定义静态方法，实现类可以访问这个方法</span><br><span class="hljs-meta">    @staticmethod </span><span class="hljs-comment">#第一步、加一个自带的装饰器</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Foo</span>():</span> <span class="hljs-comment">#第二步，把shelf去掉</span><br>        print(<span class="hljs-string">&#x27;Anti-corruption activities&#x27;</span>)<br><br><br><span class="hljs-comment"># Test</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-comment"># 常用方法实例化两个对象，对象名分别是：hb、sd</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>hb = Province(<span class="hljs-string">&#x27;hebei&#x27;</span>,<span class="hljs-string">&#x27;shjiazhuang&#x27;</span>,<span class="hljs-string">&#x27;liyang&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>sd = Province(<span class="hljs-string">&#x27;shandong&#x27;</span>,<span class="hljs-string">&#x27;jinan&#x27;</span>,<span class="hljs-string">&#x27;angshenghui&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-comment"># 调用类方法实例化一个对象，对象名为：sc</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>sc = Province.build()<br>cls: &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">__main__</span>.<span class="hljs-title">Province</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; # 对象访问实例方法（动态方法）</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">hb</span>.<span class="hljs-title">sports</span>()</span><br><span class="hljs-class"><span class="hljs-title">hebeiThe</span> <span class="hljs-title">sports</span> <span class="hljs-title">meeting</span></span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">sd</span>.<span class="hljs-title">sports</span>()</span><br><span class="hljs-class"><span class="hljs-title">shandongThe</span> <span class="hljs-title">sports</span> <span class="hljs-title">meeting</span></span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">sc</span>.<span class="hljs-title">sports</span>()</span><br><span class="hljs-class"><span class="hljs-title">SiChuanThe</span> <span class="hljs-title">sports</span> <span class="hljs-title">meeting</span></span><br><span class="hljs-class">&gt;&gt;&gt; # 注意：类不能访问实例方法（动态方法）</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">Province</span>.<span class="hljs-title">sports</span>()</span><br><span class="hljs-class"><span class="hljs-title">Traceback</span> (<span class="hljs-params">most recent call last</span>):</span><br>  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>TypeError: sports() missing <span class="hljs-number">1</span> required positional argument: <span class="hljs-string">&#x27;self&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-comment">#通过类名访问静态方法</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>Province.Foo()<br>Anti-corruption activities<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-comment">#那么，对象是否能够访问静态方法呢？答案是可以的</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>hb.Foo()<br>Anti-corruption activities<br></code></pre></div></td></tr></table></figure>
+<p><em>参考链接</em></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42976139/article/details/102662996">菜鸟和大白谁厉害 - python中：类方法、静态方法、动态方法的理解</a></p>
+<p>补充讨论：<code>Self</code> 和 <code>cls</code> 的 区别</p>
+<p><strong>从上面可以看出</strong></p>
+<ul>
+<li>self总是指调用时的实例对象本身。</li>
+<li>cls总是指向类对象本身。</li>
+</ul>
+<p><strong>关于self还有其他要点</strong></p>
+<ul>
+<li>self在定义时需要定义，但是在调用时会自动传入。</li>
+<li>self的名字并不是规定死的，但是最好还是按照约定是用self</li>
+</ul>
+<p>self名称不是必须的，在python中self不是关键词，你可以定义成a或b或其它名字都可以,但是约定成俗（为了和其他编程语言统一，减少理解难度），不要搞另类，大家会不明白的。</p>
+<p>下例中将self改为myname一样没有错误：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_init_</span>(<span class="hljs-params">myname,name</span>):</span><br>        myname.name=name<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sayhello</span>(<span class="hljs-params">myname</span>):</span><br>        <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;My name is:&#x27;</span>,myname.name<br>p=Person(<span class="hljs-string">&#x27;Bill&#x27;</span>)<br><span class="hljs-built_in">print</span> p<br></code></pre></div></td></tr></table></figure>
+<p>self指的是<strong>实例对象本身</strong>(注意：不是类本身，cls指向<strong>类对象本身</strong>)。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_init_</span>(<span class="hljs-params">self,name</span>):</span><br>        self.name=name<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sayhello</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;My name is:&#x27;</span>,self.name<br>p=Person(<span class="hljs-string">&#x27;Bill&#x27;</span>)<br><span class="hljs-built_in">print</span> p<br></code></pre></div></td></tr></table></figure>
+<p>在上述例子中，self指向<code>Person</code>的实例<code>p</code>。 为什么不是指向类本身呢，如下例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_init_</span>(<span class="hljs-params">self,name</span>):</span><br>        self.name=name<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sayhello</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-built_in">print</span> <span class="hljs-string">&#x27;My name is:&#x27;</span>,self.name<br>p1 = Person(<span class="hljs-string">&#x27;Bill&#x27;</span>)<br>p2 = Person(<span class="hljs-string">&#x27;Apple&#x27;</span>)<br>print(p1)<br></code></pre></div></td></tr></table></figure>
+<p>如果self指向类本身，那么当有多个实例对象时，self指向哪一个呢？</p>
+<blockquote>
+<p>转载链接</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chownjy/p/8663024.html">Python类中的self到底是干啥的</a></p>
+<h1 id="访问限制"><a href="#访问限制" class="headerlink" title="访问限制"></a>访问限制</h1><h1 id="继承和多态"><a href="#继承和多态" class="headerlink" title="继承和多态"></a>继承和多态</h1><h2 id="抽象类和接口类"><a href="#抽象类和接口类" class="headerlink" title="抽象类和接口类"></a>抽象类和接口类</h2><h1 id="获取对象信息"><a href="#获取对象信息" class="headerlink" title="获取对象信息"></a>获取对象信息</h1><h1 id="实例属性和类属性"><a href="#实例属性和类属性" class="headerlink" title="实例属性和类属性"></a>实例属性和类属性</h1><h1 id="抽象类和接口类-1"><a href="#抽象类和接口类-1" class="headerlink" title="抽象类和接口类"></a>抽象类和接口类</h1><h1 id="使用-slots"><a href="#使用-slots" class="headerlink" title="使用__slots__"></a>使用__slots__</h1><h1 id="使用-property"><a href="#使用-property" class="headerlink" title="使用@property"></a>使用@property</h1><h1 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h1><h1 id="定制类"><a href="#定制类" class="headerlink" title="定制类"></a>定制类</h1><h1 id="使用枚举类"><a href="#使用枚举类" class="headerlink" title="使用枚举类"></a>使用枚举类</h1><h1 id="使用元类"><a href="#使用元类" class="headerlink" title="使用元类"></a>使用元类</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/22/Ngix%E5%9F%BA%E7%A1%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ngix基础（转载）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/19/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9806-%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">剑指offer 面试题06. 从尾到头打印链表（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/22/Python%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/';
+        this.page.identifier = '/2020/04/22/Python%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

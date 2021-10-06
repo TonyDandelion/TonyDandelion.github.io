@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>如何利用自己的数据训练一个分类网络 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="如何利用自己的数据训练一个分类网络">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-03-31 00:19" pubdate>
+        2018年3月31日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">如何利用自己的数据训练一个分类网络</h1>
+            
+            <div class="markdown-body">
+              <p>从零开始学会如何利用自己的数据训练一个分类网络</p>
+<a id="more"></a>
+<h1 id="1、准备训练数据和测试数据"><a href="#1、准备训练数据和测试数据" class="headerlink" title="1、准备训练数据和测试数据"></a>1、准备训练数据和测试数据</h1><p>下载地址如下：<br>animal:<br><a target="_blank" rel="noopener" href="http://www.robots.ox.ac.uk/~vgg/data/pets/">http://www.robots.ox.ac.uk/~vgg/data/pets/</a><br>flower:<br><a target="_blank" rel="noopener" href="http://www.robots.ox.ac.uk/~vgg/data/flowers/">http://www.robots.ox.ac.uk/~vgg/data/flowers/</a><br>plane:<br><a target="_blank" rel="noopener" href="http://www.robots.ox.ac.uk/~vgg/data/airplanes_side/airplanes_side.tar">http://www.robots.ox.ac.uk/~vgg/data/airplanes_side/airplanes_side.tar</a><br>house:<br><a target="_blank" rel="noopener" href="http://www.robots.ox.ac.uk/~vgg/data/houses/houses.tar">http://www.robots.ox.ac.uk/~vgg/data/houses/houses.tar</a><br>guitar:<br><a target="_blank" rel="noopener" href="http://www.robots.ox.ac.uk/~vgg/data/guitars/guitars.tar">http://www.robots.ox.ac.uk/~vgg/data/guitars/guitars.tar</a>  </p>
+<p>数据文档结构如下：</p>
+<figure class="highlight haskell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haskell">└── <span class="hljs-class"><span class="hljs-keyword">data</span></span><br>    ├── test<br>    │   ├── animal<br>    │   ├── flower<br>    │   ├── guitar<br>    │   ├── house<br>    │   └── plane<br>    └── train<br>        ├── animal<br>        ├── flower<br>        ├── guitar<br>        ├── house<br>        └── plane<br><br></code></pre></div></td></tr></table></figure>
+<p>数量：以花为例，800+的图片，测试300+，训练500张。在剩下的不包含在test和train的图片中，每一类选择2张，共计10张图片作为demon测试图片。</p>
+<h1 id="2、制作标签"><a href="#2、制作标签" class="headerlink" title="2、制作标签"></a>2、制作标签</h1><p>格式:文件路径+标签<br>代码如下，注意修改路径：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-comment">#定义Caffe根目录</span><br>caffe_root = <span class="hljs-string">&#x27;E:/Caffe-windows/caffe-windows/&#x27;</span><br><br><span class="hljs-comment">#制作训练标签数据</span><br>i = <span class="hljs-number">0</span> <span class="hljs-comment">#标签</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(caffe_root + <span class="hljs-string">&#x27;models/my_models_recognition/labels/train.txt&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> train_txt: <br>    <span class="hljs-keyword">for</span> root,dirs,files <span class="hljs-keyword">in</span> os.walk(caffe_root+<span class="hljs-string">&#x27;models/my_models_recognition/data/train/&#x27;</span>): <span class="hljs-comment">#遍历文件夹</span><br>        <span class="hljs-keyword">for</span> <span class="hljs-built_in">dir</span> <span class="hljs-keyword">in</span> dirs:<br>            <span class="hljs-keyword">for</span> root,dirs,files <span class="hljs-keyword">in</span> os.walk(caffe_root+<span class="hljs-string">&#x27;models/my_models_recognition/data/train/&#x27;</span>+<span class="hljs-built_in">str</span>(<span class="hljs-built_in">dir</span>)): <span class="hljs-comment">#遍历每一个文件夹中的文件 </span><br>                <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files:<br>                    image_file = <span class="hljs-built_in">str</span>(<span class="hljs-built_in">dir</span>) + <span class="hljs-string">&#x27;\\&#x27;</span> + <span class="hljs-built_in">str</span>(file)<br>                    label = image_file + <span class="hljs-string">&#x27; &#x27;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&#x27;\n&#x27;</span>       <span class="hljs-comment">#文件路径+空格+标签编号+换行 </span><br>                    train_txt.writelines(label)                   <span class="hljs-comment">#写入标签文件中</span><br>                i+=<span class="hljs-number">1</span> <span class="hljs-comment">#编号加1</span><br><br><br><span class="hljs-comment">#制作测试标签数据</span><br>i=<span class="hljs-number">0</span> <span class="hljs-comment">#标签</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(caffe_root + <span class="hljs-string">&#x27;models/my_models_recognition/labels/test.txt&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> test_txt:<br>    <span class="hljs-keyword">for</span> root,dirs,files <span class="hljs-keyword">in</span> os.walk(caffe_root+<span class="hljs-string">&#x27;models/my_models_recognition/data/test/&#x27;</span>): <span class="hljs-comment">#遍历文件夹</span><br>        <span class="hljs-keyword">for</span> <span class="hljs-built_in">dir</span> <span class="hljs-keyword">in</span> dirs:<br>            <span class="hljs-keyword">for</span> root,dirs,files <span class="hljs-keyword">in</span> os.walk(caffe_root+<span class="hljs-string">&#x27;models/my_models_recognition/data/test/&#x27;</span>+<span class="hljs-built_in">str</span>(<span class="hljs-built_in">dir</span>)): <span class="hljs-comment">#遍历每一个文件夹中的文件</span><br>                <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files:<br>                    image_file = <span class="hljs-built_in">str</span>(<span class="hljs-built_in">dir</span>) + <span class="hljs-string">&#x27;\\&#x27;</span> + <span class="hljs-built_in">str</span>(file)<br>                    label = image_file + <span class="hljs-string">&#x27; &#x27;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&#x27;\n&#x27;</span>       <span class="hljs-comment">#文件路径+空格+标签编号+换行 </span><br>                    test_txt.writelines(label)                   <span class="hljs-comment">#写入标签文件中</span><br>                i+=<span class="hljs-number">1</span><span class="hljs-comment">#编号加1</span><br>                <br><span class="hljs-built_in">print</span> <span class="hljs-string">&quot;成功生成文件列表&quot;</span> <br></code></pre></div></td></tr></table></figure></p>
+<h1 id="3、数据转换-将图片转为LMDB格式"><a href="#3、数据转换-将图片转为LMDB格式" class="headerlink" title="3、数据转换,将图片转为LMDB格式"></a>3、数据转换,将图片转为LMDB格式</h1><p>参考<a target="_blank" rel="noopener" href="http://onclick.ac.cn/2018/03/27/affe%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/#%E5%88%A9%E7%94%A8convert-imageset%E7%94%9F%E6%88%90lmdb%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%AE%AD%E7%BB%83%E3%80%81%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE">这个博客</a></p>
+<p>代码如下：<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment"># convert_imageset路径</span><br><span class="hljs-comment"># 重新修改图片的分辨率位256\*256</span><br><span class="hljs-comment"># 打乱图片顺序shuffle</span><br><span class="hljs-comment"># 设置转换为lmdb格式</span><br><span class="hljs-comment"># 图片路径</span><br><span class="hljs-comment"># 图片标签</span><br><span class="hljs-comment"># lmdb文件的输出路径</span><br>.<span class="hljs-regexp">/build/</span>tools<span class="hljs-regexp">/convert_imageset --resize_height=256 --resize_width=256 --shuffle --backend=&quot;lmdb&quot; models/</span>classification_CNN<span class="hljs-regexp">/data/</span>train models<span class="hljs-regexp">/classification_CNN/</span>dlabels<span class="hljs-regexp">/train.txt models/</span>classification_CNN<span class="hljs-regexp">/lmdb/</span>train<br><br></code></pre></div></td></tr></table></figure></p>
+<h1 id="4、修改网络模型文件"><a href="#4、修改网络模型文件" class="headerlink" title="4、修改网络模型文件"></a>4、修改网络模型文件</h1><ul>
+<li>修改均值文件使用方法，不使用均值文件，使用通用均值文件<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-meta">#   transform_param &#123;</span><br><span class="hljs-meta">#     mirror: true</span><br><span class="hljs-meta">#     crop_size: 227</span><br><span class="hljs-meta">#     mean_file: <span class="hljs-string">&quot;data/ilsvrc12/imagenet_mean.binaryproto&quot;</span></span><br><span class="hljs-meta">#   &#125;</span><br><span class="hljs-meta"># mean pixel / channel-wise mean instead of mean image</span><br>  <span class="hljs-class">transform_param </span>&#123;<br><span class="hljs-symbol">    crop_size:</span> <span class="hljs-number">227</span>  <span class="hljs-meta"># 传入的图片是256*256，现在在其中框出一个227*227的小图片 以此来增大训练集</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">104</span>  <span class="hljs-meta"># 通用均值</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">117</span><br><span class="hljs-symbol">    mean_value:</span> <span class="hljs-number">123</span><br><span class="hljs-symbol">    mirror:</span> true  <span class="hljs-meta"># 镜像操作 扩大数据集</span><br>  &#125;<br></code></pre></div></td></tr></table></figure></li>
+<li>修改数据输入层的数据来源路径以及batch_size，需要适当调小一点。<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-class">data_param </span>&#123;<br><span class="hljs-symbol">  source:</span> <span class="hljs-string">&quot;/home/weijian/caffe/models/classification_CNN/lmdb/train&quot;</span><br><span class="hljs-symbol">  batch_size:</span> <span class="hljs-number">100</span><br><span class="hljs-symbol">  backend:</span> LMDB<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<li>修改中间fc6、fc7这两个全连接层的特征平面数量为512，原来的4000+的特征平面数量会造成过拟合。  </li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts">fc6<br><span class="hljs-class">layer </span>&#123;<br><span class="hljs-symbol">  name:</span> <span class="hljs-string">&quot;fc6&quot;</span><br><span class="hljs-symbol">  type:</span> <span class="hljs-string">&quot;InnerProduct&quot;</span><br><span class="hljs-symbol">  bottom:</span> <span class="hljs-string">&quot;pool5&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;fc6&quot;</span><br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">1</span><br>  &#125;<br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">0</span><br>  &#125;<br>  <span class="hljs-class">inner_product_param </span>&#123;<br><span class="hljs-symbol">    num_output:</span> <span class="hljs-number">512</span> <span class="hljs-meta"># 这里改成512</span><br>    <span class="hljs-class">weight_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;gaussian&quot;</span><br><span class="hljs-symbol">      std:</span> <span class="hljs-number">0.005</span><br>    &#125;<br>    <span class="hljs-class">bias_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;constant&quot;</span><br><span class="hljs-symbol">      value:</span> <span class="hljs-number">1</span><br>    &#125;<br>  &#125;<br>&#125;<br><br>fc7<br><span class="hljs-class">layer </span>&#123;<br><span class="hljs-symbol">  name:</span> <span class="hljs-string">&quot;fc7&quot;</span><br><span class="hljs-symbol">  type:</span> <span class="hljs-string">&quot;InnerProduct&quot;</span><br><span class="hljs-symbol">  bottom:</span> <span class="hljs-string">&quot;fc6&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;fc7&quot;</span><br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">1</span><br>  &#125;<br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">0</span><br>  &#125;<br>  <span class="hljs-class">inner_product_param </span>&#123;<br><span class="hljs-symbol">    num_output:</span> <span class="hljs-number">512</span>  <span class="hljs-meta"># 这里改成512</span><br>    <span class="hljs-class">weight_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;gaussian&quot;</span><br><span class="hljs-symbol">      std:</span> <span class="hljs-number">0.005</span><br>    &#125;<br>    <span class="hljs-class">bias_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;constant&quot;</span><br><span class="hljs-symbol">      value:</span> <span class="hljs-number">1</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>修改最后一个全连接层的输出为5种类型，因为设置了house、flower、animal、guitar、plane五种数据。</li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-class">layer </span>&#123;<br><span class="hljs-symbol">  name:</span> <span class="hljs-string">&quot;fc8&quot;</span><br><span class="hljs-symbol">  type:</span> <span class="hljs-string">&quot;InnerProduct&quot;</span><br><span class="hljs-symbol">  bottom:</span> <span class="hljs-string">&quot;fc7&quot;</span><br><span class="hljs-symbol">  top:</span> <span class="hljs-string">&quot;fc8&quot;</span><br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">1</span><br>  &#125;<br>  <span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">    lr_mult:</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">    decay_mult:</span> <span class="hljs-number">0</span><br>  &#125;<br>  <span class="hljs-class">inner_product_param </span>&#123;<br><span class="hljs-symbol">    num_output:</span> <span class="hljs-number">5</span>  <span class="hljs-meta"># 这里哟</span><br>    <span class="hljs-class">weight_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;gaussian&quot;</span><br><span class="hljs-symbol">      std:</span> <span class="hljs-number">0.01</span><br>    &#125;<br>    <span class="hljs-class">bias_filler </span>&#123;<br><span class="hljs-symbol">      type:</span> <span class="hljs-string">&quot;constant&quot;</span><br><span class="hljs-symbol">      value:</span> <span class="hljs-number">0</span><br>    &#125;<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<h1 id="5、修改超参数文件"><a href="#5、修改超参数文件" class="headerlink" title="5、修改超参数文件"></a>5、修改超参数文件</h1><ul>
+<li>修改net(网络结构文件的位置)  </li>
+</ul>
+<figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm"><span class="hljs-symbol">net:</span> <span class="hljs-string">&quot;/home/weijian/caffe/models/classification_CNN/train_val.prototxt&quot;</span><br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>修改test_iter(在测试的时候，需要迭代的次数。) test_iter = 测试图片的数量 / Test layer的batch_size<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">test_iter</span>: <span class="hljs-number">30</span>  # 测试集一共<span class="hljs-number">1500</span>张图片，Test layer的batch_size是<span class="hljs-number">50</span>，则在测试的时候，需要迭代<span class="hljs-number">30</span>次，即每<span class="hljs-number">30</span>次完成一次对所有测试集的测试。<br></code></pre></div></td></tr></table></figure></li>
+<li>修改test_interval(每训练多少次，开始一次测试。)  test_interval = 训练图片数量 / Train layer的batch_siz<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">test_interval</span>: <span class="hljs-number">250</span> # 一共<span class="hljs-number">2500</span>张训练图片，Train_layer的batch_size是<span class="hljs-number">100</span>，则每<span class="hljs-number">250</span>次iterration完成一次对所有训练图片的测试。实际上，也可以随便设置，<span class="hljs-number">200</span>，<span class="hljs-number">210</span>都可以。<br></code></pre></div></td></tr></table></figure></li>
+<li>修改训练策略参数stepsize、max_iter、snapshot、snapshot_prefix<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">lr_policy</span>: <span class="hljs-string">&quot;step&quot;</span><br><span class="hljs-attribute">gamma</span>: <span class="hljs-number">0</span>.<span class="hljs-number">1</span><br><span class="hljs-attribute">stepsize</span>: <span class="hljs-number">1000</span><br><span class="hljs-attribute">display</span>: <span class="hljs-number">50</span><br><span class="hljs-attribute">max_iter</span>: <span class="hljs-number">10000</span><br><span class="hljs-attribute">momentum</span>: <span class="hljs-number">0</span>.<span class="hljs-number">9</span><br><span class="hljs-attribute">weight_decay</span>: <span class="hljs-number">0</span>.<span class="hljs-number">0005</span><br><span class="hljs-attribute">snapshot</span>: <span class="hljs-number">5000</span><br><span class="hljs-attribute">snapshot_prefix</span>: <span class="hljs-string">&quot;/home/weijian/caffe/models/classification_CNN/caffenet_train&quot;</span><br><span class="hljs-attribute">solver_mode</span>: GPU<br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="6、训练模型"><a href="#6、训练模型" class="headerlink" title="6、训练模型"></a>6、训练模型</h1><p>vim train.sh<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-comment">#!/usr/bin/env sh</span><br><span class="hljs-builtin-name">set</span> -e<br><br><span class="hljs-attribute">log_path</span>=<span class="hljs-string">&quot;logs/&quot;</span><br>mkdir -p <span class="hljs-variable">$log_path</span><br><br><span class="hljs-attribute">save_model_path</span>=<span class="hljs-string">&quot;caffemodel/&quot;</span><br>mkdir -p <span class="hljs-variable">$save_model_path</span><br><br><span class="hljs-comment"># training log</span><br><span class="hljs-attribute">file_prefix</span>=<span class="hljs-string">&quot;classification_CNN&quot;</span><br><span class="hljs-attribute">log_file</span>=$(date -d <span class="hljs-string">&quot;today&quot;</span> +<span class="hljs-string">&quot;%Y-%m-%d-%H:%M:%S&quot;</span>)<br><span class="hljs-attribute">log_file</span>=<span class="hljs-variable">$log_path</span><span class="hljs-variable">$file_prefix</span><span class="hljs-variable">$log_file</span><span class="hljs-string">&quot;.log&quot;</span><br><br><span class="hljs-comment"># caffe execute file path</span><br><span class="hljs-attribute">caffe_bin</span>=<span class="hljs-string">&quot;/home/weijian/caffe/build/tools/caffe&quot;</span><br><br><span class="hljs-comment"># trainning</span><br><span class="hljs-comment"># $caffe_bin train --solver=solver.prototxt  2&gt;&amp;1  | tee -a $log_file</span><br><span class="hljs-variable">$caffe_bin</span> train <span class="hljs-attribute">--solver</span>=solver.prototxt 2&gt;&amp;1 | tee ./logs/classification_CNN.log<br><br></code></pre></div></td></tr></table></figure></p>
+<h1 id="7、测试模型"><a href="#7、测试模型" class="headerlink" title="7、测试模型"></a>7、测试模型</h1><p>按照labels中的test.txt和train.txt的图片分类规则在labels文件夹中编辑label.txt，在test.txt和train.txt中，animal是0，guitar是1，以此类推，得到label.txt如下所示：<br><figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">animal</span><br><span class="hljs-attribute">guitar</span><br><span class="hljs-attribute">flower</span><br><span class="hljs-attribute">house</span><br><span class="hljs-attribute">plane</span><br></code></pre></div></td></tr></table></figure><br>vim testDemo.py<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix"><span class="hljs-built_in">import</span> caffe<br><span class="hljs-built_in">import</span> numpy as np<br><span class="hljs-built_in">import</span> matplotlib.pyplot as plt<br><span class="hljs-built_in">import</span> os<br><span class="hljs-built_in">import</span> PIL<br>from PIL <span class="hljs-built_in">import</span> Image<br><span class="hljs-built_in">import</span> sys<br><br><span class="hljs-comment">#定义Caffe根目录</span><br><span class="hljs-attr">caffe_root</span> = &#x27;/home/weijian/caffe/&#x27;<br><span class="hljs-comment">#网络结构描述文件</span><br><span class="hljs-attr">deploy_file</span> = caffe_root+&#x27;models/classification_CNN/deploy.prototxt&#x27;<br><span class="hljs-comment">#训练好的模型</span><br><span class="hljs-attr">model_file</span> = caffe_root+&#x27;models/classification_CNN/caffenet_train/solver_iter_10000.caffemodel&#x27;<br><br><span class="hljs-comment">#gpu模式</span><br>caffe.set_device(<span class="hljs-number">0</span>)  <span class="hljs-comment"># 如果你有多个GPU，那么选择第一个</span><br>caffe.set_mode_gpu()<br><span class="hljs-comment"># caffe.set_mode_gpu()</span><br><br><span class="hljs-comment">#定义网络模型</span><br><span class="hljs-attr">net</span> = caffe.Classifier(deploy_file, <span class="hljs-comment">#调用deploy文件</span><br>                       model_file,  <span class="hljs-comment">#调用模型文件</span><br>                       <span class="hljs-attr">channel_swap=(2,1,0),</span>  <span class="hljs-comment">#caffe中图片是BGR格式，而原始格式是RGB，所以要转化</span><br>                       <span class="hljs-attr">raw_scale=255,</span>         <span class="hljs-comment">#python中将图片存储为[0, 1]，而caffe中将图片存储为[0, 255]，所以需要一个转换</span><br>                       <span class="hljs-attr">image_dims=(227,</span> <span class="hljs-number">227</span>)) <span class="hljs-comment">#输入模型的图片要是227*227的图片</span><br><br><br><span class="hljs-comment">#分类标签文件</span><br><span class="hljs-attr">imagenet_labels_filename</span> = caffe_root +&#x27;models/classification_CNN/labels/label.txt&#x27;<br><span class="hljs-comment">#载入分类标签文件</span><br><span class="hljs-attr">labels</span> = np.loadtxt(imagenet_labels_filename, str)<br><br><span class="hljs-comment">#对目标路径中的图像，遍历并分类</span><br>for root,dirs,files <span class="hljs-keyword">in</span> os.walk(caffe_root+&#x27;models/classification_CNN/demo_test_image/&#x27;):<br>    for file <span class="hljs-keyword">in</span> files:<br>        <span class="hljs-comment">#加载要分类的图片</span><br>        <span class="hljs-attr">image_file</span> = os.path.join(root,file)<br>        <span class="hljs-attr">input_image</span> = caffe.io.load_image(image_file)<br><br>        <span class="hljs-comment">#打印图片路径及名称</span><br>        <span class="hljs-attr">image_path</span> = os.path.join(root,file)<br>        print(image_path)<br>        <br>        <span class="hljs-comment">#显示图片</span><br>        <span class="hljs-attr">img=Image.open(image_path)</span><br>        plt.imshow(img)<br>        plt.axis(&#x27;off&#x27;)<br>        plt.show()<br>        <br>        <span class="hljs-comment">#预测图片类别</span><br>        <span class="hljs-attr">prediction</span> = net.predict([input_image])<br>        print &#x27;predicted class:&#x27;,prediction[<span class="hljs-number">0</span>].argmax()<br><br>        <span class="hljs-comment"># 输出概率最大的前5个预测结果</span><br>        <span class="hljs-attr">top_k</span> = prediction[<span class="hljs-number">0</span>].argsort()[::-<span class="hljs-number">1</span>]<br>        for node_id <span class="hljs-keyword">in</span> top_k:     <br>            <span class="hljs-comment">#获取分类名称</span><br>            <span class="hljs-attr">human_string</span> = labels[node_id]<br>            <span class="hljs-comment">#获取该分类的置信度</span><br>            <span class="hljs-attr">score</span> = prediction[<span class="hljs-number">0</span>][node_id]<br>            print(&#x27;%s (<span class="hljs-attr">score</span> = %.<span class="hljs-number">5</span>f)&#x27; % (human_string, score))<br><br></code></pre></div></td></tr></table></figure><br>运行testDemo.py</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/caffe/">caffe</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/03/31/%E5%9B%BE%E5%83%8F%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87SSIM-PSNR-MSE%E5%88%86%E6%9E%90%E7%9A%84python%E5%AE%9E%E7%8E%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图像质量评估指标MSE/SSIM/PSNR的分析和python实现</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/03/28/%E7%94%A8PyCaffe%E8%BF%9B%E8%A1%8C%E7%89%B9%E5%BE%81%E5%8F%8A%E5%AD%A6%E4%B9%A0%E6%9B%B2%E7%BA%BF%E5%8F%AF%E8%A7%86%E5%8C%96/">
+                        <span class="hidden-mobile">使用PyCaffe进行特征图及学习曲线可视化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/03/31/%E4%BD%95%E5%88%A9%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AE%AD%E7%BB%83%E4%B8%80%E4%B8%AA%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C/';
+        this.page.identifier = '/2018/03/31/%E4%BD%95%E5%88%A9%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AE%AD%E7%BB%83%E4%B8%80%E4%B8%AA%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

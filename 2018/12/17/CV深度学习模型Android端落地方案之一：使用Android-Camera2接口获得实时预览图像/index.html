@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>CV深度学习模型Android端落地第一步：使用Android Camera2接口获得实时预览图像 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CV深度学习模型Android端落地第一步：使用Android Camera2接口获得实时预览图像">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-12-17 12:58" pubdate>
+        2018年12月17日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CV深度学习模型Android端落地第一步：使用Android Camera2接口获得实时预览图像</h1>
+            
+            <div class="markdown-body">
+              <p>这个系列的博客主要介绍如何在Android设备上移植你训练的cv神经网络模型。</p>
+<a id="more"></a>
+<p>主要过程如下：<br>1、使用<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/hardware/camera2/package-summary">Android Camera2 APIs</a>获得摄像头实时预览的画面。<br>2、如果是对人脸图像进行处理，使用Android Camera2自带的Face类来对人脸检测，并完成在预览画面上画框将人脸框出、添加文字的功能。<br>3、使用<a target="_blank" rel="noopener" href="https://tensorflow.google.cn/lite/">Tensorflow Lite</a> 将自己的训练得到的模型移植到Android上。</p>
+<p>以上三个步骤会分为三个博客，同时也会提供示例代码。步骤二可以根据你的实际需求跳过或修改。</p>
+<h1 id="搭建Android-Studio开发环境"><a href="#搭建Android-Studio开发环境" class="headerlink" title="搭建Android Studio开发环境"></a>搭建Android Studio开发环境</h1><p>在Win10或Ubuntu平台上搭建Android Stuido开发环境过程都是一样的。  </p>
+<p>1、安装JDK1.8并配置环境变量 输入<code>java --version</code>提示版本则成功<br>2、下载<a target="_blank" rel="noopener" href="https://android-sdk.en.softonic.com/">AndroidSDK</a>并解压，Win10下SDK目录下启动SDK Manager.exe，Ubuntu下在tool目录下执行可执行文件android可以打开SDK manager。可以在这里面配置sdk版本、NDK版本、Cmake、LLDB等，一般装好SKD就可以了，其他的Tools按需安装即可。<br>3、前往官网下载安装Android Studio，在开始使用前要配置一下JDK和SDK的路径。  </p>
+<p><strong>需要注意的是，在Ubuntu下，最好前往/opt/android/bin目录（替换成你的AS安装目录）下，执行<code>sudo sh studio.sh</code>，以root权限打开Android studio，这样一来会避免很多莫名其妙的问题出现。</strong></p>
+<p>以下是我的项目的配置情况  </p>
+<ul>
+<li>Android Studio版本：<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Android</span> Studio <span class="hljs-number">3</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span><br><span class="hljs-attribute">Build</span> #AI-<span class="hljs-number">181</span>.<span class="hljs-number">5540</span>.<span class="hljs-number">7</span>.<span class="hljs-number">32</span>.<span class="hljs-number">5056338</span>, built <span class="hljs-literal">on</span> October <span class="hljs-number">9</span>, <span class="hljs-number">2018</span><br><span class="hljs-attribute">JRE</span>: <span class="hljs-number">1</span>.<span class="hljs-number">8</span>.<span class="hljs-number">0</span>_<span class="hljs-number">152</span>-release-<span class="hljs-number">1136</span>-b<span class="hljs-number">06</span> amd<span class="hljs-number">64</span><br><span class="hljs-attribute">JVM</span>: OpenJDK <span class="hljs-number">64</span>-Bit Server VM by JetBrains s.r.o<br><span class="hljs-attribute">Windows</span> <span class="hljs-number">10</span> <span class="hljs-number">10</span>.<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure></li>
+<li>JDK版本：<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">java</span> version <span class="hljs-string">&quot;1.8.0_191&quot;</span><br><span class="hljs-attribute">Java</span>(TM) SE Runtime Environment (build <span class="hljs-number">1</span>.<span class="hljs-number">8</span>.<span class="hljs-number">0</span>_<span class="hljs-number">191</span>-b<span class="hljs-number">12</span>)<br><span class="hljs-attribute">Java</span> HotSpot(TM) <span class="hljs-number">64</span>-Bit Server VM (build <span class="hljs-number">25</span>.<span class="hljs-number">191</span>-b<span class="hljs-number">12</span>, mixed mode)<br></code></pre></div></td></tr></table></figure></li>
+<li>测试机型号<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">HUAWEI</span> MATE <span class="hljs-number">9</span>(<span class="hljs-number">4</span>G+<span class="hljs-number">64</span>G)<br></code></pre></div></td></tr></table></figure></li>
+<li>SDK版本 SDK版本一般是根据你的测试机型配置<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">Android</span> <span class="hljs-number">8</span>.<span class="hljs-number">1</span>(Oreo) <br><span class="hljs-attribute">API</span> Level：<span class="hljs-number">27</span><br><span class="hljs-attribute">Revision</span>：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure></li>
+<li>NDK版本<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">18</span>.<span class="hljs-number">1506</span><br></code></pre></div></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="根据CameraDemo修改代码获得实时预览图像"><a href="#根据CameraDemo修改代码获得实时预览图像" class="headerlink" title="根据CameraDemo修改代码获得实时预览图像"></a>根据CameraDemo修改代码获得实时预览图像</h1><h2 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h2><p><a target="_blank" rel="noopener" href="https://github.com/googlesamples/android-Camera2Basic">android-Camera2Basic</a></p>
+<p>git clone或者下载代码解压到工作文件夹下，用AS打开，下载Gradle，Syc项目（Syc按钮在Run按钮边上），版本和插件版本是有对应关系的。  </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Plugin version</th>
+<th>Required Gradle version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0.0 - 1.1.3</td>
+<td>2.2.1 - 2.3</td>
+</tr>
+<tr>
+<td>1.2.0 - 1.3.1</td>
+<td>2.2.1 - 2.9</td>
+</tr>
+<tr>
+<td>1.5.0</td>
+<td>2.2.1 - 2.13</td>
+</tr>
+<tr>
+<td>2.0.0 - 2.1.2</td>
+<td>2.10 - 2.13</td>
+</tr>
+<tr>
+<td>2.1.3 - 2.2.3</td>
+<td>2.14.1+</td>
+</tr>
+<tr>
+<td>2.3.0+</td>
+<td>3.3+</td>
+</tr>
+<tr>
+<td>3.0.0+</td>
+<td>4.1+</td>
+</tr>
+<tr>
+<td>3.1.0+</td>
+<td>4.4+</td>
+</tr>
+<tr>
+<td>3.2.0+</td>
+<td>4.6+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>appliction的build.gradle下面写的是gradle插件版本<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">buildscript&#123;<br>    dependencies &#123;<br>        classpath <span class="hljs-string">&#x27;com.android.tools.build:gradle:3.0.1&#x27;</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>gradle-wrapper.properties下记录gradel版本<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">distributionUrl=https\:<span class="hljs-comment">//services.gradle.org/distributions/gradle-4.4-all.zip</span><br></code></pre></div></td></tr></table></figure><br>Syc时使用<a target="_blank" rel="noopener" href="https://github.com/googlesamples/android-Camera2Basic">android-Camera2Basic</a>默认配置如若不行，可以按照AS提示更新到最新版本。</p>
+<h2 id="代码修改"><a href="#代码修改" class="headerlink" title="代码修改"></a>代码修改</h2><p>完成Syc（同步）之后 ，将手机连接上,使用debug run模式将代码部署到手机上，出现的效果应该是带前置预览画面和执行聚焦的一个button。</p>
+<h3 id="切换摄像头（optional）"><a href="#切换摄像头（optional）" class="headerlink" title="切换摄像头（optional）"></a>切换摄像头（optional）</h3><p>修改openCamera方法，使用前置摄像头。</p>
+<p>原openCamera方法代码<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Opens the camera specified by &#123;<span class="hljs-doctag">@link</span> Camera2BasicFragment#mCameraId&#125;.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openCamera</span><span class="hljs-params">(<span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)<br>            != PackageManager.PERMISSION_GRANTED) &#123;<br>        requestCameraPermission();<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    setUpCameraOutputs(width, height);<br>    configureTransform(width, height);<br>    Activity activity = getActivity();<br>    CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">if</span> (!mCameraOpenCloseLock.tryAcquire(<span class="hljs-number">2500</span>, TimeUnit.MILLISECONDS)) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Time out waiting to lock camera opening.&quot;</span>);<br>        &#125;<br>        manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);<br>    &#125; <span class="hljs-keyword">catch</span> (CameraAccessException e) &#123;<br>        e.printStackTrace();<br>    &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Interrupted while trying to lock camera opening.&quot;</span>, e);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>修改后的openCamera方法<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openCamera</span><span class="hljs-params">(<span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height, <span class="hljs-keyword">int</span> isSwitch)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)<br>            != PackageManager.PERMISSION_GRANTED) &#123;<br>        requestCameraPermission();<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    setUpCameraOutputs(width, height);<br>    configureTransform(width, height);<br>    Activity activity = getActivity();<br>    CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">if</span> (!mCameraOpenCloseLock.tryAcquire(<span class="hljs-number">2500</span>, TimeUnit.MILLISECONDS)) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Time out waiting to lock camera opening.&quot;</span>);<br>        &#125;            <br>        <span class="hljs-comment">// isSwitch==0 使用后置摄像头  isSwitch==1 使用前置摄像头</span><br>        <span class="hljs-keyword">if</span>(isSwitch==<span class="hljs-number">1</span>)&#123;<br>            mCameraId = <span class="hljs-string">&quot;1&quot;</span>;<br>        &#125;<br>        Log.d(TAG, <span class="hljs-string">&quot;openCamera is : &quot;</span>+mCameraId);<br>        manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);<br>    &#125; <span class="hljs-keyword">catch</span> (CameraAccessException e) &#123;<br>        e.printStackTrace();<br>    &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Interrupted while trying to lock camera opening.&quot;</span>, e);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>修改onSurfaceTextureAvailable方法和onResume方法选择以前置摄像头启动<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSurfaceTextureAvailable</span><span class="hljs-params">(SurfaceTexture texture, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span> </span>&#123;<br>	openCamera(width, height, <span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResume</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.onResume();<br>    startBackgroundThread();<br>    <br>    <span class="hljs-keyword">if</span> (mTextureView.isAvailable()) &#123;<br>        openCamera(mTextureView.getWidth(), mTextureView.getHeight(), <span class="hljs-number">1</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="注释掉按钮-获得真数据流的实时画面"><a href="#注释掉按钮-获得真数据流的实时画面" class="headerlink" title="注释掉按钮 获得真数据流的实时画面"></a>注释掉按钮 获得真数据流的实时画面</h3><p>在Android视图下编辑 <code>Application/res/layout</code> 的 <code>xml</code>文件 设置<strong>button</strong> 和<strong> image button</strong>属性 <code>android:visibility=&quot;invisible&quot;</code>。</p>
+<p>Android Camera2通过建立会话（session）机制来协调程序调用相机，<code>CameraCaptureSession.CaptureCallbac</code> 是一个抽象类，通过对这个抽象类的实现，我们可以处理 <code>CapterSession</code> 的回调内容。要获得每一帧的实时画面，应该在<strong>CameraCaptureSession.CaptureCallback</strong>中写相关代码。在这个Demo中，实时预览画面是展示在一个基于<code>Android Texture</code> 的 <code>Surface Vie</code> 控件的，我们通过调用<strong>Texture</strong>控件的<strong>getBitmap</strong>方法，就能得到当前Texture上的实时画面，想通过Camera2的API获得实时的帧数据比较麻烦，建议使用这样的方法，延迟也比较小。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> frameCount = <span class="hljs-number">0</span>;<br> <br><span class="hljs-keyword">private</span> CameraCaptureSession.CaptureCallback mCaptureCallback<br>    = <span class="hljs-keyword">new</span> CameraCaptureSession.CaptureCallback() &#123;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">(CaptureResult result)</span> </span>&#123;<br>    <span class="hljs-keyword">switch</span> (mState) &#123;<br>        <span class="hljs-keyword">case</span> STATE_PREVIEW: &#123;<br>          <span class="hljs-comment">// ************************** 重点部分 *************************************</span><br>          <span class="hljs-comment">// 打印出当前帧</span><br>          Log.d(TAG, <span class="hljs-string">&quot;frameCount is &quot;</span> + frameCount);<br>          frameCount = frameCount + <span class="hljs-number">1</span>;<br>          <span class="hljs-comment">// 预览模式下的情况 在这里获得预览图像用于输入你的神经网络中</span><br>          <span class="hljs-comment">// bitmap_get就是我们通过getBitmap方法得到的实时画面          </span><br>          Bitmap bitmap_get= mTextureView.getBitmap();<br>          <span class="hljs-comment">// *************************************************************************</span><br>          <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">case</span> STATE_WAITING_LOCK: &#123;<br>            Integer afState = result.get(CaptureResult.CONTROL_AF_STATE);<br>            <span class="hljs-keyword">if</span> (afState == <span class="hljs-keyword">null</span>) &#123;<br>                captureStillPicture();<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED == afState ||<br>                    CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) &#123;<br>                <span class="hljs-comment">// CONTROL_AE_STATE can be null on some devices</span><br>                Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);<br>                <span class="hljs-keyword">if</span> (aeState == <span class="hljs-keyword">null</span> ||<br>                        aeState == CaptureResult.CONTROL_AE_STATE_CONVERGED) &#123;<br>                    mState = STATE_PICTURE_TAKEN;<br>                    captureStillPicture();<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    runPrecaptureSequence();<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">case</span> STATE_WAITING_PRECAPTURE: &#123;<br>            <span class="hljs-comment">// CONTROL_AE_STATE can be null on some devices</span><br>            Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);<br>            <span class="hljs-keyword">if</span> (aeState == <span class="hljs-keyword">null</span> ||<br>                    aeState == CaptureResult.CONTROL_AE_STATE_PRECAPTURE ||<br>                    aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) &#123;<br>                mState = STATE_WAITING_NON_PRECAPTURE;<br>            &#125;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">case</span> STATE_WAITING_NON_PRECAPTURE: &#123;<br>            <span class="hljs-comment">// CONTROL_AE_STATE can be null on some devices</span><br>            Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);<br>            <span class="hljs-keyword">if</span> (aeState == <span class="hljs-keyword">null</span> || aeState != CaptureResult.CONTROL_AE_STATE_PRECAPTURE) &#123;<br>                mState = STATE_PICTURE_TAKEN;<br>                captureStillPicture();<br>            &#125;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>至此，我们就能够完成实时切换摄像头并获得了实时预览画面，后面会说明如何检测人脸并在预览画面上添加矩形框和文字以展示神经网络的处理结果。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8Face%E7%B1%BB%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%B9%B6%E5%B0%86%E4%BA%BA%E8%84%B8%E6%A1%86%E5%87%BA/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CV深度学习模型Android端落地第二步：使用Face类进行实时人脸检测并将人脸框出</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/20/%E5%B7%9D%E5%A4%A7%E6%9C%9B%E6%B1%9F%E6%A0%A1%E5%8C%BA%E5%86%85%E5%88%A9%E7%94%A8Netgear-Netgear-WNDR3800-%E6%90%AD%E5%BB%BA%E9%94%90%E6%8D%B7%E6%8B%A8%E5%8F%B7%E8%B7%AF%E7%94%B1%E5%99%A8/">
+                        <span class="hidden-mobile">川大望江校区内利用Netgear WNDR3800搭建锐捷拨号路由器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8Android-Camera2%E6%8E%A5%E5%8F%A3%E8%8E%B7%E5%BE%97%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88%E5%9B%BE%E5%83%8F/';
+        this.page.identifier = '/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8Android-Camera2%E6%8E%A5%E5%8F%A3%E8%8E%B7%E5%BE%97%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88%E5%9B%BE%E5%83%8F/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

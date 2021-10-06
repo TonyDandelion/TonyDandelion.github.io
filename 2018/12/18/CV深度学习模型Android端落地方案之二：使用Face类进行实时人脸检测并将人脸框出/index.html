@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>CV深度学习模型Android端落地第二步：使用Face类进行实时人脸检测并将人脸框出 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CV深度学习模型Android端落地第二步：使用Face类进行实时人脸检测并将人脸框出">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-12-18 00:34" pubdate>
+        2018年12月18日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      33
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CV深度学习模型Android端落地第二步：使用Face类进行实时人脸检测并将人脸框出</h1>
+            
+            <div class="markdown-body">
+              <p>这个系列的博客主要介绍如何在Android设备上移植你训练的cv神经网络模型。</p>
+<a id="more"></a>
+<p>主要过程如下：<br>1、使用Android Camera2 APIs获得摄像头实时预览的画面。<br>2、如果是对人脸图像进行处理，使用Android Camera2自带的Face类来对人脸检测，并完成在预览画面上画框将人脸框出、添加文字显示神经网络处理结果的功能。<br>3、使用Tensorflow Lite 将自己的训练得到的模型移植到Android上。</p>
+<p>以上三个步骤会分为三个博客，同时也会提供示例代码。步骤二可以根据你的实际需求跳过或修改。这是这个系列的第二篇博客。</p>
+<p><strong>主要业务逻辑代码都在Camera2BasicFragment.java中修改。不特殊说明，改动都是在Camera2BasicFragment.java中进行。</strong></p>
+<h1 id="使用Face类检测Camera2捕捉画面中的人脸"><a href="#使用Face类检测Camera2捕捉画面中的人脸" class="headerlink" title="使用Face类检测Camera2捕捉画面中的人脸"></a>使用Face类检测Camera2捕捉画面中的人脸</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>首先，要获得一些相机人脸检测的参数,在setUpCameraOutputs方法中获得相机有关人脸检测的一些属性，代码加在<code>mCameraId = cameraId;</code> 和 <code>return;</code>之间。主要是要获得<strong>mFaceDetectMode</strong>。  </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">mCameraId = cameraId;<br><br><span class="hljs-comment">//获取人脸检测参数</span><br><span class="hljs-keyword">int</span>[] FD =characteristics.get(CameraCharacteristics.STATISTICS_INFO_AVAILABLE_FACE_DETECT_MODES);  <span class="hljs-comment">//支持的人脸检测模式</span><br><span class="hljs-keyword">int</span> maxFD=characteristics.get(CameraCharacteristics.STATISTICS_INFO_MAX_FACE_COUNT);  <span class="hljs-comment">//支持的最大检测人脸数量</span><br><br><span class="hljs-keyword">if</span> (FD.length&gt;<span class="hljs-number">0</span>) &#123;<br>    List&lt;Integer&gt; fdList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> FaceD : FD) &#123;<br>        fdList.add(FaceD);<br>        Log.e(<span class="hljs-string">&quot;draw&quot;</span>, <span class="hljs-string">&quot;setUpCameraOutputs: FD type:&quot;</span> + Integer.toString(FaceD));<br>    &#125;<br>    <span class="hljs-keyword">if</span> (maxFD &gt; <span class="hljs-number">0</span>) &#123;<br>        mFaceDetectSupported = <span class="hljs-keyword">true</span>;<br>        mFaceDetectMode = Collections.max(fdList);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">return</span>;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>然后要在createCameraPreviewSession方法中添加如下代码，createCameraPreviewSession方法用于创建一个新的相机预览，加上这句代码之后，我们指定下一个相机预览的人脸检测模式，<strong>这样才能直接从CaptureResult中直接得到人脸。</strong>  </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// We set up a CaptureRequest.Builder with the output Surface.</span><br>mPreviewRequestBuilder<br>        = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);<br>mPreviewRequestBuilder.addTarget(surface);<br>+ mPreviewRequestBuilder.set(CaptureRequest.STATISTICS_FACE_DETECT_MODE, mFaceDetectMode); <span class="hljs-comment">// mFaceDetectMode is faceDetectMode 有0 1 2三种类型 加这一行</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="一行代码获得人脸位置"><a href="#一行代码获得人脸位置" class="headerlink" title="一行代码获得人脸位置"></a>一行代码获得人脸位置</h2><p>完成上述准备工作后，我们就可以在 CameraCaptureSession.CaptureCallback 方法中获得检测得到的人脸了。</p>
+<p>使用Face类进行人脸检测依赖于CaptureResult，我们在CameraCaptureSession.CaptureCallback中写相关的代码，紧接着上一篇博客的内容。 Face、Rect 这些类型属于系统类型，如果没有引入造成报错，在AS里面，光标放到报错的Face等代码上，按住alt+Enter，选择第一个解决方法，会帮你引入这些类。  </p>
+<p>face[]中就是我们想要检测的人脸。face[0]就是最大人脸，调用face[0].getBounds()获取人脸矩形框左上角、右下角的坐标，传入drawRectangle方法，在预览图像上根据人脸画出矩形框。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">switch</span> (mState) &#123;<br>    <span class="hljs-keyword">case</span> STATE_PREVIEW: &#123;<br>    <span class="hljs-comment">// We have nothing to do when the camera preview is working normally.</span><br>    <span class="hljs-comment">// ************************** 重点部分 *************************************</span><br>    FrameCount = FrameCount + <span class="hljs-number">1</span>;  <span class="hljs-comment">// FrameCount定义在方法外面 初始值为0</span><br>    <span class="hljs-comment">// We have nothing to do when the camera preview is working normally.</span><br>    <span class="hljs-comment">//获得Face类 face[]中就是我们得到的人脸</span><br>    Face face[] = result.get(result.STATISTICS_FACES);<br>    Log.d(<span class="hljs-string">&quot;draw&quot;</span>, <span class="hljs-string">&quot;face: &quot;</span> + Arrays.toString(face));<br>    Log.d(<span class="hljs-string">&quot;draw&quot;</span>, <span class="hljs-string">&quot;face detected &quot;</span> + Integer.toString(face.length));<br>    <span class="hljs-comment">// 打印出当前帧编号</span><br>    Log.d(<span class="hljs-string">&quot;draw&quot;</span>, <span class="hljs-string">&quot;frameCount is &quot;</span> + FrameCount);<br>    FrameCount = FrameCount + <span class="hljs-number">1</span>;<br>    <br>    <span class="hljs-keyword">if</span> (face.length&gt;<span class="hljs-number">0</span>)&#123;<br>        Log.d(TAG, <span class="hljs-string">&quot;face detected &quot;</span> + Integer.toString(face.length));<br>        <span class="hljs-comment">//获取人脸矩形框</span><br>        Rect bounds = face[<span class="hljs-number">0</span>].getBounds();<br>        <span class="hljs-comment">// 成像画面与相机画面存在着比例缩放和角度变化需要在drawRectangle中再进行调整</span><br>        <span class="hljs-keyword">int</span>[] face_rec = drawRectangle(bounds.left, bounds.top, bounds.right, bounds.bottom);<br><br>        <span class="hljs-comment">// 每隔FrameInterval帧 将图像输入你的神经网络处理一次得到结果</span><br>        <span class="hljs-comment">// FrameInterval为间隔帧需要你自己定义在方法之外</span><br>        <span class="hljs-keyword">if</span>(FrameCount%FrameInterval == <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-comment">// 预览模式下的情况 在这里获得预览图像用于输入你的神经网络中</span><br>            <span class="hljs-comment">// bitmap_get就是我们通过getBitmap方法得到的实时画面</span><br>            Bitmap bitmap_get= mTextureView.getBitmap();<br>            do_someting(bitmap_get);<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">// *************************************************************************</span><br>      <span class="hljs-keyword">break</span>;<br>    &#125;<br>    ..........<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="将人脸在预览图像上框出来"><a href="#将人脸在预览图像上框出来" class="headerlink" title="将人脸在预览图像上框出来"></a>将人脸在预览图像上框出来</h1><p>由于成像画面和预览画面存在缩放以及旋转变化，所以需要调整，具体思路是这样的：  </p>
+<ul>
+<li><p>这个demo里面成像画面不是Canvas而是TextureView，TextureView加上FrameLayout部分才能构成Canvas，Canvas比TextureView大一些，网上很多博客使用了Canvas进行数据转换，会出现框不到人脸的错误，这一点要特别注意。  </p>
+</li>
+<li><p>简单总结一下：<br>1、由于成像画面和预览画面存在的缩放问题，第一步是要把传入的基于成像画面的人脸框坐标缩放转换成预览画面中的人脸框坐标。<br>2、完成缩放之后根据相机画面和预览画面的旋转角度写特定的代码把矩形框左上角和右下角的坐标转换过来。  </p>
+</li>
+</ul>
+<p><strong>使用如下代码可以知道当前摄像头相机画面和预览画面的旋转角度，华为Mate 9的后置摄像头是顺时针90°，前置摄像头是顺时针270°。不同设备不一样，根据相机的旋转角度实际情况自行调整，这部分代码可以参考我的写法自行修改。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 这是查看相机画面和预览画面的旋转角度的方法</span><br><span class="hljs-comment">// CameraCharacteristics.SENSOR_ORIENTATION就是当前相机的旋转角度</span><br>Log.d(<span class="hljs-string">&quot;SENSOR_ORIENTATION&quot;</span>, <span class="hljs-string">&quot;cameraId is &quot;</span>+cameraId);<br>Log.d(<span class="hljs-string">&quot;SENSOR_ORIENTATION&quot;</span>, <span class="hljs-string">&quot;SENSOR_ORIENTATION is &quot;</span>+characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION));<br></code></pre></div></td></tr></table></figure>
+<h2 id="获取成像尺寸数据"><a href="#获取成像尺寸数据" class="headerlink" title="获取成像尺寸数据"></a>获取成像尺寸数据</h2><p>在写方法之前要先保存成像画面的尺寸，在private void setUpCameraOutputs(int width, int height) {}方法里面保存变量值，setUpCameraOutputs方法的作用就是设置一些相机初始值，曝光模式、聚焦模式等。<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Size cPixelSize;  <span class="hljs-comment">// 在外面一个位置 声明保存成像尺寸的变量</span><br><br><span class="hljs-comment">// 然后在setUpCameraOutputs方法里面保存cPixelSize变量的值</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUpCameraOutputs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span> </span>&#123;<br>   Activity activity = getActivity();<br>   CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);<br>	<span class="hljs-keyword">try</span> &#123;    			<br>		<span class="hljs-keyword">for</span> (String cameraId : manager.getCameraIdList()) &#123;<br>			CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);<br>			cPixelSize = characteristics.get(CameraCharacteristics.SENSOR_INFO_PIXEL_ARRAY_SIZE);   <span class="hljs-comment">// 获取成像尺寸 同上用于后续的人脸检测框调整    </span><br>    		<span class="hljs-comment">// .....      </span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="添加surfaceview用于画框"><a href="#添加surfaceview用于画框" class="headerlink" title="添加surfaceview用于画框"></a>添加surfaceview用于画框</h2><ul>
+<li>编辑Application/res/layout的xml文件，添加一个如下所示的SurfaceView。在页面上新建一个SurfaceView并置顶用于显示矩形框</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml">&lt;SurfaceView<br>  android:id=&quot;@+id/surfaceview_show_rectangle&quot;<br>  android:layout_width=&quot;match_parent&quot;<br>  android:layout_height=&quot;483dp&quot;<br>  android:layout_alignParentStart=&quot;true&quot;<br>  android:layout_alignParentTop=&quot;true&quot;<br>  android:layout_marginStart=&quot;0dp&quot;<br>  android:layout_marginTop=&quot;0dp&quot; <br>/&gt;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>在Camera2BasicFragment.java中修改onViewCreated方法，添加surfaceview_show_rectangle并将其初始化： </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> SurfaceHolder surfaceHolder;<br><span class="hljs-keyword">private</span> SurfaceView surfaceview;<br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onViewCreated</span><span class="hljs-params">(<span class="hljs-keyword">final</span> View view, Bundle savedInstanceState)</span> </span>&#123;<br>    view.findViewById(R.id.picture).setOnClickListener(<span class="hljs-keyword">this</span>);<br>    view.findViewById(R.id.info).setOnClickListener(<span class="hljs-keyword">this</span>);<br>    mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);<br><br>    view.findViewById(R.id.surfaceview_show_rectangle).setOnClickListener(<span class="hljs-keyword">this</span>);<br>    <span class="hljs-comment">// 设置画人脸框的surface</span><br>    surfaceview = (SurfaceView)view.findViewById(R.id.surfaceview_show_rectangle);<br>    surfaceview.setZOrderOnTop(<span class="hljs-keyword">true</span>);  <span class="hljs-comment">//处于顶层</span><br>    surfaceview.getHolder().setFormat(PixelFormat.TRANSPARENT);  <span class="hljs-comment">//设置surface为透明</span><br>    surfaceHolder = surfaceview.getHolder(); <span class="hljs-comment">//设置一下SurfaceView并获取到surfaceHolder便于后面画框</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="drawRectangle方法"><a href="#drawRectangle方法" class="headerlink" title="drawRectangle方法"></a>drawRectangle方法</h2><p>以下就是drawRectangle方法，这里只使用了前置摄像头，所以只进行了270°变换的矫正。<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 在SurfaceView上画人脸框图</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] drawRectangle(<span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> top, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span> bottom)&#123;<br><br>    <span class="hljs-comment">//定义画笔</span><br>    Paint mpaint = <span class="hljs-keyword">new</span> Paint();<br>    mpaint.setColor(Color.BLUE);<br>    <span class="hljs-comment">// mpaint.setAntiAlias(true);//去锯齿</span><br>    mpaint.setStyle(Paint.Style.STROKE);<span class="hljs-comment">//空心</span><br>    <span class="hljs-comment">// 设置paint的外框宽度</span><br>    mpaint.setStrokeWidth(<span class="hljs-number">5f</span>);<br><br>    Canvas canvas = <span class="hljs-keyword">new</span> Canvas();<br>    canvas = surfaceHolder.lockCanvas();<br>    canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR); <span class="hljs-comment">//清楚掉上一次的画框。</span><br><br>    <span class="hljs-comment">// 由于成像画面和预览画面存在缩放旋转关系 所以需要调整</span><br>    <span class="hljs-comment">//成像画面与方框绘制画布长宽比比例（同画面角度情况下的长宽比例（此处前后摄像头成像画面相对预览画面倒置（±90°），计算比例时长宽互换））</span><br>    <span class="hljs-keyword">float</span> scaleWidth = canvas.getHeight()*<span class="hljs-number">1.0f</span>/cPixelSize.getWidth();<br>    <span class="hljs-keyword">float</span> scaleHeight = canvas.getWidth()*<span class="hljs-number">1.0f</span>/cPixelSize.getHeight();<br>    <span class="hljs-comment">//坐标缩放</span><br>    <span class="hljs-keyword">int</span> l = (<span class="hljs-keyword">int</span>) (left*scaleWidth);<br>    <span class="hljs-keyword">int</span> t = (<span class="hljs-keyword">int</span>) (top*scaleHeight);<br>    <span class="hljs-keyword">int</span> r = (<span class="hljs-keyword">int</span>) (right*scaleWidth);<br>    <span class="hljs-keyword">int</span> b = (<span class="hljs-keyword">int</span>) (bottom*scaleHeight);<br><br>    <span class="hljs-comment">// left、top、bottom、right变为bottom、right、top、left，并且由于坐标原点由左上角变为右下角，X,Y方向都要进行坐标换算</span><br>    <span class="hljs-comment">// 逆时针旋转了270°</span><br>    left = canvas.getWidth()-b-<span class="hljs-number">180</span>; <span class="hljs-comment">// -180</span><br>    top = mTextureView.getHeight()-r-<span class="hljs-number">180</span>;  <span class="hljs-comment">// -180</span><br>    right = canvas.getWidth()-t-<span class="hljs-number">90</span>;  <span class="hljs-comment">// -90</span><br>    bottom = mTextureView.getHeight()-l+<span class="hljs-number">20</span>;  <span class="hljs-comment">// +20</span><br><br>    <span class="hljs-comment">// 开始画框</span><br>    Rect draw_r = <span class="hljs-keyword">new</span> Rect(left, top, right, bottom);<br>    canvas.drawRect(draw_r, mpaint);<br>    surfaceHolder.unlockCanvasAndPost(canvas);<br>    <span class="hljs-keyword">int</span>[] rec_coordinate = &#123;left, top, right, bottom&#125;;<br>    <span class="hljs-keyword">return</span> rec_coordinate;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h1 id="添加文字显示功能"><a href="#添加文字显示功能" class="headerlink" title="添加文字显示功能"></a>添加文字显示功能</h1><p>一般我们框出人脸处理了图片之后，可能需要我们将结果以文字形式显示在旁边，这时候我们就要写一个显示文字的方法来完成这个工作了。</p>
+<h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>编辑Application/res/layout的xml文件，添加一个如下所示的SurfaceView。在页面上新建一个SurfaceView并置顶用于文字显示</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml">&lt;SurfaceView<br>    android:id=&quot;@+id/surfaceview_show_result&quot;<br>    android:layout_width=&quot;match_parent&quot;<br>    android:layout_height=&quot;483dp&quot;<br>    android:layout_alignParentStart=&quot;true&quot;<br>    android:layout_alignParentTop=&quot;true&quot;<br>    android:layout_marginStart=&quot;0dp&quot;<br>    android:layout_marginTop=&quot;0dp&quot; /&gt;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>在Camera2BasicFragment.java中修改onViewCreated方法，添加surfaceview_show_result并将其初始化： </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> SurfaceView surfaceview;<br><span class="hljs-keyword">private</span> SurfaceView surfaceview_result;<br><span class="hljs-keyword">private</span> SurfaceHolder surfaceHolder;<br><span class="hljs-keyword">private</span> SurfaceHolder surfaceResultHolder;<br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onViewCreated</span><span class="hljs-params">(<span class="hljs-keyword">final</span> View view, Bundle savedInstanceState)</span> </span>&#123;<br>    <span class="hljs-comment">// 初始化所有的控件 为控件添加点击事件</span><br>    view.findViewById(R.id.picture).setOnClickListener(<span class="hljs-keyword">this</span>);<br>    view.findViewById(R.id.info).setOnClickListener(<span class="hljs-keyword">this</span>);<br>    view.findViewById(R.id.change_btn).setOnClickListener(<span class="hljs-keyword">this</span>);<br>    view.findViewById(R.id.single_btn).setOnClickListener(<span class="hljs-keyword">this</span>);<br>    mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);<br><br>    <span class="hljs-comment">// 设置画人脸框的surface</span><br>    surfaceview = (SurfaceView)view.findViewById(R.id.surfaceview_show_rectangle);<br>    surfaceview.setZOrderOnTop(<span class="hljs-keyword">true</span>);  <span class="hljs-comment">//处于顶层</span><br>    surfaceview.getHolder().setFormat(PixelFormat.TRANSPARENT);  <span class="hljs-comment">//设置surface为透明</span><br>    surfaceHolder = surfaceview.getHolder(); <span class="hljs-comment">//设置一下SurfaceView并获取到surfaceHolder便于后面画框</span><br><br>    <span class="hljs-comment">// 设置展示识别结果的surface</span><br>    surfaceview_result = (SurfaceView)view.findViewById(R.id.surfaceview_show_result);<br>    surfaceview_result.setZOrderOnTop(<span class="hljs-keyword">true</span>);  <span class="hljs-comment">//处于顶层</span><br>    surfaceview_result.getHolder().setFormat(PixelFormat.TRANSPARENT);  <span class="hljs-comment">//设置surface为透明</span><br>    surfaceResultHolder = surfaceview_result.getHolder(); <span class="hljs-comment">//设置一下SurfaceView并获取到surfaceHolder便于后面画框</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="drawResult方法"><a href="#drawResult方法" class="headerlink" title="drawResult方法"></a>drawResult方法</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> *  drawResult 显示结果的方法</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">drawResult</span><span class="hljs-params">(String recognition_result, <span class="hljs-keyword">int</span>[] located)</span></span>&#123;<br>    <span class="hljs-comment">//定义画笔</span><br>    Paint mpaint = <span class="hljs-keyword">new</span> Paint();<br>    mpaint.setColor(Color.BLUE);<br>    mpaint.setAntiAlias(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//去锯齿</span><br>    mpaint.setTextSize(<span class="hljs-number">90f</span>);<br>    Canvas canvas = <span class="hljs-keyword">new</span> Canvas();<br>    canvas = surfaceResultHolder.lockCanvas();<br>    canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR); <span class="hljs-comment">//清楚掉上一次的识别结果。</span><br>    canvas.drawText(recognition_result, located[<span class="hljs-number">2</span>] ,located[<span class="hljs-number">1</span>], mpaint);<br>    surfaceResultHolder.unlockCanvasAndPost(canvas);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="下载Demo与使用"><a href="#下载Demo与使用" class="headerlink" title="下载Demo与使用"></a>下载Demo与使用</h1><p><a target="_blank" rel="noopener" href="https://github.com/TonyDandelion/DemoforCamera2">DemoforCamera2</a></p>
+<p>git clone或下载压缩包解压之后，在AS Build成功之后，将自己的代码放到Camera2BasicFragment.java的do_something方法中，do_something方法输入的是一个Bitmap和人脸框图坐标，处理Bitmap得到结果，会将结果显示在人脸框图坐标旁边。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/12/18/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%89%EF%BC%9A%E4%BD%BF%E7%94%A8Tensorflow-Lite-%E5%B0%86%E8%87%AA%E5%B7%B1%E7%9A%84%E8%AE%AD%E7%BB%83%E5%BE%97%E5%88%B0%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%A7%BB%E6%A4%8D%E5%88%B0Android%E4%B8%8A/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CV深度学习模型Android端落地第三步：使用Tensorflow Lite 将自己的训练得到的模型移植到Android上</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8Android-Camera2%E6%8E%A5%E5%8F%A3%E8%8E%B7%E5%BE%97%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88%E5%9B%BE%E5%83%8F/">
+                        <span class="hidden-mobile">CV深度学习模型Android端落地第一步：使用Android Camera2接口获得实时预览图像</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/12/18/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8Face%E7%B1%BB%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%B9%B6%E5%B0%86%E4%BA%BA%E8%84%B8%E6%A1%86%E5%87%BA/';
+        this.page.identifier = '/2018/12/18/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8Face%E7%B1%BB%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%B9%B6%E5%B0%86%E4%BA%BA%E8%84%B8%E6%A1%86%E5%87%BA/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 30. 串联所有单词的子串（难） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 30. 串联所有单词的子串（难）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-10 03:46" pubdate>
+        2020年3月10日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 30. 串联所有单词的子串（难）</h1>
+            
+            <div class="markdown-body">
+              <p> 这道题可以用滑动窗口的方式来解决，窗口的大小是words数组里面所有单词的总和。 因为字符串s如果有子串能完全匹配words，那肯定是words中的每个单词都要出现若干次的(words里面的单词可能有重复)。这样一来，我们就不用排列组合words中的一个一个字符串了。 </p>
+<a id="more"></a>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个字符串 s 和一些<strong>长度相同的单词 words</strong>。找出 s 中<strong>恰好可以由 words 中所有单词串联形成的子串的起始位置</strong>。注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>示例 1：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入：<br>  s = <span class="hljs-string">&quot;barfoothefoobarman&quot;</span>,<br>  words = [<span class="hljs-string">&quot;foo&quot;</span>,<span class="hljs-string">&quot;bar&quot;</span>]<br>输出：[<span class="hljs-number">0</span>,<span class="hljs-number">9</span>]<br></code></pre></div></td></tr></table></figure><br>解释：<br>从索引 0 和 9 开始的子串分别是 “barfoo” 和 “foobar” 。<br>输出的顺序不重要, [9,0] 也是有效答案。</p>
+<p>示例 2：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入：<br>  s = <span class="hljs-string">&quot;wordgoodgoodgoodbestword&quot;</span>,<br>  words = [<span class="hljs-string">&quot;word&quot;</span>,<span class="hljs-string">&quot;good&quot;</span>,<span class="hljs-string">&quot;best&quot;</span>,<span class="hljs-string">&quot;word&quot;</span>]<br>输出：[]<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>字符串匹配、哈希表、双指针、字符串、滑动窗口</p>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="方法一、先确定可能的组合形式，再一个一个的匹配。"><a href="#方法一、先确定可能的组合形式，再一个一个的匹配。" class="headerlink" title="方法一、先确定可能的组合形式，再一个一个的匹配。"></a>方法一、先确定可能的组合形式，再一个一个的匹配。</h3><p>思路简单，但是时间复杂度太大。</p>
+<h3 id="方法二、滑动窗口"><a href="#方法二、滑动窗口" class="headerlink" title="方法二、滑动窗口"></a>方法二、滑动窗口</h3><p>这道题可以用滑动窗口的方式来解决，窗口的大小是words数组里面所有单词的总和。<br>因为字符串s如果有子串能完全匹配words，那肯定是words中的每个单词都要出现若干次的(words里面的单词可能有重复)。这样一来，我们就不用排列组合words中的一个一个字符串了。<br>以barfoothefoobarman为例，words=[“foo”,”bar”]，那么窗口大小就是6(foo+bar的长度)。</p>
+<p>我们从字符串s的开始位置起，每次截取6位长度记做tmp，跟words的单词比较。words中的单词都放到一个map中，key是单词，value是这个单词出现的次数。我们比较tmp和map是否完全匹配，如果是就找到了一个索引位置。<br>我们按照这种方式迭代完整个数组，就可以求出解了。</p>
+<p><strong>代码概述：</strong></p>
+<p>1、几种特判情况，s为空，words为空。直接返回[]。<br>2、利用dict构造hash map，将每个单词以及出现的频率记录到字典中。<br>3、先获取单个word的长度，再计算所有word组成的字符串的长度。<br>4、开始循环，s中在最后all_words_size个字符，长度都不够all_words_size，不可能满足条件，所以循环终点在 len(s) - all_words_size + 1。<br>5、每次取tmp_str中长为all_words_size的子串，将子串和临时字典进行比较，如果是就将临时字典记录的频率-1，如果不在就跳出循环。当这个word记录频率为0时，删除该word。<br>6、当内层循环遍历完后，如果临时字典为空则表示全部匹配上了，则记录数组的下标。<br>7、循环结束。  </p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/solution/dong-hua-yan-shi-30-chuan-lian-suo-you-dan-ci-de-z/">参考连接</a></p>
+<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="方法一的实现"><a href="#方法一的实现" class="headerlink" title="方法一的实现"></a>方法一的实现</h3><p><strong>148 / 173</strong> 个通过测试用例。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">strStrs</span>(<span class="hljs-params">self, haystack: <span class="hljs-built_in">str</span>, needle: <span class="hljs-built_in">str</span></span>) -&gt; list:</span><br>        res = []<br>        <span class="hljs-comment"># count = 0</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(haystack) == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> res<br>        last_index = <span class="hljs-number">0</span><br>        is_first = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">while</span> haystack:<br>            tmp_index = self.strStr(haystack, needle)<br>            <span class="hljs-keyword">if</span> tmp_index != -<span class="hljs-number">1</span>:  <span class="hljs-comment"># 如果找到了就保存到res里面</span><br>                <span class="hljs-keyword">if</span> is_first:  <span class="hljs-comment"># 第一次</span><br>                    res.append(tmp_index)<br>                    last_index = tmp_index<br>                    is_first = <span class="hljs-literal">False</span><br>                <span class="hljs-keyword">else</span>:<br>                    res.append(tmp_index + last_index + <span class="hljs-number">1</span>)<br>                    last_index = tmp_index + last_index + <span class="hljs-number">1</span><br>                haystack = haystack[tmp_index+<span class="hljs-number">1</span>: ]<br>                <span class="hljs-comment"># count += 1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 如果一次都找不到，就直接返回[]</span><br>                <span class="hljs-keyword">return</span> res<br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">strStr</span>(<span class="hljs-params">self, haystack: <span class="hljs-built_in">str</span>, needle: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        <span class="hljs-comment"># Func: 计算偏移表</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calShiftMat</span>(<span class="hljs-params">st</span>):</span><br>            dic = &#123;&#125;<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(st)-<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>):  <span class="hljs-comment"># 从后往前计算</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> dic.get(st[i]):<br>                    dic[st[i]] = <span class="hljs-built_in">len</span>(st)-i<br>            dic[<span class="hljs-string">&quot;ot&quot;</span>] = <span class="hljs-built_in">len</span>(st)+<span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> dic<br><br>        needle_len = <span class="hljs-built_in">len</span>(needle)<br>        haystack_len = <span class="hljs-built_in">len</span>(haystack)<br><br>        <span class="hljs-comment"># 其他情况判断</span><br>        <span class="hljs-keyword">if</span> needle_len &gt; haystack_len:<span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> needle==<span class="hljs-string">&quot;&quot;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>       <br>        <span class="hljs-comment"># 偏移表预处理</span><br>        dic = calShiftMat(needle)<br>        idx = <span class="hljs-number">0</span><br><br>        <span class="hljs-keyword">while</span> idx+needle_len &lt;= haystack_len:<br>            <span class="hljs-comment"># 待匹配字符串</span><br>            str_cut = haystack[idx:idx+needle_len]<br>            <span class="hljs-comment"># 判断是否匹配，如果匹配了就把答案填在res里面，并递归调用，直到再也找不到为止。</span><br>            <span class="hljs-keyword">if</span> str_cut==needle:<br>                <span class="hljs-keyword">return</span> idx<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-comment"># 边界处理</span><br>                <span class="hljs-keyword">if</span> idx+needle_len &gt;= haystack_len:<br>                    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>                <span class="hljs-comment"># 不匹配情况下，根据下一个字符的偏移，移动idx</span><br>                cur_c = haystack[idx+needle_len]<br>                <span class="hljs-keyword">if</span> dic.get(cur_c):<br>                    idx += dic[cur_c]<br>                <span class="hljs-keyword">else</span>:<br>                    idx += dic[<span class="hljs-string">&quot;ot&quot;</span>]<br><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> idx+needle_len &gt;= haystack_len <span class="hljs-keyword">else</span> idx<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permutations</span>(<span class="hljs-params">self, n</span>):</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> [[<span class="hljs-number">0</span>]]<br>        res = []<br>        indices = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(n))<br>        <span class="hljs-comment"># print(tuple(indices))</span><br>        res.append(<span class="hljs-built_in">tuple</span>(indices))<br>        cycles = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(n, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>))<br>        <span class="hljs-keyword">while</span> n:<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">reversed</span>(<span class="hljs-built_in">range</span>(n)):<br>                cycles[i] -= <span class="hljs-number">1</span><br>                <span class="hljs-keyword">if</span> cycles[i] == <span class="hljs-number">0</span>:<br>                    indices[i:] = indices[i+<span class="hljs-number">1</span>:] + indices[i:i+<span class="hljs-number">1</span>]<br>                    cycles[i] = n - i<br>                <span class="hljs-keyword">else</span>:<br>                    j = cycles[i]<br>                    indices[i], indices[-j] = indices[-j], indices[i]<br>                    <span class="hljs-comment"># print(tuple(indices))</span><br>                    res.append(<span class="hljs-built_in">tuple</span>(indices))<br>                    <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findSubstring</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span>, words: <span class="hljs-built_in">list</span></span>) -&gt; list:</span><br><br>        prs = self.permutations(<span class="hljs-built_in">len</span>(words))<br><br>        words_combinations = []<br>        <span class="hljs-keyword">for</span> permutation <span class="hljs-keyword">in</span> prs:<br>            tmp_str = <span class="hljs-string">&quot;&quot;</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> permutation:<br>                tmp_str += words[i]<br>            words_combinations.append(tmp_str)<br>        <br>        words_combinations = <span class="hljs-built_in">set</span>(words_combinations)  <span class="hljs-comment"># 去一下重复</span><br><br>        res = []<br>        <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> words_combinations:<br>            _index = self.strStrs(s, word)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(_index):<br>                res += _index<br><br>        <span class="hljs-keyword">return</span> res<br><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [<span class="hljs-string">&quot;abababab&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;foobarfoobar&quot;</span>, <span class="hljs-string">&quot;barfoothefoobarman&quot;</span>, <span class="hljs-string">&quot;wordgoodgoodgoodbestword&quot;</span>]<br>Input1 = [[<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>], [<span class="hljs-string">&quot;a&quot;</span>], [<span class="hljs-string">&quot;a&quot;</span>], [<span class="hljs-string">&quot;foo&quot;</span>,<span class="hljs-string">&quot;bar&quot;</span>], [<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>], [<span class="hljs-string">&quot;word&quot;</span>,<span class="hljs-string">&quot;good&quot;</span>,<span class="hljs-string">&quot;best&quot;</span>,<span class="hljs-string">&quot;word&quot;</span>]]<br>Answer = [[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], [<span class="hljs-number">0</span>], [], [<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">0</span>,<span class="hljs-number">9</span>], []]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.findSubstring(Input[i], Input1[i])<br>        result.sort()<br>        print(result)<br>        print(Answer[i])<br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
+<h3 id="方法二的实现"><a href="#方法二的实现" class="headerlink" title="方法二的实现"></a>方法二的实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 滑动窗口</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution2</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findSubstring</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span>, words: <span class="hljs-built_in">list</span></span>) -&gt; list:</span><br>        <span class="hljs-comment"># 几种特判情况，s为空，words为空。直接返回[]。</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> s <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(s)==<span class="hljs-number">0</span> <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> words <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(words)==<span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> []<br>        <span class="hljs-comment"># 利用dict构造hash map，将每个单词以及出现的频率记录到字典中。</span><br>        words_map,res = <span class="hljs-built_in">dict</span>(),[]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> words:<br>            <span class="hljs-keyword">if</span> i <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> words_map:<br>                words_map[i] = <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                words_map[i] += <span class="hljs-number">1</span><br>        one_word_size = <span class="hljs-built_in">len</span>(words[<span class="hljs-number">0</span>])  <span class="hljs-comment"># 获取单个word的长度</span><br>        all_words_size = <span class="hljs-built_in">len</span>(words)*one_word_size  <span class="hljs-comment"># 计算所有word组成的字符串的长度</span><br>        s_len = <span class="hljs-built_in">len</span>(s)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(s_len-all_words_size+<span class="hljs-number">1</span>):  <span class="hljs-comment"># s中在最后all_words_size个字符，长度都不够all_words_size，不可能满足条件，所以循环终点在 len(s) - all_words_size + 1。</span><br>            <span class="hljs-comment"># 每次取 all_words_size长度的子串</span><br>            tmp_str, d = s[i:i+all_words_size], <span class="hljs-built_in">dict</span>(words_map)<br>            <span class="hljs-comment"># 将子串和临时字典进行比较</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(tmp_str), one_word_size):  <span class="hljs-comment"># one_word_size个one_word_size个地从子串tmp_str中取出one_word_size长度的子串，看是否出现在临时字典中</span><br>                <span class="hljs-comment"># 如果是就将临时字典记录的频率-1，如果不在就跳出循环</span><br>                key = tmp_str[j:j+one_word_size]<br>                <span class="hljs-keyword">if</span> key <span class="hljs-keyword">in</span> d:<br>                    d[key] -= <span class="hljs-number">1</span><br>                    <span class="hljs-keyword">if</span> d[key]==<span class="hljs-number">0</span>:<br>                        <span class="hljs-keyword">del</span> d[key]<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> d:  <span class="hljs-comment"># 当内层循环遍历完后，如果临时字典为空则表示全部匹配上了，记录数组的下标。</span><br>                res.append(i)<br>        <span class="hljs-keyword">return</span> res  <span class="hljs-comment"># 返回结果</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度$O(N*M)$</p>
+<h2 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h2><p>1、注意Python中的赋值，可变对象（list、set、dict）和不可变对象（int、float、string）。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">words_map = &#123;<span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;b&quot;</span>: <span class="hljs-number">2</span>&#125;<br>d = words_map  <span class="hljs-comment"># 这样赋值，d变化，words_map也会变化。</span><br>d = <span class="hljs-built_in">dict</span>(words_map)  <span class="hljs-comment"># 这样赋值，d变化，words_map不会变化。</span><br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/10/LeetCode-31-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 31. 下一个排列（中）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/10/LeetCode-29-%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 29. 两数相除（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/10/LeetCode-30-%E4%B8%B2%E8%81%94%E6%89%80%E6%9C%89%E5%8D%95%E8%AF%8D%E7%9A%84%E5%AD%90%E4%B8%B2%EF%BC%88%E9%9A%BE%EF%BC%89/';
+        this.page.identifier = '/2020/03/10/LeetCode-30-%E4%B8%B2%E8%81%94%E6%89%80%E6%9C%89%E5%8D%95%E8%AF%8D%E7%9A%84%E5%AD%90%E4%B8%B2%EF%BC%88%E9%9A%BE%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

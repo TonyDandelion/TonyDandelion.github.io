@@ -1,0 +1,934 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>排序算法的C++实现 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="排序算法的C++实现">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-09-18 16:44" pubdate>
+        2017年9月18日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">排序算法的C++实现</h1>
+            
+            <div class="markdown-body">
+              <p>排序算法千千万万，为什么是你？</p>
+<a id="more"></a>
+<h1 id="比较类排序"><a href="#比较类排序" class="headerlink" title="比较类排序"></a>比较类排序</h1><p>通过元素比较来决定相对次序，时间复杂度不能突破 $O(nlogn)$，又称<strong>非线性时间比较类排序</strong>。</p>
+<h2 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h2><h3 id="冒泡排序（Bubble-Sort）"><a href="#冒泡排序（Bubble-Sort）" class="headerlink" title="冒泡排序（Bubble Sort）"></a>冒泡排序（Bubble Sort）</h3><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>重复地走访过要排序的数列，一次比较两个元素，如果它们<strong>的顺序错误</strong>就把它们交换过来。走访数列的工作是<strong>重复地进行直到没有再需要交换的元素</strong>，也就是说该数列已经排序完成。</p>
+<ul>
+<li>比较相邻的元素。如果第一个比第二个大，就交换它们两个；</li>
+<li>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样<strong>在最后的元素应该会是最大的数</strong>；</li>
+<li>针对所有的元素重复以上的步骤，每次都从第0个元素开始两两交换，第 <code>n</code> 次交换到第 <code>len(nums)-1-n</code> 个元素，<code>0&lt;n&lt;len(nums)-1</code>；</li>
+<li>重复步骤1~3，直到排序完成。</li>
+</ul>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/04/05/5knH3oXZv9OxRwU.gif" srcset="/img/loading.gif" alt="v2-33a947c71ad62b254cab62e5364d2813_b.gif"></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稳定</td>
+<td>$O(n^2)$</td>
+<td>$O(n^2)$</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="快速排序（Quick-Sort）"><a href="#快速排序（Quick-Sort）" class="headerlink" title="快速排序（Quick Sort）"></a>快速排序（Quick Sort）</h3><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>基于<strong>分治</strong>的思想</p>
+<ul>
+<li>先从数列中取出一个数作为key值；</li>
+<li>将比这个数小的数全部放在它的左边，大于或等于它的数全部放在它的右边；</li>
+<li>递归的对左右两个小数列重复第二步，直至各区间只有1个数。</li>
+</ul>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://pic1.zhimg.com/v2-c411339b79f92499dcb7b5f304c826f4_b.webp" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不稳定</td>
+<td>$O(nlog_2n)$</td>
+<td>$O(n^2)$</td>
+<td>$O(nlog_2n)$</td>
+<td>$O(nlog_2n)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="简单插入排序（Insertion-Sort）"><a href="#简单插入排序（Insertion-Sort）" class="headerlink" title="简单插入排序（Insertion Sort）"></a>简单插入排序（Insertion Sort）</h3><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>将无序部分中的元素插入到有序部分。初始化时，从第一个元素开始，依次搜索每一个元素的待插入位置，算法中，<strong>有序部分在前，无序部分在后，一边寻找插入位置，一边将元素后移一个单元。</strong>一直在<strong>往前</strong>找适和当前元素的位置。</p>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://pic3.zhimg.com/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稳定</td>
+<td>$O(n^2)$</td>
+<td>$n(n^2)$</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="希尔排序（Shell-Sort）"><a href="#希尔排序（Shell-Sort）" class="headerlink" title="希尔排序（Shell Sort）"></a>希尔排序（Shell Sort）</h3><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>简单插入排序的修改版，根据<strong>步长由长到短分组，进行排序</strong>，直到步长为1为止，属于插入排序的一种。1959年Shell发明，第一个突破 $O(n^2)$ 的排序算法，它会优先比较距离较远的元素。希尔排序又叫<strong>缩小增量排序</strong>。</p>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/04/05/1Fdmg2BH64sIGNO.jpg" srcset="/img/loading.gif" alt="v2-c52e08027910d98f78ee1d225cf03a8b_720w.jpg"></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ShellSort</span><span class="hljs-params">(SqList *L)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> i,j;<br>    <span class="hljs-keyword">int</span> increment=L-&gt;length;<br>    <span class="hljs-keyword">do</span>&#123;<br>        <span class="hljs-comment">// 增量序列</span><br>        increment=increment/<span class="hljs-number">3</span>+<span class="hljs-number">1</span>;<br>        <span class="hljs-comment">// 将L-&gt;r[i]插入有序增量子表</span><br>        <span class="hljs-keyword">for</span>(i=increment+<span class="hljs-number">1</span>;i&lt;L-&gt;length;i++)&#123;<br>            <span class="hljs-comment">// 暂存L-&gt;[0]</span><br>            L-&gt;r[<span class="hljs-number">0</span>]=L-&gt;[i];<br>            <span class="hljs-keyword">for</span>(j=i-increament; j&gt;<span class="hljs-number">0</span>&amp;&amp;L-&gt;r[<span class="hljs-number">0</span>]&lt;L-&gt;r[j]; j-=increment)&#123;<br>                <span class="hljs-comment">// 记录后移找到插入位置</span><br>                L-&gt;r[j+increment]=L-&gt;r[j];<br>            <span class="hljs-comment">// 插入</span><br>            L-&gt;r[j+increment]=L-&gt;r[<span class="hljs-number">0</span>];<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<p>希尔排序的平均时间复杂度和步长序列有之间关系</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>步长序列</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不稳定</td>
+<td>$2^i3^j$</td>
+<td>$O(nlog^2n)$</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td></td>
+<td>$2^k-1$</td>
+<td>$O(n^{\frac{3}{2}})$</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td></td>
+<td>$\frac{n}{2^i}$</td>
+<td>$O(n^2)$</td>
+<td>$O(n)$</td>
+<td>$O(n)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><h3 id="简单选择排序（Selection-Sort）"><a href="#简单选择排序（Selection-Sort）" class="headerlink" title="简单选择排序（Selection Sort）"></a>简单选择排序（Selection Sort）</h3><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始（末尾）位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到<strong>未排序序列</strong>的末尾。以此类推，直到所有元素均排序完毕。注意，这里有个有序区和无序区的概念。</p>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://pic1.zhimg.com/v2-1c7e20f306ddc02eb4e3a50fa7817ff4_b.webp" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不稳定</td>
+<td>$O(n^2)$</td>
+<td>$n(n^2)$</td>
+<td>$O(n^2)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="堆排序（Heap-Sort）"><a href="#堆排序（Heap-Sort）" class="headerlink" title="堆排序（Heap Sort）"></a>堆排序（Heap Sort）</h3><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>堆排序是一种基于二叉堆（Binary Heap）结构的排序算法，所谓二叉堆，就是一种特殊的完全二叉树，只不过相比较完全二叉树而言，二叉堆的所有父节点的值都大于（或者小于）它的孩子节点，像这样：</p>
+<p><img src="https://i.loli.net/2020/04/05/rPs7YM2T9xlcKHE.jpg" srcset="/img/loading.gif" alt="v2-5d6119c9801eadb83402ef68f6d4b689_720w.jpg"></p>
+<p>首先需要引入最大堆（大根堆）的定义：</p>
+<ul>
+<li>最大堆中的<strong>最大元素值</strong>出现在根结点（堆顶）</li>
+<li>堆中每个父节点的元素值都<strong>大于等于</strong>其孩子结点</li>
+</ul>
+<p>类似的，还有最小堆（小根堆）：</p>
+<ul>
+<li>最大堆中的<strong>最小元素值</strong>出现在根结点（堆顶）</li>
+<li>堆中每个父节点的元素值都<strong>小于等于</strong>其孩子结点</li>
+</ul>
+<p><img src="https://i.loli.net/2020/04/05/CnHVsfE5pu3L1GQ.png" srcset="/img/loading.gif" alt="650075-91f1549ff0c87c15.png"></p>
+<p>那么，堆排序算法的内容就很简单了，最大堆堆顶的最大数取出，将剩余的堆继续调整为最大堆，再次将堆顶的最大数取出，这个过程持续到剩余数只有一个时结束。</p>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://pic4.zhimg.com/v2-7073c729230e1a2c3c3c9207b25f6b43_b.webp" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不稳定</td>
+<td>$O(nlog_2n)$</td>
+<td>$n(nlog_2n)$</td>
+<td>$O(nlog_2n)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="二路归并排序（Merge-Sort）"><a href="#二路归并排序（Merge-Sort）" class="headerlink" title="二路归并排序（Merge Sort）"></a>二路归并排序（Merge Sort）</h3><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>归并排序是建立在<strong>归并操作</strong>上的一种有效的排序算法。该算法是采用<strong>分治法</strong>（Divide and Conquer）思想。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将<strong>两个</strong>有序表合并成一个有序表，称为<strong>二路归并</strong>。若将K个有序表合并成一个有序表，称为<strong>多路归并排序。</strong></p>
+<ul>
+<li>如果给的数组只有一个元素的话，直接返回（也就是递归到最底层的一个情况）</li>
+<li>把整个数组分为尽可能相等的两个部分（分）</li>
+<li>对于两个被分开的两个部分进行整个归并排序（治）</li>
+<li>把两个被分开且排好序的数组拼接在一起</li>
+</ul>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://pic3.zhimg.com/v2-cdda3f11c6efbc01577f5c29a9066772_b.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://i.loli.net/2020/04/05/62YikepNGmcXyQM.jpg" srcset="/img/loading.gif" alt="v2-6639ef7ed441b0e2b7a71ee202e3ad05_720w.jpg"></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稳定</td>
+<td>$O(nlog_2n)$</td>
+<td>$O(nlog_2n)$</td>
+<td>$O(nlog_2n)$</td>
+<td>$O(n)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h1 id="非比较类排序"><a href="#非比较类排序" class="headerlink" title="非比较类排序"></a>非比较类排序</h1><p><strong>不通过比较来决定元素间的相对次序</strong>，时间复杂度可以达到 $O(n)$，又称<strong>线性时间非比较类排序</strong>。</p>
+<h2 id="计数排序（Counting-Sort）"><a href="#计数排序（Counting-Sort）" class="headerlink" title="计数排序（Counting Sort）"></a>计数排序（Counting Sort）</h2><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>计数排序不是基于比较的排序算法，其核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。 作为一种线性时间复杂度的排序，计数排序要求<strong><font color="red">输入的数据必须是有确定范围的整数。</font></strong>条件苛刻，且牺牲空间换取时间。</p>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://pic4.zhimg.com/v2-3c7ddb59df2d21b287e42a7b908409cb_b.webp" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稳定</td>
+<td>$O(n + k)$</td>
+<td>$O(n + k)$</td>
+<td>$O(n + k)$</td>
+<td>$O(n + k)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>$n$ 是待排序元素个数，$k$ 是待排序元素区间长度。</p>
+<h2 id="桶排序（Bucket-sort）"><a href="#桶排序（Bucket-sort）" class="headerlink" title="桶排序（Bucket sort）"></a>桶排序（Bucket sort）</h2><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>桶排序是计数排序的升级版，桶排序 (Bucket sort)的工作的原理：假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排）。</p>
+<p>桶排序过程中存在两个关键环节：<br>1、元素值域的划分，也就是元素到桶的映射规则。映射规则需要根据待排序集合的元素分布特性进行选择。<br>2、排序算法的选择，从待排序集合中元素映射到各个桶上的过程，并不存在元素的比较和交换操作，在对各个桶中元素进行排序时，可以自主选择合适的排序算法，桶排序算法的复杂度和稳定性，都根据选择的排序算法不同而不同。</p>
+<p>算法过程：</p>
+<ul>
+<li>设置一个<strong>定量的数组</strong>当作空桶；</li>
+<li>遍历输入数据，并且把数据一个一个<strong>放到对应的桶里去</strong>；</li>
+<li>对<strong>每个不是空的桶进行排序</strong>；</li>
+<li>从不是空的桶里把排好序的数据<strong>拼接起来</strong>。</li>
+</ul>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://pic3.zhimg.com/v2-58b4d4b9e802104727677d7b0b60157a_b.webp" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稳定</td>
+<td>$O(n+k)$</td>
+<td>$n(n^2)$</td>
+<td>$O(n)$</td>
+<td>$O(n+k)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>$n$ 是待排序元素个数，$k$ 是待排序元素区间长度。</p>
+<h2 id="基数排序（Radix-Sort）"><a href="#基数排序（Radix-Sort）" class="headerlink" title="基数排序（Radix Sort）"></a>基数排序（Radix Sort）</h2><blockquote>
+<p>算法思想</p>
+</blockquote>
+<p>基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序。最后的次序就是高优先级高的在前，高优先级相同的低优先级高的在前。</p>
+<ul>
+<li>取得数组中的最大数，并取得<strong>位数</strong>；</li>
+<li><code>nums</code> 为原始数组，从最低位开始取每个位组成 <code>radix</code> 数组；</li>
+<li>对 <code>radix</code> 进行计数排序（<strong>利用计数排序适用于小范围数的特点</strong>）；</li>
+</ul>
+<blockquote>
+<p>图示</p>
+</blockquote>
+<p><img src="https://pic3.zhimg.com/v2-3a6f1e5059386523ed941f0d6c3a136e_b.webp" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>C++实现</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>时空复杂度和稳定性</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>稳定性</th>
+<th>时间复杂度（平均）</th>
+<th>时间复杂度（最坏）</th>
+<th>时间复杂度（最好）</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稳定</td>
+<td>$O(n \times k)$</td>
+<td>$O(n \times k)$</td>
+<td>$O(n \times k)$</td>
+<td>$O(n + k)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中 $n$ 是排序元素个数，$k$ 是数字位数。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/09/26/C-C-%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C++拾遗</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2017/08/26/%E4%BD%BF%E7%94%A8supervisor%E5%92%8Cngix%E9%85%8D%E7%BD%AE%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
+                        <span class="hidden-mobile">使用supervisor和ngix配置多线程的负载均衡</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2017/09/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0%E4%B9%8B%E6%8E%92%E5%BA%8F/';
+        this.page.identifier = '/2017/09/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0%E4%B9%8B%E6%8E%92%E5%BA%8F/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

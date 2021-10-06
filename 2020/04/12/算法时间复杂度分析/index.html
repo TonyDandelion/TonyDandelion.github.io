@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>算法复杂度分析 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="算法复杂度分析">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-12 11:33" pubdate>
+        2020年4月12日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法复杂度分析</h1>
+            
+            <div class="markdown-body">
+              <p><img src="https://i.loli.net/2020/04/12/WD3omr7VaJEABUf.png" srcset="/img/loading.gif" alt="Big-O_Complexity_Chart.png"></p>
+<p>算法的复杂度理论</p>
+<a id="more"></a>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>作者：司马懿<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21387264/answer/422323594">https://www.zhihu.com/question/21387264/answer/422323594</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>作者：raymondCaptain<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f4cca5ce055a">https://www.jianshu.com/p/f4cca5ce055a</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bigocheatsheet.com/">bigocheatsheet</a></p>
+<h1 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h1><h2 id="常数级别-O-1"><a href="#常数级别-O-1" class="headerlink" title="常数级别 $O(1)$"></a>常数级别 $O(1)$</h2><p>先从 $O(1)$ 是指，<strong>每次执行该操作只需要恒定的时间</strong>，和数据量无关。</p>
+<p>理论上哈希表就是 $O(1)$。因为哈希表是通过哈希函数来映射的，所以拿到一个关键字，用哈希函数转换一下，就可以直接从表中取出对应的值。</p>
+<p>和现存数据有多少毫无关系，故而<strong>每次执行该操作只需要恒定的时间</strong>（当然，实际操作中存在冲突和冲突解决的机制，不能保证每次取值的时间是完全一样的）。举个现实的例子，比如我的身后有一排柜子，里面有香蕉（代号B），苹果（代号A），葡萄（G），现在你说A，我迅速的就把苹果递过来了；你说B，我迅速就把香蕉递过来了。就算你再增加菠萝（P）、火龙果(H)，但是你说一个代号，我递给你相应的水果这个速度是几乎不会变的。</p>
+<h2 id="对数级别-O-logn"><a href="#对数级别-O-logn" class="headerlink" title="对数级别 $O(logn)$"></a>对数级别 $O(logn)$</h2><p>$O(logn)$ 的算法复杂度，典型的比如二分查找。设想一堆试卷，已经从高到底按照分数排列了，我们现在想找到有没有59分的试卷。怎么办呢？先翻到中间，把试卷堆由中间分成上下两堆，看中间这份是大于还是小于59，如果大于，就留下上面那堆，别的丢掉，如果小于，就留下下面那堆，丢掉上面。然后按照同样的方法，每次丢一半的试卷，直到丢无可丢为止。</p>
+<p>假如有32份试卷，你丢一次，还剩16份 ，丢两次，还剩下8 份，丢三次，就只剩下4份了，可以这么一直丢下去，丢到第五次，就只剩下一份了。而 $log_2(32)=5$  。也就是我们一次丢一半，总要丢到只有一份的时候才能出结果，如果有 $n$ 份，那么显然我们就有：</p>
+<script type="math/tex; mode=display">
+\frac{n}{2^k} = 1 \Rightarrow k = log_2n</script><p>也就是大约需要 $log_2n$ 次，才能得出 “<strong>找到</strong>” 或者 “<strong>没找到</strong>” 的结果。当然你说你三分查找，每次丢三分之二可不可以？当然也可以，但是算法复杂度在这里是忽略常数的，<strong>所以不管以2为底，还是以什么数为底，都统一的写成 $O(logn)$ 的形式。</strong></p>
+<h2 id="线性级别-O-n"><a href="#线性级别-O-n" class="headerlink" title="线性级别 $O(n)$"></a>线性级别 $O(n)$</h2><p>至于 $O(n)$ ，这个就是说<strong>随着样本数量的增加，复杂度也随之线性增加。</strong></p>
+<p>典型的比如数数。如果一个人从1数到100，需要100秒，那么从1到200，基本上不会小于200秒，所以数数就是一个 $O(n)$ 复杂度的事情。一般来说，需要序贯处理的算法的复杂度，都不会低于 $O(n)$ 。比如说，如果我们要设计一个算法从一堆杂乱的考试的卷子里面找出最高的分数，这就需要我们从头到尾看完每一份试卷，显然试卷越多，需要的时间也越多，这就是一个 $O(n)$ 复杂度的算法。</p>
+<h2 id="线性对数级别-O-nlogn"><a href="#线性对数级别-O-nlogn" class="headerlink" title="线性对数级别 $O(nlogn)$"></a>线性对数级别 $O(nlogn)$</h2><p>然后是 $O(nlogn)$  ，分两种情况：</p>
+<p>1、这个 $logn$ 代表该算法中存在一个时间复杂度是 $O(logn)$的基础算法，而前面那个 $n$，代表执行了 $n$ 次 时间复杂度为$O(logn)$ 的基础算法。</p>
+<p>2、这个 $n$ 代表该算法中存在一个时间复杂度是 $O(n)$的基础算法，而前面那个 $logn$，代表执行了 $logn$ 次 时间复杂度为$O(n)$ 的基础算法。</p>
+<p>两种情况下，算法时间复杂度都是 <strong>线性对数级别 $O(nlogn)$</strong>。</p>
+<p>快排每次排序都是在进行二分查找，时间复杂度为 $O(log_2n)$，要完成排序，要对 $n$ 个元素执行 $n$ 次二分查找，则快排的时间复杂度为 $O(nlogn)$。</p>
+<p>理解了这一点，就可以理解快速排序为什么是 $O(nlogn)$ 了。<strong>比如对一堆带有序号的书进行排序</strong>，怎么快呢？就是随便先选一本，然后把号码大于这本书的扔右边，小于这本书的扔左边。因为每本书都要比较一次，所以这么搞一次的复杂度是 $O(n)$ ，那么快排需要我们搞多少次呢？这个又回到了二分查找的逻辑了，每次都把书堆一分为二，请问分多少次手里才能只剩下一本书呢？答案还是 $logn$ 。而从代码的角度来说，在到达大小为一的数列之前，我们也是需要作 $logn$ 次嵌套的调用。</p>
+<h2 id="平方级别-O-n-2"><a href="#平方级别-O-n-2" class="headerlink" title="平方级别 $O(n^2)$"></a>平方级别 $O(n^2)$</h2><p>而 $O(n^2)$ 是说，<strong>计算的复杂度随着样本个数的平方数增长。</strong></p>
+<p>这个例子在算法里面，就是那一群比较挫的排序，比如<strong>冒泡、选择</strong>等等。沿着我们刚才的说的那个试卷的例子，等我们找出最高的分数之后，放在一边另起一堆，然后用同样的方法找第二高的分数，再放到新堆上…… 这样我们做n次，试卷就按照分数从低到高都排好了。因为有 $n$ 份试卷，所以这种翻试卷，找最高分的行为，我们要做 $n$ 次，每次的复杂度是 $O(n)$ ,那么n个 $O(n)$ 自然就是 $O(n^2)$。</p>
+<p>在比如说构建一个网络，每个点都和其他的点相连。显然，每当我们增加一个点，其实就需要构建这个点和所有现存的点的连线，而现存的点的个数是 $n$，所以每增加 $1$，就需要增加 $n$ 个连接，那么如果我们增加 $n$ 个点呢，那这个连接的个数自然也就是 $n^2$ 量级了。</p>
+<p>无论是翻试卷，还是创建网络，每增加一份试卷，<strong>每增加一个点，都需要给算法执行人带来 $n$ 量级的工作量，这种算法的复杂度就是 $O(n^2)$。</strong></p>
+<h2 id="立方级别-O-n-3"><a href="#立方级别-O-n-3" class="headerlink" title="立方级别 $O(n^3)$"></a>立方级别 $O(n^3)$</h2><p>典型的三层嵌套循环</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">CubicTraversal</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> rage(n):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> rage(n):<br>            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                print(i, j, k)<br></code></pre></div></td></tr></table></figure>
+<h2 id="k次方级别-O-n-k"><a href="#k次方级别-O-n-k" class="headerlink" title="k次方级别 $O(n^k)$"></a>k次方级别 $O(n^k)$</h2><p>k层嵌套循环</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">CubicTraversal</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> rage(n):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> rage(n):<br>            ......  <span class="hljs-comment"># k-3层嵌套</span><br>            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                print(i, j, k)<br></code></pre></div></td></tr></table></figure>
+<h2 id="指数级别-O-2-n"><a href="#指数级别-O-2-n" class="headerlink" title="指数级别 $O(2^n)$"></a>指数级别 $O(2^n)$</h2><p>求该方法的时间复杂度</p>
+<figure class="highlight swift"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs swift">long aFunc(int n) &#123;<br>    <span class="hljs-keyword">if</span> (n <span class="hljs-operator">&lt;=</span> <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> aFunc(n <span class="hljs-operator">-</span> <span class="hljs-number">1</span>) <span class="hljs-operator">+</span> aFunc(n <span class="hljs-operator">-</span> <span class="hljs-number">2</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>参考答案： 显然运行次数，$T(0) = T(1) = 1$，同时 $T(n) = T(n - 1) + T(n - 2) + 1$，这里的 $1$ 是其中的加法运算的一次执行。 显然  $T(n) = T(n - 1) + T(n - 2)$ 是一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/斐波那契数列">斐波那契数列</a>，通过归纳证明法可以证明，当 $n &gt;= 1$ 时  $T(n) &lt; (\frac{5}{3})^n$，同时当 $n &gt; 4$ 时 $T(n) &gt;= (\frac{3}{2})^n$。 所以该方法的时间复杂度可以表示为 $O((\frac{5}{3})^n)$，简化后为 $O(2^n)$。 可见这个方法所需的运行时间是以指数的速度增长的。</p>
+<p>如果一个算法的运行时间是指数级的（exponential），一般它很难在实践中使用，执行次数：</p>
+<p>N=10，大约执行1024次<br>N=100，大约执行2^100次<br>N=1000，大约执行2^1000次<br>N=10000，大约执行2^10000次</p>
+<h1 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h1><h2 id="常数级别-O-1-1"><a href="#常数级别-O-1-1" class="headerlink" title="常数级别 $O(1)$"></a>常数级别 $O(1)$</h2><p>只需要几个常数、指针等可数的额外变量。</p>
+<h2 id="线性级别-O-n-1"><a href="#线性级别-O-n-1" class="headerlink" title="线性级别 $O(n)$"></a>线性级别 $O(n)$</h2><p>需要一个一维数组或链表，其长度和要处理的数据正向相关。</p>
+<h2 id="平方级别-O-n-2-1"><a href="#平方级别-O-n-2-1" class="headerlink" title="平方级别 $O(n^2)$"></a>平方级别 $O(n^2)$</h2><p>需要一个矩阵，其长度和要处理的数据正向相关。</p>
+<h2 id="立方级别-O-n-3-1"><a href="#立方级别-O-n-3-1" class="headerlink" title="立方级别 $O(n^3)$"></a>立方级别 $O(n^3)$</h2><p>需要一个三维矩阵，其长度和要处理的数据正向相关。</p>
+<h2 id="k次方级别-O-n-k-1"><a href="#k次方级别-O-n-k-1" class="headerlink" title="k次方级别 $O(n^k)$"></a>k次方级别 $O(n^k)$</h2><p>需要一个 $k$ 维矩阵，其长度和要处理的数据正向相关。</p>
+<h2 id="指数级别-O-2-n-1"><a href="#指数级别-O-2-n-1" class="headerlink" title="指数级别 $O(2^n)$"></a>指数级别 $O(2^n)$</h2><p>需要一个大小为 $2^n$ 的变量，保存变量或处理结果。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/12/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9805-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">剑指offer 面试题05. 替换空格（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/12/LeetCode-206.-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+                        <span class="hidden-mobile">LeetCode 206. 反转链表 & 剑指offer 面试题24. 反转链表（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/12/%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/';
+        this.page.identifier = '/2020/04/12/%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

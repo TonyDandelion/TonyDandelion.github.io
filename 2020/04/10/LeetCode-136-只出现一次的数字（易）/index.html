@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>LeetCode 136. 只出现一次的数字（易）&amp; 面试题56 - II. 数组中数字出现的次数 II（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 136. 只出现一次的数字（易）& 面试题56 - II. 数组中数字出现的次数 II（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-10 16:55" pubdate>
+        2020年4月10日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 136. 只出现一次的数字（易）&amp; 面试题56 - II. 数组中数字出现的次数 II（中）</h1>
+            
+            <div class="markdown-body">
+              <p>一个数组，其中N个数出现出现M次，其余数字出现Q次，求出出现M次的N个数字是哪些的题目，都要考虑用位运算来做。</p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<p>说明：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
+<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [2,2,1]</span><br><span class="hljs-section">输出: 1</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [4,1,2,1,2]</span><br><span class="hljs-section">输出: 4</span><br></code></pre></div></td></tr></table></figure></p>
+<h1 id="直觉"><a href="#直觉" class="headerlink" title="直觉"></a>直觉</h1><blockquote>
+<p>哈希表，两次遍历。</p>
+</blockquote>
+<p>第一次遍历，一张哈希表，存储映射关系。<br>第二次遍历，找到为1的数字。</p>
+<p>时间复杂度： $O(n \times 2)$ ，空间复杂度：$O(1)$ 。</p>
+<blockquote>
+<p>一次遍历</p>
+</blockquote>
+<ul>
+<li>遍历 <code>nums</code> 中的每一个元素。<ul>
+<li>如果某个 <code>nums</code> 中的数字是新出现的，则将它添加到列表中。</li>
+<li>如果某个数字已经在列表中，删除它。</li>
+</ul>
+</li>
+</ul>
+<p>时间复杂度： $O(n)$ ，空间复杂度：$O(N)$ 。</p>
+<blockquote>
+<p>对异或运算符的应用，非常有趣。</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>]<br>2 ^ 3 ^ 2 ^ 4 ^ 4 = 2 ^ 2 ^ 4 ^ 4 ^ 3 =&gt; 0 ^ 0 ^3 =&gt; 3<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度： $O(n)$ ，我们只需要将 <code>nums</code> 中的元素遍历一遍，所以时间复杂度就是 <code>nums</code> 中的元素个数，空间复杂度：$O(1)$ </p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><blockquote>
+<p>哈希表，两次遍历。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">singleNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        hash_map = <span class="hljs-built_in">dict</span>()<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> i <span class="hljs-keyword">in</span> hash_map:<br>                hash_map[i] += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                hash_map[i] = <span class="hljs-number">1</span><br>        <br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> hash_map:<br>            <span class="hljs-keyword">if</span> hash_map[i] == <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">return</span> i<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>一次遍历</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">singleNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        _list = <span class="hljs-built_in">list</span>()<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> i <span class="hljs-keyword">in</span> _list:<br>                _list.remove(i)<br>            <span class="hljs-keyword">else</span>:<br>                _list.append(i)<br>        <span class="hljs-keyword">return</span> _list[<span class="hljs-number">0</span>]<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>对异或运算符的应用</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">singleNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        res = nums[<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(nums)): res ^= nums[i]<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<h1 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h1><h2 id="137-只出现一次的数字-II（中）-amp-面试题56-II-数组中数字出现的次数-II（中）"><a href="#137-只出现一次的数字-II（中）-amp-面试题56-II-数组中数字出现的次数-II（中）" class="headerlink" title="137. 只出现一次的数字 II（中）&amp; 面试题56 - II. 数组中数字出现的次数 II（中）"></a>137. 只出现一次的数字 II（中）&amp; 面试题56 - II. 数组中数字出现的次数 II（中）</h2><h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/">面试题56 - II. 数组中数字出现的次数 II</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-ii/">137. 只出现一次的数字 II（中）</a></p>
+<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现了三次。找出那个只出现了一次的元素。</p>
+<p>说明：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
+<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [2,2,3,2]</span><br><span class="hljs-section">输出: 3</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [0,1,0,1,0,1,99]</span><br><span class="hljs-section">输出: 99</span><br></code></pre></div></td></tr></table></figure></p>
+<h3 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h3><p><strong>完全不用额外空间，非常难。但是可以做到使用常数级别的空间。</strong></p>
+<blockquote>
+<p>统计各个位上的数字</p>
+</blockquote>
+<p>如下图所示，考虑数字的二进制形式，对于出现三次的数字，各 二进制位出现的次数都是 $3$ 的倍数。因此，统计所有数字的各二进制位中 $1$ 的出现次数，并对 $3$ 求余，结果则为只出现一次的数字。时间复杂度为 $O(N)$，空间复杂度为 $O(1)$。</p>
+<p><img src="https://i.loli.net/2020/05/14/WST1GcOR3YVasyw.png" srcset="/img/loading.gif" alt="137"></p>
+<p><strong><em>参考链接</em></strong></p>
+<p>作者：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/jyd/">Krahets</a><br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-ii/solution/single-number-ii-mo-ni-san-jin-zhi-fa-by-jin407891/">https://leetcode-cn.com/problems/single-number-ii/solution/single-number-ii-mo-ni-san-jin-zhi-fa-by-jin407891/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<blockquote>
+<p>位运算</p>
+</blockquote>
+<p>为了区分出现一次的数字和出现三次的数字，使用两个位掩码：seen_once 和 seen_twice。<br>思路是：<br>仅当 seen_twice 未变时，改变 seen_once。<br>仅当 seen_once 未变时，改变seen_twice。<br>时间复杂度为 $O(N)$，空间复杂度为 $O(1)$。</p>
+<p><img src="https://i.loli.net/2020/05/14/ig1ZCa72X5xjO8z.png" srcset="/img/loading.gif" alt="137_2"></p>
+<p><strong><em>参考链接</em></strong></p>
+<p>作者：LeetCode<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetcode/">https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetcode/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><ul>
+<li>Krahets</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">singleNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        counts = [<span class="hljs-number">0</span>] * <span class="hljs-number">32</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>):<br>                counts[j] += num &amp; <span class="hljs-number">1</span><br>                num &gt;&gt;= <span class="hljs-number">1</span><br>        res, m = <span class="hljs-number">0</span>, <span class="hljs-number">3</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>):<br>            res &lt;&lt;= <span class="hljs-number">1</span><br>            res |= counts[<span class="hljs-number">31</span> - i] % m<br>        <span class="hljs-keyword">return</span> res <span class="hljs-keyword">if</span> counts[<span class="hljs-number">31</span>] % m == <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> ~(res ^ <span class="hljs-number">0xffffffff</span>)<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>LeetCode</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">singleNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        seen_once = seen_twice = <span class="hljs-number">0</span><br>        <br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-comment"># first appearance: </span><br>            <span class="hljs-comment"># add num to seen_once </span><br>            <span class="hljs-comment"># don&#x27;t add to seen_twice because of presence in seen_once</span><br>            <br>            <span class="hljs-comment"># second appearance: </span><br>            <span class="hljs-comment"># remove num from seen_once </span><br>            <span class="hljs-comment"># add num to seen_twice</span><br>            <br>            <span class="hljs-comment"># third appearance: </span><br>            <span class="hljs-comment"># don&#x27;t add to seen_once because of presence in seen_twice</span><br>            <span class="hljs-comment"># remove num from seen_twice</span><br>            seen_once = ~seen_twice &amp; (seen_once ^ num)<br>            seen_twice = ~seen_once &amp; (seen_twice ^ num)<br><br>        <span class="hljs-keyword">return</span> seen_once<br></code></pre></div></td></tr></table></figure>
+<h2 id="260-只出现一次的数字-III（中）"><a href="#260-只出现一次的数字-III（中）" class="headerlink" title="260. 只出现一次的数字 III（中）"></a>260. 只出现一次的数字 III（中）</h2><h3 id="Question-1"><a href="#Question-1" class="headerlink" title="Question"></a>Question</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-iii/">260. 只出现一次的数字 III（中）</a></p>
+<p>给定一个整数数组 <code>nums</code>，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。</p>
+<p><strong>示例 :</strong></p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入: <span class="hljs-comment">[1,2,1,3,2,5]</span><br>输出: <span class="hljs-comment">[3,5]</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ol>
+<li>结果输出的顺序并不重要，对于上面的例子， <code>[5, 3]</code> 也是正确答案。</li>
+<li>你的算法应该具有<strong>线性时间复杂度</strong>。你能否仅使用<strong>常数空间复杂度</strong>来实现？</li>
+</ol>
+<h3 id="Intuition-1"><a href="#Intuition-1" class="headerlink" title="Intuition"></a>Intuition</h3><p>使用异或运算可以帮助我们消除出现两次的数字；我们计算 <code>bitmask ^= x</code>，则 <code>bitmask</code> 留下的就是出现奇数次的位。</p>
+<p><img src="https://i.loli.net/2020/05/14/NxDCAVz15Y9iTP7.png" srcset="/img/loading.gif" alt="260_1"></p>
+<p><code>x &amp; (-x)</code> 是保留位中最右边 <code>1</code> ，且将其余的 <code>1</code> 设位 <code>0</code> 的方法。</p>
+<p><img src="https://i.loli.net/2020/05/14/254QbEaxuPtgmhS.png" srcset="/img/loading.gif" alt="260_2"></p>
+<p><strong><em>算法</em></strong><br>首先计算 <code>bitmask ^= x</code>，则 <code>bitmask</code> 不会保留出现两次数字的值，因为相同数字的异或值为 <code>0</code>。<br>但是 <code>bitmask</code> 会保留只出现一次的两个数字（<code>x</code> 和 <code>y</code>）之间的差异。</p>
+<p><img src="https://i.loli.net/2020/05/14/n2OilmpqzV78ZrK.png" srcset="/img/loading.gif" alt="260_3">我们可以直接从 <code>bitmask</code> 中提取 <code>x</code> 和 <code>y</code> 吗？不能，但是我们可以用 <code>bitmask</code> 作为标记来分离 <code>x</code> 和 <code>y</code>。我们通过 <code>bitmask &amp; (-bitmask)</code> 保留 <code>bitmask</code> 最右边的 <code>1</code>，这个 <code>1</code> 要么来自 <code>x</code>，要么来自 <code>y</code>。</p>
+<p><img src="https://i.loli.net/2020/05/14/6lVoGu2j1TiEwmd.png" srcset="/img/loading.gif" alt="260_4"></p>
+<p>当我们找到了 <code>x</code>，那么 <code>y = bitmask^x</code>。<br>时间复杂度：$O(N)$ 的时间遍历输入数组。<br>空间复杂度：$O(1)$。</p>
+<h3 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">singleNumber</span>(<span class="hljs-params">self, nums: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        bitmask = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            bitmask ^= num<br>        diff = bitmask &amp; (-bitmask)<br><br>        x = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> num &amp; diff:<br>                x ^= num<br>        <span class="hljs-keyword">return</span> [x, bitmask^x]<br></code></pre></div></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>一个数组，其中N个数出现出现M次，其余数字出现Q次，求出出现M次的N个数字是哪些的题目，都要考虑用位运算来做。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/10/LeetCode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8-II%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 142. 环形链表 II（中）& 剑指offer 面试题23. 链表中环的入口</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/10/LeetCode-141-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 141. 环形链表（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/10/LeetCode-136-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E6%98%93%EF%BC%89/';
+        this.page.identifier = '/2020/04/10/LeetCode-136-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E6%98%93%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

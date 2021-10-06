@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>川大望江校区内利用Netgear WNDR3800搭建锐捷拨号路由器 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="川大望江校区内利用Netgear WNDR3800搭建锐捷拨号路由器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-09-21 01:36" pubdate>
+        2018年9月21日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">川大望江校区内利用Netgear WNDR3800搭建锐捷拨号路由器</h1>
+            
+            <div class="markdown-body">
+              <p>折腾折腾学校宿舍的路由器</p>
+<a id="more"></a>
+<p>川大江安、望江、华西几个校区校园网使用的都是锐捷拨号，要连接平板、xbox、ps4等无拨号条件的设备就十分麻烦，需要一台能够锐捷拨号的路由器，淘宝价格为135左右，望江校区小北门这种路由器的价格为175-200不等。考（就）虑（是）成（想）本（折）问（腾）题（下） (｡･ω･｡) ，决定自行购买路由器刷机，制作代拨号锐捷的路由器，主要技术思路是<strong>openwrt+mentohust</strong>。</p>
+<h1 id="购买路由器"><a href="#购买路由器" class="headerlink" title="购买路由器"></a>购买路由器</h1><p> 前往淘宝购买一台Netgear WNDR3800路由器,可以要求卖家发货前就刷好openwrt3.1的系统。或者其他品牌能够刷openwrt的路由器。如果要长期使用可以考虑入手一台nergear3700-4300的路由器，虽然被戏称为洋垃圾，但价格适中，且相较于国内某些品牌的缩水路由，性价比较高。</p>
+<p>以下是WNDR3800的一些参数，注意CPU的型号。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Subject</th>
+<th style="text-align:center">Detail </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gluon support</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td>Target</td>
+<td style="text-align:center"><strong>ar71xx-ath79</strong></td>
+</tr>
+<tr>
+<td>Subtarget</td>
+<td style="text-align:center">generic</td>
+</tr>
+<tr>
+<td>Package architecture</td>
+<td style="text-align:center">mips_24kc</td>
+</tr>
+<tr>
+<td>Bootloader</td>
+<td style="text-align:center">U-Boot</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td style="text-align:center"><strong>Atheros AR7161</strong></td>
+</tr>
+<tr>
+<td>CPU Cores</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td>CPU MHz</td>
+<td style="text-align:center">680</td>
+</tr>
+<tr>
+<td>Flash MB</td>
+<td style="text-align:center">16</td>
+</tr>
+<tr>
+<td>RAM MB</td>
+<td style="text-align:center">128 </td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="刷openwrt系统"><a href="#刷openwrt系统" class="headerlink" title="刷openwrt系统"></a>刷openwrt系统</h1><p>路由器到手之后先设置自己电脑的IP和网关为192.168.1.2和255.255.255.0,win10系统设置IPV4网关的方法如下<br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/9f7e7ec05e0bd56f2915547c.html">百度经验</a>。  </p>
+<p>LAN Local Area Network<br>WAN Wide Area Network  </p>
+<p>顾名思义LAN就是局域网接口，WAN就是广域网接口。  </p>
+<p>将路由器插电，lan口连接你的电脑，wan口连接宿舍网口。  </p>
+<p>在浏览器中输入，192.168.1.1,如果能正常进入，说明卖家刷机openwrt成功。不需要查看下面的内容。  </p>
+<p>如果不能进入，说明卖家没有刷机或者刷机失败，需要自行刷机。刷为原厂固件，流程如下：<br>1、将设备断电<br>2、用牙签之类的小东西按住设备背面的Restore Factory Settings按钮(机身背面的红色小圆孔).<br>开启设备电源开关<br>3、观察电源灯(此时按住Restore Factory Settings按钮不要松手), 直到电源灯由<strong>橙色闪烁</strong>状态变成绿色闪烁状态(说明设备已经进入到了TFTP修复模式)，当路由器处于TFTP修复模式时，马上开始刷机。<br>4、将PC用网线连接到设备的LAN口, 将PC的IP设置为192.168.1.x (这里设置为192.168.1.2), 子网掩码为255.255.255.0, 其他项目可不必设置.<br>5、打开软件TFTP智能刷机1.62.exe. 选好固件. 固件是WNDR3800-V1.0.0.16.img. IP地址是192.168.1.1, 密码无, 其他不选.<br>6、点击更新固件. 这时候会复制文件几秒钟. 路由器期间会重启几次. 直到2.4G/5G/WIFI灯亮 刷回成功!  </p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1bCMx7oPwoGoAYfIARGy5eQ">TFTP智能刷机1.62.exe和官方原厂固件下载链接，密码：iu0d</a></p>
+<p>刷回Netgear 3800原来厂固件之后，可以开始刷openwrt了。</p>
+<p>在浏览器中输入，192.168.1.1,如果能正常进入，说明原厂固件固件刷新成功，进入如下位置升级固件为openwrt-3.1,上传3800的openwrt的官方固件openwrt-ar71xx-generic-wndr3800-squashfs-factory.img，<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1cCTJoWZ9dOe_q1wg920isA">下载链接，密码：5i3i</a>  不同设备的openwrt官方固件可能不一样，需要对应下载。</p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/20150203115028.jpg" srcset="/img/loading.gif" alt="七牛云呀">  </p>
+<p>等待路由器固件刷新<br>待路由器升级固件成功之后，再次浏览器进入192.168.1.1，初始密码为“password”<br>ubuntu下用ssh、windows下用putty，ssh root@192.168.1.1进入openwrt。如下：</p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/13111545-63c122169c464c3fbd6ec47689c736e1.jpg" srcset="/img/loading.gif" alt="七牛云呀"></p>
+<h1 id="开始使用mentohust"><a href="#开始使用mentohust" class="headerlink" title="开始使用mentohust"></a>开始使用mentohust</h1><p>mentohust是一个Linux环境下的锐捷认证程序，由华科的同学开发而成，<strong>感谢华科大佬，不愧一流学科，一流专业。</strong>  </p>
+<p>根据你的路由器CPU型号选择对应mentohust可执行文件，不同的CPU的指令集不一样，因此，上传到openwrt的root目录的mentohust可执行文件也不一样。3800使用的是mentohust.mips.17201。</p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1wDXZ8rv9avhrWmG-zHL4MA">全部类型mentohust载链接，密码：uk8q</a>  </p>
+<p>将win10下锐捷认证客户端安装位置中的如下文件在ubuntu下使用scp命令或者win10下使用winscp放入openwrt的/etc/mentohust文件夹中<br><figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-number">8021</span>X.exe、<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">SuConfig</span>.</span></span>dat、<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">W64N55</span>.</span></span>dll<br></code></pre></div></td></tr></table></figure><br>最后 执行下面的命令 应该就能拨号上网了。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm">./mentohust -u178446xxxxx -pxxxxxx -neth1 -<span class="hljs-built_in">r1</span> -<span class="hljs-built_in">v4</span>.<span class="hljs-number">96</span> -<span class="hljs-built_in">a1</span> -l5 -<span class="hljs-built_in">d1</span> -b2<br></code></pre></div></td></tr></table></figure>
+<p>-u为用户名<br>-p为密码<br>-n为网卡名称 你路由器WAN口是什么网卡，你就是填什么，这个信息可以在192.168.1.1中查看。<br>-v为锐捷版本号</p>
+<p><strong>本博客是针对川大望江的网络环境和Netgear WNDR3800路由器设备撰写的，不保证其他校园网环境以及设备也能这样刷机，最好使用和我一样的设备，成功的可能性较大。不同校园网，可能存在绑定静态IP等情况需要注意额外调试。</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8Android-Camera2%E6%8E%A5%E5%8F%A3%E8%8E%B7%E5%BE%97%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88%E5%9B%BE%E5%83%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CV深度学习模型Android端落地第一步：使用Android Camera2接口获得实时预览图像</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/07/09/%E4%B8%BA%E4%BD%A0%E8%AF%BB%E8%AF%97-%E7%B2%BE%E9%80%89/">
+                        <span class="hidden-mobile">为你读诗 精选</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/09/21/%E5%B7%9D%E5%A4%A7%E6%9C%9B%E6%B1%9F%E6%A0%A1%E5%8C%BA%E5%86%85%E5%88%A9%E7%94%A8Netgear-Netgear-WNDR3800-%E6%90%AD%E5%BB%BA%E9%94%90%E6%8D%B7%E6%8B%A8%E5%8F%B7%E8%B7%AF%E7%94%B1%E5%99%A8/';
+        this.page.identifier = '/2018/09/21/%E5%B7%9D%E5%A4%A7%E6%9C%9B%E6%B1%9F%E6%A0%A1%E5%8C%BA%E5%86%85%E5%88%A9%E7%94%A8Netgear-Netgear-WNDR3800-%E6%90%AD%E5%BB%BA%E9%94%90%E6%8D%B7%E6%8B%A8%E5%8F%B7%E8%B7%AF%E7%94%B1%E5%99%A8/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

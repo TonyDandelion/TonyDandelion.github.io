@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 68. 文本左右对齐（难） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 68. 文本左右对齐（难）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-19 03:47" pubdate>
+        2020年3月19日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 68. 文本左右对齐（难）</h1>
+            
+            <div class="markdown-body">
+              <p>算法实现效果类似Word中文本左右对齐功能，使用了贪心算法。  </p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个单词数组和一个长度 <code>maxWidth</code>，重新排版单词，使其成为每行恰好有 <code>maxWidth</code> 个字符，且左右两端对齐的文本。<br>你应该使用<strong>“贪心算法”</strong>来放置给定的单词；也就是说，尽可能多地往每行中放置单词。必要时可用空格 ‘ ‘ 填充，使得每行恰好有 <code>maxWidth</code> 个字符。<br>要求尽可能均匀分配单词间的空格数量。如果某一行单词间的空格不能均匀分配，则左侧放置的空格数要多于右侧的空格数。<br>文本的最后一行应为左对齐，且单词之间不插入额外的空格。  </p>
+<p><strong>说明:</strong><br>单词是指由非空格字符组成的字符序列。<br>每个单词的长度大于 0，小于等于 <code>maxWidth</code>。<br>输入单词数组 words 至少包含一个单词。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入:</span><br>words = [<span class="hljs-string">&quot;This&quot;</span>, <span class="hljs-string">&quot;is&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;example&quot;</span>, <span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;justification.&quot;</span>]<br>maxWidth = 16<br><span class="hljs-section">输出:</span><br>[<br>   <span class="hljs-string">&quot;This    is    an&quot;</span>,<br>   <span class="hljs-string">&quot;example  of text&quot;</span>,<br>   <span class="hljs-string">&quot;justification.  &quot;</span><br>]<br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入:</span><br>words = [<span class="hljs-string">&quot;What&quot;</span>,<span class="hljs-string">&quot;must&quot;</span>,<span class="hljs-string">&quot;be&quot;</span>,<span class="hljs-string">&quot;acknowledgment&quot;</span>,<span class="hljs-string">&quot;shall&quot;</span>,<span class="hljs-string">&quot;be&quot;</span>]<br>maxWidth = 16<br><span class="hljs-section">输出:</span><br>[<br>  <span class="hljs-string">&quot;What   must   be&quot;</span>,<br>  <span class="hljs-string">&quot;acknowledgment  &quot;</span>,<br>  <span class="hljs-string">&quot;shall be        &quot;</span><br>]<br></code></pre></div></td></tr></table></figure><br>解释: 注意最后一行的格式应为 “shall be    “ 而不是 “shall     be”,<br>因为<strong>最后一行应为左对齐，而不是左右两端对齐。</strong><br><strong>第二行同样为左对齐，这是因为这行只包含一个单词。</strong>  </p>
+<p>示例 3:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入:</span><br>words = [<span class="hljs-string">&quot;Science&quot;</span>,<span class="hljs-string">&quot;is&quot;</span>,<span class="hljs-string">&quot;what&quot;</span>,<span class="hljs-string">&quot;we&quot;</span>,<span class="hljs-string">&quot;understand&quot;</span>,<span class="hljs-string">&quot;well&quot;</span>,<span class="hljs-string">&quot;enough&quot;</span>,<span class="hljs-string">&quot;to&quot;</span>,<span class="hljs-string">&quot;explain&quot;</span>,<br>         <span class="hljs-string">&quot;to&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;computer.&quot;</span>,<span class="hljs-string">&quot;Art&quot;</span>,<span class="hljs-string">&quot;is&quot;</span>,<span class="hljs-string">&quot;everything&quot;</span>,<span class="hljs-string">&quot;else&quot;</span>,<span class="hljs-string">&quot;we&quot;</span>,<span class="hljs-string">&quot;do&quot;</span>]<br>maxWidth = 20<br><span class="hljs-section">输出:</span><br>[<br>  <span class="hljs-string">&quot;Science  is  what we&quot;</span>,<br>  <span class="hljs-string">&quot;understand      well&quot;</span>,<br>  <span class="hljs-string">&quot;enough to explain to&quot;</span>,<br>  <span class="hljs-string">&quot;a  computer.  Art is&quot;</span>,<br>  <span class="hljs-string">&quot;everything  else  we&quot;</span>,<br>  <span class="hljs-string">&quot;do                  &quot;</span><br>]<br></code></pre></div></td></tr></table></figure></p>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>字符串、贪心算法</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>首先要理顺题意，给定一堆单词，让你放在固定长度字符串里，有三个要点要注意：<br>1、两个单词之间至少有一个空格，如果单词加空格长度超过<code>maxWidth</code>，说明该单词放不下,比如示例1：当我们保证<code>this is an</code> 再加入<code>example</code>变成<code>this is an example</code>总长度超过<code>maxWidth</code>,所以这一行只能放下<code>this</code> <code>is</code> <code>an</code> 这三个单词。<br>2、<code>this is an</code>长度小于<code>maxWidth</code>，考虑分配空格，当不能保证每个间隔的空格数目一样多的时候，多出来的空格从左往右依次向每个间隔添加1个，靠近右边的一部分空格，可能就添加不上了，这样一来就保证了左边空格数大于右边的。<br>3、最后一行，要尽量靠左,例如示例2的：<code>&quot;shall be &quot;</code>。  </p>
+<p>我们针对上面三个问题，有如下解决方案：<br>1、先找到一行最多可以容下几个单词<br>2、分配空格，例如<code>this</code> <code>is</code> <code>an</code> ，对于宽度为<code>maxWidth</code>，我们可以用<code>space_count = maxWidth - all_word_len</code> 计算出剩余的空格，然后用 <code>average_space = space_count // (word_count - 1)</code> 计算出平均每个间隔应该有多少个空格。接着，用 <code>remaind_count = space_count % (word_count - 1)</code> 计算出多出来的空格。最后将这些多出来的空格从左往右依次向每个间隔添加1个。<br>3、针对最后一行单独考虑，最后一行肯定不足maxWidth，但是最后一行应为左对齐 且单词之间不插入额外的空格，这里需要单独写代码实现。  </p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fullJustify</span>(<span class="hljs-params">self, words: List[<span class="hljs-built_in">str</span>], maxWidth: <span class="hljs-built_in">int</span></span>) -&gt; List[str]:</span><br>        res = []<br>        selected_words = []<br>        selected_count = <span class="hljs-number">0</span><br>        remaind_words = words[:]<br>        <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> words:<br>            <span class="hljs-comment"># 没超出就说明这次可以选择</span><br>            <span class="hljs-keyword">if</span> selected_count + <span class="hljs-built_in">len</span>(selected_words) + <span class="hljs-built_in">len</span>(word) &lt;= maxWidth:<br>                selected_count += <span class="hljs-built_in">len</span>(word)<br>                selected_words.append(word)<br>            <span class="hljs-comment"># 否则说明超出了maxWidth 生成一行</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(selected_words) &lt; <span class="hljs-number">2</span>:<br>                    res.append(<span class="hljs-string">&quot;&#123;&#125;&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(selected_words[<span class="hljs-number">0</span>], <span class="hljs-string">&quot; &quot;</span>*(maxWidth-<span class="hljs-built_in">len</span>(selected_words[<span class="hljs-number">0</span>]))))<br>                    remaind_words.remove(selected_words[<span class="hljs-number">0</span>])<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-comment"># 计算空格数</span><br>                    space_count = maxWidth - selected_count<br>                    intervel_count = space_count // (<span class="hljs-built_in">len</span>(selected_words) - <span class="hljs-number">1</span>)<br>                    space_list = [<span class="hljs-string">&quot; &quot;</span> * intervel_count] * (<span class="hljs-built_in">len</span>(selected_words) - <span class="hljs-number">1</span>)<br>                    remaind_count = space_count % (<span class="hljs-built_in">len</span>(selected_words) - <span class="hljs-number">1</span>)<br>                    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(remaind_count):<br>                        space_list[i] += <span class="hljs-string">&quot; &quot;</span><br>                    <span class="hljs-comment"># 开始拼接</span><br>                    tmp_str = <span class="hljs-string">&quot;&quot;</span><br>                    <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(selected_words)):<br>                        selected_word = selected_words[index]<br>                        remaind_words.remove(selected_word)<br>                        space = space_list[index] <span class="hljs-keyword">if</span> index &lt; <span class="hljs-built_in">len</span>(space_list) <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;&quot;</span><br>                        tmp_str += <span class="hljs-string">&quot;&#123;&#125;&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(selected_word, space)<br>                    res.append(tmp_str)<br>                selected_count = <span class="hljs-built_in">len</span>(word)<br>                selected_words = [word]<br>        <br>        <span class="hljs-comment"># 特殊处理最后一行 最后一行应为左对齐 且单词之间不插入额外的空格</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(remaind_words) &lt; <span class="hljs-number">2</span>:<br>            res.append(<span class="hljs-string">&quot;&#123;&#125;&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(remaind_words[<span class="hljs-number">0</span>], <span class="hljs-string">&quot; &quot;</span>*(maxWidth-<span class="hljs-built_in">len</span>(remaind_words[<span class="hljs-number">0</span>]))))<br>        <span class="hljs-keyword">else</span>:<br>            remaind_words_count = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> remaind_words:<br>                remaind_words_count += <span class="hljs-built_in">len</span>(i)<br>            remaind_words_count += (<span class="hljs-built_in">len</span>(remaind_words) - <span class="hljs-number">1</span>)<br>            res.append(<span class="hljs-string">&quot;&#123;&#125;&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot; &quot;</span>.join(remaind_words), <span class="hljs-string">&quot; &quot;</span>*(maxWidth-remaind_words_count)))<br><br>        <span class="hljs-keyword">return</span> res<br><br><br><br>Input = [<br>    [<span class="hljs-string">&quot;This&quot;</span>, <span class="hljs-string">&quot;is&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;example&quot;</span>, <span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;justification.&quot;</span>],<br>    [<span class="hljs-string">&quot;What&quot;</span>,<span class="hljs-string">&quot;must&quot;</span>,<span class="hljs-string">&quot;be&quot;</span>,<span class="hljs-string">&quot;acknowledgment&quot;</span>,<span class="hljs-string">&quot;shall&quot;</span>,<span class="hljs-string">&quot;be&quot;</span>],<br>    [<span class="hljs-string">&quot;Science&quot;</span>,<span class="hljs-string">&quot;is&quot;</span>,<span class="hljs-string">&quot;what&quot;</span>,<span class="hljs-string">&quot;we&quot;</span>,<span class="hljs-string">&quot;understand&quot;</span>,<span class="hljs-string">&quot;well&quot;</span>,<span class="hljs-string">&quot;enough&quot;</span>,<span class="hljs-string">&quot;to&quot;</span>,<span class="hljs-string">&quot;explain&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;computer.&quot;</span>,<span class="hljs-string">&quot;Art&quot;</span>,<span class="hljs-string">&quot;is&quot;</span>,<span class="hljs-string">&quot;everything&quot;</span>,<span class="hljs-string">&quot;else&quot;</span>,<span class="hljs-string">&quot;we&quot;</span>,<span class="hljs-string">&quot;do&quot;</span>]<br>]<br>Input1 = [<span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">20</span>]<br>Answer = [<br>    [<br>    <span class="hljs-string">&quot;This    is    an&quot;</span>,<br>    <span class="hljs-string">&quot;example  of text&quot;</span>,<br>    <span class="hljs-string">&quot;justification.  &quot;</span><br>    ],<br>    [<br>    <span class="hljs-string">&quot;What   must   be&quot;</span>,<br>    <span class="hljs-string">&quot;acknowledgment  &quot;</span>,<br>    <span class="hljs-string">&quot;shall be        &quot;</span><br>    ],<br>    [<br>    <span class="hljs-string">&quot;Science  is  what we&quot;</span>,<br>    <span class="hljs-string">&quot;understand      well&quot;</span>,<br>    <span class="hljs-string">&quot;enough to explain to&quot;</span>,<br>    <span class="hljs-string">&quot;a  computer.  Art is&quot;</span>,<br>    <span class="hljs-string">&quot;everything  else  we&quot;</span>,<br>    <span class="hljs-string">&quot;do                  &quot;</span><br>    ]<br>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.fullJustify(Input[i], Input1[i])<br>        <span class="hljs-keyword">if</span> reslut == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(reslut)<br>            print(Answer[i])<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度： $O(n)$<br>执行用时 :44 ms, 在所有 Python3 提交中击败了27.39%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了7.50%的用户  </p>
+<p>一个更简洁的写法</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fullJustify</span>(<span class="hljs-params">self, words: List[<span class="hljs-built_in">str</span>], maxWidth: <span class="hljs-built_in">int</span></span>) -&gt; List[str]:</span><br>        res = []<br>        n = <span class="hljs-built_in">len</span>(words)<br>        i = <span class="hljs-number">0</span><br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">one_row_words</span>(<span class="hljs-params">i</span>):</span><br>            <span class="hljs-comment"># 至少 一行能放下一个单词, cur_row_len</span><br>            left = i<br>            cur_row_len = <span class="hljs-built_in">len</span>(words[i])<br>            i += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> i &lt; n:<br>                <span class="hljs-comment"># 当目前行 加上一个单词长度 再加一个空格</span><br>                <span class="hljs-keyword">if</span> cur_row_len + <span class="hljs-built_in">len</span>(words[i]) + <span class="hljs-number">1</span> &gt; maxWidth:<br>                    <span class="hljs-keyword">break</span><br>                cur_row_len += <span class="hljs-built_in">len</span>(words[i]) + <span class="hljs-number">1</span><br>                i += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> left, i<br><br>        <span class="hljs-keyword">while</span> i &lt; n:<br>            left, i = one_row_words(i)<br>            <span class="hljs-comment"># 该行几个单词获取</span><br>            one_row = words[left:i]<br>            <span class="hljs-comment"># 如果是最后一行了</span><br>            <span class="hljs-keyword">if</span> i == n :<br>                res.append(<span class="hljs-string">&quot; &quot;</span>.join(one_row).ljust(maxWidth,<span class="hljs-string">&quot; &quot;</span>))<br>                <span class="hljs-keyword">break</span><br>            <span class="hljs-comment"># 所有单词的长度</span><br>            all_word_len = <span class="hljs-built_in">sum</span>(<span class="hljs-built_in">len</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> one_row)<br>            <span class="hljs-comment"># 至少空格个数</span><br>            space_num = i - left - <span class="hljs-number">1</span><br>            <span class="hljs-comment"># 可以为空格的位置</span><br>            remain_space = maxWidth - all_word_len<br>            <span class="hljs-comment"># 单词之间至少几个空格,还剩几个空格没用</span><br>            <span class="hljs-keyword">if</span> space_num:<br>                a, b = <span class="hljs-built_in">divmod</span>(remain_space, space_num)<br>            <span class="hljs-comment"># print(a,b)</span><br>            <span class="hljs-comment"># 该行字符串拼接</span><br>            tmp = <span class="hljs-string">&quot;&quot;</span><br>            <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> one_row:<br>                <span class="hljs-keyword">if</span> tmp:<br>                    tmp += <span class="hljs-string">&quot; &quot;</span> * a<br>                    <span class="hljs-keyword">if</span> b:<br>                        tmp += <span class="hljs-string">&quot; &quot;</span><br>                        b -= <span class="hljs-number">1</span><br>                tmp += word<br>            <span class="hljs-comment">#print(tmp, len(tmp))</span><br>            res.append(tmp.ljust(maxWidth, <span class="hljs-string">&quot; &quot;</span>))<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><p>1、Python divmod() 函数<br>python divmod() 函数把除数和余数运算结果结合起来，返回一个包含商和余数的元组(a // b, a % b)。<br>在 python 2.3 版本之前不允许处理复数。  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;<span class="hljs-built_in">divmod</span>(<span class="hljs-number">7</span>, <span class="hljs-number">2</span>)<br>(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">divmod</span>(<span class="hljs-number">8</span>, <span class="hljs-number">2</span>)<br>(<span class="hljs-number">4</span>, <span class="hljs-number">0</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">divmod</span>(<span class="hljs-number">1</span>+<span class="hljs-number">2j</span>,<span class="hljs-number">1</span>+<span class="hljs-number">0.5j</span>)<br>((<span class="hljs-number">1</span>+<span class="hljs-number">0j</span>), <span class="hljs-number">1.5j</span>)<br></code></pre></div></td></tr></table></figure>
+<p>2、基于Python <code>Set.difference()</code> 的去重  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>c = <span class="hljs-built_in">set</span>(a).difference(<span class="hljs-built_in">set</span>(b))<br><span class="hljs-meta">&gt;&gt;&gt; </span>c<br>&#123;<span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>参考连接  </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/text-justification/solution/shun-zhao-si-lu-xiang-by-powcai/">LeetCode用户题解</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/19/%E3%80%8A%E9%AB%98%E5%B1%B1%E4%B8%8B%E7%9A%84%E8%8A%B1%E7%8E%AF%E3%80%8B-%E6%97%B6%E4%BB%A3%E4%B8%8E%E9%B2%9C%E8%A1%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《高山下的花环》- 时代矛盾与英雄主义</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/18/Leetcode-67-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">Leetcode 67.  二进制求和（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/19/LeetCode-68-%E6%96%87%E6%9C%AC%E5%B7%A6%E5%8F%B3%E5%AF%B9%E9%BD%90%EF%BC%88%E9%9A%BE%EF%BC%89/';
+        this.page.identifier = '/2020/03/19/LeetCode-68-%E6%96%87%E6%9C%AC%E5%B7%A6%E5%8F%B3%E5%AF%B9%E9%BD%90%EF%BC%88%E9%9A%BE%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

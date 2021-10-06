@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>剑指Offer 面试题03. 数组中的重复数字（易）&amp; LeetCode 287. 寻找重复数（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="剑指Offer 面试题03. 数组中的重复数字（易）& LeetCode 287. 寻找重复数（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-29 12:46" pubdate>
+        2020年3月29日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">剑指Offer 面试题03. 数组中的重复数字（易）&amp; LeetCode 287. 寻找重复数（中）</h1>
+            
+            <div class="markdown-body">
+              <p>数组去重问题，如何用空间换时间，以及如何用时间换空间？</p>
+<a id="more"></a>
+<blockquote>
+<p>原题链接</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">面试题03. 数组中重复的数字</a></p>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>找出数组中<strong>重复</strong>的数字。</p>
+<p>在一个长度为 <code>n</code> 的数组 <code>nums</code> 里的所有数字都在 <code>0～n-1</code> 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中<strong>任意一个</strong>重复的数字。</p>
+<p>示例 1：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：<br><span class="hljs-string">[2, 3, 1, 0, 2, 5, 3]</span><br>输出：<span class="hljs-number">2</span> 或 <span class="hljs-number">3</span> <br></code></pre></div></td></tr></table></figure><br>限制：2 &lt;= n &lt;= 100000</p>
+<blockquote>
+<p><strong><em>测试用例</em></strong></p>
+</blockquote>
+<p>功能测试：长度为n的数组里包含一个或多个重复的数字。<br>特殊输入：数组中不包含重复的数字；输入空指针；长度为n的数组中包含0～n-1之外的数字）。</p>
+<blockquote>
+<p><strong><em>本题考点</em></strong></p>
+</blockquote>
+<p>考查应聘者对一维数组的理解及编程能力。一维数组在内存中占据连续的空间，因此我们可以根据下标定位对应的元素。<br>考查应聘者分析问题的能力。当应聘者发现问题比较复杂时，能不能通过具体的例子找出其中的规律，是能否解决这个问题的关键所在。</p>
+<blockquote>
+<p>注意LeetCode上的<strong>面试题03</strong>和《剑指offer》书上的<strong>面试题03</strong>题目不同</p>
+</blockquote>
+<p>LeetCode上的<strong>面试题03</strong>：在一个长度为 <code>n</code> 的数组 <code>nums</code> 里的所有数字都在 <code>0～n-1</code> 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中<strong>任意一个</strong>重复的数字。</p>
+<p>《剑指offer》书上的<strong>面试题03</strong>：在一个长度为 <code>n+1</code> 的数组 <code>nums</code> 里的所有数字都在 <code>1～n</code> 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中<strong>任意一个</strong>重复的数字。</p>
+<p>基于hash map和一次遍历算法在这两种题目上都能正常解决问题。</p>
+<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="基于hash-map"><a href="#基于hash-map" class="headerlink" title="基于hash map"></a>基于hash map</h2><p>遍历数组，利用 <code>hash map</code> 建立<strong>数值</strong>和<strong>数值出现次数</strong>的关系的映射，一旦发现有出现两次以上的数字，即停止遍历输出即可。</p>
+<p><strong><em>算法</em></strong> </p>
+<ul>
+<li>声明 <code>hash map</code></li>
+<li><code>for</code> 循环 <code>nums</code><ul>
+<li>如果当前 <code>num</code> 在 <code>hash map</code> 中，就直接 <code>ruturn</code> 当前 <code>num</code>。</li>
+<li>否则就将当前 <code>num</code> 加入到 <code>hash map</code> 中。</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>复杂度分析</em></strong></p>
+<p>时间复杂度：$O(n)$ <br><br>空间复杂度：$O(n)$</p>
+<h2 id="一次遍历"><a href="#一次遍历" class="headerlink" title="一次遍历"></a>一次遍历</h2><p>我们注意到数组中的数字都在0~n-1的范围内。如果这个数组中没有重复的数字，那么当数组排序之后数字 <code>i</code> 将出现在下标为 <code>i</code> 的位置。由于数组中有重复的数字，有些位置可能存在多个数字，同时有些位置可能没有数字。<br>现在让我们重排这个数组。从头到尾依次扫描这个数组中的每个数字。</p>
+<p><strong><em>算法</em></strong> </p>
+<ul>
+<li>当扫描到下标为 <code>i</code> 的数字时，首先比较这个数字（用 <code>m=nums[i]</code> 表示）是不是等于 <code>i</code> 。<ul>
+<li>如果是，则接着扫描下一个数字；</li>
+<li>如果不是，则再拿它和第 <code>m</code> 个数字进行比较。<ul>
+<li>如果它和第 <code>m</code> 个数字<strong>相等</strong>，就找到了一个重复的数字（该数字在下标为<code>i</code> 和 <code>m</code> 的位置都出现了），<code>return</code> 这个找到数字。</li>
+<li>如果它和第 <code>m</code> 个数字<strong>不相等</strong>，就把第 <code>i</code> 个数字和第 <code>m</code> 个数字交换，把 <code>m</code> 放到属于它的位置。</li>
+</ul>
+</li>
+<li>接下来再重复这个比较、交换的过程，直到我们发现一个重复的数字。</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>复杂度分析</em></strong></p>
+<p>时间复杂度：$O(n)$ <br><br>空间复杂度：$O(1)$</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="基于hash-map-1"><a href="#基于hash-map-1" class="headerlink" title="基于hash map"></a>基于hash map</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># coding: utf-8</span><br><br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        <span class="hljs-comment"># 声明hash map</span><br>        hash_map = <span class="hljs-built_in">dict</span>()<br>        <span class="hljs-comment"># for循环nums</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> num <span class="hljs-keyword">in</span> hash_map:<br>                <span class="hljs-keyword">return</span> num<br>            <span class="hljs-keyword">else</span>:<br>                hash_map[num] = <span class="hljs-number">1</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    arguments = [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>]]<br>    answers = [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]]<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(arguments)):<br>        result = solution.findRepeatNumber(arguments[i])<br>        print(result <span class="hljs-keyword">in</span> answers[i])<br></code></pre></div></td></tr></table></figure>
+<h2 id="一次遍历-1"><a href="#一次遍历-1" class="headerlink" title="一次遍历"></a>一次遍历</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            length = <span class="hljs-built_in">len</span>(nums)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">if</span> nums[i] &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> nums[i] &gt; length:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">while</span> nums[i] != i:<br>                <span class="hljs-comment"># 找到重复</span><br>                <span class="hljs-keyword">if</span> nums[i] == nums[nums[i]]:<br>                    <span class="hljs-keyword">return</span> nums[i]<br>                <span class="hljs-comment"># 交换nums[i]和nums[nums[i] 数字归位</span><br>                tmp = nums[nums[i]]<br>                nums[nums[i]] = nums[i]<br>                nums[i] = tmp<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><blockquote>
+<p><strong><em>Question</em></strong></p>
+</blockquote>
+<p>题目二：不修改数组找出重复的数字。<br>在一个长度为n+1的数组里的所有数字都在1～n的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为8的数组 [2, 3, 5, 4, 3, 2, 6, 7]，那么对应的输出是重复的数字2或者3。</p>
+<blockquote>
+<p><strong><em>Related Question</em></strong></p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-duplicate-number/">287. 寻找重复数</a></p>
+<blockquote>
+<p><strong><em>Test Case</em></strong></p>
+</blockquote>
+<p>长度为n的数组里包含一个或多个重复的数字。<br>数组中不包含重复的数字。<br>无效输入测试用例（输入空指针）。</p>
+<blockquote>
+<p><strong><em>Knowledge</em></strong></p>
+</blockquote>
+<p>考查应聘者对一维数组的理解及编程能力。一维数组在内存中占据连续的空间，因此我们可以根据下标定位对应的元素。<br>考查应聘者对二分查找算法的理解，并能快速、正确地实现二分查找算法的代码。<br>考查应聘者的沟通能力。应聘者只有具备良好的沟通能力，才能充分了解面试官的需求，从而有针对性地选择算法解决问题。</p>
+<blockquote>
+<p><strong><em>Intuition</em></strong></p>
+</blockquote>
+<p>之前空间复杂度为 $O(n)$ 的 <code>hash map</code> 方案，一样可以解决这个问题。这里讨论一个空间复杂度为 $O(1)$ 的新方案。</p>
+<p><em>算法</em></p>
+<ul>
+<li>我们把从 <code>1～n</code> 的数字从中间的数字 <code>m</code> 分为两部分，前面一半为 <code>1～m</code>，后面一半为 <code>m+1～n</code>。<ul>
+<li>如果 <code>1~m</code> 的数字的数目超过 <code>m</code>，那么这一半的区间里一定包含重复的数字，设置 <code>end = middle</code>，将 <code>end</code>前移动，在 <code>[start, middle]</code> 区间寻找重复元素；</li>
+<li>否则，另一半 <code>m+1～n</code> 的区间里一定包含重复的数字。设置 <code>start = middle + 1</code>，将 <code>start</code> 后移，在<code>[middle+1, end]</code> 区间内寻找重复元素；</li>
+</ul>
+</li>
+<li>我们可以继续把包含重复数字的区间一分为二，直到找到一个重复的数字。这个过程和二分查找算法很类似，只是多了一步统计区间里数字的数目。</li>
+</ul>
+<p><em>举例</em><br>我们以长度为 <code>8</code> 的数组为 <code>[2, 3, 5, 4, 3, 2, 6, 7]</code> 例分析查找的过程。根据题目要求，这个长度为 <code>8</code> 的所有数字都在<code>1~7</code>的范围内。中间的数字 <code>4</code> 把<code>1~7</code>的范围分为两段，一段是<code>1~4</code>，另一段是<code>5～7</code>。<strong>接下来我们统计<code>1~4</code>这4个数字在数组中出现的次数，它们一共出现了5次，因此这4个数字中一定有重复的数字。</strong></p>
+<p>接下来我们再把<code>1~4</code>的范围一分为二，一段是<code>1、2</code>两个数字，另一段是<code>3、4</code>两个数字。数字 <code>1</code> 或者 <code>2</code> 在数组中一共出现了两次。我们再统计数字 <code>3</code> 或者 <code>4</code> 在数组中出现的次数，它们一共出现了<code>3</code>次。</p>
+<p>这意味着 <code>3</code>、<code>4</code> 两个数字中一定有一个重复了。我们再分别统计这两个数字在数组中出现的次数。接着我们发现数字 <code>3</code> 出现了两次，是一个重复的数字。</p>
+<p><em>复杂度分析</em><br>上述代码按照二分查找的思路，如果输入长度为n的数组，那么函数 <code>countRange</code> 将被调用 $O(logn)$ 次，每次需要 $O(n)$ 的时间，因此总的时间复杂度是 $O(nlogn)$，空间复杂度为 $O(1)$。<strong>和最前面提到的需要 $O(n)$ 的辅助空间的算法相比，这种算法相当于以时间换空间。</strong><br>需要指出的是，这种算法不能保证找出所有重复的数字。例如，<strong>该算法不能找出数组 <code>[2, 3, 5, 4, 3, 2, 6, 7]</code> 中重复的数字2。</strong>这是因为在 <code>1~2</code> 的范围里有 <code>1</code> 和 <code>2</code> 两个数字，这个范围的数字也出现 <code>2</code> 次，<strong>此时我们用该算法不能确定是每个数字各出现一次还是某个数字出现了2次。</strong></p>
+<p><em>总结</em><br>从上述分析中我们可以看出，<strong>如果面试官提出不同的功能要求（找出任意一个重复的数字、找出所有重复的数字）或者性能要求（时间效率优先、空间效率优先），那么我们最终选取的算法也将不同。</strong>这也说明在面试中和面试官交流的重要性，我们一定要在动手写代码之前弄清楚面试官的需求。</p>
+<blockquote>
+<p><strong><em>Code</em></strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">contRange</span>(<span class="hljs-params">self, nums, length, start, end</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">if</span> start &lt;= nums[i] &lt;= end:<br>                count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> count<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findDuplicate</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        length = <span class="hljs-built_in">len</span>(nums)<br>        start = <span class="hljs-number">1</span>  <span class="hljs-comment"># 剑指offer原题里面数组第一个数字是1，LeetCode题目里面数组第一个数字是0，所以这个改成0。</span><br>        end = length - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> start &lt;= end:<br>            middle = start + (end - start) // <span class="hljs-number">2</span><br>            count = self.contRange(nums, length, start, middle)<br>            <span class="hljs-keyword">if</span> start == end:<br>                <span class="hljs-keyword">if</span> count &gt; <span class="hljs-number">1</span>:<br>                    <span class="hljs-keyword">return</span> start<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">if</span> count &gt; middle - start + <span class="hljs-number">1</span>:<br>                end = middle<br>            <span class="hljs-keyword">else</span>:<br>                start = middle + <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p><strong><em>Condition Change</em></strong></p>
+</blockquote>
+<p>如果将题目从“在一个长度为n+l的数组里的所有数字都在1～n的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。”改成“在一个长度为n的数组里的所有数字都在0～n-1的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。”。</p>
+<p>可以发现数字范围从1～n变成了0～n-1，则遇到如 [0, 1, 2, 0, 4, 5, 6, 7, 8, 9] 这样的输入，就要对 <code>count == middle - start + 1</code> 进行讨论了。</p>
+<p>第一次遍历，start=0，end=9，middle=4，0-4的数字有0，1，2，3，4，出现5次，即count=5，而middle - start + 1=5，此时如果再按照书上的代码，</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span> count &gt; middle - start + <span class="hljs-number">1</span>:<br>    end = middle<br><span class="hljs-keyword">else</span>:<br>    start = middle + <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>start就会被设置为5，但实际上下一个搜索区间应该是start=0，end=4。因此需要对<code>count == middle - start + 1</code> 进行讨论。<code>start</code> 初始值也要从1改为0。</p>
+<p><strong><em>算法</em></strong></p>
+<ul>
+<li>我们把从 <code>1～n</code> 的数字从中间的数字 <code>m</code> 分为两部分，前面一半为 <code>1～m</code>，后面一半为 <code>m+1～n</code>。<ul>
+<li>如果 <code>1~m</code> 的数字的数目等于 <code>m</code>，那么就要判断 <code>1~m</code> 的数字是否都在 <code>nums</code> 中。<ul>
+<li>如果都在其中， <code>m+1～n</code> 的区间里一定包含重复的数字。</li>
+<li>否则，<code>1~m</code> 的区间里一定包含重复的数字。</li>
+</ul>
+</li>
+<li>如果 <code>1~m</code> 的数字的数目超过 <code>m</code>，那么这一半的区间里一定包含重复的数字；</li>
+<li>否则，另一半 <code>m+1～n</code> 的区间里一定包含重复的数字。</li>
+</ul>
+</li>
+<li>我们可以继续把包含重复数字的区间一分为二，直到找到一个重复的数字。这个过程和二分查找算法很类似，只是多了一步统计区间里数字的数目。</li>
+</ul>
+<p><strong><em>代码</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">contRange</span>(<span class="hljs-params">self, nums, length, start, end</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">if</span> start &lt;= nums[i] &lt;= end:<br>                count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> count<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        length = <span class="hljs-built_in">len</span>(nums)<br>        start = <span class="hljs-number">0</span>  <span class="hljs-comment"># 剑指offer原题里面数组第一个数字是1，LeetCode题目里面数组第一个数字是0，所以这个改成0。</span><br>        end = length - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> start &lt;= end:<br>            middle = start + (end - start) // <span class="hljs-number">2</span><br>            count = self.contRange(nums, length, start, middle)<br>            <span class="hljs-keyword">if</span> start == end:<br>                <span class="hljs-keyword">if</span> count &gt; <span class="hljs-number">1</span>:<br>                    <span class="hljs-keyword">return</span> start<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">break</span><br>            <span class="hljs-comment"># 相等的情况下有两种情况，一是 0, 1, 2, 3 的情况，二是 2, 2, 3, 3</span><br>            <span class="hljs-keyword">if</span> count == middle - start + <span class="hljs-number">1</span>:<br>                flag = <span class="hljs-literal">True</span><br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, middle+<span class="hljs-number">1</span>):<br>                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> j <span class="hljs-keyword">in</span> nums:<br>                        flag = <span class="hljs-literal">False</span><br>                        <span class="hljs-keyword">break</span><br>                <span class="hljs-comment"># 第一种情况就在后面查找 start = middle + 1</span><br>                <span class="hljs-keyword">if</span> flag:<br>                    start = middle + <span class="hljs-number">1</span><br>                <span class="hljs-comment"># 第二种情况就在前面查找 end = middle</span><br>                <span class="hljs-keyword">else</span>:<br>                    end = middle<br>            <span class="hljs-keyword">elif</span> count &gt; middle - start + <span class="hljs-number">1</span>:  <span class="hljs-comment"># 注意，这里是 &gt;</span><br>                end = middle<br>            <span class="hljs-keyword">else</span>:<br>                start = middle + <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度 $O(nlogn)$ 。<br><br>空间复杂度 $O(1)$</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%92%8C%E6%90%9C%E7%B4%A2/">二分查找和搜索</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/30/%E4%BA%BA%E6%98%AF%E5%A6%82%E4%BD%95%E5%BA%9F%E6%8E%89%E7%9A%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">人是如何废掉的</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/28/LeetCode-99-%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E9%9A%BE%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 99. 恢复二叉搜索树（难）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/29/%E5%89%91%E6%8C%87Offer-%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97/';
+        this.page.identifier = '/2020/03/29/%E5%89%91%E6%8C%87Offer-%E9%9D%A2%E8%AF%95%E9%A2%9803-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

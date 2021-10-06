@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>算法：位运算 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="算法：位运算">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-10 21:08" pubdate>
+        2020年4月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法：位运算</h1>
+            
+            <div class="markdown-body">
+              <p>一些位运算的常识</p>
+<a id="more"></a>
+<h1 id="位运算基本概念"><a href="#位运算基本概念" class="headerlink" title="位运算基本概念"></a>位运算基本概念</h1><h2 id="Python的位运算符"><a href="#Python的位运算符" class="headerlink" title="Python的位运算符"></a>Python的位运算符</h2><p>a = 010101(21)</p>
+<p>b = 100100(36)</p>
+<ul>
+<li><p>(a &amp; b)<br><strong>按位与运算符</strong>：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0<br>输出结果 12 ，二进制解释： a &amp; b = 000100(4)</p>
+</li>
+<li><p>(a | b)<br><strong>按位或运算符</strong>：只要对应的二个二进位有一个为1时，结果位就为1。<br>输出结果 61 ，二进制解释： a | b = 110101(53)</p>
+</li>
+<li><p>(a ^ b)<br><strong>按位异或运算符</strong>：当两对应的二进位相异时，结果为1<br>输出结果 49 ，二进制解释： a ^ b = 110001(49)</p>
+</li>
+<li><p>(~a )<br><strong>按位取反运算符</strong>：对数据的每个二进制位取反,即把1变为0,把0变为1 。~x 类似于 -(x+1)<br>输出结果 -22 ，二进制解释： ~a = 101010（-22），属于一个<strong>有符号二进制数的补码形式</strong>。为什么有符号二进制数的补码形式的101010是-22？如何从补码反推源码？进而知道其10进制数的表达方式？首先根据其首位，确定其正负（1为负、0为正），然后先对其取反，然后再加1。则101010的源码是010101+1=010110(22)，由于 101010首位是1，所以这是一个负数，所以有符号二进制数的补码形式的101010表示的十进制数是-22，即~a = -(x+1) = -x - 1</p>
+<p><strong><font color='red'>在计算机系统中，数值一律用补码来表示和存储。原因在于，使用补码，可以将符号位和数值域统一处理；同时，加法和减法也可以统一处理 [2] 。</font></strong></p>
+</li>
+<li><p>a &lt;&lt; 2<br><strong>左移动运算符</strong>：运算数的各二进位全部左移若干位，由 &lt;&lt; 右边的数字指定了移动的位数，高位丢弃，低位补0。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt; a = <span class="hljs-number">15</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b = a &lt;&lt; <span class="hljs-number">4</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b<br><span class="hljs-number">240</span><br></code></pre></div></td></tr></table></figure>
+<p>输出结果 240 ，二进制解释： 1111 (15) 右移四位得到11110000（240）</p>
+</li>
+<li><p>a &gt;&gt; 2<br><strong>右移动运算符</strong>：把”&gt;&gt;”左边的运算数的各二进位全部右移若干位，&gt;&gt; 右边的数字指定了移动的位数。输出结果 15 ，二进制解释： 0000 1111</p>
+</li>
+</ul>
+<h2 id="机器数、真值、原码、补码、反码"><a href="#机器数、真值、原码、补码、反码" class="headerlink" title="机器数、真值、原码、补码、反码"></a>机器数、真值、原码、补码、反码</h2><ul>
+<li><strong>机器数</strong></li>
+</ul>
+<p>一个数在计算机中的二进制表示形式,  叫做这个数的机器数。机器数是带符号的，在计算机用一个数的最高位存放符号, 正数为0, 负数为1.</p>
+<p>比如，十进制中的数 +3 ，计算机字长为8位，转换成二进制就是00000011。如果是 -3 ，就是 10000011 。那么，这里的 00000011 和 10000011 就是机器数。</p>
+<ul>
+<li><strong>真值</strong></li>
+</ul>
+<p>因为第一位是符号位，所以机器数的形式值就不等于真正的数值。例如上面的有符号数 10000011，其最高位1代表负，其真正数值是 -3 而不是形式值131（10000011转换成十进制等于131）。所以，为区别起见，将带符号位的机器数对应的真正数值称为机器数的真值。</p>
+<p>例：0000 0001的真值 = +000 0001 = +1，1000 0001的真值 = –000 0001 = –1</p>
+<ul>
+<li><strong>原码</strong></li>
+</ul>
+<p><strong>原码就是符号位加上真值的绝对值</strong>, 即用第一位表示符号, 其余位表示值. 比如如果是8位二进制:<br><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml">[<span class="hljs-string">+1</span>]<span class="hljs-string">原</span> <span class="hljs-string">=</span> <span class="hljs-number">0000 </span><span class="hljs-number">0001</span><br>[<span class="hljs-number">-1</span>]<span class="hljs-string">原</span> <span class="hljs-string">=</span> <span class="hljs-number">1000 </span><span class="hljs-number">0001</span><br></code></pre></div></td></tr></table></figure><br>第一位是符号位. 因为第一位是符号位, 所以8位二进制数的取值范围就是:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml">[<span class="hljs-number">1111 </span><span class="hljs-number">1111</span> , <span class="hljs-number">0111 </span><span class="hljs-number">1111</span>] <span class="hljs-string">=&gt;</span> [<span class="hljs-number">-127</span> , <span class="hljs-number">127</span>]<br></code></pre></div></td></tr></table></figure>
+<p>原码是人脑最容易理解和计算的表示方式.</p>
+<ul>
+<li><strong>反码</strong></li>
+</ul>
+<p>反码的表示方法是:</p>
+<p><strong>正数的反码是其本身</strong></p>
+<p><strong>负数的反码是在其原码的基础上, 符号位不变，其余各个位取反.</strong></p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7"><span class="hljs-comment">[+1]</span> = <span class="hljs-comment">[00000001]</span>原 = <span class="hljs-comment">[00000001]</span>反<br><span class="hljs-comment">[-1]</span> = <span class="hljs-comment">[10000001]</span>原 = <span class="hljs-comment">[11111110]</span>反<br></code></pre></div></td></tr></table></figure>
+<p>可见如果一个反码表示的是负数, 人脑无法直观的看出来它的数值. 通常要将其转换成原码再计算.</p>
+<ul>
+<li><strong>补码</strong></li>
+</ul>
+<p>补码的表示方法是:</p>
+<p><strong>正数的补码就是其本身</strong></p>
+<p><strong>负数的补码是在其原码的基础上, 符号位不变, 其余各位取反, 最后+1. (即在反码的基础上+1)</strong></p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7"><span class="hljs-comment">[+1]</span> = <span class="hljs-comment">[00000001]</span>原 = <span class="hljs-comment">[00000001]</span>反 = <span class="hljs-comment">[00000001]</span>补<br><span class="hljs-comment">[-1]</span> = <span class="hljs-comment">[10000001]</span>原 = <span class="hljs-comment">[11111110]</span>反 = <span class="hljs-comment">[11111111]</span>补<br></code></pre></div></td></tr></table></figure>
+<p>对于负数, 补码表示方式也是人脑无法直观看出其数值的. 通常也需要转换成原码在计算其数值.</p>
+<ul>
+<li><strong>为何要使用原码, 反码和补码?</strong></li>
+</ul>
+<p>在开始深入学习前, 我的学习建议是先”死记硬背”上面的原码, 反码和补码的表示方式以及计算方法.</p>
+<p>现在我们知道了计算机可以有三种编码方式表示一个数. 对于正数因为三种编码方式的结果都相同:</p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7"><span class="hljs-comment">[+1]</span> = <span class="hljs-comment">[00000001]</span>原 = <span class="hljs-comment">[00000001]</span>反 = <span class="hljs-comment">[00000001]</span>补<br></code></pre></div></td></tr></table></figure>
+<p>所以不需要过多解释. 但是对于负数:</p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7"><span class="hljs-comment">[-1]</span> = <span class="hljs-comment">[10000001]</span>原 = <span class="hljs-comment">[11111110]</span>反 = <span class="hljs-comment">[11111111]</span>补<br></code></pre></div></td></tr></table></figure>
+<p>可见原码, 反码和补码是完全不同的. 既然原码才是被人脑直接识别并用于计算表示方式, 为何还会有反码和补码呢?</p>
+<p><strong>首先, 因为人脑可以知道第一位是符号位, 在计算的时候我们会根据符号位, 选择对真值区域的加减. (真值的概念在本文最开头). 但是对于计算机, 加减乘数已经是最基础的运算, 要设计的尽量简单. 计算机辨别”符号位”显然会让计算机的基础电路设计变得十分复杂!</strong> 于是人们想出了将符号位也参与运算的方法. 我们知道, 根据运算法则减去一个正数等于加上一个负数, 即: 1-1 = 1 + (-1) = 0 , 所以机器可以只有加法而没有减法, 这样计算机运算的设计就更简单了.</p>
+<p>于是人们开始探索 将符号位参与运算, 并且只保留加法的方法. 首先来看原码:</p>
+<p>计算十进制的表达式: 1-1=0</p>
+<figure class="highlight basic"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>- <span class="hljs-number">1</span> = <span class="hljs-number">1</span> + (-<span class="hljs-number">1</span>) = [<span class="hljs-number">00000001</span>]原 + [<span class="hljs-number">10000001</span>]原 = [<span class="hljs-number">10000010</span>]原 = -<span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure>
+<p>如果用原码表示, 让符号位也参与计算, 显然对于减法来说, 结果是不正确的.这也就是为何计算机内部不使用原码表示一个数.</p>
+<p>为了解决原码做减法的问题, 出现了反码:</p>
+<p>计算十进制的表达式: 1-1=0</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-number">1</span> <span class="hljs-bullet">-</span> <span class="hljs-number">1</span> <span class="hljs-string">=</span> <span class="hljs-number">1</span> <span class="hljs-string">+</span> <span class="hljs-string">(-1)</span> <span class="hljs-string">=</span> [<span class="hljs-number">0000 </span><span class="hljs-number">0001</span>]<span class="hljs-string">原</span> <span class="hljs-string">+</span> [<span class="hljs-number">1000 </span><span class="hljs-number">0001</span>]<span class="hljs-string">原=</span> [<span class="hljs-number">0000 </span><span class="hljs-number">0001</span>]<span class="hljs-string">反</span> <span class="hljs-string">+</span> [<span class="hljs-number">1111 </span><span class="hljs-number">1110</span>]<span class="hljs-string">反</span> <span class="hljs-string">=</span> [<span class="hljs-number">1111 </span><span class="hljs-number">1111</span>]<span class="hljs-string">反</span> <span class="hljs-string">=</span> [<span class="hljs-number">1000 </span><span class="hljs-number">0000</span>]<span class="hljs-string">原</span> <span class="hljs-string">=</span> <span class="hljs-number">-0</span><br></code></pre></div></td></tr></table></figure>
+<p>发现用反码计算减法, 结果的真值部分是正确的. 而唯一的问题其实就出现在”0”这个特殊的数值上. 虽然人们理解上+0和-0是一样的, 但是0带符号是没有任何意义的. 而且会有[0000 0000]原和[1000 0000]原两个编码表示0.</p>
+<p>于是补码的出现, 解决了0的符号以及两个编码的问题:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-number">1</span><span class="hljs-number">-1</span> <span class="hljs-string">=</span> <span class="hljs-number">1</span> <span class="hljs-string">+</span> <span class="hljs-string">(-1)</span> <span class="hljs-string">=</span> [<span class="hljs-number">0000 </span><span class="hljs-number">0001</span>]<span class="hljs-string">原</span> <span class="hljs-string">+</span> [<span class="hljs-number">1000 </span><span class="hljs-number">0001</span>]<span class="hljs-string">原</span> <span class="hljs-string">=</span> [<span class="hljs-number">0000 </span><span class="hljs-number">0001</span>]<span class="hljs-string">补</span> <span class="hljs-string">+</span> [<span class="hljs-number">1111 </span><span class="hljs-number">1111</span>]<span class="hljs-string">补</span> <span class="hljs-string">=</span> [<span class="hljs-number">0000 </span><span class="hljs-number">0000</span>]<span class="hljs-string">补=[0000</span> <span class="hljs-number">0000</span><span class="hljs-string">]原</span><br></code></pre></div></td></tr></table></figure>
+<p>这样0用[0000 0000]表示, 而以前出现问题的-0则不存在了.而且可以用[1000 0000]表示-128:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">(-1)</span> <span class="hljs-string">+</span> <span class="hljs-string">(-127)</span> <span class="hljs-string">=</span> [<span class="hljs-number">1000 </span><span class="hljs-number">0001</span>]<span class="hljs-string">原</span> <span class="hljs-string">+</span> [<span class="hljs-number">1111 </span><span class="hljs-number">1111</span>]<span class="hljs-string">原</span> <span class="hljs-string">=</span> [<span class="hljs-number">1111 </span><span class="hljs-number">1111</span>]<span class="hljs-string">补</span> <span class="hljs-string">+</span> [<span class="hljs-number">1000 </span><span class="hljs-number">0001</span>]<span class="hljs-string">补</span> <span class="hljs-string">=</span> [<span class="hljs-number">1000 </span><span class="hljs-number">0000</span>]<span class="hljs-string">补</span><br></code></pre></div></td></tr></table></figure>
+<p>-1-127的结果应该是-128, 在用补码运算的结果中, [1000 0000]补 就是-128. 但是注意因为实际上是使用以前的-0的补码来表示-128, 所以-128并没有原码和反码表示.(对-128的补码表示[1000 0000]补算出来的原码是[0000 0000]原, 这是不正确的)</p>
+<p><strong>使用补码, 不仅仅修复了0的符号以及存在两个编码的问题, 而且还能够多表示一个最低数. 这就是为什么8位二进制, 使用原码或反码表示的范围为[-127, +127], 而使用补码表示的范围为[-128, 127].</strong></p>
+<p>因为机器使用补码, 所以对于编程中常用到的32位int类型, 可以表示范围是: [-231, 231-1] 因为第一位表示的是符号位.而使用补码表示时又可以多保存一个最小值。</p>
+<h2 id="位图运算"><a href="#位图运算" class="headerlink" title="位图运算"></a>位图运算</h2><p>使用位图来替代传统的 <code>bool</code> 数组或者哈希表存储元素是否出现。</p>
+<ul>
+<li>预声明<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">_len = <span class="hljs-number">26</span>  <span class="hljs-comment"># 要保存的数字个数</span><br>bitmask = <span class="hljs-number">0</span>  <span class="hljs-comment"># 位图</span><br></code></pre></div></td></tr></table></figure></li>
+<li>判断是否读取过<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span> (bitmask &gt;&gt; (_len - index - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 如果为0则说明之前未曾访问过第index个元素</span><br></code></pre></div></td></tr></table></figure></li>
+<li>将对应bit上的值从1变成0，或者从0变成1。<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">bitmask ^= <span class="hljs-number">1</span> &lt;&lt; (_len - index - <span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
+面试题 01.01. 判定字符是否唯一</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 位掩码方法</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isUnique</span>(<span class="hljs-params">self, astr: <span class="hljs-built_in">str</span></span>) -&gt; bool:</span><br>        _len = <span class="hljs-number">26</span>  <span class="hljs-comment"># 一共有26个bit保存26个字母的使用情况</span><br>        bitmask = <span class="hljs-number">0</span>  <span class="hljs-comment"># 位掩码</span><br>        <span class="hljs-keyword">for</span> _char <span class="hljs-keyword">in</span> astr:<br>            index = <span class="hljs-built_in">ord</span>(_char) - <span class="hljs-number">97</span><br>            <span class="hljs-keyword">if</span> (bitmask &gt;&gt; (_len - index - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 如果为0则说明之前未曾访问过第index个元素</span><br>                bitmask ^= <span class="hljs-number">1</span> &lt;&lt; (_len - index - <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br><br><span class="hljs-comment"># List方法</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isUnique</span>(<span class="hljs-params">self, astr: <span class="hljs-built_in">str</span></span>) -&gt; bool:</span><br>        used = []<br>        <span class="hljs-keyword">for</span> _char <span class="hljs-keyword">in</span> astr:<br>            <span class="hljs-keyword">if</span> _char <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> used:<br>                used.append(_char)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br> <br><span class="hljs-comment"># hash-map方法</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isUnique</span>(<span class="hljs-params">self, astr: <span class="hljs-built_in">str</span></span>) -&gt; bool:</span><br>        used = &#123;&#125;<br>        <span class="hljs-keyword">for</span> _char <span class="hljs-keyword">in</span> astr:<br>            <span class="hljs-keyword">if</span> _char <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> used:<br>                used[_char] = <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
+<p>关于位图在数据库上的使用：</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5c4fd2af51882525da267385">https://juejin.im/post/5c4fd2af51882525da267385</a></p>
+<h1 id="关键思想"><a href="#关键思想" class="headerlink" title="关键思想"></a>关键思想</h1><h1 id="相关LeetCode题目"><a href="#相关LeetCode题目" class="headerlink" title="相关LeetCode题目"></a>相关LeetCode题目</h1><h2 id="LeetCode-52-N皇后-II（难）"><a href="#LeetCode-52-N皇后-II（难）" class="headerlink" title="LeetCode 52. N皇后 II（难）"></a>LeetCode 52. N皇后 II（难）</h2><p><strong>直觉</strong></p>
+<p>1、利用传统的回溯算法思想，直接在满足终止条件时，执行 <code>count += 1</code>，返回 <code>count</code> 结果就行。</p>
+<p>2、利用位运算</p>
+<p>1）、找到满足条件的位置</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">A         = <span class="hljs-number">1000</span> <span class="hljs-number">1001</span>  <span class="hljs-comment"># 这一行由于列冲突不能放置的位置</span><br>B         = 0001 0010  <span class="hljs-comment"># 这一行由于主对角线冲突不能放置的位置</span><br>C         = 0010 <span class="hljs-number">0000</span>  <span class="hljs-comment"># 这一行由于负对角线冲突不能放置的位置</span><br>A|B|C     = <span class="hljs-number">1011</span> <span class="hljs-number">1011</span>  <span class="hljs-comment"># 先做个或操作</span><br>~(A|B|C)  = 0100 0100 = D <span class="hljs-comment"># 然后取反 D中为1的位置就是第四行可以放置皇后的位置</span><br>-D        = <span class="hljs-number">1011</span> <span class="hljs-number">1110</span>  <span class="hljs-comment"># 接着加1 -D是D的所有位置按位取反之后加1</span><br>D&amp;-D      = <span class="hljs-number">0000</span> 0100 = bit <span class="hljs-comment"># 将二者与操作一下 得到的bit就是下一次可以放置皇后的一个位置</span><br></code></pre></div></td></tr></table></figure>
+<p>2）、</p>
+<p>这一题也可以使用位运算（位图）来实现，不过理解较为复杂。<br>对于<strong>列冲突变量</strong><code>A</code>来说，只要使用 <code>A|bit</code> 即可表示下一行列冲突的情况。<br>对于<strong>主对角线冲突变量</strong> <code>B</code>，采用<code>B|(bit&gt;&gt;1)</code> 即可表示下一行中，主对角线冲突的情况。<br>对于<strong>负对角线冲突变量</strong> <code>C</code>，采用<code>C|(bit&lt;&lt;1)</code> 即可表示下一行中，负对角线冲突的情况。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">bit       = <span class="hljs-number">0000</span> 0100  <span class="hljs-comment"># bit是当前选择的情况</span><br>A         = <span class="hljs-number">1000</span> <span class="hljs-number">1001</span><br>A = A|bit = <span class="hljs-number">1000</span> <span class="hljs-number">1101</span>   <span class="hljs-comment"># 更新下一行的列冲突位置</span><br><br>bit            = <span class="hljs-number">0000</span> 0100<br>bit&gt;&gt;<span class="hljs-number">1</span>         = <span class="hljs-number">0000</span> 0010<br>B              = 0001 0010<br>B = B|(bit&gt;&gt;<span class="hljs-number">1</span>) = 0001 0010  <span class="hljs-comment"># 更新下一行的负对角线冲突位置</span><br>    <br>bit            = <span class="hljs-number">0000</span> 0100<br>bit&lt;&lt;<span class="hljs-number">1</span>         = <span class="hljs-number">0000</span> <span class="hljs-number">1000</span><br>C              = 0001 0010<br>C = C|(bit&lt;&lt;<span class="hljs-number">1</span>) = 0001 <span class="hljs-number">1010</span>  <span class="hljs-comment"># 更新下一行的主对角线冲突位置</span><br></code></pre></div></td></tr></table></figure>
+<p>得到更新之后的 <code>A B C</code> 变量，就可以进行递归了。</p>
+<p><strong>关键代码</strong></p>
+<ul>
+<li>传统代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">could_place</span>(<span class="hljs-params">row, col</span>):</span><br>    <br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">place_queen</span>(<span class="hljs-params">row, col</span>)</span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">remove_queen</span>(<span class="hljs-params">row, col</span>)</span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">row = <span class="hljs-number">0</span>, count = <span class="hljs-number">0</span></span>):</span>  <span class="hljs-comment"># 默认backtrack从第0行开始</span><br>    <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):  <span class="hljs-comment"># &lt;选择列表&gt; 逐列添加</span><br>        <span class="hljs-keyword">if</span> could_place(row, col):  <span class="hljs-comment"># 判断当前位置是否可以添加皇后</span><br>            place_queen(row, col)  <span class="hljs-comment"># 执行选择</span><br>            <span class="hljs-keyword">if</span> row + <span class="hljs-number">1</span> == n:  <span class="hljs-comment"># &lt;结束条件&gt; Our Goal 遍历完所有行</span><br>                count += <span class="hljs-number">1</span>  <span class="hljs-comment"># 发现一个解，count加1</span><br>            <span class="hljs-keyword">else</span>:<br>                count = backtrack(row + <span class="hljs-number">1</span>, count)  <span class="hljs-comment"># 递归回溯， 列不变</span><br>            remove_queen(row, col)  <span class="hljs-comment"># 撤销选择</span><br>    <span class="hljs-keyword">return</span> count<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>位运算代码，明显简洁很多。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">totalNQueens</span>(<span class="hljs-params">self, n</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type n: int</span><br><span class="hljs-string">        :rtype: int</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">row = <span class="hljs-number">0</span>, hills = <span class="hljs-number">0</span>, next_row = <span class="hljs-number">0</span>, dales = <span class="hljs-number">0</span>, count = <span class="hljs-number">0</span></span>):</span><br>            <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            :type row: 当前放置皇后的行号</span><br><span class="hljs-string">            :type hills: 主对角线占据情况 [1 = 被占据，0 = 未被占据]</span><br><span class="hljs-string">            :type next_row: 下一行被占据的情况 [1 = 被占据，0 = 未被占据] 实际上就是记录了还有哪些列可以用</span><br><span class="hljs-string">            :type dales: 次对角线占据情况 [1 = 被占据，0 = 未被占据]</span><br><span class="hljs-string">            :rtype: 所有可行解的个数</span><br><span class="hljs-string">            &quot;&quot;&quot;</span><br>            <span class="hljs-keyword">if</span> row == n:  <span class="hljs-comment"># 如果已经放置了 n 个皇后</span><br>                count += <span class="hljs-number">1</span>  <span class="hljs-comment"># 累加可行解</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-comment"># 当前行可用的列</span><br>                <span class="hljs-comment"># ! 表示 0 和 1 的含义对于变量 hills, next_row and dales的含义是相反的</span><br>                <span class="hljs-comment"># [1 = 未被占据，0 = 被占据]</span><br>                free_columns = columns &amp; ~(hills | next_row | dales)<br>                <span class="hljs-comment"># free_columns =  ~(hills | next_row | dales)</span><br>                <br>                <span class="hljs-comment"># 找到可以放置下一个皇后的列</span><br>                <span class="hljs-keyword">while</span> free_columns:<br>                    <span class="hljs-comment"># free_columns 的第一个为 &#x27;1&#x27; 的位在该列我们放置当前皇后</span><br>                    curr_column = - free_columns &amp; free_columns<br>                    <span class="hljs-comment"># 放置皇后 并且排除对应的列</span><br>                    free_columns ^= curr_column<br>                    count = backtrack(row + <span class="hljs-number">1</span>, <br>                                      (hills | curr_column) &lt;&lt; <span class="hljs-number">1</span>, <br>                                      next_row | curr_column, <br>                                      (dales | curr_column) &gt;&gt; <span class="hljs-number">1</span>, <br>                                      count)<br>            <span class="hljs-keyword">return</span> count<br><br>        <span class="hljs-comment"># 棋盘所有的列都可放置，</span><br>        <span class="hljs-comment"># 即，按位表示为 n 个 &#x27;1&#x27;</span><br>        <span class="hljs-comment"># bin(cols) = 0b1111 (n = 4), bin(cols) = 0b111 (n = 3)</span><br>        <span class="hljs-comment"># [1 = 可放置]</span><br>        columns = (<span class="hljs-number">1</span> &lt;&lt; n) - <span class="hljs-number">1</span>  <span class="hljs-comment"># columns中为每一行默认可以放置的位置 全1</span><br>        <span class="hljs-keyword">return</span> backtrack()<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/10/LeetCode-52-N皇后-II（难）/">LeetCode 52. N皇后 II（难）</a></p>
+<h2 id="LeetCode-78-子集（中）"><a href="#LeetCode-78-子集（中）" class="headerlink" title="LeetCode 78. 子集（中）"></a>LeetCode 78. 子集（中）</h2><p><strong>题目</strong></p>
+<p>给定一组<strong>不含重复元素、也不一定连续</strong>的整数数组 <em>nums</em>，返回该数组所有可能的子集（幂集）。<br><strong>说明：</strong>解集不能包含重复的子集。</p>
+<p><strong>直觉</strong></p>
+<p>状态分配：把数组中所有的数分配一个状态，true 表示这个数在子集中出现，false 表示在子集中不出现，那么对于一个长度为 n 的数组，每个数字都有出现与不出现两种情况，所以共有 2n 中情况，那么我们把每种情况都转换出来就是子集了，状态存储用位运算来实现。</p>
+<p><strong>关键代码</strong></p>
+<p>状态分配</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">convertIntToSet</span>(<span class="hljs-params">nums, k</span>):</span><br>            sub = []<br>            idx = <span class="hljs-number">0</span><br>            i = k<br>            <span class="hljs-keyword">while</span> i&gt;<span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">if</span> i &amp; <span class="hljs-number">1</span> == <span class="hljs-number">1</span>:<br>                    sub.append(nums[idx])<br>                idx += <span class="hljs-number">1</span><br>                i &gt;&gt;= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> sub<br>        res = []<br>        nums.sort()<br>        _max = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-built_in">len</span>(nums)<br>        k = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> k &lt; _max:<br>            out = convertIntToSet(nums, k)<br>            res.append(out)<br>            k += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/20/LeetCode-78-子集（中）/">LeetCode 78. 子集（中）</a></p>
+<h2 id="LeetCode-89-格雷编码（中）"><a href="#LeetCode-89-格雷编码（中）" class="headerlink" title="LeetCode 89. 格雷编码（中）"></a>LeetCode 89. 格雷编码（中）</h2><p><strong>题目</strong></p>
+<p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。<br>给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。格雷编码序列必须以 0 开头。</p>
+<p><strong>直觉</strong></p>
+<p>由<a target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/格雷码">维基百科</a>可知 <strong>二进制数字</strong> 和 <strong>格雷码</strong> 之间的转换公式是： </p>
+<script type="math/tex; mode=display">
+gray\_num = binary\_num >> 1\ \wedge\ binary\_num</script><p>由此可循环 $2^n$ 个数字，依次处理即可。  </p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">grayCode</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        res = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>**n):<br>            res.append((i &gt;&gt; <span class="hljs-number">1</span>)^i)<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/23/LeetCode-89-格雷编码（中）/">LeetCode 89. 格雷编码（中）</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E6%A0%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构：树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%8E%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95/">
+                        <span class="hidden-mobile">算法：二分查找与搜索算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E4%BD%8D%E8%BF%90%E7%AE%97/';
+        this.page.identifier = '/2020/04/10/%E7%AE%97%E6%B3%95%EF%BC%9A%E4%BD%8D%E8%BF%90%E7%AE%97/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

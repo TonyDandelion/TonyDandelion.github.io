@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 76. 最小覆盖子串（难） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 76. 最小覆盖子串（难）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-20 14:26" pubdate>
+        2020年3月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 76. 最小覆盖子串（难）</h1>
+            
+            <div class="markdown-body">
+              <p>滑动窗口解决字符串问题  </p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个字符串 S、一个字符串 T，请在字符串 S 里面找出：包含 T 所有字母的最小子串。</p>
+<p><strong>说明</strong></p>
+<ul>
+<li>如果 S 中不存这样的子串，则返回空字符串 <code>&quot;&quot;</code>。</li>
+<li>如果 S 中存在这样的子串，我们保证它是唯一的答案。</li>
+</ul>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">S</span> = <span class="hljs-string">&quot;ADOBECODEBANC&quot;</span>, <span class="hljs-attr">T</span> = <span class="hljs-string">&quot;ABC&quot;</span><br>输出: <span class="hljs-string">&quot;BANC&quot;</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>滑动窗口、hashmap、字符串问题</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>step 1</strong></p>
+<p>建立一个可以容纳ASCII的字典<code>mem</code>，然后记录 <code>t</code> 中元素出现的次数。 <code>mem</code>可以理解成t中字母等待确认的次数，在s中出现一次，就减一。<code>t_len</code>记录了t中的字符个数。<code>minL</code> 和 <code>minL</code> 分别是最新窗口的左边缘和右边缘，<code>l</code> 为滑动窗口左边缘。</p>
+<figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix"><span class="hljs-attr">mem</span> = Counter(t) <br><span class="hljs-attr">t_len</span> = len(t)<br>minL, <span class="hljs-attr">minR</span> = <span class="hljs-number">0</span>, float(&#x27;inf&#x27;)<br><span class="hljs-attr">l</span> = <span class="hljs-number">0</span>  <span class="hljs-comment"># 滑动窗口左边缘</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>step 2</strong></p>
+<p>遍历<code>s</code>，设置循环下标<code>r</code>为滑动窗口右边缘，将字典<code>mem</code>中的<code>c</code>元素减一，如果<code>s</code>中的元素在<code>t</code>中出现过，记录此时的<code>t_len = len(t)-1</code>。当<code>t_len==0</code>时，说明此时<code>t</code>中的元素在<code>s</code>中都出现了，我们此时要进入下一步判断。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> r, c <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(s):  <span class="hljs-comment"># r是当前滑动窗口的右边缘</span><br>    <span class="hljs-keyword">if</span> mem[c] &gt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 出现次数大于1 说明是要找的字符串</span><br>        t_len -= <span class="hljs-number">1</span>  <span class="hljs-comment"># 找到这个待确认的了 减去待确认字符个数</span><br>	mem[c] -= <span class="hljs-number">1</span>  <span class="hljs-comment"># 无论如何，将出现次数减去1。那么t中有s中也有的字符，对应出现次数为0。而那些t中没有，s中有的字符，对应出现次数就是-1。</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>step 3</strong></p>
+<p>判断<code>mem</code>中<code>s[l]</code>是不是小于0，如果是的话，说明<code>t</code>中不应该包含<code>s[l]</code>，所以我们需要将它剔除出去（也就是mem[s[l++]]++）。</p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">if t_len == 0:<br>    while mem<span class="hljs-comment">[s<span class="hljs-comment">[l]</span>]</span> &lt; 0:  # 判断mem中s<span class="hljs-comment">[l]</span>是不是小于0，如果是的话，说明t中不应该包含s<span class="hljs-comment">[l]</span>，就要把滑动窗口右移，所以我们需要将它剔除出去（也就是mem<span class="hljs-comment">[s<span class="hljs-comment">[l++]</span>]</span>++）。 <br>        mem<span class="hljs-comment">[s<span class="hljs-comment">[l]</span>]</span> += 1  # mem对应值归零<br>        l += 1  # 滑动窗口右移<br></code></pre></div></td></tr></table></figure>
+<p><strong>step 4</strong></p>
+<p><strong>完成滑动窗口右移，找到最前面的一个t字符之后</strong>，我们记录此时的<code>l</code>和<code>r</code>为寻找得到的最小窗口。接着我们需要继续找符合条件的位置，我们将<code>l++</code>并且<code>t_len++</code>，将<code>s[l]</code>再加入到<code>mem</code>中去，这样我们就将窗口向右滑动一步，过掉这个t包含字符，寻找下一个窗口。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span> t_len == <span class="hljs-number">0</span>:<br>	<span class="hljs-keyword">while</span> mem[s[l]] &lt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 判断mem中s[l]是不是小于0，如果是的话，说明t中不应该包含s[l]，就要把滑动窗口右移，所以我们需要将它剔除出去（也就是mem[s[l++]]++）。 </span><br>		mem[s[l]] += <span class="hljs-number">1</span><br>	l += <span class="hljs-number">1</span>  <span class="hljs-comment"># 滑动窗口右移</span><br><br>	<span class="hljs-keyword">if</span> r - l &lt; minR - minL:  <span class="hljs-comment"># 记录此时的l和r为新的滑动窗口</span><br>		minL, minR = l, r<br>    <span class="hljs-comment"># 将l++并且t_len++，将s[l]再加入到mem中去，这样我们就将窗口向右滑动一步</span><br>    mem[s[l]] += <span class="hljs-number">1</span>  <span class="hljs-comment"># 出现次数加一</span><br>    t_len += <span class="hljs-number">1</span>  <span class="hljs-comment"># 待确定个数加一</span><br>    l += <span class="hljs-number">1</span>  <span class="hljs-comment"># 滑动窗口右移 寻找下一个窗口</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="python版本"><a href="#python版本" class="headerlink" title="python版本"></a>python版本</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minWindow</span>(<span class="hljs-params">self, s: <span class="hljs-string">&#x27;str&#x27;</span>, t: <span class="hljs-string">&#x27;str&#x27;</span></span>) -&gt; &#x27;str&#x27;:</span><br>        <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict<br>        lookup = defaultdict(<span class="hljs-built_in">int</span>)<br>        <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> t:<br>            lookup[c] += <span class="hljs-number">1</span><br>        start = <span class="hljs-number">0</span><br>        end = <span class="hljs-number">0</span><br>        min_len = <span class="hljs-built_in">float</span>(<span class="hljs-string">&quot;inf&quot;</span>)<br>        counter = <span class="hljs-built_in">len</span>(t)<br>        res = <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-keyword">while</span> end &lt; <span class="hljs-built_in">len</span>(s):<br>            <span class="hljs-keyword">if</span> lookup[s[end]] &gt; <span class="hljs-number">0</span>:<br>                counter -= <span class="hljs-number">1</span><br>            lookup[s[end]] -= <span class="hljs-number">1</span><br>            end += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> counter == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">if</span> min_len &gt; end - start:<br>                    min_len = end - start<br>                    res = s[start:end]<br>                <span class="hljs-keyword">if</span> lookup[s[start]] == <span class="hljs-number">0</span>:<br>                    counter += <span class="hljs-number">1</span><br>                lookup[s[start]] += <span class="hljs-number">1</span><br>                start += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>我写的一个不完整版本</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minWindow</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span>, t: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        <span class="hljs-comment"># 只要保证窗口(队列)字符串含有t中字符的个数大于等于t里相应元素个数.</span><br>        d = &#123;&#125;<br>        repeat_statistis = &#123;&#125;<br>        check_flage = <span class="hljs-literal">False</span><br>        min_length = <span class="hljs-number">1000000</span><br>        min_str = <span class="hljs-string">&quot;&quot;</span><br>        <br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> t:<br>            <span class="hljs-keyword">if</span> i <span class="hljs-keyword">in</span> repeat_statistis:<br>                repeat_statistis[i] += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                repeat_statistis[i] = <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(s) &lt; <span class="hljs-built_in">len</span>(t):<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>        <br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(s) == <span class="hljs-built_in">len</span>(t):<br>            check_flage = <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> t:<br>                <span class="hljs-keyword">if</span> i <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> s:<br>                    check_flage = <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">if</span> check_flage:<br>                <span class="hljs-keyword">return</span> s<br><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s)):<br>            <span class="hljs-keyword">if</span> s[i] <span class="hljs-keyword">in</span> t:<br>                check_flage = <span class="hljs-literal">True</span><br>                d[s[i]] = i<br>                tmp_d = <span class="hljs-built_in">dict</span>((v,k) <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> d.items())<br>                right_flag = <span class="hljs-built_in">min</span>(tmp_d)<br>                left_flag = <span class="hljs-built_in">max</span>(tmp_d)<br>                sub_str = s[right_flag:left_flag+<span class="hljs-number">1</span>]<br>                <span class="hljs-comment"># 确定子字符在里面</span><br>                tmp_sub_str = sub_str<br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> t:<br>                    <span class="hljs-keyword">if</span> j <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> tmp_sub_str:<br>                        check_flage = <span class="hljs-literal">False</span><br>                        <span class="hljs-keyword">break</span><br>                    <span class="hljs-keyword">else</span>:<br>                        tmp_sub_str = <span class="hljs-built_in">list</span>(tmp_sub_str)<br>                        tmp_sub_str.remove(j)<br>                        tmp_sub_str = <span class="hljs-string">&quot;&quot;</span>.join(tmp_sub_str)<br><br>                <span class="hljs-keyword">if</span> check_flage:<br>                    <span class="hljs-keyword">if</span> (left_flag-right_flag) &lt; min_length:<br>                        min_str = sub_str<br>                        min_length = left_flag-right_flag<br><br>        <span class="hljs-keyword">return</span> min_str<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">S = &quot;aaflslflsldkalskaaa&quot;</span><br><span class="hljs-string">T = &quot;aaa&quot;</span><br><span class="hljs-string">Answer = &quot;aaa&quot;  # 无法通过这个测试样例 不能以输入样例来控制滑动窗口</span><br><span class="hljs-string"></span><br><span class="hljs-string">if __name__ == &quot;__main__&quot;:</span><br><span class="hljs-string">    solution = Solution()</span><br><span class="hljs-string">    print(solution.minWindow(S, T))</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></div></td></tr></table></figure>
+<p><strong><font color='red'>不能以输入样例来控制滑动窗口</font></strong>  </p>
+<ul>
+<li>可理解版本</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minWindow</span>(<span class="hljs-params">self, s, t</span>):</span><br>        mem = Counter(t)  <span class="hljs-comment"># Counter 一个计数器工具提供快速和方便的计数 建立一个可以容纳ASCII的字典mem，然后记录t中元素出现的次数。 mem可以理解成等待确认的次数。</span><br>        t_len = <span class="hljs-built_in">len</span>(t)<br>        minL, minR = <span class="hljs-number">0</span>, <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;inf&#x27;</span>)<br>        l = <span class="hljs-number">0</span>  <span class="hljs-comment"># 滑动窗口左边缘</span><br>        <br>        <span class="hljs-keyword">for</span> r, c <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(s):<br>            <span class="hljs-keyword">if</span> mem[c] &gt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 出现次数大于1</span><br>                t_len -= <span class="hljs-number">1</span>  <span class="hljs-comment"># 找到这个待确认的了 减去待确认字符个数</span><br>            mem[c] -= <span class="hljs-number">1</span>  <span class="hljs-comment"># 出现次数减去1</span><br>                <br>            <span class="hljs-keyword">if</span> t_len == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">while</span> mem[s[l]] &lt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 判断mem中s[l]是不是小于0，如果是的话，说明t中不应该包含s[l]，就要把滑动窗口右移，所以我们需要将它剔除出去（也就是mem[s[l++]]++）。 </span><br>                    mem[s[l]] += <span class="hljs-number">1</span><br>                    l += <span class="hljs-number">1</span>  <span class="hljs-comment"># 滑动窗口右移</span><br>                    <br>                <span class="hljs-keyword">if</span> r - l &lt; minR - minL:  <span class="hljs-comment"># 记录此时的l和r为新的滑动窗口</span><br>                    minL, minR = l, r<br>                <span class="hljs-comment"># 将l++并且t_len++，将s[l]再加入到mem中去，这样我们就将窗口向右滑动一步</span><br>                mem[s[l]] += <span class="hljs-number">1</span>  <span class="hljs-comment"># 出现次数加一</span><br>                t_len += <span class="hljs-number">1</span>  <span class="hljs-comment"># 待确定个数加一</span><br>                l += <span class="hljs-number">1</span>  <span class="hljs-comment"># 滑动窗口右移 寻找下一个窗口</span><br>        <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">if</span> minR == <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;inf&#x27;</span>) <span class="hljs-keyword">else</span> s[minL:minR+<span class="hljs-number">1</span>]<br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>S = [<span class="hljs-string">&quot;ADOBECODEBANC&quot;</span>, <span class="hljs-string">&quot;aa&quot;</span>, <span class="hljs-string">&quot;bbaa&quot;</span>, <span class="hljs-string">&quot;aaflslflsldkalskaaa&quot;</span>]<br>T = [<span class="hljs-string">&quot;ABC&quot;</span>, <span class="hljs-string">&quot;aa&quot;</span>, <span class="hljs-string">&quot;aba&quot;</span>, <span class="hljs-string">&quot;aaa&quot;</span>]<br>Answer = [<span class="hljs-string">&quot;BANC&quot;</span>, <span class="hljs-string">&quot;aa&quot;</span>, <span class="hljs-string">&quot;baa&quot;</span>, <span class="hljs-string">&quot;aaa&quot;</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(S)):<br>        <span class="hljs-comment"># print(&quot;-&quot;*50)</span><br>        result = solution.minWindow(S[i], T[i])<br>        <span class="hljs-comment"># print(S[i], T[i])</span><br>        <span class="hljs-comment"># print(result, Answer[i])</span><br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
+<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><p>1、<code>from collections import Counter</code> 是一个计数器工具提供快速和方便的计数。<br>使用方法: <a target="_blank" rel="noopener" href="http://www.pythoner.com/205.html">参考链接</a>  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">c = Counter()  <span class="hljs-comment"># 创建一个空的Counter类</span><br>c = Counter(<span class="hljs-string">&#x27;gallahad&#x27;</span>)  <span class="hljs-comment"># 从一个可iterable对象（list、tuple、dict、字符串等）创建</span><br>c = Counter(&#123;<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&#x27;b&#x27;</span>: <span class="hljs-number">2</span>&#125;)  <span class="hljs-comment"># 从一个字典对象创建</span><br>c = Counter(a=<span class="hljs-number">4</span>, b=<span class="hljs-number">2</span>)  <span class="hljs-comment"># 从一组键值对创建</span><br></code></pre></div></td></tr></table></figure>
+<p>2、<code>minL, minR = 0, float(&#39;inf&#39;)</code> 设置正无穷。<br>使用方法</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;inf&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = <span class="hljs-number">0</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>print(a&gt;b)<br><span class="hljs-meta">&gt;&gt;&gt; </span>print(a&lt;b)<br><br><span class="hljs-literal">True</span><br><span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/20/%E5%85%B3%E4%BA%8E%E6%81%90%E6%83%A7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于恐惧</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/20/LeetCode-77-%E7%BB%84%E5%90%88%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 77. 组合（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/20/LeetCode-76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2%EF%BC%88%E9%9A%BE%EF%BC%89/';
+        this.page.identifier = '/2020/03/20/LeetCode-76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2%EF%BC%88%E9%9A%BE%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

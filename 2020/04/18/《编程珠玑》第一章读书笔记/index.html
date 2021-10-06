@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>《编程珠玑》第一章读书笔记 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="《编程珠玑》第一章读书笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-18 16:12" pubdate>
+        2020年4月18日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">《编程珠玑》第一章读书笔记</h1>
+            
+            <div class="markdown-body">
+              <p>设计者确定其设计达到完美的标准不是不能再增加任何东西，而是不能再减少任何东西。</p>
+<a id="more"></a>
+<p>简单来说，《编程珠玑》第一章通过一个硬盘数据排序的问题，引出了一套代码调优的原则。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>输入：一个包含1000万个不重复的7位10进制整数的本地文件。</p>
+<p>输出：按<strong>升序</strong>排列的输入。</p>
+<p>约束：内存空间仅1MB，磁盘存储空间较多，运行时间需要优化到10s左右。</p>
+<h1 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h1><p><strong>基本思想</strong></p>
+<p>一个7位10进制整数如果用 $7$ bytes来表示，1MB（$2^{20}$ byte）可以保存143000个数字。</p>
+<p>一个7位10进制整数如果用 $4$ bytes来表示，1MB（$2^{20}$ byte）可以保存 250000个数字。</p>
+<p>1000万个数字，需要分40次多趟排序（第一趟挑选出所有数字中0-249999的数字进行排序，第二趟挑选出所有数字中250000-499999的数字进行排序，以此类推。）</p>
+<p><strong>改进</strong></p>
+<p>用一个10000000位的字符串表示，当且仅当整数 $i$ 在文件中存在时，第 $i$ 位为1。按照大小顺序将这个字符串依次输出就行，整个代码分为3个部分。</p>
+<p>1、初始化一个1000万位的所有位置都为0的字符串，从而将集合初始化为空。</p>
+<p>2、通过读入输入文件中的每一个整数来建立集合，将每个位置置为1。</p>
+<p>3、从第0位开始检验1000万位的字符串，如果该位为1，就输出对应整数，由此产生有序的输出文件。</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>1、明确问题（<strong>对小问题的仔细分析可以得到长远的好处</strong>）</p>
+<p>2、使用位图数据结构（有限定义域内的稠密集合）</p>
+<p>3、多趟算法（每趟读入一部分数据）</p>
+<p>4、时间-空间折中与双赢</p>
+<p>5、简单设计（<strong>设计者确定其设计达到完美的标准不是不能再增加任何东西，而是不能再减少任何东西。</strong>）</p>
+<h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><p>1、 如果不缺内存，如何使用一个具有库的语言来实现一种排序算法以表示和排序集合？</p>
+<p>下面这个 C++ 程序使用 C++ 标准模板库中的 set 容器完成相同的任务。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; S;<br>    <span class="hljs-keyword">int</span> i;<br>    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator j;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">cin</span> &gt;&gt; j)<br>        S.insert(i);<br>    <span class="hljs-keyword">for</span>(j = S.begin(); j != S.end(); ++j)<br>        count &lt;&lt; *j &lt;&lt; <span class="hljs-string">&quot;\n&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>2、如何使用位逻辑运算（如与、或、移位）来实现位向量？</p>
+<p>下面的函数（C++）使用常量来设置、清除以及测试位值：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BITSPERWORD 32</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SHIFT 5</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MASK 0x1F</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10000000</span><br><span class="hljs-keyword">int</span> a[<span class="hljs-number">1</span> + N / BITSPERWORD];<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>    a[i &gt;&gt; SHIFT] |= (<span class="hljs-number">1</span> &lt;&lt; (i &amp; MASK));<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clr</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>    a[i &gt;&gt; SHIFT] &amp;= ~(<span class="hljs-number">1</span> &lt;&lt; (i &amp; MASK));<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a[i &gt;&gt; SHIFT] &amp; (<span class="hljs-number">1</span> &lt;&lt; (i &amp; MASK));<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>下面的函数（Python）使用常量来设置、清除以及测试位值：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python">hash_mask = <span class="hljs-number">8</span>  <span class="hljs-comment"># 1000 </span><br>data_length = <span class="hljs-number">4</span>  <span class="hljs-comment"># 4个数值</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set</span>(<span class="hljs-params">index</span>):</span>  <span class="hljs-comment"># 将第i位（从0开始）从0设置成1或者从1设置成0</span><br>    hash_mask ^= <span class="hljs-number">1</span> &lt;&lt; (data_length - <span class="hljs-number">1</span> - index)<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span>(<span class="hljs-params">index</span>):</span><br>    <span class="hljs-keyword">return</span> (hash_mask &gt;&gt; index) &amp; <span class="hljs-number">1</span> == <span class="hljs-number">1</span>  <span class="hljs-comment"># 如果第i位（从0开始）是1则返回True否则返回False</span><br></code></pre></div></td></tr></table></figure>
+<p>3、运行时效率是设计目标的一个重要组成部分，所得到的程序需要足够高效。在你自己的系统上实现位图排序并度量其运行时间。该时间与系统排序的运行时间以及习题 1 中排序（调用库实现）的运行时间相比如何？假设 n 为 10 000 000，且输入文件包含 1 000 000个整数，。</p>
+<p>下面的 C 代码使用答案 2 中定义的函数来实现排序算法。</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> i;<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; N; i++) <br>        clr(i);<br>    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, $i) != EOF)<br>        <span class="hljs-built_in">set</span>(i);<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; N; i++)<br>        <span class="hljs-keyword">if</span> (test(i))<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, i);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>使用答案 4 中的程序生成了一个包含 100 万个不同正整数的文件，其中每个正整数都小于 1 000 万。下表列出了使用系统命令行排序、答案 1 中的 C++ 和 C 程序以及位图代码对这些整数进行排序的开销：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>系统排序</th>
+<th>系统排序</th>
+<th>C++/STL</th>
+<th>C/qsort</th>
+<th>C/位图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总时间开销（秒）</td>
+<td>89</td>
+<td>38</td>
+<td>12.6</td>
+<td>10.7</td>
+</tr>
+<tr>
+<td>计算时间开销（秒）</td>
+<td>79</td>
+<td>28</td>
+<td>2.4</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>空间开销（MB）</td>
+<td>0.8</td>
+<td>70</td>
+<td>4</td>
+<td>1.25</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>第一行是总时间。<br>第二行减去了读写文件所需的 10.2 秒输入/输出时间。<br>尽管通用 C++ 程序所需的内存和 CPU 时间是专用 C 程序的 50 倍，但是代码量仅有专用 C 程序的一半，而且扩展到其他问题也容易得多。</p>
+<p>4、如果认真考虑了习题 3，你将会面对生成小于 n 且没有重复的 k 个整数的问题。最简单的方法就是使用前 k 个正整数。这个极端的数据集合将不会明显地改变位图方法的运行时间（将不会明显的显示出不同方法的性能差距），但是可能会歪曲系统排序的运行时间。如何生成位于 0 至 n-1 之间的 k 个不同的随机顺序的随机整数？尽量使你的程序简短且高效。</p>
+<p>见第 12 章，尤其是习题 12.8。下面的代码假定 <code>randint(l, u)</code> 返回 <code>l..u</code> 中的一个随机整数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">/* 伪代码 */</span><br><span class="hljs-keyword">for</span> i = [<span class="hljs-number">0</span>, n)<br>    x[i] = i<br><span class="hljs-keyword">for</span> i = [<span class="hljs-number">0</span>, k)<br>    swap(i, randint(i, n - <span class="hljs-number">1</span>))<br>    print x[i]<br></code></pre></div></td></tr></table></figure>
+<p>其中 <code>swap</code> 函数的作用是交换 <code>x</code> 中的两个元素。有关 <code>randint</code> 函数的详细讨论见 12.1 节。</p>
+<p>5、那个程序员说他有 1 MB 的可用存储空间，但是我们概要描述的代码需要 1.25 MB 的空间。他可以不费力气地索取到额外的空间。如果 1 MB 空间是严格的边界，你会推荐如何处理呢？你的算法的运行时间又是多少？</p>
+<p><strong>使用位图表示 1 000 万个数需要 1000 万个位，或者说 125 万字节。</strong><br>考虑到没有以数字 0 或 1 打头的电话号码，我们可以将内存需求降低为 100 万字节。<br>另一种做法是采用两趟算法，首先使用 5000 000 / 8 = 625 000 个字节的存储空间来排序 0 ~ 4 999 999 之间的整数，然后在第二趟排序 5 000 000 ~ 9 999 999 的整数。$k$ 趟算法可以在 $k \times n$ 的时间开销和 $n / k$ 的空间开销内完成对最多 $n$ 个小于 $n$ 的无重复正整数的排序。</p>
+<p>6、如果那个程序员说的不是每个整数最多出现一次，而是每个整数最多出现 10 次，你又如何建议他呢？你的解决方案如何随着可用存储空间总量的变化而变化？</p>
+<p>如果每个整数最多出现 10 次，那么我们就可以使用 4 位的 $\frac{1}{2}$ 字节来统计它出现的次数。利用习题 5 的答案，我们可以使用 $10 ,000 ,000 \times \frac{1}{2} = 5, 000, 000$个字节（每一个数字使用 $\frac{1}{2}$ 字节进行保存）在 1 趟内完成对整个文件的排序，或使用 $10 ,000 ,000 \times \frac{1}{2 \times k} $个字节在 $k$  趟内完成对整个文件的排序。</p>
+<p>7 、[R. Weil] 本书 1.4 节中描述的程序存在一些缺陷。首先是假定在输入中没有出现两次的整数。如果某个数出现超过一次的话，会发生什么？在这种情况下，如何修改程序来调用错误处理函数？当输入整数小于零或大于等于 n 时，又会发生什么？如果某个输入不是数值又如何？在这些情况下，程序该如何处理？程序还应该包含哪些明智的检查？描述一些用以测试程序的小型数据集合，并说明如何正确处理上述以及其他的不良情况。</p>
+<p><strong>如果某个数出现超过一次的话，会发生什么？</strong>重复出现的数字会被覆盖。<br><strong>在这种情况下，如何修改程序来调用错误处理函数？</strong>使用额外的存储空间，记录重复出现数字的次序，输出时按住这个值进行输出。<br><strong>在这些情况下，程序该如何处理？程序还应该包含哪些明智的检查？</strong>如果不允许重复，就在不做处理，读入数据时直接覆盖。<br>描述一些用以测试程序的小型数据集合，并说明如何正确处理上述以及其他的不良情况。</p>
+<p>8、当那个程序员解决该问题的时候，美国所有免费电话的区号都是 800 。现在免费电话的区号包括 800、877 和 888，而且还在增多。如何在 1 MB 空间内完成对所有这些免费电话号码的排序？如何将免费电话号码存储在一个集合中，要求可以实现非常快速的查找以判定一个给定的免费电话号码是否可用或者已经存在？</p>
+<p>这种特殊的数字而且数量有限，直接使用关键字索引就行。</p>
+<p>9、使用更多的空间来换取更少的运行时间存在一个问题：初始化空间本身需要消耗大量的时间。说<strong>明如何设计一种技术，在第一次访问向量的项时将其初始化为 0。你的方案应该使用常量时间进行初始化和向量访问，使用的额外空间应正比于向量的大小。</strong>因为该方法通过进一步增加空间来减少初始化的时间，所以仅在空间很廉价、时间很宝贵且向量很稀疏的情况下才考虑使用。</p>
+<p>借助于两个额外的 <code>n</code> 元向量 <code>from</code>、<code>to</code> 和一个整数 <code>top</code>，我们就可以使用标识来初始化向量 <code>data[0..n-1]</code>。<br>如果元素 <code>data[i]</code> 已初始化（值为0），那么 <code>from[i] &lt; top</code> 并且 <code>to[from[i]] = i</code>。因此，<code>from</code> 是一个简单的标识，<code>to</code> 和 <code>top</code> 一起确保了 <code>from</code> 中不会被写入内存里的随机内容。变量 <code>top</code> 初始为 <code>0</code>，下面的代码实现对数组元素 i 的首次访问：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++">from[i] = top<br>to[top] = i<br>data[i] = <span class="hljs-number">0</span><br>top++<br></code></pre></div></td></tr></table></figure>
+<p>10、在成本低廉的隔日送达时代之前，商店允许顾客通过电话订购商品，并在几天后上门自取。商店的数据库使用客户的电话号码作为其检索的主关键字（客户知道他们自己的电话号码，而且这些关键字几乎都是唯一的）。你如何组织商店的数据库，以允许高效的插入和检索操作？</p>
+<p>商店将纸质订单表格放在 10 <em> 10 的箱数组中，使用客户电话号码的最后两位作为散列索引。当客户打电话下订单时，将订单放到适当的箱中。<em>*当客户来取商品时，销售人员顺序搜索对应箱中的订单——这就是经典的“用顺序搜索来解决冲突的开放散列”。电话号码的最后两位数字非常接近于随机，因此是非常理想的散列函数，</em></em>而最前面的两位数字则很不理想——为什么？一些市政机关使用类似的方案在记事本中记录信息。</p>
+<p>11、在 20 世纪 80 年代早期，洛克希德公司加利福尼亚州桑尼维尔市工厂的工程师们每天都要将许多由计算机辅助设计（CAD）系统生成的图纸从工厂送到位于圣克鲁斯市的测试站。虽然仅有 40 公里远，但使用汽车快递服务每天都需要一个多小时的时间（由于交通阻塞和山路崎岖），花费 100 美元。请给出新的数据传输方案并估计每一种方案的费用。</p>
+<p>两地的计算机原先是通过微波连接的，但是当时测试站打印图纸所需的打印机却非常昂贵。因此，该团队在主厂绘制图纸，然后拍摄下来并通过信鸽把 35 毫米的底片送到测试站，在测试站进行放大并打印成图片。鸽子来回一次需要 45 分钟，是汽车所需时间的一半，并且每天只需要花费几美元。在项目开发的 16 个月中，信鸽传送了几百卷底片，仅丢失了两卷（当地有鹰，因此没有让信鸽传送机密数据）。由于现在打印机比较便宜，因此可以使用微波链路解决该问题。</p>
+<p>12、载人航天的先驱们很快就意识到需要在外太空的极端环境下实现顺利书写。民间盛传美国国家宇航局（NASA）花费 100 万美元研发出了一种特殊的钢笔来解决这个问题。那么，前苏联又会如何解决相同的问题呢？</p>
+<p>根据该传闻，前苏联人用铅笔解决了这个问题。有关这个真实故事的背景请查看www.spacepen.com(刚看了下，价格还可以接受)。Fisher Space Pen 公司成立于 1948 年，其书写设备被俄国航天局、水底探测人员和喜马拉雅登山探险队使用过。</p>
+<p><em>参考连接</em></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Folgerjun/Programming-Pearls/blob/master/Chapter-One.md">https://github.com/Folgerjun/Programming-Pearls/blob/master/Chapter-One.md</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%BA%E6%9C%AF%E6%B1%82%E9%81%93/">论术求道</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91/">编程珠玑</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/19/Visual-Studio-Code-C-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Visual Studio Code C++环境搭建</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/17/Python%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8/">
+                        <span class="hidden-mobile">Python的装饰器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/18/%E3%80%8A%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91%E3%80%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/';
+        this.page.identifier = '/2020/04/18/%E3%80%8A%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91%E3%80%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

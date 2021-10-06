@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 48. 旋转图像（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 48. 旋转图像（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-10 00:49" pubdate>
+        2020年3月10日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 48. 旋转图像（中）</h1>
+            
+            <div class="markdown-body">
+              <p><strong>将给定的矩阵分成四个矩形</strong>  并且将原问题划归为旋转这些矩形的问题。</p>
+<a id="more"></a>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个 n × n 的二维矩阵表示一个图像。<br>将图像顺时针旋转 90 度。</p>
+<p>说明：<br>你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>示例 1:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">给定 matrix = <br>[<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],<br>  [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]<br>],<br>原地旋转输入矩阵，使其变为:<br>[<br>  [<span class="hljs-number">7</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>],<br>  [<span class="hljs-number">8</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>],<br>  [<span class="hljs-number">9</span>,<span class="hljs-number">6</span>,<span class="hljs-number">3</span>]<br>]<br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">给定 matrix =<br>[<br>  [ <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">9</span>,<span class="hljs-number">11</span>],<br>  [ <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>,<span class="hljs-number">10</span>],<br>  [<span class="hljs-number">13</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>],<br>  [<span class="hljs-number">15</span>,<span class="hljs-number">14</span>,<span class="hljs-number">12</span>,<span class="hljs-number">16</span>]<br>], <br>原地旋转输入矩阵，使其变为:<br>[<br>  [<span class="hljs-number">15</span>,<span class="hljs-number">13</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>],<br>  [<span class="hljs-number">14</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>],<br>  [<span class="hljs-number">12</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>],<br>  [<span class="hljs-number">16</span>, <span class="hljs-number">7</span>,<span class="hljs-number">10</span>,<span class="hljs-number">11</span>]<br>]<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>数组</p>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="方法一、转置加翻转"><a href="#方法一、转置加翻转" class="headerlink" title="方法一、转置加翻转"></a>方法一、转置加翻转</h3><p><strong>最直接的想法是先转置矩阵，然后翻转每一行。</strong>这个简单的方法已经能达到最优的时间复杂度$O(N^2)$。</p>
+<p><strong>算法</strong></p>
+<ul>
+<li>根据输入数据，得到 <code>n</code> 的大小。</li>
+<li>先获得转置矩阵<ul>
+<li>列号从<code>0</code> 一直到 <code>n-1</code>，外循环是列 <code>i</code> 代表列。<ul>
+<li>行号从<code>i</code>一直到<code>n-1</code> 内循环是行 <code>j</code> 代表行。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>然后reserve每一行</li>
+</ul>
+<h3 id="方法二、旋转四个矩形"><a href="#方法二、旋转四个矩形" class="headerlink" title="方法二、旋转四个矩形"></a>方法二、旋转四个矩形</h3><p><strong>将给定的矩阵分成四个矩形</strong>并且将原问题划归为旋转这些矩形的问题。</p>
+<p><img src="https://i.loli.net/2020/03/04/nLNhYbMvW3P921o.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-04_23-59-40.png" style="zoom:150%;" /></p>
+<p>解法很直接 - 可以在第一个矩形中移动元素并且在 长度为 <code>4</code> 个元素的临时列表中移动它们。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><img src="https://i.loli.net/2020/03/05/Vh3xjP8pQgRrECz.png" srcset="/img/loading.gif" alt="9.png"></th>
+<th><img src="https://i.loli.net/2020/03/05/VpEemKXbwkisPj5.png" srcset="/img/loading.gif" alt="10.png"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://i.loli.net/2020/03/05/d9cEeAjWYOapPUN.png" srcset="/img/loading.gif" alt="11.png"></td>
+<td><img src="https://i.loli.net/2020/03/05/eDfx6LvQkWS7INR.png" srcset="/img/loading.gif" alt="12.png"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>算法</strong></p>
+<ul>
+<li><p>获取n的大小</p>
+</li>
+<li><p>开始外层遍历，范围是 0 - (n-2)，如果n=3，则遍历0、1两次。每次调整一组4个数字。<code>for i in range(n // 2 + n % 2)</code> ，外层的 <code>i</code> 行号。</p>
+<ul>
+<li><p>开始内存遍历，<code>for j in range(n // 2):</code>。</p>
+<ul>
+<li>先声明 <code>tmp = [0] * 4</code>  、<code>row = i</code> 、 <code>col = j</code>。</li>
+<li><code>for k in range(4)</code> 循环四次，获取四个矩形块里的值 保存在 <code>tmp</code> 中。注意行号和列号的切换方式 <code>row, col = col, n - 1 - row</code> 。</li>
+<li><code>for k in range(4)</code> 循环四次，利用保存在 <code>tmp</code> 中的结果，旋转四个矩阵块，其填充顺序是 <code>tmp[3]</code> 、<code>tmp[0]</code> 、<code>tmp[1]</code> 、<code>tmp[2]</code> ，填充方式 <code>matrix[row][col] = tmp[(k - 1) % 4]</code>。行列切换方式和上一步保持一致。</li>
+</ul>
+<figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">k            <span class="hljs-number"> 0 </span>1<span class="hljs-number"> 2 </span>3<br>(k - 1) %<span class="hljs-number"> 4 </span> <span class="hljs-number"> 3 </span>0<span class="hljs-number"> 1 </span>2<br></code></pre></div></td></tr></table></figure>
+<p>简而言之，将整个 $n \times n$ 的矩阵，分成了4个块，每个位置的数字，必然属于其中一个块，然后一次替换一组（4个数字），如果一个块由 $m$ 个数字组成，就会替换 $m$ 次，最终就完成了整个矩阵的旋转。  </p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-image/solution/xuan-zhuan-tu-xiang-by-leetcode/">LeetCode官方题解</a></p>
+<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="方法一的实现"><a href="#方法一的实现" class="headerlink" title="方法一的实现"></a>方法一的实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rotate</span>(<span class="hljs-params">self, matrix</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type matrix: List[List[int]]</span><br><span class="hljs-string">        :rtype: void Do not return anything, modify matrix in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        n = <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])  <span class="hljs-comment"># 获取n的大小</span><br><br>        <span class="hljs-comment"># 先获得转置矩阵</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):  <span class="hljs-comment"># 列号从0开始 外循环是列 i代表列</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(i, n):  <span class="hljs-comment"># 行号从i一直到n-1 内循环是行 j代表行</span><br>                matrix[j][i], matrix[i][j] = matrix[i][j], matrix[j][i] <br>        <br>        <span class="hljs-comment"># reverse each row  # 然后reserve每一行</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            matrix[i].reverse()<br></code></pre></div></td></tr></table></figure>
+<p>执行用时 :56 ms, 在所有 Python3 提交中击败了16.61%的用户<br>内存消耗 :13.3 MB, 在所有 Python3 提交中击败了26.99%的用户<br>时间复杂度：$O(N^2)$。<br>空间复杂度：$O(1)$ 由于旋转操作是 <strong>就地</strong> 完成的。  </p>
+<h3 id="方法二的实现"><a href="#方法二的实现" class="headerlink" title="方法二的实现"></a>方法二的实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rotate</span>(<span class="hljs-params">self, matrix</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type matrix: List[List[int]]</span><br><span class="hljs-string">        :rtype: void Do not return anything, modify matrix in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        n = <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])  <span class="hljs-comment"># 获取n的大小</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n // <span class="hljs-number">2</span> + n % <span class="hljs-number">2</span>):  <span class="hljs-comment"># 外层遍历范围是 0-(n-2)</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n // <span class="hljs-number">2</span>):<br>                tmp = [<span class="hljs-number">0</span>] * <span class="hljs-number">4</span><br>                row, col = i, j<br>                <span class="hljs-comment"># store 4 elements in tmp</span><br>                <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">4</span>):  <span class="hljs-comment"># 获取四个块的值 保存在tmp中</span><br>                    tmp[k] = matrix[row][col]<br>                    row, col = col, n - <span class="hljs-number">1</span> - row<br>                <span class="hljs-comment"># rotate 4 elements   </span><br>                <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">4</span>):  <span class="hljs-comment"># 旋转四个矩阵块 填充顺序是 tmp[3]、tmp[0]、tmp[1]、tmp[2]</span><br>                    matrix[row][col] = tmp[(k - <span class="hljs-number">1</span>) % <span class="hljs-number">4</span>]  <span class="hljs-comment"># 从tmp的后面开始往matrix[row][col]填充</span><br>                    row, col = col, n - <span class="hljs-number">1</span> - row<br></code></pre></div></td></tr></table></figure>
+<p>执行用时 :40 ms, 在所有 Python3 提交中击败了59.48%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了26.99%的用户<br>时间复杂度：$O(N^2)$  是两重循环的复杂度。<br>空间复杂度：$O(1)$ 由于我们在一次循环中的操作是 <strong>就地</strong> 完成的，并且我们只用了长度为 4 的临时列表做辅助。  </p>
+<h3 id="在单次循环中旋转-4-个矩形"><a href="#在单次循环中旋转-4-个矩形" class="headerlink" title="在单次循环中旋转 4 个矩形"></a>在单次循环中旋转 4 个矩形</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rotate</span>(<span class="hljs-params">self, matrix</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type matrix: List[List[int]]</span><br><span class="hljs-string">        :rtype: void Do not return anything, modify matrix in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        n = <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])        <br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n // <span class="hljs-number">2</span> + n % <span class="hljs-number">2</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n // <span class="hljs-number">2</span>):<br>                tmp = matrix[n - <span class="hljs-number">1</span> - j][i]<br>                matrix[n - <span class="hljs-number">1</span> - j][i] = matrix[n - <span class="hljs-number">1</span> - i][n - j - <span class="hljs-number">1</span>]<br>                matrix[n - <span class="hljs-number">1</span> - i][n - j - <span class="hljs-number">1</span>] = matrix[j][n - <span class="hljs-number">1</span> -i]<br>                matrix[j][n - <span class="hljs-number">1</span> - i] = matrix[i][j]<br>                matrix[i][j] = tmp<br></code></pre></div></td></tr></table></figure>
+<p>执行用时 :36 ms, 在所有 Python3 提交中击败了80.25%的用户。<br>内存消耗 :13.3 MB, 在所有 Python3 提交中击败了26.99%的用户。<br>时间复杂度：$O(N^2)$ 是两重循环的复杂度。<br>空间复杂度：$O(1)$ 由于旋转操作是 <strong>就地</strong> 完成的。</p>
+<h2 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h2><p>1、Python3 快速交换两变量的值 利用此格式 <code>a, b = b, a</code>，可以随意交换变量值。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-number">1</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b = <span class="hljs-number">2</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a, b = b, a<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br><span class="hljs-number">2</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b<br><span class="hljs-number">1</span><br><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-literal">True</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b = <span class="hljs-string">&quot;hello world&quot;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a, b = b, a<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br><span class="hljs-string">&#x27;hello world&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b<br><span class="hljs-literal">True</span><br><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-number">1.36</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>a, b = b, a<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>b<br><span class="hljs-number">1.36</span><br></code></pre></div></td></tr></table></figure>
+<p>2、负数除法的取值</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>-<span class="hljs-number">1</span> % <span class="hljs-number">4</span><br><span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/10/LeetCode-49-%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 49. 字母异位词分组（中）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/10/LeetCode-47-%E5%85%A8%E6%8E%92%E5%88%97-II%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 47. 全排列 II（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/10/LeetCode-48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/10/LeetCode-48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

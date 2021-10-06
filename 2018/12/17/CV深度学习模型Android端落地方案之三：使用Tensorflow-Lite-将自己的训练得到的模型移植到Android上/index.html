@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>CV深度学习模型Android端落地第三步：使用Tensorflow Lite 将自己的训练得到的模型移植到Android上 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CV深度学习模型Android端落地第三步：使用Tensorflow Lite 将自己的训练得到的模型移植到Android上">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-12-17 22:54" pubdate>
+        2018年12月17日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      35
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CV深度学习模型Android端落地第三步：使用Tensorflow Lite 将自己的训练得到的模型移植到Android上</h1>
+            
+            <div class="markdown-body">
+              <p>这个系列的博客主要介绍如何在Android设备上移植你训练的cv神经网络模型。</p>
+<a id="more"></a>
+<p>主要过程如下：<br>1、使用Android Camera2 APIs获得摄像头实时预览的画面。<br>2、如果是对人脸图像进行处理，使用Android Camera2自带的Face类来对人脸检测，并完成在预览画面上画框将人脸框出、添加文字显示神经网络处理结果的功能。<br>3、使用Tensorflow Lite 将自己的训练得到的模型移植到Android上。</p>
+<p>以上三个步骤会分为三个博客，同时也会提供示例代码。步骤二可以根据你的实际需求跳过或修改。这是这个系列的第三篇博客。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guyuealian/article/details/79672257">参考链接</a></p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><ul>
+<li>新建一个C++ suport的AS项目  </li>
+<li>一个你训练好的以pb结尾的Tensorflow模型，如果你的模型是caffemodel可以使用代码将其转换成pb模型。  </li>
+<li>一个能调用你的模型完成你想要功能的Python脚本，以确保你的模型可以使用，以手写字体模型Minist为例：    </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br> <br><span class="hljs-comment">#模型路径</span><br>model_path = <span class="hljs-string">&#x27;model/mnist.pb&#x27;</span><br><span class="hljs-comment">#测试图片</span><br>testImage = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;data/test_image.jpg&quot;</span>);<br> <br><span class="hljs-keyword">with</span> tf.Graph().as_default():<br>    output_graph_def = tf.GraphDef()<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(model_path, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>        output_graph_def.ParseFromString(f.read())<br>        tf.import_graph_def(output_graph_def, name=<span class="hljs-string">&quot;&quot;</span>)<br> <br>    <span class="hljs-keyword">with</span> tf.Session() <span class="hljs-keyword">as</span> sess:<br>        tf.global_variables_initializer().run()<br>        <span class="hljs-comment"># x_test = x_test.reshape(1, 28 * 28)</span><br>        input_x = sess.graph.get_tensor_by_name(<span class="hljs-string">&quot;input/x_input:0&quot;</span>)<br>        output = sess.graph.get_tensor_by_name(<span class="hljs-string">&quot;output:0&quot;</span>)<br> <br>        <span class="hljs-comment">#对图片进行测试</span><br>        testImage=testImage.convert(<span class="hljs-string">&#x27;L&#x27;</span>)<br>        testImage = testImage.resize((<span class="hljs-number">28</span>, <span class="hljs-number">28</span>))<br>        test_input=np.array(testImage)<br>        test_input = test_input.reshape(<span class="hljs-number">1</span>, <span class="hljs-number">28</span> * <span class="hljs-number">28</span>)<br>        pre_num = sess.run(output, feed_dict=&#123;input_x: test_input&#125;)<span class="hljs-comment">#利用训练好的模型预测结果</span><br>        print(<span class="hljs-string">&#x27;模型预测结果为：&#x27;</span>,pre_num)<br>        <span class="hljs-comment">#显示测试的图片</span><br>        <span class="hljs-comment"># testImage = test_x.reshape(28, 28)</span><br>        fig = plt.figure(), plt.imshow(testImage,cmap=<span class="hljs-string">&#x27;binary&#x27;</span>)  <span class="hljs-comment"># 显示图片</span><br>        plt.title(<span class="hljs-string">&quot;prediction result:&quot;</span>+<span class="hljs-built_in">str</span>(pre_num))<br>        plt.show()<br><br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>清楚你的输入lable(inputName)和输出lable(outputName),如果不清楚，可以使用如下代码输出pb模型的层级结构  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># coding:utf-8</span><br><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><br><span class="hljs-comment">#输出保存的模型中参数名字及对应的值</span><br><span class="hljs-keyword">with</span> tf.gfile.GFile(<span class="hljs-string">&#x27;ResNet_model.pb&#x27;</span>, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f:  <span class="hljs-comment">#读取模型数据</span><br>    graph_def = tf.GraphDef()<br>    graph_def.ParseFromString(f.read()) <span class="hljs-comment">#得到模型中的计算图和数据</span><br><span class="hljs-keyword">with</span> tf.Graph().as_default() <span class="hljs-keyword">as</span> graph:  <span class="hljs-comment"># 这里的Graph()要有括号，不然会报TypeError</span><br>    tf.import_graph_def(graph_def, name=<span class="hljs-string">&quot;&quot;</span>)  <span class="hljs-comment">#导入模型中的图到现在这个新的计算图中，不指定名字的话默认是 import</span><br>    <span class="hljs-keyword">for</span> op <span class="hljs-keyword">in</span> graph.get_operations():  <span class="hljs-comment"># 打印出图中的节点信息</span><br>        print(op.name, op.values())<br><br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>清楚你的输入向量和输出向量的关系  </li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output</th>
+<th>IN_COL</th>
+<th>IN_ROW</th>
+<th>OUT_COL</th>
+<th>OUT_ROW</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入：单通道28*28</td>
+<td>输出：1*1</td>
+<td>1</td>
+<td>28*28</td>
+<td>1</td>
+<td>1</td>
+<td><code>inferenceInterface.feed(inputName, inputdata, IN_COL, IN_ROW);</code></td>
+</tr>
+<tr>
+<td>输入：三通道224*224</td>
+<td>输出：1*7</td>
+<td>3</td>
+<td>224*224</td>
+<td>1</td>
+<td>7</td>
+<td><code>inferenceInterface.feed(inputName, inputdata, (1,3,224,224));</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Android-Studio配置"><a href="#Android-Studio配置" class="headerlink" title="Android Studio配置"></a>Android Studio配置</h1><p>（1）新建一个Android项目。<br>（2）把训练好的pb文件（mnist.pb）放入Android项目中app/src/main/assets下，若不存在assets目录，右键main-&gt;new-&gt;Directory，输入assets。<br>（3）将下载的libtensorflow_inference.so和libandroid_tensorflow_inference_java.jar如下结构放在libs文件夹下。  </p>
+<p><img src="https://s1.ax1x.com/2018/12/17/F0TJYT.png" srcset="/img/loading.gif" alt=""></p>
+<p>（4）app\build.gradle配置  </p>
+<p>在defaultConfig中添加<br><figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">multiDexEnabled</span> <span class="hljs-literal">true</span><br>ndk &#123;<br>	<span class="hljs-attribute">abiFilters</span> <span class="hljs-string">&quot;armeabi-v7a&quot;</span><br>&#125;<br></code></pre></div></td></tr></table></figure><br>增加sourceSets<br><figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">sourceSets &#123;<br>    <span class="hljs-selector-tag">main</span> &#123;<br>        jniLibs<span class="hljs-selector-class">.srcDirs</span> = <span class="hljs-selector-attr">[<span class="hljs-string">&#x27;libs&#x27;</span>]</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br><img src="https://s1.ax1x.com/2018/12/17/F0TdX9.png" srcset="/img/loading.gif" alt=""></p>
+<p>在dependencies中增加TensoFlow编译的jar文件libandroid_tensorflow_inference_java.jar：<br><figure class="highlight isbl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs isbl"><span class="hljs-variable">compile</span> <span class="hljs-function"><span class="hljs-title">files</span>(<span class="hljs-string">&#x27;libs/libandroid_tensorflow_inference_java.jar&#x27;</span>)</span><br></code></pre></div></td></tr></table></figure><br><img src="https://s1.ax1x.com/2018/12/17/F0T0mR.png" srcset="/img/loading.gif" alt=""></p>
+<p>(5) 测试图片配置<br>将一张28*28的手写字体图片放到<code>app/src/main/res/drawabble</code>中，在AS中复制，会自动帮你建立xml配置关系的。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>  在需要调用TensoFlow的地方，加载so库 <code>System.loadLibrary(&quot;tensorflow_inference&quot;);</code> 并 <code>import org.tensorflow.contrib.android.TensorFlowInferenceInterface;</code> 就可以使用了</p>
+<blockquote>
+<p>注意，旧版的TensoFlow，是如下方式进行，该方法可参考博客<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1168384edc1e">基于TensorFlow的MNIST手写数字识别与Android移植</a>： </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">TensorFlowInferenceInterface.fillNodeFloat(); <span class="hljs-comment">//送入输入数据</span><br>TensorFlowInferenceInterface.runInference();  <span class="hljs-comment">//进行模型的推理</span><br>TensorFlowInferenceInterface.readNodeFloat(); <span class="hljs-comment">//获取输出数据</span><br></code></pre></div></td></tr></table></figure>
+<p>但在最新的libandroid_tensorflow_inference_java.jar中，已经没有这些方法了，换为<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">TensorFlowInferenceInterface.feed()<br>TensorFlowInferenceInterface.run()<br>TensorFlowInferenceInterface.fetch()<br></code></pre></div></td></tr></table></figure></p>
+<p>下面是以MNIST手写数字识别为例，其实现方法如下：<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.jinquan.pan.mnist_ensorflow_androiddemo;<br> <br><span class="hljs-keyword">import</span> android.content.res.AssetManager;<br><span class="hljs-keyword">import</span> android.graphics.Bitmap;<br><span class="hljs-keyword">import</span> android.graphics.Color;<br><span class="hljs-keyword">import</span> android.graphics.Matrix;<br><span class="hljs-keyword">import</span> android.util.Log;<br> <br><span class="hljs-keyword">import</span> org.tensorflow.contrib.android.TensorFlowInferenceInterface;<br> <br> <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PredictionTF</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = <span class="hljs-string">&quot;PredictionTF&quot;</span>;<br>    <span class="hljs-comment">//设置模型输入/输出节点的数据维度</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> IN_COL = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> IN_ROW = <span class="hljs-number">28</span>*<span class="hljs-number">28</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> OUT_COL = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> OUT_ROW = <span class="hljs-number">1</span>;<br>    <span class="hljs-comment">//模型中输入变量的名称</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String inputName = <span class="hljs-string">&quot;input/x_input&quot;</span>;<br>    <span class="hljs-comment">//模型中输出变量的名称</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String outputName = <span class="hljs-string">&quot;output&quot;</span>;<br> <br>    TensorFlowInferenceInterface inferenceInterface;<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-comment">//加载libtensorflow_inference.so库文件</span><br>        System.loadLibrary(<span class="hljs-string">&quot;tensorflow_inference&quot;</span>);<br>        Log.e(TAG,<span class="hljs-string">&quot;libtensorflow_inference.so库加载成功&quot;</span>);<br>    &#125;<br> <br>    PredictionTF(AssetManager assetManager, String modePath) &#123;<br>        <span class="hljs-comment">//初始化TensorFlowInferenceInterface对象</span><br>        inferenceInterface = <span class="hljs-keyword">new</span> TensorFlowInferenceInterface(assetManager,modePath);<br>        Log.e(TAG,<span class="hljs-string">&quot;TensoFlow模型文件加载成功&quot;</span>);<br>    &#125;<br> <br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     *  利用训练好的TensoFlow模型预测结果</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> bitmap 输入被测试的bitmap图</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 返回预测结果，int数组</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] getPredict(Bitmap bitmap) &#123;<br>        <span class="hljs-keyword">float</span>[] inputdata = bitmapToFloatArray(bitmap,<span class="hljs-number">28</span>, <span class="hljs-number">28</span>);<span class="hljs-comment">//需要将图片缩放带28*28</span><br>        <span class="hljs-comment">//将数据feed给tensorflow的输入节点</span><br>        inferenceInterface.feed(inputName, inputdata, IN_COL, IN_ROW);<br>        <span class="hljs-comment">//运行tensorflow</span><br>        String[] outputNames = <span class="hljs-keyword">new</span> String[] &#123;outputName&#125;;<br>        inferenceInterface.run(outputNames);<br>        <span class="hljs-comment">///获取输出节点的输出信息</span><br>        <span class="hljs-keyword">int</span>[] outputs = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[OUT_COL*OUT_ROW]; <span class="hljs-comment">//用于存储模型的输出数据</span><br>        inferenceInterface.fetch(outputName, outputs);<br>        <span class="hljs-keyword">return</span> outputs;<br>    &#125;<br> <br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将bitmap转为（按行优先）一个float数组，并且每个像素点都归一化到0~1之间。</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> bitmap 输入被测试的bitmap图片</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> rx 将图片缩放到指定的大小（列）-&gt;28</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ry 将图片缩放到指定的大小（行）-&gt;28</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span>   返回归一化后的一维float数组 -&gt;28*28</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">float</span>[] bitmapToFloatArray(Bitmap bitmap, <span class="hljs-keyword">int</span> rx, <span class="hljs-keyword">int</span> ry)&#123;<br>        <span class="hljs-keyword">int</span> height = bitmap.getHeight();<br>        <span class="hljs-keyword">int</span> width = bitmap.getWidth();<br>        <span class="hljs-comment">// 计算缩放比例</span><br>        <span class="hljs-keyword">float</span> scaleWidth = ((<span class="hljs-keyword">float</span>) rx) / width;<br>        <span class="hljs-keyword">float</span> scaleHeight = ((<span class="hljs-keyword">float</span>) ry) / height;<br>        Matrix matrix = <span class="hljs-keyword">new</span> Matrix();<br>        matrix.postScale(scaleWidth, scaleHeight);<br>        bitmap = Bitmap.createBitmap(bitmap, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, width, height, matrix, <span class="hljs-keyword">true</span>);<br>        Log.i(TAG,<span class="hljs-string">&quot;bitmap width:&quot;</span>+bitmap.getWidth()+<span class="hljs-string">&quot;,height:&quot;</span>+bitmap.getHeight());<br>        Log.i(TAG,<span class="hljs-string">&quot;bitmap.getConfig():&quot;</span>+bitmap.getConfig());<br>        height = bitmap.getHeight();<br>        width = bitmap.getWidth();<br>        <span class="hljs-keyword">float</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">float</span>[height*width];<br>        <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">//行优先</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>;j &lt; height;j++)&#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; width;i++)&#123;<br>                <span class="hljs-keyword">int</span> argb = bitmap.getPixel(i,j);<br>                <span class="hljs-keyword">int</span> r = Color.red(argb);<br>                <span class="hljs-keyword">int</span> g = Color.green(argb);<br>                <span class="hljs-keyword">int</span> b = Color.blue(argb);<br>                <span class="hljs-keyword">int</span> a = Color.alpha(argb);<br>                <span class="hljs-comment">//由于是灰度图，所以r,g,b分量是相等的。</span><br>                <span class="hljs-keyword">assert</span>(r==g &amp;&amp; g==b);<br>                result[k++] = r / <span class="hljs-number">255.0f</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<ul>
+<li>简单说明一下：项目新建了一个 <code>PredictionTF</code> 类，该类会先加载 <code>libtensorflow_inference.so</code> 库文件；<code>PredictionTF(AssetManager assetManager, String modePath)</code> 构造方法需要传入 <code>AssetManager</code> 对象和pb文件的路径；  </li>
+<li>从资源文件中获取BitMap图片，并传入 <code>getPredict(Bitmap bitmap)</code> 方法，该方法首先将BitMap图像缩放到28*28的大小，由于原图是灰度图，我们需要获取灰度图的像素值，并将28*28的像素转存为行向量的一个float数组，并且每个像素点都归一化到0~1之间，这个就是 <code>bitmapToFloatArray(Bitmap bitmap, int rx, int ry)</code> 方法的作用；  </li>
+<li>然后将数据 <strong>喂给(feed)</strong> tensorflow的输入节点，并 <strong>运行(run)</strong> tensorflow，最后 <strong>获取（fetch）</strong> 输出节点的输出信息。  </li>
+</ul>
+<p>MainActivity很简单，一个单击事件获取预测结果:<br><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> android.graphics.Bitmap;<br><span class="hljs-keyword">import</span> android.graphics.BitmapFactory;<br><span class="hljs-keyword">import</span> android.support.v7.app.AppCompatActivity;<br><span class="hljs-keyword">import</span> android.os.Bundle;<br><span class="hljs-keyword">import</span> android.util.Log;<br><span class="hljs-keyword">import</span> android.view.View;<br><span class="hljs-keyword">import</span> android.widget.ImageView;<br><span class="hljs-keyword">import</span> android.widget.TextView;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;<br><br>    <span class="hljs-comment">// Used to load the &#x27;native-lib&#x27; library on application startup.</span><br>    <span class="hljs-keyword">static</span> &#123;<br>        System.loadLibrary(<span class="hljs-string">&quot;native-lib&quot;</span>);<span class="hljs-comment">//可以去掉</span><br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TAG = <span class="hljs-string">&quot;MainActivity&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String MODEL_FILE = <span class="hljs-string">&quot;file:///android_asset/mnist.pb&quot;</span>; <span class="hljs-comment">//模型存放路径</span><br>    TextView txt;<br>    TextView tv;<br>    ImageView imageView;<br>    Bitmap bitmap;<br>    PredictionTF preTF;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        <span class="hljs-comment">// Example of a call to a native method</span><br>        tv = (TextView) findViewById(R.id.sample_text);<br>        txt=(TextView)findViewById(R.id.txt_id);<br>        imageView =(ImageView)findViewById(R.id.imageView1);<br>        bitmap = BitmapFactory.decodeStream(getClass().getResourceAsStream(<span class="hljs-string">&quot;/res/drawable/test.bmp&quot;</span>));<br>        imageView.setImageBitmap(bitmap);<br>        preTF = <span class="hljs-keyword">new</span> PredictionTF(getAssets(),MODEL_FILE);<span class="hljs-comment">//输入模型存放路径，并加载TensoFlow模型</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">click01</span><span class="hljs-params">(View v)</span></span>&#123;<br>        String res=<span class="hljs-string">&quot;预测结果为：&quot;</span>;<br>        <span class="hljs-keyword">int</span>[] result= preTF.getPredict(bitmap);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;result.length;i++)&#123;<br>            Log.i(TAG, res+result[i] );<br>            res=res+String.valueOf(result[i])+<span class="hljs-string">&quot; &quot;</span>;<br>        &#125;<br>        txt.setText(res);<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * A native method that is implemented by the &#x27;native-lib&#x27; native library,</span><br><span class="hljs-comment">     * which is packaged with this application.</span><br><span class="hljs-comment">     */</span><br>&#125;<br><br></code></pre></div></td></tr></table></figure><br>activity_main布局文件：<br><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">&quot;vertical&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:paddingBottom</span>=<span class="hljs-string">&quot;16dp&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:paddingLeft</span>=<span class="hljs-string">&quot;16dp&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:paddingRight</span>=<span class="hljs-string">&quot;16dp&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:paddingTop</span>=<span class="hljs-string">&quot;16dp&quot;</span>&gt;</span><br>    &lt;TextView<br>        android:id=&quot;@+id/sample_text&quot;<br>        android:layout_width=&quot;wrap_content&quot;<br>        android:layout_height=&quot;wrap_content&quot;<br>        android:text=&quot;https://blog.csdn.net/guyuealian&quot;<br>        android:layout_gravity=&quot;center&quot;/&gt;<br>    &lt;Button<br>        android:onClick=&quot;click01&quot;<br>        android:layout_width=&quot;match_parent&quot;<br>        android:layout_height=&quot;wrap_content&quot;<br>        android:text=&quot;click&quot; /&gt;<br>    &lt;TextView<br>        android:id=&quot;@+id/txt_id&quot;<br>        android:layout_width=&quot;match_parent&quot;<br>        android:layout_height=&quot;wrap_content&quot;<br>        android:gravity=&quot;center&quot;<br>        android:text=&quot;结果为：&quot;/&gt;<br>    &lt;ImageView<br>        android:id=&quot;@+id/imageView1&quot;<br>        android:layout_width=&quot;wrap_content&quot;<br>        android:layout_height=&quot;wrap_content&quot;<br>        android:layout_gravity=&quot;center&quot;/&gt;<br><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span><br><br></code></pre></div></td></tr></table></figure><br>实际效果<br><img src="https://s1.ax1x.com/2018/12/17/F079hT.jpg" srcset="/img/loading.gif" alt="">  </p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
+<li><p>不同的神经网络对于输入图片的要求也不一样，有些需要转化成灰度图，有些需要归一化，有些要对尺寸进行裁剪，有些要减去均值。最好是先写一个Python脚本，将你的模型跑起来，完成需要的预处理，检测神经网络的输出是否正确。通过这个脚本了解输入输出数据的维度，再根据这个Python脚本去改写出对应的java代码。</p>
+</li>
+<li><p>特别要注意的是：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// inputdata是一个(图片数量\*图片长\*图片宽\*图片通道数)维的float32数组</span><br>inferenceInterface.feed(inputName, inputdata, (图片数量，图片长，图片宽，图片通道数));<br></code></pre></div></td></tr></table></figure>
+<p>写好<strong>inferenceInterface.feed</strong>，才能成功起调模型，得到你想要的结果。</p>
+<h1 id="本博客主要依据这位博主的博客进行二次编写"><a href="#本博客主要依据这位博主的博客进行二次编写" class="headerlink" title="本博客主要依据这位博主的博客进行二次编写"></a>本博客主要依据这位博主的博客进行二次编写</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guyuealian/article/details/79672257">转载链接</a></p>
+<h1 id="演示Demo"><a href="#演示Demo" class="headerlink" title="演示Demo"></a>演示Demo</h1><p><a target="_blank" rel="noopener" href="https://github.com/TonyDandelion/TensorflowLiteDemo">TensorflowLiteDemo</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/12/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98-Peter-Harrington-%E4%B8%AD%E8%8B%B1%E6%96%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">机器学习实战 - Peter Harrington - 中英文版</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8Face%E7%B1%BB%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E5%B9%B6%E5%B0%86%E4%BA%BA%E8%84%B8%E6%A1%86%E5%87%BA/">
+                        <span class="hidden-mobile">CV深度学习模型Android端落地第二步：使用Face类进行实时人脸检测并将人脸框出</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%89%EF%BC%9A%E4%BD%BF%E7%94%A8Tensorflow-Lite-%E5%B0%86%E8%87%AA%E5%B7%B1%E7%9A%84%E8%AE%AD%E7%BB%83%E5%BE%97%E5%88%B0%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%A7%BB%E6%A4%8D%E5%88%B0Android%E4%B8%8A/';
+        this.page.identifier = '/2018/12/17/CV%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8BAndroid%E7%AB%AF%E8%90%BD%E5%9C%B0%E6%96%B9%E6%A1%88%E4%B9%8B%E4%B8%89%EF%BC%9A%E4%BD%BF%E7%94%A8Tensorflow-Lite-%E5%B0%86%E8%87%AA%E5%B7%B1%E7%9A%84%E8%AE%AD%E7%BB%83%E5%BE%97%E5%88%B0%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%A7%BB%E6%A4%8D%E5%88%B0Android%E4%B8%8A/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

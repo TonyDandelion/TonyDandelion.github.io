@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>LeetCode 142. 环形链表 II（中）&amp; 剑指offer 面试题23. 链表中环的入口 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 142. 环形链表 II（中）& 剑指offer 面试题23. 链表中环的入口">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-11 03:39" pubdate>
+        2020年4月11日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 142. 环形链表 II（中）&amp; 剑指offer 面试题23. 链表中环的入口</h1>
+            
+            <div class="markdown-body">
+              <p>2020腾讯暑期实习一面题目，LeetCode 142. 环形链表（易）的升级版，需要输出循环开始位置。</p>
+<a id="more"></a>
+<blockquote>
+<p>链表、双指针</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/huan-xing-lian-biao-ii-by-leetcode/">LeetCode官方题解</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle-ii">题目来源：力扣（LeetCode）</a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 <code>null</code>。</p>
+<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
+<p>说明：不允许修改给定的链表。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight xquery"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xquery">输入<span class="hljs-built_in">：head</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">4</span>], pos = <span class="hljs-number">1</span><br>输出<span class="hljs-built_in">：tail</span> connects <span class="hljs-keyword">to</span> <span class="hljs-type">node</span> index <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>解释：链表中有一个环，其尾部连接到第二个节点。</p>
+<p><img src="https://i.loli.net/2020/04/10/YH6AF8NWyRtz5ja.png" srcset="/img/loading.gif" alt="circularlinkedlist.png"></p>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight xquery"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xquery">输入<span class="hljs-built_in">：head</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], pos = <span class="hljs-number">0</span><br>输出<span class="hljs-built_in">：tail</span> connects <span class="hljs-keyword">to</span> <span class="hljs-type">node</span> index <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+<p>解释：链表中有一个环，其尾部连接到第一个节点。</p>
+<p><img src="https://i.loli.net/2020/04/10/8mdwJEsycDzKGhe.png" srcset="/img/loading.gif" alt="circularlinkedlist_test2.png"></p>
+<p><strong>示例 3：</strong><br><figure class="highlight perl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs perl">输入：head = [<span class="hljs-number">1</span>], <span class="hljs-keyword">pos</span> = -<span class="hljs-number">1</span><br>输出：<span class="hljs-keyword">no</span> cycle<br></code></pre></div></td></tr></table></figure><br>解释：链表中没有环。</p>
+<p>进阶：你是否可以不用额外空间解决此题？</p>
+<blockquote>
+<p>测试用例</p>
+</blockquote>
+<p>功能测试（链表中包含或者不包含环；链表中有多个或者<strong>只有一个节点</strong>）。<br>特殊输入测试（链表头节点为nullptr指针）。</p>
+<h1 id="直觉"><a href="#直觉" class="headerlink" title="直觉"></a>直觉</h1><blockquote>
+<p>基于Hash Map</p>
+</blockquote>
+<p>基于hash表检查第一个之前就被访问过的节点，将其返回。</p>
+<p>时间复杂度：$O(n)$，对于含有 <code>n</code> 个元素的链表，我们访问每个元素最多一次。添加一个结点到哈希表中只需要花费 $O(1)$ 的时间。<br>空间复杂度：$O(n)$，空间取决于添加到哈希表中的元素数目，最多可以添加 $n$ 个元素</p>
+<blockquote>
+<p>Folyd算法</p>
+</blockquote>
+<p><strong><em>第一阶段</em></strong><br>执行 <strong><a href="/2020/04/10/LeetCode-141-环形链表（易）/">第141题</a></strong> 代码，利用快慢指针从head出发，慢指针一次走一步，快指针一次走两步，找到相遇点。</p>
+<p><strong><em>第二阶段</em></strong><br>给定阶段 1 找到的相遇点，阶段 2 将找到环的入口。首先我们初始化额外的两个指针： <code>ptr1</code> ，指向链表的头（下图中的 <strong>list head</strong>）， <code>ptr2</code> 指向相遇点（下图中的 <strong>first interaction</strong>）。然后，我们每次将它们往前移动一步，直到它们相遇，它们相遇的点就是环的入口，返回这个节点。上述推断的基础是：关系 $b = F$ 成立。</p>
+<p><img src="https://i.loli.net/2020/04/10/hGpQdRXkTimtJ75.png" srcset="/img/loading.gif" alt="99987d4e679fdfbcfd206a4429d9b076b46ad09bd2670f886703fb35ef130635-image.png"></p>
+<p>关于上面这个结论的数学推导过程如下：当快慢指针都是从<code>head</code>出发时，假设相遇时慢指针走了 $x$ 步，快指针走了 $y$ 步，则相遇时有 $2 \times x = y$，已知 $x=F+a$， $y = F + a + b$，代入前式可得 $F = b$。以上就是Floyd算法的全过程了。</p>
+<p><strong>时间复杂度：$O(n)$</strong><br>对有环列表，快指针和慢指针在 $F+C-h$ 次迭代以后会指向同一个节点，正如上面正确性证明所示，$F+C-h \leq F+C = n$，所以阶段 1 运行时间在 $O(n)$ 时间以内，阶段 2 运行 $F &lt; n$ 次迭代，所以它运行时间也在 $O(n)$ 以内。<br>对于无环链表，快指针大约需要迭代 $\dfrac{n}{2}$ 次会抵达链表的尾部，这样不会进入阶段 2 就直接退出。<br>因此，不管是哪一类链表，都会在与节点数成线性关系的时间内运行完。</p>
+<p><strong>空间复杂度：$O(1)$</strong><br>Floyd 的快慢指针算法仅需要几个指针，所以只需常数级别的额外空间。</p>
+<blockquote>
+<p>剑指offer</p>
+</blockquote>
+<ol>
+<li>判断是否有环：执行 <strong><a href="/2020/04/10/LeetCode-141-环形链表（易）/">第141题</a></strong> 代码，利用快慢指针从head出发，慢指针一次走一步，快指针一次走两步，找到相遇点。</li>
+<li>计算环部分的长度 <code>n</code>：如果两个指针相遇，则表明链表中存在环。两个指针相遇的节点一定是在环中。可以从这个节点出发，一边继续向前移动一边计数，当再次回到这个节点时，就可以得到环中节点数了。</li>
+<li>找到环入口：快慢指针回到开始点，快指针领先慢指针 <code>n</code> 个节点之后，快慢指针都以一次一步的方式向前移动，两个指针相遇之处，就是链表入口。</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><blockquote>
+<p>基于hash map</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">detectCycle</span>(<span class="hljs-params">self, head: ListNode</span>) -&gt; ListNode:</span><br>        nodesSee = <span class="hljs-built_in">list</span>()<br>        <span class="hljs-keyword">while</span> head:<br>            <span class="hljs-keyword">if</span> head <span class="hljs-keyword">in</span> nodesSee:<br>                <span class="hljs-keyword">return</span> head<br>            <span class="hljs-keyword">else</span>:<br>                nodesSee.append(head)<br>            head = head.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>Floyd算法</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Definition for singly-linked list.</span><br><span class="hljs-comment"># class ListNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.next = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getEncounter</span>(<span class="hljs-params">self, head: ListNode</span>) -&gt; ListNode:</span><br>        <span class="hljs-comment"># 注意，slow和fast和第142题不再一样了，都是从head这里出发的了。</span><br>        slow = head<br>        fast = head<br><br>        <span class="hljs-comment"># 由于 slow 和 fast一开始就都是从head开始出发的，这个while条件 slow != fast 就不会满足，所以不能这么写。</span><br>        <span class="hljs-comment"># 得用 fast != None and fast.next != None 做while条件，用 slow == fast 做终止条件，如下面那部分代码所示。</span><br>        <span class="hljs-comment"># while slow != fast:</span><br>        <span class="hljs-comment">#     if fast == None or fast.next == None:</span><br>        <span class="hljs-comment">#         return None</span><br>        <span class="hljs-comment">#     slow = slow.next</span><br>        <span class="hljs-comment">#     fast = fast.next.next</span><br>        <span class="hljs-comment"># return slow</span><br><br>        <span class="hljs-keyword">while</span> fast != <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> fast.<span class="hljs-built_in">next</span> != <span class="hljs-literal">None</span>:<br>            slow = slow.<span class="hljs-built_in">next</span><br>            fast = fast.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>            <span class="hljs-keyword">if</span> slow == fast:<br>                <span class="hljs-keyword">return</span> slow<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">detectCycle</span>(<span class="hljs-params">self, head: ListNode</span>) -&gt; ListNode:</span><br>        <span class="hljs-keyword">if</span> head == <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> head.<span class="hljs-built_in">next</span> == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        <span class="hljs-comment"># Floyd算法</span><br>        <span class="hljs-comment"># 第一阶段 获取相遇点</span><br>        encounter = self.getEncounter(head)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> encounter:  <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>  <span class="hljs-comment"># 不相遇说明不是环</span><br><br>        <span class="hljs-comment"># 第二阶段</span><br>        <span class="hljs-comment"># 给定阶段 1 找到的相遇点，阶段 2 将找到环的入口。首先我们初始化额外的两个指针： `ptr1` ，指向链表的头（下图中的 list head）， `ptr2 ` 指向相遇点（下图中的 first interaction）。然后，我们每次将它们往前移动一步，直到它们相遇，它们相遇的点就是环的入口。</span><br>        ptr1 = head<br>        ptr2 = encounter<br>        <span class="hljs-keyword">while</span> ptr1 != ptr2:<br>            ptr1 = ptr1.<span class="hljs-built_in">next</span><br>            ptr2 = ptr2.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> ptr1<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>剑指offer</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Definition for singly-linked list.</span><br><span class="hljs-comment"># class ListNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.next = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isCycle</span>(<span class="hljs-params">self, head</span>):</span><br>        <span class="hljs-comment"># 第一种写法</span><br>        fast = head<br>        slow = head<br>        <span class="hljs-keyword">while</span> fast <span class="hljs-keyword">and</span> fast.<span class="hljs-built_in">next</span> <span class="hljs-keyword">and</span> fast.<span class="hljs-built_in">next</span>:<br>            fast = fast.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>            slow = slow.<span class="hljs-built_in">next</span><br>            <span class="hljs-keyword">if</span> fast == slow:<br>                <span class="hljs-keyword">return</span> slow<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-comment"># # 第二种写法</span><br>        <span class="hljs-comment"># slow = head</span><br>        <span class="hljs-comment"># fast = head.next</span><br>        <span class="hljs-comment"># while slow != fast:</span><br>        <span class="hljs-comment">#     if fast == None or fast.next == None:</span><br>        <span class="hljs-comment">#         return False</span><br>        <span class="hljs-comment">#     slow = slow.next</span><br>        <span class="hljs-comment">#     fast = fast.next.next</span><br>        <span class="hljs-comment"># return slow</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">detectCycle</span>(<span class="hljs-params">self, head: ListNode</span>) -&gt; ListNode:</span><br>        <span class="hljs-keyword">if</span> head == <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> head.<span class="hljs-built_in">next</span> == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>  <span class="hljs-comment"># 空链表和只有一个节点的链表判断 </span><br>        <span class="hljs-comment"># stage 1</span><br>        meet = self.isCycle(head)<br>        <span class="hljs-keyword">if</span> meet:<br>            <span class="hljs-comment"># stage 2</span><br>            p = meet.<span class="hljs-built_in">next</span><br>            count = <span class="hljs-number">1</span>  <span class="hljs-comment"># p = meet.next时，已经往后面走了一步了。</span><br>            <span class="hljs-keyword">while</span> p!=meet:<br>                p = p.<span class="hljs-built_in">next</span><br>                count += <span class="hljs-number">1</span><br>            <span class="hljs-comment"># stage 3</span><br>            slow = head<br>            fast = head<br>            <span class="hljs-keyword">while</span> count:<br>                fast = fast.<span class="hljs-built_in">next</span><br>                count -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> fast != slow:<br>                fast = fast.<span class="hljs-built_in">next</span><br>                slow = slow.<span class="hljs-built_in">next</span><br>            <span class="hljs-keyword">return</span> fast<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/11/%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">互联网公司面试常见算法题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/11/LeetCode-136-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 136. 只出现一次的数字（易）& 面试题56 - II. 数组中数字出现的次数 II（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/11/LeetCode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8-II%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/04/11/LeetCode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8-II%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

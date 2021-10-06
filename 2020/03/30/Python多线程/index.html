@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>Python多线程 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Python多线程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-30 20:56" pubdate>
+        2020年3月30日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python多线程</h1>
+            
+            <div class="markdown-body">
+              <p><img src="https://i.loli.net/2020/03/30/A2Tfw7b9KqmOd6i.jpg" srcset="/img/loading.gif" alt="v2-55134722dc0bb73e0104d61d85fa7c03_r.jpg" style="zoom: 33%;" /></p>
+<p>Python中的多线程编程：一个美丽的梦</p>
+<a id="more"></a>
+<h1 id="Reposted-Link"><a href="#Reposted-Link" class="headerlink" title="Reposted Link"></a>Reposted Link</h1><p><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/threading.html">Thread官方文档</a><br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017629247922688">转载连接：廖雪峰</a></p>
+<h1 id="Thread-API"><a href="#Thread-API" class="headerlink" title="Thread API"></a>Thread API</h1><blockquote>
+<p><code>start()</code> 和 <code>run()</code></p>
+</blockquote>
+<p><strong>start方法</strong>：开始线程活动。对每一个线程对象来说它只能被调用一次，它安排对象在一个另外的单独线程中调用run()方法（而非当前所处线程）。当该方法在同一个线程对象中被调用超过一次时，会引入RuntimeError(运行时错误)。</p>
+<p><strong>run()方法</strong>：代表了线程活动的具体方法。<strong>你可以在子类中重写此方法，以实现自己的工作目标</strong>。标准run()方法调用了传递给对象的构造函数的可调对象作为目标参数，如果有这样的参数的话，顺序和关键字参数分别从args和kargs取得。</p>
+<blockquote>
+<p><code>join()</code></p>
+</blockquote>
+<p><code>join</code> 的原理就是依次检验线程池中的线程是否结束，没有结束就阻塞直到线程结束，如果结束则跳转执行下一个线程的join函数。调用 <code>Thread.join</code> 将会<strong>使主调线程堵塞</strong>，直到被调用线程运行结束或超时。参数timeout是一个数值类型，表示超时时间，如果未提供该参数，那么主调线程将一直堵塞到被调线程结束。</p>
+<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p>多任务可以由多进程完成，也可以由一个进程内的多线程完成。<br>进程是由若干线程组成的，一个进程至少有一个线程。<br>由于线程是操作系统直接支持的执行单元，因此，高级语言通常都内置多线程的支持，Python也不例外，并且，Python的线程是真正的Posix Thread，而不是模拟出来的线程。</p>
+<p>POSIX线程（英语：POSIX Threads，常被缩写为Pthreads）是POSIX的线程标准，定义了创建和操纵线程的一套API。 实现POSIX 线程标准的库常被称作Pthreads，一般用于Unix-like POSIX 系统，如Linux、 Solaris。但是Microsoft Windows上的实现也存在，例如直接使用Windows API实现的第三方库pthreads-w32；而利用Windows的SFU/SUA子系统，则可以使用微软提供的一部分原生POSIX API。 </p>
+<p>Python的标准库提供了两个模块：<code>_thread</code> 和 <code>threading</code>， <code>_thread</code> 是低级模块，<code>threading</code> 是高级模块，对 <code>_thread</code> 进行了封装。绝大多数情况下，我们只需要使用<code>threading</code> 这个高级模块。</p>
+<p>三步创建并运行一个线程：<br>1、把一个函数传入并创建Thread实例<br>2、调用start()开始执行<br>3、调用join()开始阻塞主调线程，运行当前线程，之前主调线程的阻塞会在当前进程完成之后结束。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># coding: utf-8</span><br><br><span class="hljs-keyword">import</span> time, threading<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loop</span>():</span><br>    print(<span class="hljs-string">&quot;Inner thread %s is running...&quot;</span> % threading.current_thread().name)<br>    n = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> n &lt; <span class="hljs-number">5</span>:<br>        n += <span class="hljs-number">1</span><br>        print(<span class="hljs-string">&quot;Inner thread %s &gt;&gt;&gt; %s&quot;</span> % (threading.current_thread().name, n))<br>        time.sleep(<span class="hljs-number">1</span>)<br>    print(<span class="hljs-string">&quot;Inner thread %s is ended...&quot;</span> % threading.current_thread().name)<br><br>print(<span class="hljs-string">&quot;Start: thread %s is running...&quot;</span> % threading.current_thread().name)<br>t = threading.Thread(target=loop, name=<span class="hljs-string">&quot;LoopThread&quot;</span>)  <span class="hljs-comment"># 1、把一个函数传入并创建Thread实例</span><br>t.start()  <span class="hljs-comment"># 2、调用start()开始执行</span><br>t.join()  <span class="hljs-comment"># 3、调用join()开始阻塞主调线程，运行当前线程</span><br>print(<span class="hljs-string">&quot;End: thread %s is ended...&quot;</span> % threading.current_thread().name)<br></code></pre></div></td></tr></table></figure>
+<p>Output<br><figure class="highlight lasso"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lasso">Start: <span class="hljs-keyword">thread</span> MainThread is running<span class="hljs-params">...</span><br>Inner <span class="hljs-keyword">thread</span> LoopThread is running<span class="hljs-params">...</span><br>Inner <span class="hljs-keyword">thread</span> LoopThread &gt;&gt;&gt; <span class="hljs-number">1</span><br>Inner <span class="hljs-keyword">thread</span> LoopThread &gt;&gt;&gt; <span class="hljs-number">2</span><br>Inner <span class="hljs-keyword">thread</span> LoopThread &gt;&gt;&gt; <span class="hljs-number">3</span><br>Inner <span class="hljs-keyword">thread</span> LoopThread &gt;&gt;&gt; <span class="hljs-number">4</span><br>Inner <span class="hljs-keyword">thread</span> LoopThread &gt;&gt;&gt; <span class="hljs-number">5</span><br>Inner <span class="hljs-keyword">thread</span> LoopThread is ended<span class="hljs-params">...</span><br>End: <span class="hljs-keyword">thread</span> MainThread is ended<span class="hljs-params">...</span><br></code></pre></div></td></tr></table></figure></p>
+<p>由于任何进程默认就会启动一个线程，我们把该线程称为主线程，主线程又可以启动新的线程，Python的 <code>threading</code> 模块有个 <code>current_thread()</code> 函数，它永远返回当前线程的实例。主线程实例的名字叫 <code>MainThread</code>，子线程的名字在创建时指定，我们用 <code>LoopThread</code> 命名子线程。名字仅仅在打印时用来显示，完全没有其他意义，如果不起名字Python就自动给线程命名为<code>Thread-1</code>，<code>Thread-2</code>……</p>
+<h1 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h1><p>多线程和多进程最大的不同在于，多进程中，同一个变量，各自有一份拷贝存在于每个进程中，互不影响，而<strong>多线程中，所有变量都由所有线程共享，所以，任何一个变量都可以被任何一个线程修改</strong>，因此，线程之间共享数据最大的危险在于多个线程同时改一个变量，把内容给改乱了。</p>
+<p>来看看多个线程同时操作一个变量怎么把内容给改乱了：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># coding: utf-8</span><br><br><span class="hljs-keyword">import</span> time, threading<br><br>balance = <span class="hljs-number">0</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">change_it</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-keyword">global</span> balance<br>    balance += n<br>    balance -= n<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run_thread</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10000000</span>):<br>        change_it(n)<br>    <br><br>t1 = threading.Thread(target=run_thread, args=(<span class="hljs-number">5</span>, ))<br>t2 = threading.Thread(target=run_thread, args=(<span class="hljs-number">8</span>, ))<br><br><span class="hljs-comment"># t1和t2并发执行 并发执行的时候 才需要锁</span><br><span class="hljs-comment"># 启动t1线程</span><br>t1.start()<br><span class="hljs-comment"># 启动t2线程</span><br>t2.start()<br><span class="hljs-comment"># t1争夺主线程地位</span><br>t1.join()<br><span class="hljs-comment"># t2争夺主线程地位</span><br>t2.join()<br><br><span class="hljs-comment"># t1和t2顺序执行 顺序执行时 不需要锁</span><br><span class="hljs-comment"># 启动t1线程</span><br>t1.start();<br><span class="hljs-comment"># 等待t1结束，这时候t2线程并未启动</span><br>t1.join();<br><span class="hljs-comment"># t1结束后，启动t2线程</span><br>t2.start();<br><span class="hljs-comment"># 等待t2结束</span><br>t2.join();<br><br>print(balance)<br></code></pre></div></td></tr></table></figure>
+<p>Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs plain">183<br></code></pre></div></td></tr></table></figure>
+<p>我们定义了一个共享变量<code>balance</code>，初始值为<code>0</code>，并且启动两个线程，先存后取，理论上结果应该为<code>0</code>，但是，由于线程的调度是由操作系统决定的，当 <code>t1</code>、<code>t2</code> 交替执行时，只要循环次数足够多，<code>balance</code>的结果就不一定是<code>0</code>了。</p>
+<p>原因是因为高级语言的一条语句在CPU执行时是若干条语句，即使一个简单的计算：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">balance = balance + n<br></code></pre></div></td></tr></table></figure>
+<p>也分两步：</p>
+<ol>
+<li>计算<code>balance + n</code>，存入临时变量中；</li>
+<li>将临时变量的值赋给<code>balance</code>。</li>
+</ol>
+<p>也就是可以看成：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">x = balance + n<br>balance = x<br></code></pre></div></td></tr></table></figure>
+<p>由于x是局部变量，两个线程各自都有自己的x，当代码正常执行时：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">初始值 balance = <span class="hljs-number">0</span><br><br>t1: x1 = balance + <span class="hljs-number">5</span> <span class="hljs-comment"># x1 = 0 + 5 = 5</span><br>t1: balance = x1     <span class="hljs-comment"># balance = 5</span><br>t1: x1 = balance - <span class="hljs-number">5</span> <span class="hljs-comment"># x1 = 5 - 5 = 0</span><br>t1: balance = x1     <span class="hljs-comment"># balance = 0</span><br><br>t2: x2 = balance + <span class="hljs-number">8</span> <span class="hljs-comment"># x2 = 0 + 8 = 8</span><br>t2: balance = x2     <span class="hljs-comment"># balance = 8</span><br>t2: x2 = balance - <span class="hljs-number">8</span> <span class="hljs-comment"># x2 = 8 - 8 = 0</span><br>t2: balance = x2     <span class="hljs-comment"># balance = 0</span><br>    <br>结果 balance = <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+<p>但是t1和t2是交替运行的，如果操作系统以下面的顺序执行t1、t2：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">初始值 balance = <span class="hljs-number">0</span><br><br>t1: x1 = balance + <span class="hljs-number">5</span>  <span class="hljs-comment"># x1 = 0 + 5 = 5</span><br><br>t2: x2 = balance + <span class="hljs-number">8</span>  <span class="hljs-comment"># x2 = 0 + 8 = 8</span><br>t2: balance = x2      <span class="hljs-comment"># balance = 8</span><br><br>t1: balance = x1      <span class="hljs-comment"># balance = 5</span><br>t1: x1 = balance - <span class="hljs-number">5</span>  <span class="hljs-comment"># x1 = 5 - 5 = 0</span><br>t1: balance = x1      <span class="hljs-comment"># balance = 0</span><br><br>t2: x2 = balance - <span class="hljs-number">8</span>  <span class="hljs-comment"># x2 = 0 - 8 = -8</span><br>t2: balance = x2   <span class="hljs-comment"># balance = -8</span><br><br>结果 balance = -<span class="hljs-number">8</span><br></code></pre></div></td></tr></table></figure>
+<p>究其原因，是因为修改<code>balance</code>需要多条语句，而执行这几条语句时，线程可能中断，从而导致多个线程把同一个对象的内容改乱了。</p>
+<p>两个线程同时一存一取，就可能导致余额不对，你肯定不希望你的银行存款莫名其妙地变成了负数，所以，我们必须确保一个线程在修改<code>balance</code>的时候，别的线程一定不能改。</p>
+<p>如果我们要确保<code>balance</code>计算正确，就要给<code>change_it()</code>上一把锁，当某个线程开始执行<code>change_it()</code>时，我们说，该线程因为获得了锁，因此其他线程不能同时执行<code>change_it()</code>，只能等待，直到锁被释放后，获得该锁以后才能改。由于锁只有一个，无论多少线程，同一时刻最多只有一个线程持有该锁，所以，不会造成修改的冲突。创建一个锁就是通过<code>threading.Lock()</code>来实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># coding: utf-8</span><br><br><span class="hljs-keyword">import</span> time, threading<br><br>balance = <span class="hljs-number">0</span><br>lock = threading.Lock()  <span class="hljs-comment"># 声明一个线程锁对象</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">change_it</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-keyword">global</span> balance<br>    balance += n<br>    balance -= n<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run_thread</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10000000</span>):<br>        <span class="hljs-comment"># 获得锁</span><br>        lock.acquire()<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment"># 放心大胆的改吧</span><br>            change_it(n)<br>        <span class="hljs-keyword">finally</span>:<br>            lock.release()<br><br>t1 = threading.Thread(target=run_thread, args=(<span class="hljs-number">5</span>, ))<br>t2 = threading.Thread(target=run_thread, args=(<span class="hljs-number">8</span>, ))<br>t1.start()<br>t2.start()<br>t1.join()<br>t2.join()<br><br>print(balance)<br></code></pre></div></td></tr></table></figure>
+<p>Output</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+<p>当多个线程同时执行<code>lock.acquire()</code>时，只有一个线程能成功地获取锁，然后继续执行代码，其他线程就继续等待直到获得锁为止。</p>
+<p>获得锁的线程用完后一定要释放锁，否则那些苦苦等待锁的线程将永远等待下去，成为死线程。所以我们用<code>try...finally</code>来确保锁一定会被释放。</p>
+<p><strong>锁的好处就是确保了某段关键代码只能由一个线程从头到尾完整地执行</strong>，坏处当然也很多，首先是<strong>阻止了多线程并发执行，包含锁的某段代码实际上只能以单线程模式执行，效率就大大地下降了。</strong>其次，<strong>由于可以存在多个锁，不同的线程持有不同的锁，并试图获取对方持有的锁时，可能会造成死锁，导致多个线程全部挂起，既不能执行，也无法结束，只能靠操作系统强制终止。</strong></p>
+<h1 id="Multi-Core-CPU"><a href="#Multi-Core-CPU" class="headerlink" title="Multi-Core CPU"></a>Multi-Core CPU</h1><p>如果你不幸拥有一个多核CPU，你肯定在想，多核应该可以同时执行多个线程。<br>如果写一个死循环的话，会出现什么情况呢？<br>打开Mac OS X的Activity Monitor，或者Windows的Task Manager，都可以监控某个进程的CPU使用率。<br>我们可以监控到一个死循环线程会100%占用一个CPU。<br>如果有两个死循环线程，在多核CPU中，可以监控到会占用200%的CPU，也就是占用两个CPU核心。<br>要想把N核CPU的核心全部跑满，就必须启动N个死循环线程。<br>试试用Python写个死循环：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time, threading, multiprocessing<br><br>print(<span class="hljs-string">&quot;CPU个数&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(multiprocessing.cpu_count()))<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">loop</span>():</span><br>    x = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        x = x ** <span class="hljs-number">1</span><br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(multiprocessing.cpu_count()):<br>    t = threading.Thread(target=loop)<br>    t.start()<br><br></code></pre></div></td></tr></table></figure>
+<p>Output</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">CPU个数<span class="hljs-number">8</span><br></code></pre></div></td></tr></table></figure>
+<p>由于双线程技术，4核CPU拥有了8线程。超线程技术的工作原理是在每个时钟周期内完成更多工作，一个支持超线程(HT)技术的处理器使当前的操作系统和应用可以看到两个虚拟处理器，该处理器可以同时处理两组任务，充分利用闲置资源，并可在相同时间内完成更多工作。</p>
+<p>在处理多个线程的过程中，多线程处理器内部的每个逻辑处理器均可以单独对中断做出响应，当第一个逻辑处理器跟踪一个软件线程时，第二个逻辑处理器也开始对另外一个软件线程进行跟踪和处理了。另外，为了避免CPU处理资源冲突，负责处理第二个线程的那个逻辑处理器，其使用的是仅是运行第一个线程时被暂时闲置的处理单元．例如：<strong>当一个逻辑处理器在执行浮点运算(使用处理器的浮点运算单元)时，另一个逻辑处理器可以执行加法运算(使用处理器的整数运算单元)。</strong>这样做，无疑大大提高了处理器内部处理单元的利用率和相应的数据、指令的吞吐能力。</p>
+<p>启动与CPU核心数量相同的N个线程，在4核CPU上可以监控到CPU占用率仅有38%，也就是仅使用了一个线程。<br>但是用C、C++或Java来改写相同的死循环，直接可以把全部核心跑满，4核就跑到400%，8核就跑到800%，为什么Python不行呢？<br><strong>因为Python的线程虽然是真正的线程</strong>，但解释器执行代码时，有一个GIL锁（全局解释器锁）：Global Interpreter Lock，<strong>任何Python线程执行前，必须先获得GIL锁，然后，每执行100条字节码，解释器就自动释放GIL锁，让别的线程有机会执行。这个GIL全局锁实际上把所有线程的执行代码都给上了锁，所以，多线程在Python中只能交替执行，即使100个线程跑在100核CPU上，也只能用到1个核。</strong><br>GIL是Python解释器设计的历史遗留问题，通常我们用的解释器是官方实现的CPython，要真正利用多核，除非重写一个不带GIL的解释器。<br>所以，在Python中，可以使用多线程，但不要指望能有效利用多核。如果一定要通过多线程利用多核，那只能通过C扩展来实现，不过这样就失去了Python简单易用的特点。<br>不过，也不用过于担心，<strong>Python虽然不能利用多线程实现多核任务，但可以通过多进程实现多核任务。多个Python进程有各自独立的GIL锁，互不影响。</strong></p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>多线程编程，模型复杂，容易发生冲突，必须用锁加以隔离，同时，又要小心死锁的发生。<br>Python解释器由于设计时有GIL全局锁，导致了多线程无法利用多核。多线程的并发在Python中就是一个美丽的梦。</p>
+<p>如果你的代码是<strong>CPU密集型</strong>，多个线程的代码<strong>很有可能</strong>是线性执行的。所以这种情况下多线程是鸡肋，效率可能还不如单线程因为有context switch。</p>
+<p>但是：如果<strong>你的代码是IO密集型</strong>，多线程可以明显提高效率。例如制作爬虫（我就不明白为什么Python总和爬虫联系在一起…不过也只想起来这个例子…），绝大多数时间爬虫是在等待socket返回数据，最终结果是某个线程等待IO的时候其他线程可以继续执行。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23474039/answer/24695447">知乎yegle</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/30/Earth-2020/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Earth-2020-01</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/30/%E4%BA%BA%E6%98%AF%E5%A6%82%E4%BD%95%E5%BA%9F%E6%8E%89%E7%9A%84/">
+                        <span class="hidden-mobile">人是如何废掉的</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/30/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/';
+        this.page.identifier = '/2020/03/30/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

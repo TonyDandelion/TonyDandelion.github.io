@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>select、poll、epoll的原理 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="select、poll、epoll的原理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-09 00:35" pubdate>
+        2020年4月9日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      10k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      112
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">select、poll、epoll的原理</h1>
+            
+            <div class="markdown-body">
+              <p>select、poll、epoll 的原理、比较、以及使用场景。</p>
+<p>epoll 的水平触发与边缘触发（socket）。</p>
+<a id="more"></a>
+<h1 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wish123/p/11393383.html">select,poll,epoll最简单的解释</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/questI/On/32163005/answer/55111082">知乎王伟豪</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/288808056/answer/463060065">知乎裴浩</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77234351">知乎明月照我心</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1b4b3c738d8c">简书六尺帐篷</a><br><a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-25906157-id-1799466.html">select,poll详解</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/liushengxi_root/article/details/88654393">Select，Poll，Epoll 的差异与选择</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95872805">高性能IO模型分析-浅析Select、Poll、Epoll机制（三）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/nanxiaotao/article/details/90612404">select、poll、epoll的原理与区别</a></p>
+<h1 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h1><h2 id="用户空间和内核空间"><a href="#用户空间和内核空间" class="headerlink" title="用户空间和内核空间"></a>用户空间和内核空间</h2><p>操作系统根据寻址空间，划分为内核空间与用户空间。  对 32 位操作系统而言，它的寻址空间（虚拟地址空间，或叫线性地址空间）为 4G（2的32次方）。</p>
+<p>Linux 操作系统将这4个G的寻址空间中高位1G字节为内核使用，就是内核空间；低位3G字节位用户使用 ，也就用户空间。  </p>
+<p><strong>为啥要设置这两个空间？</strong>在 CPU 的所有指令中，<strong>有些指令是非常危险的，如果错用，将导致系统崩溃，比如清内存、设置时钟等。</strong>如果允许所有的程序都可以使用这些指令，那么系统崩溃的概率将大大增加。所以，CPU 将指令分为特权指令和非特权指令，对于那些危险的指令，只允许操作系统及其相关模块使用，普通应用程序只能使用那些不会造成灾难的指令。比如 Intel 的 CPU 将特权等级分为 4 个级别：Ring0~Ring3。其实 Linux 系统只使用了 Ring0 和 Ring3 两个运行级别(Windows 系统也是一样的)。当进程运行在 Ring3 级别（使用安全指令）时被称为运行在用户态，此时进程运行在用户空间。而运行在 Ring0 级别（使用危险指令）时被称为运行在内核态，此时程运行在内核空间中。  </p>
+<p>在内核态下，进程运行在内核地址空间中，此时 CPU 可以执行任何指令。运行的代码也不受任何的限制，可以自由地访问任何有效地址，也可以直接进行端口的访问。在用户态下，进程运行在用户地址空间中，被执行的代码要受到 CPU 的诸多检查，它们只能访问映射其地址空间的页表项中规定的在用户态下可访问页面的虚拟地址，且只能对任务状态段(TSS)中 I/O 许可位图(I/O Permission Bitmap)中规定的可访问端口进行直接访问。  </p>
+<p><strong><font color='red'>区分内核空间和用户空间本质上是要提高操作系统的稳定性及可用性。</font></strong>  </p>
+<p>读写磁盘文件，分配回收内存，从网络接口读写数据等等都是在内核空间中完成的，应用程序是无法直接进行这样的操作的，但是我们可以通过内核提供的接口来完成这样的任务。对于从网络接口读写数据，我们就会用到socket。  </p>
+<h2 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h2><p>socket有三层含义：第一层是指一种通讯机制，第二层是指套接口，第二层是指套接字。   </p>
+<p><strong>socket是一套用于Unix进程间通信的机制。</strong> 光有机制不行，还是要有代码实现这套机制才能做进一步开发，于是有人写代码实现了这套机制，这些代码就是这套通讯机制在操作系统（Unix、Mac O、Windows等）上的应用程序接口（套接口，，socket API），<strong>这就是上面所说的多个内核提供的接口中的一种</strong>，后面的程序员每次都调用这套API（套接口，套接字相关的接口，socket API）就能实现操作系统中进程之间的通信了（<strong>同一台机器上不同进程或者不同计算机上的进程间跨网络的通信都是通过套接口实现的</strong>）。最早实现这套API的是伯克利socket，后来Windows也实现了该接口。  </p>
+<p>现在，我们知道了socket的第一层和第二层含义了，那么第三层含义套接字（也是传播最广泛的含义），是什么意思？第三层含义就是：<strong>套接字就是使用套接口处理的文件描述符</strong>。</p>
+<h2 id="文件描述符-fd-和-套接字"><a href="#文件描述符-fd-和-套接字" class="headerlink" title="文件描述符 fd 和 套接字"></a>文件描述符 <code>fd</code> 和 <strong>套接字</strong></h2><p>文件描述符是Unix系统标识文件的int，Unix的哲学一切皆文件，所以各自资源（包括常规意义的文件、目录、管道、POSIX IPC）都可以看成文件。文件描述符是内核提供给用户来安全地操作文件的标识，不像指针，拥有了指针后你能随意修改文件。文件描述符在形式上是一个非负整数。实际上，<strong>它是一个索引值</strong>，该索引指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。  </p>
+<p>拥有了描述符后，你只能传入描述符给特定的接口，当你将文件描述符 <code>fd</code> 传入 套接口（socket API）时，这时候你就得到了传说中的<strong>套接字</strong>，进一步的进程之间的通讯以及数据的读写操作由内核读取用户输入的参数后来安全地执行。  </p>
+<p>也就是说，<strong>套接字就是使用套接口处理的文件描述符</strong>，因为是文件描述符，所以叫做套接<strong>“字”</strong>。而<strong>IP+端口就是网络socket（套接字）的地址</strong>，<strong>IP报文有8个字节</strong>分别代表源和目的地的IP地址，UDP头和TCP头有4个字节分别<strong>代</strong>表源和目的地的端口，就像以太头有12个字节分别代表源和目的地的MAC地址。   </p>
+<h1 id="I-O操作"><a href="#I-O操作" class="headerlink" title="I/O操作"></a>I/O操作</h1><p><strong>问</strong>：什么叫做I/O操作？<br><strong>答</strong>：Linux系统继承了Unix系统的概念，一切皆文件。文件是指Linux系统中的VFS文件系统下的文件，VFS文件系统提供通用的接口对接各种类型的二进制流。因此，不管socket、还是FIFO、管道、终端等，对于LInux来说、一切都是文件、一切都是流。<br>在信息交换的过程中，对这些流进行数据的收发操作，就简称为I/O操作(input and output)。I/O分为磁盘I/O和网络I/O。访问的数据不在应用程序缓存中，那么每次数据都会直接从磁盘加载，或者应用程序需要哪从磁盘种读取书，就是磁盘I/O。而应用程序从网络中获取、分发数据说的就是网络I/O。  </p>
+<p><strong>问</strong>：基于socket是什么类型的I/O？<br><strong>答</strong>：socket是一种操作系统提供的进程间通信机制机，以及该机制在操作系统上的应用程序接口（socket API）。在TCP/IP协议中“IP地址 + TCP或UDP端口号”唯一标识网络通讯中的一个进程，“IP + 端口号”就称为<strong>套接字地址</strong>。在TCP协议中，建立连接的两个进程各自有一个socket来标识，那么两个socket组成的socket pair就唯一标识一个连接。应用程序可以通过套接字接口（socket API），来使用网络套接字，以进行数据交换。因此基于socket的I/O就是网络I/O。  </p>
+<p><strong>问</strong>：网络I/O中会出现阻塞，请解释一下网络I/O阻塞出现的原因。<br><strong>答</strong>：网络I/O阻塞产生的原因要从数据到达计算机设备开始理解：<br>1、数据从网线或者无线路由器以无线信号的方式到达计算机网卡，然后通过硬件电路的传输，最终会把数据写入到内存中的某个地址上。<br><img src="https://i.loli.net/2020/03/15/SfDaUTZEw7oNWzR.jpg" srcset="/img/loading.gif" alt="网络数据在硬件上的传输.jpg"><br>2、当网卡把数据写入到内存后，网卡向 CPU 发出一个中断信号，操作系统便能得知有新的网络数据到来，再通过<strong>网卡中断程序</strong>去处理数据。<br>3、当网卡发出的中断信号中断了CPU当前的进程，开启了<strong>网卡中断程序</strong>之后，就有可能产生阻塞。阻塞是指进程一直处于等待某事件（如接收到网络数据）发生之前的状态。不同情况下，计算机系统产生阻塞的原因不一样，和具体场景和任务流程有关，一个基础的网络程序如下：  </p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">//创建socket</span><br><span class="hljs-keyword">int</span> s = socket(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>);   <br><span class="hljs-comment">//绑定</span><br>bind(s, ...)<br><span class="hljs-comment">//监听</span><br>listen(s, ...)<br><span class="hljs-comment">//接受客户端连接</span><br><span class="hljs-keyword">int</span> c = accept(s, ...)<br><span class="hljs-comment">//接收客户端数据</span><br>receive(c, ...);<br><span class="hljs-comment">//将数据打印出来</span><br><span class="hljs-built_in">printf</span>(...)<br></code></pre></div></td></tr></table></figure>
+<p>先新建 socket 对象，依次调用 <code>bind</code>、<code>listen</code> 与 <code>accept</code>，最后调用 <code>receive</code> 接收数据。其中<code>recv</code> 是个阻塞方法，当程序运行到 <code>receive</code> 时，它会一直等待来自内存的网络数据到达引发的中断信号，直到该中断信号到达，说明接收到数据才往下执行。这样一来就产生了一次I/O阻塞。阻塞的本质是什么 ？操作系统为了支持多任务，实现了进程调度的功能，会把进程分为<strong>“运行”</strong>和<strong>“等待”</strong>等几种状态。<strong>运行状态是进程获得 CPU 使用权，正在执行代码的状态；等待状态是阻塞状态，比如上述程序运行到 <code>receive</code>  时，程序会从运行状态变为等待状态，接收到数据后又变回运行状态。</strong>下图的计算机中运行着 A、B 与 C 三个进程（<em>工作队列中有 A、B 和 C 三个进程</em>），其中进程 A 执行着上述基础网络程序，一开始，这 3 个进程都被操作系统的工作队列所引用，处于运行状态，会分时执行。  </p>
+<p><img src="https://i.loli.net/2020/03/16/X1jyHapT8Klez4c.jpg" srcset="/img/loading.gif" alt="1a5418e9c98fca59261ba1b60b85192aef1.jpg"></p>
+<p>当进程 A 执行到创建 socket 的语句时，操作系统会创建一个由文件系统管理的 socket 对象（<strong>套接字对象，一个使用套接口处理的文件描述符，可以认为是一种特殊的数据结构</strong> ）（如下图）。这个 socket 对象（特殊的数据结构）包含了<strong>发送缓冲区、接收缓冲区与等待队列等成员三个组成部分</strong>。等待队列是个非常重要的结构，它指向所有需要等待该 socket 事件的进程。  </p>
+<p><img src="https://i.loli.net/2020/03/16/FobAhlZqp1OVxjE.jpg" srcset="/img/loading.gif" alt="b69ec1091258a28ef5e5e6173e0d110a51c.jpg"></p>
+<p>当程序执行到 <code>receive</code> 时，操作系统会<strong>将进程 A 从工作队列移动到该 socket 的等待队列中（这个操作也就是把socket从运行空间拷贝到内核空间）</strong>（如下图）。<strong>由于工作队列只剩下了进程 B 和 C，依据进程调度，CPU 会轮流执行这两个进程的程序，不会执行进程 A 的程序。所以进程 A 被阻塞</strong>，不会往下执行代码，<strong>也不会占用 CPU 资源，但是会占用网络I/O，一直判断是否有进程A需要的网络数据达到。</strong>  </p>
+<p><img src="https://i.loli.net/2020/03/16/rw8cITHVk9UoPKe.jpg" srcset="/img/loading.gif" alt="09494eced300dc6610aa8bc3544e196f54e.jpg"></p>
+<p>操作系统添加等待队列只是<strong>添加了</strong>对这个“等待中”进程的<strong>引用</strong>，以便在接收到数据时获取进程对象、将其唤醒，而非直接将进程管理纳入自己之下。<strong>上图为了方便说明，才直接将进程挂到等待队列之下。</strong><br>当 socket 接收到数据后，操作系统将该 socket 等待队列上的进程重新放回到工作队列，该进程变成运行状态，继续执行代码。同时由于 socket 的接收缓冲区已经有了数据，<code>receive</code> 可以返回接收到的数据。<br>如下图所示，进程在 <code>receive</code>  阻塞期间，计算机收到了对端传送的数据（步骤①），数据经由网卡传送到内存（步骤②），然后网卡通过中断信号通知 CPU 有数据到达，CPU 执行中断程序（步骤③）。此处的中断程序主要有两项功能，先将网络数据写入到对应 socket 的接收缓冲区里面（步骤④），再唤醒进程 A（步骤⑤），重新将进程 A 放入工作队列中。  </p>
+<p><img src="https://i.loli.net/2020/03/16/QsZaFTcCqRJhGO1.jpg" srcset="/img/loading.gif" alt="a0ad9bdc62ad4670365301d8c39ae476e0b.jpg"></p>
+<p>具体唤醒过程如下：  </p>
+<p><img src="https://i.loli.net/2020/03/16/dw3rSxLAMkK4Htf.jpg" srcset="/img/loading.gif" alt="19da1395842a5a5eaf7c1fa70bf72c84c6a.jpg"></p>
+<p>以上就是<strong>处于阻塞状态的进程在得知自己网络数据到来之后被唤起的过程（这种进程因为阻塞被挂起/放入等待队列，之后又被重新唤醒恢复执行的过程被称为<font color='red'>进程切换</font>）</strong>，这里我们可能会思考一个问题，操作系统如何知道网络数据对应于哪个 socket？是这样的，因为一个 socket 对应着一个端口号，而网络数据包中包含了 ip 和端口的信息，内核可以通过端口号找到对应的 socket。当然，为了提高处理速度，操作系统会维护端口号到 socket 的索引结构，以快速读取。</p>
+<h1 id="I-O多路复用技术"><a href="#I-O多路复用技术" class="headerlink" title="I/O多路复用技术"></a>I/O多路复用技术</h1><p><strong>问</strong>：很好，你已经说清楚了网路I/O阻塞的产生以及进程重新唤之后网路I/O阻塞消失的过程了，但是，如你所说，这种模式下，虽然不会占用 CPU 资源，但是会占用网络I/O，如何同时监视多个进程对应的 socket 数据是否到来，进而提高单个网络I/O的利用率呢？<br><strong>答</strong>：上面的例子是典型的客户端/服务器（c/s demo）的通信模型，send/receive就是在一条I/O通道收发数据，这就是基本的网络I/O，但是这种操作不能充分利用所有网络I/O资源。而“I/O多路复用技术就可以解决这个问题，”I/O多路复用“实际上是指<strong>复用网络I/O从而使得多个I/O操作能在同一个网络I/O中执行</strong>。网络I/O使用socket套接字来通信，普通I/O模型只能监听一个socket，而I/O多路复用可同时监听多个socket，极大的提高了网络资源的利用率。  </p>
+<p><strong>问</strong>：不错，说一下常见的几种I/O多路复用的机制吧。<br><strong>答</strong>：</p>
+<h2 id="select机制"><a href="#select机制" class="headerlink" title="select机制"></a><strong>select机制</strong></h2><p>先理解不太高效的 select，<strong>假如能够预先传入一个 socket 列表（多个套接字），如果列表中的 socket 都没有数据，挂起进程，直到有一个 socket 收到数据，唤醒进程。</strong>这种方法很直接，也是 select 的设计思想。在下边的代码中，先准备一个数组 <code>fds</code>，让 <code>fds</code> 存放着所有需要监视的 socket。然后调用 select，如果 fds 中的所有 socket 都没有数据，select 会阻塞，直到有一个 socket 接收到数据，select 返回，唤醒进程。用户可以遍历 fds，通过 <code>FD_ISSET</code> 判断具体哪个 socket 收到数据，然后做出处理。  </p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">int</span> s = socket(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>); <span class="hljs-comment">// 第一个参数指明套接字类型，AF_INET（又称 PF_INET）是 IPv4 网络协议的套接字类型，AF_INET6 则是 IPv6 的；而 AF_UNIX 则是 Unix 系统本地通信。第二个参数指明连接类型，SOCK_STREAM是基于数据流的，SOCK_DGRAM是基于数据报的。第三个参数用来指明所要接收的协议包，设置为0则用于接收任何的IP数据，设置为0则用于接收任何的TCP数据等等。</span><br>bind(s, ...);<br>listen(s, ...);<br><span class="hljs-keyword">int</span> fds[] = 存放需要监听的socket;  <span class="hljs-comment">// fd为文件描述符，套接字本质就是文件描述符，不过是交由套接口处理的文件描述符，被称为套接字。</span><br><span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>    <span class="hljs-keyword">int</span> n = select(..., fds, ...)<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i &lt; fds.count; i++)&#123;<br>        <span class="hljs-keyword">if</span>(FD_ISSET(fds[i], ...))&#123;<br>            <span class="hljs-comment">//fds[i]的数据处理</span><br>        &#125;<br>    &#125;&#125;<br></code></pre></div></td></tr></table></figure>
+<p>select 的实现思路很直接，假如程序同时监视如下图的 sock1、sock2 和 sock3 三个 socket，那么在调用 select 之后，操作系统把进程 A 分别加入这三个 socket 的等待队列中<strong>（实际上就是把这三个套接字从运行空间拷贝到内核空间中，这里的拷贝涉及一次遍历）</strong>。  </p>
+<p><img src="https://i.loli.net/2020/03/16/sL4TUcfYpuRm6WF.jpg" srcset="/img/loading.gif" alt="b86e3ee49616e773a967648e69278bb2e74.jpg"></p>
+<p>当任何一个 socket 收到数据后，中断程序将唤起进程。下图展示了 sock2 接收到了数据的处理流程，注： <code>receive</code> 和  <code>select</code> 的中断回调可以设置成不同的内容。  </p>
+<p><img src="https://i.loli.net/2020/03/16/KRVxLuQMfGyzvai.jpg" srcset="/img/loading.gif" alt="e553196c24b162263fe98c8754407eabc98.jpg"></p>
+<p><em>sock2 接收到了数据，中断程序唤起进程 A</em>，所谓唤起进程，就是将进程从所有的等待队列中移除，加入到工作队列里面，如下图所示：  </p>
+<p><img src="https://i.loli.net/2020/03/16/mW8yFuAUPMBZVwa.jpg" srcset="/img/loading.gif" alt="060b95ed33c31e140e0e8409de559d855c5.jpg"></p>
+<p><em>将进程 A 从所有等待队列中移除，再加入到工作队列里面</em>，经由这些步骤，当进程 A 被唤醒后，它知道至少有一个 socket 接收了数据。<strong>程序只需遍历一遍 socket 列表</strong>，就可以得到就绪的 socket。  </p>
+<p>下面贴一下linux系统中 <code>/usr/include/sys/select.h</code> 文件中对 <code>select</code> 方法的定义：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">/* fd_set for select and pselect.  */</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">  &#123;</span> <br>    <span class="hljs-comment">/* XPG4.2 requires this member name.  Otherwise avoid the name</span><br><span class="hljs-comment">       from the global namespace.  */</span><br>    <span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __USE_XOPEN</span><br>        __fd_mask fds_bits[__FD_SETSIZE / __NFDBITS];<br>    <span class="hljs-meta"># <span class="hljs-meta-keyword">define</span> __FDS_BITS(set) ((set)-&gt;fds_bits)</span><br>    <span class="hljs-meta">#<span class="hljs-meta-keyword">else</span></span><br>        __fd_mask __fds_bits[__FD_SETSIZE / __NFDBITS];<br>    <span class="hljs-meta"># <span class="hljs-meta-keyword">define</span> __FDS_BITS(set) ((set)-&gt;__fds_bits)</span><br>    <span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br>  &#125; fd_set;<br><br><span class="hljs-comment">/* Check the first NFDS descriptors each in READFDS (if not NULL) for read</span><br><span class="hljs-comment">   readiness, in WRITEFDS (if not NULL) for write readiness, and in EXCEPTFDS</span><br><span class="hljs-comment">   (if not NULL) for exceptional conditions.  If TIMEOUT is not NULL, time out</span><br><span class="hljs-comment">   after waiting the interval specified therein.  Returns the number of ready</span><br><span class="hljs-comment">   descriptors, or -1 for errors.</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">   This function is a cancellation point and therefore not marked with</span><br><span class="hljs-comment">   __THROW.  */</span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">select</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> __nfds, fd_set *__restrict __readfds,</span></span><br><span class="hljs-function"><span class="hljs-params">                   fd_set *__restrict __writefds,</span></span><br><span class="hljs-function"><span class="hljs-params">                   fd_set *__restrict __exceptfds,</span></span><br><span class="hljs-function"><span class="hljs-params">                   struct timeval *__restrict __timeout)</span></span>;<br></code></pre></div></td></tr></table></figure><br><strong>int __nfds</strong>是<code>fd_set</code>中最大的描述符+1，当调用select时，内核态会判断fd<em>set中描述符是否就绪，**\</em>_nfds<strong>告诉内核最多判断到哪一个描述符。  
+</strong><strong>readfds、</strong>writefds、<strong>exceptfds<strong>都是结构体<code>fd_set</code>，fd_set可以看作是一个描述符的集合。 select函数中存在三个fd_set集合，分别代表三种事件，<code>readfds</code>表示读描述符集合，<code>writefds</code>表示读描述符集合，<code>exceptfds</code>表示异常描述符集合。当对应的fd_set = NULL时，表示不监听该类描述符。  
+</strong>timeval </strong>timeout<strong>用来指定select的工作方式，即当文件描述符尚未就绪时，select是永远等下去，而是等待一定的时间，即使没有socket就绪，也直接返回。  
+</strong>函数返回值int<strong>表示： 就绪描述符的数量，如果为-1表示产生错误 。  
+</strong><font color='red'>fd 就是 文件描述符 file descriptor</font><strong>  
+</strong>运行机制**：Select会将全量<code>fd_set</code>从用户空间拷贝到内核空间，并注册回调函数， 在内核态空间来判断每个请求是否准备好数据 。select在没有查询到有文件描述符（就是套接字）就绪的情况下，将一直阻塞（就是一直等在 <code>receive</code> 那里）。如果有一个或者多个描述符（就是套接字）就绪，那么select将就绪的文件描述符（就是套接字）置位，然后select返回。返回后，由程序遍历查看哪个请求有数据。  </p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a><strong>优点</strong></h3><p>这种简单方式行之有效，在几乎所有操作系统都有对应的实现。  </p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a><strong>缺点</strong></h3><ul>
+<li>每次调用 select 都需要将进程加入到所有 socket 的等待队列（套接字集合拷贝），每次唤醒都需要从每个队列中移除（检查到底是哪一个套接字就绪了），这里涉及了两次遍历。</li>
+<li>第一次遍历：每次都要将整个 fds 列表（<strong>就是套接字集合</strong>）传递给内核，这个传递，说白了就是将整个 fds 列表（<strong>就是套接字集合</strong>）从用户态拷贝到内核态，这波操作有一定的开销，而且fd越多开销则越大。  </li>
+<li>第二次遍历：进程被唤醒后，程序并不知道哪些 socket 收到数据，select返回的是整个socket 数组的句柄。应用程序需要遍历整个socket 数组才知道谁发生了变化（谁就绪了），轮询代价大。  </li>
+<li>每次都会拷贝，每次都要轮询，最大开销和fds列表（<strong>就是套接字集合</strong>）中的fd（文件描述符/套接字）有关，为了防止fds太大，拷贝、轮询的开销太大，所以fds的长度是有限制的。<strong>Select的<code>fd_set</code>是基于一个位掩码（bit mask）实现的，因此 <code>fd_set</code> 有固定的长度，一般是32*32=1024，数组元素的每一位对应一个文件描述符。例如，一个int整数占32位，那么32个int整数组成的数组，第一个元素代表文件描述符0到31，数组的第二个元素代表文件描述符32到63，以此类推，<code>fd_set</code>可以表示1024个文件描述符的就绪情况，所以默认就只能监视 1024 个socket。内核在被编译的时候，可以不受这个长度的限制，因为select()允许应用程序自定义FD_SETSIZE的大小（在如今的系统头文件中可以看到这一点），但是这会增加额外的支出。</strong><br><strong>注意</strong>：这里只解释了 select 的一种情形。当程序调用 select 时，内核会先遍历一遍 socket，如果有一个以上的 socket 接收缓冲区有数据，那么 select 直接返回，不会阻塞。这也是为什么 select 的返回值有可能大于 1 的原因之一。如果没有 socket 有数据，说明该进程需要的网络数据还没到达，进程才会阻塞，才会处于等待状态。  </li>
+</ul>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a><strong>使用场景</strong></h3><ul>
+<li>可移植性好，几乎适用于所有平台。select已经存在很长时间了，你可以确定每个支持网络和非阻塞套接字的平台都会支持select，而它可能还不支持poll。另一种选择是你仍然使用poll然后在那些没有poll的平台上使用select来模拟它。  </li>
+<li>select的超时时间理论上可以精确到纳秒级别。而poll和epoll的精度只有毫秒级。这对于桌面或者服务器系统来说没有任何区别，因为它们不会运行在纳秒精度的时钟上，但是在某些与硬件交互的实时嵌入式平台，<strong>降低控制棒关闭核反应堆</strong>．可能是需要的。(这就可以作为一个更加精确的sleep()来用)  </li>
+<li>select的缺点，使得其无法支持高并发连接。假设我们的服务器需要支持100万的并发连接，则在_FD_SETSIZE为1024的情况下，则<strong>我们至少需要开辟1k个进程才能实现100万的并发连接</strong>。除了<strong>进程间上下文切换的时间消耗外，从内核/用户空间大量的无脑内存拷贝、数组轮询等</strong>，是<font color='red'><strong>系统难以承受</strong></font>的。因此，基于select模型的服务器程序，要达到10万级别的并发访问，是一个很难完成的任务。  </li>
+</ul>
+<h3 id="触发方式"><a href="#触发方式" class="headerlink" title="触发方式"></a><strong>触发方式</strong></h3><p>select的触发方式是水平触发，应用程序如果没有完成对一个已经就绪的文件描述符进行IO，那么之后再次select调用还是会将这些文件描述符通知进程。  </p>
+<p>select完整调用过程，参看下图：  </p>
+<p><img src="https://i.loli.net/2020/03/16/ISlneN7HVmBjEqg.png" srcset="/img/loading.gif" alt="20190527213148418.png"></p>
+<h2 id="poll机制"><a href="#poll机制" class="headerlink" title="poll机制"></a><strong>poll机制</strong></h2><p>linux系统中<code>/usr/include/sys/poll.h</code>文件中对<code>poll</code>方法的定义如下：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">/* Data structure describing a polling request.  */</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pollfd</span></span><br><span class="hljs-class">  &#123;</span><br>    <span class="hljs-keyword">int</span> fd;                     <span class="hljs-comment">/* File descriptor to poll.  */</span><br>    <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> events;           <span class="hljs-comment">/* Types of events poller cares about.  */</span><br>    <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> revents;          <span class="hljs-comment">/* Types of events that actually occurred.  */</span><br>  &#125;;<br><br><span class="hljs-comment">/* Poll the file descriptors described by the NFDS structures starting at</span><br><span class="hljs-comment">   FDS.  If TIMEOUT is nonzero and not -1, allow TIMEOUT milliseconds for</span><br><span class="hljs-comment">   an event to occur; if TIMEOUT is -1, block until an event occurs.</span><br><span class="hljs-comment">   Returns the number of file descriptors with events, zero if timed out,</span><br><span class="hljs-comment">   or -1 for errors.</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">   This function is a cancellation point and therefore not marked with</span><br><span class="hljs-comment">   __THROW.  */</span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">poll</span> <span class="hljs-params">(struct pollfd *__fds, <span class="hljs-keyword">nfds_t</span> __nfds, <span class="hljs-keyword">int</span> __timeout)</span></span>;<br></code></pre></div></td></tr></table></figure><br><strong>__fds</strong>参数时Poll机制中定义的结构体<code>pollfd</code>，用来指定一个需要监听的描述符。<strong>结构体中fd为需要监听的文件描述符，events为需要监听的事件类型，而revents为经过poll调用之后返回的事件类型</strong>，在调用poll的时候，一般会传入一个pollfd的结构体数组，数组的元素个数表示监控的描述符个数。<br><strong>__nfds</strong>和<strong>__timeout</strong>参数都和Select机制中的同名参数含义类似。  </p>
+<p>下面是一个典型的程序流程：基本与select相同：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">// The structure for two events</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pollfd</span> <span class="hljs-title">fds</span>[2];</span><br> <br><span class="hljs-comment">// Monitor sock1 for input</span><br>fds[<span class="hljs-number">0</span>].fd = sock1;<br>fds[<span class="hljs-number">0</span>].events = POLLIN;<br> <br><span class="hljs-comment">// Monitor sock2 for output</span><br>fds[<span class="hljs-number">1</span>].fd = sock2;<br>fds[<span class="hljs-number">1</span>].events = POLLOUT;<br> <br><span class="hljs-comment">// Wait 10 seconds</span><br><span class="hljs-keyword">int</span> ret = poll( &amp;fds, <span class="hljs-number">2</span>, <span class="hljs-number">10000</span> );<br><span class="hljs-comment">// Check if poll actually succeed</span><br><span class="hljs-keyword">if</span> ( ret == <span class="hljs-number">-1</span> )<br>    <span class="hljs-comment">// report error and abort</span><br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( ret == <span class="hljs-number">0</span> )<br>    <span class="hljs-comment">// timeout; no event detected</span><br><span class="hljs-keyword">else</span><br>&#123;<br>    <span class="hljs-comment">// 如果我们检测到事件，请将其归零，以便我们可以重用该结构</span><br>    <span class="hljs-keyword">if</span> ( pfd[<span class="hljs-number">0</span>].revents &amp; POLLIN )<br>        pfd[<span class="hljs-number">0</span>].revents = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// input event on sock1</span><br><br>    <span class="hljs-keyword">if</span> ( pfd[<span class="hljs-number">1</span>].revents &amp; POLLOUT )<br>        pfd[<span class="hljs-number">1</span>].revents = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// output event on sock2</span><br>&#125;<br></code></pre></div></td></tr></table></figure></p>
+<h3 id="Poll优点"><a href="#Poll优点" class="headerlink" title="Poll优点"></a><strong>Poll优点</strong></h3><ul>
+<li>Poll描述fd集合（也就是套接字集合）的方式select不同，poll使用 <code>pollfd</code> 结构（也就是链表结构）而不是select的 <code>fd_set</code> 结构（也就是bit mask结构），<strong>所以poll是没有最大连接数的限制，可以超过1024。</strong>  </li>
+<li>它不会修改struct pollfd数据中传递的数据。因此，只要将生成事件的描述符的revents成员设置为零，就可以在poll（）调用之间重用它。  </li>
+<li>相比于select来说可以更好的控制事件。例如，它可以检测对端套接字是否关闭而不需要监听它的读事件。   </li>
+</ul>
+<h3 id="Poll缺点"><a href="#Poll缺点" class="headerlink" title="Poll缺点"></a><strong>Poll缺点</strong></h3><ul>
+<li>Poll和selec本质上都差不多，就是改了fds的集合的数据结构，突破了1024的限制。但还是必须通过遍历描述符列表（套接字集合 fds）来查找哪些描述符（套接字）接收到了数据或者发出了数据。更糟糕的是在内核空间也需要通过遍历来找到哪些套接字正在被监听，然后再重新遍历整个列表来设置事件。（<strong>简而言之，和select一样，要来回拷贝，要遍历整个套接字集合寻找就绪的套接字。</strong>）  </li>
+</ul>
+<h3 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a><strong>运行机制</strong></h3><ul>
+<li>poll的实现和select非常相似，只是描述fd集合的方式不同，同时，poll相对于select最大的特点就是<strong>将需要监听的事件和返回的事件</strong>封装到一个结构体当中，不需要像select那样每次都要重新进行设置，并且poll并没有最大值的限制。poll使用pollfd结构代替select的fd_set（网上讲：类似于位图）结构，所以Poll机制突破了Select机制中的文件描述符数量最大为1024的限制。  </li>
+</ul>
+<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a><strong>使用场景</strong></h3><ul>
+<li>跨平台</li>
+<li>同一时刻你的应用程序监听的套接字少于1000（这种情况下使用epoll不会得到任何益处）。  </li>
+<li>同一时刻一次监视超过1000个套接字，但连接非常短暂。  </li>
+</ul>
+<h3 id="触发方式-1"><a href="#触发方式-1" class="headerlink" title="触发方式"></a><strong>触发方式</strong></h3><p>poll有一个特点是<strong>水平触发</strong>，也就是<strong>通知进程fd就绪（套接字就绪）后，这次没有被处理，那么下次poll的时候会再次通知同个fd已经就绪</strong>。   </p>
+<h2 id="epoll机制"><a href="#epoll机制" class="headerlink" title="epoll机制"></a><strong>epoll机制</strong></h2><h3 id="epoll相对于select、poll的改进"><a href="#epoll相对于select、poll的改进" class="headerlink" title="epoll相对于select、poll的改进"></a><strong>epoll相对于select、poll的改进</strong></h3><p>之所以是e-poll，是因为它是event事件驱动<br>epoll 通过以下一些措施来改进效率：<br>措施一：功能分离<br>select 低效的原因之一是将“维护等待队列”和“阻塞进程”两个步骤合二为一。如下图所示，每次调用 select 都需要这两步操作，<strong>然而大多数应用场景中，需要监视的 socket 相对固定（一般进程绑定的端口不会改变，QQ一般是4000），并不需要每次都修改。</strong>epoll 将这两个操作分开，先用 <code>epoll_ctl</code> 维护等待队列，再调用 <code>epoll_wait</code> 阻塞进程。显而易见地，效率就能得到提升。  </p>
+<p><img src="https://i.loli.net/2020/03/16/BX3eKvSc4YrfPl1.jpg" srcset="/img/loading.gif" alt="0ddba276b2f74f2706d029a4268529d8554.jpg"></p>
+<p>相比 select，epoll 拆分了功能，为方便理解后续的内容，我们先了解一下 epoll 的用法。如下的代码中，先用 <code>epoll_create</code> 创建一个 epoll 对象 <code>epfd</code>，再通过 <code>epoll_ctl</code> 将需要监视的 socket 添加到 epfd 中，最后调用 <code>epoll_wait</code> 等待数据：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">int</span> s = socket(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>);   <br>bind(s, ...)<br>listen(s, ...)<br><br><span class="hljs-keyword">int</span> epfd = epoll_create(...);<br>epoll_ctl(epfd, ...); <span class="hljs-comment">//将所有需要监听的socket添加到epfd中</span><br><br><span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>    <span class="hljs-keyword">int</span> n = epoll_wait(...)<br>    <span class="hljs-keyword">for</span>(接收到数据的socket)&#123;<br>        <span class="hljs-comment">//处理</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure><br>这样的功能分离，使得 epoll 有了优化的可能。  </p>
+<p>措施二：就绪列表<br>select 低效的另一个原因在于<strong>程序不知道哪些 socket 收到数据，只能一个个遍历。</strong>如果内核维护一个“就绪列表”，引用收到数据的 socket，就能避免遍历。如下图所示，计算机共有三个 socket，收到数据的 sock2 和 sock3 被就绪列表 rdlist 所引用。当进程被唤醒后，只要获取 rdlist 的内容，就能够知道哪些 socket 收到数据。  </p>
+<p><img src="https://i.loli.net/2020/03/16/aGj1cFEKmuO8HQx.jpg" srcset="/img/loading.gif" alt="e553196c24b162263fe98c8754407eabc98.jpg"></p>
+<h3 id="epoll-的原理与工作流程"><a href="#epoll-的原理与工作流程" class="headerlink" title="epoll 的原理与工作流程"></a><strong>epoll 的原理与工作流程</strong></h3><p>（1）、创建 epoll 对象<br>如下图所示，当某个进程调用 <code>epoll_create</code> 方法时，内核会创建一个 <code>eventpoll</code> 对象（也就是上面程序中 <code>epfd</code> 所代表的对象）。<code>eventpoll</code> 对象也是文件系统中的一员，和 socket 一样，它也会有等待队列。  </p>
+<p><img src="https://i.loli.net/2020/03/16/cL6wJHZTfYuXG5p.jpg" srcset="/img/loading.gif" alt="30b27df072206fea5639252ad7fadc63bb2.jpg"></p>
+<p>创建一个代表该 epoll 的 eventpoll 对象是必须的，因为内核要维护“就绪列表”等数据，“就绪列表”会作为 eventpoll 的成员。<br>（2）、维护监视列表<br>创建 epoll 对象后，可以用 <code>epoll_ctl</code> 添加或删除所要监听的 socket。以添加 socket 为例，如下图，如果通过 <code>epoll_ctl</code> 添加 sock1、sock2 和 sock3 的监视，内核会将 eventpoll 添加到这三个 socket 的等待队列中。  </p>
+<p><img src="https://i.loli.net/2020/03/16/eBRz5VJGsxfnAl9.jpg" srcset="/img/loading.gif" alt="7747ffcc54ec6d4f0385a7f34af7e1d9a94.jpg"></p>
+<p>当 socket 收到数据后，中断程序会操作 eventpoll 对象，而不是直接操作进程。<br>（3）、接收数据<br>当 socket 收到数据后，中断程序会给 eventpoll 的“就绪列表”添加 socket 引用。如下图展示的是 sock2 和 sock3 收到数据后，中断程序让 rdlist 引用这两个 socket。  </p>
+<p><img src="https://i.loli.net/2020/03/16/KiY2OVFaJ9tpTCl.jpg" srcset="/img/loading.gif" alt="cfb2eb13b21262f8182536a4bae270e766f _1_.jpg"></p>
+<p><strong>eventpoll 对象相当于 socket 和进程之间的中介，socket 的数据接收并不直接影响进程，而是通过改变 eventpoll 的就绪列表来改变进程状态。</strong>当程序执行到 epoll_wait 时，如果 rdlist 已经引用了 socket，那么 epoll_wait 直接返回，如果 rdlist 为空，阻塞进程。<br>（4）、阻塞和唤醒进程<br>假设计算机中正在运行进程 A 和进程 B，在某时刻进程 A 运行到了 <code>epoll_wait</code> 语句。如下图所示，内核会将进程 A 放入 eventpoll 的等待队列中，阻塞进程。    </p>
+<p><img src="https://i.loli.net/2020/03/16/epyXabi9E2zoOkt.jpg" srcset="/img/loading.gif" alt="e5dc0eb74081450fc5a38814733c0a6c6cd.jpg"></p>
+<p>当 socket 接收到数据，<strong>中断程序一方面修改 rdlist，另一方面唤醒 eventpoll 等待队列中的进程，进程 A 再次进入运行状态（如下图）。也因为 rdlist 的存在，进程 A 可以知道哪些 socket 发生了变化。</strong></p>
+<p><img src="https://i.loli.net/2020/03/16/WXbdyjfpmGZtgFl.jpg" srcset="/img/loading.gif" alt="b6366aa6286134dde88d2e722629dd2d68a.jpg"></p>
+<p>简而言之就是四步骤<br>第一步、创建 epoll 对象 eventpoll<br>第二步、向 eventpoll 的监听队列中添加socket（套接字）<br>第三步、假设进程A运行到 <code>epoll_wait</code> 语句，将推出工作队列，进入 <code>eventpoll</code> 的等待队列。<br>第四步、接收到网络数据，引发中断之后，中断程序（在内核空间中）会向 <code>eventpoll</code> 的 “就绪列表”（<code>rdlist</code>） 中添加接收到网络数据的 socket 的引用。并唤醒进程A，进程A在epoll机制下，就不用像之前select、poll机制那样遍历所有socket了，通过rdlist就可以知道是哪一个socket里面有新接收的网络数据。  </p>
+<h3 id="eventpoll-的数据结构"><a href="#eventpoll-的数据结构" class="headerlink" title="eventpoll 的数据结构"></a><strong>eventpoll 的数据结构</strong></h3><p>如下图所示，eventpoll 包含了 lock、mtx、wq（等待队列）与 rdlist 等成员，其中 rdlist （负责保存已经就绪的socket）和 rbr（负责保存所有待监听的socket）是我们所关心的。  </p>
+<p><img src="https://i.loli.net/2020/03/16/k8UNhQVyxsoiTYb.jpg" srcset="/img/loading.gif" alt="a74286896bfc4ef63e06209dbe8c3556311.jpg"></p>
+<p>就绪列表引用着就绪的 socket，所以它应能够快速的插入数据。程序可能随时调用 <code>epoll_ctl</code> 添加监视 socket，也可能随时删除。当删除时，若该 socket 已经存放在就绪列表中，它也应该被移除。所以<strong>就绪列表应是一种能够快速插入和删除的数据结构。</strong>双向链表就是这样一种数据结构，epoll 使用<strong>双向链表</strong>来实现就绪队列（对应上图的 rdllist）。<br>既然 epoll 将“维护监视队列”和“进程阻塞”分离，也意味着需要有个数据结构来保存监视的 socket，至少要方便地添加和移除，还要便于搜索，以避免重复添加。红黑树是一种自平衡二叉查找树，搜索、插入和删除时间复杂度都是O(log(N))，效率较好，epoll 使用了<strong>红黑树</strong>作为索引结构（对应上图的 rbr）。  </p>
+<p><img src="https://i.loli.net/2020/03/16/Xf4eP5o9VUxYQTj.png" srcset="/img/loading.gif" alt="20180813172146956.png"></p>
+<p>linux系统中<code>/usr/include/sys/epoll.h</code>文件中有如下方法：<br><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">/* Creates an epoll instance.  Returns an fd for the new instance.</span><br><span class="hljs-comment">   The &quot;size&quot; parameter is a hint specifying the number of file</span><br><span class="hljs-comment">   descriptors to be associated with the new instance.  The fd</span><br><span class="hljs-comment">   returned by epoll_create() should be closed with close().  */</span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">epoll_create</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> __size)</span> __THROW</span>;<br><br><span class="hljs-comment">/* Manipulate an epoll instance &quot;epfd&quot;. Returns 0 in case of success,</span><br><span class="hljs-comment">   -1 in case of error ( the &quot;errno&quot; variable will contain the</span><br><span class="hljs-comment">   specific error code ) The &quot;op&quot; parameter is one of the EPOLL_CTL_*</span><br><span class="hljs-comment">   constants defined above. The &quot;fd&quot; parameter is the target of the</span><br><span class="hljs-comment">   operation. The &quot;event&quot; parameter describes which events the caller</span><br><span class="hljs-comment">   is interested in and any associated user data.  */</span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">epoll_ctl</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> __epfd, <span class="hljs-keyword">int</span> __op, <span class="hljs-keyword">int</span> __fd,</span></span><br><span class="hljs-function"><span class="hljs-params">                      struct epoll_event *__event)</span> __THROW</span>;<br><br><span class="hljs-comment">/* Wait for events on an epoll instance &quot;epfd&quot;. Returns the number of</span><br><span class="hljs-comment">   triggered events returned in &quot;events&quot; buffer. Or -1 in case of</span><br><span class="hljs-comment">   error with the &quot;errno&quot; variable set to the specific error code. The</span><br><span class="hljs-comment">   &quot;events&quot; parameter is a buffer that will contain triggered</span><br><span class="hljs-comment">   events. The &quot;maxevents&quot; is the maximum number of events to be</span><br><span class="hljs-comment">   returned ( usually size of &quot;events&quot; ). The &quot;timeout&quot; parameter</span><br><span class="hljs-comment">   specifies the maximum wait time in milliseconds (-1 == infinite).</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">   This function is a cancellation point and therefore not marked with</span><br><span class="hljs-comment">   __THROW.  */</span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">epoll_wait</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> __epfd, struct epoll_event *__events,</span></span><br><span class="hljs-function"><span class="hljs-params">                       <span class="hljs-keyword">int</span> __maxevents, <span class="hljs-keyword">int</span> __timeout)</span></span>;<br></code></pre></div></td></tr></table></figure><br><strong>epoll_create</strong>函数：创建一个epoll实例并返回，该实例可以用于监控__size个文件描述符<br><strong>epoll_ctl</strong>函数：向epoll中注册事件，该函数如果调用成功返回0，否则返回-1。  </p>
+<ul>
+<li>__epfd为epoll_create返回的epoll实例</li>
+<li>__op表示要进行的操作</li>
+<li>__fd为要进行监控的文件描述符</li>
+<li>__event要监控的事件</li>
+</ul>
+<p><strong>epoll_wait</strong>函数：类似与select机制中的select函数、poll机制中的poll函数，等待内核返回监听描述符的事件产生。该函数返回已经就绪的事件的数量，如果为-1表示出错。  当调用epoll_wait检查是否有事件发生时，只需要检查eventpoll对象中的rdlist双链表中是否有epitem元素即可。如果rdlist不为空，则把发生的事件复制到用户态，同时将事件数量返回给用户。</p>
+<ul>
+<li>__epfd为epoll_create返回的epoll实例</li>
+<li>__events数组为 epoll_wait要返回的已经产生的事件集合</li>
+<li>__maxevents为希望返回的最大的事件数量（通常为__events的大小）</li>
+<li>__timeout和select、poll机制中的同名参数含义相同</li>
+</ul>
+<h3 id="运行机制-1"><a href="#运行机制-1" class="headerlink" title="运行机制"></a><strong>运行机制</strong></h3><p>epoll操作过程需要上述三个函数，也正是通过三个函数完成Select机制中一个函数完成的事情，解决了Select机制的三大缺陷（内核空间拷贝、遍历选择就绪socket、1024长度限制）。  </p>
+<ul>
+<li>对于第一个缺点，epoll的解决方案是：通过 <code>eventpoll</code> 对象在用户态和内核态之间之间共享fds（套-接字集合），所以可以不必进行从用户态到内核态的一个拷贝，大大节约系统资源。  </li>
+<li>对于第二个缺点，epoll的解决方案不像select或poll一样每次都把当前进程轮流加入fd（套接字）对应的设备等待队列中，而只在<code>epoll_ctl</code>时把当前进程挂一遍（这一遍必不可少），<strong>并为每个fd（套接字）指定一个回调函数</strong>。当套接字就绪时，唤醒等待队列上的等待者时，就会调用这个回调函数，而这个回调函数会把就绪的fd（套接字）加入一个就绪链表。那么当我们调用<code>epoll_wait</code>时，<code>epoll_wait</code>只需要检查链表中是否有存在就绪的fd（套接字）即可，效率非常可观。  </li>
+<li>对于第三个缺点，fd（套接字）数量的限制，也只有Select存在，Poll和Epoll都不存在。由于Epoll机制中只关心就绪的fd（套接字），它相较于Poll需要关心所有fd，在连接较多的场景下，效率更高。在1GB内存的机器上大约是10万左右，一般来说这个数目和系统内存关系很大。  </li>
+</ul>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a><strong>优点</strong></h3><ul>
+<li>使用内存映射技术（也就是声明<code>eventpoll</code> 对象），节省了用户态和内核态间数据拷贝的资源消耗。  </li>
+<li>通过每个fd定义的回调函数来实现的，只有就绪的fd才会执行回调函数。I/O的效率不会随着监视fd的数量的增长而下降。  </li>
+<li>文件描述符数量不再受限。  </li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a><strong>缺点</strong></h3><ul>
+<li><strong>改变监听事件的类型（例如从读事件改为写事件）需要调用<code>epoll_ctl</code>系统调用，先删除后添加，而这在poll中只需要在用户空间简单的设置一下对应的掩码。</strong>如果需要改变5000个套接字的监听事件类型就需要5000次系统调用和上下文切换（直到2014年epoll_ctl函数仍然不能批量操作，每个描述符只能单独操作），这在poll中只需要循环一次pollfd结构体。  </li>
+<li><strong>每一个被 <code>accept()</code> 的套接字都需要添加到集合中，在epoll中必须使用 <code>epoll_ctl</code> 来添加–这就意味着每一个新的连接都需要两次系统调用，</strong>而在poll中只需要一次。如果你的服务有非常多的短连接它们都接受或者发送少量数据，epoll所花费的时间可能比poll更长。(解释了上文)</li>
+<li><strong>epoll是Linux上独有的</strong>，虽然其他平台上也有类似的机制但是他们的区别非常大，例如边沿触发这种模式是非常独特的（FreeBSD的kqueue对它的支持非常粗糙）。</li>
+</ul>
+<h3 id="触发方式-2"><a href="#触发方式-2" class="headerlink" title="触发方式"></a><strong>触发方式</strong></h3><ul>
+<li>水平触发（LT）：<strong>若就绪的事件一次没有处理完要做的所有事件，就会一直去处理。</strong>将没有处理完的事件继续放回到就绪队列之中（即那个内核中的链表），一直进行处理。 具体代码实现上是将没处理完的放在 rdlist 的最前面，然后跟着下次需要返回的一起返回。  </li>
+<li>边缘触发（ET）：就绪的事件只能处理一次，若没有处理完会在下次的其它事件就绪时再进行处理。而若以后再也没有就绪的事件，那么剩余的那部分数据也会随之而丢失，具体实现就是从 rdlist 上删除了。  </li>
+</ul>
+<p>由此可见：ET模式的效率比LT模式的效率要高很多。只是如果使用ET模式，就要保证每次进行数据处理时，要将其处理完，不能造成数据丢失，这样对编写代码的人要求就比较高。 注意：ET模式只支持非阻塞的读写：为了保证数据的完整性。  </p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a><strong>应用场景</strong></h3><ul>
+<li><strong>你的程序通过多个线程来处理大量的网络连接。</strong>如果你的程序只是单线程的那么将会失去epoll的很多优点。并且很有可能不会比poll更好。  </li>
+<li><strong>你需要监听的套接字数量非常大（至少1000）。</strong>如果监听的套接字数量很少则使用epoll不会有任何性能上的优势甚至可能还不如poll。  </li>
+<li><strong>你的网络连接相对来说都是长连接。</strong>就像上面提到的epoll处理短连接的性能还不如poll因为epoll需要额外的系统调用来添加描述符到集合中。</li>
+</ul>
+<p>epoll完整调用过程，参看下图：<br><img src="https://i.loli.net/2020/03/16/sVmn6Oebw5gKi9l.png" srcset="/img/loading.gif" alt="20190527231438974.png"></p>
+<p>几种机制的对比，如下图所示：<br><img src="https://i.loli.net/2020/03/16/vshNOUkYmQ56ZPG.jpg" srcset="/img/loading.gif" alt="v2-b23f9ccc4a82c26cc447779aa4427a0e_r.jpg"></p>
+<p><strong>问</strong>：很好，你说已经清楚了select、poll、epoll 的原理、比较、以及使用场景，epoll 的水平触发与边缘触发等问题，面试结果将在几天之后通知你。<br><strong>答</strong>：好的，谢谢。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E5%85%A5%E9%97%A8/">计算机科学入门</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/09/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%BB%A5%E5%8F%8A%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">三次握手以及四次挥手</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/08/%E5%90%9E%E5%90%90%E9%87%8F%EF%BC%88TPS%EF%BC%89%E3%80%81QPS%E3%80%81%E5%B9%B6%E5%8F%91%E6%95%B0%E3%80%81%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%EF%BC%88RT%EF%BC%89%E6%A6%82%E5%BF%B5/">
+                        <span class="hidden-mobile">吞吐量（TPS）、QPS、并发数、响应时间（RT）概念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/09/select%E3%80%81poll%E3%80%81epoll%E7%9A%84%E5%8E%9F%E7%90%86/';
+        this.page.identifier = '/2020/04/09/select%E3%80%81poll%E3%80%81epoll%E7%9A%84%E5%8E%9F%E7%90%86/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

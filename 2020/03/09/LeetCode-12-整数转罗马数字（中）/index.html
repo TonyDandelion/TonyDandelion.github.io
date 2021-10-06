@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="无知者">
+  <meta name="keywords" content="">
+  <title>LeetCode 12. 整数转罗马数字（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 12. 整数转罗马数字（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-09 03:16" pubdate>
+        2020年3月9日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 12. 整数转罗马数字（中）</h1>
+            
+            <div class="markdown-body">
+              <p> 基于贪心算法解决，十分简洁。 </p>
+<a id="more"></a>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。<br><figure class="highlight mathematica"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mathematica">字符          数值<br><span class="hljs-built_in">I</span>             <span class="hljs-number">1</span><br><span class="hljs-variable">V</span>             <span class="hljs-number">5</span><br><span class="hljs-variable">X</span>             <span class="hljs-number">10</span><br><span class="hljs-variable">L</span>             <span class="hljs-number">50</span><br><span class="hljs-built_in">C</span>             <span class="hljs-number">100</span><br><span class="hljs-built_in">D</span>             <span class="hljs-number">500</span><br><span class="hljs-variable">M</span>             <span class="hljs-number">1000</span><br></code></pre></div></td></tr></table></figure><br>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
+<p>通常情况下，罗马数字中<strong>小的数字在大的数字的右边</strong>。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
+<p>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>给定一个整数，将其转为罗马数字。<strong>输入确保在 1 到 3999 的范围内。</strong></p>
+<blockquote>
+<p> 示例</p>
+</blockquote>
+<p>示例 1:</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: <span class="hljs-number">3</span><br>输出: <span class="hljs-string">&quot;III&quot;</span><br></code></pre></div></td></tr></table></figure>
+<p>示例 2:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: <span class="hljs-number">4</span><br>输出: <span class="hljs-string">&quot;IV&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 3:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: <span class="hljs-number">9</span><br>输出: <span class="hljs-string">&quot;IX&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 4:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: <span class="hljs-number">58</span><br>输出: <span class="hljs-string">&quot;LVIII&quot;</span><br></code></pre></div></td></tr></table></figure><br>解释: L = 50, V = 5, III = 3.</p>
+<p>示例 5:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: <span class="hljs-number">1994</span><br>输出: <span class="hljs-string">&quot;MCMXCIV&quot;</span><br></code></pre></div></td></tr></table></figure><br>解释: M = 1000, CM = 900, XC = 90, IV = 4.</p>
+<p>示例 6:</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: <span class="hljs-number">3999</span><br>输出: <span class="hljs-string">&quot;MMMCMXCIX&quot;</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>条件判定、贪心算法</p>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="限制条件有限"><a href="#限制条件有限" class="headerlink" title="限制条件有限"></a>限制条件有限</h3><p>所以设置好判定条件就能实现该算法。</p>
+<h3 id="使用贪心算法实现"><a href="#使用贪心算法实现" class="headerlink" title="使用贪心算法实现"></a>使用贪心算法实现</h3><p>贪心算法（又称贪婪算法）是指，在对 问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的是在某种意义上的局部 最优解。 贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。</p>
+<p>假设一个问题比较复杂，暂时找不到全局最优解，那么我们可以考虑把原问题拆成几个小问题（分而治之思想），分别求每个小问题的最优解，再把这些“局部最优解”叠起来，就“当作”整个问题的最优解了。</p>
+<p>“将整数转换为罗马数字”的过程，就是用上面这张表中右边的数字作为“加法因子”去分解一个整数，目的是“分解的整数个数”尽可能少，因此，对于这道问题，类似于用最少的纸币凑成一个整数，贪心算法的规则如下：</p>
+<p>每一步都使用当前较大的罗马数字作为加法因子，最后得到罗马数字表示就是长度最少的。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-to-roman/solution/tan-xin-suan-fa-by-liweiwei1419/">LeetCode题解</a></p>
+<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="自己实现的一个基于条件判定的方法"><a href="#自己实现的一个基于条件判定的方法" class="headerlink" title="自己实现的一个基于条件判定的方法"></a>自己实现的一个基于条件判定的方法</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">intToRoman</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; str:</span><br>        <span class="hljs-comment"># 一位数：I II III VI VII VIII</span><br>        <span class="hljs-comment"># 两位数：X XX XXX LX LXX LXXX</span><br>        <span class="hljs-comment"># 三位数：C CC CCC DC DCC DCCC</span><br>        <span class="hljs-comment"># 四位数：M MM MMM</span><br>        <br>        special_pairs = &#123;<br>            <span class="hljs-number">4</span>: <span class="hljs-string">&quot;IV&quot;</span>,<br>            <span class="hljs-number">9</span>: <span class="hljs-string">&quot;IX&quot;</span>,<br>            <span class="hljs-number">40</span>: <span class="hljs-string">&quot;XL&quot;</span>,<br>            <span class="hljs-number">90</span>: <span class="hljs-string">&quot;XC&quot;</span>,<br>            <span class="hljs-number">400</span>: <span class="hljs-string">&quot;CD&quot;</span>,<br>            <span class="hljs-number">900</span>: <span class="hljs-string">&quot;CM&quot;</span><br>        &#125;<br><br>        normal_pairs = &#123;<br>            <span class="hljs-number">1</span>: <span class="hljs-string">&quot;I&quot;</span>,<br>            <span class="hljs-number">5</span>: <span class="hljs-string">&quot;V&quot;</span>,<br>            <span class="hljs-number">10</span>: <span class="hljs-string">&quot;X&quot;</span>,<br>            <span class="hljs-number">50</span>: <span class="hljs-string">&quot;L&quot;</span>,<br>            <span class="hljs-number">100</span>: <span class="hljs-string">&quot;C&quot;</span>,<br>            <span class="hljs-number">500</span>: <span class="hljs-string">&quot;D&quot;</span>,<br>            <span class="hljs-number">1000</span>: <span class="hljs-string">&quot;M&quot;</span><br>        &#125;<br><br>        result = []<br>        <span class="hljs-comment"># 换个方向</span><br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> num != <span class="hljs-number">0</span>:<br>            remainder = (num % <span class="hljs-number">10</span>) * (<span class="hljs-number">10</span> ** count)<br>            count += <span class="hljs-number">1</span><br>            num //= <span class="hljs-number">10</span><br>            <span class="hljs-comment"># 进行替换</span><br>            <span class="hljs-keyword">if</span> remainder <span class="hljs-keyword">in</span> special_pairs:<br>                tmp_str = special_pairs[remainder]<br>                result.append(tmp_str)<br>            <span class="hljs-keyword">elif</span> remainder <span class="hljs-keyword">in</span> normal_pairs:<br>                tmp_str = normal_pairs[remainder]<br>                result.append(tmp_str)<br>            <span class="hljs-keyword">elif</span> count == <span class="hljs-number">1</span>:  <span class="hljs-comment"># 一位数</span><br>                <span class="hljs-keyword">if</span> remainder &lt;= <span class="hljs-number">3</span>:  <span class="hljs-comment"># 1 2 3</span><br>                    tmp_str = remainder * normal_pairs[<span class="hljs-number">1</span>]<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 6 7 8</span><br>                    tmp_str = normal_pairs[<span class="hljs-number">5</span>] + (remainder-<span class="hljs-number">5</span>) * normal_pairs[<span class="hljs-number">1</span>]<br>                result.append(tmp_str)<br>            <span class="hljs-keyword">elif</span> count == <span class="hljs-number">2</span>:  <span class="hljs-comment"># 两位数</span><br>                remainder //= <span class="hljs-number">10</span><br>                <span class="hljs-keyword">if</span> remainder &lt;= <span class="hljs-number">3</span>:  <span class="hljs-comment"># 10 20 30</span><br>                    tmp_str = remainder * normal_pairs[<span class="hljs-number">10</span>]<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 60 70 80</span><br>                    tmp_str = normal_pairs[<span class="hljs-number">50</span>] + (remainder-<span class="hljs-number">5</span>) * normal_pairs[<span class="hljs-number">10</span>]<br>                result.append(tmp_str)<br>            <span class="hljs-keyword">elif</span> count == <span class="hljs-number">3</span>:  <span class="hljs-comment"># 三位数</span><br>                remainder //= <span class="hljs-number">100</span><br>                <span class="hljs-keyword">if</span> remainder &lt;= <span class="hljs-number">3</span>:  <span class="hljs-comment"># 100 200 300</span><br>                    tmp_str = remainder * normal_pairs[<span class="hljs-number">100</span>]<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 600 700 800</span><br>                    tmp_str = normal_pairs[<span class="hljs-number">500</span>] + (remainder-<span class="hljs-number">5</span>) * normal_pairs[<span class="hljs-number">100</span>]<br>                result.append(tmp_str)<br>            <span class="hljs-keyword">elif</span> count == <span class="hljs-number">4</span>:  <span class="hljs-comment"># 四位数</span><br>                remainder //= <span class="hljs-number">1000</span><br>                tmp_str = remainder * normal_pairs[<span class="hljs-number">1000</span>]<br>                result.append(tmp_str)<br>            <span class="hljs-keyword">else</span>:<br>                print(<span class="hljs-string">&quot;有问题&quot;</span>)<br><br>        tmp_str = <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-comment"># 传入是小位数字在前大位数字在后，所以要逆向构造。</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(result)-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>            tmp_str += result[i]<br><br>        <span class="hljs-keyword">return</span> tmp_str<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度 $O(n)$ 遍历了一遍输入数字 遍历了一遍转化结果</p>
+<h3 id="贪心算法版本"><a href="#贪心算法版本" class="headerlink" title="贪心算法版本"></a>贪心算法版本</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">intToRoman</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; str:</span><br>        <span class="hljs-comment"># 把阿拉伯数字与罗马数字可能出现的所有情况和对应关系，放在两个数组中</span><br>        <span class="hljs-comment"># 并且按照阿拉伯数字的大小降序排列，这是贪心选择思想</span><br>        nums = [<span class="hljs-number">1000</span>, <span class="hljs-number">900</span>, <span class="hljs-number">500</span>, <span class="hljs-number">400</span>, <span class="hljs-number">100</span>, <span class="hljs-number">90</span>, <span class="hljs-number">50</span>, <span class="hljs-number">40</span>, <span class="hljs-number">10</span>, <span class="hljs-number">9</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>]<br>        romans = [<span class="hljs-string">&quot;M&quot;</span>, <span class="hljs-string">&quot;CM&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>, <span class="hljs-string">&quot;CD&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;XC&quot;</span>, <span class="hljs-string">&quot;L&quot;</span>, <span class="hljs-string">&quot;XL&quot;</span>, <span class="hljs-string">&quot;X&quot;</span>, <span class="hljs-string">&quot;IX&quot;</span>, <span class="hljs-string">&quot;V&quot;</span>, <span class="hljs-string">&quot;IV&quot;</span>, <span class="hljs-string">&quot;I&quot;</span>]<br><br>        index = <span class="hljs-number">0</span><br>        res = <span class="hljs-string">&#x27;&#x27;</span><br><br>        <span class="hljs-keyword">while</span> index &lt; <span class="hljs-number">13</span>:<br>            <span class="hljs-keyword">while</span> num &gt;= nums[index]:  <span class="hljs-comment"># 使用&gt;=是指尽量找靠近这个数字的最大值来表示</span><br>                res += romans[index]  <span class="hljs-comment"># 找到就存起来</span><br>                num -= nums[index]  <span class="hljs-comment"># 之前是//更新，现在改成减去已经表示了的部分（局部最优解），剩下的部分继续处理，在这里就体现了贪心的思想。</span><br>            index += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>时间复杂度：$O(1)$，虽然看起来是两层循环，但是外层循环的次数最多 12，内层循环的此时其实也是有限次的，综合一下，时间复杂度是 $O(1)$。</li>
+<li>空间复杂度：$O(1)$，这里使用了两个辅助数字，空间都为 13，还有常数个变量，故空间复杂度是 $O(1)$。</li>
+</ul>
+<h2 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h2><p>1、Python中的从后往前输出</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a<br>[<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(a)-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):  <span class="hljs-comment"># 可迭代对象长度减一（range开始处），可迭代对象长度加一</span><br>	print(a[i])<br>	<br><span class="hljs-number">1</span><br><span class="hljs-number">2</span><br><span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/09/LeetCode-13-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 13. 罗马数字转整数（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/08/LeetCode-60-%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 60. 第k个排列（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/09/LeetCode-12-%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/09/LeetCode-12-%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

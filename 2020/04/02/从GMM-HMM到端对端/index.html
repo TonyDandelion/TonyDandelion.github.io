@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>从GMM-HMM到端对端 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="从GMM-HMM到端对端">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-02 12:04" pubdate>
+        2020年4月2日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">从GMM-HMM到端对端</h1>
+            
+            <div class="markdown-body">
+              <p><img src="https://i.loli.net/2020/04/02/1OIHVN4i7RWDvJ2.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_14-20-27.png"></p>
+<p>语言识别的历史长河：从GMM-HMM到端对端</p>
+<a id="more"></a>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="ASR定义"><a href="#ASR定义" class="headerlink" title="ASR定义"></a>ASR定义</h2><blockquote>
+<p>从语音信号到文本记录 From Speech Signal to Transcript</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/04/02/eDBhcPRtZqSEQlM.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_12-05-56.png"></p>
+<p><strong>ASR（Automatic Speech Recognition）定义</strong>：给定一个<font color="blue"><strong>语音信号</strong></font>，<strong>找到最有可能</strong>与之对应的<font color="green"><strong>词序列</strong></font>的过程就是自动语音识别。</p>
+<script type="math/tex; mode=display">
+\hat{W} = argmax\ p(W|X)</script><p>$X$ 是输入的<font color="blue"><strong>语音信号</strong></font>，$W$ 就是我们最终要求解的<font color="green"><strong>词序列</strong></font>，找最有可能得过程就是计算<strong>条件概率 $p(W|X)$</strong>的过程。对该条件概率进行贝叶斯拆解，可以得到 ：</p>
+<script type="math/tex; mode=display">
+\hat{W} = argmax\ \frac{p(W)p(X|W)}{p(X)}</script><p>对于任何一个 $p(W)$ （语言模型，描述的是词序列本身发生的概率），$p(X)$（语音信号本身发生的概率）和 $p(W)$ 没有关系，是一个独立概率，所以上式可以简化为：</p>
+<script type="math/tex; mode=display">
+\hat{W} = argmax\ p(W)p(X|W)</script><p>连在一起就是：</p>
+<script type="math/tex; mode=display">
+\hat{W} = argmax\ p(W|X) = argmax \frac{p(W)p(X|W)}{p(X)} = argmax\  p(W)p(X|W)</script><p>由此可知，一个语音识别问题的解决，可以分为三个部分：</p>
+<p>Decoder： $argmax()$ 一个搜索、求解、找到使得<strong>条件概率 $p(W|X)$</strong>最大的 $W$ 的方法。<br>Acoustic Model：$p(X|W)$，<strong>声学模型，描述词序列和语音信号之间的关系。</strong><br>Language Model：$p(W)$，语言模型，描述的是词序列本身发生的概率。</p>
+<h2 id="框架-FrameWork"><a href="#框架-FrameWork" class="headerlink" title="框架  FrameWork"></a>框架  FrameWork</h2><p>语言模型和声学模型，是基于一些语音语料库得到的。<strong>发音词典（Dictionary）</strong>则是<strong>语言模型</strong>和<strong>声学模型</strong>之间的桥梁，当声学模型和语言模型采取不同的建模单元的时候。比如<strong>语言模型</strong>以词作为基本的建模单元，而<strong>声学模型</strong>以声母、韵母作为基本的建模单元，这时候就可以利用<strong>发音词典</strong>来完成一个映射。</p>
+<p><img src="https://i.loli.net/2020/04/02/1OIHVN4i7RWDvJ2.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_14-20-27.png"></p>
+<h1 id="分类说明"><a href="#分类说明" class="headerlink" title="分类说明"></a>分类说明</h1><h2 id="语言模型-Language-Model"><a href="#语言模型-Language-Model" class="headerlink" title="语言模型 Language Model"></a>语言模型 Language Model</h2><blockquote>
+<p>基于马尔可夫假设的N元文法语言模型<br>N-gram language model based on the Markov hypothesis</p>
+</blockquote>
+<p>马尔科夫假设：<strong>随意一个词出现的概率只与它前面出现的有限的一个或者几个词有关。</strong>换而言之，当计算有很长词历史的句子的发生概率时，只考虑当<strong>前词之前的N个词</strong>作为词历史（词历史也就是条件）来代替很长的词历史。</p>
+<p>如果一个词的出现与它周围的词是独立的，那么我们就称之为<strong>unigram</strong>，也就是一元语言模型：</p>
+<script type="math/tex; mode=display">
+p(S) = p(w_1, w_2, w_3, ..., w_{m-1}, w_{m})</script><script type="math/tex; mode=display">
+p(S) \approx p(w_1)p(w_2)p(w_3)...p(w_n)</script><p>如果一个词的出现仅依赖于它前面出现的一个词，那么我们就称之为<strong>bigram</strong>，也就是二元语言模型：</p>
+<script type="math/tex; mode=display">
+p(S) = p(w_1, w_2, w_3, ..., w_{m-1}, w_{m})</script><script type="math/tex; mode=display">
+p(S) \approx p(w_1)p(w_2|w_1)p(w_3|w_2)...p(w_n|w_{n-1})</script><p>假设一个词的出现仅依赖于它前面出现的两个词，那么我们就称之为<strong>trigram</strong>，也就是三元语言模型：</p>
+<script type="math/tex; mode=display">
+p(S) = p(w_1, w_2, w_3, ..., w_{m-1}, w_{m})</script><script type="math/tex; mode=display">
+p(S) \approx p(w_1)p(w_2|w_1)p(w_3|w_2, w_1)...p(w_n|w_{n-1}, w_{n-2})</script><p><strong>N元模型就是假设当前词的出现概率只与它前面的N-1个词有关。而这些概率参数都是可以通过大规模语料库来计算，比如三元概率有：</strong></p>
+<script type="math/tex; mode=display">
+p(w_i|w_{i-1}, w_{i-2}) \approx \frac{count(w_{i-2}w_{i-1}w_{i})}{count(w_{i-2}w_{i-1})}</script><p><strong>在实践中用的最多的就是bigram和trigram了，高于四元的用的非常少，由于训练它须要更庞大的语料，并且数据稀疏严重，时间复杂度高，精度却提高的不多。</strong></p>
+<p><strong>优点</strong>：1、查表操作即可获得N元文法的得分，计算速度快，开销小。如果用神经网络，需要矩阵乘法才行。2、N-gram的效果随着在语料库规模的增大而增大。</p>
+<p><strong>实际应用</strong>：当我们遇到一个新的语音识别问题的时候，新收集尽可能多的语料组织语料库（上T级别）来训练一个语言模型，可以有效的提升效果。</p>
+<p><strong>建模单元</strong>：以汉语为例，可以用字做建模单元、也可以用词做建模单元，不同长度的词会影响最终语言模型的效果，一般来说，<strong>基于词的语言模型由于融合了一些结构信息，所以效果会更好。</strong>在收集得到的语料库上，按照建模单元（字、词）进行分词。</p>
+<p><strong>N-gram公式推导</strong></p>
+<script type="math/tex; mode=display">
+p(S) = p(w_1, w_2, w_3, ..., w_{m-1}, w_{m})</script><p>等价于，这里的约等于 $\approx$ 就体现了马尔可夫假设。</p>
+<script type="math/tex; mode=display">
+p(S) = p(w_1)p(w_2|w_1)p(w_3|w_1, w_2)p(p_4| w_1, w_2, w_3)...p(w_m|w_1, w_2, w_3, ..., w_{m-1})</script><script type="math/tex; mode=display">
+p(S) = \prod_{i=1}^m\ p(w_i|w_1, w_2, w_3, ..., w_{i-1})</script><script type="math/tex; mode=display">
+p(S) \approx \prod_{i=1}^m\ p(w_i|w_{i-(n-1)}, w_{i-(n-2)}, ..., w_{i-1})</script><h2 id="解码器-Decoder"><a href="#解码器-Decoder" class="headerlink" title="解码器 Decoder"></a>解码器 Decoder</h2><p>解码器做的一个重要的事情就是搜索，就是把语言模型和声学模型整合起来去搜索得到一条最优的路径。</p>
+<p>当我们基于语言模型和声学模型构建好发音字典之后，我们可以通过发音字典去构建一个搜索解码网络。基于这个网络中搜索得到的路径，我们可以得到一个N元文法的得分。同时我们也可以把解码过程中得到的声学模型的得分和N元文法的得分融合起来。</p>
+<p>这样就需要两个部分：搜索算法、解码网络</p>
+<ul>
+<li>搜索算法</li>
+</ul>
+<p>Viterbi Algorithm（一个DP动态规划的算法）</p>
+<ul>
+<li>解码网络</li>
+</ul>
+<p>分为<strong>动态解码网络</strong>和<strong>静态解码网络</strong>两种</p>
+<p>基于发音词典获得解码网络，然后动态的融合语言模型，这种解，网络属于<strong>动态解码网络</strong>，特点是语言模型信息是查找之后放进去的，而非一开始就在搜索网络里面。</p>
+<p>而静态解码网络是把语言模型的信息在一开始就融合进了搜索解码网络中。常用WFST/Weighted Finite State Transducers，一种形式化的表示语言，能够将发音词典和语言模型以同种方式表示并融合到同一个网络中。</p>
+<h2 id="声学模型-Acoustic-Model"><a href="#声学模型-Acoustic-Model" class="headerlink" title="声学模型 Acoustic Model"></a>声学模型 Acoustic Model</h2><blockquote>
+<p>声学模型中的多样性问题</p>
+</blockquote>
+<p>1、上下文多样性：同一个字或者字母，在不同的上下文中，发音会有所不同。下图中的字母T，在Tea、Tree等不同上下文中，发音结果的频谱表现差别很大。</p>
+<p><img src="https://i.loli.net/2020/04/02/ikcR6wKDynjWopY.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_15-56-45.png"></p>
+<p>2、说话对象多样性：同一个词，不同的说话人，发音会有所不同。下图中的单词 head 和 Zero，不同的年龄和情绪状态下，发音结果的频谱表现差别很大。</p>
+<p><img src="https://i.loli.net/2020/04/02/RyBQEZ91zSWd6hc.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_15-56-56.png"></p>
+<blockquote>
+<p> GMM-HMM</p>
+</blockquote>
+<p>利用<strong>马尔科夫跳转概率</strong>对输入的语音信号内部状态进行建模。</p>
+<p>利用<strong>高斯混合模型</strong>来拟合特征分布情况，这里可以认为是对马尔科夫跳转概率进行建模。</p>
+<p>GMM-HMM的意义：提出了一个完整框架，将语音识别问题分为了多个层次。</p>
+<p><img src="https://i.loli.net/2020/04/02/A8tQKqr5fs3wUhD.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_16-00-02.png"></p>
+<blockquote>
+<p>声学建模单元的选择问题 Choice of Acoustic Modeling Unit</p>
+</blockquote>
+<p>考虑因素：</p>
+<ul>
+<li>准确性 Accurate</li>
+<li>可训练性 Trainable</li>
+<li>可泛化性（可推广性） Generalizable</li>
+</ul>
+<p>尺度越小，每个建模单元上训练数据就越多，复用性就越高，可训练性、可泛化性强，但是上下文多样性会减少，准确性会变差，一般是在多个方面做一个权衡。</p>
+<p>声母 -&gt; 音节 -&gt; 字 -&gt; 词 -&gt; 短语、句子</p>
+<blockquote>
+<p>上下文依赖的建模单元选择 Context dependency </p>
+</blockquote>
+<p>1、选择声母作为建模单元，假设我们有60个声母可以作为基本的建模单元，考虑上下文（前面一个声母、中间一个声母，后面一个声母），就有$60^3$个不同的建模单元，这样每一个建模单元能够得到的样本就很少。</p>
+<p>2、对这 $60^3$ 个建模单元进行聚类，因为不同的上下文，对同一个中间声母的影响是类似的，就可以把它们划归为同一类。根据数据库的实际情况，你可以把$60^3$个建模单元聚类成1千个或者1万个，这样的方法就很好地平衡了<strong>建模的尺度</strong>和<strong>上下文之间</strong>的关系。</p>
+<h1 id="语音识别性能"><a href="#语音识别性能" class="headerlink" title="语音识别性能"></a>语音识别性能</h1><p>脱离语音识别场景谈性能是一种耍流氓的行为</p>
+<p><img src="https://i.loli.net/2020/04/02/4DCOzqEvLlIRH6T.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_16-30-06.png"></p>
+<h1 id="初见DNN"><a href="#初见DNN" class="headerlink" title="初见DNN"></a>初见DNN</h1><h2 id="简单替换"><a href="#简单替换" class="headerlink" title="简单替换"></a>简单替换</h2><p><img src="https://i.loli.net/2020/04/02/X8ZarCRc5wymnqS.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_16-31-33.png"></p>
+<p>直接将GMM那一部分替换为神经网络。GMM输出的是HMM的每一个状态的<strong>likelihood（可能性）</strong>，而DNN接收声学特征作为输入，输出的HMM的每一个状态的<strong>posterior probability（后验概率）</strong>。</p>
+<p>DNN output（？？？）</p>
+<script type="math/tex; mode=display">
+y_{s_i}(t) = p(q_t = s_i|x_i)</script><script type="math/tex; mode=display">
+p(x_t|q_t=s_i) = \frac{p(q_t=s_i|x_t)p(x_t)}{p(s_i)} \cong \frac{y_{s_i}(t)}{p(s_i)}</script><blockquote>
+<p>经典文献</p>
+</blockquote>
+<p>[1] G Dahl, D Yu, L Deng, A Acero . Context Dependent Pre trained Deep Neural Networks for Large Vocabulary Speech Recognition. Audio, Speech, and Language Processing, IEEE Transactions on 20(1), 30 42<br>[2] G. Hinton, L. Deng, D. Yu, GE. Dahl, A. Mohamed, and et.al, Deep neural networks for acoustic modeling in speech recognition: The shared views of four research groups. IEEE Signal processing magazine 29 (6), 82 97.</p>
+<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><blockquote>
+<p>输入特征</p>
+</blockquote>
+<p>相关实验发现：输入特征使用Fbank的效果要好于使用MFCCs作为输入特征。原因是MFCCs增加了特征内部之间的独立性，而GMM方法有独立性要求，DNN没有这方面的要求，所以改用Fbank会好一点。</p>
+<blockquote>
+<p>网络结构</p>
+</blockquote>
+<p>前馈 -&gt; 卷积 -&gt; 循环神经网络<br>Feedforward -&gt; Convolutions -&gt; Recurrent<br><strong>现在很多大公司，在线云端的ASR系统依旧采用的是LSTM+HMM的模式。</strong></p>
+<blockquote>
+<p>经典论文</p>
+</blockquote>
+<p>[3] A. Graves, A. Mohamed, G. Hinton, Speech recognition with deep recurrent neural networks. ICASSP 2013.<br>[4]O Abdel Hamid, A Mohamed, H Jiang, L Deng, G Penn, D Yu. Convolutional neural networks for speech recognition. IEEE/ACM Transactions on Audio, Speech and Language Processing, 22(10),1533 1545.</p>
+<h1 id="端到端系统"><a href="#端到端系统" class="headerlink" title="端到端系统"></a>端到端系统</h1><blockquote>
+<p> 非端到端的混合系统：LSTM-HMM</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/04/02/XqaI8NbiOuL7DeA.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_17-27-20.png"></p>
+<blockquote>
+<p>端到端系统：CTC(Connectionist Temporal Classification)</p>
+</blockquote>
+<p>CTC算法可以对给定的X求出输出任意Y的概率。关键在于CTC如何考虑输入X和输出Y的alignment，因为X和Y的长度通常不是相同的。CTC用于ASRT还引入了blank label，解决连续词问题。</p>
+<p><img src="https://i.loli.net/2020/04/02/MjtLfhlNeOd1sVw.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_17-35-42.png"></p>
+<p>关于CTC的一切，参考博客：<br><a target="_blank" rel="noopener" href="https://xiaodu.io/ctc-explained/">https://xiaodu.io/ctc-explained/</a><br><a target="_blank" rel="noopener" href="https://distill.pub/2017/ctc/">https://distill.pub/2017/ctc/</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/88645033">https://zhuanlan.zhihu.com/p/88645033</a></p>
+<blockquote>
+<p>CTC vs. HMM</p>
+</blockquote>
+<p>本质上一样，不过<strong>拓扑结构不同</strong>。CTC没有对输出符号之间的关系进行建模，输出符号可能会存在延迟。</p>
+<p><img src="https://i.loli.net/2020/04/02/dLjTI7kmJA5KsoH.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_17-58-46.png"></p>
+<blockquote>
+<p>CTC算法实例：DeepSpeech System</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/04/02/xjN1cQA5hKt4VF3.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_18-06-03.png"></p>
+<blockquote>
+<p>Attention ASR</p>
+</blockquote>
+<p>sequence2sequence的Attention ASR不在需要语言模型。文本、语音一一对应的数据很难搜集，所以，<strong>数据</strong>是端到端sequence2sequence的Attention ASR效果的关键。</p>
+<blockquote>
+<p>对比</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/04/02/cYClxtwIsAJFibd.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_19-35-10.png"></p>
+<p>CTC到底是不是端到端的，取决于建模单元是音素（phoneme）还是音节或者字（syllable/character）。CTC或者Attention在采取音节或者字为建模单元的情况下，添加<strong>N元文法</strong>语言模型，都是可以提高效果的。</p>
+<p>基于Attention的ASR第一篇文献：<br>Chorowski J , Bahdanau D , Cho K , <strong>Bengio Yoshua</strong>. End-to-end Continuous Speech Recognition using Attention-based Recurrent NN: First Results[J]. Eprint Arxiv, 2014.</p>
+<blockquote>
+<p>LTS System(Listen-Attend-Spell)</p>
+</blockquote>
+<p><strong>编码器 Encoder</strong><br>Listen，将输1入特征序列映射为嵌入特征 embedding feature。<br><strong>解码器 Decoder</strong><br>Spell，将embadding feature和attention information映射为输出符号。</p>
+<p><img src="https://i.loli.net/2020/04/02/sZVrP1tWl4ECKdO.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_20-06-24.png"></p>
+<p><img src="https://i.loli.net/2020/04/02/RYzqsuQrx6D12yL.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_20-06-34.png"></p>
+<blockquote>
+<p>Attention VS. CTC</p>
+</blockquote>
+<p><strong>Attention优点：</strong><br>1、无条件独立性假设<br>2、同时学习了声学特征和语言信息<br>3、结构更加简单<br><strong>Attention缺点：</strong><br>1、训练困难，需要更多技巧。<br>2、Attention需要把输入的embadding feature映射成<strong>固定维度的向量</strong>，不利于流式解码，流式解码的输入是变长的，输入的语音长度无法控制。</p>
+<blockquote>
+<p>Tricks of LTS</p>
+</blockquote>
+<p>1、Schedule sampling，在一个训练的batch中，有时候用Ground Truth做监督，有时候用预测值做监督。<br>2、Lable Smoothing，直接给输出符号加预定义噪声。（2016）<br>3、Multi-Task Learning，多任务学习。在Attention Decoder之外，添加CTC Decoder，Loss Function中添加CTC Decoder的结果，这样不但收敛更快，而且解码效果更好。（2017）</p>
+<p><img src="https://i.loli.net/2020/04/02/U4O9C8lGPpjKg3S.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_20-17-25.png"></p>
+<p>4、Multi-Headed Attention（2018）</p>
+<p><img src="https://i.loli.net/2020/04/02/NyX7Dkv1Zpo5xmR.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-02_20-19-03.png"></p>
+<p>5、SpecAugment，通过增强数据加快收敛速度。（2019）</p>
+<blockquote>
+<p>Transducer</p>
+</blockquote>
+<p>Online neural transducer解决Attention方法无法流式解码的问题。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AF%AD%E9%9F%B3%E7%AE%97%E6%B3%95/">语音算法</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/02/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">从存储器到页面置换</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%90%84%E9%83%A8%E5%88%86%E5%85%B3%E7%B3%BB/">
+                        <span class="hidden-mobile">操作系统基础理论思维导图</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/02/%E4%BB%8EGMM-HMM%E5%88%B0%E7%AB%AF%E5%AF%B9%E7%AB%AF/';
+        this.page.identifier = '/2020/04/02/%E4%BB%8EGMM-HMM%E5%88%B0%E7%AB%AF%E5%AF%B9%E7%AB%AF/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

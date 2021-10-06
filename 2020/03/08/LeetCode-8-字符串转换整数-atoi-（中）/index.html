@@ -1,0 +1,573 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="化身孤岛的鲸">
+  <meta name="keywords" content="">
+  <title>LeetCode 8. 字符串转换整数 (atoi)（中）&amp; 剑指offer 面试题67. 把字符串转换成整数（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 8. 字符串转换整数 (atoi)（中）& 剑指offer 面试题67. 把字符串转换成整数（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-08 00:39" pubdate>
+        2020年3月8日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 8. 字符串转换整数 (atoi)（中）&amp; 剑指offer 面试题67. 把字符串转换成整数（中）</h1>
+            
+            <div class="markdown-body">
+              <p><strong>本题最难点在于如何用Python模拟解决 <code>Int32</code> 溢出问题。</strong></p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>请你来实现一个 <code>atoi</code> 函数，使其能将字符串转换成整数。<br>首先，该函数会<strong>根据需要丢弃无用的开头空格字符</strong>，直到寻找到第一个非空格的字符为止。<br>当我们寻找到的<strong>第一个非空字符为正或者负号时</strong>，则将<strong>该符号与之后面尽可能多的连续数字组合起来</strong>，作为该整数的正负号；<strong>假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数</strong>。<br><strong>该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，</strong>它们对于函数不应该造成影响。<br>注意：<strong>假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换。</strong><br><strong>在任何情况下，若函数不能进行有效的转换时，请返回 0。</strong></p>
+<p>说明：<br>假设<strong>我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [$-2^{31}$,  $2^{31}-1$]。</strong>如果数值超过这个范围，请返回  INT_MAX ($2^{31}-1$) 或 INT_MIN ($-2^{31}$)。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: &quot;42&quot;</span><br><span class="hljs-section">输出: 42</span><br></code></pre></div></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: &quot;   -42&quot;</span><br><span class="hljs-section">输出: -42</span><br></code></pre></div></td></tr></table></figure>
+<p>解释: 第一个非空白字符为 ‘-‘, 它是一个负号。<br>     我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。</p>
+<p>示例 3:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: &quot;4193 with words&quot;</span><br><span class="hljs-section">输出: 4193</span><br></code></pre></div></td></tr></table></figure>
+<p>解释: 转换截止于数字 ‘3’ ，因为它的下一个字符不为数字。</p>
+<p><strong>示例 4:</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: &quot;words and 987&quot;</span><br><span class="hljs-section">输出: 0</span><br></code></pre></div></td></tr></table></figure>
+<p>解释: 第一个非空字符是 ‘w’, 但它不是数字或正、负号。<br>     因此无法执行有效的转换。</p>
+<p><strong>示例 5:</strong></p>
+<figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入: &quot;-<span class="hljs-number">91283472332</span>&quot;<br>输出: -<span class="hljs-number">2147483648</span><br></code></pre></div></td></tr></table></figure>
+<p>解释: 数字 “-91283472332” 超过 32 位有符号整数范围。 因此返回 INT_MIN ($−2^{31}$) 。</p>
+<blockquote>
+<p><strong><em>测试用例</em></strong></p>
+</blockquote>
+<p>功能测试（输入的字符串表示正数、负数和0）。<br>边界值测试（最大的正整数；最小的负整数）。<br>特殊输入测试（输入的字符串为 <code>nullptr</code> 指针；输入的字符串为空字符串；输入的字符串中有非数字字符等）。</p>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>字符串处理、正则项匹配、条件判定逻辑</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><h2 id="使用正则表达式解决该问题"><a href="#使用正则表达式解决该问题" class="headerlink" title="使用正则表达式解决该问题"></a>使用正则表达式解决该问题</h2><p><code>r&#39;^[\+\-]?\d+&#39;</code><br>解释：<br>^：匹配字符串开头<br>[+-]：代表一个+字符或-字符<br>?：前面一个字符可有可无<br>\d：一个数字<br>+：前面一个字符的一个或多个<br>\D：一个非数字字符<br>*：前面一个字符的0个或多个</p>
+<p>为什么可以使用正则表达式？如果整数过大溢出怎么办？用该方法来防止结果越界<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(result, <span class="hljs-number">2</span>**<span class="hljs-number">31</span> - <span class="hljs-number">1</span>), -<span class="hljs-number">2</span>**<span class="hljs-number">31</span>) <br></code></pre></div></td></tr></table></figure><br>题目中描述： 假设我们的环境只能存储 32 位大小的有符号整数</p>
+<p>首先，这个假设对于 Python 不成立，Python 不存在 32 位的 int 类型。其次，即使搜索到的字符串转32位整数可能导致溢出，我们也可以直接通过字符串判断是否存在溢出的情况（比如 try 函数 或 判断字符串长度 + 字符串比较）。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/string-to-integer-atoi/solution/python-1xing-zheng-ze-biao-da-shi-by-knifezhu/">参考连接</a></p>
+<h2 id="通过字符串遍历来解决该问题"><a href="#通过字符串遍历来解决该问题" class="headerlink" title="通过字符串遍历来解决该问题"></a>通过字符串遍历来解决该问题</h2><p>这道题也可以通过直接遍历字符串来处理，做好特殊情况处理即可。</p>
+<p><strong>本题难点</strong><br>如何检测 非空格 第一个字符<br>检测到之后，如何避免重复检测</p>
+<p><strong>解决方案</strong><br>设置变量：<code>FirstCharCheck = True</code></p>
+<ul>
+<li><code>if FirstCharCheck</code><ul>
+<li>遇到 空格‘ ’， <code>continue</code>（直接跳过，不会改变flag的值）</li>
+<li>遇到 <code>+ or -</code>，更新 <code>sign</code> 符号，并检测 <code>i+1</code> 位置是否为数字，决定是否提前 <code>return</code>。<code>+</code> 的ASCII码是43 ，<code>-</code> 的ASCII码是45 所以 <code>sign = 44-ord(&#39;+/-&#39;)</code>。</li>
+<li>遇到 ‘数字’，<code>ans = ans*10 + ord(str[i]) - ord(&#39;0&#39;)</code></li>
+<li>令 <code>FirstCharCheck = False</code> ，循环到下次时 <code>FirstCharCheck = False</code>，避免了重复检测。</li>
+</ul>
+</li>
+<li><code>else</code><ul>
+<li>每次遇到digital，添加到ans上 <code>ans = ans*10 + ord(str[i]) - ord(&#39;0&#39;)</code>。</li>
+<li><strong>遇到非digital，跳出循环</strong>。</li>
+</ul>
+</li>
+<li>最终返回时，对于溢出的数字要做越界判定：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(ans, (<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>)-<span class="hljs-number">1</span>), -(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>))<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>实际上，正常来说不应该在最后返回时才做溢出判断，因为数字的大小压根儿就不能超过 [-2147483648, 2147483647] 这个范围。所以，应该在计算过程中做溢出判断。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">tmp = (<span class="hljs-built_in">ord</span>(item) - ord_0) * (<span class="hljs-number">10</span>**count)<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> flag <span class="hljs-keyword">and</span> res &lt; <span class="hljs-number">147483648</span> <span class="hljs-keyword">and</span> tmp &lt;= <span class="hljs-number">2000000000</span>) <span class="hljs-keyword">or</span> (flag <span class="hljs-keyword">and</span> res &lt; <span class="hljs-number">147483647</span> <span class="hljs-keyword">and</span> tmp &lt;= <span class="hljs-number">2000000000</span>):<br>    <span class="hljs-keyword">pass</span>  <span class="hljs-comment"># 满足条件，不做处理。</span><br><span class="hljs-keyword">else</span>:<br>    is_valid = <span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/string-to-integer-atoi/solution/python3-shi-jian-on-kong-jian-o1-zhi-xing-yong-shi/">参考连接</a></p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><h2 id="一个使用正则表达式的版本"><a href="#一个使用正则表达式的版本" class="headerlink" title="一个使用正则表达式的版本"></a>一个使用正则表达式的版本</h2><p>简洁，但是完成难度大，可读性低，依赖正则模块。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myAtoi</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(<br>            <span class="hljs-built_in">min</span>(<br>                <span class="hljs-built_in">int</span>(*re.findall(  <span class="hljs-comment"># 由于返回的是个列表需要加*，解包并且转换成整数。</span><br>                    <span class="hljs-string">r&#x27;^[\+\-]?\d+&#x27;</span>, s.lstrip())  <br>                    <span class="hljs-comment"># lstrip()去掉字符串开头的空格</span><br>                    <span class="hljs-comment"># ^：匹配字符串开头</span><br>                    <span class="hljs-comment"># [\+\-]：代表一个+字符或-字符</span><br>                    <span class="hljs-comment"># ?：前面一个字符可有可无</span><br>                    <span class="hljs-comment"># \d：一个数字</span><br>                    <span class="hljs-comment"># +：前面一个字符的一个或多个</span><br>                    <span class="hljs-comment"># 总结起来就是，在s.lstrip中寻找以+或者-开头或者不以开头的多个数字</span><br>                ), <br>                <span class="hljs-number">2</span>**<span class="hljs-number">31</span> - <span class="hljs-number">1</span><br>            ),   <span class="hljs-comment"># 在int函数结果和 2**31-1(理论最大值之间选择较小的那一个)</span><br>            -<span class="hljs-number">2</span>**<span class="hljs-number">31</span>  <span class="hljs-comment"># 在 min函数结果和 -2**31(理论最小值之间选择较大的那个一个)</span><br>        )<br><br><span class="hljs-comment"># 可读性更高的版本</span><br><span class="hljs-keyword">import</span> re<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myAtoi</span>(<span class="hljs-params">self, <span class="hljs-built_in">str</span>: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        INT_MAX = <span class="hljs-number">2147483647</span>    <br>        INT_MIN = -<span class="hljs-number">2147483648</span><br>        <span class="hljs-built_in">str</span> = <span class="hljs-built_in">str</span>.lstrip()      <span class="hljs-comment">#清除左边多余的空格</span><br>        num_re = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;^[\+\-]?\d+&#x27;</span>)   <span class="hljs-comment">#设置正则规则设置正则规则 匹配一个 以+或者-开头的多个数字组成的字符串 / 匹配一个仅由多个数字组成的字符串</span><br>        num = num_re.findall(<span class="hljs-built_in">str</span>)   <span class="hljs-comment">#查找匹配的内容</span><br>        num = <span class="hljs-built_in">int</span>(*num) <span class="hljs-comment"># re.findall返回的是一个字符串列表，int()数据类型转换不支持列表，用*对列表解包得到字符串。 需要注意的是，* 和 ** 只在“传参”时才有用。直接调用num = *num会报错 SyntaxError: can&#x27;t use starred expression here</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(num,INT_MAX),INT_MIN)    <span class="hljs-comment">#返回值</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="遍历字符串-进行判断的方法"><a href="#遍历字符串-进行判断的方法" class="headerlink" title="遍历字符串 进行判断的方法"></a>遍历字符串 进行判断的方法</h2><ul>
+<li>在最终返回时才做溢出判断（仅适用于Python所以不推荐）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment"># 可读性更高的版本</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">strToInt</span>(<span class="hljs-params">self, _str: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        sign = <span class="hljs-number">1</span>  <span class="hljs-comment"># 整数符号　+1 or -1</span><br>        ans = <span class="hljs-number">0</span>  <span class="hljs-comment"># 累计结果</span><br>        FirstCharCheck = <span class="hljs-literal">True</span>   <span class="hljs-comment"># bool 用于检测第一个非空格字符，默认为True,当检测到第一个字符后设为False</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(_str)):<br>            <span class="hljs-comment"># FirstCharCheck为True时 进行第一个字符检测</span><br>            <span class="hljs-keyword">if</span> FirstCharCheck:<br>                <span class="hljs-keyword">if</span> _str[i] == <span class="hljs-string">&#x27; &#x27;</span>:  <span class="hljs-comment"># 遇到空格跳过，直到遇到第一个非空格字符 不会修改FirstCharCheck</span><br>                    <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">elif</span> _str[i] == <span class="hljs-string">&#x27;-&#x27;</span> <span class="hljs-keyword">or</span> _str[i] == <span class="hljs-string">&#x27;+&#x27;</span>:  <span class="hljs-comment"># 如果第一个字符为+/-号, 更新sign,</span><br>                    sign = <span class="hljs-number">44</span>-<span class="hljs-built_in">ord</span>(_str[i])  <span class="hljs-comment"># Return the Unicode code point for a one-character string.  ‘+’的ASCII码是43 ，‘-’的ASCII码是45 所以 sign = 44-ord(‘+/-’)</span><br>                    <span class="hljs-keyword">if</span> i+<span class="hljs-number">1</span> &lt; <span class="hljs-built_in">len</span>(_str) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> _str[i+<span class="hljs-number">1</span>].isdigit():  <span class="hljs-comment"># 判定+/-后字符是否为数字</span><br>                        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>                <span class="hljs-keyword">elif</span> _str[i].isdigit():  <span class="hljs-comment"># 如果第一个字符为数字，更新ans</span><br>                    ans = ans*<span class="hljs-number">10</span> + (<span class="hljs-built_in">ord</span>(_str[i])-<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;0&#x27;</span>))<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 第一个字符为其他符号，return</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>                FirstCharCheck = <span class="hljs-literal">False</span>  <span class="hljs-comment"># 判定第一个字符后，更新FirstCharCheck,避免重复检测</span><br>            <span class="hljs-comment"># 后续遇到数字字符，累加到ans</span><br>            <span class="hljs-keyword">elif</span> _str[i].isdigit():<br>                ans = ans * <span class="hljs-number">10</span> + (<span class="hljs-built_in">ord</span>(_str[i]) - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;0&#x27;</span>))<br>			<span class="hljs-comment"># 后续遇到非数字字符，直接break,计算结果</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">break</span><br><br>        ans *= sign  <span class="hljs-comment"># 先乘以正负</span><br><br>        <span class="hljs-comment"># 利用max和min进行越界判定</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(ans, (<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>)-<span class="hljs-number">1</span>), -(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>))<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>在计算过程中就实时进行溢出判断（<strong>适用于所有类型的语言，推荐！！！</strong>）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"> <span class="hljs-comment"># 可读性更高的版本</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.count = <span class="hljs-number">0</span><br>        self.ans = <span class="hljs-number">0</span>  <span class="hljs-comment"># 累计结果</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">autoAdd</span>(<span class="hljs-params">self, char, sign</span>):</span><br>        tmp = (<span class="hljs-built_in">ord</span>(char) - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;0&#x27;</span>))<br>        <span class="hljs-comment"># 在计算过程中就实时进行溢出判断</span><br>        <span class="hljs-keyword">if</span> self.ans &gt; <span class="hljs-number">214748365</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> self.ans == <span class="hljs-number">214748364</span> <span class="hljs-keyword">and</span> ((sign == -<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> tmp &gt; <span class="hljs-number">8</span>) <span class="hljs-keyword">or</span> (sign == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> tmp &gt; <span class="hljs-number">7</span>)):<br>            <span class="hljs-comment"># 不满足条件，已经溢出了。</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-comment"># 满足条件，新增。</span><br>            self.ans = self.ans*<span class="hljs-number">10</span> + tmp<br>            self.count += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">strToInt</span>(<span class="hljs-params">self, _str: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>        sign = <span class="hljs-number">1</span>  <span class="hljs-comment"># 整数符号　+1 or -1</span><br>        FirstCharCheck = <span class="hljs-literal">True</span>   <span class="hljs-comment"># bool 用于检测第一个非空格字符，默认为True,当检测到第一个字符后设为False</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(_str)):<br>            <span class="hljs-comment"># FirstCharCheck为True时 进行第一个字符检测</span><br>            <span class="hljs-keyword">if</span> FirstCharCheck:<br>                <span class="hljs-keyword">if</span> _str[i] == <span class="hljs-string">&#x27; &#x27;</span>:  <span class="hljs-comment"># 遇到空格跳过，直到遇到第一个非空格字符 不会修改FirstCharCheck</span><br>                    <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">elif</span> _str[i] == <span class="hljs-string">&#x27;-&#x27;</span> <span class="hljs-keyword">or</span> _str[i] == <span class="hljs-string">&#x27;+&#x27;</span>:  <span class="hljs-comment"># 如果第一个字符为+/-号, 更新sign,</span><br>                    sign = <span class="hljs-number">44</span>-<span class="hljs-built_in">ord</span>(_str[i])  <span class="hljs-comment"># Return the Unicode code point for a one-character string.  ‘+’的ASCII码是43 ，‘-’的ASCII码是45 所以 sign = 44-ord(‘+/-’)</span><br>                    <span class="hljs-keyword">if</span> i+<span class="hljs-number">1</span> &lt; <span class="hljs-built_in">len</span>(_str) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> _str[i+<span class="hljs-number">1</span>].isdigit():  <span class="hljs-comment"># 判定+/-后字符是否为数字</span><br>                        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>                <span class="hljs-keyword">elif</span> _str[i].isdigit():  <span class="hljs-comment"># 如果第一个字符为数字，更新ans</span><br>                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.autoAdd(_str[i], sign):<br>                        <span class="hljs-keyword">return</span> ((<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>)-<span class="hljs-number">1</span>) <span class="hljs-keyword">if</span> sign == <span class="hljs-number">1</span> <span class="hljs-keyword">else</span> -(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>)<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 第一个字符为其他符号，return</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>                FirstCharCheck = <span class="hljs-literal">False</span>  <span class="hljs-comment"># 判定第一个字符后，更新FirstCharCheck,避免重复检测</span><br>            <span class="hljs-comment"># 后续遇到数字字符，累加到self.ans。</span><br>            <span class="hljs-keyword">elif</span> _str[i].isdigit():<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.autoAdd(_str[i], sign):<br>                    <span class="hljs-keyword">return</span> ((<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>)-<span class="hljs-number">1</span>) <span class="hljs-keyword">if</span> sign == <span class="hljs-number">1</span> <span class="hljs-keyword">else</span> -(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>)<br>                <span class="hljs-comment"># ans = ans * 10 + (ord(_str[i]) - ord(&#x27;0&#x27;))</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 后续遇到非数字字符，直接break,计算结果</span><br>                <span class="hljs-keyword">break</span><br><br>        self.ans *= sign  <span class="hljs-comment"># 先乘以+1/-1恢复正负号</span><br>        <span class="hljs-keyword">return</span> self.ans<br><br></code></pre></div></td></tr></table></figure>
+<h2 id="剑指offer版本"><a href="#剑指offer版本" class="headerlink" title="剑指offer版本"></a>剑指offer版本</h2><p>LeetCode的题目相较于《剑指offer》的原题做了改动，这里放上符合《剑指offer》题目要求的代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">string2int32</span>(<span class="hljs-params">_str: <span class="hljs-built_in">str</span></span>) -&gt; int:</span><br>    <span class="hljs-string">&quot;&quot;&quot;convert str to int</span><br><span class="hljs-string">    :param _str: str</span><br><span class="hljs-string">    :return int:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 输入类型检查</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isinstance</span>(_str, <span class="hljs-built_in">str</span>): <span class="hljs-keyword">raise</span> ValueError<br>    <span class="hljs-comment"># 长度特判</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(_str) == <span class="hljs-number">0</span>:  <span class="hljs-keyword">raise</span> ValueError<br>    flag = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 默认为正数</span><br>    ord_0 = <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;0&#x27;</span>)<br>    ord_9 = <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;9&#x27;</span>)<br><br>    <span class="hljs-comment"># 输入数据检测</span><br>    <span class="hljs-keyword">if</span> _str[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;-&#x27;</span>:<br>        _str = _str[<span class="hljs-number">1</span>:]<br>        flag = <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">for</span> _char <span class="hljs-keyword">in</span> _str:<br>        tmp = <span class="hljs-built_in">ord</span>(_char)<br>        <span class="hljs-keyword">if</span> tmp &lt; ord_0  <span class="hljs-keyword">or</span> tmp &gt; ord_9:<br>            <span class="hljs-keyword">raise</span> ValueError<br><br>    <span class="hljs-comment"># string to int</span><br>    res = <span class="hljs-number">0</span><br>    count = <span class="hljs-number">0</span><br>    is_valid = <span class="hljs-literal">True</span><br>    <span class="hljs-comment"># 注意：这里是从后往前遍历的</span><br>    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> _str[::-<span class="hljs-number">1</span>]:<br>        is_valid = <span class="hljs-literal">True</span><br>        <span class="hljs-comment"># 做溢出判断  -2147483648 &lt; int32 &lt; 2147483647</span><br>        <span class="hljs-comment"># 负数溢出判定 or 正数溢出判定</span><br>        tmp = (<span class="hljs-built_in">ord</span>(item) - ord_0) * (<span class="hljs-number">10</span>**count)<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> flag <span class="hljs-keyword">and</span> res &lt; <span class="hljs-number">147483648</span> <span class="hljs-keyword">and</span> tmp &lt;= <span class="hljs-number">2000000000</span>) <span class="hljs-keyword">or</span> (flag <span class="hljs-keyword">and</span> res &lt; <span class="hljs-number">147483647</span> <span class="hljs-keyword">and</span> tmp &lt;= <span class="hljs-number">2000000000</span>):<br>            <span class="hljs-keyword">pass</span>  <span class="hljs-comment"># 满足条件，不做处理。</span><br>        <span class="hljs-keyword">else</span>:<br>            is_valid = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> is_valid:<br>            res += tmp<br>            count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError<br><br>    <span class="hljs-keyword">return</span> res <span class="hljs-keyword">if</span> flag <span class="hljs-keyword">else</span> (<span class="hljs-number">0</span>-res)<br></code></pre></div></td></tr></table></figure>
+<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><h2 id="如何约束返回值的范围"><a href="#如何约束返回值的范围" class="headerlink" title="如何约束返回值的范围"></a>如何约束返回值的范围</h2><p>通过<strong>使用Python内建的max和min函数</strong>可以用简洁的方法约束结果的范围</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># result的结果只能在(MIN, MAX)之间，大于MAX就返回MAX，小于MIN就返回MIN</span><br><span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(result, MAX), MIN) <br><span class="hljs-comment"># 等效于</span><br><span class="hljs-keyword">if</span> result&lt;MAX:<br>	<span class="hljs-keyword">if</span> result&gt;MIN:<br>		<span class="hljs-keyword">return</span> result  <span class="hljs-comment"># MIN&lt;result&lt;MAX</span><br>	<span class="hljs-keyword">else</span>:<br>		<span class="hljs-keyword">return</span> MIN  <span class="hljs-comment"># result&lt;=MIN</span><br><span class="hljs-keyword">else</span>:<br>	<span class="hljs-keyword">return</span> MAX  <span class="hljs-comment"># result&gt;=MAX</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="Python自带内建函数去除字符串开头、结尾的空格"><a href="#Python自带内建函数去除字符串开头、结尾的空格" class="headerlink" title="Python自带内建函数去除字符串开头、结尾的空格"></a>Python自带内建函数去除字符串开头、结尾的空格</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-string">&#x27;   112dgsd 232   sdfsaf   123666     &#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a.lstrip()  <span class="hljs-comment"># Return a copy of the string with leading whitespace removed.</span><br><span class="hljs-string">&#x27;112dgsd 232   sdfsaf   123666     &#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a.rstrip()  <span class="hljs-comment"># Return a copy of the string with tailing whitespace removed.</span><br><span class="hljs-string">&#x27;   112dgsd 232   sdfsaf   123666&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a.strip()  <span class="hljs-comment"># Return a copy of the string with leading and trailing whitespace removed.</span><br><span class="hljs-string">&#x27;112dgsd 232   sdfsaf   123666&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="Python解包骚操作"><a href="#Python解包骚操作" class="headerlink" title="Python解包骚操作"></a>Python解包骚操作</h2><p>将可迭代对象分解出来的一种方法。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/41968260">参考连接</a></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment"># 1、用于基本的解包</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a, b, *c = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>c<br>[<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]<br><span class="hljs-comment"># * 和 ** 只在“传参”时才有用。直接调用num = *num会报错 SyntaxError: can&#x27;t use starred expression here</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>num = [<span class="hljs-string">&#x27;123&#x27;</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>num = *num<br><span class="hljs-string">&quot;SyntaxError: can&#x27;t use starred expression here&quot;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>num = <span class="hljs-built_in">int</span>(*num)<br><span class="hljs-meta">&gt;&gt;&gt; </span>num<br><span class="hljs-number">123</span><br><br><span class="hljs-comment"># 2、用于list连接</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>list1 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>list2 = <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>,<span class="hljs-number">6</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>[*list1, *list2]<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><br><span class="hljs-comment"># 3、用于参数传递</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">a, b, c</span>):</span><br>	print(a+b+c)<br><br>	<br><span class="hljs-meta">&gt;&gt;&gt; </span>parameter = &#123;<span class="hljs-string">&#x27;a&#x27;</span>:<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;b&#x27;</span>:<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;c&#x27;</span>:<span class="hljs-number">3</span>&#125;<br><span class="hljs-meta">&gt;&gt;&gt; </span>func(**parameter)  <span class="hljs-comment"># ** 符号作用的对象是字典对象，它会自动解包成关键字参数 key=value 的格式</span><br><span class="hljs-number">6</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>func(a=<span class="hljs-number">1</span>, b=<span class="hljs-number">2</span>, c=<span class="hljs-number">3</span>)  <span class="hljs-comment"># **parameter和a=1, b=2, c=3完全等效</span><br><span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="不使用str-将单个int转成str"><a href="#不使用str-将单个int转成str" class="headerlink" title="不使用str()将单个int转成str"></a>不使用str()将单个int转成str</h2><p>使用ord()函数，不调用int方法将单个数字char转化成int，将‘+’、‘-’转化成1、-1。<strong>ord() 函数</strong>是 chr() 函数（对于8位的ASCII字符串）或 unichr() 函数（对于Unicode对象）的配对函数，它以一个字符（长度为1的字符串）作为参数，返回对应的 ASCII 数值，或者 Unicode 数值，如果所给的 Unicode 字符超出了你的 Python 定义范围，则会引发一个 TypeError 的异常。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-string">&#x27;6&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">ord</span>(a) - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;0&#x27;</span>)<br><span class="hljs-number">6</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>sgin = <span class="hljs-string">&#x27;+&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">44</span>-<span class="hljs-built_in">ord</span>(sgin)  <span class="hljs-comment"># ‘+’的ASCII码是43 ，‘-’的ASCII码是45 所以 sign = 44-ord(‘+/-’)</span><br><span class="hljs-number">1</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>sgin = <span class="hljs-string">&#x27;-&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">44</span>-<span class="hljs-built_in">ord</span>(sgin)<br>-<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="使用内建函数判断字符是否是数字"><a href="#使用内建函数判断字符是否是数字" class="headerlink" title="使用内建函数判断字符是否是数字"></a>使用内建函数判断字符是否是数字</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-string">&#x27;a&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a.isdigit()<br><span class="hljs-literal">False</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-string">&#x27;1&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a.isdigit()<br><span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/08/LeetCode-9-%E5%9B%9E%E6%96%87%E6%95%B0%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 9. 回文数（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/08/LeetCode-7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 7. 整数反转（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/08/LeetCode-8-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0-atoi-%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/08/LeetCode-8-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0-atoi-%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

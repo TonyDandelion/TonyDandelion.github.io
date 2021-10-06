@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 69. x 的平方根（易） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 69. x 的平方根（易）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-19 06:55" pubdate>
+        2020年3月19日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 69. x 的平方根（易）</h1>
+            
+            <div class="markdown-body">
+              <p>一个简单难度的题目，要理解使用拟牛顿法解决问题的原理。  </p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>实现 <code>int sqrt(int x)</code> 函数。<br>计算并返回 <em>x</em> 的平方根，其中 <em>x</em> 是非负整数。<br>由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。  </p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: 4</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: 8</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure>
+<p>说明: 8 的平方根是 2.82842…,<br>由于返回类型是整数，小数部分将被舍去。</p>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>二分查找、数学</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、二分查找</strong><br>算一个候选值的平方，然后和 $x$ 比较大小，为了缩短查找时间，我们采用二分搜索法来找平方根，找最后一个不大于目标值的数。 之前 <code>left</code> 和 <code>right</code> 都是数组下标，这里的 <code>left</code> 和 <code>right</code> 直接就是数字本身了，一个数字的平方根是不可能比起本身还大的，所以 <code>right</code> 初始化为 $x$，还有就是这里若 $x$ 是整型最大值，再加1就会溢出。最后就是返回值是 <code>right-1</code>，因为题目中说了要把小数部分减去，只有减1才能得到正确的值。 </p>
+<p>另外一种二分法解法的实现，从x/2处开始寻找。</p>
+<ul>
+<li>如果 <code>x &lt; 2</code>，返回 <code>x</code>。</li>
+<li>令左边界为 <code>2</code>，右边界为 <code>x / 2</code>。</li>
+<li>当 <code>left &lt;= right</code> 时：<ul>
+<li>令 <code>num = (left + right) / 2</code>，比较 <code>num * num</code> 与 <code>x</code>：<ul>
+<li>如果 <code>num * num &gt; x</code>，更新右边界为 <code>right = pivot -1</code>。</li>
+<li>如果 <code>num * num &lt; x</code>，更新左边界为 <code>left = pivot + 1</code>。</li>
+<li>如果 <code>num * num == x</code>，即整数平方根为 <code>num</code>，返回 <code>num</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>返回 <code>right</code>。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/03/18/e142mhFTBZwMyv6.png" srcset="/img/loading.gif" alt="binary"></p>
+<p><strong>方法二、牛顿迭代法</strong><br>利用牛顿迭代法，高数中好像讲到过这个方法，是用逼近法求方程根的神器，在这里也可以借用一下，可参见网友 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/AnnieKim/archive/2013/04/18/3028607.html">Annie Kim’s Blog</a> 的博客。<br>为了方便理解，就先以本题为例：<br>计算 $x^2 = n$ 的解，令 $f(x)=x^2-n$ ，相当于求解 $f(x)=0$ 的解，如下图所示。<br>首先取 $x_0$，如果 $x_0$ 不是解，做一个经过 $(x_0, f(x_0))$ 这个点的切线，与x轴的交点为 $x_1$。<br>同样的道理，如果 $x_1$ 不是解，做一个经过 $(x_1,f(x_1))$ 这个点的切线，与x轴的交点为 $x_2$     。<br>以此类推。  </p>
+<p><img src="https://i.loli.net/2020/03/18/jYgV1l5pGO97vIS.jpg" srcset="/img/loading.gif" alt="18155235-b272cc444a1845d3aede4c72a87f83dc.jpg"></p>
+<p>以这样的方式得到的 $x<em>i$会无限趋近于 $f(x)=0$ 的解。<br>判断 $x_i$ 是否是 $f(x)=0$ 的解有两种方法：<br>一是直接计算 $f(x_i)$ 的值判断是否为 $0$，二是判断前后两个解 $x_i$ 和 $x</em>{i-1}$ 是否无限接近。<br>经过 $(x<em>i, f(x_i))$ 这个点的切线方程为 $f(x) = f(x_i) + f’(x_i)(x - x_i)$ ，其中 $f’(x)$ 为 $f(x)$ 的导数，本题中为$2x$。令切线方程等于0，即求解出的 $x$ 就是 $x</em>{i+1}$， $x<em>{i+1}=x_i - f(x_i)/f’(x_i)$。<br>继续化简，$x</em>{i+1}=x<em>i - (x_i^2 - n) / (2x_i) = x_i - x_i / 2 + n / (2x_i) = x_i / 2 + n / 2x_i = (xi + n/xi) / 2$。<br>即，$x</em>{i+1}=(xi + n/xi) / 2$<br>有了迭代公式，程序就好写了，关于牛顿迭代法，可以参考<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Newton&#39;s_method">wikipedia</a>以及<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/643093.htm">百度百科</a>。  </p>
+<p><strong>算法效率比较</strong>  </p>
+<p><img src="https://i.loli.net/2020/03/18/L9Tri1tfUoAXZ6w.png" srcset="/img/loading.gif" alt="cp.png">  </p>
+<p><strong>牛顿法随着x的增加性能优势也在增加</strong>    </p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<li>方法一的实现</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> x &lt;= <span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> x<br>        left, right = <span class="hljs-number">0</span>, x<br>        <span class="hljs-keyword">while</span> left &lt; right:<br>            mid = left + (right - left) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> mid * mid &lt;= x:  <span class="hljs-comment"># 如果 mid*mid是不大于x的，即平方根在右区间，右移left。</span><br>                left = mid + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 否则，如果mid*mid大于x，说明平方根在左区间，左移right。</span><br>                right = mid<br>        <span class="hljs-keyword">return</span> right - <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(logN)$。<br>空间复杂度：$O(1)$。<br>执行用时 :40 ms, 在所有 Python3 提交中击败了74.38%的用户<br>内存消耗 :13.3 MB, 在所有 Python3 提交中击败了5.02%的用户  </p>
+<p>另外一种二分法解法的实现，从x/2处开始寻找。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x</span>):</span><br>        <span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">return</span> x<br>        <br>        left, right = <span class="hljs-number">2</span>, x // <span class="hljs-number">2</span><br>        <br>        <span class="hljs-keyword">while</span> left &lt;= right:<br>            pivot = left + (right - left) // <span class="hljs-number">2</span><br>            num = pivot * pivot<br>            <span class="hljs-keyword">if</span> num &gt; x:<br>                right = pivot -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> num &lt; x:<br>                left = pivot + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> pivot<br>            <br>        <span class="hljs-keyword">return</span> right<br></code></pre></div></td></tr></table></figure>
+<p>执行用时 :68 ms, 在所有 Python3 提交中击败了18.20%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.02%的用户  </p>
+<ul>
+<li>方法二的实现  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        res = x<br>        <span class="hljs-keyword">while</span> (res * res) &gt; x:<br>            res = (res + x // res) // <span class="hljs-number">2</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(res)<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(logN)$，此方法是二次收敛的。<br>空间复杂度：$O(1)$。<br>执行用时 :68 ms, 在所有 Python3 提交中击败了18.20%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.02%的用户  </p>
+<ul>
+<li>python内建求平方根的方法  </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(x ** <span class="hljs-number">0.5</span>)<br></code></pre></div></td></tr></table></figure>
+<p>执行用时 :52 ms, 在所有 Python3 提交中击败了38.08%的用户<br>内存消耗 :13.2 MB, 在所有 Python3 提交中击败了5.02%的用户</p>
+<blockquote>
+<p>参考链接  </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4346413.html">Grandyang</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sqrtx/solution/x-de-ping-fang-gen-by-leetcode/">LeetCode 官方题解</a>  </p>
+<h1 id="相似题目"><a href="#相似题目" class="headerlink" title="相似题目"></a>相似题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-perfect-square/">367. 有效的完全平方数（易）</a> （已完成）</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%92%8C%E6%90%9C%E7%B4%A2/">二分查找和搜索</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/19/LeetCode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 71. 简化路径（中）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/19/%E3%80%8A%E9%AB%98%E5%B1%B1%E4%B8%8B%E7%9A%84%E8%8A%B1%E7%8E%AF%E3%80%8B-%E6%97%B6%E4%BB%A3%E4%B8%8E%E9%B2%9C%E8%A1%80/">
+                        <span class="hidden-mobile">《高山下的花环》- 时代矛盾与英雄主义</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/19/LeetCode-69-x-%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9%EF%BC%88%E6%98%93%EF%BC%89/';
+        this.page.identifier = '/2020/03/19/LeetCode-69-x-%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9%EF%BC%88%E6%98%93%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

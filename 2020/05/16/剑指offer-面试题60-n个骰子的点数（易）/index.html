@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>剑指offer 面试题60. n个骰子的点数（易） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="剑指offer 面试题60. n个骰子的点数（易）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-16 16:51" pubdate>
+        2020年5月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">剑指offer 面试题60. n个骰子的点数（易）</h1>
+            
+            <div class="markdown-body">
+              <p>要想把各种现实问题抽象成数学模型并用计算机的编程语言表达出来，应聘者除了需要具备扎实的数学基础和编程能力，还需要具有敏锐的洞察力和丰富的想象力。</p>
+<p>建模的<strong>第一步</strong>是选择合理的数据结构来表述问题。<br>建模的<strong>第二步</strong>是分析模型中的内在规律，并用编程语言表述这种规律。</p>
+<a id="more"></a>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值出现的概率。你需要用一个浮点数数组返回答案，其中第 i 个元素代表这 n 个骰子所能掷出的点数集合中第 i 小的那个的概率。 </p>
+<p>示例 1:<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入: <span class="hljs-number">1</span><br>输出: [<span class="hljs-number">0.16667,0</span>.<span class="hljs-number">16667,0</span>.<span class="hljs-number">16667,0</span>.<span class="hljs-number">16667,0</span>.<span class="hljs-number">16667,0</span>.<span class="hljs-number">16667</span>]<br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入: <span class="hljs-number">2</span><br>输出: [<span class="hljs-number">0.02778,0</span>.<span class="hljs-number">05556,0</span>.<span class="hljs-number">08333,0</span>.<span class="hljs-number">11111,0</span>.<span class="hljs-number">13889,0</span>.<span class="hljs-number">16667,0</span>.<span class="hljs-number">13889,0</span>.<span class="hljs-number">11111,0</span>.<span class="hljs-number">08333,0</span>.<span class="hljs-number">05556,0</span>.<span class="hljs-number">02778</span>]<br></code></pre></div></td></tr></table></figure><br>限制：1 &lt;= n &lt;= 11</p>
+<blockquote>
+<p><strong><em>测试用例</em></strong></p>
+</blockquote>
+<p>功能测试（1、2、3、4个骰子的各点数的概率）。<br>特殊输入测试（输入0）。<br>性能测试（输入较大的数字，如11）。</p>
+<blockquote>
+<p><strong><em>本题考点</em></strong></p>
+</blockquote>
+<p>考查应聘者的数学建模能力。不管采用哪种思路解决问题，我们都要先想到用数组来存放n个骰子的每个点数出现的次数，并通过分析点数的规律建立模型，最终找到解决方案。<br>考查应聘者对递归和循环的性能的理解。</p>
+<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="基于递归来实现"><a href="#基于递归来实现" class="headerlink" title="基于递归来实现"></a>基于递归来实现</h2><p>骰子一共有6个面，每个面上都有一个点数，对应的是 <code>1~6</code> 之间的一个数字。<strong>所以n个骰子的点数和的最小值为 <code>n</code>，最大值为 <code>6n</code>。</strong>另外，根据排列组合的知识，我们还知道n个骰子的所有点数的排列数为 $6^n$。要解决这个问题，我们需要先统计出每个点数出现的次数，然后把每个点数出现的次数除以 $6^n$，就能求出每个点数出现的概率。</p>
+<p>现在我们考虑如何统计每个点数出现的次数。要想求出<code>n</code>个骰子的点数和，可以先把<code>n</code>个骰子分为两堆：第一堆只有一个；另一堆有<code>n-1</code>个。</p>
+<p>单独的那一个有可能出现<code>1~6</code>的点数。我们需要计算<code>1~6</code>的每一种点数和剩下的<code>n-1</code>个骰子来<strong>计算点数和</strong>。</p>
+<p>接下来把剩下的<code>n-1</code>个骰子仍然分成两堆：第一堆只有一个；第二堆有<code>n-2</code>个。我们把上一轮那个单独骰子的点数和这一轮单独骰子的点数相加，再和剩下的<code>n-2</code>个骰子来计算点数和。</p>
+<p>分析到这里，我们不难发现这是一种递归的思路，递归结束的条件就是最后只剩下一个骰子。我们可以定义一个长度为 <code>6n-n+1</code> 的数组，<strong>将和为<code>s</code>的点数出现的次数保存到数组的第<code>s-n</code>个元素里。</strong></p>
+<h2 id="基于循环来实现"><a href="#基于循环来实现" class="headerlink" title="基于循环来实现"></a>基于循环来实现</h2><p>首先，很明显只有一个骰子的时候，1，2，3，4，5，6出现的次数都为1。那么如果 <code>n=2</code>，即2个骰子，最终能得到的骰子点数和的范围时<code>2-12</code>。出现点数和为分别为6、7、8、9、10、11、12的话，各自有多少种情况呢？设数组 <code>count[i]</code> 为掷出骰子的和为 <code>i</code> 的组合数，则 <code>count[6]=1</code>、<code>count[7]=6</code>、<code>count[8]=5</code>、<code>count[9]=4</code>、<code>count[10]=3</code>、<code>count[11]=2</code>、<code>count[12]=1</code>。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>i</th>
+<th>count(probability)</th>
+<th>combination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1 (1/6)</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td>1 (1/6)</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>3</td>
+<td>1 (1/6)</td>
+<td>3</td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td>1 (1/6)</td>
+<td>4</td>
+</tr>
+<tr>
+<td></td>
+<td>5</td>
+<td>1 (1/6)</td>
+<td>5</td>
+</tr>
+<tr>
+<td></td>
+<td>6</td>
+<td>1 (1/6)</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1 (1/36)</td>
+<td>1+1</td>
+</tr>
+<tr>
+<td></td>
+<td>3</td>
+<td>2 (2/36)</td>
+<td>1+2、2+1</td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td>3 (3/36)</td>
+<td>1+3、2+2、3+1</td>
+</tr>
+<tr>
+<td></td>
+<td>5</td>
+<td>4 (4/36)</td>
+<td>1+4、2+3、3+2、4+1</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>6</strong></td>
+<td><strong>5 (5/36)</strong></td>
+<td><strong>1+5、2+4、3+3、4+2、5+1</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>7</td>
+<td>6 (6/36)</td>
+<td>1+6、2+5、3+4、4+3、5+2、6+1</td>
+</tr>
+<tr>
+<td></td>
+<td>8</td>
+<td>5 (5/36)</td>
+<td>2+6、3+5、4+4、5+3、6+2</td>
+</tr>
+<tr>
+<td></td>
+<td>9</td>
+<td>4 (4/36)</td>
+<td>3+6、4+5、5+4、6+3</td>
+</tr>
+<tr>
+<td></td>
+<td>10</td>
+<td>3 (3/36)</td>
+<td>4+6、5+5、6+4</td>
+</tr>
+<tr>
+<td></td>
+<td>11</td>
+<td>2 (2/36)</td>
+<td>5+6、6+5</td>
+</tr>
+<tr>
+<td></td>
+<td>12</td>
+<td>1 (1/36)</td>
+<td>6+6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>1 (1/216)</td>
+<td>1+1+1</td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td>3 (3/216)</td>
+<td>1+2+1、2+1+1、1+1+2</td>
+</tr>
+<tr>
+<td></td>
+<td>5</td>
+<td>7 (7/216)</td>
+<td>1+2+2、2+1+2、3+1+1、2+2+1、1+3+1、1+2+2、1+1+3</td>
+</tr>
+<tr>
+<td></td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>由此可知，如果要计算 <code>n=2</code> 时，<code>count=6</code> 的概率，我们需要先计算出 <code>n=1</code> 时，<code>P(count=1|n=1)=1/6</code>、<code>P(count=2|n=1)=1/6</code>、<code>P(count=3|n=1)=1/6</code>、<code>P(count=4|n=1)=1/6</code>、<code>P(count=5|n=1)=1/6</code>、<code>P(count=6|n=1)=1/6</code>。则 <code>P(count=6|n=2)</code> 的概率可以由下列公式计算得到：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-constructor">P(<span class="hljs-params">count</span>=6|<span class="hljs-params">n</span>=2)</span> = <span class="hljs-constructor">P(<span class="hljs-params">count</span>=1|<span class="hljs-params">n</span>=1)</span><span class="hljs-operator"> * </span><span class="hljs-constructor">P(<span class="hljs-params">count</span>=5|<span class="hljs-params">n</span>=1)</span> + <br>                 <span class="hljs-constructor">P(<span class="hljs-params">count</span>=2|<span class="hljs-params">n</span>=1)</span><span class="hljs-operator"> * </span><span class="hljs-constructor">P(<span class="hljs-params">count</span>=4|<span class="hljs-params">n</span>=1)</span> + <br>                 <span class="hljs-constructor">P(<span class="hljs-params">count</span>=3|<span class="hljs-params">n</span>=1)</span><span class="hljs-operator"> * </span><span class="hljs-constructor">P(<span class="hljs-params">count</span>=3|<span class="hljs-params">n</span>=1)</span> + <br>                 <span class="hljs-constructor">P(<span class="hljs-params">count</span>=4|<span class="hljs-params">n</span>=1)</span><span class="hljs-operator"> * </span><span class="hljs-constructor">P(<span class="hljs-params">count</span>=2|<span class="hljs-params">n</span>=1)</span> + <br>                 <span class="hljs-constructor">P(<span class="hljs-params">count</span>=5|<span class="hljs-params">n</span>=1)</span><span class="hljs-operator"> * </span><span class="hljs-constructor">P(<span class="hljs-params">count</span>=1|<span class="hljs-params">n</span>=1)</span><br>                 =  <span class="hljs-number">1</span>/<span class="hljs-number">36</span> +  <span class="hljs-number">1</span>/<span class="hljs-number">36</span> + <span class="hljs-number">1</span>/<span class="hljs-number">36</span> + <span class="hljs-number">1</span>/<span class="hljs-number">36</span> + <span class="hljs-number">1</span>/<span class="hljs-number">36</span>  = <span class="hljs-number">5</span>/<span class="hljs-number">36</span><br></code></pre></div></td></tr></table></figure>
+<p>同理，如果要计算 <code>n=2</code> 时，<code>count=1</code> 的概率 <code>P(count=1|n=3)</code>，可以由下列公式计算得到</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"><span class="hljs-constructor">P(<span class="hljs-params">count</span>=1|<span class="hljs-params">n</span>=3)</span> = <span class="hljs-constructor">P(<span class="hljs-params">count</span>=1|<span class="hljs-params">n</span>=1)</span><span class="hljs-operator"> * </span><span class="hljs-constructor">P(<span class="hljs-params">count</span>=1|<span class="hljs-params">n</span>=1)</span><span class="hljs-operator"> * </span><span class="hljs-constructor">P(<span class="hljs-params">count</span>=1|<span class="hljs-params">n</span>=1)</span><br>               = <span class="hljs-constructor">P(<span class="hljs-params">count</span>=1|<span class="hljs-params">n</span>=1)</span><span class="hljs-operator"> * </span><span class="hljs-constructor">P(<span class="hljs-params">count</span>=1|<span class="hljs-params">n</span>=2)</span><br>               = <span class="hljs-number">1</span>/<span class="hljs-number">6</span><span class="hljs-operator"> * </span><span class="hljs-number">1</span>/<span class="hljs-number">6</span><span class="hljs-operator"> * </span><span class="hljs-number">1</span>/<span class="hljs-number">6</span><br>               = <span class="hljs-number">1</span>/<span class="hljs-number">36</span><span class="hljs-operator"> * </span><span class="hljs-number">1</span>/<span class="hljs-number">6</span><br>               = <span class="hljs-number">1</span>/<span class="hljs-number">216</span><br></code></pre></div></td></tr></table></figure>
+<p>以上过程可以通过循环代码来实现。</p>
+<p><strong><em>参考链接</em></strong></p>
+<p>作者：lucifer<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/solution/di-gui-huo-zhe-die-dai-du-ke-yi-python-and-javascr/">https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/solution/di-gui-huo-zhe-die-dai-du-ke-yi-python-and-javascr/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="基于迭代来实现"><a href="#基于迭代来实现" class="headerlink" title="基于迭代来实现"></a>基于迭代来实现</h2><p>注意，统计的是组合数量。最后除以了 $6^n$，就是概率。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">twoSum</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[float]:</span><br>        MAX_VALUE = <span class="hljs-number">6</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">diceCnt</span>(<span class="hljs-params">n</span>):</span><br>            <span class="hljs-comment"># step 1 层层递归 求解cnts</span><br>            <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">return</span> [<span class="hljs-number">0</span>] + [<span class="hljs-number">1</span>] * MAX_VALUE  <span class="hljs-comment"># 第0位为0，n=1，就是只有一个骰子，这种情况下，骰子不可能掷出0的结果。</span><br>            cnts = diceCnt(n - <span class="hljs-number">1</span>) + [<span class="hljs-number">0</span>] * MAX_VALUE  <span class="hljs-comment"># 用一个数组cnts，cnts[i] 表示掷出的骰子点数和为i的组合数。</span><br>            <span class="hljs-comment"># step 2 基于前面的结果逐个更新 cnts</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6</span> * n, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>):<br>                cnts[i] = <span class="hljs-built_in">sum</span>(cnts[<span class="hljs-built_in">max</span>(i - MAX_VALUE, <span class="hljs-number">0</span>): i])<br>            <span class="hljs-keyword">return</span> cnts<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">list</span>(<span class="hljs-built_in">filter</span>(<br>                    <span class="hljs-keyword">lambda</span> a: a != <span class="hljs-number">0</span>, <span class="hljs-built_in">list</span>(<br>                        <span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> a: a / MAX_VALUE ** n, diceCnt(n))  <span class="hljs-comment"># 求解概率，count / 6 ** n，保留不为0的概率。</span><br>                    )<br>                )<br>            )<br></code></pre></div></td></tr></table></figure>
+<h2 id="基于循环来实现（推荐，效率更高！）"><a href="#基于循环来实现（推荐，效率更高！）" class="headerlink" title="基于循环来实现（推荐，效率更高！）"></a>基于循环来实现（推荐，效率更高！）</h2><p>注意，循环过程中直接就是在计算概率。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">twoSum</span>(<span class="hljs-params">self, n</span>):</span><br>        MAX_VALUE = <span class="hljs-number">6</span><br>        pre_probabilities = [<span class="hljs-number">1</span>/MAX_VALUE] * MAX_VALUE  <span class="hljs-comment"># base probability</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>            new_add_probabilities = [<span class="hljs-number">1</span>/MAX_VALUE] * MAX_VALUE  <span class="hljs-comment"># 每次新增骰子之后的new-add probability </span><br>            temp = [<span class="hljs-number">0</span>] * (MAX_VALUE + <span class="hljs-number">5</span> * i)<br>            <span class="hljs-keyword">for</span> pre_index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(pre_probabilities)):<br>                <span class="hljs-keyword">for</span> cur_index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(new_add_probabilities)):<br>                    temp[pre_index+cur_index] += pre_probabilities[pre_index]* new_add_probabilities[cur_index]<br>            pre_probabilities = temp  <span class="hljs-comment"># 更新base probability</span><br>        <br>        <span class="hljs-keyword">return</span> [<span class="hljs-built_in">round</span>(probability, <span class="hljs-number">5</span>) <span class="hljs-keyword">for</span> probability <span class="hljs-keyword">in</span> pre_probabilities]<br></code></pre></div></td></tr></table></figure>
+<p>值得注意的是，上述代码没有在函数里把一个骰子的最大点数硬编码（Hard Code）为6，而是用一个变量 <code>MAX_VALUE</code> 来表示。这样做的好处是，如果某个厂家生产了其他点数的骰子，那么我们只需要在代码中修改一个地方，扩展起来很方便。如果在面试的时候我们能对面试官提起对程序扩展性的考虑，则一定能给面试官留下很好的印象。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/">统计学</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/17/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9861-%E6%89%91%E5%85%8B%E7%89%8C%E4%B8%AD%E7%9A%84%E9%A1%BA%E5%AD%90%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">剑指offer 面试题61. 扑克牌中的顺子（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/16/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9859-I-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">剑指offer 面试题59 - I. 滑动窗口的最大值（易）& LeetCode 239. 滑动窗口最大值（难）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/05/16/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9860-n%E4%B8%AA%E9%AA%B0%E5%AD%90%E7%9A%84%E7%82%B9%E6%95%B0%EF%BC%88%E6%98%93%EF%BC%89/';
+        this.page.identifier = '/2020/05/16/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9860-n%E4%B8%AA%E9%AA%B0%E5%AD%90%E7%9A%84%E7%82%B9%E6%95%B0%EF%BC%88%E6%98%93%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无者">
+  <meta name="keywords" content="">
+  <title>LeetCode 81. 搜索旋转排序数组 II（中） - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LeetCode 81. 搜索旋转排序数组 II（中）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-22 06:41" pubdate>
+        2020年3月22日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LeetCode 81. 搜索旋转排序数组 II（中）</h1>
+            
+            <div class="markdown-body">
+              <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/">LeetCode 33. 搜索旋转排序数组</a> 的改进。<br>出现了重复数字，需要在二分查找的预处理阶段进行一些特殊判断。  </p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。<br>( 例如，数组 [0,0,1,2,2,5,6] 可能变为 [2,5,6,0,0,1,2] )。<br>编写一个函数来判断给定的目标值是否存在于数组中。若存在返回 true，否则返回 false。<br>进阶:<br>这是 搜索旋转排序数组 的延伸题目，本题中的 nums  可能包含重复元素。<br>这会影响到程序的时间复杂度吗？会有怎样的影响，为什么？<br>影响：由于要去重，时间复杂度从 $O(log N)$ 变成了 $O(log N + N)$。  </p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例 1:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: nums = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], target = <span class="hljs-number">0</span><br>输出: true<br></code></pre></div></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: nums = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], target = <span class="hljs-number">3</span><br>输出: false<br></code></pre></div></td></tr></table></figure>
+<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>二分查找、数组</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、预处理加二分查找</strong><br><strong>预处理</strong>：由于 <code>nums</code> 存在重复数字，然后又进行了旋转。所以预处理阶段，要找到旋转点，根据旋转点找到可能存在 <code>target</code> 且有序的那一部分 <code>sub_list</code>。<br><strong>二分查找</strong>：在 <code>sub_list</code> 利用二分查找寻找 <code>target</code>。  </p>
+<p><strong>方法二、直接二分查找</strong><br>这道是之前那道 <a target="_blank" rel="noopener" href="http://www.cnblogs.com/grandyang/p/4325648.html">Search in Rotated Sorted Array</a> 的延伸，现在数组中允许出现重复数字，这个也会影响我们选择哪半边继续搜索，由于之前那道题不存在相同值，我们在比较中间值和最右值时就完全符合之前所说的规律：<br><strong>如果中间的数小于最右边的数，则右半段是有序的，。</strong><br><strong>若中间数大于最右边数，则左半段是有序的</strong>。<br>而如果可以有重复值，就会出现来面两种情况，<code>[3 1 1]</code> 和 <code>[1 1 3 1]</code>，对于这两种情况，<strong>中间值等于最右值时，目标值3既可以在左边又可以在右边</strong>，那怎么办么，对于这种情况其实处理非常简单，<strong>只要把最右值向左一位即可继续循环，如果还相同则继续移，直到移到不同值为止，</strong>然后其他部分还采用 <a target="_blank" rel="noopener" href="http://www.cnblogs.com/grandyang/p/4325648.html">Search in Rotated Sorted Array</a> 中的方法。</p>
+<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<li>方法一的实现</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; bool:</span><br>        <span class="hljs-comment"># step1、特判</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(nums) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">len</span>(nums) == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> nums[<span class="hljs-number">0</span>] != target):  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(nums) == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> nums[<span class="hljs-number">0</span>] == target:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        _min = <span class="hljs-built_in">min</span>(nums)<br>        <br>        <span class="hljs-comment"># step2、确定sub_list，其中可能存在 target，且sub_list有序，可以用于二分查找。</span><br>        <span class="hljs-keyword">if</span> _min == target:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        min_index = nums.index(_min)<br>        <span class="hljs-keyword">if</span> min_index == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">if</span> nums[-<span class="hljs-number">1</span>] &gt; nums[<span class="hljs-number">0</span>]:  <span class="hljs-comment"># [1, 3]的情况，直接跳过，认为当前nums就是sub_list了。</span><br>                <span class="hljs-keyword">pass</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># [1, 3, 1, 1]的情况</span><br>                <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(nums) &gt;=<span class="hljs-number">2</span> <span class="hljs-keyword">and</span> nums[-<span class="hljs-number">1</span>] == nums[<span class="hljs-number">0</span>]:  <span class="hljs-comment"># 这里要注意,可能出现最终len(nums)为0的情况，所以要做个判断。</span><br>                    nums = nums[:-<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">elif</span> min_index != <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> target &gt;= nums[<span class="hljs-number">0</span>]:<br>            nums = nums[:min_index]   <span class="hljs-comment"># 在前面一个区间做二分查找</span><br>        <span class="hljs-keyword">else</span>:<br>            nums = nums[min_index:]  <span class="hljs-comment"># 在后面一个区间做二分查找</span><br>        <br>        <span class="hljs-comment"># step3、得到sub_list，这个sub_list包含target且一定有序，在sub_list中进行二分查找。</span><br>        left = <span class="hljs-number">0</span><br>        right = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">while</span> left &lt; right:<br>            mid = left + (right - left) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> target == nums[mid]:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">elif</span> target &lt; nums[mid]:  <span class="hljs-comment"># 在左区间 right左移</span><br>                right = mid<br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 在右区间 left右移 target &gt;= nums[mid + 1]</span><br>                left = mid + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>Input = [[<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]]<br>Input1 = [<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>]<br>Answer = [<span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.search(Input[i], Input1[i])<br>        print(reslut == Answer[i])<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(nlogn + n)$，二分查找的时间复杂度是 $O(nlogn)$，而 <code>nums = nums[:-1]</code> 最坏情况下可能执行 <code>n</code> 次，所以最终的时间复杂度为 $O(nlogn + n)$。<br>空间复杂度：$O(1)$，只是用了常数级别的额外空间。<br>执行用时 :44 ms, 在所有 Python3 提交中击败了80.02%的用户<br>内存消耗 :13.7 MB, 在所有 Python3 提交中击败了5.37%的用户  </p>
+<ul>
+<li>方法二的实现</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; bool:</span><br>        <span class="hljs-comment"># step1、特判</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(nums) <span class="hljs-keyword">or</span> (<span class="hljs-built_in">len</span>(nums) == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> nums[<span class="hljs-number">0</span>] != target):  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(nums) == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> nums[<span class="hljs-number">0</span>] == target:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        _min = <span class="hljs-built_in">min</span>(nums)<br><br>        <span class="hljs-comment"># 由于出现了重复数字，所以不能再通过找到list中的最小元素来分割nums为左边值或者右边值。比如[1, 3, 1, 1]的出现，由于最小值1就在第0位，就分割不了了。</span><br>        <span class="hljs-comment"># 所以用中间值分隔</span><br>        n = <span class="hljs-built_in">len</span>(nums)<br>        left,right = <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> left &lt;= right:<br>            mid = (left + right) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> nums[mid] == target:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> nums[mid] &lt; nums[right]:  <span class="hljs-comment"># 如果中间的数小于最右边的数，则右半段是有序的。</span><br>                <span class="hljs-comment"># 以下就是关键代码</span><br>                <span class="hljs-comment"># 先在右半段（有序）的里面用二分查找找target，同时根据nums[mid]、nums[right]和target的值的关系，更新left和right。</span><br>                <span class="hljs-keyword">if</span> nums[mid] &lt; target <span class="hljs-keyword">and</span> nums[right] &gt;= target:  left = mid + <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:  right = mid -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> nums[mid] &gt; nums[right]:  <span class="hljs-comment"># 若中间数大于最右边数，则左半段是有序的</span><br>                <span class="hljs-comment"># 以下就是关键代码</span><br>                <span class="hljs-comment"># 先在左半段（有序）的里面用二分查找找target，同时根据nums[mid]、nums[left]和target的值的关系，更新left和right。</span><br>                <span class="hljs-keyword">if</span> nums[left] &lt;= target <span class="hljs-keyword">and</span> nums[mid] &gt; target:  right = mid - <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>: left = mid + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  right -= <span class="hljs-number">1</span>  <span class="hljs-comment"># 这里的right -= 1就类似方法一中的 nums = nums[:-1]</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+<p>258 / 275 个通过测试用例</p>
+<blockquote>
+<p>参考连接  </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4325840.html">Grandyang</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%92%8C%E6%90%9C%E7%B4%A2/">二分查找和搜索</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/22/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LeetCode 84. 柱状图中最大的矩形</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/22/LeetCode-80-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9-II%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <span class="hidden-mobile">LeetCode 80.  删除排序数组中的重复项 II（中）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/03/22/LeetCode-81-%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84-II%EF%BC%88%E4%B8%AD%EF%BC%89/';
+        this.page.identifier = '/2020/03/22/LeetCode-81-%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84-II%EF%BC%88%E4%B8%AD%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

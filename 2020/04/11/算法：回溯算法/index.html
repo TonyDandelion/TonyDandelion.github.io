@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>算法：回溯算法 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="算法：回溯算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-11 05:06" pubdate>
+        2020年4月11日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      10.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      141
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法：回溯算法</h1>
+            
+            <div class="markdown-body">
+              <p>回溯的过程就是构建二叉树的过程，通过添加判断项，在构建二叉树的过程中进行剪枝，可以有效的提升运算速度。很多题目，如果用Python写，不添加剪枝策略，时间复杂度就会很高。</p>
+<a id="more"></a>
+<h1 id="回溯算法基础概念"><a href="#回溯算法基础概念" class="headerlink" title="回溯算法基础概念"></a>回溯算法基础概念</h1><h2 id="基本理解"><a href="#基本理解" class="headerlink" title="基本理解"></a>基本理解</h2><blockquote>
+<p><strong>递归、深度优先搜索、回溯算法、动态规划的相互关系？</strong></p>
+</blockquote>
+<script type="math/tex; mode=display">
+Recursion \subseteq  DFS(Option: BackTrack) \subseteq Dynamic\ Programming</script><ul>
+<li><p>递归是DFS（深度优先搜索）的一种实现方式，递归也可以实现分治思想（归并排序）。</p>
+</li>
+<li><p>DFS是动态规划的一种实现方式。</p>
+</li>
+<li><p><strong>回溯法是DFS过程中可以进行的可选操作，也可以认为是一种固定的套路/模板。</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>如何可视化回溯算？</p>
+</blockquote>
+<p>通过构建二叉树，可以可视化回溯过程。回溯的过程就是构建二叉树的过程，通过添加判断项，在构建二叉树的过程中进行剪枝，可以有效的提升运算速度。</p>
+<p>画二叉树，回溯的过程就是构建二叉树的过程，通过添加判断项，在构建二叉树的过程中<strong>进行剪枝</strong>，可以有效的提升运算速度。</p>
+<blockquote>
+<p> <strong>用这种套路有什么好处呢？</strong></p>
+</blockquote>
+<p>利用回溯算法，利用将解空间缩小。</p>
+<blockquote>
+<p>如何判断是否应该使用回溯算法？</p>
+</blockquote>
+<p>当<strong>要解决的问题涉及过程选择、条件控制，解空间特别大的时候</strong>，比如<strong><font color="green">下棋、路径规划、排列、组合、字符串匹配</font></strong>等问题，都可以考虑用回溯算法解决。</p>
+<blockquote>
+<p>回溯算法的三个关键点</p>
+</blockquote>
+<p><strong>解决一个回溯问题，实际上就是一个决策树的遍历过程</strong>，你只需要思考 3 个问题：</p>
+<p><strong>1、路径</strong>：也就是已经做出的选择。(Our Choice)<br><strong>2、选择列表</strong>：也就是你当前可以做的选择。（Our Constraints）<br><strong>3、结束条件</strong>：也就是到达决策树底层，无法再做选择的条件。（Our Goal）</p>
+<h2 id="回溯算法的框架"><a href="#回溯算法的框架" class="headerlink" title="回溯算法的框架"></a>回溯算法的框架</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python">result = []<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">路径, 选择列表</span>):</span> <br>    <span class="hljs-keyword">if</span> 满足结束条件:<br>        result.add(路径)  <span class="hljs-comment"># 路径就是要添加的结果</span><br>        <span class="hljs-keyword">return</span>           <span class="hljs-comment"># 大多数情况下，有return会运行快一点。</span><br><br>    <span class="hljs-keyword">for</span> 选择 <span class="hljs-keyword">in</span> 选择列表: <span class="hljs-comment"># 选择列表是由一系列参数组成的</span><br>        做选择<br>        backtrack(路径, 选择列表)<br>        撤销选择<br></code></pre></div></td></tr></table></figure>
+<p><strong>其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」，特别简单。</strong></p>
+<p>所谓模板、框架，只是给我们一个启示，但是<strong>千万别过度依赖算法模板、框架，理解算法思想的精髓才是关键，</strong>我就因为过渡相信模板、框架，错失了一道本应该能做对的题，<a href="/2020/04/15/关于牛客笔试做题的相关问题/#太依赖模板思想，没有灵活解决问题，导致没有AC。">详情</a>。</p>
+<blockquote>
+<p>回溯算法思维导图</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/03/04/MDcmfUbG54CJeVR.png" srcset="/img/loading.gif" alt="6a464ba95a7ad1c247aa39610535984c241e6b95148f8bc36b02908a190b1d54-image.png"></p>
+<blockquote>
+<p>思路步骤</p>
+</blockquote>
+<p><strong>第 1 步都是先画图，画图是非常重要的，只有画图才能帮助我们想清楚递归结构，想清楚如何剪枝。</strong>就拿题目中的示例，想一想人手动操作是怎么做的，一般这样下来，这棵递归树都不难画出。</p>
+<p>即在画图的过程中思考清楚：<br>1、分支如何产生；<br>2、题目需要的解在哪里？是在叶子结点、还是在非叶子结点、还是在从跟结点到叶子结点的路径？<br>3、哪些搜索是会产生不需要的解的？例如：产生重复是什么原因，如果在浅层就知道这个分支不能产生需要的结果，应该提前剪枝，剪枝的条件是什么，代码怎么写？</p>
+<h2 id="剪枝！剪枝！剪枝！"><a href="#剪枝！剪枝！剪枝！" class="headerlink" title="剪枝！剪枝！剪枝！"></a>剪枝！剪枝！剪枝！</h2><p>由于回溯算法的时间复杂度很高，因此，如果在遍历的时候，如果能够提前知道这一条分支不能搜索到满意的结果，就可以提前结束，这一步操作称之为剪枝。</p>
+<p><strong>回溯算法会大量应用“剪枝”技巧达到以加快搜索速度。</strong>有些时候，需要做一些预处理工作（<strong>例如排序</strong>）才能达到剪枝的目的。预处理工作虽然也消耗时间，但一般而且能够剪枝节约的时间更多。还有正是因为回溯问题本身时间复杂度就很高，所以能用空间换时间就尽量使用空间。否则时间消耗又上去了。</p>
+<p><strong><font color='red'>没有剪枝的回溯算法不是合格的回溯算法。</font></strong></p>
+<p><strong>去重和剪枝的区别</strong></p>
+<p>去重是把答案中重复的部分去掉，剪枝是结合题意，缩小选择空间，减少不必要的选择，在结束条件之后加 <code>return</code> 就是一种剪枝。</p>
+<p><em>参考连接</em></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/">LeetCode 大佬题解</a></p>
+<h1 id="回溯算法基础代码"><a href="#回溯算法基础代码" class="headerlink" title="回溯算法基础代码"></a>回溯算法基础代码</h1><h2 id="排列组合的定义"><a href="#排列组合的定义" class="headerlink" title="排列组合的定义"></a>排列组合的定义</h2><p><strong>排列</strong>，排列的定义是指从 $n$ 个不同元素中，任取 $m$ ( $m≤n$, $m$ 与 $n$ 均为自然数,下同）个不同的元素<strong><font color="red">按照一定的顺序</font></strong>排成一列，叫做从 $n$ 个不同元素中取出 $m$ 个元素的<strong>一个排列</strong>；从 $n$ 个不同元素中取出 $m$ ($m≤n$）个元素的<strong>所有排列的个数</strong>，叫做从 $n$ 个不同元素中取出 $m$ 个元素的<strong>排列数</strong>。排列本质就是<strong><font color="red">有序组合</font></strong>，计算公式如下 </p>
+<script type="math/tex; mode=display">
+A_n^m = n \times (n-1) \times ...... \times (n-m+1) = \frac{n!}{(n-m)!}</script><p>例如：</p>
+<script type="math/tex; mode=display">
+A_6^4 = \frac{6!}{4!} = \frac{6 \times 5 \times 4 \times 3 \times 2!}{2!} = 6 \times 5 \times 4 \times 3 = 360</script><p><strong>组合</strong>，组合的定义是指从 $n$ 个不同元素中，任取 $m$ ($m≤n$）个元素并成一组，叫做从 $n$ 个不同元素中取出 $m$ 个元素的<strong>一个组合</strong>；从 $n$ 个不同元素中取出 $m$ ($m≤n$ ）个元素的<strong>所有组合的个数</strong>，叫做从 $n$ 个不同元素中取出 $m$ 个元素的<strong>组合数</strong>。本质就是<strong><font color="red">无序组合</font></strong>，公式如下</p>
+<script type="math/tex; mode=display">
+C_n^m = \frac{A_n^m}{m!} = \frac{n!}{m! \times (n-m)!} = C_n^{n-m}</script><p>例如：</p>
+<script type="math/tex; mode=display">
+C_6^4 = \frac{6!}{4! \times (6-4)!} = \frac{6 \times 5 \times 4!}{4! \times 2!} = \frac{6 \times 5}{2!} = 15</script><p>注意：规定 $0! = 1$。</p>
+<p><strong>排列 和 组合 的本质区别在于：决策的顺序对结果有没有影响。</strong></p>
+<ul>
+<li>九个人，选三个人出来，先后颁发金、银、铜三色奖牌，是一个<strong>排列问题</strong>。</li>
+<li>九个人，选三个人出来，先后颁发三瓶可乐，是一个<strong>组合问题</strong>。</li>
+</ul>
+<h2 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h2><h3 id="无重复数字"><a href="#无重复数字" class="headerlink" title="无重复数字"></a>无重复数字</h3><p>给定一个 <strong>没有重复数字</strong> 的序列 和 排列元素个数 <code>m</code>，返回其所有可能的排列。<strong><font color='red'>written by hand require</font></strong></p>
+<blockquote>
+<p>以下代码，以行数最短为目标，但是实际运行过程中，建议在终止条件之后加上 <code>return</code>。</p>
+</blockquote>
+<p><strong><em>额外变量法</em></strong>  </p>
+<p>14行代码实现全排列回溯算法，基于额外的 <code>bool</code> 数组记录每个元素的使用情况，拿时间换空间是永恒不变的道理。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permute</span>(<span class="hljs-params">nums, m</span>):</span>                           <span class="hljs-comment"># 1</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :param m: int    </span><br><span class="hljs-string">    :return: List[List[int]]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums: <span class="hljs-keyword">return</span>                         <span class="hljs-comment"># 2</span><br>    res = []                                    <span class="hljs-comment"># 3 注意res要写在backtrack方法上面</span><br>    n = <span class="hljs-built_in">len</span>(nums)                               <span class="hljs-comment"># 4</span><br>    visited = [<span class="hljs-number">0</span>] * n                           <span class="hljs-comment"># 5 visited数组记录该元素是否已经被选择</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">path, depth</span>):</span>                 <span class="hljs-comment"># 6</span><br>        <span class="hljs-string">&quot;&quot;&quot;backtrack based on extra space visted vector</span><br><span class="hljs-string">        :param path: List[int]</span><br><span class="hljs-string">        :param depth: int</span><br><span class="hljs-string">        :return: None</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># depth是递归的深度也是path的长度</span><br>        <span class="hljs-keyword">if</span> depth == m:  res.append(path[:])     <span class="hljs-comment"># 7</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):                      <span class="hljs-comment"># 8</span><br>            <span class="hljs-keyword">if</span> visited[i]:  <span class="hljs-keyword">continue</span>            <span class="hljs-comment"># 9</span><br>            visited[i] = <span class="hljs-number">1</span>                      <span class="hljs-comment"># 10</span><br>            <span class="hljs-comment"># path+[nums[i]]这样写更简洁，就不用先append后pop了，也就是先选择，后撤销选择了。</span><br>            backtrack(path+[nums[i]], depth+<span class="hljs-number">1</span>)  <span class="hljs-comment"># 11</span><br>            visited[i] = <span class="hljs-number">0</span>                      <span class="hljs-comment"># 12</span><br><br>    backtrack([],<span class="hljs-number">0</span>)                             <span class="hljs-comment"># 13</span><br>    <span class="hljs-keyword">return</span> res                                  <span class="hljs-comment"># 14</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>注意</strong>：正常情况下，回溯算法是按照 <strong>选择 递归 撤销选择</strong> 的顺序进行执行的。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):                      <span class="hljs-comment"># 1</span><br>    <span class="hljs-keyword">if</span> visited[i]:  <span class="hljs-keyword">continue</span>            <span class="hljs-comment"># 2</span><br>    visited[i] = <span class="hljs-number">1</span>                      <span class="hljs-comment"># 3 选择</span><br>    path.append(nums[i])                <span class="hljs-comment"># 4 选择</span><br>    backtrack(path, depth+<span class="hljs-number">1</span>)            <span class="hljs-comment"># 5 递归回溯</span><br>    visited[i] = <span class="hljs-number">0</span>                      <span class="hljs-comment"># 6 撤销选择</span><br>    path.pop()                          <span class="hljs-comment"># 7 撤销选择</span><br></code></pre></div></td></tr></table></figure>
+<p>但是，如果选择是往<strong>选择路径 <code>path</code></strong> 添加元素，则可以简化成下面这种形式。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):                      <span class="hljs-comment"># 1</span><br>    <span class="hljs-keyword">if</span> visited[i]:  <span class="hljs-keyword">continue</span>            <span class="hljs-comment"># 2</span><br>    visited[i] = <span class="hljs-number">1</span>                      <span class="hljs-comment"># 3 选择</span><br>    backtrack(path+[nums[i]], depth+<span class="hljs-number">1</span>)  <span class="hljs-comment"># 4 递归回溯</span><br>    visited[i] = <span class="hljs-number">0</span>                      <span class="hljs-comment"># 5 撤销选择</span><br></code></pre></div></td></tr></table></figure>
+<p><strong><em>挖洞法</em></strong></p>
+<p><strong>10</strong>代码实现全排列回溯算法，递归回溯时去掉已经选择的对象，特点结构简单。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permute</span>(<span class="hljs-params">nums, m</span>):</span>                                               <span class="hljs-comment"># 1</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :param m: int   </span><br><span class="hljs-string">    :return: List[List[int]]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums: <span class="hljs-keyword">return</span>                                             <span class="hljs-comment"># 2</span><br>    res = []                                                        <span class="hljs-comment"># 3</span><br>    n = <span class="hljs-built_in">len</span>(nums)                                                   <span class="hljs-comment"># 4</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">nums, path, depth</span>):</span>                               <span class="hljs-comment"># 5</span><br>        <span class="hljs-string">&quot;&quot;&quot;backtrack based on the digging out select number</span><br><span class="hljs-string">        :param nums: List[int]</span><br><span class="hljs-string">        :param path: List[int]</span><br><span class="hljs-string">        :param depth: depth</span><br><span class="hljs-string">        :return: None</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> depth == m:  res.append(path[:])                          <span class="hljs-comment"># 6</span><br>        <span class="hljs-comment"># 以range(len(nums))作为选择列表，则之前那个已经被挖掉的元素不会再被选择</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):                                   <span class="hljs-comment"># 7</span><br>            <span class="hljs-comment"># 递归调用时就挖掉了那个已经选择的元素</span><br>            backtrack(nums[:i]+nums[i+<span class="hljs-number">1</span>:], path+[nums[i]], depth+<span class="hljs-number">1</span>)  <span class="hljs-comment"># 8</span><br>    <br>    backtrack(nums, [], <span class="hljs-number">0</span>)                                           <span class="hljs-comment"># 9</span><br>    <span class="hljs-keyword">return</span> res                                                       <span class="hljs-comment"># 10</span><br></code></pre></div></td></tr></table></figure>
+<p><strong><em>交换法</em></strong></p>
+<p><strong>11行</strong>代码实现全排列回溯算法，递归回溯时直接在 <code>nums</code> 上操作，将第 <code>i</code> 个整数放在当前排列的待安置位置，特点：不需要 <code>select</code>，理解较为困难。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permute</span>(<span class="hljs-params"> nums, m</span>):</span>                                            <span class="hljs-comment"># 1</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums: <span class="hljs-keyword">return</span>                                           <span class="hljs-comment"># 2</span><br>    res = []                                                      <span class="hljs-comment"># 3</span><br>    n = <span class="hljs-built_in">len</span>(nums)                                                 <span class="hljs-comment"># 4</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">depth=<span class="hljs-number">0</span></span>):</span>                                       <span class="hljs-comment"># 5</span><br>        <span class="hljs-comment"># 当交换到最后一位的时候，就将此时的解算入解集中，然后返回上层递归。</span><br>        <span class="hljs-keyword">if</span> depth == m: res.append(nums[:m])                       <span class="hljs-comment"># 6</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(depth, n):                                 <span class="hljs-comment"># 7</span><br>            <span class="hljs-comment"># 将第i个整数放在当前排列的待安置位置(select[path])。</span><br>            nums[depth], nums[i] = nums[i], nums[depth]           <span class="hljs-comment"># 8</span><br>            backtrack(depth + <span class="hljs-number">1</span>)                                  <span class="hljs-comment"># 9</span><br>            <span class="hljs-comment"># 撤销交换</span><br>            nums[depth], nums[i] = nums[i], nums[depth]           <span class="hljs-comment"># 10</span><br><br>    backtrack()                                                   <span class="hljs-comment"># 11</span><br>    <span class="hljs-keyword">return</span> res                                                    <span class="hljs-comment"># 12</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N \times N!)$，在第 1 层，结点个数为 $N$ 个数选 1 个的排列，故为 $A_N^1$ 。在第 2 层，结点个数为 $N$ 个数选 2 个的排列，故为 $A_N^2$ 。一共有 $N$ 层，所以时间复杂度为  =$O(N \times N!)$。  </p>
+<p>空间复杂度：$O(N×N!)$  ，（1）递归树深度 $logN$； （2）全排列个数 $N!$，每个全排列占空间 $N$。取较大者。    </p>
+<h3 id="有重复数字"><a href="#有重复数字" class="headerlink" title="有重复数字"></a>有重复数字</h3><p>给定一个 <strong>可能包含重复数字</strong> 的序列 和 排列元素个数 <code>m</code>，返回所有不重复的排列。<strong><font color='red'>written by hand require</font></strong></p>
+<ul>
+<li><strong>16行</strong>代码完成<strong>有重复数字</strong>的全排列算法问题</li>
+</ul>
+<p>在类型1的基础上加上了剪枝策略，不同回溯算法，剪枝策略不一样，这里使用<strong>14行</strong>代码的版本进行剪枝，应用额外的 <code>bool</code> 数组，记录每个元素的使用情况，所以可以方便的进行剪枝。</p>
+<p><strong>剪枝原则</strong>：当该节点没有被使用，且该节点和前面节点的数值一样时，这个节点就应该被剪枝跳过。</p>
+<p>除了判定前后两个数必须相同以外，还要判定当前位置的前面一个位置（ <code>index - 1</code> ）是否被占用，因为前一个位置在回溯时肯定是先被释放了占用了的，加入 <code>not visited[i - 1]</code> 条件，这样的剪枝更彻底。</p>
+<p><strong>添加了以下两行</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 所以要对 visited[index-1] 处进行检查。</span><br><span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i] == nums[i-<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> visited[i-<span class="hljs-number">1</span>]:  <span class="hljs-keyword">continue</span>  <span class="hljs-comment"># 10</span><br><span class="hljs-comment"># 由于要剪枝，所以必须要提前对nums进行排序，让重复的数字排列在一起。</span><br>nums.sort()                                                        <span class="hljs-comment"># 14</span><br></code></pre></div></td></tr></table></figure>
+<p>推荐这种在运算过程中剪枝的算法，效率更高，详见 <a href="/2020/05/10/剑指offer-面试题38-字符串的排列（中）/">剑指offer 面试题38. 字符串的排列（中）</a>中的对比。<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permuteUnique</span>(<span class="hljs-params">nums, m</span>):</span>                                                     <span class="hljs-comment"># 1</span><br>    <span class="hljs-string">&quot;&quot;&quot;permutation with repeatable input</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :return: List[List[int]]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:  <span class="hljs-keyword">return</span>                                                        <span class="hljs-comment"># 2</span><br>    res = []                                                                    <span class="hljs-comment"># 3</span><br>    n = <span class="hljs-built_in">len</span>(nums)                                                               <span class="hljs-comment"># 4</span><br>    visited = [<span class="hljs-literal">False</span>] * n                                                       <span class="hljs-comment"># 5</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">path, depth</span>):</span>                                                 <span class="hljs-comment"># 6</span><br>        <span class="hljs-string">&quot;&quot;&quot;backtrack based on extra space visted vector</span><br><span class="hljs-string">        :param path: List[int]</span><br><span class="hljs-string">        :param depth: int</span><br><span class="hljs-string">        :return: None</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> depth == m:  res.append(path[:])                                     <span class="hljs-comment"># 7</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):                                                      <span class="hljs-comment"># 8</span><br>            <span class="hljs-keyword">if</span> visited[i]:  <span class="hljs-keyword">continue</span>                                            <span class="hljs-comment"># 9</span><br>            <span class="hljs-comment"># 就加了这一句剪枝，那为什么要求visited[index-1]必须为False？</span><br>            <span class="hljs-comment"># 因为一般回溯到这里时，前面visited[index-1]的占用可能没有被撤销。</span><br>            <span class="hljs-comment"># 所以要对 visited[index-1] 处进行检查。</span><br>            <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i] == nums[i-<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> visited[i-<span class="hljs-number">1</span>]:  <span class="hljs-keyword">continue</span>  <span class="hljs-comment"># 10</span><br>            visited[i] = <span class="hljs-literal">True</span>                                                   <span class="hljs-comment"># 11</span><br>            backtrack(path+[nums[i]], depth+<span class="hljs-number">1</span>)                                  <span class="hljs-comment"># 12</span><br>            visited[i] = <span class="hljs-literal">False</span>                                                  <span class="hljs-comment"># 13</span><br><br>    <span class="hljs-comment"># 由于要剪枝，所以必须要提前对nums进行排序，让重复的数字排列在一起。</span><br>    nums.sort()                                                                 <span class="hljs-comment"># 14</span><br>    backtrack([], <span class="hljs-number">0</span>)  <span class="hljs-comment"># 86%                                                     # 15</span><br>    <span class="hljs-keyword">return</span> res                                                                  <span class="hljs-comment"># 16</span><br></code></pre></div></td></tr></table></figure><br>Java版本</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">import</span> java.util.Collections;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LeetCodeTest</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> m = <span class="hljs-number">3</span>;<br>        <span class="hljs-keyword">final</span> List&lt;Integer&gt; nums = Arrays.asList(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>);<br>        <span class="hljs-keyword">final</span> Solution so = <span class="hljs-keyword">new</span> Solution();<br>        <span class="hljs-keyword">final</span> List&lt;List&lt;Integer&gt;&gt; res = so.permute(nums, m);<br>        System.out.println(res);<br>        System.out.println(res.size());<br>    &#125;<br><br>&#125;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br><br>    List&lt;Integer&gt; nums = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    <span class="hljs-keyword">static</span> List&lt;List&lt;Integer&gt;&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    List&lt;Boolean&gt; visited = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    <span class="hljs-keyword">int</span> m = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 带重复数字的全排列生成</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permute(<span class="hljs-keyword">final</span> List&lt;Integer&gt; nums, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> m) &#123;<br><br>        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> n = nums.size();<br>        <span class="hljs-keyword">if</span>(nums.isEmpty()) <br>            <span class="hljs-keyword">return</span> res;<br><br>        <span class="hljs-keyword">this</span>.m = m;<br>        <span class="hljs-keyword">this</span>.nums = nums; <br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++) &#123;<br>            <span class="hljs-keyword">this</span>.visited.add(<span class="hljs-keyword">false</span>);<br>        &#125;<br>        <br>        Collections.sort(nums);<br>        <span class="hljs-keyword">final</span> List&lt;Integer&gt; path = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        backtrack(path, <span class="hljs-number">0</span>);<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.res;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-keyword">final</span> List&lt;Integer&gt; path, <span class="hljs-keyword">int</span> depth)</span> </span>&#123;<br>        <span class="hljs-comment">// 选择终止</span><br>        <span class="hljs-keyword">if</span> (depth == m) &#123;<br>            <span class="hljs-keyword">this</span>.res.add(path);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.size(); i++) &#123;<br>            <span class="hljs-comment">// 减枝</span><br>            <span class="hljs-keyword">if</span> (visited.get(i)) &#123;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (i&gt;<span class="hljs-number">0</span> &amp;&amp; nums.get(i)==nums.get(i-<span class="hljs-number">1</span>) &amp;&amp; !visited.get(i-<span class="hljs-number">1</span>)) &#123;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br><br>            <span class="hljs-comment">// 选择</span><br>            visited.set(i, <span class="hljs-keyword">true</span>);<br>            path.add(nums.get(i));<br>            depth = depth + <span class="hljs-number">1</span>;<br><br>            <span class="hljs-comment">// 回溯</span><br>            backtrack(path, depth);<br><br>            <span class="hljs-comment">// 撤销选择</span><br>            visited.set(i, <span class="hljs-keyword">false</span>);<br>            path.remove(path.size()-<span class="hljs-number">1</span>);<br>            depth = depth - <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><strong>10</strong>代码实现有<strong>重复数字</strong>全排列回溯算法，递归回溯时去掉已经选择的对象，特点结构简单。</li>
+</ul>
+<p><strong>修改了以下代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span> depth == m:  res.append(path[:])   <br>==&gt;<br><span class="hljs-keyword">if</span> depth == m <span class="hljs-keyword">and</span> path <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:  res.append(path[:])   <br></code></pre></div></td></tr></table></figure>
+<p><strong>不推荐这种算法</strong>，虽然理解简单，但是运行效率较低。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permuteUnique</span>(<span class="hljs-params">nums, m</span>):</span>                                                     <span class="hljs-comment"># 1</span><br>    <span class="hljs-string">&quot;&quot;&quot;permutation with repeatable input</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :return: List[List[int]]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:  <span class="hljs-keyword">return</span>                                                        <span class="hljs-comment"># 2</span><br>    res = []                                                                    <span class="hljs-comment"># 3</span><br>    n = <span class="hljs-built_in">len</span>(nums)                                                               <span class="hljs-comment"># 4</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack2</span>(<span class="hljs-params">nums, path, depth</span>):</span>                                          <span class="hljs-comment"># 5</span><br>        <span class="hljs-string">&quot;&quot;&quot;backtrack based on the digging out select number</span><br><span class="hljs-string">        :param nums: List[int]</span><br><span class="hljs-string">        :param path: List[int]</span><br><span class="hljs-string">        :param depth: depth</span><br><span class="hljs-string">        :return: None</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> depth == m <span class="hljs-keyword">and</span> path <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:  res.append(path[:])                 <span class="hljs-comment"># 6</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):                                              <span class="hljs-comment"># 7</span><br>            backtrack2(nums[:i]+nums[i+<span class="hljs-number">1</span>:], path+[nums[i]], depth+<span class="hljs-number">1</span>)            <span class="hljs-comment"># 8</span><br><br>    <span class="hljs-comment"># 由于要剪枝，所以必须要提前对nums进行排序，让重复的数字排列在一起。</span><br>    backtrack2(nums, [], <span class="hljs-number">0</span>)  <span class="hljs-comment"># 12.83%                                           # 9</span><br>    <span class="hljs-keyword">return</span> res                                                                  <span class="hljs-comment"># 10</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="组合（子集）"><a href="#组合（子集）" class="headerlink" title="组合（子集）"></a>组合（子集）</h2><h3 id="无重复数字-1"><a href="#无重复数字-1" class="headerlink" title="无重复数字"></a>无重复数字</h3><h4 id="一般组合（一般子集）"><a href="#一般组合（一般子集）" class="headerlink" title="一般组合（一般子集）"></a>一般组合（一般子集）</h4><p>给定一个数组 <code>nums</code> (<strong>无重复、不一定连续</strong>) ，求 <code>k</code> 个子元素组成的所有组合，<strong>14行</strong>代码实现。 <strong><font color='red'>written by hand require</font></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subset</span>(<span class="hljs-params">nums, k</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">start = <span class="hljs-number">0</span>, path = []</span>):</span><br>        cur_len = <span class="hljs-built_in">len</span>(path)<br>        <span class="hljs-keyword">if</span> cur_len == k:<br>            res.append(path[:])<br>            <span class="hljs-keyword">return</span> <br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, n - (k - cur_len) + <span class="hljs-number">1</span>):  <span class="hljs-comment"># 剪枝策略，详见LeetCode 77题</span><br>            backtrack(i + <span class="hljs-number">1</span>, path + [nums[i]])<br>    n = <span class="hljs-built_in">len</span>(nums)<br>    <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [nums]<br>    <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> [[]]<br>    res = []<br>    backtrack()<br>    <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p><strong>时间复杂度</strong> : $O(k \times C_N^k)$。<br><strong>空间复杂度</strong> : $O(C_N^k)$ ，用于保存全部组合数以输出。  </p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Input</span><br>nums = [<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, <span class="hljs-number">50</span>, <span class="hljs-number">36</span>, <span class="hljs-number">99</span>]<br>k = <span class="hljs-number">2</span><br>res = subset(nums, k)<br>print(res)<br>print(<span class="hljs-built_in">len</span>(res))  <span class="hljs-comment"># 5选2 10种情况</span><br><span class="hljs-comment"># Output</span><br>[[<span class="hljs-number">1</span>, <span class="hljs-number">36</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">50</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">99</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">100</span>], [<span class="hljs-number">36</span>, <span class="hljs-number">50</span>], [<span class="hljs-number">36</span>, <span class="hljs-number">99</span>], [<span class="hljs-number">36</span>, <span class="hljs-number">100</span>], [<span class="hljs-number">50</span>, <span class="hljs-number">99</span>], [<span class="hljs-number">50</span>, <span class="hljs-number">100</span>], [<span class="hljs-number">99</span>, <span class="hljs-number">100</span>]]<br><span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="全组合（全子集）"><a href="#全组合（全子集）" class="headerlink" title="全组合（全子集）"></a>全组合（全子集）</h4><p>给定一个 <code>nums</code> (<strong>无重复、不一定连续</strong>) ，求所有子集。</p>
+<p><em>回溯算法</em>  <strong>11行代码</strong>实现</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">nums</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;calculate all kinds of subsets based on input list</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :param k: int</span><br><span class="hljs-string">    :return: List[List[int]]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums: <span class="hljs-keyword">return</span> []<br>    n = <span class="hljs-built_in">len</span>(nums)<br>    res = []<br>    nums.sort()<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">idx, n, path</span>):</span><br>        res.append(path[:])  <span class="hljs-comment"># 无需终止条件，一直往res种加回溯结果就行。</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(idx, n):<br>            backtrack(i + <span class="hljs-number">1</span>, n, path + [nums[i]])<br>    backtrack(<span class="hljs-number">0</span>, n, [])<br>    <span class="hljs-keyword">return</span> re<br></code></pre></div></td></tr></table></figure>
+<p><em>遍历循环</em> <strong>5行代码</strong>实现</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">nums</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;calculate all kinds of subsets based on input list</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :param k: int</span><br><span class="hljs-string">    :return: List[List[int]]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    res = [[]]<br>    <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>        res += [curr + [num] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> res]<br>    <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：$O(N \times 2^N)$，生成所有子集，并复制到输出结果中。<br>空间复杂度：$O(N \times 2^N)$，这是子集的数量。<br>对于给定的任意元素，它在子集中有两种情况，存在或者不存在（对应二进制中的 0 和 1）。因此，$N$ 个数字共有 $2^N$个子集。</p>
+<h3 id="有重复数字-1"><a href="#有重复数字-1" class="headerlink" title="有重复数字"></a>有重复数字</h3><h4 id="一般组合（一般子集）-1"><a href="#一般组合（一般子集）-1" class="headerlink" title="一般组合（一般子集）"></a>一般组合（一般子集）</h4><p>给定一个数组 <code>nums</code> (<strong>无重复、不一定连续</strong>) ，求 <code>k</code> 个子元素组成的所有组合，<strong>15行</strong>代码实现。 <strong><font color='red'>written by hand require</font></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsetWithDup</span>(<span class="hljs-params">nums, k</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;calculate subset with k elements based on input list</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :param k: int</span><br><span class="hljs-string">    :return: List[List[int]]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">start = <span class="hljs-number">0</span>, path = []</span>):</span><br>        cur_len = <span class="hljs-built_in">len</span>(path)<br>        <span class="hljs-keyword">if</span> cur_len == k:<br>            <span class="hljs-keyword">if</span> path <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:  <span class="hljs-comment"># 此处去重有效</span><br>                res.append(path[:])<br>            <span class="hljs-keyword">return</span> <br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, n - (k - cur_len) + <span class="hljs-number">1</span>):  <span class="hljs-comment"># 剪枝策略，详见LeetCode 77题</span><br>            <span class="hljs-comment"># if i &gt; start and nums[i] == nums[i-1]:  # 此处去重无效</span><br>            <span class="hljs-comment">#     continue</span><br>            backtrack(i + <span class="hljs-number">1</span>, path + [nums[i]])<br>    n = <span class="hljs-built_in">len</span>(nums)<br>    <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [nums]<br>    <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> [[]]<br>    res = []<br>    backtrack()<br>    <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<h4 id="全组合（全子集）-1"><a href="#全组合（全子集）-1" class="headerlink" title="全组合（全子集）"></a>全组合（全子集）</h4><p>给定一个 <code>nums</code> (<strong>有重复、不一定连续</strong>) ，求所有子集。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsetsWithDup</span>(<span class="hljs-params">nums</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;calculate all kinds of subsets based on input list</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :param k: int</span><br><span class="hljs-string">    :return: List[List[int]]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums: <span class="hljs-keyword">return</span> []<br>    res = []<br>    nums.sort()  <span class="hljs-comment"># 去重都要做排序</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">traversal</span>():</span><br>        <span class="hljs-string">&quot;&quot;&quot;calculate all kinds of subsets based on traversal</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># 循环开始前先对nums进行排序</span><br>        output = [[]]<br>        tmp = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):<br>            <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i - <span class="hljs-number">1</span>] == nums[i]:  <br>                tmp = [curr + [nums[i]] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> tmp]<br>            <span class="hljs-keyword">else</span>:<br>                tmp = [curr + [nums[i]] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> output]<br>            output += tmp<br>        <span class="hljs-keyword">return</span> output<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">start, n, path</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;calculate all kinds of subsets based on traversal</span><br><span class="hljs-string">        :param start: int</span><br><span class="hljs-string">        :param n: int</span><br><span class="hljs-string">        :param path: List[int]</span><br><span class="hljs-string">        :return: None</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># if path not in res:  # 去重处1(35.29%)</span><br>        <span class="hljs-comment">#     res.append(path[:])</span><br>        res.append(path[:])  <span class="hljs-comment"># 无需终止条件，一直往res种加回溯结果就行。</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, n):<br>            <span class="hljs-keyword">if</span> i &gt; start <span class="hljs-keyword">and</span>  nums[i] == nums[i - <span class="hljs-number">1</span>]:  <span class="hljs-comment"># 去重处2(76.81%)</span><br>                <span class="hljs-keyword">continue</span><br>            backtrack(i + <span class="hljs-number">1</span>, n, path + [nums[i]])<br><br>    <span class="hljs-comment"># 基于回溯的方法</span><br>    n = <span class="hljs-built_in">len</span>(nums)<br>    backtrack(<span class="hljs-number">0</span>, n, [])  <span class="hljs-comment"># 35.29%/76.81%</span><br><br>    <span class="hljs-comment"># 基于遍历递归的方法</span><br>    <span class="hljs-comment"># res = traversal()  # 76.81%</span><br><br>    <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<h1 id="关键思想总结"><a href="#关键思想总结" class="headerlink" title="关键思想总结"></a>关键思想总结</h1><p>1、回溯算法的精髓是 <strong>“终止条件、路径保存、选择列表”</strong> ，有些题目非常灵活的使用了回溯的思想，例如LeetCode 17/22等题目，就是利用回溯算法解决一些字符串生成和搜索的问题。<br>2、一般来说，下棋或者数独问题都是要用<strong>约束编程+回溯算法</strong>的思想去解决，例如LeetCode 37/51/52。<br>3、LeetCode 78，典型的把简单问题复杂化了，求幂子集，直接去掉终止条件，一直递归回溯就行。<br>4、回溯算法中的输入去重问题，注意学习利用 <code>while</code> 条件在运算过程中去重的方法，例如 LeetCode 90。<br>5、无重复数字求组合：LeetCode 77/78，有重复数字求组合：LeetCode 90。无重复数字求排列：LeetCode 46，有重复数字求组合：LeetCode 47。<br>6、回溯算法去重，有两种思路，一是在先sort然后在for循环中跳过重复的，二是在加入时判断是否重复。<br>7、针对具体问题，多挖掘剪枝条件，LeetCode 93。</p>
+<h1 id="相关LeetCode题目"><a href="#相关LeetCode题目" class="headerlink" title="相关LeetCode题目"></a>相关LeetCode题目</h1><h2 id="LeetCode-10-正则表达式匹配（难）"><a href="#LeetCode-10-正则表达式匹配（难）" class="headerlink" title="LeetCode 10. 正则表达式匹配（难）"></a>LeetCode 10. 正则表达式匹配（难）</h2><p><strong>直觉</strong></p>
+<p>这个题目，挺难的，其结构不是一道正常的递归回溯题目。走的是先匹配当前字符和pattern第一个字符。再分开考虑无限通配符的情况，具体请看代码注释。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-comment"># 暴力递归</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isMatch</span>(<span class="hljs-params">self, text, pattern</span>):</span><br>        <span class="hljs-comment"># 当pattern为空时执行以下逻辑</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> pattern:<br>            <span class="hljs-comment"># 如果text非空，空pattern无法匹配非空text，应该返回False，而not text就是False。</span><br>            <span class="hljs-comment"># 如果txt为空，空pattern可以匹配空text，应该返回True，而 not text就是True。</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> text  <br><br>        <span class="hljs-comment"># 当前第一个字符是否匹配，考虑了.作为通配符的情况。首先text必须非空所以有bool(text)的条件，其次pattern[0]需要为.或者和text[0]相等。</span><br>        first_match = <span class="hljs-built_in">bool</span>(text) <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">0</span>] <span class="hljs-keyword">in</span> &#123;text[<span class="hljs-number">0</span>], <span class="hljs-string">&#x27;.&#x27;</span>&#125;  <span class="hljs-comment"># 这里必须用bool(text)，不能用text，否者无法判断非空。</span><br><br>        <span class="hljs-comment"># 考虑无限匹配符*的情况</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(pattern) &gt;= <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>:<br>            <span class="hljs-comment"># 考虑匹配0次（传入self.isMatch的是text和pattern[:2]，代表当前text不匹配且跳过pattern[0]和patter[1]，及跳过*匹配项。</span><br>            <span class="hljs-comment"># 或者考虑递归匹配1次（也就是考虑多次），传入self.isMatch的是text[1:]和pattern，代表当前text[0]已经算匹配了的，继续考虑*匹配项。</span><br>            <span class="hljs-comment"># 这两种考虑是or关系，因为题干里面说了&#x27;*&#x27;是指匹配零个或多个前面的那一个元素。）</span><br>            <span class="hljs-keyword">return</span> (self.isMatch(text, pattern[<span class="hljs-number">2</span>:]) <span class="hljs-keyword">or</span><br>                    first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>:], pattern))  <br>         <span class="hljs-comment"># 非无限匹配符*的情况，简单的把text和pattern都往后调整即可。</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>:], pattern[<span class="hljs-number">1</span>:])  <br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/08/LeetCode-10-正则表达式匹配（难）/">LeetCode-10-正则表达式匹配（难）</a></p>
+<h2 id="LeetCode-17-电话号码的字母组合（中）"><a href="#LeetCode-17-电话号码的字母组合（中）" class="headerlink" title="LeetCode 17. 电话号码的字母组合（中）"></a>LeetCode 17. 电话号码的字母组合（中）</h2><p><strong>直觉</strong></p>
+<p>给出如下回溯函数 <code>backtrack(combination, next_digits)</code> ，它将一个目前已经产生的组合 <code>combination</code> 和接下来准备要输入的数字 <code>next_digits</code> 作为参数。如果没有更多的数字需要被输入，那意味着当前的组合已经产生好了，可以直接添加。如果还有数字需要被输入：遍历下一个数字所对应的所有映射的字母。将当前的字母添加到组合最后，也就是 <code>combination = combination + letter</code> 。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">combination, next_digits</span>):</span><br>    <span class="hljs-comment"># 如果没有更多的数字需要被输入，那意味着当前的组合已经产生好了，可以直接添加。</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> next_digits:<br>        output.append(combination)<br>    <span class="hljs-comment"># 如果还有数字需要被输入，遍历下一个数字所对应的所有映射的字母。</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-comment"># phone[next_digits[0]]是数字代表的字母构成的list [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br>        <span class="hljs-keyword">for</span> letter <span class="hljs-keyword">in</span> phone[next_digits[<span class="hljs-number">0</span>]]:<br>            <span class="hljs-comment"># 在这里添加letter到前面的combination上，将遍历得到的字母添加到组合最后。</span><br>            backtrack(combination + letter, next_digits[<span class="hljs-number">1</span>:])<br><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/08/LeetCode-17-电话号码的字母组合（中）/">LeetCode 17. 电话号码的字母组合（中）</a></p>
+<h2 id="LeetCode-22-括号生成（中）"><a href="#LeetCode-22-括号生成（中）" class="headerlink" title="LeetCode 22. 括号生成（中）"></a>LeetCode 22. 括号生成（中）</h2><p><strong>直觉</strong></p>
+<p><strong>只有在我们知道序列仍然保持有效时才添加 <code>&#39;(&#39;</code> or <code>&#39;)&#39;</code></strong>，我们<strong>可以通过跟踪到目前为止放置的左括号和右括号的数目</strong>来做到这一点，从代码形式上就是先放左括号，后放右括号。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">S = <span class="hljs-string">&#x27;&#x27;</span>, left = <span class="hljs-number">0</span>, right = <span class="hljs-number">0</span></span>):</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(S) == <span class="hljs-number">2</span> * N:  <span class="hljs-comment"># 结束条件为S的长度已经达到了2N</span><br>        ans.append(S)<br>        <span class="hljs-keyword">return</span>  <span class="hljs-comment"># 完成一次有效选择，返回上一层</span><br>    <br>    <span class="hljs-comment"># 开始做选择</span><br>    <span class="hljs-keyword">if</span> left &lt; N:  <span class="hljs-comment"># 如果left&lt;N说明还可以放置开括号，就添加开括号，先添加开括号。 为什么要优先添加开括号，因为现有”(“后有”)“。</span><br>        backtrack(S+<span class="hljs-string">&#x27;(&#x27;</span>, left+<span class="hljs-number">1</span>, right)  <span class="hljs-comment"># backtrack(路径, 选择列表)</span><br>    <br>    <span class="hljs-comment"># 添加完开括号之后，撤销选择。</span><br>    <span class="hljs-keyword">if</span> right &lt; left:  <span class="hljs-comment"># 添加闭括号</span><br>        backtrack(S+<span class="hljs-string">&#x27;)&#x27;</span>, left, right+<span class="hljs-number">1</span>)  <span class="hljs-comment"># 在原来S的基础上添加闭括号，相当于上面没有添加开括号，也就是把选择给撤销了。1</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/08/LeetCode-22-括号生成（中）/">LeetCode 22. 括号生成（中）</a></p>
+<h2 id="LeetCode-37-解数独（难）★"><a href="#LeetCode-37-解数独（难）★" class="headerlink" title="LeetCode 37. 解数独（难）★"></a>LeetCode 37. 解数独（难）★</h2><p><strong>直觉</strong></p>
+<p>基本的意思是在放置每个数字时都设置约束。在数独上放置一个数字后立即排除当前行、列和子方块对该数字的使用。这会传播 <strong>约束条件</strong> 并有利于减少需要考虑组合的个数。这个情况在N皇后问题中也出现过，N皇后问题也考虑了回溯算法。<strong>这说明约束编程和回溯算法一般都会复共同出现，</strong>约束编程可以视为一种剪枝策略。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 声明三个hash map用来保存存储关系 实现约束编程</span><br>rows = [defaultdict(<span class="hljs-built_in">int</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N)]<br>columns = [defaultdict(<span class="hljs-built_in">int</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N)]<br>boxes = [defaultdict(<span class="hljs-built_in">int</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N)]<br><br><span class="hljs-comment"># 定义could_place方法，检测该位置，是否可以放置该数字。</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">could_place</span>(<span class="hljs-params">d, row, col</span>):</span><br><br><span class="hljs-comment"># 定义place_number方法，将数放置到对应位置，并添加rows、columns、boxes约束。</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">place_number</span>(<span class="hljs-params">d, row, col</span>):</span><br>    <br><span class="hljs-comment"># 定义remove_number方法，将某个位置的数据去掉，替换回&#x27;.&#x27;，同时去掉约束。</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">remove_number</span>(<span class="hljs-params">d, row, col</span>):</span><br><br><span class="hljs-comment"># 定义place_next_numbers方法。进行一些place_number之后的操作，比如终止循环、同行依次递归、异行折行递归。</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">place_next_numbers</span>(<span class="hljs-params">row, col</span>):</span><br><br><span class="hljs-comment"># 定义backtrack回溯函数</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">row = <span class="hljs-number">0</span>, col = <span class="hljs-number">0</span></span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    Backtracking</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># if the cell is empty</span><br>    <span class="hljs-keyword">if</span> board[row][col] == <span class="hljs-string">&#x27;.&#x27;</span>:  <span class="hljs-comment"># 如果当前位置是空的，也就是&#x27;.&#x27;，就从1到10，一个一个的填进去试试。</span><br>        <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>):   <span class="hljs-comment"># 选择列表：range(1, 10)</span><br>            <span class="hljs-keyword">if</span> could_place(d, row, col):  <span class="hljs-comment"># 先判断该位置能不能放这个数</span><br>                place_number(d, row, col)  <span class="hljs-comment"># 做选择：如果没有被约束，就将这个数放到这个位置。</span><br>                place_next_numbers(row, col)  <span class="hljs-comment"># 判断是否终止：然后调用place_next_numbers，进行一些place_number之后的操作，比如终止循环、同行依次递归、异行折行递归。</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> sudoku_solved:  <span class="hljs-comment"># 利用sudoku_solved判定数独是否解决</span><br>                    remove_number(d, row, col)  <span class="hljs-comment"># 撤销：选择如果没有解决，就执行撤销操作。</span><br>    <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 否则调用place_next_numbers方法，检测下一个位置。</span><br>        place_next_numbers(row, col) <br>    <br><span class="hljs-comment"># 将str的数独输入转化成int类型，并建立约束。</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):<br>        <span class="hljs-keyword">if</span> board[i][j] != <span class="hljs-string">&#x27;.&#x27;</span>: <br>            d = <span class="hljs-built_in">int</span>(board[i][j])<br>            place_number(d, i, j)  <span class="hljs-comment"># 在这里就把每一个已存在数字的约束建立好</span><br><br><span class="hljs-comment"># 声明终止条件sudoku_solved为False并调用backtrack()</span><br>sudoku_solved = <span class="hljs-literal">False</span><br>backtrack()<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/09/LeetCode-37-解数独（难）/">LeetCode 37. 解数独（难）</a></p>
+<h2 id="LeetCode-39-组合总和（中）★"><a href="#LeetCode-39-组合总和（中）★" class="headerlink" title="LeetCode 39. 组合总和（中）★"></a>LeetCode 39. 组合总和（中）★</h2><p>减法回溯：一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字<strong>可以无限制重复被选取</strong>，解集不能包含重复的组合。</p>
+<p><strong>直觉</strong></p>
+<p>基于减法回溯，从根结点到叶子结点（必须为 0）的路径，就是题目要我们找的一个组合。</p>
+<ul>
+<li>去重：通过设置下一轮搜索的起点，防止在较深层的结点重复使用之前使用过的值。</li>
+<li>剪枝：把候选数组排个序，遇到一个较大的数，如果以这个数为起点都搜索不到结果，后面的数就更搜索不到结果了。</li>
+</ul>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combinationSum</span>():</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">path, begin, target</span>)</span><br>        if target == 0:<br>            res.append(path[:])<br>            <span class="hljs-keyword">return</span><br>        <span class="hljs-keyword">if</span> target &lt; <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span><br><br>        <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(begin, <span class="hljs-built_in">len</span>(nums)):<br>            residue = target - nums[index]<br>            <span class="hljs-keyword">if</span> residue &lt; <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">break</span><br>            backtrack(path+[nums[index]], index, residue)<br><br>    res = []<br>    nums.sort()<br>    backtrack([], <span class="hljs-number">0</span>, target)<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/09/LeetCode-39-组合总和（中）/">LeetCode 39. 组合总和（中）</a></p>
+<h2 id="LeetCode-40-组合总和-II（中）"><a href="#LeetCode-40-组合总和-II（中）" class="headerlink" title="LeetCode 40. 组合总和 II（中）"></a>LeetCode 40. 组合总和 II（中）</h2><p><strong>题目</strong></p>
+<p>一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的<strong>每个数字在每个组合中只能使用一次</strong>，解集不能包含重复的组合。</p>
+<p><strong>直觉</strong></p>
+<p>主要难点有两个：1、一个数字本身不能重复用。2、去掉重复的组合。<br>先对数组升序排序，重复的元素一定排在一起，到时候做个判断，跳过就好了。<br>禁止每一个数字出现多次，只能出现一次，所以，在剪枝后面，再加一个重复数字判断就行。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(begin, length):<br>    <span class="hljs-comment"># 剪枝判断，如果当前位置的数字大于residue，由于是sort了的，那后面也不用看了，接break掉。这里是剪枝。</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sum</span>(path) + candidates[index]) &gt; target:<br>        <span class="hljs-keyword">break</span><br>    <span class="hljs-comment"># 在这里进行一个判断，过滤掉那些紧随其后一样的数字，这么写就是为了防止不同数字重复解的出现。这里是去重复。</span><br>    <span class="hljs-keyword">if</span> index &gt; begin <span class="hljs-keyword">and</span> candidates[index-<span class="hljs-number">1</span>] == candidates[index]:<br>        <span class="hljs-keyword">continue</span><br>    <span class="hljs-comment"># index+1，这么写就是为了防止数字本身重复。</span><br>    backtrack(candidates + [index], index+<span class="hljs-number">1</span>, path, res, length)  <br><br>candidates.sort()<br>backtrack(candidates, <span class="hljs-number">0</span>, path, res, length)<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/09/LeetCode-40-组合总和-II（中）/">LeetCode 40. 组合总和 II（中）</a></p>
+<h2 id="LeetCode-46-全排列（中）"><a href="#LeetCode-46-全排列（中）" class="headerlink" title="LeetCode 46. 全排列（中）"></a>LeetCode 46. 全排列（中）</h2><p><strong>题目</strong></p>
+<p>给定一个<strong>没有重复数字</strong>的序列，返回其所有可能的全排列。</p>
+<p><strong>直觉</strong></p>
+<ul>
+<li>基于额外的 <code>bool</code> 数组记录每个元素的使用情况</li>
+<li>递归回溯时去掉已经选择的对象</li>
+<li>递归回溯时直接在 <code>nums</code> 上操作，将第 <code>i</code> 个整数放在当前排列的待安置位置。</li>
+</ul>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">nums, path, depth</span>):</span>                               <span class="hljs-comment"># 5</span><br>    <span class="hljs-string">&quot;&quot;&quot;backtrack based on the digging out select number</span><br><span class="hljs-string">    :param nums: List[int]</span><br><span class="hljs-string">    :param path: List[int]</span><br><span class="hljs-string">    :param depth: depth</span><br><span class="hljs-string">    :return: None</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> depth == n:  res.append(path)                             <span class="hljs-comment"># 6</span><br>    <span class="hljs-comment"># 以range(len(nums))作为选择列表，则之前那个已经被挖掉的元素不会再被选择</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):                                   <span class="hljs-comment"># 7</span><br>        <span class="hljs-comment"># 递归调用时就挖掉了那个已经选择的元素</span><br>        backtrack(nums[:i]+nums[i+<span class="hljs-number">1</span>:], path+[nums[i]], depth+<span class="hljs-number">1</span>)  <span class="hljs-comment"># 8</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/10/LeetCode-46-全排列（中）/">LeetCode 46. 全排列（中）</a></p>
+<h2 id="LeetCode-47-全排列-II（中）"><a href="#LeetCode-47-全排列-II（中）" class="headerlink" title="LeetCode 47. 全排列 II（中）"></a>LeetCode 47. 全排列 II（中）</h2><p><strong>题目</strong></p>
+<p>给定<strong>一个可包含重复数字</strong>的序列，返回所有不重复的全排列。</p>
+<p><strong>直觉</strong></p>
+<p><strong>剪枝原则</strong>：当该节点没有被使用，且该节点和前面节点的数值一样时，这个节点就应该被剪枝跳过。</p>
+<p>除了判定前后两个数必须相同以外，还要判定当前位置的前面一个位置（ <code>index - 1</code> ）是否被占用，因为前一个位置在回溯时肯定是先被释放了占用了的，加入 <code>not visited[i - 1]</code> 条件，这样的剪枝更彻底。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 给定 bool数组 控制回溯</span><br><span class="hljs-comment"># 所以要对 visited[index-1] 处进行检查。</span><br><span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i] == nums[i -<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> visited[i-<span class="hljs-number">1</span>]:  <span class="hljs-keyword">continue</span>  <span class="hljs-comment"># 10</span><br><span class="hljs-comment"># 由于要剪枝，所以必须要提前对nums进行排序，让重复的数字排列在一起。</span><br>nums.sort()                                                         <span class="hljs-comment"># 14</span><br><br><span class="hljs-comment"># 直接将选择过的去掉</span><br><span class="hljs-keyword">if</span> depth == n:  res.append(path[:])   <br>==&gt;<br><span class="hljs-keyword">if</span> depth == n <span class="hljs-keyword">and</span> path <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:  res.append(path[:])   <br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/10/LeetCode-47-全排列-II（中）/">LeetCode 47. 全排列 II（中）</a></p>
+<h2 id="LeetCode-51-N皇后（难）★"><a href="#LeetCode-51-N皇后（难）★" class="headerlink" title="LeetCode 51. N皇后（难）★"></a>LeetCode 51. N皇后（难）★</h2><p><strong>直觉</strong></p>
+<p>当在棋盘上放置了几个皇后且不会相互攻击。但是选择的方案不是最优的，因为无法放置下一个皇后。此时我们该怎么做？回溯。意思是回退一步，来改变最后放置皇后的位置并且接着往下放置。如果还是不行，再回溯。</p>
+<ul>
+<li>一行只可能有一个皇后且一列也只可能有一个皇后。这意味着没有必要再棋盘上考虑所有的方格。只需要按列循环即可。</li>
+<li>对于所有的主对角线（左上到右下）有 <code>行号 - 列号 = 常数</code>，对于所有的次对角线（右上到左下）有 <code>行号 + 列号 = 常数</code>。</li>
+</ul>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 判断该位置是否可以用于放置皇后</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">could_place</span>(<span class="hljs-params">row, col</span>)</span><br><span class="hljs-function"></span><br><span class="hljs-function"># 进行选择：将皇后进行放置，并设置列约束和对角线约束。</span><br><span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">place_queen</span>(<span class="hljs-params">row, col</span>)</span><br><span class="hljs-function"></span><br><span class="hljs-function"># 撤销选择：解除该位置的占用</span><br><span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">remove_queen</span>(<span class="hljs-params">row, col</span>)</span><br><span class="hljs-function"></span><br><span class="hljs-function"># 添加结果：将结果转化为题目要求的形式</span><br><span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">add_solution</span>()</span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">row = <span class="hljs-number">0</span></span>):</span><br>    <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):  <span class="hljs-comment"># 选择列表 遍历这一行的所有列 以找到一个位置放入皇后</span><br>        <span class="hljs-keyword">if</span> could_place(row, col):<br>            place_queen(row, col)  <span class="hljs-comment"># 进行选择</span><br>            <span class="hljs-keyword">if</span> row + <span class="hljs-number">1</span> == n:  <span class="hljs-comment"># 结束条件</span><br>                add_solution()<br>            <span class="hljs-keyword">else</span>:<br>                backtrack(row + <span class="hljs-number">1</span>)  <span class="hljs-comment"># 递归回溯，列不变</span><br>            remove_queen(row, col)  <span class="hljs-comment"># 撤销选择</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/10/LeetCode-51-N皇后（难）/">LeetCode 51. N皇后（难）</a></p>
+<h2 id="LeetCode-52-N皇后-II（难）"><a href="#LeetCode-52-N皇后-II（难）" class="headerlink" title="LeetCode 52. N皇后 II（难）"></a>LeetCode 52. N皇后 II（难）</h2><p><strong>直觉</strong></p>
+<p>与51题一样，不过返回的不是具体的解答，而是解答的个数。修改部分代码即可，去掉变量 <code>queens</code> 和 <code>out_put</code> 以及函数 <code>add_solution</code>，直接在满足终止条件时，执行 <code>count += 1</code>，返回 <code>count</code> 结果就行。</p>
+<p>这一题也可以使用位运算（位图）来实现，不过理解较为复杂。</p>
+<p><strong>关键代码</strong></p>
+<ul>
+<li>传统代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">could_place</span>(<span class="hljs-params">row, col</span>):</span><br>    <br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">place_queen</span>(<span class="hljs-params">row, col</span>)</span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">remove_queen</span>(<span class="hljs-params">row, col</span>)</span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-title">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">row = <span class="hljs-number">0</span>, count = <span class="hljs-number">0</span></span>):</span>  <span class="hljs-comment"># 默认backtrack从第0行开始</span><br>    <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):  <span class="hljs-comment"># &lt;选择列表&gt; 逐列添加</span><br>        <span class="hljs-keyword">if</span> could_place(row, col):  <span class="hljs-comment"># 判断当前位置是否可以添加皇后</span><br>            place_queen(row, col)  <span class="hljs-comment"># 执行选择</span><br>            <span class="hljs-keyword">if</span> row + <span class="hljs-number">1</span> == n:  <span class="hljs-comment"># &lt;结束条件&gt; Our Goal 遍历完所有行</span><br>                count += <span class="hljs-number">1</span>  <span class="hljs-comment"># 发现一个解，count加1</span><br>            <span class="hljs-keyword">else</span>:<br>                count = backtrack(row + <span class="hljs-number">1</span>, count)  <span class="hljs-comment"># 递归回溯， 列不变</span><br>            remove_queen(row, col)  <span class="hljs-comment"># 撤销选择</span><br>    <span class="hljs-keyword">return</span> count<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>位运算</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">totalNQueens</span>(<span class="hljs-params">self, n</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type n: int</span><br><span class="hljs-string">        :rtype: int</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">row = <span class="hljs-number">0</span>, hills = <span class="hljs-number">0</span>, next_row = <span class="hljs-number">0</span>, dales = <span class="hljs-number">0</span>, count = <span class="hljs-number">0</span></span>):</span><br>            <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            :type row: 当前放置皇后的行号</span><br><span class="hljs-string">            :type hills: 主对角线占据情况 [1 = 被占据，0 = 未被占据]</span><br><span class="hljs-string">            :type next_row: 下一行被占据的情况 [1 = 被占据，0 = 未被占据] 实际上就是记录了还有哪些列可以用</span><br><span class="hljs-string">            :type dales: 次对角线占据情况 [1 = 被占据，0 = 未被占据]</span><br><span class="hljs-string">            :rtype: 所有可行解的个数</span><br><span class="hljs-string">            &quot;&quot;&quot;</span><br>            <span class="hljs-keyword">if</span> row == n:  <span class="hljs-comment"># 如果已经放置了 n 个皇后</span><br>                count += <span class="hljs-number">1</span>  <span class="hljs-comment"># 累加可行解</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-comment"># 当前行可用的列</span><br>                <span class="hljs-comment"># ! 表示 0 和 1 的含义对于变量 hills, next_row and dales的含义是相反的</span><br>                <span class="hljs-comment"># [1 = 未被占据，0 = 被占据]</span><br>                free_columns = columns &amp; ~(hills | next_row | dales)<br>                <span class="hljs-comment"># free_columns =  ~(hills | next_row | dales)</span><br>                <br>                <span class="hljs-comment"># 找到可以放置下一个皇后的列</span><br>                <span class="hljs-keyword">while</span> free_columns:<br>                    <span class="hljs-comment"># free_columns 的第一个为 &#x27;1&#x27; 的位在该列我们放置当前皇后</span><br>                    curr_column = - free_columns &amp; free_columns<br>                    <span class="hljs-comment"># 放置皇后 并且排除对应的列</span><br>                    free_columns ^= curr_column<br>                    count = backtrack(row + <span class="hljs-number">1</span>, <br>                                      (hills | curr_column) &lt;&lt; <span class="hljs-number">1</span>, <br>                                      next_row | curr_column, <br>                                      (dales | curr_column) &gt;&gt; <span class="hljs-number">1</span>, <br>                                      count)<br>            <span class="hljs-keyword">return</span> count<br><br>        <span class="hljs-comment"># 棋盘所有的列都可放置，</span><br>        <span class="hljs-comment"># 即，按位表示为 n 个 &#x27;1&#x27;</span><br>        <span class="hljs-comment"># bin(cols) = 0b1111 (n = 4), bin(cols) = 0b111 (n = 3)</span><br>        <span class="hljs-comment"># [1 = 可放置]</span><br>        columns = (<span class="hljs-number">1</span> &lt;&lt; n) - <span class="hljs-number">1</span>  <span class="hljs-comment"># columns中为每一行默认可以放置的位置 全1</span><br>        <span class="hljs-keyword">return</span> backtrack()<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/10/LeetCode-52-N皇后-II（难）/">LeetCode 52. N皇后 II（难）</a></p>
+<h2 id="LeetCode-77-组合（中）"><a href="#LeetCode-77-组合（中）" class="headerlink" title="LeetCode 77. 组合（中）"></a>LeetCode 77. 组合（中）</h2><p><strong>题目</strong></p>
+<p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</p>
+<p><strong>直觉</strong></p>
+<p>直接回溯：不设置 <code>is_validate</code> 函数和 <code>used</code> 变量，每次都从下一个位置开始遍历，这样就跳过了重复的情况。</p>
+<p>加上剪枝：剪枝要去掉的多余步骤一般出现在循环中，如果已经选了的元素都放到 <code>select</code> 中，一共要选择 <code>k</code> 个元素。那么循环干的事情，是从 <code>[i, n]</code> 这个区间里（注意，左右都是闭区间），找到 <code>k - len(selects)</code>个元素。 <code>i</code> 有一个上限。那这个上限 <code>max(i)</code> 是 <code>n - (k -len(selects)) + 1</code>。所以，我们的剪枝过程就是：把for循环的终止条件从 <code>i &lt; n+1</code> 改成 <code>i &lt; n - (k - len(selects)) + 2</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n - (k - <span class="hljs-built_in">len</span>(selects)) + <span class="hljs-number">2</span>):<br>    pre.append(i)<br>    backtrack(i + <span class="hljs-number">1</span>, selects)<br>    pre.pop()<br></code></pre></div></td></tr></table></figure>
+<p>也可以用<strong>字典序 (二进制排序) 组合</strong>来解决，不过理解起来不是很简单。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">first=<span class="hljs-number">1</span>, selects=[]</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(selects) == k:<br>                res.append(selects[:])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-comment"># for i in range(first, n + 1):  # 剪枝之前 66.70%</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n - (k - <span class="hljs-built_in">len</span>(selects)) + <span class="hljs-number">2</span>):  <span class="hljs-comment"># 剪枝之后 97.27%</span><br>                selects.append(i)<br>                backtrack(i+<span class="hljs-number">1</span>, selects)<br>                selects.pop()<br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))]<br>        res = []<br>        backtrack()<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p>字典序</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))]<br>         <br>        <span class="hljs-comment"># init first combination</span><br>        nums = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, k + <span class="hljs-number">1</span>)) + [n + <span class="hljs-number">1</span>]<br>        <br>        output, j = [], <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> j &lt; k:<br>            <span class="hljs-comment"># add current combination</span><br>            output.append(nums[:k])<br>            <span class="hljs-comment"># increase first nums[j] by one</span><br>            <span class="hljs-comment"># if nums[j] + 1 != nums[j + 1]</span><br>            j = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">while</span> j &lt; k <span class="hljs-keyword">and</span> nums[j + <span class="hljs-number">1</span>] == nums[j] + <span class="hljs-number">1</span>:<br>                nums[j] = j + <span class="hljs-number">1</span><br>                j += <span class="hljs-number">1</span><br>            nums[j] += <span class="hljs-number">1</span><br>            <br>        <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/20/LeetCode-77-组合（中）/">LeetCode 77. 组合（中）</a></p>
+<h2 id="LeetCode-78-子集（中）"><a href="#LeetCode-78-子集（中）" class="headerlink" title="LeetCode 78. 子集（中）"></a>LeetCode 78. 子集（中）</h2><p><strong>题目</strong></p>
+<p>给定一组<strong>不含重复元素、也不一定连续</strong>的整数数组 <em>nums</em>，返回该数组所有可能的子集（幂集）。<br><strong>说明：</strong>解集不能包含重复的子集。</p>
+<p><strong>直觉</strong></p>
+<p><em>复杂回溯</em>：回溯产生的是固定长度的组合，这里求解的是所有可能的子集。所以这道题用回溯算法其实挺复杂的，先循环，然后在循环里面回溯。</p>
+<p>简单回溯：<strong>别把问题想太复杂</strong>，既然求的是幂子集，就不用终止条件了，一直递归回溯就成。</p>
+<p>遍历递归：这道题实际上可以直接从后遍历，遇到一个数就把所有子集加上该数组成新的子集，遍历完毕即是所有子集。</p>
+<p><strong>关键代码</strong></p>
+<p>复杂回溯</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">first = <span class="hljs-number">0</span>, curr = []</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(curr) == k:  <br>                output.append(curr[:])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n - (k - <span class="hljs-built_in">len</span>(curr)) + <span class="hljs-number">1</span>):<br>                curr.append(nums[i])<br>                backtrack(i + <span class="hljs-number">1</span>, curr)<br>                curr.pop()<br>        <br>        output = []<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n + <span class="hljs-number">1</span>):<br>            backtrack()<br>        <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
+<p>简单回溯</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self,nums</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type nums: List[int]</span><br><span class="hljs-string">        :rtype: List[List[int]]</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:<br>            <span class="hljs-keyword">return</span> []<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        res = []<br>        nums.sort()<br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">idx, n, temp_list</span>):</span><br>            res.append(temp_list)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(idx, n):<br>                helper1(i + <span class="hljs-number">1</span>, n, temp_list + [nums[i]])<br><br>        backtrack(<span class="hljs-number">0</span>, n, [])<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p>遍历递归</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">nums</span>):</span><br>    res = [[]]<br>    <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>        res += [curr + [num] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> res]<br>    <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/20/LeetCode-78-子集（中）/">LeetCode 78. 子集（中）</a></p>
+<h2 id="LeetCode-90-子集-II（中）"><a href="#LeetCode-90-子集-II（中）" class="headerlink" title="LeetCode 90. 子集 II（中）"></a>LeetCode 90. 子集 II（中）</h2><p><strong>题目</strong></p>
+<p>给定一个<strong>可能包含重复元素</strong>的整数数组 nums，返回该数组<strong>所有可能的子集（幂集）</strong>。<br>说明：解集不能包含重复的子集。</p>
+<p><strong>直觉</strong></p>
+<p>在78题代码的<strong>简单回溯、遍历递归</strong>两种方法的基础上添加某些限制条件即可。</p>
+<p>简单回溯：先将 <code>nums</code> 数组排序，在撤销选择之后，判断后面是否有相同的数字，如果有，就跳过。或者在添加时做个是否重复的判断。</p>
+<p>遍历递归：先对 <code>nums</code> 进行排序，判断当前数字和前一个数字是否相似，如果和前一个数字一样，就在前一次循环产生的增量数组 <code>tmp</code> 上添加。如果和前一个数字不一样，就在前一次循环产生的结果 <code>output</code> 上添加。</p>
+<p><strong>关键代码</strong></p>
+<p><em>简单回溯</em></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 思路1</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack1</span>(<span class="hljs-params">idx, n, temp_list</span>):</span><br>    <span class="hljs-keyword">if</span> temp_list <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:  <span class="hljs-comment"># 此处去重</span><br>        res.append(temp_list)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(idx, n):<br>        backtrack1(i + <span class="hljs-number">1</span>, n, temp_list + [nums[i]])<br><span class="hljs-comment"># 思路2</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack2</span>(<span class="hljs-params">idx, n, temp_list</span>):</span><br>    res.append(temp_list)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(idx, n):<br>        <span class="hljs-keyword">if</span> i &gt; idx <span class="hljs-keyword">and</span>  nums[i] == nums[i - <span class="hljs-number">1</span>]:  <span class="hljs-comment"># 此处去重</span><br>            <span class="hljs-keyword">continue</span><br>        backtrack2(i + <span class="hljs-number">1</span>, n, temp_list + [nums[i]])<br></code></pre></div></td></tr></table></figure>
+<p><em>遍历递归</em></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 循环开始前先对nums进行排序</span><br>nums.sort()<br>tmp = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):<br>    <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i - <span class="hljs-number">1</span>] == nums[i]:  <br>        tmp = [curr + [nums[i]] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> tmp]<br>    <span class="hljs-keyword">else</span>:<br>        tmp = [curr + [nums[i]] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> output]<br>    output += tmp<br><span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/20/LeetCode-90-子集-II（中）/">LeetCode 90. 子集 II（中）</a></p>
+<h2 id="LeetCode-79-单词搜索（中）"><a href="#LeetCode-79-单词搜索（中）" class="headerlink" title="LeetCode 79. 单词搜索（中）"></a>LeetCode 79. 单词搜索（中）</h2><p><strong>题目</strong></p>
+<p>给定一个二维网格和一个单词，找出该单词是否存在于网格中。<br>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。</p>
+<p><strong>直觉</strong></p>
+<p>以二维数组中每一个数都作为起点和给定字符串做匹配，可以不用 visited 数组，直接对 board 数组进行修改，将其遍历过的位置改为井号，记得递归调用完后需要恢复之前的状态。因为题目要求一个 cell 只能被访问一次。如果二维数组 board 的当前字符和目标字符串 word 对应的字符相等，则对其上下左右四个邻字符分别调用 DFS 的递归函数，<strong>只要有一个返回 true，那么就表示可以找到对应的字符串，否则就不能找到。</strong></p>
+<p>1、不再是统计path，而是验证结果，返回 <code>True</code> 和 <code>False</code>。<br>2、不再是单一方向回溯，由于是在矩阵中回溯，所以是四个方向，包括上下左右。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exist</span>(<span class="hljs-params">self, borad, word</span>):</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">borad, word, depth, row, col</span>):</span><br>            <span class="hljs-keyword">if</span> depth == <span class="hljs-built_in">len</span>(word):  <span class="hljs-comment"># 终止</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> row &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> col &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> row &gt;= rows <span class="hljs-keyword">or</span> col &gt;= cols <span class="hljs-keyword">or</span> borad[row][col] != word[depth]:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            char = borad[row][col]<br>            borad[row][col] = <span class="hljs-string">&quot;#&quot;</span>  <span class="hljs-comment"># 选择</span><br>            res = backtrack(borad, word, depth+<span class="hljs-number">1</span>, row-<span class="hljs-number">1</span>, col) <span class="hljs-keyword">or</span> \<br>                backtrack(borad, word, depth+<span class="hljs-number">1</span>, row+<span class="hljs-number">1</span>, col) <span class="hljs-keyword">or</span> \<br>                backtrack(borad, word, depth+<span class="hljs-number">1</span>, row, col-<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> \<br>                backtrack(borad, word, depth+<span class="hljs-number">1</span>, row, col+<span class="hljs-number">1</span>)  <span class="hljs-comment"># 回溯</span><br>            borad[row][col] = char <span class="hljs-comment"># 终止</span><br>            <span class="hljs-keyword">return</span> res<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(borad) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(borad[<span class="hljs-number">0</span>]):  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        rows = <span class="hljs-built_in">len</span>(borad)<br>        cols = <span class="hljs-built_in">len</span>(borad[<span class="hljs-number">0</span>])<br>        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(rows):<br>            <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(cols):<br>                <span class="hljs-keyword">if</span> backtrack(borad, word, <span class="hljs-number">0</span>, row, col):  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/21/LeetCode-79-单词搜索（中）/">LeetCode 79. 单词搜索（中）</a></p>
+<h2 id="LeetCode-89-格雷编码（中）"><a href="#LeetCode-89-格雷编码（中）" class="headerlink" title="LeetCode 89. 格雷编码（中）"></a>LeetCode 89. 格雷编码（中）</h2><p><strong>题目</strong></p>
+<p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。<br>给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。格雷编码序列必须以 0 开头。</p>
+<p><strong>直觉</strong></p>
+<p>从空字符串开始，<strong>一部分分别在末尾加上0、1</strong>，下面的<strong>另一部分分别在末尾加上1、0</strong>，直到长度达n。<br>所以<strong>回溯的终止条件</strong>是 <code>len(path) == n</code>，<strong>选择列表</strong>通过一个 <code>flag</code> 变量判断当前到底是加 0 还是加 1。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">path, flag</span>):</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(path) == n:<br>        res.append(<span class="hljs-built_in">int</span>(path, <span class="hljs-number">2</span>))<br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-keyword">if</span> flag == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 上面的（绿色）分别加0、1</span><br>        backtrack(path + <span class="hljs-string">&quot;0&quot;</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment"># 回溯时顺序不变</span><br>        backtrack(path + <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># （红色）分别加1、0</span><br>        backtrack(path + <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment"># 回溯时顺序变化</span><br>        backtrack(path + <span class="hljs-string">&quot;0&quot;</span>, <span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/23/LeetCode-89-格雷编码（中）/">LeetCode 89. 格雷编码（中）</a></p>
+<h2 id="LeetCode-93-复原IP地址（中）"><a href="#LeetCode-93-复原IP地址（中）" class="headerlink" title="LeetCode 93. 复原IP地址（中）"></a>LeetCode 93. 复原IP地址（中）</h2><p><strong>题目</strong></p>
+<p>给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。</p>
+<p><strong>直觉</strong></p>
+<p>IP地址总共有四段，每一段可能有一位，两位或者三位，范围是[字符如果是三位数字且大于255，也需要剪枝。0, 255]。题目明确指出输入字符串只含有数字。<br>字符如果是三位数字且大于255，也需要剪枝。<br>截取字符串之后，剩余的字符个数不能过多，过多也需要剪枝。<br>当只有一位时，0可以成某一段，如果有两位或三位时，像 00， 01， 001， 011， 000等都是不合法的。<br>终止条件：如果是确定最后一个IP段，那么截取的就应该是全部剩余字符。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 回溯函数</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">self, s = <span class="hljs-string">&quot;&quot;</span>, path =  [], depth = <span class="hljs-number">0</span>, res = []</span>):</span><br>    <span class="hljs-keyword">if</span> depth == <span class="hljs-number">4</span>:<br>        res.append(<span class="hljs-string">&quot;.&quot;</span>.join(path))<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(s)+<span class="hljs-number">1</span>):<br>            clip_s = s[:i]<br>            pruning_result = self.pruning(clip_s, s, i, depth)  <span class="hljs-comment"># 剪枝</span><br>            <span class="hljs-keyword">if</span> pruning_result == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">if</span> pruning_result == -<span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">continue</span><br>            path.append(clip_s)  <span class="hljs-comment"># 选择</span><br>            self.backtrack(s[i:], path, depth + <span class="hljs-number">1</span>, res)  <span class="hljs-comment"># 回溯</span><br>            path.pop()  <span class="hljs-comment"># 撤销选择</span><br><br><span class="hljs-comment"># 剪枝函数</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pruning</span>(<span class="hljs-params">self, clip_s, s, i, depth</span>):</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(clip_s) &gt; <span class="hljs-number">3</span>:  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>    <span class="hljs-keyword">if</span> depth == <span class="hljs-number">3</span> <span class="hljs-keyword">and</span> clip_s != s:  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># continue</span><br>    <span class="hljs-keyword">if</span> depth !=<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">len</span>(s[i:]) &gt; (<span class="hljs-number">4</span> - depth - <span class="hljs-number">1</span>) * <span class="hljs-number">3</span>:  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># continue</span><br>    <span class="hljs-keyword">if</span>  <span class="hljs-built_in">int</span>(clip_s) &gt; <span class="hljs-number">255</span>:  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># continuereturn -1  # continue</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(clip_s) &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> clip_s[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;0&quot;</span>:  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>  <span class="hljs-comment"># continue</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>  <span class="hljs-comment"># go on</span><br><br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/24/LeetCode-93-复原IP地址（中）/">LeetCode 93. 复原IP地址（中）</a></p>
+<h2 id="LeetCode-95-不同的二叉搜索树-II（中）"><a href="#LeetCode-95-不同的二叉搜索树-II（中）" class="headerlink" title="LeetCode 95. 不同的二叉搜索树 II（中）"></a>LeetCode 95. 不同的二叉搜索树 II（中）</h2><p><strong>题目</strong></p>
+<p>给定一个整数 n，生成所有由 1 … n 为节点所组成的二叉搜索树。</p>
+<p><strong>直觉</strong></p>
+<p>利用回溯法，依次递归回溯构造左右子树。</p>
+<p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generateTrees</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[TreeNode]:</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span>: <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">return</span> self.dfs(<span class="hljs-number">1</span>, n)<br>        <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">self, start, end</span>):</span><br>        <span class="hljs-keyword">if</span> start &gt; end: <span class="hljs-keyword">return</span> [<span class="hljs-literal">None</span>]<br>        res = []<br>        <span class="hljs-keyword">for</span> rootval <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, end+<span class="hljs-number">1</span>):<br>            LeftTree = self.dfs(start, rootval-<span class="hljs-number">1</span>)<br>            RightTree = self.dfs(rootval+<span class="hljs-number">1</span>, end)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> LeftTree:<br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> RightTree:<br>                    root = TreeNode(rootval)<br>                    root.left = i<br>                    root.right = j<br>                    res.append(root)<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p><strong>题解</strong></p>
+<p><a href="/2020/03/28/LeetCode-95-不同的二叉搜索树-II（中）/">LeetCode 95. 不同的二叉搜索树 II（中）</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">算法与数据结构</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/11/%E7%AE%97%E6%B3%95%EF%BC%9A%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法：贪心算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%9B%BE%E5%92%8C%E5%A0%86/">
+                        <span class="hidden-mobile">数据结构：图和堆</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/11/%E7%AE%97%E6%B3%95%EF%BC%9A%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/';
+        this.page.identifier = '/2020/04/11/%E7%AE%97%E6%B3%95%EF%BC%9A%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>蓝鲸运维SaaS开发实战公开课第一课：企业级PaaS解决方案 - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="蓝鲸运维SaaS开发实战公开课第一课：企业级PaaS解决方案">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-22 19:39" pubdate>
+        2020年4月22日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      915 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">蓝鲸运维SaaS开发实战公开课第一课：企业级PaaS解决方案</h1>
+            
+            <div class="markdown-body">
+              <p>蓝鲸运维SaaS开发实战公开课 课程笔记</p>
+<a id="more"></a>
+<h1 id="Iaas-amp-Paas-amp-Saas"><a href="#Iaas-amp-Paas-amp-Saas" class="headerlink" title="Iaas &amp; Paas &amp; Saas"></a>Iaas &amp; Paas &amp; Saas</h1><p>IaaS<br>提供基础服务，腾讯云、阿里云。</p>
+<p>Paas<br>面向开发者，写好Django之后，上传项目，点击发布就行。<br>PaaS（Platform as a Service），提供软件部署平台（runtime），抽象掉了硬件和操作系统细节开发者只需要关注自己的业务逻辑，不需要关注底层。</p>
+<p>Saas<br>就是容器，用户直接使用就行。</p>
+<h1 id="简单理解蓝鲸"><a href="#简单理解蓝鲸" class="headerlink" title="简单理解蓝鲸"></a>简单理解蓝鲸</h1><p>场景：一个游戏业务，由登录模块、存储模块、游戏逻辑模块的机器组成。当我们需要更新登录模块的代码，首先<strong>由作业平台</strong>调用<strong>配置平台</strong>的接口，查询到这个游戏业务负责登录模块的物理机的IP列表。<br>拿到IP列表之后，利用<strong>管控平台</strong>，去更新这一个IP列表上所有主机的登录模块的代码，重启进程。</p>
+<h1 id="从传统开发到基于Paas的开发"><a href="#从传统开发到基于Paas的开发" class="headerlink" title="从传统开发到基于Paas的开发"></a>从传统开发到基于Paas的开发</h1><p> <img src="https://i.loli.net/2020/04/22/aS7z2xtILqFc6jp.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-22_20-30-18.png"></p>
+<p>资源云化、基建共享、前后端部署一体化</p>
+<p>前端：MagicBox（拖拽式可视化布局）</p>
+<p>后端：Python(3.6) +Django(2.2.6)</p>
+<h2 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h2><p>面向服务的架构（SOA）是一个组件模型，它将应用程序的不同功能单元（称为服务）进行拆分，并通过这些服务之间定义良好的接口和契约联系起来。接口是采用中立的方式进行定义的，它应该独立于实现服务的硬件平台、操作系统和编程语言。这使得构建在各种各样的系统中的服务可以以一种统一和通用的方式进行交互。</p>
+<p>当底层配置平台、作业平台等平台发生变化，同时有SOA时：</p>
+<pre><code class=" mermaid">graph BT
+   SOA --&gt; Saas1
+   SOA --&gt; Saas2
+   SOA --&gt; Saas3BT
+   SOA --&gt; Saas4
+   SOA --&gt; Saas5
+   SOA --&gt; Saas6
+   ConfigPlatForm -- 只调整这里 --&gt; SOA
+</code></pre>
+<p>当底层配置平台、作业平台等平台发生变化，同时无SOA时：</p>
+<pre><code class=" mermaid">graph BT
+  ConfigPlatForm -- 调整这里 --&gt; Saas1
+  ConfigPlatForm -- 调整这里 --&gt; Saas2
+  ConfigPlatForm -- 调整这里 --&gt; Saas3
+  ConfigPlatForm -- 调整这里 --&gt; Saas4
+  ConfigPlatForm -- 调整这里 --&gt; Saas5
+  ConfigPlatForm -- 调整这里 --&gt; Saas6
+</code></pre>
+<p>使用<strong>SOA</strong>作为<strong>众多Saas</strong>和<strong>底层配置平台、作业平台等平台</strong>的中间层，当修改底层配置平台和作业平台的API路由，但是参数不变时，由于只用调整<strong>底层配置平台、作业平台等平台</strong>到<strong>SOA</strong>的配置，就不用调整<strong>SOA</strong>到Saas的API配置了 。</p>
+<p>hexo的流程图绘制教程，参看  <a target="_blank" rel="noopener" href="https://github.com/webappdevelp/hexo-filter-mermaid-diagrams">hexo-filter-mermaid-diagrams</a> 和 <a target="_blank" rel="noopener" href="https://www.yuque.com/yuque/help/mermaid">Mermaid</a>、<a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/?id=mermaid">Mermaid</a>、<a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/48b558e3035d9a7f38c09aeb.html">typora画流程图、时序图(顺序图)、甘特图</a>、<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wanghaokun/p/12485152.html">markdown画流程图-mermaid工具</a></p>
+<h2 id="APIGateway"><a href="#APIGateway" class="headerlink" title="APIGateway"></a>APIGateway</h2><p><img src="https://i.loli.net/2020/04/22/7xpuQ6nM8lU1ir9.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-22_21-28-46.png"></p>
+<p>ESB是SOA解决方案中用于<strong>路由、消息转换、协议桥接</strong>等的传统中间件。重要作用是对API进一步研发集成。<br>APIGateway实际就是维护托管的API，包括流量管理、授权和访问控制、监控以及API版本管理。</p>
+<h2 id="蓝鲸中APIGateway与SOA理念里ESB的联系"><a href="#蓝鲸中APIGateway与SOA理念里ESB的联系" class="headerlink" title="蓝鲸中APIGateway与SOA理念里ESB的联系"></a>蓝鲸中APIGateway与SOA理念里ESB的联系</h2><ul>
+<li>ESB是SOA解决方案中用于路由，消息转换，协议桥接等的<strong>传统中间件</strong>，重要作用是对API进一步研发集成</li>
+<li><strong>APIGateway实际就是维护托管的API</strong>，包括流量管理、授权和访问控制、监控以及API版本管理。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/04/22/lRAVi3FraYohxTM.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-22_21-37-14.png"></p>
+<p>APIGateway会管理两种API，一种是基于研发之后新组成的API，还有一种是底层系统原生对接上的API。</p>
+<h1 id="开放式开发-技术赋能"><a href="#开放式开发-技术赋能" class="headerlink" title="开放式开发 技术赋能"></a>开放式开发 技术赋能</h1><p>使用蓝鲸平台，开发是开放式的，为开发者彻底免除了运维的烦恼。</p>
+<p><strong>Django要求</strong>：</p>
+<p>Tutorial(Part 1/Part 2/Part 3/Part 4)</p>
+<p>Models、QuerySet、Views、template的基本使用</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/">系统运维</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/23/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%BA%8C%E8%AF%BE%EF%BC%9APython%E5%9F%BA%E7%A1%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">蓝鲸运维SaaS开发实战公开课第二课：Python基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/22/%E5%8F%8D%E6%B6%88%E8%B4%B9%E4%B8%BB%E4%B9%89/">
+                        <span class="hidden-mobile">反消费主义</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/04/22/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%B8%80%E8%AF%BE%EF%BC%9A%E4%BC%81%E4%B8%9A%E7%BA%A7PaaS%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/';
+        this.page.identifier = '/2020/04/22/%E8%93%9D%E9%B2%B8%E8%BF%90%E7%BB%B4SaaS%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E5%85%AC%E5%BC%80%E8%AF%BE%E7%AC%AC%E4%B8%80%E8%AF%BE%EF%BC%9A%E4%BC%81%E4%B8%9A%E7%BA%A7PaaS%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

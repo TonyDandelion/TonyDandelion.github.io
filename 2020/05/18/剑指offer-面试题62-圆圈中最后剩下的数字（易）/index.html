@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-18 01:00" pubdate>
+        2020年5月18日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p>本题就是有名的约瑟夫（Josephuse）环问题，此题的难点在于求解状态转移方程。</p>
+<a id="more"></a>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>0,1,,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。例如，0、1、2、3、4这5个数字组成一个圆圈，从数字0开始每次删除第3个数字，则删除的前4个数字依次是2、0、4、1，因此最后剩下的数字是3。</p>
+<p>示例 1：<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: n = 5, m = 3</span><br><span class="hljs-section">输出: 3</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: n = 10, m = 17</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure><br>限制：$1 &lt;= n &lt;= 10^5$；$1 &lt;= m &lt;= 10^6$</p>
+<blockquote>
+<p><strong><em>测试用例</em></strong></p>
+</blockquote>
+<p><strong>功能测试</strong>（输入的m小于n，比如从最初有5个数字的圆圈中每次删除第2、3个数字；输入的m大于或者等于n，比如从最初有6个数字的圆圈中每次删除第6、7个数字）。<br><strong>特殊输入</strong>（圆圈中有0个数字）。<br><strong>性能测试</strong>（从最初有4000个数字的圆圈中每次删除第997个数字）。</p>
+<blockquote>
+<p><strong><em>本题考点</em></strong></p>
+</blockquote>
+<p>考查应聘者的抽象建模能力。不管应聘者是用环形链表来模拟圆圈，还是分析被删除数字的规律，都要深刻理解这个问题的特点并编程实现自己的解决方案。<br>考查应聘者对环形链表的理解及应用能力。大部分面试官只要求应聘者基于环形链表的方法解决这个问题。<br>考查应聘者的数学功底及逻辑思维能力。少数对算法和数学基础要求很高的公司，面试官会要求应聘者不能使用$O(n)$ 的辅助内存，这时候应聘者就只能静下心来一步步推导出每次删除的数字有哪些规律。</p>
+<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="用链表模拟环"><a href="#用链表模拟环" class="headerlink" title="用链表模拟环"></a>用链表模拟环</h2><p><strong><em>算法</em></strong><br>很容易想到用环形链表来模拟环。我们可以创建一个共有 $n$ 个节点的环形链表，然后每次在这个链表中删除第 $m$ 个节点。<br><strong>由于链表本身并不是一个环形结构，因此每当迭代器（lterator）扫描到链表末尾的时候，我们要记得把迭代器移到链表的头部，这样就相当于按照顺序在一个圆圈里遍历了。</strong></p>
+<p><strong><em>复杂度分析</em></strong><br>时间复杂度：$O(n \times m)$ ；<br>空间复杂度：$O(n)$；<br>由于复杂度太高，无法通过LeetCode所有测试用例。</p>
+<h2 id="分析规律"><a href="#分析规律" class="headerlink" title="分析规律"></a>分析规律</h2><p><strong><em>表格找规律</em></strong></p>
+<p>约瑟夫问题比较难想的点有两个：</p>
+<ul>
+<li>当数到最后一个结点不足m个时，需要跳到第一个结点继续数。</li>
+<li>每轮都是上一轮被删结点的下一个结点开始数 m 个。</li>
+</ul>
+<p>第一点比较好解决，可以通过取余来完成。<br>第二点的解决方案是：将删除结点的后继作为下一轮的第一个结点，后续结点依次排列。这样每轮都是从首结点开始数 m 个了。</p>
+<p>以输入<code>n=7</code> 个节点，每次从这个圆圈里删除第 <code>m=9</code>个数字为例。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>当前序列</th>
+<th>原起点</th>
+<th>删除数值</th>
+<th>新起点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0, 1, 2, 3, 4, 5, 6</td>
+<td>0</td>
+<td>9%7=2，以0为第一个数，第2个数为1，删除<strong>1</strong>。</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0, 2, 3, 4, 5, 6</td>
+<td>2</td>
+<td>9%6=3，以2为第一个数，第3个数为4，删除<strong>4</strong>。</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0, 2, 3, 5, 6</td>
+<td>5</td>
+<td>9%5=4，以5为第一个数，第4个数为2，删除<strong>2</strong>。</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0, 3, 5, 6</td>
+<td>3</td>
+<td>9%4=1，以3为第一个数，第1个数为3，删除<strong>3</strong>。</td>
+<td>5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0, 5, 6</td>
+<td>5</td>
+<td>9%3=0，以5为第一个数，第0个数为0，删除<strong>0</strong>。</td>
+<td>5</td>
+</tr>
+<tr>
+<td>6</td>
+<td>5, 6</td>
+<td>5</td>
+<td>9%2=1，以5为第一个数，第1个数为5，删除<strong>5</strong>。</td>
+<td>6</td>
+</tr>
+<tr>
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td>只剩一个数，停止删除，返回。</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>由上表可知，删除数之后的那个数为下一轮新的起点，以第一轮为例，删除1，下一个数2就是下一轮起点。</p>
+<p><strong><em>剑指offer原书数学证明</em></strong></p>
+<p>1、首先我们定义一个关于 $n$ 和 $m$ 的方程 $f(n, m)$，表示每次在 $n$ 个数字 $0$, $1$, …, $n-1$ 中删除第 $m$ 个数字最后剩下的数字。 </p>
+<p>2、第一个被删除的数字是 $k=(m-1)\%n$。</p>
+<p>3、设新形成的 $k+1$, $…$, $n-1$, $0$, $1$, $…$, $k-1$ 序列的函数为 $f’(n-1, m)$，最初序列最后剩余数字 $f(n-1, m)$ 一定是删除一个数字之后的序列最后新形成的数字，所以有 $f’(n-1, m)=f(n-1, m)$。</p>
+<p>4、将新形成的 $k+1$, $…$, $n-1$, $0$, $1$, $…$, $k-1$ 序列用映射函数 $p(x)=(x-k-1)\%n$ 映射为 $0$,$1$, $2$, …, $n-2$ 的序列。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>新序列（$x$）</th>
+<th>映射序列(（$p(x)=(x-k-1)\%n$）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$k+1$</td>
+<td>$0$</td>
+</tr>
+<tr>
+<td>$k+2$</td>
+<td>$1$</td>
+</tr>
+<tr>
+<td>$…$</td>
+<td>$…$</td>
+</tr>
+<tr>
+<td>$n-1$</td>
+<td>$n-k-2$</td>
+</tr>
+<tr>
+<td>$0$</td>
+<td>$n-k-1$</td>
+</tr>
+<tr>
+<td>$1$</td>
+<td>$n-k$</td>
+</tr>
+<tr>
+<td>$…$</td>
+<td>$…$</td>
+</tr>
+<tr>
+<td>$k-1$</td>
+<td>$n-2$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>可知，逆映射函数 $p^{-1}(x)=(x+k+1)\%n$</p>
+<p>5、由于映射之后的序列和最初的序列具有同样的形式，即都是从 $0$ 开始的连续序列，因此仍然可以用函数f来表示，记为 $f(n-1, m)$。根据我们的映射规则，映射之前的序列中最后剩下的数字满足以下关系：</p>
+<script type="math/tex; mode=display">
+f(n-1, m)=p^{-1}[(n-1, m)]=[f(n-1, m)+k+1]%n</script><p>将 $k=(m-1)\%n$ 代入上式可得：</p>
+<script type="math/tex; mode=display">
+f(n-1, m) = f'(n-1, m) = [f(n-1,m)+m]\%n</script><p>6、经过上面复杂的分析，我们终于找到了一个递归公式。要得到 $n$ 个数字的序列中最后剩下的数字，只需要得到 $n-1$ 个数字的序列中最后剩下的数字，并以此类推。当 $n=1$ 时，也就是序列中开始只有一个数字0，那么很显然最后剩下的数字就是0。我们把这种关系表示为：</p>
+<script type="math/tex; mode=display">
+f(n, m) =
+\begin{cases}
+0, \quad n=1 \\ 
+[f(n-1,m)+m]\%n, \quad n>1
+\end{cases}</script><p>这个公式无论是用递归还是用循环，都很容易实现。</p>
+<p><strong><em>复杂度分析</em></strong></p>
+<p>时间复杂度：$O(n)$；空间复杂度：$O(1)$；可以通过LeetCode所有测试用例。</p>
+<p><strong><em>参考链接</em></strong></p>
+<p>作者：Time-Limit<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/chi-jing-stsu-degd-degtsu-tu-jie-yue-se-fu-huan-hu/">https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/chi-jing-stsu-degd-degtsu-tu-jie-yue-se-fu-huan-hu/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="用链表模拟环-1"><a href="#用链表模拟环-1" class="headerlink" title="用链表模拟环"></a>用链表模拟环</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lastRemaining</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, m: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-comment"># 构建循环链表</span><br>        nums = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(n))<br>        dummy = ListNode(<span class="hljs-literal">None</span>)<br>        p = dummy<br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            p.<span class="hljs-built_in">next</span> = ListNode(num)<br>            p = p.<span class="hljs-built_in">next</span><br>        <br>        head = dummy.<span class="hljs-built_in">next</span><br>        p.<span class="hljs-built_in">next</span> = head<br><br>        <span class="hljs-comment"># 每隔m-1删除一个节点</span><br>        count = n<br>        <span class="hljs-comment"># 最开始时 p 指向之前的tail</span><br>        <span class="hljs-keyword">while</span> count &gt; <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m-<span class="hljs-number">1</span>):<br>                p = p.<span class="hljs-built_in">next</span><br>            _next = p.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>            p.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span><br>            p.<span class="hljs-built_in">next</span> = _next<br>            <span class="hljs-comment"># p = p.next</span><br>            count -= <span class="hljs-number">1</span><br><br>        p.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">return</span> p.val<br></code></pre></div></td></tr></table></figure>
+<h2 id="分析规律-1"><a href="#分析规律-1" class="headerlink" title="分析规律"></a>分析规律</h2><ul>
+<li>递归写法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lastRemaining</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, m: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cur</span>(<span class="hljs-params">n, m</span>):</span><br>            <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>            <span class="hljs-keyword">return</span> (cur(n-<span class="hljs-number">1</span>, m) + m) % n<br><br>        <span class="hljs-keyword">return</span> cur(n, m)<br><br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>上面的递归可以改写为迭代，避免递归使用栈空间。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lastRemaining</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, m: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> m &lt; <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        last = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>):<br>            last = (last + m) % i<br>        <span class="hljs-keyword">return</span> last<br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/18/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9863-%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E5%88%A9%E6%B6%A6%EF%BC%88%E4%B8%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">剑指offer 面试题63. 股票的最大利润（中）& LeetCode 121. 买卖股票的最佳时机（易）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/17/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9861-%E6%89%91%E5%85%8B%E7%89%8C%E4%B8%AD%E7%9A%84%E9%A1%BA%E5%AD%90%EF%BC%88%E6%98%93%EF%BC%89/">
+                        <span class="hidden-mobile">剑指offer 面试题61. 扑克牌中的顺子（易）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2020/05/18/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9862-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E6%98%93%EF%BC%89/';
+        this.page.identifier = '/2020/05/18/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9862-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97%EF%BC%88%E6%98%93%EF%BC%89/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
