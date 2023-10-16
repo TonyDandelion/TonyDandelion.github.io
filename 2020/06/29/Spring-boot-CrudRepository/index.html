@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      329 字
+      331 字
     </span>
   
 
@@ -253,20 +253,22 @@
             <div class="markdown-body">
               <p><code>CrudRepository</code> 使用方法简单介绍</p>
 <a id="more"></a>
-<h1 id="Mybatis连接数据库"><a href="#Mybatis连接数据库" class="headerlink" title="Mybatis连接数据库"></a>Mybatis连接数据库</h1><p>对数据库的数据进行CRUD是一种基操作</p>
+<h1 id="mybatis连接数据库">Mybatis连接数据库</h1>
+<p>对数据库的数据进行CRUD是一种基操作</p>
 <p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html">CrudRepository的文档</a></p>
 <p>CrudRepostitory继承自<strong>Superinterfaces</strong>，是Spring Data仓库的主要实现形式之一。</p>
 <p><strong>项目目录</strong></p>
-<p>DAO（Data Access Object）<em>*数据访问对象层</em>，使用JDBC或者其他方法连接数据库，实现增删</p>
+<p>DAO（Data Access Object）**数据访问对象层*，使用JDBC或者其他方法连接数据库，实现增删</p>
 <p>Service <strong>业务逻辑层</strong></p>
 <p>Controller/Web <strong>控制层</strong></p>
 <p>Model/Bean <strong>实体层</strong></p>
 <p>Application <strong>应用启动类</strong></p>
-<h1 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h1><p>RESTful API的两种写法</p>
+<h1 id="restful">RESTful</h1>
+<p>RESTful API的两种写法</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 增：向数据库里面新增用户</span><br><span class="hljs-comment">// 使用PostMapping</span><br><span class="hljs-meta">@PostMapping(value = &quot;/&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Boolean <span class="hljs-title">postUser</span><span class="hljs-params">(User user)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;开始新增...&quot;</span>);<br>    System.out.println(user.toString());<br>    <span class="hljs-keyword">return</span> userService.addUser(user);<br>&#125;<br><br><span class="hljs-comment">// RESTful API的另一种写法</span><br><span class="hljs-comment">// 使用RequestMapping</span><br><span class="hljs-comment">/* @RequestMapping(value = &quot;/&quot;, method = RequestMethod.POST)</span><br><span class="hljs-comment">public boolean addUser(User user) &#123;</span><br><span class="hljs-comment">    System.out.println(&quot;开始新增...&quot;);</span><br><span class="hljs-comment">    return userService.addUser(user);</span><br><span class="hljs-comment">&#125; */</span><br></code></pre></div></td></tr></table></figure>
 <p>URL参数获取可以是一个Object，也可以是单个值。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 改：将注销之后的用户重新激活 PUT请求</span><br><span class="hljs-meta">@PutMapping(value = &quot;active&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Boolean <span class="hljs-title">activeUser</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(value = &quot;email&quot;, required = true)</span> String email)</span> </span>&#123;<br>  System.out.println(<span class="hljs-string">&quot;开始激活用户...&quot;</span>);<br>  <span class="hljs-keyword">return</span> userService.activeUser(email);<br>&#125;<br><br><span class="hljs-comment">// 改：目前仅允许修改密码 [测试正常]  PUT请求</span><br><span class="hljs-meta">@PutMapping(value = &quot;/password&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Boolean <span class="hljs-title">updatePassword</span><span class="hljs-params">(User user)</span> </span>&#123;  <span class="hljs-comment">// 可以以User为参数，但是实际上只传递部分值，如email、id。</span><br>  System.out.println(<span class="hljs-string">&quot;开始修改密码...&quot;</span>);<br>  <span class="hljs-keyword">return</span> userService.updatePassword(user);<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -503,6 +505,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

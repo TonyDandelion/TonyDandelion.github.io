@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      918 字
+      921 字
     </span>
   
 
@@ -253,23 +253,28 @@
             <div class="markdown-body">
               <p>总结一下，两个栈，一个栈保存当前层要打印的节点，另一个栈保存下一层要打印的节点。所有节点都打印完了，就交换这两个节点，打印下一层。另外，在奇数层要先左后右的扫描下一层的节点，在偶数层要先右后左的扫描下一层。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>给定一个二叉树，返回其节点值的锯齿形层次遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。</p>
-<p>例如：给定二叉树 [3, 9, 20, null, null, 15, 7],<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure><br>返回锯齿形层次遍历如下：<br><figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">[<br>  [<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">20</span>,<span class="hljs-number">9</span>],<br>  [<span class="hljs-number">15</span>,<span class="hljs-number">7</span>]<br>]<br></code></pre></div></td></tr></table></figure></p>
+<h1 id="question">Question</h1>
+<p>给定一个二叉树，返回其节点值的锯齿形层次遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。</p>
+<p>例如：给定二叉树 [3, 9, 20, null, null, 15, 7], <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure> 返回锯齿形层次遍历如下： <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">[<br>  [<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">20</span>,<span class="hljs-number">9</span>],<br>  [<span class="hljs-number">15</span>,<span class="hljs-number">7</span>]<br>]<br></code></pre></div></td></tr></table></figure></p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（完全二叉树；所有节点只有左子树的二叉树；所有节点只有右子树的二叉树）。<br>特殊输入测试（二叉树根节点为nullptr指针；只有一个节点的二叉树）。</p>
+<p>功能测试（完全二叉树；所有节点只有左子树的二叉树；所有节点只有右子树的二叉树）。 特殊输入测试（二叉树根节点为nullptr指针；只有一个节点的二叉树）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者的思维能力。按之字形遍历二叉树，这对很多应聘者来说是一个新概念，要在短时间内想明白遍历的过程不是一件容易的事情。应聘者通过具体的例子找出其中的规律并想到基于两个栈的算法，是解决这个问题的关键。<br>考查应聘者对二叉树及栈的理解。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>当二叉树的根节点（节点1）打印之后，它的左子节点（节点2）和右子节点（节点3）先后保存到一个数据容器里。</p>
+<p>考查应聘者的思维能力。按之字形遍历二叉树，这对很多应聘者来说是一个新概念，要在短时间内想明白遍历的过程不是一件容易的事情。应聘者通过具体的例子找出其中的规律并想到基于两个栈的算法，是解决这个问题的关键。 考查应聘者对二叉树及栈的理解。</p>
+<h1 id="intuition">Intuition</h1>
+<p>当二叉树的根节点（节点1）打印之后，它的左子节点（节点2）和右子节点（节点3）先后保存到一个数据容器里。</p>
 <p>在打印第二层的节点时，先打印节点3，再打印节点2。看起来节点在这个数据容器里是后进先出的，<strong>因此这个数据容器可以用栈来实现。</strong></p>
 <p>接着打印第二层的两个节点。根据之字形顺序，先打印节点3，再打印节点2，并把它们的子节点保存到一个数据容器里。<strong>我们注意到在打印第三层的时候，先打印节点2的两个子节点（节点4和节点5），再打印节点3的两个子节点（节点6和节点7）。这意味着我们仍然可以用一个栈来保存节点2和节点3的子节点。</strong></p>
-<p><img src="https://i.loli.net/2020/05/09/xf4HZcT6lwEhReg.png" srcset="/img/loading.gif" alt="1.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/09/xf4HZcT6lwEhReg.png" srcset="/img/loading.gif" alt="1.png" /><figcaption aria-hidden="true">1.png</figcaption>
+</figure>
 <p>总结一下，两个栈，一个栈保存当前层要打印的节点，另一个栈保存下一层要打印的节点。所有节点都打印完了，就交换这两个节点，打印下一层。另外，在奇数层要先左后右的扫描下一层的节点，在偶数层要先右后左的扫描下一层。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-comment"># 总结一下，两个栈，一个栈保存了当前层要打印的节点，另一个栈保存下一层要打印的节点。</span><br><span class="hljs-comment"># 所有节点都打印完了，就交换这两个节点，打印下一层。</span><br><span class="hljs-comment"># 另外，在奇数层要先左后右的扫描下一层的节点，在偶数层要先右后左的扫描下一层。</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">zigzagLevelOrder</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">return</span> []<br>        res = []<br>        tmp = []<br>        current_stack = []<br>        next_stack = []<br>        current_stack.append(root)<br>        flag = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 是否在奇数层</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(current_stack):<br>            node = current_stack.pop()<br>            <span class="hljs-keyword">if</span> node:<br>                tmp.append(node.val)<br>                <span class="hljs-keyword">if</span> flag:  <span class="hljs-comment"># 奇数层要先左后右的扫描下一层的节点</span><br>                    <span class="hljs-keyword">if</span> node.left: next_stack.append(node.left)<br>                    <span class="hljs-keyword">if</span> node.right: next_stack.append(node.right)<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 在偶数层要先右后左的扫描下一层。</span><br>                    <span class="hljs-keyword">if</span> node.right: next_stack.append(node.right)<br>                    <span class="hljs-keyword">if</span> node.left: next_stack.append(node.left)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(current_stack) == <span class="hljs-number">0</span>:<br>                res.append(tmp[:])<br>                tmp = []<br>                current_stack = next_stack[:]<br>                next_stack = []<br>                flag = <span class="hljs-keyword">not</span> flag<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-comment"># 总结一下，两个栈，一个栈保存了当前层要打印的节点，另一个栈保存下一层要打印的节点。</span><br><span class="hljs-comment"># 所有节点都打印完了，就交换这两个节点，打印下一层。</span><br><span class="hljs-comment"># 另外，在奇数层要先左后右的扫描下一层的节点，在偶数层要先右后左的扫描下一层。</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">zigzagLevelOrder</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">return</span> []<br>        res = []<br>        tmp = []<br>        current_stack = []<br>        next_stack = []<br>        current_stack.append(root)<br>        flag = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 是否在奇数层</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(current_stack):<br>            node = current_stack.pop()<br>            <span class="hljs-keyword">if</span> node:<br>                tmp.append(node.val)<br>                <span class="hljs-keyword">if</span> flag:  <span class="hljs-comment"># 奇数层要先左后右的扫描下一层的节点</span><br>                    <span class="hljs-keyword">if</span> node.left: next_stack.append(node.left)<br>                    <span class="hljs-keyword">if</span> node.right: next_stack.append(node.right)<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 在偶数层要先右后左的扫描下一层。</span><br>                    <span class="hljs-keyword">if</span> node.right: next_stack.append(node.right)<br>                    <span class="hljs-keyword">if</span> node.left: next_stack.append(node.left)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(current_stack) == <span class="hljs-number">0</span>:<br>                res.append(tmp[:])<br>                tmp = []<br>                current_stack = next_stack[:]<br>                next_stack = []<br>                flag = <span class="hljs-keyword">not</span> flag<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -515,6 +520,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

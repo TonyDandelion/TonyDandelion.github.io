@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      529 字
+      531 字
     </span>
   
 
@@ -253,29 +253,38 @@
             <div class="markdown-body">
               <p>最基本深度学习理论</p>
 <a id="more"></a>
-<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h2><p><img src="http://oke9xbto1.bkt.clouddn.com/convolution.gif" srcset="/img/loading.gif" alt=""></p>
+<h1 id="基本概念">基本概念</h1>
+<h2 id="卷积">卷积</h2>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/convolution.gif" srcset="/img/loading.gif" /></p>
 <p>我们可以看到，卷积过程其实还是基于一个固定的矩阵，在另外一个矩阵不断一格一格扫过去的到的数值的和，产生的一个新的矩阵，我们以作为比较会发现：粉红色矩阵和绿色矩阵在根本上有很大不一样，卷积之后的维数降低了.所以规律可以得到：<strong>粉红色最后的卷积结果矩阵维度=绿色矩阵维数-橙色矩阵维数+1</strong></p>
 <blockquote>
 <p>多通道数据的卷积过程</p>
 </blockquote>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/ilEPEvZ.jpg" srcset="/img/loading.gif" alt=""></p>
-<p>Input Data Size: A*A*B<br>Convolution Size: C*C*B<br>其中 A&gt;B<br>Output Data Size: (A-C+1)*(A-C+1)*1<br><strong>直接将结果相加即可</strong></p>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/multiple_channel_%20convolution.gif" srcset="/img/loading.gif" alt=""></p>
-<h2 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h2><p><img src="http://oke9xbto1.bkt.clouddn.com/pooling.gif" srcset="/img/loading.gif" alt=""></p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/ilEPEvZ.jpg" srcset="/img/loading.gif" /></p>
+<p>Input Data Size: A*A*B<br />
+Convolution Size: C*C*B 其中 A&gt;B Output Data Size: (A-C+1)*(A-C+1)*1<br />
+<strong>直接将结果相加即可</strong></p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/multiple_channel_%20convolution.gif" srcset="/img/loading.gif" /></p>
+<h2 id="池化">池化</h2>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/pooling.gif" srcset="/img/loading.gif" /></p>
 <p>我们可以发现其实跟之前没什么不一样：还是以三个矩阵之间的运算，但是我们很容易发现，它并不是一行一行扫过去的，橙色矩阵维度是黄色矩阵的整数倍，所以池化的最终的结论是要把原来的维度减少到1/n.这是池化最根本的原理（当然也有特殊情况。）</p>
-<h2 id="步长"><a href="#步长" class="headerlink" title="步长"></a>步长</h2><blockquote>
+<h2 id="步长">步长</h2>
+<blockquote>
 <p>那个粉红色矩阵，他每一次移动多少格，格子就是步长！！</p>
 </blockquote>
-<h2 id="Padding-增边"><a href="#Padding-增边" class="headerlink" title="Padding(增边)"></a>Padding(增边)</h2><p>padding操作用以解决这个问题<strong>“如果我不想最后减少维度，我只希望卷积，怎么办呢？”</strong>  </p>
+<h2 id="padding增边">Padding(增边)</h2>
+<p>padding操作用以解决这个问题<strong>"如果我不想最后减少维度，我只希望卷积，怎么办呢？"</strong></p>
 <p>现在我们来解决这个问题：比如：我们需要做一个300*300的原始矩阵，用一个3*3卷积核（粉红色矩阵）来扫，扫出来，按照之前公式，结果的矩阵应该是：298*298的矩阵，但是这样很难计算，减得也不多，反而增加我计算难度，还不如池化（pooling）来得干脆是吧！那我们就在300*300矩阵外面周围加一圈“0”，记住，是在外面外包一层“0”</p>
 <blockquote>
 <p>重点是：这样的300*300就变成了302*302的矩阵，这样就可以完全避开卷积后那两层的抵消。</p>
 </blockquote>
-<h2 id="卷积核"><a href="#卷积核" class="headerlink" title="卷积核"></a>卷积核</h2><blockquote>
+<h2 id="卷积核">卷积核</h2>
+<blockquote>
 <p>橙色矩阵</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/errors_in_life/article/details/65950699">基本概念</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/yudiemiaomiao/article/details/72466402">多通道</a></p>
-
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/errors_in_life/article/details/65950699">基本概念</a><br />
+<a target="_blank" rel="noopener" href="http://blog.csdn.net/yudiemiaomiao/article/details/72466402">多通道</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -512,6 +521,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

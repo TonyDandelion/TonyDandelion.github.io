@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,48 +251,69 @@
             <h1 style="display: none">深度学习中的优化器</h1>
             
             <div class="markdown-body">
-              <p>以tensorflow为例介绍一些深度学习的优化器  参考覃秉丰教程</p>
+              <p>以tensorflow为例介绍一些深度学习的优化器 参考覃秉丰教程</p>
 <a id="more"></a>
-<h1 id="梯度下降法则"><a href="#梯度下降法则" class="headerlink" title="梯度下降法则"></a>梯度下降法则</h1><ul>
-<li>标准梯度下降法：计算所有样本汇总误差，根据总误差来更新权值  </li>
-<li>随机梯度下降法：先随机抽取一个样本来计算误差，再根据这个误差来更新权值  </li>
-<li>批量梯度下降法：从总样本中选取一个批次（batch）（例如10000个样本，随机选取1中的100个样本作为batch），然后计算这个batch的总误差，再根据这个误差来更新权值  </li>
-</ul>
-<h2 id="随机梯度下降法："><a href="#随机梯度下降法：" class="headerlink" title="随机梯度下降法："></a>随机梯度下降法：</h2><p><img src="http://oke9xbto1.bkt.clouddn.com/SGD_small.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="带Momentum的随机梯度下降法："><a href="#带Momentum的随机梯度下降法：" class="headerlink" title="带Momentum的随机梯度下降法："></a>带Momentum的随机梯度下降法：</h2><p><img src="http://oke9xbto1.bkt.clouddn.com/Momentum.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="涅斯捷罗夫加速梯度下降法-NAG-Nesterov-accelerated-gradient"><a href="#涅斯捷罗夫加速梯度下降法-NAG-Nesterov-accelerated-gradient" class="headerlink" title="涅斯捷罗夫加速梯度下降法 NAG(Nesterov accelerated gradient)"></a>涅斯捷罗夫加速梯度下降法 NAG(Nesterov accelerated gradient)</h2><p><img src="http://oke9xbto1.bkt.clouddn.com/NAG.png" srcset="/img/loading.gif" alt=""></p>
-<p>  在Momentun中小球会盲目地跟从下坡的梯度,容易发生错误,所以我们需要一个更聪明的小球,这个小球提前知道它要去哪里,它还要知道走到坡底的时候速度慢下来而不是又冲上另一个坡。γvt−1会用来修改W的值,计算W−γvt−1可以表示小球下一个位置大概在哪里。从而我们可以提前计算下一个位置的梯度,然后使用到当前位置。</p>
-<h2 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h2><p>上面提到的方法对于所有参数都使用了同一个更新速率。但是同一个更新速率不一定适合所有参数。比如有的参数可能已经到了仅需要微调的阶段，但又有些参数由于对应样本少等原因，还需要较大幅度的调动。于是提出了Adagrad算法，为不同分类设置了不同的学习率。简单的说，就是这类数据出现的越多，这类数据的学习率越小，这类数据出现的越少，这类数据学习率越大。    </p>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/Adagrad.png" srcset="/img/loading.gif" alt=""></p>
+<h1 id="梯度下降法则">梯度下降法则</h1>
 <ul>
-<li>η为学习率，一般为0.01  </li>
-<li>gti为第i个分类的代价函数的导数（第i个分类的代价函数的梯度）  </li>
-<li>Wt+1等于Wt减去学习率η除以（从1到t’的共计t’次第i个分类的代价函数的梯度的平方加ε的和的平方根）的商点乘gt的积</li>
+<li>标准梯度下降法：计算所有样本汇总误差，根据总误差来更新权值<br />
+</li>
+<li>随机梯度下降法：先随机抽取一个样本来计算误差，再根据这个误差来更新权值<br />
+</li>
+<li>批量梯度下降法：从总样本中选取一个批次（batch）（例如10000个样本，随机选取1中的100个样本作为batch），然后计算这个batch的总误差，再根据这个误差来更新权值</li>
 </ul>
-<p>它是基于SGD的一种算法,它的核心思想是<strong>对比较常见的数据给予它比较小的学习率去调整参数,对于比较罕见的数据给予它比较大的学习率去调整参数</strong>。<br>它很适合应用于数据稀疏的数据集(比如一个图片数据集,有10000张狗的照片,10000张猫的照片,只有100张大象的照片)。比较稀疏的数据集是指猫和狗的照片很多，而大象的照片很少，即照片分布不均匀。  </p>
-<p>举例说明：<br>设置狗是第一个分类（i=1），猫是第二个分类（i=2），大象是第三个分类（i=3）。<br>第一次抽到狗，即i=1，t=1(第1次抽到狗这个分类)，计算g11(第一分类的代价函数的导数(梯度))的平方，此时狗分类学习率η=η/(g11的平方+ε)。<br>第二次又抽到狗，即i=1，t=2(第2次抽到狗这个分类)，计算g21(第一分类的代价函数的导数(梯度))的平方，此时狗分类学习率η=η/(g11的平方+g21的平方+ε)。<br>第三次还抽到狗，即i=1，t=3(第3次抽到狗这个分类)，计算g31(第一分类的代价函数的导数(梯度))的平方，此时狗分类学习率η=η/(g11的平方+g21的平方+g31的平方+ε)。<br>第四次抽到的是猫，即i=2，t=1(第1次抽到猫这个分类)，计算g12(第二分类的代价函数的导数(梯度))的平方，此时猫分类学习率η=η/(g12的平方+ε)。<br>第五次抽到的是象，即i=3，t=1(第1次抽到象这个分类)，计算g13(第三分类的代价函数的导数(梯度))的平方，此时象分类学习率η=η/(g13的平方+ε)。<br>第六次抽到的还是猫，即i=2，t=2(第2次抽到猫这个分类)，计算g22(第二分类的代价函数的导数(梯度))的平方，此时猫分类学习率η=η/(g12的平方+g22的平方+ε)。<br>以此类推  </p>
+<h2 id="随机梯度下降法">随机梯度下降法：</h2>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/SGD_small.png" srcset="/img/loading.gif" /></p>
+<h2 id="带momentum的随机梯度下降法">带Momentum的随机梯度下降法：</h2>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/Momentum.png" srcset="/img/loading.gif" /></p>
+<h2 id="涅斯捷罗夫加速梯度下降法-nagnesterov-accelerated-gradient">涅斯捷罗夫加速梯度下降法 NAG(Nesterov accelerated gradient)</h2>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/NAG.png" srcset="/img/loading.gif" /></p>
+<p>在Momentun中小球会盲目地跟从下坡的梯度,容易发生错误,所以我们需要一个更聪明的小球,这个小球提前知道它要去哪里,它还要知道走到坡底的时候速度慢下来而不是又冲上另一个坡。γvt−1会用来修改W的值,计算W−γvt−1可以表示小球下一个位置大概在哪里。从而我们可以提前计算下一个位置的梯度,然后使用到当前位置。</p>
+<h2 id="adagrad">Adagrad</h2>
+<p>上面提到的方法对于所有参数都使用了同一个更新速率。但是同一个更新速率不一定适合所有参数。比如有的参数可能已经到了仅需要微调的阶段，但又有些参数由于对应样本少等原因，还需要较大幅度的调动。于是提出了Adagrad算法，为不同分类设置了不同的学习率。简单的说，就是这类数据出现的越多，这类数据的学习率越小，这类数据出现的越少，这类数据学习率越大。</p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/Adagrad.png" srcset="/img/loading.gif" /></p>
+<ul>
+<li>η为学习率，一般为0.01<br />
+</li>
+<li>gti为第i个分类的代价函数的导数（第i个分类的代价函数的梯度）<br />
+</li>
+<li>Wt+1等于Wt减去学习率η除以（从1到t'的共计t'次第i个分类的代价函数的梯度的平方加ε的和的平方根）的商点乘gt的积</li>
+</ul>
+<p>它是基于SGD的一种算法,它的核心思想是<strong>对比较常见的数据给予它比较小的学习率去调整参数,对于比较罕见的数据给予它比较大的学习率去调整参数</strong>。<br />
+它很适合应用于数据稀疏的数据集(比如一个图片数据集,有10000张狗的照片,10000张猫的照片,只有100张大象的照片)。比较稀疏的数据集是指猫和狗的照片很多，而大象的照片很少，即照片分布不均匀。</p>
+<p>举例说明： 设置狗是第一个分类（i=1），猫是第二个分类（i=2），大象是第三个分类（i=3）。 第一次抽到狗，即i=1，t=1(第1次抽到狗这个分类)，计算g11(第一分类的代价函数的导数(梯度))的平方，此时狗分类学习率η=η/(g11的平方+ε)。 第二次又抽到狗，即i=1，t=2(第2次抽到狗这个分类)，计算g21(第一分类的代价函数的导数(梯度))的平方，此时狗分类学习率η=η/(g11的平方+g21的平方+ε)。<br />
+第三次还抽到狗，即i=1，t=3(第3次抽到狗这个分类)，计算g31(第一分类的代价函数的导数(梯度))的平方，此时狗分类学习率η=η/(g11的平方+g21的平方+g31的平方+ε)。<br />
+第四次抽到的是猫，即i=2，t=1(第1次抽到猫这个分类)，计算g12(第二分类的代价函数的导数(梯度))的平方，此时猫分类学习率η=η/(g12的平方+ε)。<br />
+第五次抽到的是象，即i=3，t=1(第1次抽到象这个分类)，计算g13(第三分类的代价函数的导数(梯度))的平方，此时象分类学习率η=η/(g13的平方+ε)。<br />
+第六次抽到的还是猫，即i=2，t=2(第2次抽到猫这个分类)，计算g22(第二分类的代价函数的导数(梯度))的平方，此时猫分类学习率η=η/(g12的平方+g22的平方+ε)。<br />
+以此类推</p>
 <blockquote>
-<p>优点：从举例中可以看出，Adagrad确实可以达到<strong>对比较常见的数据给予它比较小的学习率去调整参数,对于比较罕见的数据给予它比较大的学习率去调整参数</strong>这个目的。  </p>
-<p>缺点：Adagrad主要的优势在于不需要人为的调节学习率,它可以自动调节。它的缺点在于,随着迭代次数的增多,学习率也会越来越低,最终会趋向于0。  </p>
+<p>优点：从举例中可以看出，Adagrad确实可以达到<strong>对比较常见的数据给予它比较小的学习率去调整参数,对于比较罕见的数据给予它比较大的学习率去调整参数</strong>这个目的。</p>
 </blockquote>
-<h2 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h2><p>RMS(Root Mean Square)均方根</p>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/RMSprop.png" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>缺点：Adagrad主要的优势在于不需要人为的调节学习率,它可以自动调节。它的缺点在于,随着迭代次数的增多,学习率也会越来越低,最终会趋向于0。</p>
+</blockquote>
+<h2 id="rmsprop">RMSprop</h2>
+<p>RMS(Root Mean Square)均方根</p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/RMSprop.png" srcset="/img/loading.gif" /></p>
 <p>RMSprop借鉴了一些Adagrad的思想,不过这里RMSprop只用到了<strong>前t-1次梯度平方的平均值加上当前梯度的平方的和</strong>的开平方作为学习率的分母。这样RMSprop<strong>不会出现学习率越来越低的问题,而且也能自己调节学习率,并且可以有一个比较好的效果</strong>。</p>
-<h2 id="Adadelta"><a href="#Adadelta" class="headerlink" title="Adadelta"></a>Adadelta</h2><p><img src="http://oke9xbto1.bkt.clouddn.com/Adadelta.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="adadelta">Adadelta</h2>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/Adadelta.png" srcset="/img/loading.gif" /></p>
 <p>ΔWt等于负的学习率除以前t次的梯度平方的平均值加上ε的和的平方根点乘当前这次(也就是第t次)的梯度</p>
 <p>分子对上一次(t-1)的ΔW求均方根，分母对这一次(t)的梯度求均方根。</p>
-<p>使用Adadelta我们甚至不需要设置一个默认学习率,在Adadelta不需要使用学习率也可以达到一个非常好的效<br>果。</p>
-<h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><p><img src="http://oke9xbto1.bkt.clouddn.com/Adam.png" srcset="/img/loading.gif" alt=""></p>
-<p>就像Adadelta和RMSprop一样Adam会存储之前衰减的平方梯度,同时它也会保存之前衰减的梯度。经过一些<br>处理之后再使用类似Adadelta和RMSprop的方式更新参数。</p>
-<h1 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h1><blockquote>
+<p>使用Adadelta我们甚至不需要设置一个默认学习率,在Adadelta不需要使用学习率也可以达到一个非常好的效 果。</p>
+<h2 id="adam">Adam</h2>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/Adam.png" srcset="/img/loading.gif" /></p>
+<p>就像Adadelta和RMSprop一样Adam会存储之前衰减的平方梯度,同时它也会保存之前衰减的梯度。经过一些 处理之后再使用类似Adadelta和RMSprop的方式更新参数。</p>
+<h1 id="效果演示">效果演示</h1>
+<blockquote>
 <p>这里的速度是指模型收敛的速度，也就是得到模型的速度。</p>
 </blockquote>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/opt2.gif" srcset="/img/loading.gif" alt=""><br>五角星位置为全局最小值，Adadelta最快，SGD最慢。  </p>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/opt1.gif" srcset="/img/loading.gif" alt=""><br>马鞍问题，除了SGD以外其他方法均能够逃离马鞍，找到最正确的位置。</p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/opt2.gif" srcset="/img/loading.gif" /> 五角星位置为全局最小值，Adadelta最快，SGD最慢。</p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/opt1.gif" srcset="/img/loading.gif" /> 马鞍问题，除了SGD以外其他方法均能够逃离马鞍，找到最正确的位置。</p>
 <blockquote>
 <p>虽然SDG的收敛速度可能会比其他优化器慢，但是模型识别的准确率不一定是最差的。</p>
 </blockquote>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -529,6 +550,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

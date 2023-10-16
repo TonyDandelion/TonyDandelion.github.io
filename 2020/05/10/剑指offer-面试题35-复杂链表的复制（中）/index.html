@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      18
        分钟
     </span>
   
@@ -253,38 +253,53 @@
             <div class="markdown-body">
               <p>很多读者可能都知道“各个击破”的军事思想，这种思想的精髓是当敌我实力悬殊时，我们可以把强大的敌人分割开来，然后集中优势兵力打败被分割开来的小部分敌人。要一下子战胜总体很强大的敌人很困难，但战胜小股敌人就容易多了。同样，在面试中，当我们遇到复杂的大问题的时候，如果能够先把大问题分解成若干个简单的小问题，然后再逐个解决这些小问题，则可能也会容易很多。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>请实现 <code>copyRandomList</code> 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，<strong>还有一个 random 指针指向链表中的任意节点或者 null。</strong></p>
+<h1 id="question">Question</h1>
+<p>请实现 <code>copyRandomList</code> 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，<strong>还有一个 random 指针指向链表中的任意节点或者 null。</strong></p>
 <p>示例 1：</p>
-<p><img src="https://i.loli.net/2020/05/10/Yl8fZsh19C5uN2m.png" srcset="/img/loading.gif" alt="e1.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/10/Yl8fZsh19C5uN2m.png" srcset="/img/loading.gif" alt="e1.png" /><figcaption aria-hidden="true">e1.png</figcaption>
+</figure>
 <figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：head = <span class="hljs-comment">[<span class="hljs-comment">[7,null]</span>,<span class="hljs-comment">[13,0]</span>,<span class="hljs-comment">[11,4]</span>,<span class="hljs-comment">[10,2]</span>,<span class="hljs-comment">[1,0]</span>]</span><br>输出：<span class="hljs-comment">[<span class="hljs-comment">[7,null]</span>,<span class="hljs-comment">[13,0]</span>,<span class="hljs-comment">[11,4]</span>,<span class="hljs-comment">[10,2]</span>,<span class="hljs-comment">[1,0]</span>]</span><br></code></pre></div></td></tr></table></figure>
 <p>示例 2：</p>
-<p><img src="https://i.loli.net/2020/05/10/CDLcmREftqOHQ7W.png" srcset="/img/loading.gif" alt="e2.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/10/CDLcmREftqOHQ7W.png" srcset="/img/loading.gif" alt="e2.png" /><figcaption aria-hidden="true">e2.png</figcaption>
+</figure>
 <figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：head = <span class="hljs-string">[[1,1],[2,1]]</span><br>输出：<span class="hljs-string">[[1,1],[2,1]]</span><br></code></pre></div></td></tr></table></figure>
 <p>示例 3：</p>
-<p><img src="https://i.loli.net/2020/05/10/4TDJixPXeWcYMf9.png" srcset="/img/loading.gif" alt="e3.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/10/4TDJixPXeWcYMf9.png" srcset="/img/loading.gif" alt="e3.png" /><figcaption aria-hidden="true">e3.png</figcaption>
+</figure>
 <figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：head = <span class="hljs-string">[[3,null],[3,0],[3,null]]</span><br>输出：<span class="hljs-string">[[3,null],[3,0],[3,null]]</span><br></code></pre></div></td></tr></table></figure>
-<p>示例 4：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：head = <span class="hljs-comment">[]</span><br>输出：<span class="hljs-comment">[]</span><br>解释：给定的链表为空（空指针），因此返回 null。<br></code></pre></div></td></tr></table></figure><br>提示：-10000 &lt;= Node.val &lt;= 10000；Node.random 为空（null）或指向链表中的节点；节点数不超过1000 。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><strong><em>初步思想</em></strong></p>
-<p>把复制过程分成两步：第一步是复制原始链表上的每个节点，并用<strong>next指针</strong>链接起来；第二步是设置每个节点的<strong>random指针</strong>。假设原始链表中的某个节点N的 random 指针指向节点S，由于S在链表中可能在N的前面也可能在N的后面，所以要定位S的位置需要从原始链表的头节点开始找。对于一个含有n个节点的链表，由于定位每个节点的<strong>random指针</strong>都需要从链表头节点开始经过 $O(n)$步才能找到，因此这种方法总的时间复杂度是 $O(n^2)$。</p>
+<p>示例 4： <figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：head = <span class="hljs-comment">[]</span><br>输出：<span class="hljs-comment">[]</span><br>解释：给定的链表为空（空指针），因此返回 null。<br></code></pre></div></td></tr></table></figure> 提示：-10000 &lt;= Node.val &lt;= 10000；Node.random 为空（null）或指向链表中的节点；节点数不超过1000 。</p>
+<h1 id="intuition">Intuition</h1>
+<p><strong><em>初步思想</em></strong></p>
+<p>把复制过程分成两步：第一步是复制原始链表上的每个节点，并用<strong>next指针</strong>链接起来；第二步是设置每个节点的<strong>random指针</strong>。假设原始链表中的某个节点N的 random 指针指向节点S，由于S在链表中可能在N的前面也可能在N的后面，所以要定位S的位置需要从原始链表的头节点开始找。对于一个含有n个节点的链表，由于定位每个节点的<strong>random指针</strong>都需要从链表头节点开始经过 <span class="math inline">\(O(n)\)</span>步才能找到，因此这种方法总的时间复杂度是 <span class="math inline">\(O(n^2)\)</span>。</p>
 <p><strong><em>进阶思想</em></strong></p>
-<p>由于上述方法的时间主要花费在定位节点的<strong>random指针</strong>上面，我们试着在这方面去进行优化。我们还是分为两步：第一步仍然是复制原始链表上的每个节点N创建N’，然后把这些创建出来的节点用<strong>next指针</strong>链接起来。<br>同时我们把<N, N>的配对信息放到一个哈希表中；第二步还是设置复制链表上每个节点的<strong>random指针</strong>。如果在原始链表中节点N的<strong>random指针</strong>指向节点S，那么在复制链表中，对应的N’应该指向S’。由于有了哈希表，我们可以用 $O(1)$ 的时间根据S找到S’。<br>第二种方法相当于用空间换时间。对于有n个节点的链表，我们需要一个大小为 $O(n)$ 的哈希表，也就是说我们以$O(n)$ 的空间消耗把时间复杂度由 $O(n^2)$ 降低到 $O(n)$。</p>
+<p>由于上述方法的时间主要花费在定位节点的<strong>random指针</strong>上面，我们试着在这方面去进行优化。我们还是分为两步：第一步仍然是复制原始链表上的每个节点N创建N'，然后把这些创建出来的节点用<strong>next指针</strong>链接起来。 同时我们把&lt;N, N&gt;的配对信息放到一个哈希表中；第二步还是设置复制链表上每个节点的<strong>random指针</strong>。如果在原始链表中节点N的<strong>random指针</strong>指向节点S，那么在复制链表中，对应的N'应该指向S'。由于有了哈希表，我们可以用 <span class="math inline">\(O(1)\)</span> 的时间根据S找到S'。 第二种方法相当于用空间换时间。对于有n个节点的链表，我们需要一个大小为 <span class="math inline">\(O(n)\)</span> 的哈希表，也就是说我们以<span class="math inline">\(O(n)\)</span> 的空间消耗把时间复杂度由 <span class="math inline">\(O(n^2)\)</span> 降低到 <span class="math inline">\(O(n)\)</span>。</p>
 <p><strong><em>剑指offer终极思想</em></strong></p>
-<p>第三种方法的<strong>第一步</strong>仍然是根据原始链表的每个节点N创建对应的N’。<strong>这一次，我们把N’链接在N的后面</strong>。如图所示：</p>
-<p><img src="https://i.loli.net/2020/05/10/U5Q8DupTRxsKArH.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_16-12-05.png"></p>
-<p><strong>第二步</strong>设置复制出节点的<strong>random指针</strong>。假设原始链表上的N的<strong>random指针</strong>指向节点S(<code>N.random = S</code>)，那么其对应复制出来的N’是N的<strong>next指针</strong>指向的节点(<code>N.next = N&#39;</code>)，同样S’也是S(<code>S.next = S&#39;</code>)的<strong>next指针</strong>指向的节点。用一行代码就能实现 <code>N.random</code> 到<code>S&#39;</code>的连接， <code>N&#39;.random = N.random.next</code>。（此处是关键！）如图所示：</p>
-<p><img src="https://i.loli.net/2020/05/10/FJjWaPZ3Nn7sVi1.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_16-17-28.png"></p>
+<p>第三种方法的<strong>第一步</strong>仍然是根据原始链表的每个节点N创建对应的N'。<strong>这一次，我们把N'链接在N的后面</strong>。如图所示：</p>
+<figure>
+<img src="https://i.loli.net/2020/05/10/U5Q8DupTRxsKArH.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_16-12-05.png" /><figcaption aria-hidden="true">Snipaste_2020-05-10_16-12-05.png</figcaption>
+</figure>
+<p><strong>第二步</strong>设置复制出节点的<strong>random指针</strong>。假设原始链表上的N的<strong>random指针</strong>指向节点S(<code>N.random = S</code>)，那么其对应复制出来的N'是N的<strong>next指针</strong>指向的节点(<code>N.next = N'</code>)，同样S'也是S(<code>S.next = S'</code>)的<strong>next指针</strong>指向的节点。用一行代码就能实现 <code>N.random</code> 到<code>S'</code>的连接， <code>N'.random = N.random.next</code>。（此处是关键！）如图所示：</p>
+<figure>
+<img src="https://i.loli.net/2020/05/10/FJjWaPZ3Nn7sVi1.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_16-17-28.png" /><figcaption aria-hidden="true">Snipaste_2020-05-10_16-17-28.png</figcaption>
+</figure>
 <p>第三步把这个长链表拆分成两个链表：把奇数位置的节点用<strong>next指针</strong>链接起来就是原始链表，<strong>把偶数位置的节点用next指针链接起来就是复制出来的链表</strong>。如图所示：</p>
-<p><img src="https://i.loli.net/2020/05/10/YohIXWQiKGpdcsu.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_16-17-40.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/10/YohIXWQiKGpdcsu.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_16-17-40.png" /><figcaption aria-hidden="true">Snipaste_2020-05-10_16-17-40.png</figcaption>
+</figure>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（节点中的<strong>random指针</strong>指向节点自身；两个节点的<strong>random指针</strong>形成环状结构；链表中只有一个节点）。<br>特殊输入测试（指向链表头节点的指针为 <code>nullptr</code> 指针）。</p>
+<p>功能测试（节点中的<strong>random指针</strong>指向节点自身；两个节点的<strong>random指针</strong>形成环状结构；链表中只有一个节点）。 特殊输入测试（指向链表头节点的指针为 <code>nullptr</code> 指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p><strong>考查应聘者对复杂问题的思维能力。</strong>本题中的复杂链表是一种不太常见的数据结构，而且复制这种链表的过程也较为复杂。我们<strong>把复杂链表的复制过程分解成3个步骤，同时把每个步骤都用图形化的方式表示出来，这样能帮助我们厘清思路。</strong>在写代码的时候，我们为每个步骤定义一个子函数，最后在复制函数中<strong>先后调用这3个函数</strong>。有了这些清晰的思路之后再写代码，就容易多了。<br><strong>考查应聘者分析时间效率和空间效率的能力。</strong>当应聘者提出第一种和第二种思路的时候，面试官会提示此时在效率上还不是最优解。这时候应聘者要能自己分析出这两种算法的时间复杂度和空间复杂度各是多少。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"># Definition for a Node.</span><br><span class="hljs-string">class Node:</span><br><span class="hljs-string">    def __init__(self, x: int, next: &#x27;Node&#x27; = None, random: &#x27;Node&#x27; = None):</span><br><span class="hljs-string">        self.val = int(x)</span><br><span class="hljs-string">        self.next = next</span><br><span class="hljs-string">        self.random = random</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cloneNode</span>(<span class="hljs-params">self, head</span>):</span><br>        p = head<br>        <span class="hljs-keyword">while</span> p:<br>            tmp = Node(p.val)<br>            tmp.<span class="hljs-built_in">next</span> = p.<span class="hljs-built_in">next</span><br>            p.<span class="hljs-built_in">next</span> = tmp<br>            p = tmp.<span class="hljs-built_in">next</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">connectRandom</span>(<span class="hljs-params">self, head</span>):</span><br>        p = head<br>        <span class="hljs-keyword">while</span> p:  <br>            p_cloned = p.<span class="hljs-built_in">next</span><br>            <span class="hljs-comment"># p.random可能会指向None 所以这里这么写 if p.random else None</span><br>            p_cloned.random = p.random.<span class="hljs-built_in">next</span> <span class="hljs-keyword">if</span> p.random <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span><br>            p = p.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">splitLinkedList</span>(<span class="hljs-params">self, head</span>):</span><br>        dummy = Node(<span class="hljs-number">0</span>)<br>        cloned_p = head.<span class="hljs-built_in">next</span><br>        dummy.<span class="hljs-built_in">next</span> = head.<span class="hljs-built_in">next</span><br><br>        <span class="hljs-keyword">while</span> cloned_p.<span class="hljs-built_in">next</span>:<br>            tmp = cloned_p.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>            cloned_p.<span class="hljs-built_in">next</span> = tmp<br>            cloned_p = tmp<br><br>        <span class="hljs-keyword">return</span> dummy.<span class="hljs-built_in">next</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">copyRandomList</span>(<span class="hljs-params">self, head: <span class="hljs-string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span><br>        <span class="hljs-keyword">if</span> head == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        <br>        <span class="hljs-comment"># 复制节点</span><br>        self.cloneNode(head)<br>        <br>        <span class="hljs-comment"># 复制出节点的random指针</span><br>        self.connectRandom(head)<br><br>        <span class="hljs-comment"># 拆分链表</span><br>        <span class="hljs-keyword">return</span> self.splitLinkedList(head)<br></code></pre></div></td></tr></table></figure>
-
+<p><strong>考查应聘者对复杂问题的思维能力。</strong>本题中的复杂链表是一种不太常见的数据结构，而且复制这种链表的过程也较为复杂。我们<strong>把复杂链表的复制过程分解成3个步骤，同时把每个步骤都用图形化的方式表示出来，这样能帮助我们厘清思路。</strong>在写代码的时候，我们为每个步骤定义一个子函数，最后在复制函数中<strong>先后调用这3个函数</strong>。有了这些清晰的思路之后再写代码，就容易多了。 <strong>考查应聘者分析时间效率和空间效率的能力。</strong>当应聘者提出第一种和第二种思路的时候，面试官会提示此时在效率上还不是最优解。这时候应聘者要能自己分析出这两种算法的时间复杂度和空间复杂度各是多少。</p>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"># Definition for a Node.</span><br><span class="hljs-string">class Node:</span><br><span class="hljs-string">    def __init__(self, x: int, next: &#x27;Node&#x27; = None, random: &#x27;Node&#x27; = None):</span><br><span class="hljs-string">        self.val = int(x)</span><br><span class="hljs-string">        self.next = next</span><br><span class="hljs-string">        self.random = random</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cloneNode</span>(<span class="hljs-params">self, head</span>):</span><br>        p = head<br>        <span class="hljs-keyword">while</span> p:<br>            tmp = Node(p.val)<br>            tmp.<span class="hljs-built_in">next</span> = p.<span class="hljs-built_in">next</span><br>            p.<span class="hljs-built_in">next</span> = tmp<br>            p = tmp.<span class="hljs-built_in">next</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">connectRandom</span>(<span class="hljs-params">self, head</span>):</span><br>        p = head<br>        <span class="hljs-keyword">while</span> p:  <br>            p_cloned = p.<span class="hljs-built_in">next</span><br>            <span class="hljs-comment"># p.random可能会指向None 所以这里这么写 if p.random else None</span><br>            p_cloned.random = p.random.<span class="hljs-built_in">next</span> <span class="hljs-keyword">if</span> p.random <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span><br>            p = p.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">splitLinkedList</span>(<span class="hljs-params">self, head</span>):</span><br>        dummy = Node(<span class="hljs-number">0</span>)<br>        cloned_p = head.<span class="hljs-built_in">next</span><br>        dummy.<span class="hljs-built_in">next</span> = head.<span class="hljs-built_in">next</span><br><br>        <span class="hljs-keyword">while</span> cloned_p.<span class="hljs-built_in">next</span>:<br>            tmp = cloned_p.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>            cloned_p.<span class="hljs-built_in">next</span> = tmp<br>            cloned_p = tmp<br><br>        <span class="hljs-keyword">return</span> dummy.<span class="hljs-built_in">next</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">copyRandomList</span>(<span class="hljs-params">self, head: <span class="hljs-string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span><br>        <span class="hljs-keyword">if</span> head == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        <br>        <span class="hljs-comment"># 复制节点</span><br>        self.cloneNode(head)<br>        <br>        <span class="hljs-comment"># 复制出节点的random指针</span><br>        self.connectRandom(head)<br><br>        <span class="hljs-comment"># 拆分链表</span><br>        <span class="hljs-keyword">return</span> self.splitLinkedList(head)<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -530,6 +545,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

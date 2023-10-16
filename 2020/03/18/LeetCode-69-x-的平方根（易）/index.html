@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,62 +251,94 @@
             <h1 style="display: none">LeetCode 69. x 的平方根（易）</h1>
             
             <div class="markdown-body">
-              <p>一个简单难度的题目，要理解使用拟牛顿法解决问题的原理。  </p>
+              <p>一个简单难度的题目，要理解使用拟牛顿法解决问题的原理。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>实现 <code>int sqrt(int x)</code> 函数。<br>计算并返回 <em>x</em> 的平方根，其中 <em>x</em> 是非负整数。<br>由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
+<h1 id="题目">题目</h1>
+<p>实现 <code>int sqrt(int x)</code> 函数。<br />
+计算并返回 <em>x</em> 的平方根，其中 <em>x</em> 是非负整数。<br />
+由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。</p>
+<h1 id="示例">示例</h1>
+<p>示例 1:</p>
 <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: 4</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure>
 <p>示例 2:</p>
 <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: 8</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure>
-<p>说明: 8 的平方根是 2.82842…,<br>由于返回类型是整数，小数部分将被舍去。</p>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>二分查找、数学</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、二分查找</strong><br>算一个候选值的平方，然后和 $x$ 比较大小，为了缩短查找时间，我们采用二分搜索法来找平方根，找最后一个不大于目标值的数。 之前 <code>left</code> 和 <code>right</code> 都是数组下标，这里的 <code>left</code> 和 <code>right</code> 直接就是数字本身了，一个数字的平方根是不可能比起本身还大的，所以 <code>right</code> 初始化为 $x$，还有就是这里若 $x$ 是整型最大值，再加1就会溢出。最后就是返回值是 <code>right-1</code>，因为题目中说了要把小数部分减去，只有减1才能得到正确的值。 </p>
+<p>说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。</p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>二分查找、数学</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>方法一、二分查找</strong><br />
+算一个候选值的平方，然后和 <span class="math inline">\(x\)</span> 比较大小，为了缩短查找时间，我们采用二分搜索法来找平方根，找最后一个不大于目标值的数。 之前 <code>left</code> 和 <code>right</code> 都是数组下标，这里的 <code>left</code> 和 <code>right</code> 直接就是数字本身了，一个数字的平方根是不可能比起本身还大的，所以 <code>right</code> 初始化为 <span class="math inline">\(x\)</span>，还有就是这里若 <span class="math inline">\(x\)</span> 是整型最大值，再加1就会溢出。最后就是返回值是 <code>right-1</code>，因为题目中说了要把小数部分减去，只有减1才能得到正确的值。</p>
 <p>另外一种二分法解法的实现，从x/2处开始寻找。</p>
 <ul>
 <li>如果 <code>x &lt; 2</code>，返回 <code>x</code>。</li>
 <li>令左边界为 <code>2</code>，右边界为 <code>x / 2</code>。</li>
-<li>当 <code>left &lt;= right</code> 时：<ul>
-<li>令 <code>num = (left + right) / 2</code>，比较 <code>num * num</code> 与 <code>x</code>：<ul>
+<li>当 <code>left &lt;= right</code> 时：
+<ul>
+<li>令 <code>num = (left + right) / 2</code>，比较 <code>num * num</code> 与 <code>x</code>：
+<ul>
 <li>如果 <code>num * num &gt; x</code>，更新右边界为 <code>right = pivot -1</code>。</li>
 <li>如果 <code>num * num &lt; x</code>，更新左边界为 <code>left = pivot + 1</code>。</li>
 <li>如果 <code>num * num == x</code>，即整数平方根为 <code>num</code>，返回 <code>num</code>。</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li>返回 <code>right</code>。</li>
 </ul>
-<p><img src="https://i.loli.net/2020/03/18/e142mhFTBZwMyv6.png" srcset="/img/loading.gif" alt="binary"></p>
-<p><strong>方法二、牛顿迭代法</strong><br>利用牛顿迭代法，高数中好像讲到过这个方法，是用逼近法求方程根的神器，在这里也可以借用一下，可参见网友 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/AnnieKim/archive/2013/04/18/3028607.html">Annie Kim’s Blog</a> 的博客。<br>为了方便理解，就先以本题为例：<br>计算 $x^2 = n$ 的解，令 $f(x)=x^2-n$ ，相当于求解 $f(x)=0$ 的解，如下图所示。<br>首先取 $x_0$，如果 $x_0$ 不是解，做一个经过 $(x_0, f(x_0))$ 这个点的切线，与x轴的交点为 $x_1$。<br>同样的道理，如果 $x_1$ 不是解，做一个经过 $(x_1,f(x_1))$ 这个点的切线，与x轴的交点为 $x_2$     。<br>以此类推。  </p>
-<p><img src="https://i.loli.net/2020/03/18/jYgV1l5pGO97vIS.jpg" srcset="/img/loading.gif" alt="18155235-b272cc444a1845d3aede4c72a87f83dc.jpg"></p>
-<p>以这样的方式得到的 $x<em>i$会无限趋近于 $f(x)=0$ 的解。<br>判断 $x_i$ 是否是 $f(x)=0$ 的解有两种方法：<br>一是直接计算 $f(x_i)$ 的值判断是否为 $0$，二是判断前后两个解 $x_i$ 和 $x</em>{i-1}$ 是否无限接近。<br>经过 $(x<em>i, f(x_i))$ 这个点的切线方程为 $f(x) = f(x_i) + f’(x_i)(x - x_i)$ ，其中 $f’(x)$ 为 $f(x)$ 的导数，本题中为$2x$。令切线方程等于0，即求解出的 $x$ 就是 $x</em>{i+1}$， $x<em>{i+1}=x_i - f(x_i)/f’(x_i)$。<br>继续化简，$x</em>{i+1}=x<em>i - (x_i^2 - n) / (2x_i) = x_i - x_i / 2 + n / (2x_i) = x_i / 2 + n / 2x_i = (xi + n/xi) / 2$。<br>即，$x</em>{i+1}=(xi + n/xi) / 2$<br>有了迭代公式，程序就好写了，关于牛顿迭代法，可以参考<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Newton&#39;s_method">wikipedia</a>以及<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/643093.htm">百度百科</a>。  </p>
-<p><strong>算法效率比较</strong>  </p>
-<p><img src="https://i.loli.net/2020/03/18/L9Tri1tfUoAXZ6w.png" srcset="/img/loading.gif" alt="cp.png">  </p>
-<p><strong>牛顿法随着x的增加性能优势也在增加</strong>    </p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<figure>
+<img src="https://i.loli.net/2020/03/18/e142mhFTBZwMyv6.png" srcset="/img/loading.gif" alt="binary" /><figcaption aria-hidden="true">binary</figcaption>
+</figure>
+<p><strong>方法二、牛顿迭代法</strong><br />
+利用牛顿迭代法，高数中好像讲到过这个方法，是用逼近法求方程根的神器，在这里也可以借用一下，可参见网友 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/AnnieKim/archive/2013/04/18/3028607.html">Annie Kim's Blog</a> 的博客。 为了方便理解，就先以本题为例：<br />
+计算 <span class="math inline">\(x^2 = n\)</span> 的解，令 <span class="math inline">\(f(x)=x^2-n\)</span> ，相当于求解 <span class="math inline">\(f(x)=0\)</span> 的解，如下图所示。<br />
+首先取 <span class="math inline">\(x_0\)</span>，如果 <span class="math inline">\(x_0\)</span> 不是解，做一个经过 <span class="math inline">\((x_0, f(x_0))\)</span> 这个点的切线，与x轴的交点为 <span class="math inline">\(x_1\)</span>。<br />
+同样的道理，如果 <span class="math inline">\(x_1\)</span> 不是解，做一个经过 <span class="math inline">\((x_1,f(x_1))\)</span> 这个点的切线，与x轴的交点为 <span class="math inline">\(x_2\)</span> 。<br />
+以此类推。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/18/jYgV1l5pGO97vIS.jpg" srcset="/img/loading.gif" alt="18155235-b272cc444a1845d3aede4c72a87f83dc.jpg" /><figcaption aria-hidden="true">18155235-b272cc444a1845d3aede4c72a87f83dc.jpg</figcaption>
+</figure>
+<p>以这样的方式得到的 <span class="math inline">\(x_i\)</span>会无限趋近于 <span class="math inline">\(f(x)=0\)</span> 的解。<br />
+判断 <span class="math inline">\(x_i\)</span> 是否是 <span class="math inline">\(f(x)=0\)</span> 的解有两种方法：<br />
+一是直接计算 <span class="math inline">\(f(x_i)\)</span> 的值判断是否为 <span class="math inline">\(0\)</span>，二是判断前后两个解 <span class="math inline">\(x_i\)</span> 和 <span class="math inline">\(x_{i-1}\)</span> 是否无限接近。<br />
+经过 <span class="math inline">\((x_i, f(x_i))\)</span> 这个点的切线方程为 <span class="math inline">\(f(x) = f(x_i) + f’(x_i)(x - x_i)\)</span> ，其中 <span class="math inline">\(f&#39;(x)\)</span> 为 <span class="math inline">\(f(x)\)</span> 的导数，本题中为<span class="math inline">\(2x\)</span>。令切线方程等于0，即求解出的 <span class="math inline">\(x\)</span> 就是 <span class="math inline">\(x_{i+1}\)</span>， <span class="math inline">\(x_{i+1}=x_i - f(x_i)/f’(x_i)\)</span>。 继续化简，<span class="math inline">\(x_{i+1}=x_i - (x_i^2 - n) / (2x_i) = x_i - x_i / 2 + n / (2x_i) = x_i / 2 + n / 2x_i = (xi + n/xi) / 2\)</span>。<br />
+即，<span class="math inline">\(x_{i+1}=(xi + n/xi) / 2\)</span> 有了迭代公式，程序就好写了，关于牛顿迭代法，可以参考<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Newton&#39;s_method">wikipedia</a>以及<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/643093.htm">百度百科</a>。</p>
+<p><strong>算法效率比较</strong></p>
+<figure>
+<img src="https://i.loli.net/2020/03/18/L9Tri1tfUoAXZ6w.png" srcset="/img/loading.gif" alt="cp.png" /><figcaption aria-hidden="true">cp.png</figcaption>
+</figure>
+<p><strong>牛顿法随着x的增加性能优势也在增加</strong></p>
+<h1 id="python版本">Python版本</h1>
+<ul>
 <li>方法一的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> x &lt;= <span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> x<br>        left, right = <span class="hljs-number">0</span>, x<br>        <span class="hljs-keyword">while</span> left &lt; right:<br>            mid = left + (right - left) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> mid * mid &lt;= x:  <span class="hljs-comment"># 如果 mid*mid是不大于x的，即平方根在右区间，右移left。</span><br>                left = mid + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 否则，如果mid*mid大于x，说明平方根在左区间，左移right。</span><br>                right = mid<br>        <span class="hljs-keyword">return</span> right - <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(logN)$。<br>空间复杂度：$O(1)$。<br>执行用时 :40 ms, 在所有 Python3 提交中击败了74.38%的用户<br>内存消耗 :13.3 MB, 在所有 Python3 提交中击败了5.02%的用户  </p>
+<p>时间复杂度：<span class="math inline">\(O(logN)\)</span>。<br />
+空间复杂度：<span class="math inline">\(O(1)\)</span>。<br />
+执行用时 :40 ms, 在所有 Python3 提交中击败了74.38%的用户<br />
+内存消耗 :13.3 MB, 在所有 Python3 提交中击败了5.02%的用户</p>
 <p>另外一种二分法解法的实现，从x/2处开始寻找。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x</span>):</span><br>        <span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">return</span> x<br>        <br>        left, right = <span class="hljs-number">2</span>, x // <span class="hljs-number">2</span><br>        <br>        <span class="hljs-keyword">while</span> left &lt;= right:<br>            pivot = left + (right - left) // <span class="hljs-number">2</span><br>            num = pivot * pivot<br>            <span class="hljs-keyword">if</span> num &gt; x:<br>                right = pivot -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> num &lt; x:<br>                left = pivot + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> pivot<br>            <br>        <span class="hljs-keyword">return</span> right<br></code></pre></div></td></tr></table></figure>
-<p>执行用时 :68 ms, 在所有 Python3 提交中击败了18.20%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.02%的用户  </p>
+<p>执行用时 :68 ms, 在所有 Python3 提交中击败了18.20%的用户<br />
+内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.02%的用户</p>
 <ul>
-<li>方法二的实现  </li>
+<li>方法二的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        res = x<br>        <span class="hljs-keyword">while</span> (res * res) &gt; x:<br>            res = (res + x // res) // <span class="hljs-number">2</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(res)<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(logN)$，此方法是二次收敛的。<br>空间复杂度：$O(1)$。<br>执行用时 :68 ms, 在所有 Python3 提交中击败了18.20%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.02%的用户  </p>
+<p>时间复杂度：<span class="math inline">\(O(logN)\)</span>，此方法是二次收敛的。<br />
+空间复杂度：<span class="math inline">\(O(1)\)</span>。<br />
+执行用时 :68 ms, 在所有 Python3 提交中击败了18.20%的用户<br />
+内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.02%的用户</p>
 <ul>
-<li>python内建求平方根的方法  </li>
+<li>python内建求平方根的方法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(x ** <span class="hljs-number">0.5</span>)<br></code></pre></div></td></tr></table></figure>
-<p>执行用时 :52 ms, 在所有 Python3 提交中击败了38.08%的用户<br>内存消耗 :13.2 MB, 在所有 Python3 提交中击败了5.02%的用户</p>
+<p>执行用时 :52 ms, 在所有 Python3 提交中击败了38.08%的用户 内存消耗 :13.2 MB, 在所有 Python3 提交中击败了5.02%的用户</p>
 <blockquote>
-<p>参考链接  </p>
+<p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4346413.html">Grandyang</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sqrtx/solution/x-de-ping-fang-gen-by-leetcode/">LeetCode 官方题解</a>  </p>
-<h1 id="相似题目"><a href="#相似题目" class="headerlink" title="相似题目"></a>相似题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-perfect-square/">367. 有效的完全平方数（易）</a> （已完成）</p>
-
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4346413.html">Grandyang</a><br />
+<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sqrtx/solution/x-de-ping-fang-gen-by-leetcode/">LeetCode 官方题解</a></p>
+<h1 id="相似题目">相似题目</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-perfect-square/">367. 有效的完全平方数（易）</a> （已完成）</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -550,6 +582,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

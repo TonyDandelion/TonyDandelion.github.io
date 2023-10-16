@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      909 字
+      910 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      14
        分钟
     </span>
   
@@ -254,7 +254,8 @@
               <p>Python3的通用多行输入方式。</p>
 <a id="more"></a>
 <p>使用IDE为Visual Studio Code</p>
-<h1 id="输入数据"><a href="#输入数据" class="headerlink" title="输入数据"></a>输入数据</h1><ul>
+<h1 id="输入数据">输入数据</h1>
+<ul>
 <li>输入数据类型1</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-number">5</span><br><span class="hljs-number">5</span> <span class="hljs-number">3</span> <span class="hljs-number">1</span> <span class="hljs-number">4</span> <span class="hljs-number">2</span><br><span class="hljs-number">2</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">1</span> <span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure>
@@ -264,7 +265,8 @@
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">1</span><br><span class="hljs-attribute">02</span>:<span class="hljs-number">10</span><br><span class="hljs-attribute">200</span><br></code></pre></div></td></tr></table></figure>
 <p>对于这样一行输入一个的情况，可以选择直接用以下方法处理，也可以考虑用更加通用的方案。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">z = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())<br>t = <span class="hljs-built_in">input</span>()<br>m = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())<br></code></pre></div></td></tr></table></figure>
-<h1 id="第一种通用方案：5行代码1次回车"><a href="#第一种通用方案：5行代码1次回车" class="headerlink" title="第一种通用方案：5行代码1次回车"></a>第一种通用方案：5行代码1次回车</h1><ul>
+<h1 id="第一种通用方案5行代码1次回车">第一种通用方案：5行代码1次回车</h1>
+<ul>
 <li><code>res</code> 中每一个元素，就是一个 <code>list</code>，包含了输入。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">res = []                <span class="hljs-comment"># 1</span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:             <span class="hljs-comment"># 2</span><br>    s = <span class="hljs-built_in">input</span>()         <span class="hljs-comment"># 3</span><br>    <span class="hljs-keyword">if</span> s == <span class="hljs-string">&#x27;&#x27;</span>:  <span class="hljs-keyword">break</span>  <span class="hljs-comment"># 4</span><br>    res.append(s)       <span class="hljs-comment"># 5</span><br></code></pre></div></td></tr></table></figure>
@@ -278,7 +280,8 @@
 <li>在函数里面获取命令行输入，<font color='red'><strong>无法调试</strong></font>。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span>():</span><br>    res = []<br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        temp = <span class="hljs-built_in">input</span>()<br>        <span class="hljs-keyword">if</span> temp == <span class="hljs-string">&#x27;&#x27;</span>:<br>            <span class="hljs-keyword">break</span><br>        res.append([<span class="hljs-built_in">int</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> temp.split(<span class="hljs-string">&#x27; &#x27;</span>)])<br>    <br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> res:<br>        print(i)<br><br>    print(<span class="hljs-string">&quot;Finish!!!&quot;</span>)  <span class="hljs-comment"># 在函数里面，在这个位置设置断点，F5下去不了。</span><br>    <span class="hljs-comment"># 后续代码</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>	test()<br></code></pre></div></td></tr></table></figure>
-<h1 id="第二种通用方案：6行代码1次回车"><a href="#第二种通用方案：6行代码1次回车" class="headerlink" title="第二种通用方案：6行代码1次回车"></a>第二种通用方案：6行代码1次回车</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys                                <span class="hljs-comment"># 1</span><br>res = []                                  <span class="hljs-comment"># 2</span><br>s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>)      <span class="hljs-comment"># 3</span><br><span class="hljs-keyword">while</span> s != <span class="hljs-string">&quot;&quot;</span>:                            <span class="hljs-comment"># 4</span><br>    res.append(s)                         <span class="hljs-comment"># 5</span><br>    s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>)  <span class="hljs-comment"># 6</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="第二种通用方案6行代码1次回车">第二种通用方案：6行代码1次回车</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys                                <span class="hljs-comment"># 1</span><br>res = []                                  <span class="hljs-comment"># 2</span><br>s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>)      <span class="hljs-comment"># 3</span><br><span class="hljs-keyword">while</span> s != <span class="hljs-string">&quot;&quot;</span>:                            <span class="hljs-comment"># 4</span><br>    res.append(s)                         <span class="hljs-comment"># 5</span><br>    s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>)  <span class="hljs-comment"># 6</span><br></code></pre></div></td></tr></table></figure>
 <p>如果输入类型是类型1，可以在 <code>append</code> 之前加个特殊处理。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">res.append([<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> s.split(<span class="hljs-string">&#x27; &#x27;</span>)])<br></code></pre></div></td></tr></table></figure>
 <ul>
@@ -289,8 +292,9 @@
 <li>在函数里面获取命令行输入，<font color='red'><strong>无法调试</strong></font>。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span>():</span><br>    <span class="hljs-keyword">import</span> sys                                      <span class="hljs-comment"># 1</span><br>    res = []                                        <span class="hljs-comment"># 2</span><br>    s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>)            <span class="hljs-comment"># 3</span><br>    <span class="hljs-keyword">while</span> s != <span class="hljs-string">&quot;&quot;</span>:                                  <span class="hljs-comment"># 4</span><br>        res.append([<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> s.split(<span class="hljs-string">&#x27; &#x27;</span>)])  <span class="hljs-comment"># 5</span><br>        s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>)        <span class="hljs-comment"># 6</span><br>    <br>    n = <span class="hljs-built_in">int</span>(res[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>])<br>    start = res[<span class="hljs-number">1</span>]<br>    end = res[<span class="hljs-number">2</span>]<br><br>    print(<span class="hljs-string">&quot;函数内获取参数&quot;</span>)<br>    print(<span class="hljs-string">&quot;n is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(n))<br>    print(<span class="hljs-string">&quot;start is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(start))<br>    print(<span class="hljs-string">&quot;end is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(end))<br>    print(<span class="hljs-string">&quot;后续代码&quot;</span>)<br>    <span class="hljs-comment"># 后续代码</span><br>    a = <span class="hljs-number">1</span>  <span class="hljs-comment"># 在这里加断点也无法继续调试</span><br>    b = <span class="hljs-number">1</span><br>    c = a + b<br>    print(<span class="hljs-string">&quot;sum of &#123;&#125; and &#123;&#125; is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(a, b, c))  <span class="hljs-comment"># 但是不加断点，可以一直执行到这里。</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br><br>    test()<br></code></pre></div></td></tr></table></figure>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>先用固定值调试，再用在函数外面获取然后传入到函数里面使用 <strong>或者</strong> 在函数里面获取的方式进行提交。</p>
-
+<h1 id="解决方案">解决方案</h1>
+<p>先用固定值调试，再用在函数外面获取然后传入到函数里面使用 <strong>或者</strong> 在函数里面获取的方式进行提交。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -527,6 +531,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

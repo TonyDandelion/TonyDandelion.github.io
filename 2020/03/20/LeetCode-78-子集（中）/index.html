@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,24 +253,30 @@
             <div class="markdown-body">
               <p>一道题，三种解，其中两种实现了，但是代码都不够简洁，记录了简洁版本的代码以供参考。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一组<strong>不含重复元素、也不一定连续</strong>的整数数组 <em>nums</em>，返回该数组所有可能的子集（幂集）。<br><strong>说明：</strong>解集不能包含重复的子集。 </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例:</strong></p>
+<h1 id="题目">题目</h1>
+<p>给定一组<strong>不含重复元素、也不一定连续</strong>的整数数组 <em>nums</em>，返回该数组所有可能的子集（幂集）。<br />
+<strong>说明：</strong>解集不能包含重复的子集。</p>
+<h1 id="示例">示例</h1>
+<p><strong>示例:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: nums = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br>输出:<br>[<br>  [<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">1</span>],<br>  [<span class="hljs-number">2</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],<br>  []<br>]<br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>位运算、数组、回溯算法</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、回溯</strong>  </p>
-<p><em>复杂回溯</em> </p>
-<p>设置子集长度 <code>k</code> 从 <code>0</code> 开始一直到 <code>len(nums)</code><br>每次都调用 <code>combine</code> 输入<code>nums</code>、<code>nums</code>的长度<code>n</code>、需要的组合的长度 <code>k</code>，得到 <code>nums</code> 长度为 <code>k</code>的子集的集合。将结果累加到同一个 <code>list</code> 即为最终答案。先循环，然后在循环里面回溯。  </p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>位运算、数组、回溯算法</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>方法一、回溯</strong></p>
+<p><em>复杂回溯</em></p>
+<p>设置子集长度 <code>k</code> 从 <code>0</code> 开始一直到 <code>len(nums)</code><br />
+每次都调用 <code>combine</code> 输入<code>nums</code>、<code>nums</code>的长度<code>n</code>、需要的组合的长度 <code>k</code>，得到 <code>nums</code> 长度为 <code>k</code>的子集的集合。将结果累加到同一个 <code>list</code> 即为最终答案。先循环，然后在循环里面回溯。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">res = []<br>nums.sort()<br>n = <span class="hljs-built_in">len</span>(nums)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(n+<span class="hljs-number">1</span>)):<br>	res += self.combine(nums, n, k)<br></code></pre></div></td></tr></table></figure>
 <p><em>简答回溯</em></p>
 <p>实际上，这么写代码，虽然可以实现功能，但是把问题复杂化了。既然求的是幂子集，那<strong>直接去掉终止条件不就行了吗？</strong></p>
-<p><strong>方法二、一次遍历（递归）</strong><br>这个题蛮有意思的，可以直接从后遍历，遇到一个数就把所有子集加上该数组成新的子集，遍历完毕即是所有子集。  </p>
+<p><strong>方法二、一次遍历（递归）</strong><br />
+这个题蛮有意思的，可以直接从后遍历，遇到一个数就把所有子集加上该数组成新的子集，遍历完毕即是所有子集。</p>
 <p><img src="https://i.loli.net/2020/03/20/Sahgu34RHdIsYO8.jpg" srcset="/img/loading.gif" alt="QQ图片20200320162039.jpg" style="zoom: 33%;" /></p>
 <p><strong>方法三、状态分配（字典排序（二进制排序） 子集）</strong></p>
-<p>把数组中所有的数分配一个状态，true 表示这个数在子集中出现，false 表示在子集中不出现，那么对于一个长度为 $n$ 的数组，每个数字都有出现与不出现两种情况，所以共有 $2n$ 中情况，那么我们把每种情况都转换出来就是子集了，我们还是用题目中的例子, [1 2 3] 这个数组共有8个子集，每个子集的序号的二进制表示，把是1的位对应原数组中的数字取出来就是一个子集，八种情况都取出来就是所有的子集了。  </p>
-<div class="table-container">
+<p>把数组中所有的数分配一个状态，true 表示这个数在子集中出现，false 表示在子集中不出现，那么对于一个长度为 <span class="math inline">\(n\)</span> 的数组，每个数字都有出现与不出现两种情况，所以共有 <span class="math inline">\(2n\)</span> 中情况，那么我们把每种情况都转换出来就是子集了，我们还是用题目中的例子, [1 2 3] 这个数组共有8个子集，每个子集的序号的二进制表示，把是1的位对应原数组中的数字取出来就是一个子集，八种情况都取出来就是所有的子集了。</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th></th>
 <th>1</th>
 <th>2</th>
@@ -279,56 +285,56 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>0</td>
 <td>F</td>
 <td>F</td>
 <td>F</td>
 <td>[]</td>
 </tr>
-<tr>
+<tr class="even">
 <td>1</td>
 <td>F</td>
 <td>F</td>
 <td>T</td>
 <td>3</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>2</td>
 <td>F</td>
 <td>T</td>
 <td>F</td>
 <td>2</td>
 </tr>
-<tr>
+<tr class="even">
 <td>3</td>
 <td>F</td>
 <td>T</td>
 <td>T</td>
 <td>23</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>4</td>
 <td>T</td>
 <td>F</td>
 <td>F</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>5</td>
 <td>T</td>
 <td>F</td>
 <td>T</td>
 <td>13</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>6</td>
 <td>T</td>
 <td>T</td>
 <td>F</td>
 <td>12</td>
 </tr>
-<tr>
+<tr class="even">
 <td>7</td>
 <td>T</td>
 <td>T</td>
@@ -337,37 +343,48 @@
 </tr>
 </tbody>
 </table>
-</div>
-<p>上表的状态存储用位运算来实现  </p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<p>上表的状态存储用位运算来实现</p>
+<h1 id="python版本">Python版本</h1>
+<ul>
 <li>方法一的实现</li>
 </ul>
 <p><em>复杂回溯</em></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, nums, n, k</span>):</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">start = <span class="hljs-number">0</span>, path = []</span>):</span><br>            cur_len = <span class="hljs-built_in">len</span>(path)<br>            <span class="hljs-keyword">if</span> cur_len == k:<br>                res.append(path[:])<br>                <span class="hljs-keyword">return</span> <br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, n - (k - cur_len) + <span class="hljs-number">1</span>):<br>                d = nums[i]<br>                path.append(d)<br>                backtrack(i + <span class="hljs-number">1</span>, path)<br>                path.pop()<br><br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [nums]<br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> [[]]<br>        res = []<br>        backtrack()<br>        <span class="hljs-keyword">return</span> res<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        res = []<br>        nums.sort()<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, n+<span class="hljs-number">1</span>):<br>            res += self.combine(nums, n, k)<br>        <span class="hljs-keyword">return</span> res<br><br><br>Input = [[<span class="hljs-number">3</span>,<span class="hljs-number">9</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]]<br>Answer = [<br>    [[],[<span class="hljs-number">3</span>],[<span class="hljs-number">9</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">9</span>]],<br>    [[<span class="hljs-number">3</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">2</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[]]<br>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.subsets(Input[i])<br>        <span class="hljs-keyword">if</span> reslut == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(reslut)<br>            print(Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(N \times 2^N)$，生成所有子集，并复制到输出集合中。<br>空间复杂度：$O(N \times 2^N)$，存储所有子集，共 $n$ 个元素，每个元素都有可能存在或者不存在。<br>行用时 :56 ms, 在所有 Python3 提交中击败了14.36%的用户<br>内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.46%的用户  </p>
-<p><strong>复杂回溯的另一种写法</strong>  </p>
+<p>时间复杂度：<span class="math inline">\(O(N \times 2^N)\)</span>，生成所有子集，并复制到输出集合中。<br />
+空间复杂度：<span class="math inline">\(O(N \times 2^N)\)</span>，存储所有子集，共 <span class="math inline">\(n\)</span> 个元素，每个元素都有可能存在或者不存在。<br />
+行用时 :56 ms, 在所有 Python3 提交中击败了14.36%的用户<br />
+内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.46%的用户</p>
+<p><strong>复杂回溯的另一种写法</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">first = <span class="hljs-number">0</span>, curr = []</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(curr) == k:  <br>                output.append(curr[:])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n - (k - <span class="hljs-built_in">len</span>(curr)) + <span class="hljs-number">1</span>):<br>                curr.append(nums[i])<br>                backtrack(i + <span class="hljs-number">1</span>, curr)<br>                curr.pop()<br>        <br>        output = []<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n + <span class="hljs-number">1</span>):<br>            backtrack()<br>        <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
-<p>执行用时 :36 ms, 在所有 Python3 提交中击败了76.86%的用户<br>内存消耗 :13.7 MB, 在所有 Python3 提交中击败了5.46%的用户  </p>
+<p>执行用时 :36 ms, 在所有 Python3 提交中击败了76.86%的用户<br />
+内存消耗 :13.7 MB, 在所有 Python3 提交中击败了5.46%的用户</p>
 <p><em>简单回溯</em></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self,nums</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type nums: List[int]</span><br><span class="hljs-string">        :rtype: List[List[int]]</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:<br>            <span class="hljs-keyword">return</span> []<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        res = []<br>        nums.sort()<br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">idx, n, temp_list</span>):</span><br>            res.append(temp_list)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(idx, n):<br>                helper1(i + <span class="hljs-number">1</span>, n, temp_list + [nums[i]])<br><br>        backtrack(<span class="hljs-number">0</span>, n, [])<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>方法二 一次遍历（递归）</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span> <br>        res = [[]]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> nums:<br>            tmp_res = res[:]<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> res:<br>                new = j[:]<br>                new += [i]<br>                tmp_res += [new[:]]<br>            res = tmp_res[:]<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(N \times 2^N)$ ，生成所有子集，并复制到输出结果中。<br>空间复杂度：$O(N \times 2^N)$ ，这是子集的数量。<br>对于给定的任意元素，它在子集中有两种情况，存在或者不存在（对应二进制中的 0 和 1）。因此，$N$ 个数字共有 $2^N$ 个子集。<br>执行用时 :40 ms, 在所有 Python3 提交中击败了53.70%的用户<br>内存消耗 :13.7 MB, 在所有 Python3 提交中击败了5.46%的用户  </p>
-<p><strong>一次遍历的另一种简洁写法</strong>  </p>
+<p>时间复杂度：<span class="math inline">\(O(N \times 2^N)\)</span> ，生成所有子集，并复制到输出结果中。<br />
+空间复杂度：<span class="math inline">\(O(N \times 2^N)\)</span> ，这是子集的数量。<br />
+对于给定的任意元素，它在子集中有两种情况，存在或者不存在（对应二进制中的 0 和 1）。因此，<span class="math inline">\(N\)</span> 个数字共有 <span class="math inline">\(2^N\)</span> 个子集。<br />
+执行用时 :40 ms, 在所有 Python3 提交中击败了53.70%的用户<br />
+内存消耗 :13.7 MB, 在所有 Python3 提交中击败了5.46%的用户</p>
+<p><strong>一次遍历的另一种简洁写法</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        output = [[]]<br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            output += [curr + [num] <span class="hljs-keyword">for</span> curr <span class="hljs-keyword">in</span> output]<br>        <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
-<p>执行用时 :40 ms, 在所有 Python3 提交中击败了53.70%的用户<br>内存消耗 :13.7 MB, 在所有 Python3 提交中击败了5.46%的用户 </p>
+<p>执行用时 :40 ms, 在所有 Python3 提交中击败了53.70%的用户<br />
+内存消耗 :13.7 MB, 在所有 Python3 提交中击败了5.46%的用户</p>
 <ul>
-<li>方法五 状态分配  </li>
+<li>方法五 状态分配</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">subsets</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">convertIntToSet</span>(<span class="hljs-params">nums, k</span>):</span><br>            sub = []<br>            idx = <span class="hljs-number">0</span><br>            i = k<br>            <span class="hljs-keyword">while</span> i&gt;<span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">if</span> i &amp; <span class="hljs-number">1</span> == <span class="hljs-number">1</span>:<br>                    sub.append(nums[idx])<br>                idx += <span class="hljs-number">1</span><br>                i &gt;&gt;= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> sub<br>        res = []<br>        nums.sort()<br>        _max = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-built_in">len</span>(nums)<br>        k = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> k &lt; _max:<br>            out = convertIntToSet(nums, k)<br>            res.append(out)<br>            k += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-<p>执行用时 :60 ms, 在所有 Python3 提交中击败了9.75%的用户<br>内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.46%的用户  </p>
+<p>执行用时 :60 ms, 在所有 Python3 提交中击败了9.75%的用户<br />
+内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.46%的用户</p>
 <blockquote>
-<p>参考链接  </p>
+<p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/solution/zi-ji-by-leetcode/">LeetCode</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4309345.html">Grandyang</a></p>
-
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/solution/zi-ji-by-leetcode/">LeetCode</a><br />
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4309345.html">Grandyang</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -613,6 +630,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

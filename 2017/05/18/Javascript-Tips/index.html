@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      268 字
+      275 字
     </span>
   
 
@@ -253,22 +253,21 @@
             <div class="markdown-body">
               <p>JavaScript常用方法记录</p>
 <a id="more"></a>
-<h1 id="JavaScript中的DOM"><a href="#JavaScript中的DOM" class="headerlink" title="JavaScript中的DOM"></a>JavaScript中的DOM</h1><p>三种常见的DOM节点:</p>
-<ol>
-<li>元素节点：上图中<strong>html、body、p</strong>等都是元素节点，即标签。</li>
-<li>文本节点:向用户展示的内容，如<strong>li标签</strong>中的JavaScript、DOM、CSS等文本。</li>
-<li>属性节点:元素属性，如<strong>a标签</strong>的链接属性<strong>href</strong></li>
-</ol>
+<h1 id="javascript中的dom">JavaScript中的DOM</h1>
+<p>三种常见的DOM节点: 1. 元素节点：上图中<strong>html、body、p</strong>等都是元素节点，即标签。 2. 文本节点:向用户展示的内容，如<strong>li标签</strong>中的JavaScript、DOM、CSS等文本。 3. 属性节点:元素属性，如<strong>a标签</strong>的链接属性<strong>href</strong></p>
 <p>常见的DOM操作：</p>
-<ol>
+<ol type="1">
 <li>获取DOM元素的节点值，设置DOM元素节点值。</li>
 <li>查找DOM节点</li>
 <li>遍历DOM节点</li>
 </ol>
-<h1 id="Jquery绑定事件的正确姿势"><a href="#Jquery绑定事件的正确姿势" class="headerlink" title="Jquery绑定事件的正确姿势"></a>Jquery绑定事件的正确姿势</h1><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">$(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    $(<span class="hljs-string">&#x27;#returnImage&#x27;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        alert(<span class="hljs-string">&quot;&quot;</span>)<br>   &#125;);<br>&#125;)<br></code></pre></div></td></tr></table></figure>
-<h1 id="Jquery触发事件"><a href="#Jquery触发事件" class="headerlink" title="Jquery触发事件"></a>Jquery触发事件</h1><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">$(<span class="hljs-string">&quot;#id_doctype&quot;</span>).trigger(<span class="hljs-string">&quot;change&quot;</span>);  <br></code></pre></div></td></tr></table></figure>
-<h1 id="Javascript中的时间操作"><a href="#Javascript中的时间操作" class="headerlink" title="Javascript中的时间操作"></a>Javascript中的时间操作</h1><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 获取今天的Date对象</span><br><span class="hljs-keyword">var</span> today = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()<br><span class="hljs-built_in">console</span>.log(today)<br>VM541:<span class="hljs-number">2</span> Mon Apr <span class="hljs-number">03</span> <span class="hljs-number">2017</span> <span class="hljs-number">15</span>:<span class="hljs-number">42</span>:<span class="hljs-number">14</span> GMT+<span class="hljs-number">0800</span> (中国标准时间)<br><span class="hljs-comment">// 获取某一天的Date对象(2017-02-28)</span><br><span class="hljs-keyword">var</span> endday = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">&#x27;2017&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-number">28</span>)<br><span class="hljs-built_in">console</span>.log(endday)<br>VM587:<span class="hljs-number">2</span> Tue Feb <span class="hljs-number">28</span> <span class="hljs-number">2017</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT+<span class="hljs-number">0800</span> (中国标准时间)<br><br><span class="hljs-comment">// 获取某一天之后的第N（2）天的Date对象</span><br>endday.setDate(endday.getDate()+<span class="hljs-number">2</span>)<br><span class="hljs-built_in">console</span>.log(endday)<br>VM807:<span class="hljs-number">2</span> Thu Mar <span class="hljs-number">02</span> <span class="hljs-number">2017</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT+<span class="hljs-number">0800</span> (中国标准时间)<br></code></pre></div></td></tr></table></figure>
-
+<h1 id="jquery绑定事件的正确姿势">Jquery绑定事件的正确姿势</h1>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">$(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    $(<span class="hljs-string">&#x27;#returnImage&#x27;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        alert(<span class="hljs-string">&quot;&quot;</span>)<br>   &#125;);<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+<h1 id="jquery触发事件">Jquery触发事件</h1>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">$(<span class="hljs-string">&quot;#id_doctype&quot;</span>).trigger(<span class="hljs-string">&quot;change&quot;</span>);  <br></code></pre></div></td></tr></table></figure>
+<h1 id="javascript中的时间操作">Javascript中的时间操作</h1>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 获取今天的Date对象</span><br><span class="hljs-keyword">var</span> today = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()<br><span class="hljs-built_in">console</span>.log(today)<br>VM541:<span class="hljs-number">2</span> Mon Apr <span class="hljs-number">03</span> <span class="hljs-number">2017</span> <span class="hljs-number">15</span>:<span class="hljs-number">42</span>:<span class="hljs-number">14</span> GMT+<span class="hljs-number">0800</span> (中国标准时间)<br><span class="hljs-comment">// 获取某一天的Date对象(2017-02-28)</span><br><span class="hljs-keyword">var</span> endday = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">&#x27;2017&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-number">28</span>)<br><span class="hljs-built_in">console</span>.log(endday)<br>VM587:<span class="hljs-number">2</span> Tue Feb <span class="hljs-number">28</span> <span class="hljs-number">2017</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT+<span class="hljs-number">0800</span> (中国标准时间)<br><br><span class="hljs-comment">// 获取某一天之后的第N（2）天的Date对象</span><br>endday.setDate(endday.getDate()+<span class="hljs-number">2</span>)<br><span class="hljs-built_in">console</span>.log(endday)<br>VM807:<span class="hljs-number">2</span> Thu Mar <span class="hljs-number">02</span> <span class="hljs-number">2017</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT+<span class="hljs-number">0800</span> (中国标准时间)<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -505,6 +504,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

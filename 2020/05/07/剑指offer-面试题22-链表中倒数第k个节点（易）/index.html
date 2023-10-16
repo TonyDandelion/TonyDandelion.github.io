@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,22 +253,25 @@
             <div class="markdown-body">
               <p>使用快慢指针解题即可，关键是写出更加鲁棒的代码。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，<strong>本题从1开始计数</strong>，即链表的尾节点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。</p>
+<h1 id="question">Question</h1>
+<p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，<strong>本题从1开始计数</strong>，即链表的尾节点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。</p>
 <blockquote>
 <p>测试用例</p>
 </blockquote>
-<p>功能测试（第k个节点在链表的中间；第k个节点是链表的头节点；第k个节点是链表的尾节点）。<br>特殊输入测试（链表头节点为 <code>nullptr</code> 指针；链表的节点总数少于k；k等于0）。</p>
+<p>功能测试（第k个节点在链表的中间；第k个节点是链表的头节点；第k个节点是链表的尾节点）。 特殊输入测试（链表头节点为 <code>nullptr</code> 指针；链表的节点总数少于k；k等于0）。</p>
 <blockquote>
 <p>考点</p>
 </blockquote>
-<p>考查应聘者<strong>对链表的理解</strong>。<br><strong>考查应聘者所写代码的鲁棒性。</strong>鲁棒性是解决这道题的关键所在。<strong>如果应聘者写出的代码有着多处崩溃的潜在风险，那么他是很难通过这轮面试的。</strong></p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>有不少人在面试之前从网上看到过用两个指针遍历的思路来解这道题，因此听到面试官问这道题，他们心中一阵窃喜，很快就能写出代码。<br>可是几天之后他们等来的不是Offer，而是拒信，于是百思不得其解。其实原因很简单，就是自己写的代码不够鲁棒。面试官可以找出3种办法让这段代码崩溃。</p>
-<ol>
+<p>考查应聘者<strong>对链表的理解</strong>。 <strong>考查应聘者所写代码的鲁棒性。</strong>鲁棒性是解决这道题的关键所在。<strong>如果应聘者写出的代码有着多处崩溃的潜在风险，那么他是很难通过这轮面试的。</strong></p>
+<h1 id="intuition">Intuition</h1>
+<p>有不少人在面试之前从网上看到过用两个指针遍历的思路来解这道题，因此听到面试官问这道题，他们心中一阵窃喜，很快就能写出代码。 可是几天之后他们等来的不是Offer，而是拒信，于是百思不得其解。其实原因很简单，就是自己写的代码不够鲁棒。面试官可以找出3种办法让这段代码崩溃。</p>
+<ol type="1">
 <li>输入的pListHead为<strong>空指针（空链表）</strong>。由于代码会试图访问空指针指向的内存，从而造成程序崩溃</li>
 <li>输入的以pListHead为头节点的<strong>链表的节点总数少于k</strong>。由于在快指针会在链表上向前走k步，最终会报错越出原链表。</li>
 <li><strong>输入的参数k为0</strong>，按理应该输出 <code>None</code>，也确实是输出了 <code>None</code>，原来书中的那种写法会出问题，Python3写不会报错。</li>
 </ol>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<h1 id="code">Code</h1>
+<ul>
 <li>原代码</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Definition for singly-linked list.</span><br><span class="hljs-comment"># class ListNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.next = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getKthFromEnd</span>(<span class="hljs-params">self, head: ListNode, k: <span class="hljs-built_in">int</span></span>) -&gt; ListNode:</span><br>        fast = head<br>        slow = head<br>        <span class="hljs-keyword">while</span> k:<br>            fast = fast.<span class="hljs-built_in">next</span><br>            k -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> fast:<br>            fast = fast.<span class="hljs-built_in">next</span><br>            slow = slow.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> slow<br></code></pre></div></td></tr></table></figure>
@@ -276,6 +279,7 @@
 <li>更加鲁棒的代码</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Definition for singly-linked list.</span><br><span class="hljs-comment"># class ListNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.next = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getKthFromEnd</span>(<span class="hljs-params">self, head: ListNode, k: <span class="hljs-built_in">int</span></span>) -&gt; ListNode:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> head:  <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>  <span class="hljs-comment"># 空链表自动就会返回None</span><br>        fast = head<br>        slow = head<br>        <span class="hljs-comment"># 如果输入的k=0，那么fast和slow会一起一直循环访问到最后一个节点的next指针所指向的None，会返回None</span><br>        <span class="hljs-keyword">while</span> k:<br>            fast = fast.<span class="hljs-built_in">next</span><br>            k -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> k &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> fast == <span class="hljs-literal">None</span>:  <span class="hljs-comment"># 说明输出的k大于链表长度 直接返回None</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">while</span> fast:<br>            fast = fast.<span class="hljs-built_in">next</span><br>            slow = slow.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> slow<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -519,6 +523,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

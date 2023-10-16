@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      962 字
+      963 字
     </span>
   
 
@@ -254,39 +254,45 @@
               <p>这里总结了一些非常有意思的、非常规的题目，多是一些数学、通信领域的实际问题。</p>
 <a id="more"></a>
 <p>这里总结了一些非常规的算法思想</p>
-<h1 id="相关LeetCode题目"><a href="#相关LeetCode题目" class="headerlink" title="相关LeetCode题目"></a>相关LeetCode题目</h1><h2 id="LeetCode-60-第k个排列（中）"><a href="#LeetCode-60-第k个排列（中）" class="headerlink" title="LeetCode 60. 第k个排列（中）"></a>LeetCode 60. 第k个排列（中）</h2><p><strong>直觉</strong></p>
+<h1 id="相关leetcode题目">相关LeetCode题目</h1>
+<h2 id="leetcode-60.-第k个排列中">LeetCode 60. 第k个排列（中）</h2>
+<p><strong>直觉</strong></p>
 <p>利用阶乘系统，构建输入和输出的映射关系，实际上阶乘系统经常在密码学中被应用。</p>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getPermutation</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; str:</span><br>        factorials, nums = [<span class="hljs-number">1</span>], [<span class="hljs-string">&#x27;1&#x27;</span>]  <span class="hljs-comment"># 声明保存阶层数的变量factorials，factorials[0]就是1，以及存储从 1 到 N 的数字的变量nums，nums[0]是&#x27;1&#x27;。</span><br>        <br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>            <span class="hljs-comment"># 计算从 0 到 (N - 1)!的所有阶乘数。</span><br>            factorials.append(factorials[i - <span class="hljs-number">1</span>] * i)<br>            <span class="hljs-comment"># 生成输入数组，存储从 1 到 N 的数字。</span><br>            nums.append(<span class="hljs-built_in">str</span>(i + <span class="hljs-number">1</span>))<br><br>        k -= <span class="hljs-number">1</span>  <span class="hljs-comment"># 数组排序是从0开始的，所以要在输入的k上减去1</span><br>        <br>        output = []  <span class="hljs-comment"># 声明保存结果的output</span><br>        <span class="hljs-comment"># 开始循环计算k的阶乘表示，循环范围从n - 1到0。</span><br>        <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n - <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>            <span class="hljs-comment"># 计算 k 的阶乘表示，使用阶乘系数构造排列。</span><br>            <span class="hljs-comment"># 已知 k = k_m * m! + ... + k_1 * 1! + k_0 * 0!</span><br>            k_m = k // factorials[m]  <span class="hljs-comment"># 计算计算当前阶乘 m! 对应的阶乘系数 k_m，从后往前计算。</span><br>            k -= k_m * factorials[m]  <span class="hljs-comment"># 更新k</span><br>            output.append(nums[k_m])  <span class="hljs-comment"># 将阶乘系数对应的数选中放入output中</span><br>            <span class="hljs-keyword">del</span> nums[k_m]  <span class="hljs-comment"># 再从nums中删除这次被选中的数字</span><br>        <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.join(output)  <span class="hljs-comment"># 返回选中的排列字符串output的字符串形式。</span><br></code></pre></div></td></tr></table></figure>
 <p>题解 **</p>
 <p><a href="/2020/03/08/LeetCode-60-第k个排列（中）/">LeetCode 60. 第k个排列（中）</a></p>
-<h2 id="LeetCode-89-格雷编码（中）"><a href="#LeetCode-89-格雷编码（中）" class="headerlink" title="LeetCode 89. 格雷编码（中）"></a>LeetCode 89. 格雷编码（中）</h2><p><strong>题目</strong></p>
-<p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。<br>给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。格雷编码序列必须以 0 开头。</p>
+<h2 id="leetcode-89.-格雷编码中">LeetCode 89. 格雷编码（中）</h2>
+<p><strong>题目</strong></p>
+<p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。 给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。格雷编码序列必须以 0 开头。</p>
 <p><strong>直觉</strong></p>
-<p>1、先翻转 <code>0 1</code>，得到长度为 <code>n</code> 的排列 <code>0 1 1 0</code> （n=4）。<br>2、在前 <code>n/2</code> 个数字不变，在后 <code>n/2</code> 个排列前加 <code>1</code>。组成新排列，以此类推。  </p>
-<p>这个解法也可以理解成动态规划，状态转移方程就是：  </p>
+<p>1、先翻转 <code>0 1</code>，得到长度为 <code>n</code> 的排列 <code>0 1 1 0</code> （n=4）。<br />
+2、在前 <code>n/2</code> 个数字不变，在后 <code>n/2</code> 个排列前加 <code>1</code>。组成新排列，以此类推。</p>
+<p>这个解法也可以理解成动态规划，状态转移方程就是：</p>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">dp</span>[j] += dp[j-<span class="hljs-number">1</span>] | <span class="hljs-number">1</span> &lt;&lt; i<br></code></pre></div></td></tr></table></figure>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">grayCode</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        res = [<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            size = <span class="hljs-built_in">len</span>(res)<br>            <span class="hljs-comment"># 为啥要从后面往前循环，因为是镜像的，由0 1得到1 0，所以必须从后往前循环。</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(size-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                res.append(res[j] | (<span class="hljs-number">1</span> &lt;&lt; i))<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
 <p><strong>题解</strong></p>
 <p><a href="/2020/03/23/LeetCode-89-格雷编码（中）/">LeetCode 89. 格雷编码（中）</a></p>
-<h2 id="剑指offer-面试题43-1～n整数中1出现的次数（中）"><a href="#剑指offer-面试题43-1～n整数中1出现的次数（中）" class="headerlink" title="剑指offer 面试题43. 1～n整数中1出现的次数（中）"></a>剑指offer 面试题43. 1～n整数中1出现的次数（中）</h2><p><strong>题目</strong></p>
-<p>输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。<br>例如，输入12，1～12这些整数中包含1 的数字有1、10、11和12，1一共出现了5次。</p>
+<h2 id="剑指offer-面试题43.-1n整数中1出现的次数中">剑指offer 面试题43. 1～n整数中1出现的次数（中）</h2>
+<p><strong>题目</strong></p>
+<p>输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。 例如，输入12，1～12这些整数中包含1 的数字有1、10、11和12，1一共出现了5次。</p>
 <p><strong>直觉</strong></p>
-<p>不要试图遍历 [1, 2, 3, …, n] 的list，而是直接从分析 <code>n</code> 入手，以求解出1出现的次数。</p>
+<p>不要试图遍历 [1, 2, 3, ..., n] 的list，而是直接从分析 <code>n</code> 入手，以求解出1出现的次数。</p>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">while</span> high != <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> cur != <span class="hljs-number">0</span>:<br>    <span class="hljs-keyword">if</span> cur == <span class="hljs-number">0</span>: res += high * digit<br>    <span class="hljs-keyword">elif</span> cur == <span class="hljs-number">1</span>: res += high * digit + low + <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>: res += (high + <span class="hljs-number">1</span>) * digit<br>    low += cur * digit<br>    cur = high % <span class="hljs-number">10</span><br>    high //= <span class="hljs-number">10</span><br>    digit *= <span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
 <p><strong>题解</strong></p>
 <p><a href="/2020/05/12/剑指offer-面试题43-1～n整数中1出现的次数（中）/">剑指offer-面试题43-1～n整数中1出现的次数（中）</a></p>
-<h2 id="剑指offer-面试题62-圆圈中最后剩下的数字（易）"><a href="#剑指offer-面试题62-圆圈中最后剩下的数字（易）" class="headerlink" title="剑指offer 面试题62-圆圈中最后剩下的数字（易）"></a>剑指offer 面试题62-圆圈中最后剩下的数字（易）</h2><p><strong>题目</strong></p>
+<h2 id="剑指offer-面试题62-圆圈中最后剩下的数字易">剑指offer 面试题62-圆圈中最后剩下的数字（易）</h2>
+<p><strong>题目</strong></p>
 <p>经典的约瑟夫环问题，此题的难点在于求解状态转移方程。</p>
 <p><strong>直觉</strong></p>
-<p>用链环解决在 $O(n \times m)$ 的时间复杂度内解决问题的思路很简单，但是要想在 $O(n)$ 的时间复杂度内解决问题就不容易了。</p>
+<p>用链环解决在 <span class="math inline">\(O(n \times m)\)</span> 的时间复杂度内解决问题的思路很简单，但是要想在 <span class="math inline">\(O(n)\)</span> 的时间复杂度内解决问题就不容易了。</p>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lastRemaining</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, m: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> m &lt; <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        last = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>):<br>            last = (last + m) % i<br>        <span class="hljs-keyword">return</span> last<br></code></pre></div></td></tr></table></figure>
 <p><strong>题解</strong></p>
 <p><a href="/2020/05/17/剑指offer-面试题62-圆圈中最后剩下的数字（易）/">剑指offer-面试题62-圆圈中最后剩下的数字（易）</a></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -523,6 +529,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

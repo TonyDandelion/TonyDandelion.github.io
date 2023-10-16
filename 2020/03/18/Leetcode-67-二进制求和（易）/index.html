@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,52 +251,69 @@
             <h1 style="display: none">Leetcode 67.  二进制求和（易）</h1>
             
             <div class="markdown-body">
-              <p>看似简单，实际上解法多样，需要多注意，特别是位运算方法。<br>计算 <em>x</em> 和 <em>y</em> 的无进位相加结果：<code>answer = x^y</code>。<br>计算 <em>x</em> 和 <em>y</em> 的进位：<code>carry = (x &amp; y) &lt;&lt; 1</code>。<br>完成本次循环，更新 <code>x = answer</code>，<code>y = carry</code>。  </p>
+              <p>看似简单，实际上解法多样，需要多注意，特别是位运算方法。<br />
+计算 <em>x</em> 和 <em>y</em> 的无进位相加结果：<code>answer = x^y</code>。<br />
+计算 <em>x</em> 和 <em>y</em> 的进位：<code>carry = (x &amp; y) &lt;&lt; 1</code>。<br />
+完成本次循环，更新 <code>x = answer</code>，<code>y = carry</code>。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定两个二进制字符串，返回他们的和（用二进制表示）。<br>输入为非空字符串且只包含数字 1 和 0。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">a</span> = <span class="hljs-string">&quot;11&quot;</span>, <span class="hljs-attr">b</span> = <span class="hljs-string">&quot;1&quot;</span><br>输出: <span class="hljs-string">&quot;100&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">a</span> = <span class="hljs-string">&quot;1010&quot;</span>, <span class="hljs-attr">b</span> = <span class="hljs-string">&quot;1011&quot;</span><br>输出: <span class="hljs-string">&quot;10101&quot;</span><br></code></pre></div></td></tr></table></figure></p>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>数组、位运算</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>方法一、进制转换相加<br>将 a 和 b 转换为十进制整数，求和，将求和结果转换为二进制整数。  </p>
-<p>方法二、逐位计算<br>这种写法巧妙又简洁，用了两个指针分别指向a和b的末尾，然后每次取出一个字符，转为数字，若无法取出字符则按0处理，然后定义进位carry，carry初始化为0，将三者加起来，对2取余即为当前位的数字，<strong>对2取商即为当前进位的值</strong>，记得<strong>最后还要判断下carry，如果为1的话，要在结果最前面加上一个1。</strong>   </p>
-<p><img src="https://i.loli.net/2020/03/18/JzKbTADEU7ydhZx.png" srcset="/img/loading.gif" alt="67_sl_3.png"></p>
-<p>方法三、位运算<br>XOR 操作得到两个数字无进位相加的结果。  </p>
-<p><img src="https://i.loli.net/2020/03/18/YDts7AUQ3juXmax.png" srcset="/img/loading.gif" alt="xor4.png"></p>
-<p>进位和两个数字与操作结果左移一位对应。  </p>
-<p><img src="https://i.loli.net/2020/03/18/xaYZpKbnivhdyuM.png" srcset="/img/loading.gif" alt="carry2.png"></p>
-<p>现在问题被简化为：1、首先计算<strong>两个数字的无进位相加结果</strong>和<strong>进位</strong>，2、然后计算<strong>无进位相加结果</strong>与<strong>进位</strong>之和。同理求和问题又可以转换成上一步，<strong>直到进位为 0 结束</strong>。  </p>
-<p><strong>算法</strong>  </p>
+<h1 id="题目">题目</h1>
+<p>给定两个二进制字符串，返回他们的和（用二进制表示）。<br />
+输入为非空字符串且只包含数字 1 和 0。</p>
+<h1 id="示例">示例</h1>
+<p>示例 1:<br />
+<figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">a</span> = <span class="hljs-string">&quot;11&quot;</span>, <span class="hljs-attr">b</span> = <span class="hljs-string">&quot;1&quot;</span><br>输出: <span class="hljs-string">&quot;100&quot;</span><br></code></pre></div></td></tr></table></figure> 示例 2:<br />
+<figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">a</span> = <span class="hljs-string">&quot;1010&quot;</span>, <span class="hljs-attr">b</span> = <span class="hljs-string">&quot;1011&quot;</span><br>输出: <span class="hljs-string">&quot;10101&quot;</span><br></code></pre></div></td></tr></table></figure></p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>数组、位运算</p>
+<h1 id="核心思想">核心思想</h1>
+<p>方法一、进制转换相加<br />
+将 a 和 b 转换为十进制整数，求和，将求和结果转换为二进制整数。</p>
+<p>方法二、逐位计算<br />
+这种写法巧妙又简洁，用了两个指针分别指向a和b的末尾，然后每次取出一个字符，转为数字，若无法取出字符则按0处理，然后定义进位carry，carry初始化为0，将三者加起来，对2取余即为当前位的数字，<strong>对2取商即为当前进位的值</strong>，记得<strong>最后还要判断下carry，如果为1的话，要在结果最前面加上一个1。</strong></p>
+<figure>
+<img src="https://i.loli.net/2020/03/18/JzKbTADEU7ydhZx.png" srcset="/img/loading.gif" alt="67_sl_3.png" /><figcaption aria-hidden="true">67_sl_3.png</figcaption>
+</figure>
+<p>方法三、位运算<br />
+XOR 操作得到两个数字无进位相加的结果。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/18/YDts7AUQ3juXmax.png" srcset="/img/loading.gif" alt="xor4.png" /><figcaption aria-hidden="true">xor4.png</figcaption>
+</figure>
+<p>进位和两个数字与操作结果左移一位对应。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/18/xaYZpKbnivhdyuM.png" srcset="/img/loading.gif" alt="carry2.png" /><figcaption aria-hidden="true">carry2.png</figcaption>
+</figure>
+<p>现在问题被简化为：1、首先计算<strong>两个数字的无进位相加结果</strong>和<strong>进位</strong>，2、然后计算<strong>无进位相加结果</strong>与<strong>进位</strong>之和。同理求和问题又可以转换成上一步，<strong>直到进位为 0 结束</strong>。</p>
+<p><strong>算法</strong><br />
+- 把 <em>a</em> 和 <em>b</em> 转换成整型数字 <em>x</em> 和 <em>y</em>，<em>x</em> 保存结果，<em>y</em> 保存进位。 - 当进位不为 0：<code>y != 0</code>： - 计算当前 <em>x</em> 和 <em>y</em> 的无进位相加结果：<code>answer = x^y</code>。 - 计算当前 <em>x</em> 和 <em>y</em> 的进位：<code>carry = (x &amp; y) &lt;&lt; 1</code>。 - 完成本次循环，更新 <code>x = answer</code>，<code>y = carry</code>。 - 返回 <em>x</em> 的二进制形式。</p>
+<h1 id="python版本">Python版本</h1>
 <ul>
-<li>把 <em>a</em> 和 <em>b</em> 转换成整型数字 <em>x</em> 和 <em>y</em>，<em>x</em> 保存结果，<em>y</em> 保存进位。</li>
-<li>当进位不为 0：<code>y != 0</code>：<ul>
-<li>计算当前 <em>x</em> 和 <em>y</em> 的无进位相加结果：<code>answer = x^y</code>。</li>
-<li>计算当前 <em>x</em> 和 <em>y</em> 的进位：<code>carry = (x &amp; y) &lt;&lt; 1</code>。</li>
-<li>完成本次循环，更新 <code>x = answer</code>，<code>y = carry</code>。</li>
-</ul>
-</li>
-<li>返回 <em>x</em> 的二进制形式。</li>
-</ul>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
-<li>方法一的实现（<font color='red'><strong>不推荐</strong></font>，写算法题不能老是调用内部API）  </li>
+<li>方法一的实现（<font color='red'><strong>不推荐</strong></font>，写算法题不能老是调用内部API）</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">binaryStr2Decima</span>(<span class="hljs-params">self, s</span>):</span><br>        count = <span class="hljs-number">0</span><br>        res = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s)-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>            res += (<span class="hljs-built_in">int</span>(s[i]) * (<span class="hljs-number">2</span> ** count))<br>            count += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addBinary</span>(<span class="hljs-params">self, a: <span class="hljs-built_in">str</span>, b: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        <span class="hljs-comment"># 2进制转10进制</span><br>        a = self.binaryStr2Decima(a)<br>        b = self.binaryStr2Decima(b)<br>        <span class="hljs-comment"># 相加</span><br>        <span class="hljs-built_in">sum</span> = a + b<br>        <span class="hljs-comment"># 10进制转2进制</span><br>        <span class="hljs-built_in">sum</span> = <span class="hljs-built_in">str</span>(<span class="hljs-built_in">bin</span>(<span class="hljs-built_in">sum</span>))[<span class="hljs-number">2</span>:]<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span><br><br><span class="hljs-comment"># 另一种简洁的写法</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addBinary</span>(<span class="hljs-params">self, a, b</span>) -&gt; str:</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#123;0:b&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">int</span>(a, <span class="hljs-number">2</span>) + <span class="hljs-built_in">int</span>(b, <span class="hljs-number">2</span>))<br><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(m+n)$，m是a字符串的长度，n是b字符串的长度。<br>执行用时 :48 ms, 在所有 Python3 提交中击败了27.90%的用户<br>内存消耗 :13.4 MB, 在所有 Python3 提交中击败了5.01%的用户  </p>
+<p>时间复杂度：<span class="math inline">\(O(m+n)\)</span>，m是a字符串的长度，n是b字符串的长度。<br />
+执行用时 :48 ms, 在所有 Python3 提交中击败了27.90%的用户<br />
+内存消耗 :13.4 MB, 在所有 Python3 提交中击败了5.01%的用户</p>
 <ul>
-<li>方法二的实现（<font color='green'><strong>推荐</strong></font>，思路简单明了）  </li>
+<li>方法二的实现（<font color='green'><strong>推荐</strong></font>，思路简单明了）</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addBinary</span>(<span class="hljs-params">self, a: <span class="hljs-built_in">str</span>, b: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        res = <span class="hljs-string">&quot;&quot;</span><br>        m = <span class="hljs-built_in">len</span>(a) - <span class="hljs-number">1</span><br>        n = <span class="hljs-built_in">len</span>(b) - <span class="hljs-number">1</span><br>        carry = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> m &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> n &gt;= <span class="hljs-number">0</span>:<br>            p = <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> m &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> a[m] == <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-number">1</span><br>            q = <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> b[n] == <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-number">1</span><br>            <span class="hljs-built_in">sum</span> = p + q + carry<br>            res = <span class="hljs-built_in">str</span>(<span class="hljs-built_in">sum</span> % <span class="hljs-number">2</span>) + res  <span class="hljs-comment"># 放在res前面的位置</span><br>            carry = <span class="hljs-built_in">sum</span> // <span class="hljs-number">2</span>  <span class="hljs-comment"># 注意这里用整除</span><br>            m -= <span class="hljs-number">1</span><br>            n -= <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;1&quot;</span> + res <span class="hljs-keyword">if</span> carry == <span class="hljs-number">1</span> <span class="hljs-keyword">else</span> res  <span class="hljs-comment"># 最后还要判断下carry，如果为1的话，要在结果最前面加上一个1。  </span><br><br><br>Input = [<span class="hljs-string">&quot;11&quot;</span>, <span class="hljs-string">&quot;1010&quot;</span>]<br>Input1 = [<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;1011&quot;</span>]<br>Answer = [<span class="hljs-string">&quot;100&quot;</span>, <span class="hljs-string">&quot;10101&quot;</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.addBinary(Input[i], Input1[i])<br>        <span class="hljs-keyword">if</span> reslut == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(Input[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(max(N,M))$，其中 N 和 M 是输入字符串 a 和 b 的长度。<br>空间复杂度：$O(max(N,M))$，存储求和结果。<br>执行用时 :48 ms, 在所有 Python3 提交中击败了27.90%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.01%的用户  </p>
+<p>时间复杂度：<span class="math inline">\(O(max(N,M))\)</span>，其中 N 和 M 是输入字符串 a 和 b 的长度。<br />
+空间复杂度：<span class="math inline">\(O(max(N,M))\)</span>，存储求和结果。<br />
+执行用时 :48 ms, 在所有 Python3 提交中击败了27.90%的用户<br />
+内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.01%的用户</p>
 <ul>
-<li>方法三的实现  </li>
+<li>方法三的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addBinary</span>(<span class="hljs-params">self, a, b</span>) -&gt; str:</span><br>        x, y = <span class="hljs-built_in">int</span>(a, <span class="hljs-number">2</span>), <span class="hljs-built_in">int</span>(b, <span class="hljs-number">2</span>)<br>        <span class="hljs-keyword">while</span> y:<br>            answer = x ^ y<br>            carry = (x &amp; y) &lt;&lt; <span class="hljs-number">1</span><br>            x, y = answer, carry<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">bin</span>(x)[<span class="hljs-number">2</span>:]<br><br><span class="hljs-comment"># 另外一个四行代码的版本</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addBinary</span>(<span class="hljs-params">self, a, b</span>) -&gt; str:</span><br>        x, y = <span class="hljs-built_in">int</span>(a, <span class="hljs-number">2</span>), <span class="hljs-built_in">int</span>(b, <span class="hljs-number">2</span>)<br>        <span class="hljs-keyword">while</span> y:<br>            x, y = x ^ y, (x &amp; y) &lt;&lt; <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">bin</span>(x)[<span class="hljs-number">2</span>:]<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(N+M)$，其中 NN 和 MM 是输入字符串 aa 和 bb 的长度。<br>空间复杂度：$O(max(N,M))$，存储计算结果。<br>执行用时 :36 ms, 在所有 Python3 提交中击败了75.62%的用户<br>内存消耗 :13.3 MB, 在所有 Python3 提交中击败了5.01%的用户</p>
-<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><p>1、Python 2进制、8进制、10进制、16进制之间的转换，数值和字符串之间的转换。  </p>
+<p>时间复杂度：<span class="math inline">\(O(N+M)\)</span>，其中 NN 和 MM 是输入字符串 aa 和 bb 的长度。 空间复杂度：<span class="math inline">\(O(max(N,M))\)</span>，存储计算结果。 执行用时 :36 ms, 在所有 Python3 提交中击败了75.62%的用户 内存消耗 :13.3 MB, 在所有 Python3 提交中击败了5.01%的用户</p>
+<h1 id="有效语法糖">有效语法糖</h1>
+<p>1、Python 2进制、8进制、10进制、16进制之间的转换，数值和字符串之间的转换。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 字符串2进制转int 10进制</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-string">&quot;10101&quot;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-built_in">int</span>(a, <span class="hljs-number">2</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br><span class="hljs-number">21</span><br><span class="hljs-comment"># int 10进制转字符串2进制</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-number">21</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-string">&#x27;&#123;0:b&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(a)<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br><span class="hljs-string">&#x27;10101&#x27;</span><br><br><span class="hljs-comment"># int 2进制、8进制、10进制、16进制之间的转换</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>dec = <span class="hljs-number">21</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">&quot;十进制数为：&quot;</span>, dec)<br>十进制数为： <span class="hljs-number">21</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">&quot;转换为二进制为：&quot;</span>, <span class="hljs-built_in">bin</span>(dec))<br>转换为二进制为： <span class="hljs-number">0b10101</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">&quot;转换为八进制为：&quot;</span>, <span class="hljs-built_in">oct</span>(dec))<br>转换为八进制为： <span class="hljs-number">0o25</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">&quot;转换为十六进制为：&quot;</span>, <span class="hljs-built_in">hex</span>(dec))<br>转换为十六进制为： <span class="hljs-number">0x15</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
-<p>参考连接  </p>
+<p>参考连接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-binary/solution/er-jin-zhi-qiu-he-by-leetcode/">LeetCode官方题解</a>  </p>
-
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-binary/solution/er-jin-zhi-qiu-he-by-leetcode/">LeetCode官方题解</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -542,6 +559,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

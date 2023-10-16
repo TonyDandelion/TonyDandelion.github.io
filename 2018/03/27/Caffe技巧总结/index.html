@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,21 +253,31 @@
             <div class="markdown-body">
               <p>caffe的一些小技巧</p>
 <a id="more"></a>
-<h1 id="启动脚本的参考版本"><a href="#启动脚本的参考版本" class="headerlink" title="启动脚本的参考版本"></a>启动脚本的参考版本</h1><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env sh</span><br><span class="hljs-built_in">set</span> -e<br><br>log_path=<span class="hljs-string">&quot;logs/&quot;</span><br>mkdir -p <span class="hljs-variable">$log_path</span><br><br>save_model_path=<span class="hljs-string">&quot;caffemodel/&quot;</span><br>mkdir -p <span class="hljs-variable">$save_model_path</span><br><br><span class="hljs-comment"># training log</span><br>file_prefix=<span class="hljs-string">&quot;VDSR-20_&quot;</span><br>log_file=$(date -d <span class="hljs-string">&quot;today&quot;</span> +<span class="hljs-string">&quot;%Y-%m-%d-%H:%M:%S&quot;</span>)<br>log_file=$log_path$file_prefix<span class="hljs-variable">$log_file</span><span class="hljs-string">&quot;.log&quot;</span><br><br><span class="hljs-comment"># caffe execute file path</span><br>caffe_bin=<span class="hljs-string">&quot;/home/tony/caffe/build/tools/caffe&quot;</span><br><br><br><span class="hljs-comment"># trainning</span><br><span class="hljs-comment"># $caffe_bin train --solver=VDSR_solver.prototxt  2&gt;&amp;1  | tee -a $log_file</span><br><span class="hljs-comment"># resume training</span><br><span class="hljs-variable">$caffe_bin</span> train --solver=VDSR_solver.prototxt --snapshot=<span class="hljs-string">&#x27;./caffemodel/VDSR-20_iter_71000.solverstate&#x27;</span> -gpu 0 2&gt;&amp;1  | tee -a <span class="hljs-variable">$log_file</span><br><span class="hljs-comment"># fine-tuning</span><br><span class="hljs-comment"># $caffe_bin train --solver=VDSR_solver.prototxt --weights=&#x27;./caffemodel/VDSR-20_iter_24000.caffemodel&#x27; -gpu 0 2&gt;&amp;1  | tee -a $log_file</span><br><br></code></pre></div></td></tr></table></figure>
-<h1 id="利用convert-imageset生成lmdb格式的训练、测试数据"><a href="#利用convert-imageset生成lmdb格式的训练、测试数据" class="headerlink" title="利用convert_imageset生成lmdb格式的训练、测试数据"></a>利用convert_imageset生成lmdb格式的训练、测试数据</h1><p>路径：/caffe/build/tools<br>作用：生成lmdb格式的数据<br>用法：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./convert_imageset 图片路径 标签路径 生成的lmdb文件的存放路径<br>./convert_imageset /mnist/MNIST_data/train-images.idx3-ubyte /mnist/MNIST_data/train-labels.idx1-ubyte /lmdb/train_lmdb<br></code></pre></div></td></tr></table></figure><br>报错：当生成的lmdb文件的存放路径已经存在的时候，使用convert_imageset会报错。</p>
-<h1 id="利用compute-image-mean计算均值文件"><a href="#利用compute-image-mean计算均值文件" class="headerlink" title="利用compute_image_mean计算均值文件"></a>利用compute_image_mean计算均值文件</h1><p>路径：/caffe/build/tools<br>作用：计算lmdb格式数据的均值文件，均值文件主要用于数据预处理的减均值处理，做减均值处理属于数据归一化的一种方式，进行这样的操作主要是出于以下几方面的考虑：<br>1、在自然图像上进行训练时，对每一个像素单独估计均值和方差意义不大，因为（理论上）图像任一部分的统计性质都应该和其它部分相同，图像的这种特性被称作平稳性（stationarity）。<br>2、基本在deep learning中只要你是使用gradient descent来训练模型的话都要在数据预处理步骤进行数据归一化。为什么要采用这种预处理方式呢？ 首先如果输入层 x 很大，在back propagation时传递到输入层的梯度就会很大，如下式：<br><img src="http://oke9xbto1.bkt.clouddn.com/v2-8c7dc633079e9573346d6eaa8b4856ff_hd.jpg" srcset="/img/loading.gif" alt=""><br>我们知道如果梯度非常大，学习率就必须非常小（否则会跳过local minimum(局部最小值)），因此，学习率（学习率初始值）的选择需要参考输入层的数值，不如直接将数据归一化，这样学习率就不必再根据数据范围作调整。</p>
-<p>用法：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./convert_imageset lmdb文件路径(以这个文件路径中的lmdb文件来计算均值文件) 计算得到的均值文件的存放路径<br>./convert_imageset /lmdb/train_lmdb /mnist/mean_file/mean.binaryproto<br></code></pre></div></td></tr></table></figure></p>
-<h1 id="利用draw-net-py绘制网络结构图"><a href="#利用draw-net-py绘制网络结构图" class="headerlink" title="利用draw_net.py绘制网络结构图"></a>利用draw_net.py绘制网络结构图</h1><p>路径： /caffe/python<br>作用：绘制神经网络的结构<br>依赖：</p>
+<h1 id="启动脚本的参考版本">启动脚本的参考版本</h1>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env sh</span><br><span class="hljs-built_in">set</span> -e<br><br>log_path=<span class="hljs-string">&quot;logs/&quot;</span><br>mkdir -p <span class="hljs-variable">$log_path</span><br><br>save_model_path=<span class="hljs-string">&quot;caffemodel/&quot;</span><br>mkdir -p <span class="hljs-variable">$save_model_path</span><br><br><span class="hljs-comment"># training log</span><br>file_prefix=<span class="hljs-string">&quot;VDSR-20_&quot;</span><br>log_file=$(date -d <span class="hljs-string">&quot;today&quot;</span> +<span class="hljs-string">&quot;%Y-%m-%d-%H:%M:%S&quot;</span>)<br>log_file=$log_path$file_prefix<span class="hljs-variable">$log_file</span><span class="hljs-string">&quot;.log&quot;</span><br><br><span class="hljs-comment"># caffe execute file path</span><br>caffe_bin=<span class="hljs-string">&quot;/home/tony/caffe/build/tools/caffe&quot;</span><br><br><br><span class="hljs-comment"># trainning</span><br><span class="hljs-comment"># $caffe_bin train --solver=VDSR_solver.prototxt  2&gt;&amp;1  | tee -a $log_file</span><br><span class="hljs-comment"># resume training</span><br><span class="hljs-variable">$caffe_bin</span> train --solver=VDSR_solver.prototxt --snapshot=<span class="hljs-string">&#x27;./caffemodel/VDSR-20_iter_71000.solverstate&#x27;</span> -gpu 0 2&gt;&amp;1  | tee -a <span class="hljs-variable">$log_file</span><br><span class="hljs-comment"># fine-tuning</span><br><span class="hljs-comment"># $caffe_bin train --solver=VDSR_solver.prototxt --weights=&#x27;./caffemodel/VDSR-20_iter_24000.caffemodel&#x27; -gpu 0 2&gt;&amp;1  | tee -a $log_file</span><br><br></code></pre></div></td></tr></table></figure>
+<h1 id="利用convert_imageset生成lmdb格式的训练测试数据">利用convert_imageset生成lmdb格式的训练、测试数据</h1>
+<p>路径：/caffe/build/tools<br />
+作用：生成lmdb格式的数据<br />
+用法： <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./convert_imageset 图片路径 标签路径 生成的lmdb文件的存放路径<br>./convert_imageset /mnist/MNIST_data/train-images.idx3-ubyte /mnist/MNIST_data/train-labels.idx1-ubyte /lmdb/train_lmdb<br></code></pre></div></td></tr></table></figure> 报错：当生成的lmdb文件的存放路径已经存在的时候，使用convert_imageset会报错。</p>
+<h1 id="利用compute_image_mean计算均值文件">利用compute_image_mean计算均值文件</h1>
+<p>路径：/caffe/build/tools<br />
+作用：计算lmdb格式数据的均值文件，均值文件主要用于数据预处理的减均值处理，做减均值处理属于数据归一化的一种方式，进行这样的操作主要是出于以下几方面的考虑：<br />
+1、在自然图像上进行训练时，对每一个像素单独估计均值和方差意义不大，因为（理论上）图像任一部分的统计性质都应该和其它部分相同，图像的这种特性被称作平稳性（stationarity）。<br />
+2、基本在deep learning中只要你是使用gradient descent来训练模型的话都要在数据预处理步骤进行数据归一化。为什么要采用这种预处理方式呢？ 首先如果输入层 x 很大，在back propagation时传递到输入层的梯度就会很大，如下式： <img src="http://oke9xbto1.bkt.clouddn.com/v2-8c7dc633079e9573346d6eaa8b4856ff_hd.jpg" srcset="/img/loading.gif" /> 我们知道如果梯度非常大，学习率就必须非常小（否则会跳过local minimum(局部最小值)），因此，学习率（学习率初始值）的选择需要参考输入层的数值，不如直接将数据归一化，这样学习率就不必再根据数据范围作调整。</p>
+<p>用法：<br />
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./convert_imageset lmdb文件路径(以这个文件路径中的lmdb文件来计算均值文件) 计算得到的均值文件的存放路径<br>./convert_imageset /lmdb/train_lmdb /mnist/mean_file/mean.binaryproto<br></code></pre></div></td></tr></table></figure></p>
+<h1 id="利用draw_net.py绘制网络结构图">利用draw_net.py绘制网络结构图</h1>
+<p>路径： /caffe/python 作用：绘制神经网络的结构 依赖：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">pip install protobuf<br>sudo apt install python-pydot python-pydot-ng graphviz<br></code></pre></div></td></tr></table></figure>
-<p>用法：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">python draw_net.py --rankdir 生成网络的图像方向(TB(从上到下)、BT、LR（从左到右）、RL)<br><br>python python/draw_net.py --rankdir TB examples/mnist/lenet_train_test.prototxt ./mnist_TB.png<br>Drawing net to ./mnist_TB.png<br><br>python python/draw_net.py --rankdir LR examples/mnist/lenet_train_test.prototxt ./mnist_TB.png<br>Drawing net to ./mnist_LR.png<br></code></pre></div></td></tr></table></figure><br>从上到下</p>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/mnist_TB.png" srcset="/img/loading.gif" alt=""></p>
+<p>用法： <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">python draw_net.py --rankdir 生成网络的图像方向(TB(从上到下)、BT、LR（从左到右）、RL)<br><br>python python/draw_net.py --rankdir TB examples/mnist/lenet_train_test.prototxt ./mnist_TB.png<br>Drawing net to ./mnist_TB.png<br><br>python python/draw_net.py --rankdir LR examples/mnist/lenet_train_test.prototxt ./mnist_TB.png<br>Drawing net to ./mnist_LR.png<br></code></pre></div></td></tr></table></figure> 从上到下</p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/mnist_TB.png" srcset="/img/loading.gif" /></p>
 <p>从左到右</p>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/mnist_LR.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/mnist_LR.png" srcset="/img/loading.gif" /></p>
 <blockquote>
 <p>另外也可以使用在线画图网站</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="http://ethereon.github.io/netscope/#/editor">http://ethereon.github.io/netscope/#/editor</a>  或  <a target="_blank" rel="noopener" href="https://dgschwend.github.io/netscope/#/editor">https://dgschwend.github.io/netscope/#/editor</a></p>
-
+<p>http://ethereon.github.io/netscope/#/editor 或 https://dgschwend.github.io/netscope/#/editor</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -504,6 +514,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

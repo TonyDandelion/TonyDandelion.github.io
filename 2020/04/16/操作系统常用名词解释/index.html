@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,33 +253,39 @@
             <div class="markdown-body">
               <p>操作系统名词词典</p>
 <a id="more"></a>
-<h1 id="指令、程序、处理机、CPU"><a href="#指令、程序、处理机、CPU" class="headerlink" title="指令、程序、处理机、CPU"></a>指令、程序、处理机、CPU</h1><blockquote>
-<p> <strong>处理机</strong></p>
+<h1 id="指令程序处理机cpu">指令、程序、处理机、CPU</h1>
+<blockquote>
+<p><strong>处理机</strong></p>
 </blockquote>
-<p><strong>指令</strong>是处理机能直接解释、执行的信息单位。(指令就是信息单位)<br><strong>程序</strong>是描述处理机完成某项任务的指令序列。（程序就是指令序列）<br><strong>处理机</strong>是计算机系统中存<strong>储程序和数据</strong>，并按照程序规定的步骤执行指令的<strong>部件</strong>。（处理机就是部件）<br>处理机包括中央处理器（cpu），主存储器，输入 - 输出接口。<br>处理机加外围设备就构成完整的计算机系统</p>
+<p><strong>指令</strong>是处理机能直接解释、执行的信息单位。(指令就是信息单位) <strong>程序</strong>是描述处理机完成某项任务的指令序列。（程序就是指令序列） <strong>处理机</strong>是计算机系统中存<strong>储程序和数据</strong>，并按照程序规定的步骤执行指令的<strong>部件</strong>。（处理机就是部件） 处理机包括中央处理器（cpu），主存储器，输入 - 输出接口。 处理机加外围设备就构成完整的计算机系统</p>
 <blockquote>
 <p><strong>CPU</strong></p>
 </blockquote>
 <p>中央处理器（CPU，Central Processing Unit）是<strong>一块超大规模的集成电路</strong>，是一台计算机的运算核心（Core）和控制核心（ Control Unit）。它的功能主要是<strong>解释计算机指令</strong>以及<strong>处理计算机软件中的数据</strong>。</p>
-<h1 id="计算机五大组成部分"><a href="#计算机五大组成部分" class="headerlink" title="计算机五大组成部分"></a>计算机五大组成部分</h1><p>1、控制器（CPU）<br>2、运算器（CPU）<br>3、存储器（寄存器、主存、辅存）<br>4、输入（鼠标、键盘、麦克风、传真机）<br>5、输出（显示器、打印机、音响）</p>
-<h1 id="CPU密集型和I-O密集型"><a href="#CPU密集型和I-O密集型" class="headerlink" title="CPU密集型和I/O密集型"></a>CPU密集型和I/O密集型</h1><p><strong>CPU密集型（计算繁忙型）</strong></p>
+<h1 id="计算机五大组成部分">计算机五大组成部分</h1>
+<p>1、控制器（CPU） 2、运算器（CPU） 3、存储器（寄存器、主存、辅存） 4、输入（鼠标、键盘、麦克风、传真机） 5、输出（显示器、打印机、音响）</p>
+<h1 id="cpu密集型和io密集型">CPU密集型和I/O密集型</h1>
+<p><strong>CPU密集型（计算繁忙型）</strong></p>
 <p>指要进行大量的计算，消耗CPU资源，比如计算圆周率、对视频进行高清解码等等，全靠CPU的运算能力。这种类型的任务虽然也可以用多任务完成，但是任务越多，花在任务切换的时间就越多，CPU执行任务的效率就越低，所以，要最高效地利用CPU，<strong>计算密集型任务同时进行的数量应当等于CPU的核心数。</strong>计算密集型任务由于主要消耗CPU资源，因此，代码运行效率至关重要。Python这样的脚本语言运行效率很低，完全不适合计算密集型任务。对于计算密集型任务，最好用C语言编写。</p>
 <p><strong>I/O密集型（IO繁忙型）</strong></p>
 <p>涉及到网络、磁盘IO的任务都是IO密集型任务，这类任务的特点是CPU消耗很少，任务的大部分时间都在等待IO操作完成（因为IO的速度远远低于CPU和内存的速度）。<strong>对于IO密集型任务，任务越多，CPU效率越高，但也有一个限度。常见的大部分任务都是IO密集型任务，比如Web应用。</strong>IO密集型任务执行期间，99%的时间都花在IO上，花在CPU上的时间很少，因此，<strong>用运行速度极快的C语言替换用Python这样运行速度极低的脚本语言，完全无法提升运行效率。</strong>对于IO密集型任务，最合适的语言就是开发效率最高（代码量最少）的语言，脚本语言是首选，C语言最差。</p>
-<h1 id="作业、进程、线程、协程"><a href="#作业、进程、线程、协程" class="headerlink" title="作业、进程、线程、协程"></a>作业、进程、线程、协程</h1><p>详情请看 <a href="/2020/04/16/进程、线程与协程/">作业、进程、线程与协程</a></p>
+<h1 id="作业进程线程协程">作业、进程、线程、协程</h1>
+<p>详情请看 <a href="/2020/04/16/进程、线程与协程/">作业、进程、线程与协程</a></p>
 <ul>
 <li><strong>作业</strong>是用户提交给系统的一个任务，一个作业通常包括几个进程，几个进程共同完成一个任务（作业）。</li>
 <li><strong>进程</strong>是进程实体的运行过程，<strong>是系统进行资源分配和调度的基本单位，是系统中最小的资源管理单元。</strong></li>
 <li><strong>线程</strong>是进程中一个单一顺序的控制流，<strong>是系统分配和调度的基本单位，是系统中最小的执行单元。</strong></li>
 <li><strong>协程</strong>是一种用户态的轻量级线程。<strong>是一种编译器级别的任务调度机制</strong>，它可以让你用逻辑流的顺序去写控制流，而且还不会导致操作系统级的线程阻塞。</li>
 </ul>
-<h1 id="批处理系统、实时系统、分时系统"><a href="#批处理系统、实时系统、分时系统" class="headerlink" title="批处理系统、实时系统、分时系统"></a>批处理系统、实时系统、分时系统</h1><p><strong>批处理系统</strong>：操作人员将作业成批装入计算机并由计算机管理运行，在程序的运行期间用户不能干预，因此批处理系统的特点是：用户脱机使用计算机，作业成批处理，系统内多道程序并发执行以及交互能力差。</p>
+<h1 id="批处理系统实时系统分时系统">批处理系统、实时系统、分时系统</h1>
+<p><strong>批处理系统</strong>：操作人员将作业成批装入计算机并由计算机管理运行，在程序的运行期间用户不能干预，因此批处理系统的特点是：用户脱机使用计算机，作业成批处理，系统内多道程序并发执行以及交互能力差。</p>
 <p><strong>分时系统</strong>：不同用户通过各自的终端以交互方式共用一台计算机，计算机以“分时”的方法轮流为每个用户服务。分时系统的主要特点是：多个用户同时使用计算机的同时性，人机问答的交互性，每个用户独立使用计算机的独占性，以及系统响应的及时性。</p>
 <p><strong>实时系统</strong>：实时监控控制对象并能做出及时反应。实时系统的特点：可靠性高、响应及时但资源利用率低。</p>
-<p>如果一个分时系统的响应及时性满足实时系统要求时，该分时系统也就是实时系统。<br>如果一个实时系统有多个用户同时使用，该实时系统也就是分时系统。</p>
-<h1 id="饥饿现象"><a href="#饥饿现象" class="headerlink" title="饥饿现象"></a>饥饿现象</h1><p>由于进程调度算法的原因，一些特殊的进程，长时间不能获取处理机，一直处于等待的现象，就是饥饿现象。</p>
+<p>如果一个分时系统的响应及时性满足实时系统要求时，该分时系统也就是实时系统。 如果一个实时系统有多个用户同时使用，该实时系统也就是分时系统。</p>
+<h1 id="饥饿现象">饥饿现象</h1>
+<p>由于进程调度算法的原因，一些特殊的进程，长时间不能获取处理机，一直处于等待的现象，就是饥饿现象。</p>
 <p>举个栗子：使用 <strong>SJF 短作业优先算法</strong> 对作业进行调度时，那些耗时长的作业，就会长时间得不到处理机。</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -516,6 +522,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

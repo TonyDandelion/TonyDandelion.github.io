@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,10 +253,12 @@
             <div class="markdown-body">
               <p>学习下 Python增强建议书 (๑• . •๑)</p>
 <a id="more"></a>
-<h1 id="转载连接"><a href="#转载连接" class="headerlink" title="转载连接"></a>转载连接</h1><p>[PEP8规则及Pycharm应用]（<a target="_blank" rel="noopener" href="https://zhangslob.github.io/tags/Pycharm/）">https://zhangslob.github.io/tags/Pycharm/）</a></p>
+<h1 id="转载连接">转载连接</h1>
+<p>[PEP8规则及Pycharm应用]（https://zhangslob.github.io/tags/Pycharm/）</p>
 <p>学习下 Python增强建议书 (๑• . •๑)</p>
-<p><a target="_blank" rel="noopener" href="https://i.imgur.com/8HyHkph.png"><img src="https://i.imgur.com/8HyHkph.png" srcset="/img/loading.gif" alt="img"></a></p>
-<h1 id="PEP8"><a href="#PEP8" class="headerlink" title="PEP8"></a>PEP8</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://i.imgur.com/8HyHkph.png"><img src="https://i.imgur.com/8HyHkph.png" srcset="/img/loading.gif" alt="img" /></a></p>
+<h1 id="pep8">PEP8</h1>
+<blockquote>
 <p>PEP是 Python Enhancement Proposal 的缩写，翻译过来就是 Python增强建议书</p>
 </blockquote>
 <p>PEP8 是什么呢，简单说就是一种编码规范，是为了让代码“更好看”，更容易被阅读。</p>
@@ -264,26 +266,31 @@
 <p>For example</p>
 <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">Yes: import os</span><br>     import sys<br><br><span class="hljs-section">No:  import sys, os</span><br><br><br><span class="hljs-section">Yes:</span><br>i = i + 1<br>submitted += 1<br>x = x*2 - 1<br>hypot2 = x*x + y*y<br>c = (a+b) * (a-b)<br><br><br><span class="hljs-section">No:</span><br>i=i+1<br>submitted +=1<br>x = x * 2 - 1<br>hypot2 = x * x + y * y<br>c = (a + b) * (a - b)<br></code></pre></div></td></tr></table></figure>
 <p>对于初学者（例如我）来说，这些标准太多，在实际coding中可能很难记住所有的。之前招聘爬虫工程师，会PEP8也会加分，所以学习下PEP8还是有帮助的。</p>
-<h1 id="Pycharm-设置"><a href="#Pycharm-设置" class="headerlink" title="Pycharm 设置"></a>Pycharm 设置</h1><p>PyCharm 配置 PEP 8 代码提示<br>直接在右下角调整 Highlighting Level 为 Inspections 就能自动 PEP 8提示 (一般默认就是这个)</p>
-<p><a target="_blank" rel="noopener" href="https://i.imgur.com/OrCItzF.png"><img src="https://i.imgur.com/OrCItzF.png" srcset="/img/loading.gif" alt="img"></a></p>
+<h1 id="pycharm-设置">Pycharm 设置</h1>
+<p>PyCharm 配置 PEP 8 代码提示 直接在右下角调整 Highlighting Level 为 Inspections 就能自动 PEP 8提示 (一般默认就是这个)</p>
+<p><a target="_blank" rel="noopener" href="https://i.imgur.com/OrCItzF.png"><img src="https://i.imgur.com/OrCItzF.png" srcset="/img/loading.gif" alt="img" /></a></p>
 <p>For example</p>
-<p><a target="_blank" rel="noopener" href="https://i.imgur.com/qK1iZVM.png"><img src="https://i.imgur.com/qK1iZVM.png" srcset="/img/loading.gif" alt="img"></a></p>
-<p>鼠标移到上方会提示： <code>PEP 8: expected 2 blank lines, found 1</code>，我们再增加一个空格就好了，你的代码中有任何不符合 PEP8 规范的地方都会有“<del>~</del>”提示</p>
-<p><a target="_blank" rel="noopener" href="https://i.imgur.com/kq4POwe.png"><img src="https://i.imgur.com/kq4POwe.png" srcset="/img/loading.gif" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://i.imgur.com/qK1iZVM.png"><img src="https://i.imgur.com/qK1iZVM.png" srcset="/img/loading.gif" alt="img" /></a></p>
+<p>鼠标移到上方会提示： <code>PEP 8: expected 2 blank lines, found 1</code>，我们再增加一个空格就好了，你的代码中有任何不符合 PEP8 规范的地方都会有“~~~~~”提示</p>
+<p><a target="_blank" rel="noopener" href="https://i.imgur.com/kq4POwe.png"><img src="https://i.imgur.com/kq4POwe.png" srcset="/img/loading.gif" alt="img" /></a></p>
 <p>这是一个困扰了我很久的问题，我一直不知道是哪里出了错，看英文也不懂，最后去Google才知道，创建字典的写法不规范，应该这样写：</p>
 <figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">item</span> = dict()<br></code></pre></div></td></tr></table></figure>
-<h1 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h1><p>除了Pycharm，还有其他工具可以提示</p>
-<ol>
+<h1 id="其他工具">其他工具</h1>
+<p>除了Pycharm，还有其他工具可以提示</p>
+<ol type="1">
 <li>Google 开源的 Python 文件格式化工具：<a target="_blank" rel="noopener" href="https://github.com/google/yapf">github.com/google/yapf</a></li>
 <li>pyflakes, pylint 等工具及各种编辑器的插件</li>
 </ol>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>好吧，这里才是正文，正确的规范如下：</p>
-<h2 id="缩进"><a href="#缩进" class="headerlink" title="缩进"></a>缩进</h2><ul>
+<h1 id="正文">正文</h1>
+<p>好吧，这里才是正文，正确的规范如下：</p>
+<h2 id="缩进">缩进</h2>
+<ul>
 <li>不要使用 tab 缩进</li>
 <li>使用任何编辑器写 Python，请把一个 tab 展开为 4 个空格</li>
 <li>绝对不要混用 tab 和空格，否则容易出现 <code>IndentationError</code></li>
 </ul>
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><ul>
+<h2 id="空格">空格</h2>
+<ul>
 <li>在 list, dict, tuple, set, 参数列表的 , 后面加一个空格</li>
 <li>在 dict 的 : 后面加一个空格</li>
 <li>在注释符号 # 后面加一个空格，但是 <code>#!/usr/bin/python</code> 的 <code>#</code> 后不能有空格</li>
@@ -291,34 +298,35 @@
 <li>接上一条，在参数列表里的 = 两端不需要空格</li>
 <li>括号（(), {}, []）内的两端不需要空格</li>
 </ul>
-<h2 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h2><ul>
+<h2 id="空行">空行</h2>
+<ul>
 <li>function 和 class 顶上两个空行</li>
 <li>class 的 method 之间一个空行</li>
 <li>函数内逻辑无关的段落之间空一行，不要过度使用空行</li>
 <li>不要把多个语句写在一行，然后用 ; 隔开</li>
 <li><code>if/for/while</code> 语句中，即使执行语句只有一句，也要另起一行</li>
 </ul>
-<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><ul>
-<li><p>每一行代码控制在 80 字符以内</p>
-</li>
-<li><p>使用 \ 或 () 控制换行，举例：</p>
+<h2 id="换行">换行</h2>
+<ul>
+<li><p>每一行代码控制在 80 字符以内</p></li>
+<li><p>使用  或 () 控制换行，举例：</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livecodeserver">def foo(<span class="hljs-keyword">first</span>, <span class="hljs-keyword">second</span>, <span class="hljs-keyword">third</span>, <span class="hljs-keyword">fourth</span>, <span class="hljs-keyword">fifth</span>,<br>        <span class="hljs-keyword">sixth</span>, and_some_other_very_long_param):<br>    user = User.objects.filter_by(<span class="hljs-keyword">first</span>=<span class="hljs-keyword">first</span>, <span class="hljs-keyword">second</span>=<span class="hljs-keyword">second</span>, <span class="hljs-keyword">third</span>=<span class="hljs-keyword">third</span>) \<br>        .skip(<span class="hljs-number">100</span>).limit(<span class="hljs-number">100</span>) \<br>        .all()<br><br><span class="hljs-keyword">text</span> = (<span class="hljs-string">&#x27;Long strings can be made up &#x27;</span><br>        <span class="hljs-string">&#x27;of several shorter strings.&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
-<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2></li>
-<li><p>使用有意义的，英文单词或词组，绝对不要使用汉语拼音</p>
-</li>
-<li>package/module 名中不要出现 -</li>
-<li>各种类型的命名规范：</li>
+<h2 id="命名">命名</h2></li>
+<li><p>使用有意义的，英文单词或词组，绝对不要使用汉语拼音</p></li>
+<li><p>package/module 名中不要出现 -</p></li>
+<li><p>各种类型的命名规范：</p></li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://i.imgur.com/0sVNGR9.png"><img src="https://i.imgur.com/0sVNGR9.png" srcset="/img/loading.gif" alt="img"></a></p>
-<h2 id="import"><a href="#import" class="headerlink" title="import"></a>import</h2><ul>
+<p><a target="_blank" rel="noopener" href="https://i.imgur.com/0sVNGR9.png"><img src="https://i.imgur.com/0sVNGR9.png" srcset="/img/loading.gif" alt="img" /></a></p>
+<h2 id="import">import</h2>
+<ul>
 <li>所有 import 尽量放在文件开头，在 docstring 下面，其他变量定义的上面</li>
 <li>不要使用 from foo imort *</li>
-<li>import 需要分组，每组之间一个空行，每个分组内的顺序尽量采用字典序，分组顺序是：<ol>
+<li>import 需要分组，每组之间一个空行，每个分组内的顺序尽量采用字典序，分组顺序是：
+<ol type="1">
 <li>标准库</li>
 <li>第三方库</li>
 <li>本项目的 package 和 module</li>
-</ol>
-</li>
+</ol></li>
 <li>不要使用隐式的相对导入（implicit relative imports），可是使用显示的相对导入（explicit relative imports），如 <code>from ..utils import parse</code>，最好使用全路径导入（absolute imports）</li>
 <li>对于不同的 package，一个 import 单独一行，同一个 package/module 下的内容可以写一起：</li>
 </ul>
@@ -327,7 +335,8 @@
 <li>为了避免可能出现的命名冲突，可以使用 as 或导入上一级命名空间</li>
 <li>不要出现循环导入(cyclic import)</li>
 </ul>
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
+<h2 id="注释">注释</h2>
+<ul>
 <li>文档字符串 docstring, 是 package, module, class, method, function 级别的注释，可以通过 <strong>doc</strong> 成员访问到，注释内容在一对 “”” 符号之间</li>
 <li>function, method 的文档字符串应当描述其功能、输入参数、返回值，如果有复杂的算法和实现，也需要写清楚</li>
 <li>不要写错误的注释，不要无谓的注释</li>
@@ -336,54 +345,48 @@
 <ul>
 <li>优先使用英文写注释，英文不好全部写中文，否则更加看不懂</li>
 </ul>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
-<li><p>不要轻易使用 try/except</p>
-</li>
-<li><p>except 后面需要指定捕捉的异常，裸露的 except 会捕捉所有异常，意味着会隐藏潜在的问题</p>
-</li>
-<li><p>可以有多个 except 语句，捕捉多种异常，分别做异常处理</p>
-</li>
-<li><p>使用 finally 子句来处理一些收尾操作</p>
-</li>
+<h2 id="异常">异常</h2>
+<ul>
+<li><p>不要轻易使用 try/except</p></li>
+<li><p>except 后面需要指定捕捉的异常，裸露的 except 会捕捉所有异常，意味着会隐藏潜在的问题</p></li>
+<li><p>可以有多个 except 语句，捕捉多种异常，分别做异常处理</p></li>
+<li><p>使用 finally 子句来处理一些收尾操作</p></li>
 <li><p>try/except 里的内容不要太多，只在可能抛出异常的地方使用，如：</p>
 <figure class="highlight nsis"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nsis"><span class="hljs-comment"># bad</span><br><span class="hljs-literal">try</span>:<br>    <span class="hljs-literal">user</span> = User()<br>    <span class="hljs-literal">user</span>.name = <span class="hljs-string">&quot;leon&quot;</span><br>    <span class="hljs-literal">user</span>.age = int(age) <span class="hljs-comment"># 可能抛出异常</span><br>    <span class="hljs-literal">user</span>.created_at = datetime.datetime.utcnow()<br><br>    db.session.add(<span class="hljs-literal">user</span>)<br>    db.session.commit() <span class="hljs-comment"># 可能抛出异常</span><br>except:<br>    db.session.rollback()<br><br><span class="hljs-comment"># better</span><br><span class="hljs-literal">try</span>:<br>    age = int(age)<br>except (TypeError, ValueError):<br>    return <span class="hljs-comment"># 或别的操作</span><br><br><span class="hljs-literal">user</span> = User()<br><span class="hljs-literal">user</span>.name = <span class="hljs-string">&quot;leon&quot;</span><br><span class="hljs-literal">user</span>.age = age<br><span class="hljs-literal">user</span>.created_at = datetime.datetime.utcnow()<br>db.session.add(<span class="hljs-literal">user</span>)<br><br><span class="hljs-literal">try</span>:<br>    db.session.commit()<br>except sqlalchemy.exc.SQLAlchemyError: <span class="hljs-comment"># 或者更具体的异常</span><br>    db.session.rollback()<br>finally:<br>    db.session.close()<br></code></pre></div></td></tr></table></figure></li>
-<li>从 <code>Exception</code> 而不是 <code>BaseException</code> 继承自定义的异常类</li>
+<li><p>从 <code>Exception</code> 而不是 <code>BaseException</code> 继承自定义的异常类</p></li>
 </ul>
-<h2 id="Class（类）"><a href="#Class（类）" class="headerlink" title="Class（类）"></a>Class（类）</h2><ul>
+<h2 id="class类">Class（类）</h2>
+<ul>
 <li>显示的写明父类，如果不是继承自别的类，就继承自 object 类</li>
 <li>使用 super 调用父类的方法</li>
 <li>支持多继承，即同时有多个父类，建议使用 Mixin</li>
 </ul>
-<h2 id="编码建议"><a href="#编码建议" class="headerlink" title="编码建议"></a>编码建议</h2><hr>
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
+<h2 id="编码建议">编码建议</h2>
+<hr />
+<h2 id="字符串">字符串</h2>
+<ul>
 <li>使用字符串的 <code>join</code> 方法拼接字符串</li>
 <li>使用字符串类型的方法，而不是 <code>string</code> 模块的方法</li>
 <li>使用 <code>startswith</code> 和 <code>endswith</code> 方法比较前缀和后缀</li>
 <li>使用 <code>format</code> 方法格式化字符串</li>
 </ul>
-<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><ul>
-<li><p>空的 list, str, tuple, set, dict 和 0, 0.0, None 都是 False</p>
-</li>
-<li><p>使用 if some_list 而不是 if len(some_list) 判断某个 list 是否为空，其他类型同理</p>
-</li>
-<li><p>使用 is 和 is not 与单例（如 None）进行比较，而不是用 == 和 !=</p>
-</li>
-<li><p>使用 if a is not None 而不是 if not a is None</p>
-</li>
-<li><p>用 isinstance 而不是 type 判断类型</p>
-</li>
-<li><p>不要用 == 和 != 与 True 和 False 比较（除非有特殊情况，如在 sqlalchemy 中可能用到）</p>
-</li>
+<h2 id="比较">比较</h2>
+<ul>
+<li><p>空的 list, str, tuple, set, dict 和 0, 0.0, None 都是 False</p></li>
+<li><p>使用 if some_list 而不是 if len(some_list) 判断某个 list 是否为空，其他类型同理</p></li>
+<li><p>使用 is 和 is not 与单例（如 None）进行比较，而不是用 == 和 !=</p></li>
+<li><p>使用 if a is not None 而不是 if not a is None</p></li>
+<li><p>用 isinstance 而不是 type 判断类型</p></li>
+<li><p>不要用 == 和 != 与 True 和 False 比较（除非有特殊情况，如在 sqlalchemy 中可能用到）</p></li>
 <li><p>使用 in 操作：</p>
-<ol>
+<ol type="1">
 <li><p>用 key in dict 而不是 dict.has_key()</p>
 <figure class="highlight reasonml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml"># bad<br><span class="hljs-keyword">if</span> d.has<span class="hljs-constructor">_key(<span class="hljs-params">k</span>)</span>:<br>    <span class="hljs-keyword">do</span><span class="hljs-constructor">_something()</span><br><br># good<br><span class="hljs-keyword">if</span> k <span class="hljs-keyword">in</span> d:<br>    <span class="hljs-keyword">do</span><span class="hljs-constructor">_something()</span><br></code></pre></div></td></tr></table></figure>
-<p>2.用 set 加速 “存在性” 检查，list 的查找是线性的，复杂度 O(n)，set 底层是 hash table, 复杂度 O(1)，但用 set 需要比 list 更多内存空间</p>
-</li>
-</ol>
-</li>
+<p>2.用 set 加速 “存在性” 检查，list 的查找是线性的，复杂度 O(n)，set 底层是 hash table, 复杂度 O(1)，但用 set 需要比 list 更多内存空间</p></li>
+</ol></li>
 </ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<h2 id="其他">其他</h2>
+<ul>
 <li>使用列表表达式（<a target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0202/">list comprehension</a>），字典表达式(<a target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0274/">dict comprehension</a>, Python 2.7+) 和生成器(generator)</li>
 <li>dict 的 get 方法可以指定默认值，但有些时候应该用 [] 操作，使得可以抛出 KeyError</li>
 <li>使用 for item in list 迭代 list, for index, item in enumerate(list) 迭代 list 并获取下标</li>
@@ -398,8 +401,9 @@
 <li>阅读优秀的开源代码，如 <a target="_blank" rel="noopener" href="https://github.com/pallets/flask">Flask</a> 框架, <a target="_blank" rel="noopener" href="https://github.com/requests/requests">Requests for Humans</a></li>
 <li>不要重复造轮子，查看标准库、PyPi、Github、Google 等使用现有的优秀的解决方案</li>
 </ul>
-<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><p>写程序的好习惯在于理解、坚持，然后就是运用自如！</p>
-
+<h1 id="反思">反思</h1>
+<p>写程序的好习惯在于理解、坚持，然后就是运用自如！</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -645,6 +649,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

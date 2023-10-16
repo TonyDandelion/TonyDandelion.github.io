@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      302 字
+      305 字
     </span>
   
 
@@ -255,17 +255,22 @@
 <a id="more"></a>
 <p><a target="_blank" rel="noopener" href="http://blog.csdn.net/errors_in_life/article/details/65950699">参考链接</a></p>
 <p>VGG16分为16层，我们主要讲前面的前几层（越详细越好吧，后面是一样的）</p>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/20170325221311877" srcset="/img/loading.gif" alt=""></p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/20170325221311877" srcset="/img/loading.gif" /></p>
 <p>看懂一些式子表达：</p>
-<p>Conv3-512   →    第三层卷积后维度变成512；</p>
-<p>Conv3_2 s=2     →     第三层卷积层里面的第二子层，滑动步长等于2（每次移动两个格子）</p>
+<p>Conv3-512 → 第三层卷积后维度变成512；</p>
+<p>Conv3_2 s=2 → 第三层卷积层里面的第二子层，滑动步长等于2（每次移动两个格子）</p>
 <p>好了，我们有了以上的知识可以考试剖析VGG16卷积神经网络了</p>
-<h2 id="1、从INPUT到Conv1"><a href="#1、从INPUT到Conv1" class="headerlink" title="1、从INPUT到Conv1"></a>1、从INPUT到Conv1</h2><p>如图, 输入数据是224*224*3的RGB图像</p>
-<p>Conv1_1的卷积核尺寸为3*3*3, 所以经过Conv1_1处理后, 输出数据是 222*222*1.<br>但是在卷积之前, 数据进行了padding处理, 保持了尺寸不变, 因此输出数据是 224*224*1.<br>3*3*1的卷积核有64个 所以输出数据是 224*224*64<br>maxpool的尺寸是2*2*64, 有224*(1/2)=112, 即第一次maxpool之后数据是 112*112*64</p>
-<h2 id="2、Conv1到Conv2"><a href="#2、Conv1到Conv2" class="headerlink" title="2、Conv1到Conv2"></a>2、Conv1到Conv2</h2><p>如上图所示, Conv2的有128个卷积核, 再经过maxpool, 最终的输出为 56*56*128</p>
-<h2 id="3、Conv3到Conv4"><a href="#3、Conv3到Conv4" class="headerlink" title="3、Conv3到Conv4"></a>3、Conv3到Conv4</h2><p>Conv3有256个卷积核, 经过maxpool, 最终输出为28*28*256</p>
-<h2 id="5、Conv4到Conv5"><a href="#5、Conv4到Conv5" class="headerlink" title="5、Conv4到Conv5"></a>5、Conv4到Conv5</h2><p>Conv4有512个卷积核, 经过maxpool, 最终输出为14*14*512</p>
-
+<h2 id="从input到conv1">1、从INPUT到Conv1</h2>
+<p>如图, 输入数据是224*224*3的RGB图像</p>
+<p>Conv1_1的卷积核尺寸为3*3*3, 所以经过Conv1_1处理后, 输出数据是 222*222*1.<br />
+但是在卷积之前, 数据进行了padding处理, 保持了尺寸不变, 因此输出数据是 224*224*1. 3*3*1的卷积核有64个 所以输出数据是 224*224*64 maxpool的尺寸是2*2*64, 有224*(1/2)=112, 即第一次maxpool之后数据是 112*112*64</p>
+<h2 id="conv1到conv2">2、Conv1到Conv2</h2>
+<p>如上图所示, Conv2的有128个卷积核, 再经过maxpool, 最终的输出为 56*56*128</p>
+<h2 id="conv3到conv4">3、Conv3到Conv4</h2>
+<p>Conv3有256个卷积核, 经过maxpool, 最终输出为28*28*256</p>
+<h2 id="conv4到conv5">5、Conv4到Conv5</h2>
+<p>Conv4有512个卷积核, 经过maxpool, 最终输出为14*14*512</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -502,6 +507,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      850 字
+      853 字
     </span>
   
 
@@ -253,24 +253,36 @@
             <div class="markdown-body">
               <p>在46题的基础上添加了剪枝策略</p>
 <a id="more"></a>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定<strong>一个可包含重复数字</strong>的序列，返回所有不重复的全排列。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>示例:</p>
+<h2 id="题目">题目</h2>
+<p>给定<strong>一个可包含重复数字</strong>的序列，返回所有不重复的全排列。</p>
+<h2 id="示例">示例</h2>
+<p>示例:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]<br>输出:<br>[<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>],<br>  [<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]<br>]<br></code></pre></div></td></tr></table></figure>
-<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>回溯算法</p>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="方法一、在46题的基础上，增加剪枝条件，去掉重复的。"><a href="#方法一、在46题的基础上，增加剪枝条件，去掉重复的。" class="headerlink" title="方法一、在46题的基础上，增加剪枝条件，去掉重复的。"></a>方法一、在46题的基础上，增加剪枝条件，去掉重复的。</h3><p>当该节点没有被使用，且该节点和前面节点的数值一样时，这个节点就应该被剪枝跳过。</p>
+<h2 id="考察知识点">考察知识点</h2>
+<p>回溯算法</p>
+<h2 id="核心思想">核心思想</h2>
+<h3 id="方法一在46题的基础上增加剪枝条件去掉重复的">方法一、在46题的基础上，增加剪枝条件，去掉重复的。</h3>
+<p>当该节点没有被使用，且该节点和前面节点的数值一样时，这个节点就应该被剪枝跳过。</p>
 <ul>
 <li>由于要剪枝，所以在回溯之前要排序。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">nums.sort()  <span class="hljs-comment"># 由于要剪枝，所以必须要提前对nums进行排序，让重复的数字排列在一起。</span><br>backtrack()  <span class="hljs-comment"># 开始回溯，初始时used是000。</span><br></code></pre></div></td></tr></table></figure>
 <ul>
-<li>除了判定前后两个数必须相同以外，还要判定当前位置的前面一个位置（ <code>index - 1</code> ）是否被占用，因为前一个位置在回溯时肯定是先被释放了占用了的，加入 <code>not used[i - 1]</code>  条件，这样的剪枝更彻底。</li>
+<li>除了判定前后两个数必须相同以外，还要判定当前位置的前面一个位置（ <code>index - 1</code> ）是否被占用，因为前一个位置在回溯时肯定是先被释放了占用了的，加入 <code>not used[i - 1]</code> 条件，这样的剪枝更彻底。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span> index &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[index] == nums[index -<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> (used &gt;&gt; (index - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 为什么要求used[index-1]，因为一般回溯到这里时，前面used[index-1]的占用就被撤销了。所以要对 index - 1 处进行检查。</span><br>	<span class="hljs-keyword">continue</span><br></code></pre></div></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/03/04/zP6athyldBmX7YS.png" srcset="/img/loading.gif" alt="8.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/03/04/zP6athyldBmX7YS.png" srcset="/img/loading.gif" alt="8.png" /><figcaption aria-hidden="true">8.png</figcaption>
+</figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/">大佬题解</a></p>
-<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="方法一的实现"><a href="#方法一的实现" class="headerlink" title="方法一的实现"></a>方法一的实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permuteUnique</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">path=[], depth=<span class="hljs-number">0</span>, used=<span class="hljs-number">0</span></span>):</span>  <span class="hljs-comment"># 整个回溯函数只包含两个参数，一个是path（记录选择结果），depth（记录还剩多少没有选择）。也可以不用depth，只传递path。通过比较len(path)和len(nums)，判断是否完成寻找。回溯法就是一种深度优先遍历。</span><br>            <span class="hljs-keyword">if</span> depth == length:  <span class="hljs-comment"># 终止条件是寻找深度达到目标深度</span><br>                res.append(path[:])  <span class="hljs-comment"># 由于list是可变对象，因此，这里要用[:]取到具体的值，再append进res中。</span><br>                <span class="hljs-keyword">return</span>  <span class="hljs-comment"># 也可以不用return，不过有return会好一点，后面逻辑在path添加到res之后就不用执行了。</span><br><br>            <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):  <span class="hljs-comment"># 遍历所有待添加数</span><br>                <span class="hljs-keyword">if</span> (used &gt;&gt; index) &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 如果当前数字没有使用，即该位置的二进制值为0</span><br>                    <span class="hljs-keyword">if</span> index &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[index] == nums[index -<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> (used &gt;&gt; (index - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 为什么要求used[index-1]，因为一般回溯到这里时，前面used[index-1]的占用就被撤销了。所以要对 index - 1 处进行检查。</span><br>                        <span class="hljs-keyword">continue</span><br>                    used ^= (<span class="hljs-number">1</span> &lt;&lt; index)  <span class="hljs-comment"># 将该位置的二进制值从0改成1</span><br>                    path.append(nums[index])  <span class="hljs-comment"># 添加到path</span><br>                    backtrack(path, depth+<span class="hljs-number">1</span>, used)  <span class="hljs-comment"># 继续递归回溯</span><br>                    used ^= (<span class="hljs-number">1</span> &lt;&lt; index)  <span class="hljs-comment"># 将该位置的二进制值从0改成1，完成深度优先遍历（递归回溯）之后，更新选择情况为False代表还未被选择。</span><br>                    path.pop()  <span class="hljs-comment"># 从path中弹出这一轮被选择的数字，以上两步就是在“撤销选择”。</span><br><br>        res = []  <span class="hljs-comment"># 声明res、length、used等全局变量</span><br>        length = <span class="hljs-built_in">len</span>(nums)<br>        nums.sort()  <span class="hljs-comment"># 由于要剪枝，所以必须要提前对nums进行排序，让重复的数字排列在一起。</span><br>        backtrack()  <span class="hljs-comment"># 开始回溯，初始时used是000。</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(N \times N!)$，这里 <code>N</code> 为数组的长度。<br>空间复杂度：$O(N \times N!)$<br>执行用时 ：48 ms, 在所有 Python3 提交中击败了94.50%的用户<br>内存消耗 ：13.8 MB, 在所有 Python3 提交中击败了25.53%的用户  </p>
-
+<h2 id="python版本">Python版本</h2>
+<h3 id="方法一的实现">方法一的实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permuteUnique</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">path=[], depth=<span class="hljs-number">0</span>, used=<span class="hljs-number">0</span></span>):</span>  <span class="hljs-comment"># 整个回溯函数只包含两个参数，一个是path（记录选择结果），depth（记录还剩多少没有选择）。也可以不用depth，只传递path。通过比较len(path)和len(nums)，判断是否完成寻找。回溯法就是一种深度优先遍历。</span><br>            <span class="hljs-keyword">if</span> depth == length:  <span class="hljs-comment"># 终止条件是寻找深度达到目标深度</span><br>                res.append(path[:])  <span class="hljs-comment"># 由于list是可变对象，因此，这里要用[:]取到具体的值，再append进res中。</span><br>                <span class="hljs-keyword">return</span>  <span class="hljs-comment"># 也可以不用return，不过有return会好一点，后面逻辑在path添加到res之后就不用执行了。</span><br><br>            <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):  <span class="hljs-comment"># 遍历所有待添加数</span><br>                <span class="hljs-keyword">if</span> (used &gt;&gt; index) &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 如果当前数字没有使用，即该位置的二进制值为0</span><br>                    <span class="hljs-keyword">if</span> index &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[index] == nums[index -<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> (used &gt;&gt; (index - <span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 为什么要求used[index-1]，因为一般回溯到这里时，前面used[index-1]的占用就被撤销了。所以要对 index - 1 处进行检查。</span><br>                        <span class="hljs-keyword">continue</span><br>                    used ^= (<span class="hljs-number">1</span> &lt;&lt; index)  <span class="hljs-comment"># 将该位置的二进制值从0改成1</span><br>                    path.append(nums[index])  <span class="hljs-comment"># 添加到path</span><br>                    backtrack(path, depth+<span class="hljs-number">1</span>, used)  <span class="hljs-comment"># 继续递归回溯</span><br>                    used ^= (<span class="hljs-number">1</span> &lt;&lt; index)  <span class="hljs-comment"># 将该位置的二进制值从0改成1，完成深度优先遍历（递归回溯）之后，更新选择情况为False代表还未被选择。</span><br>                    path.pop()  <span class="hljs-comment"># 从path中弹出这一轮被选择的数字，以上两步就是在“撤销选择”。</span><br><br>        res = []  <span class="hljs-comment"># 声明res、length、used等全局变量</span><br>        length = <span class="hljs-built_in">len</span>(nums)<br>        nums.sort()  <span class="hljs-comment"># 由于要剪枝，所以必须要提前对nums进行排序，让重复的数字排列在一起。</span><br>        backtrack()  <span class="hljs-comment"># 开始回溯，初始时used是000。</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(N \times N!)\)</span>，这里 <code>N</code> 为数组的长度。<br />
+空间复杂度：<span class="math inline">\(O(N \times N!)\)</span><br />
+执行用时 ：48 ms, 在所有 Python3 提交中击败了94.50%的用户<br />
+内存消耗 ：13.8 MB, 在所有 Python3 提交中击败了25.53%的用户</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -514,6 +526,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

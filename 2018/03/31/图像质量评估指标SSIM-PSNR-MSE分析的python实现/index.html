@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,36 +253,50 @@
             <div class="markdown-body">
               <p>MSE、SSIM、PSNR图像质量评估指标SSIM/PSNR/MSE分析常用于超分辨算法的评估</p>
 <a id="more"></a>
-<h1 id="MSE-MeanSquareError"><a href="#MSE-MeanSquareError" class="headerlink" title="MSE(MeanSquareError)"></a>MSE(MeanSquareError)</h1><p>计算图像处理后的质量，最直接的思路即比较处理后的图像与真实图像（distortion-free）之间的差剖面，即可视误差，通过可视(visibility of errors )误差评价图像质量。 MSE 就是基于这种简单直接的思路确定的指标。  </p>
+<h1 id="msemeansquareerror">MSE(MeanSquareError)</h1>
+<p>计算图像处理后的质量，最直接的思路即比较处理后的图像与真实图像（distortion-free）之间的差剖面，即可视误差，通过可视(visibility of errors )误差评价图像质量。 MSE 就是基于这种简单直接的思路确定的指标。</p>
 <p>均方误差（mean-square error, MSE）是反映估计量与被估计量之间差异程度的一种度量。MSE的计算公式如下所示：</p>
-<script type="math/tex; mode=display">
-MSE = \frac{1}{H \times M} \sum_{i=1}^{H} \sum_{j=1}^{W} (X(i, j)-Y(i, j))^2</script><p>MSE表示当前图像 $X$ 和参考图像 $Y$ 的均方误差（MeanSquare Error），$H$、$W$ 分别为图像的高度和宽度。</p>
+<p><span class="math display">\[
+MSE = \frac{1}{H \times M} \sum_{i=1}^{H} \sum_{j=1}^{W} (X(i, j)-Y(i, j))^2
+\]</span> MSE表示当前图像 <span class="math inline">\(X\)</span> 和参考图像 <span class="math inline">\(Y\)</span> 的均方误差（MeanSquare Error），<span class="math inline">\(H\)</span>、<span class="math inline">\(W\)</span> 分别为图像的高度和宽度。</p>
 <p><strong>python代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># TensorFlow Version</span><br>mse = tf.reduced_mean(tf.squared_difference(target,output))<br><br><span class="hljs-comment"># General Version</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mae_value</span>(<span class="hljs-params">y_true, y_pred</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;compute mae of predict value and ground truth</span><br><span class="hljs-string">    :param y_true: numpy Calculable variable </span><br><span class="hljs-string">    :param y_pred: numpy Calculable variable </span><br><span class="hljs-string">    :return mae: float</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br> <br>    n = <span class="hljs-built_in">len</span>(y_true)<br>    mae = <span class="hljs-built_in">sum</span>(np.<span class="hljs-built_in">abs</span>(y_true - y_pred))/n<br>    <span class="hljs-keyword">return</span> mae<br></code></pre></div></td></tr></table></figure>
-<h1 id="SSIM-structural-similarity"><a href="#SSIM-structural-similarity" class="headerlink" title="SSIM(structural similarity)"></a>SSIM(structural similarity)</h1><p>SSIM(structural similarity index)，结构相似性，是一种衡量两幅图像相似度的指标。给定两个图像x和y, 两张图像的结构相似性可按照以下方式求出 ：</p>
-<script type="math/tex; mode=display">
-SSIM(x,y)=[l(x,y)]^{\alpha}[c(x,y)]^{\beta}[s(x,y)]^{\gamma}</script><script type="math/tex; mode=display">
-l(x,y)= \frac{2\mu_x\mu_y + c_1}{\mu_x^2 + \mu_y^2 + c_1}</script><script type="math/tex; mode=display">
-c(x,y)=\frac{2\sigma_{xy}+c_2}{\sigma_x^2+\sigma_y^2+c_2},</script><script type="math/tex; mode=display">
-s(x,y)=\frac{\sigma_{xy}+c_3}{\sigma_x\sigma_y+c_3}</script><p>其中 $\alpha&gt;0,\ \beta&gt;0, \gamma&gt;0$，$l(x, y)$是亮度比较，$c(x,y)$ 是对比度比较，$s(x,y)$是结构比较。$\mu<em>x$和 $\mu_y$分别代表 $x$, $y$ 的平均值，$\sigma_x$ 和 $\sigma_y$ 分别代表 $x$, $y$ 的标准差。$\sigma</em>{xy}$ 代表 $x$ 和 $y$ 的协方差。而 $c_1$，$c_2$，$c_3$分别为常数，避免分母为 $0$ 带来的系统错误。 </p>
-<p>在实际工程计算中，我们一般设定 $\alpha=\beta=\gamma=1$，以及  $c_3=c_2/2$ 可以将SSIM简化为下：</p>
-<script type="math/tex; mode=display">
-SSIM(x,y)= \frac{(2\mu_x\mu_y + c_1)(\sigma_{xy}+c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2+c_2)}</script><p>结构相似性的范围为0到1，当两张图像一模一样时，SSIM的值等于1。作为结构相似性理论的实现，结构相似度指数从图像组成的角度将结构信息定义为独立于亮度、对比度的，反映场景中物体结构的属性，并将失真建模为亮度、对比度和结构三个不同因素的组合。用均值作为亮度的估计，标准差作为对比度的估计，协方差作为结构相似程度的度量。</p>
+<h1 id="ssimstructural-similarity">SSIM(structural similarity)</h1>
+<p>SSIM(structural similarity index)，结构相似性，是一种衡量两幅图像相似度的指标。给定两个图像x和y, 两张图像的结构相似性可按照以下方式求出 ：</p>
+<p><span class="math display">\[
+SSIM(x,y)=[l(x,y)]^{\alpha}[c(x,y)]^{\beta}[s(x,y)]^{\gamma}
+\]</span></p>
+<p><span class="math display">\[
+l(x,y)= \frac{2\mu_x\mu_y + c_1}{\mu_x^2 + \mu_y^2 + c_1}
+\]</span></p>
+<p><span class="math display">\[
+c(x,y)=\frac{2\sigma_{xy}+c_2}{\sigma_x^2+\sigma_y^2+c_2},
+\]</span></p>
+<p><span class="math display">\[
+s(x,y)=\frac{\sigma_{xy}+c_3}{\sigma_x\sigma_y+c_3}
+\]</span></p>
+<p>其中 <span class="math inline">\(\alpha&gt;0,\ \beta&gt;0, \gamma&gt;0\)</span>，<span class="math inline">\(l(x, y)\)</span>是亮度比较，<span class="math inline">\(c(x,y)\)</span> 是对比度比较，<span class="math inline">\(s(x,y)\)</span>是结构比较。<span class="math inline">\(\mu_x\)</span>和 <span class="math inline">\(\mu_y\)</span>分别代表 <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> 的平均值，<span class="math inline">\(\sigma_x\)</span> 和 <span class="math inline">\(\sigma_y\)</span> 分别代表 <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> 的标准差。<span class="math inline">\(\sigma_{xy}\)</span> 代表 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 的协方差。而 <span class="math inline">\(c_1\)</span>，<span class="math inline">\(c_2\)</span>，<span class="math inline">\(c_3\)</span>分别为常数，避免分母为 <span class="math inline">\(0\)</span> 带来的系统错误。</p>
+<p>在实际工程计算中，我们一般设定 <span class="math inline">\(\alpha=\beta=\gamma=1\)</span>，以及 <span class="math inline">\(c_3=c_2/2\)</span> 可以将SSIM简化为下： <span class="math display">\[
+SSIM(x,y)= \frac{(2\mu_x\mu_y + c_1)(\sigma_{xy}+c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2+c_2)}
+\]</span> 结构相似性的范围为0到1，当两张图像一模一样时，SSIM的值等于1。作为结构相似性理论的实现，结构相似度指数从图像组成的角度将结构信息定义为独立于亮度、对比度的，反映场景中物体结构的属性，并将失真建模为亮度、对比度和结构三个不同因素的组合。用均值作为亮度的估计，标准差作为对比度的估计，协方差作为结构相似程度的度量。</p>
 <p><strong>python代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># TensorFlow Version</span><br>tf.image.ssim(x, y, <span class="hljs-number">255</span>)<br><br><span class="hljs-comment"># General Version</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ssim</span>(<span class="hljs-params">imageA, imageB</span>):</span><br>    <span class="hljs-comment"># 为确保图像能被转为灰度图</span><br>    imageA = np.array(imageA, dtype=np.uint8)<br>    imageB = np.array(imageB, dtype=np.uint8)<br>    <span class="hljs-comment"># 通道分离，注意顺序BGR不是RGB</span><br>    (B1, G1, R1) = cv2.split(imageA)<br>    (B2, G2, R2) = cv2.split(imageB)<br>    <span class="hljs-comment"># convert the images to grayscale BGR2GRAY</span><br>    grayA = cv2.cvtColor(imageA, cv2.COLOR_BGR2GRAY)<br>    grayB = cv2.cvtColor(imageB, cv2.COLOR_BGR2GRAY)<br><br>    <span class="hljs-comment"># 方法一</span><br>    (grayScore, diff) = compare_ssim(grayA, grayB, full=<span class="hljs-literal">True</span>)<br>    diff = (diff * <span class="hljs-number">255</span>).astype(<span class="hljs-string">&quot;uint8&quot;</span>)<br>    print(<span class="hljs-string">&quot;gray SSIM: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(grayScore))<br><br>    <span class="hljs-comment"># 方法二</span><br>    (score0, diffB) = compare_ssim(B1, B2, full=<span class="hljs-literal">True</span>)<br>    (score1, diffG) = compare_ssim(G1, G2, full=<span class="hljs-literal">True</span>)<br>    (score2, diffR) = compare_ssim(R1, R2, full=<span class="hljs-literal">True</span>)<br>    aveScore = (score0+score1+score2)/<span class="hljs-number">3</span><br>    print(<span class="hljs-string">&quot;BGR average SSIM: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(aveScore ))<br><br>    <span class="hljs-keyword">return</span> grayScore, aveScore<br></code></pre></div></td></tr></table></figure>
 <p><em>参考链接</em></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/leviopku/article/details/84635897">https://blog.csdn.net/leviopku/article/details/84635897</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/djw12333/p/11982426.html">https://www.cnblogs.com/djw12333/p/11982426.html</a></p>
-<h1 id="PSNR-PeakSignal-to-Noise-Ratio"><a href="#PSNR-PeakSignal-to-Noise-Ratio" class="headerlink" title="PSNR(PeakSignal to Noise Ratio)"></a>PSNR(PeakSignal to Noise Ratio)</h1><p>峰值信噪比，是一种评价图像的客观标准，它具有局限性，一般是用于最大值信号和背景噪音之间的一个工程项目。<strong>PSRN越大，图像失真越小，编码质量越高，PSNR的普遍基准为30dB，低于30dB失真明显，一般在30dB到40dB之间。</strong>  </p>
-<p>peak的中文意思是顶点。而ratio的意思是比率或比列的。整个意思就是到达噪音比率的顶点信号，psnr一般是用于最大值信号和背景噪音之间的一个工程项目。通常在经过影像压缩之后，输出的影像都会在某种程度与原始影像不同。  </p>
-<p>为了衡量经过处理后的影像品质，我们通常会参考PSNR值来衡量某个处理程序能否令人满意。它是原图像与被处理图像之间的均方误差相对于$(2^n-1)^2$的对数值(信号最大值的平方，$n$ 是每个采样值的比特数)，计算公式如下：  </p>
-<script type="math/tex; mode=display">
-PSNR = 10 \times log_{10}(\frac{(2^n-1)^2}{MSE})  = 20 \times log_{10}(\frac{(2^n-1)}{\sqrt{MSE}})</script><p>其中，MSE是原图像与处理图像之间均方误差。$n$ 为每像素的比特数，一般取 8，即像素灰阶数为256。PSNR的单位为dB，所以PSNR值越大，就代表失真越少。    </p>
-<p>PSNR是最普遍，最广泛使用的评鉴画质的客观量测法，不过许多实验结果都显示，PSNR的分数无法和人眼看到的视觉品质完全一致，有可能PSNR较高者看起来反而比PSNR较低者差。这是因为人眼的视觉对于误差的敏感度并不是绝对的，其感知结果会受到许多因素的影响而产生变化（例如：人眼对空间频率较低的对比差异敏感度较高，人眼对亮度对比差异的敏感度较色度高，人眼对一个区域的感知结果会受到其周围邻近区域的影响）。  </p>
+<p>https://blog.csdn.net/leviopku/article/details/84635897 https://www.cnblogs.com/djw12333/p/11982426.html</p>
+<h1 id="psnrpeaksignal-to-noise-ratio">PSNR(PeakSignal to Noise Ratio)</h1>
+<p>峰值信噪比，是一种评价图像的客观标准，它具有局限性，一般是用于最大值信号和背景噪音之间的一个工程项目。<strong>PSRN越大，图像失真越小，编码质量越高，PSNR的普遍基准为30dB，低于30dB失真明显，一般在30dB到40dB之间。</strong></p>
+<p>peak的中文意思是顶点。而ratio的意思是比率或比列的。整个意思就是到达噪音比率的顶点信号，psnr一般是用于最大值信号和背景噪音之间的一个工程项目。通常在经过影像压缩之后，输出的影像都会在某种程度与原始影像不同。</p>
+<p>为了衡量经过处理后的影像品质，我们通常会参考PSNR值来衡量某个处理程序能否令人满意。它是原图像与被处理图像之间的均方误差相对于<span class="math inline">\((2^n-1)^2\)</span>的对数值(信号最大值的平方，<span class="math inline">\(n\)</span> 是每个采样值的比特数)，计算公式如下：</p>
+<p><span class="math display">\[
+PSNR = 10 \times log_{10}(\frac{(2^n-1)^2}{MSE})  = 20 \times log_{10}(\frac{(2^n-1)}{\sqrt{MSE}})
+\]</span></p>
+<p>其中，MSE是原图像与处理图像之间均方误差。<span class="math inline">\(n\)</span> 为每像素的比特数，一般取 8，即像素灰阶数为256。PSNR的单位为dB，所以PSNR值越大，就代表失真越少。</p>
+<p>PSNR是最普遍，最广泛使用的评鉴画质的客观量测法，不过许多实验结果都显示，PSNR的分数无法和人眼看到的视觉品质完全一致，有可能PSNR较高者看起来反而比PSNR较低者差。这是因为人眼的视觉对于误差的敏感度并不是绝对的，其感知结果会受到许多因素的影响而产生变化（例如：人眼对空间频率较低的对比差异敏感度较高，人眼对亮度对比差异的敏感度较色度高，人眼对一个区域的感知结果会受到其周围邻近区域的影响）。</p>
 <p><strong>python代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># TensorFlow Version</span><br>mse = tf.reduced_mean(tf.squared_difference(target,output))<br>psnr = tf.constant(<span class="hljs-number">255</span>**<span class="hljs-number">2</span>,dtype = tf.float32)/mse<br><br><span class="hljs-comment"># General Version</span><br><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> math<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">psnr1</span>(<span class="hljs-params">img1, img2</span>):</span><br>    mse = np.mean((img1/<span class="hljs-number">1.0</span> - img2/<span class="hljs-number">1.0</span>) ** <span class="hljs-number">2</span> )<br>    <span class="hljs-keyword">if</span> mse &lt; <span class="hljs-number">1.0e-10</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">100</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">10</span> * math.log10(<span class="hljs-number">255.0</span>**<span class="hljs-number">2</span>/mse)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">psnr2</span>(<span class="hljs-params">img1, img2</span>):</span><br>    mse = np.mean( (img1/<span class="hljs-number">255.</span> - img2/<span class="hljs-number">255.</span>) ** <span class="hljs-number">2</span> )<br>    <span class="hljs-keyword">if</span> mse &lt; <span class="hljs-number">1.0e-10</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">100</span><br>    PIXEL_MAX = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">20</span> * math.log10(PIXEL_MAX / math.sqrt(mse))<br></code></pre></div></td></tr></table></figure>
 <p><em>参考链接</em></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010886794/article/details/84784453">https://blog.csdn.net/u010886794/article/details/84784453</a></p>
-
+<p>https://blog.csdn.net/u010886794/article/details/84784453</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -519,6 +533,26 @@ PSNR = 10 \times log_{10}(\frac{(2^n-1)^2}{MSE})  = 20 \times log_{10}(\frac{(2^
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

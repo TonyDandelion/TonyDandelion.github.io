@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      145 字
+      146 字
     </span>
   
 
@@ -253,8 +253,11 @@
             <div class="markdown-body">
               <p>记录与Django有关的一些问题</p>
 <a id="more"></a>
-<h1 id="Django的信号量机制"><a href="#Django的信号量机制" class="headerlink" title="Django的信号量机制"></a>Django的信号量机制</h1><h1 id="Django中的文件上传"><a href="#Django中的文件上传" class="headerlink" title="Django中的文件上传"></a>Django中的文件上传</h1><p>主要注意文件保存路径是从项目根目录开始检索的，如path = “./laboratory/static/images/news”。   </p>
+<h1 id="django的信号量机制">Django的信号量机制</h1>
+<h1 id="django中的文件上传">Django中的文件上传</h1>
+<p>主要注意文件保存路径是从项目根目录开始检索的，如path = "./laboratory/static/images/news"。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">path = <span class="hljs-string">&quot;./laboratory/static/images/news&quot;</span>                                                       <br>myFile = request.FILES.get(<span class="hljs-string">&quot;myfile&quot;</span>, <span class="hljs-literal">None</span>)  <span class="hljs-comment"># 获取上传的文件，如果没有文件，则默认为None       </span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> myFile:<br>        <span class="hljs-keyword">return</span> HttpResponse(<span class="hljs-string">&quot;no files for upload!&quot;</span>)                                            <br>    destination = <span class="hljs-built_in">open</span>(os.path.join(path, myFile.name), <span class="hljs-string">&#x27;wb+&#x27;</span>)    <span class="hljs-comment"># 打开特定的文件进行二进制的写操作</span><br>    <span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> myFile.chunks():  <span class="hljs-comment"># 分块写入文件                         </span><br>        destination.write(chunk)                                         <br><br>    destination.close()<br>    <span class="hljs-keyword">return</span> HttpResponse(<span class="hljs-string">&quot;upload over!&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -498,6 +501,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

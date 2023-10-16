@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      20
        分钟
     </span>
   
@@ -253,18 +253,21 @@
             <div class="markdown-body">
               <p>典型的对带重复元素的输入进行全排列计算的问题，基于回溯算法解决。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一个字符串，打印出该字符串中字符的所有排列。<br>你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。</p>
-<p>示例:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">&quot;abc&quot;</span><br>输出：[<span class="hljs-string">&quot;abc&quot;</span>,<span class="hljs-string">&quot;acb&quot;</span>,<span class="hljs-string">&quot;bac&quot;</span>,<span class="hljs-string">&quot;bca&quot;</span>,<span class="hljs-string">&quot;cab&quot;</span>,<span class="hljs-string">&quot;cba&quot;</span>]<br></code></pre></div></td></tr></table></figure><br>限制：1 &lt;= s 的长度 &lt;= 8</p>
+<h1 id="question">Question</h1>
+<p>输入一个字符串，打印出该字符串中字符的所有排列。 你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。</p>
+<p>示例: <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">&quot;abc&quot;</span><br>输出：[<span class="hljs-string">&quot;abc&quot;</span>,<span class="hljs-string">&quot;acb&quot;</span>,<span class="hljs-string">&quot;bac&quot;</span>,<span class="hljs-string">&quot;bca&quot;</span>,<span class="hljs-string">&quot;cab&quot;</span>,<span class="hljs-string">&quot;cba&quot;</span>]<br></code></pre></div></td></tr></table></figure> 限制：1 &lt;= s 的长度 &lt;= 8</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入的字符串中有一个或者多个字符）。<br>特殊输入测试（输入的字符串的内容为空或者 <code>nullpt</code> r指针）。</p>
+<p>功能测试（输入的字符串中有一个或者多个字符）。 特殊输入测试（输入的字符串的内容为空或者 <code>nullpt</code> r指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者的思维能力。当整个问题看起来不能直接解决的时候，应聘者能否想到把字符串分成两部分，从而把大问题分解成小问题来解决，是能否顺利解决这个问题的关键。<br>考查应聘者对递归的理解和编程能力。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>典型的对带重复元素的输入进行全排列计算的问题，基于回溯算法进行解决。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permutation</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; List[str]:</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :param nums: List[int]</span><br><span class="hljs-string">        :param m: int   </span><br><span class="hljs-string">        :return: List[List[int]]</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        nums = <span class="hljs-built_in">list</span>(s)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums: <span class="hljs-keyword">return</span> []<br>        res = []<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">nums, path, depth</span>):</span><br>            <span class="hljs-string">&quot;&quot;&quot;backtrack based on the digging out select number</span><br><span class="hljs-string">            :param nums: List[int]</span><br><span class="hljs-string">            :param path: List[int]</span><br><span class="hljs-string">            :param depth: depth</span><br><span class="hljs-string">            :return: None</span><br><span class="hljs-string">            &quot;&quot;&quot;</span><br>            <span class="hljs-keyword">if</span> depth == n:<br>                tmp =  <span class="hljs-string">&#x27;&#x27;</span>.join(path[:])<br>                <span class="hljs-keyword">if</span> tmp <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:<br>                    res.append(tmp)<br>            <span class="hljs-comment"># if depth == n:  res.append()</span><br>            <span class="hljs-comment"># 以range(len(nums))作为选择列表，则之前那个已经被挖掉的元素不会再被选择</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):<br>                <span class="hljs-comment"># 递归调用时就挖掉了那个已经选择的元素</span><br>                backtrack(nums[:i]+nums[i+<span class="hljs-number">1</span>:], path+[nums[i]], depth+<span class="hljs-number">1</span>)<br>        <br>        backtrack(nums, [], <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> res<br><br><span class="hljs-comment"># output</span><br>----------------------------------------------------------------------<br>Ran <span class="hljs-number">1</span> test <span class="hljs-keyword">in</span> <span class="hljs-number">4.160</span>s<br>OK<br></code></pre></div></td></tr></table></figure>
+<p>考查应聘者的思维能力。当整个问题看起来不能直接解决的时候，应聘者能否想到把字符串分成两部分，从而把大问题分解成小问题来解决，是能否顺利解决这个问题的关键。 考查应聘者对递归的理解和编程能力。</p>
+<h1 id="intuition">Intuition</h1>
+<p>典型的对带重复元素的输入进行全排列计算的问题，基于回溯算法进行解决。</p>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">permutation</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; List[str]:</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :param nums: List[int]</span><br><span class="hljs-string">        :param m: int   </span><br><span class="hljs-string">        :return: List[List[int]]</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        nums = <span class="hljs-built_in">list</span>(s)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums: <span class="hljs-keyword">return</span> []<br>        res = []<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">nums, path, depth</span>):</span><br>            <span class="hljs-string">&quot;&quot;&quot;backtrack based on the digging out select number</span><br><span class="hljs-string">            :param nums: List[int]</span><br><span class="hljs-string">            :param path: List[int]</span><br><span class="hljs-string">            :param depth: depth</span><br><span class="hljs-string">            :return: None</span><br><span class="hljs-string">            &quot;&quot;&quot;</span><br>            <span class="hljs-keyword">if</span> depth == n:<br>                tmp =  <span class="hljs-string">&#x27;&#x27;</span>.join(path[:])<br>                <span class="hljs-keyword">if</span> tmp <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:<br>                    res.append(tmp)<br>            <span class="hljs-comment"># if depth == n:  res.append()</span><br>            <span class="hljs-comment"># 以range(len(nums))作为选择列表，则之前那个已经被挖掉的元素不会再被选择</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):<br>                <span class="hljs-comment"># 递归调用时就挖掉了那个已经选择的元素</span><br>                backtrack(nums[:i]+nums[i+<span class="hljs-number">1</span>:], path+[nums[i]], depth+<span class="hljs-number">1</span>)<br>        <br>        backtrack(nums, [], <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> res<br><br><span class="hljs-comment"># output</span><br>----------------------------------------------------------------------<br>Ran <span class="hljs-number">1</span> test <span class="hljs-keyword">in</span> <span class="hljs-number">4.160</span>s<br>OK<br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>另一种实现去重的全排列算法，在过程中剪枝，速度更快。</li>
 </ul>
@@ -273,17 +276,20 @@
 <li>测试单元</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> unittest<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSolution</span>(<span class="hljs-params">unittest.TestCase</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setUp</span>(<span class="hljs-params">self</span>):</span><br>        self.test_class = Solution1()<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_solution</span>(<span class="hljs-params">self</span>):</span><br>        words = [<br>            <span class="hljs-string">&quot;ryawrowv&quot;</span>,               <span class="hljs-comment"># 功能测试</span><br>                                      <span class="hljs-comment"># 边界值的测试</span><br>            <span class="hljs-string">&quot;&quot;</span>                        <span class="hljs-comment"># 特殊样例</span><br>        ]<br>        answers = [<span class="hljs-number">10080</span>, <span class="hljs-number">0</span>]<br>        res = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(words)):<br>            res.append(<span class="hljs-built_in">len</span>(self.test_class.permutation(words[i])))<br>        self.assertEqual(res, answers)<br> <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tearDown</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">del</span> self.test_class<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    unittest.main()<br></code></pre></div></td></tr></table></figure>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><p>如果不是求字符的所有排列，而是求字符的所有组合，应该怎么办呢？<br>还是输入三个字符a、b、c，则它们的组合有a、b、c、ab、ac、bc、abc。<br>当交换字符串中的两个字符时，虽然能得到两个不同的排列，但却是同一个组合。比如ab和ba是不同的排列，但只算一个组合。<br>如果输入n个字符，则这n个字符能构成长度为1，2…，n的组合。在求n个字符的长度为 m(1≤m≤n) 的组合的时候，我们把这n个字符分成两部分：第一个字符和其余的所有字符。如果组合里<strong>包含第一个字符</strong>，则下一步<strong>在剩余的所有字符里选取m-1个字符</strong>；如果组合里<strong>不包含第一个字符</strong>，则下一步<strong>在剩余的n-1个字符里选取m个字符</strong>。也就是说，<strong>我们可以把求n个字符组成长度为m的组合的问题分解成两个子问题，分别求n-1个字符中长度为m-1的组合，以及求n-1个字符中长度为m的组合。这两个子问题都可以用递归的方式解决。</strong></p>
+<h1 id="extension">Extension</h1>
+<p>如果不是求字符的所有排列，而是求字符的所有组合，应该怎么办呢？ 还是输入三个字符a、b、c，则它们的组合有a、b、c、ab、ac、bc、abc。 当交换字符串中的两个字符时，虽然能得到两个不同的排列，但却是同一个组合。比如ab和ba是不同的排列，但只算一个组合。 如果输入n个字符，则这n个字符能构成长度为1，2…，n的组合。在求n个字符的长度为 m(1≤m≤n) 的组合的时候，我们把这n个字符分成两部分：第一个字符和其余的所有字符。如果组合里<strong>包含第一个字符</strong>，则下一步<strong>在剩余的所有字符里选取m-1个字符</strong>；如果组合里<strong>不包含第一个字符</strong>，则下一步<strong>在剩余的n-1个字符里选取m个字符</strong>。也就是说，<strong>我们可以把求n个字符组成长度为m的组合的问题分解成两个子问题，分别求n-1个字符中长度为m-1的组合，以及求n-1个字符中长度为m的组合。这两个子问题都可以用递归的方式解决。</strong></p>
 <p><strong><em>相关题目</em></strong></p>
 <ul>
 <li><a href="/2020/03/10/LeetCode-51-N皇后（难）/">八皇后问题</a></li>
-<li>摆数字<br>输入一个含有8个数字的数组，判断有没有可能把这8个数字分别放到正方体的8个顶点上（如图所示），使得正方体上三组相对的面上的4个顶点的和都相等。这相当于先得到 $a_1$、$a_2$、$a_3$、$a_4$、$a_5$、$a_6$、$a_7$ 和 $a_8$ 这8个数字的所有排列，然后判断有没有某一个排列符合题目给定的条件，即 $a_1 + a_2 + a_3 + a_4 = a_5 +  a_6 + a_7 + a_8$，并且 $a_1 + a_2 + a_5 + a_6 = a_3 +  a_4 + a_7 + a_8$ 。</li>
+<li>摆数字 输入一个含有8个数字的数组，判断有没有可能把这8个数字分别放到正方体的8个顶点上（如图所示），使得正方体上三组相对的面上的4个顶点的和都相等。这相当于先得到 <span class="math inline">\(a_1\)</span>、<span class="math inline">\(a_2\)</span>、<span class="math inline">\(a_3\)</span>、<span class="math inline">\(a_4\)</span>、<span class="math inline">\(a_5\)</span>、<span class="math inline">\(a_6\)</span>、<span class="math inline">\(a_7\)</span> 和 <span class="math inline">\(a_8\)</span> 这8个数字的所有排列，然后判断有没有某一个排列符合题目给定的条件，即 <span class="math inline">\(a_1 + a_2 + a_3 + a_4 = a_5 + a_6 + a_7 + a_8\)</span>，并且 <span class="math inline">\(a_1 + a_2 + a_5 + a_6 = a_3 + a_4 + a_7 + a_8\)</span> 。</li>
 </ul>
-<p><img src="https://i.loli.net/2020/05/10/oRuk1rHJ2bPNGnL.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_23-42-06"></p>
-<p><strong><em>举一反三</em></strong><br>如果面试题是按照一定要求摆放若干个数字，则可以先求出这些数字的所有排列，然后一一判断每个排列是不是满足题目给定的要求。</p>
+<figure>
+<img src="https://i.loli.net/2020/05/10/oRuk1rHJ2bPNGnL.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_23-42-06" /><figcaption aria-hidden="true">Snipaste_2020-05-10_23-42-06</figcaption>
+</figure>
+<p><strong><em>举一反三</em></strong> 如果面试题是按照一定要求摆放若干个数字，则可以先求出这些数字的所有排列，然后一一判断每个排列是不是满足题目给定的要求。</p>
 <p><strong><em>总结</em></strong></p>
-<p>在面试时，我们难免会遇到难题，画图、举例和分解这3种方法能够帮助我们解决复杂的问题。<br><strong><em>图形能使抽象的问题形象化。</em></strong>当面试题涉及链表、二叉树等数据结构时，如果在纸上画几张草图，则题目中隐藏的规律就有可能变得很直观。<br><strong><em>一两个例子能使抽象的问题具体化。</em></strong>很多与算法相关的问题都很抽象，未必一眼就能看出它们的规律。这时候我们不妨举几个例子，一步一步模拟运行的过程，说不定就能发现其中的规律，从而找到解决问题的窍门。<br><strong><em>把复杂问题分解成若干个小问题，是解决很多复杂问题的有效方法。</em></strong>如果我们遇到的问题很大，则可以尝试先把大问题分解成小问题，然后再递归地解决这些小问题。分治法、动态规划等方法应用的都是分解复杂问题的思路。</p>
-
+<p>在面试时，我们难免会遇到难题，画图、举例和分解这3种方法能够帮助我们解决复杂的问题。 <strong><em>图形能使抽象的问题形象化。</em></strong>当面试题涉及链表、二叉树等数据结构时，如果在纸上画几张草图，则题目中隐藏的规律就有可能变得很直观。 <strong><em>一两个例子能使抽象的问题具体化。</em></strong>很多与算法相关的问题都很抽象，未必一眼就能看出它们的规律。这时候我们不妨举几个例子，一步一步模拟运行的过程，说不定就能发现其中的规律，从而找到解决问题的窍门。 <strong><em>把复杂问题分解成若干个小问题，是解决很多复杂问题的有效方法。</em></strong>如果我们遇到的问题很大，则可以尝试先把大问题分解成小问题，然后再递归地解决这些小问题。分治法、动态规划等方法应用的都是分解复杂问题的思路。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -527,6 +533,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

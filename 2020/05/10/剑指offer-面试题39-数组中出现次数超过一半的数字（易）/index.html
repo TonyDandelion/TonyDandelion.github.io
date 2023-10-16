@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,25 +251,28 @@
             <h1 style="display: none">剑指offer 面试题39. 数组中出现次数超过一半的数字（易）&amp; LeetCode 169. 多数元素（易）</h1>
             
             <div class="markdown-body">
-              <p>看到这道题，很多应聘者就会想要是这个数组是排序的数组就好了。<br>如果是排好序的数组，那么我们就能很容易统计出每个数字出现的次数。题目给出的数组没有说是排序的，因此我们需要先给它排序。排序的时间复杂度是$O(nlogn)$。最直观的算法通常不是面试官满意的算法，接下来我们试着找出更快的算法，空间复杂度更小的算法。</p>
+              <p>看到这道题，很多应聘者就会想要是这个数组是排序的数组就好了。 如果是排好序的数组，那么我们就能很容易统计出每个数字出现的次数。题目给出的数组没有说是排序的，因此我们需要先给它排序。排序的时间复杂度是<span class="math inline">\(O(nlogn)\)</span>。最直观的算法通常不是面试官满意的算法，接下来我们试着找出更快的算法，空间复杂度更小的算法。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。<br>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
-<p> 示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure><br>限制：1 &lt;= 数组长度 &lt;= 50000</p>
+<h1 id="question">Question</h1>
+<p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。 你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p> 示例 1: <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure> 限制：1 &lt;= 数组长度 &lt;= 50000</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入的数组中存在一个出现次数超过数组长度一半的数字；输入的数组中不存在一个出现次数超过数组长度一半的数字）。<br>特殊输入测试（输入的数组中只有一个数字；输入 <code>nullptr</code> 指针）。</p>
+<p>功能测试（输入的数组中存在一个出现次数超过数组长度一半的数字；输入的数组中不存在一个出现次数超过数组长度一半的数字）。 特殊输入测试（输入的数组中只有一个数字；输入 <code>nullptr</code> 指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者对时间复杂度的理解。应聘者每想出一种解法，面试官都期待他能分析出这种解法的时间复杂度是多少。<br>考查应聘者思维的全面性。面试官除了要求应聘者能对有效的输入返回正确的结果，同时也期待应聘者能对无效的输入进行相应的处理。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><strong><em>额外空间</em></strong></p>
-<p>使用额外空间进行出现次数统计，即可实现时间复杂度为 $O(n)$ 的算法，空间复杂度为 $O(n^2)$，需要一个 $n \times 2$ 的矩阵，$n$ 为输入数组中的数字类型数，例如 <code>nums=[1, 2, 3, 1, 2, 3, 1, 1, 1, 1, 1,]</code>，$n=3$。</p>
+<p>考查应聘者对时间复杂度的理解。应聘者每想出一种解法，面试官都期待他能分析出这种解法的时间复杂度是多少。 考查应聘者思维的全面性。面试官除了要求应聘者能对有效的输入返回正确的结果，同时也期待应聘者能对无效的输入进行相应的处理。</p>
+<h1 id="intuition">Intuition</h1>
+<p><strong><em>额外空间</em></strong></p>
+<p>使用额外空间进行出现次数统计，即可实现时间复杂度为 <span class="math inline">\(O(n)\)</span> 的算法，空间复杂度为 <span class="math inline">\(O(n^2)\)</span>，需要一个 <span class="math inline">\(n \times 2\)</span> 的矩阵，<span class="math inline">\(n\)</span> 为输入数组中的数字类型数，例如 <code>nums=[1, 2, 3, 1, 2, 3, 1, 1, 1, 1, 1,]</code>，<span class="math inline">\(n=3\)</span>。</p>
 <p><strong><em>类快排算法</em></strong></p>
-<p>数组中有一个数字出现的次数超过了数组长度的一半。如果把这个数组排序，那么<strong>排序之后位于数组中间的数字一定就是那个出现次数超过数组长度一半的数字。</strong>也就是说，这个数字就是统计学上的<strong>中位数</strong>，即长度为n的数组中第n/2大的数字。<br>这种算法受快速排序算法的启发。在随机快速排序算法中，我们 <strong><em>1.</em></strong> 先在数组中随机选择一个数字，<strong><em>2.</em></strong> 然后调整数组中数字的顺序，使得<strong>比选中的数字小的数字都排在它的左边，比选中的数字大的数字都排在它的右边。</strong> <strong><em>3.</em></strong> 如果这个选中的数字的下标刚好是n/2，那么这个数字就是数组的中位数；<strong><em>4.</em></strong>  如果它的下标大于n/2，那么中位数应该位于它的左边，我们可以接着在它的左边部分的数组中查找；<strong><em>5.</em></strong> 如果它的下标小于n/2，那么中位数应该位于它的右边，我们可以接着在它的右边部分的数组中查找。这是一个典型的递归过程。时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。</p>
+<p>数组中有一个数字出现的次数超过了数组长度的一半。如果把这个数组排序，那么<strong>排序之后位于数组中间的数字一定就是那个出现次数超过数组长度一半的数字。</strong>也就是说，这个数字就是统计学上的<strong>中位数</strong>，即长度为n的数组中第n/2大的数字。 这种算法受快速排序算法的启发。在随机快速排序算法中，我们 <strong><em>1.</em></strong> 先在数组中随机选择一个数字，<strong><em>2.</em></strong> 然后调整数组中数字的顺序，使得<strong>比选中的数字小的数字都排在它的左边，比选中的数字大的数字都排在它的右边。</strong> <strong><em>3.</em></strong> 如果这个选中的数字的下标刚好是n/2，那么这个数字就是数组的中位数；<strong><em>4.</em></strong> 如果它的下标大于n/2，那么中位数应该位于它的左边，我们可以接着在它的左边部分的数组中查找；<strong><em>5.</em></strong> 如果它的下标小于n/2，那么中位数应该位于它的右边，我们可以接着在它的右边部分的数组中查找。这是一个典型的递归过程。时间复杂度为 <span class="math inline">\(O(n)\)</span>，空间复杂度为 <span class="math inline">\(O(1)\)</span>。</p>
 <p><strong><em>基于数组特点的方法</em></strong>（best method）</p>
-<p>数组中有一个数字出现的次数超过数组长度的一半，也就是说它出现的次数比其他所有数字出现次数的和还要多。因此，<strong>我们可以考虑在遍历数组的时候保存两个值：一个是数组中的一个数字；另一个是次数。</strong> <strong><em>1.</em></strong> 当我们遍历到下一个数字的时候，<strong>如果下一个数字和我们之前保存的数字相同，则次数加1</strong>； <strong><em>2.</em></strong> 如果<strong>下一个数字和我们之前保存的数字不同，则次数减1</strong>。<strong><em>3.</em></strong> 如果次数为零，那么我们<strong>需要保存下一个数字，并把次数设为1。</strong>由于我们要找的数字出现的次数比其他所有数字出现的次数之和还要多，那么<strong>要找的数字肯定是最后一次把次数设为1时对应的数字。</strong>时间复杂度为 $O(n)$，空间复杂度为 $O(1)$，且易于理解。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<p>数组中有一个数字出现的次数超过数组长度的一半，也就是说它出现的次数比其他所有数字出现次数的和还要多。因此，<strong>我们可以考虑在遍历数组的时候保存两个值：一个是数组中的一个数字；另一个是次数。</strong> <strong><em>1.</em></strong> 当我们遍历到下一个数字的时候，<strong>如果下一个数字和我们之前保存的数字相同，则次数加1</strong>； <strong><em>2.</em></strong> 如果<strong>下一个数字和我们之前保存的数字不同，则次数减1</strong>。<strong><em>3.</em></strong> 如果次数为零，那么我们<strong>需要保存下一个数字，并把次数设为1。</strong>由于我们要找的数字出现的次数比其他所有数字出现的次数之和还要多，那么<strong>要找的数字肯定是最后一次把次数设为1时对应的数字。</strong>时间复杂度为 <span class="math inline">\(O(n)\)</span>，空间复杂度为 <span class="math inline">\(O(1)\)</span>，且易于理解。</p>
+<h1 id="code">Code</h1>
+<ul>
 <li>基于额外空间的方法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">majorityElement</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(nums) &lt; <span class="hljs-number">2</span>:  <span class="hljs-keyword">return</span> nums[<span class="hljs-number">0</span>]<br>        n = <span class="hljs-built_in">len</span>(nums) // <span class="hljs-number">2</span><br>        hash_map = &#123;&#125;<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> i <span class="hljs-keyword">in</span> hash_map:<br>                hash_map[i] += <span class="hljs-number">1</span><br>                <span class="hljs-keyword">if</span> hash_map[i] &gt; n:<br>                    <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">else</span>:<br>                hash_map[i] = <span class="hljs-number">1</span><br>                <br></code></pre></div></td></tr></table></figure>
@@ -282,7 +285,7 @@
 <li>基于数组特点的方法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">majorityElement</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        _len = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.checkValid(nums, _len):<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>  <span class="hljs-comment"># 输入不合法就返回0</span><br>        result = nums[<span class="hljs-number">0</span>]<br>        times = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, _len):<br>            <span class="hljs-keyword">if</span> times == <span class="hljs-number">0</span>:<br>                result = nums[i]<br>                times = <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> nums[i] == result:<br>                times += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                times -= <span class="hljs-number">1</span><br>    <br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.checkResult(nums, _len, result):<br>            result = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">return</span> result<br><br>    <span class="hljs-comment"># 检查输入nums是否合法</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkValid</span>(<span class="hljs-params">self, nums, _len</span>):</span><br>        is_valid = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">if</span> nums == <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> _len &lt; <span class="hljs-number">1</span>:<br>            is_valid = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> is_valid<br><br>    <span class="hljs-comment"># 检查是否是众数</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkResult</span>(<span class="hljs-params">self, nums, _len, result</span>):</span><br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_len):<br>            <span class="hljs-keyword">if</span> nums[i] == result:<br>                count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> count * <span class="hljs-number">2</span> &lt;= _len:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -530,6 +533,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

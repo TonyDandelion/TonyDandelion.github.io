@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,101 +251,107 @@
             <h1 style="display: none">LeetCode 7. 整数反转（易）</h1>
             
             <div class="markdown-body">
-              <p> 记录了Python位运算的基本操作 </p>
+              <p>记录了Python位运算的基本操作</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
+<h1 id="题目">题目</h1>
+<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
 <p>注意:</p>
-<p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [$−2^{31}$,  $2^{31}-1$]。请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
+<p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [<span class="math inline">\(−2^{31}\)</span>, <span class="math inline">\(2^{31}-1\)</span>]。请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
+<h1 id="示例">示例</h1>
+<p>示例 1:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: <span class="hljs-number">123</span><br>输出: <span class="hljs-number">321</span><br></code></pre></div></td></tr></table></figure>
-<p> 示例 2:</p>
+<p>示例 2:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: -<span class="hljs-number">123</span><br>输出: -<span class="hljs-number">321</span><br></code></pre></div></td></tr></table></figure>
 <p>示例 3:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: <span class="hljs-number">120</span><br>输出: <span class="hljs-number">21</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>数组、位移运算、边界条件</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>针对优化解</strong> 可以一次构建反转整数的一位数字。在这样做的时候，我们可以预先检查向原整数附加另一位数字是否会导致溢出。反转整数的方法可以与反转字符串进行类比。我们想重复“弹出” x 的最后一位数字，并将它“推入”到 res 的后面。最后，res 将与 x 相反。</p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><p><strong><font color='red'>输入输出都必须要检测是否越界</font></strong><br><strong><font color='red'>关键一行</font></strong></p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>数组、位移运算、边界条件</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>针对优化解</strong> 可以一次构建反转整数的一位数字。在这样做的时候，我们可以预先检查向原整数附加另一位数字是否会导致溢出。反转整数的方法可以与反转字符串进行类比。我们想重复“弹出” x 的最后一位数字，并将它“推入”到 res 的后面。最后，res 将与 x 相反。</p>
+<h1 id="python版本">Python版本</h1>
+<p><strong><font color='red'>输入输出都必须要检测是否越界</font></strong><br />
+<strong><font color='red'>关键一行</font></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">res = res*<span class="hljs-number">10</span> + y%<span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="自己手写的一个版本"><a href="#自己手写的一个版本" class="headerlink" title="自己手写的一个版本"></a>自己手写的一个版本</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> x &lt; -<span class="hljs-number">2147483648</span> <span class="hljs-keyword">or</span> x &gt; <span class="hljs-number">2147483647</span>:<br>             <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        <br>        <span class="hljs-keyword">if</span> -<span class="hljs-number">10</span> &lt; x &lt; <span class="hljs-number">10</span>:<br>            <span class="hljs-keyword">return</span> x<br>        <br>        _convert = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">0</span>:<br>            x = <span class="hljs-number">0</span>-x<br>            _convert = <span class="hljs-literal">True</span><br>        <br>        result = []<br>        <span class="hljs-keyword">while</span> x != <span class="hljs-number">0</span>:<br>            remainder = x%<span class="hljs-number">10</span><br>            result.append(remainder)<br>            x = x//<span class="hljs-number">10</span><br><br>        tmp = <span class="hljs-number">0</span><br>        _len = <span class="hljs-built_in">len</span>(result)<br>        _scale = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_len):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_len-i-<span class="hljs-number">1</span>):<br>                _scale = _scale*<span class="hljs-number">10</span><br>            tmp += _scale * result[i]<br>            _scale = <span class="hljs-number">1</span><br>        <br>        tmp = <span class="hljs-number">0</span>-tmp <span class="hljs-keyword">if</span> _convert <span class="hljs-keyword">else</span> tmp<br>		<br>        <span class="hljs-comment"># 不仅要在开始设置溢出判断 也要在return的时候进行溢出判断</span><br>        <span class="hljs-keyword">return</span> tmp <span class="hljs-keyword">if</span> -<span class="hljs-number">2147483648</span> &lt; tmp &lt; <span class="hljs-number">2147483647</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>s = [<span class="hljs-number">1534236469</span>, <span class="hljs-number">123</span>, -<span class="hljs-number">123</span>, <span class="hljs-number">120</span>]<br>Answer = [<span class="hljs-number">9646324351</span>, <span class="hljs-number">321</span>, -<span class="hljs-number">321</span>, <span class="hljs-number">21</span>]<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.reverse(s[i])<br>        print(result)<br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
-<div class="table-container">
+<h2 id="自己手写的一个版本">自己手写的一个版本</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> x &lt; -<span class="hljs-number">2147483648</span> <span class="hljs-keyword">or</span> x &gt; <span class="hljs-number">2147483647</span>:<br>             <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        <br>        <span class="hljs-keyword">if</span> -<span class="hljs-number">10</span> &lt; x &lt; <span class="hljs-number">10</span>:<br>            <span class="hljs-keyword">return</span> x<br>        <br>        _convert = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">0</span>:<br>            x = <span class="hljs-number">0</span>-x<br>            _convert = <span class="hljs-literal">True</span><br>        <br>        result = []<br>        <span class="hljs-keyword">while</span> x != <span class="hljs-number">0</span>:<br>            remainder = x%<span class="hljs-number">10</span><br>            result.append(remainder)<br>            x = x//<span class="hljs-number">10</span><br><br>        tmp = <span class="hljs-number">0</span><br>        _len = <span class="hljs-built_in">len</span>(result)<br>        _scale = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_len):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_len-i-<span class="hljs-number">1</span>):<br>                _scale = _scale*<span class="hljs-number">10</span><br>            tmp += _scale * result[i]<br>            _scale = <span class="hljs-number">1</span><br>        <br>        tmp = <span class="hljs-number">0</span>-tmp <span class="hljs-keyword">if</span> _convert <span class="hljs-keyword">else</span> tmp<br>		<br>        <span class="hljs-comment"># 不仅要在开始设置溢出判断 也要在return的时候进行溢出判断</span><br>        <span class="hljs-keyword">return</span> tmp <span class="hljs-keyword">if</span> -<span class="hljs-number">2147483648</span> &lt; tmp &lt; <span class="hljs-number">2147483647</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>s = [<span class="hljs-number">1534236469</span>, <span class="hljs-number">123</span>, -<span class="hljs-number">123</span>, <span class="hljs-number">120</span>]<br>Answer = [<span class="hljs-number">9646324351</span>, <span class="hljs-number">321</span>, -<span class="hljs-number">321</span>, <span class="hljs-number">21</span>]<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.reverse(s[i])<br>        print(result)<br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">提交结果</th>
-<th style="text-align:left">执行用时</th>
-<th style="text-align:left">内存消耗</th>
-<th style="text-align:left">语言</th>
+<tr class="header">
+<th style="text-align: left;">提交结果</th>
+<th style="text-align: left;">执行用时</th>
+<th style="text-align: left;">内存消耗</th>
+<th style="text-align: left;">语言</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">通过</td>
-<td style="text-align:left">32 ms</td>
-<td style="text-align:left">13.1 MB</td>
-<td style="text-align:left">Python3</td>
+<tr class="odd">
+<td style="text-align: left;">通过</td>
+<td style="text-align: left;">32 ms</td>
+<td style="text-align: left;">13.1 MB</td>
+<td style="text-align: left;">Python3</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h2 id="自己手写的版本"><a href="#自己手写的版本" class="headerlink" title="自己手写的版本"></a>自己手写的版本</h2><p>基于将int转成字符串，字符串反转的方式。</p>
+<h2 id="自己手写的版本">自己手写的版本</h2>
+<p>基于将int转成字符串，字符串反转的方式。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> x &lt; -<span class="hljs-number">2147483648</span> <span class="hljs-keyword">or</span> x &gt; <span class="hljs-number">2147483647</span>:<br>             <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        <br>        <span class="hljs-keyword">if</span> -<span class="hljs-number">10</span> &lt; x &lt; <span class="hljs-number">10</span>:<br>            <span class="hljs-keyword">return</span> x<br><br>        _convert = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">0</span>:<br>            x = <span class="hljs-number">0</span>-x<br>            _convert = <span class="hljs-literal">True</span><br><br>        str_x = <span class="hljs-built_in">str</span>(x)<br>        tmp_str = <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(str_x)-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>            tmp_str += str_x[i]<br>        <span class="hljs-comment"># str_x = str_x[::-1]  # 这种方法也可以在Python里面实现字符串翻转（reverse）</span><br>        x = <span class="hljs-built_in">int</span>(tmp_str)<br>        x = <span class="hljs-number">0</span>-x <span class="hljs-keyword">if</span> _convert <span class="hljs-keyword">else</span> x<br><br>        <span class="hljs-keyword">return</span> x <span class="hljs-keyword">if</span> -<span class="hljs-number">2147483648</span> &lt; x &lt; <span class="hljs-number">2147483647</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
-<div class="table-container">
 <table>
 <thead>
-<tr>
-<th style="text-align:left">提交结果</th>
-<th style="text-align:left">执行用时</th>
-<th style="text-align:left">内存消耗</th>
-<th style="text-align:left">语言</th>
+<tr class="header">
+<th style="text-align: left;">提交结果</th>
+<th style="text-align: left;">执行用时</th>
+<th style="text-align: left;">内存消耗</th>
+<th style="text-align: left;">语言</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">通过</td>
-<td style="text-align:left">44 ms</td>
-<td style="text-align:left">13.2 MB</td>
-<td style="text-align:left">Python3</td>
+<tr class="odd">
+<td style="text-align: left;">通过</td>
+<td style="text-align: left;">44 ms</td>
+<td style="text-align: left;">13.2 MB</td>
+<td style="text-align: left;">Python3</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h2 id="一个更加简洁、高效的优化版本"><a href="#一个更加简洁、高效的优化版本" class="headerlink" title="一个更加简洁、高效的优化版本"></a>一个更加简洁、高效的<strong>优化版本</strong></h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-comment"># y, res = abs(x), 0  # 能不用API就不要用API</span><br>        y, res = x <span class="hljs-keyword">if</span> x&gt;=<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>-x, <span class="hljs-number">0</span><br>        <span class="hljs-comment"># 则其数值范围为 [−2^31,  2^31 − 1]</span><br>        boundry = (<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>) -<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> x&gt;<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>  <span class="hljs-comment"># 利用右移动运算符确定边界</span><br>        <span class="hljs-keyword">while</span> y != <span class="hljs-number">0</span>:<br>            res = res*<span class="hljs-number">10</span> + y%<span class="hljs-number">10</span>  <span class="hljs-comment"># 行很关键</span><br>            <span class="hljs-keyword">if</span> res &gt; boundry :  <span class="hljs-comment"># 判定结果是否越界</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>            y //=<span class="hljs-number">10</span><br>        <span class="hljs-keyword">return</span> res <span class="hljs-keyword">if</span> x &gt;<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> -res  <span class="hljs-comment"># 根据输入判断输出是否取反</span><br></code></pre></div></td></tr></table></figure>
-<div class="table-container">
+<h2 id="一个更加简洁高效的优化版本">一个更加简洁、高效的<strong>优化版本</strong></h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-comment"># y, res = abs(x), 0  # 能不用API就不要用API</span><br>        y, res = x <span class="hljs-keyword">if</span> x&gt;=<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>-x, <span class="hljs-number">0</span><br>        <span class="hljs-comment"># 则其数值范围为 [−2^31,  2^31 − 1]</span><br>        boundry = (<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>) -<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> x&gt;<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span>  <span class="hljs-comment"># 利用右移动运算符确定边界</span><br>        <span class="hljs-keyword">while</span> y != <span class="hljs-number">0</span>:<br>            res = res*<span class="hljs-number">10</span> + y%<span class="hljs-number">10</span>  <span class="hljs-comment"># 行很关键</span><br>            <span class="hljs-keyword">if</span> res &gt; boundry :  <span class="hljs-comment"># 判定结果是否越界</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>            y //=<span class="hljs-number">10</span><br>        <span class="hljs-keyword">return</span> res <span class="hljs-keyword">if</span> x &gt;<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> -res  <span class="hljs-comment"># 根据输入判断输出是否取反</span><br></code></pre></div></td></tr></table></figure>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">提交结果</th>
-<th style="text-align:left">执行用时</th>
-<th style="text-align:left">内存消耗</th>
-<th style="text-align:left">语言</th>
+<tr class="header">
+<th style="text-align: left;">提交结果</th>
+<th style="text-align: left;">执行用时</th>
+<th style="text-align: left;">内存消耗</th>
+<th style="text-align: left;">语言</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">通过</td>
-<td style="text-align:left">40 ms</td>
-<td style="text-align:left">12.9 MB</td>
-<td style="text-align:left">Python3</td>
+<tr class="odd">
+<td style="text-align: left;">通过</td>
+<td style="text-align: left;">40 ms</td>
+<td style="text-align: left;">12.9 MB</td>
+<td style="text-align: left;">Python3</td>
 </tr>
 </tbody>
 </table>
-</div>
-<p>时间复杂度：$O(log(x))$，$x$中大约有$log10(x)$ 位数字。<br>空间复杂度：$O(1)$</p>
-<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><h2 id="python的位运算符"><a href="#python的位运算符" class="headerlink" title="python的位运算符"></a>python的位运算符</h2><p>a 为 60，b 为 13，二进制格式如下：a = 0011 1100; b = 0000 1101。</p>
+<p>时间复杂度：<span class="math inline">\(O(log(x))\)</span>，<span class="math inline">\(x\)</span>中大约有<span class="math inline">\(log10(x)\)</span> 位数字。 空间复杂度：<span class="math inline">\(O(1)\)</span></p>
+<h1 id="有效语法糖">有效语法糖</h1>
+<h2 id="python的位运算符">python的位运算符</h2>
+<p>a 为 60，b 为 13，二进制格式如下：a = 0011 1100; b = 0000 1101。</p>
 <ul>
-<li>(a &amp; b)<br><strong>按位与运算符</strong>：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0<br>输出结果 12 ，二进制解释： 0000 1100</li>
-<li>(a | b)<br><strong>按位或运算符</strong>：只要对应的二个二进位有一个为1时，结果位就为1。<br>输出结果 61 ，二进制解释： 0011 1101</li>
-<li>(a ^ b)<br><strong>按位异或运算符</strong>：当两对应的二进位相异时，结果为1<br>输出结果 49 ，二进制解释： 0011 0001</li>
-<li>(~a )<br><strong>按位取反运算符</strong>：对数据的每个二进制位取反,即把1变为0,把0变为1 。~x 类似于 -x-1<br>输出结果 -61 ，二进制解释： 1100 0011，在一个有符号二进制数的补码形式。</li>
-<li>a &lt;&lt; 2 等价于 $a \times 2^2$<br><strong>左移动运算符</strong>：运算数的各二进位全部左移若干位，由 &lt;&lt; 右边的数字指定了移动的位数，高位丢弃，低位补0。</li>
+<li>(a &amp; b) <strong>按位与运算符</strong>：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0 输出结果 12 ，二进制解释： 0000 1100</li>
+<li>(a | b) <strong>按位或运算符</strong>：只要对应的二个二进位有一个为1时，结果位就为1。 输出结果 61 ，二进制解释： 0011 1101</li>
+<li>(a ^ b) <strong>按位异或运算符</strong>：当两对应的二进位相异时，结果为1 输出结果 49 ，二进制解释： 0011 0001</li>
+<li>(~a ) <strong>按位取反运算符</strong>：对数据的每个二进制位取反,即把1变为0,把0变为1 。~x 类似于 -x-1 输出结果 -61 ，二进制解释： 1100 0011，在一个有符号二进制数的补码形式。</li>
+<li>a &lt;&lt; 2 等价于 <span class="math inline">\(a \times 2^2\)</span> <strong>左移动运算符</strong>：运算数的各二进位全部左移若干位，由 &lt;&lt; 右边的数字指定了移动的位数，高位丢弃，低位补0。</li>
 </ul>
 <figure class="highlight python-repl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python-repl">&gt;&gt; a = 15<br><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="python">b = a &lt;&lt; <span class="hljs-number">4</span></span><br><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="python">b</span><br>240<br></code></pre></div></td></tr></table></figure>
 <p>输出结果 240 ，二进制解释： 1111 (15) 右移四位得到11110000（240）</p>
 <ul>
-<li>a &gt;&gt; 2 等价于 $a \div 2^2$<br><strong>右移动运算符</strong>：把”&gt;&gt;”左边的运算数的各二进位全部右移若干位，&gt;&gt; 右边的数字指定了移动的位数<br>输出结果 15 ，二进制解释： 0000 1111</li>
+<li>a &gt;&gt; 2 等价于 <span class="math inline">\(a \div 2^2\)</span> <strong>右移动运算符</strong>：把"&gt;&gt;"左边的运算数的各二进位全部右移若干位，&gt;&gt; 右边的数字指定了移动的位数 输出结果 15 ，二进制解释： 0000 1111</li>
 </ul>
-<h2 id="python赋值运算符"><a href="#python赋值运算符" class="headerlink" title="python赋值运算符"></a>python赋值运算符</h2><p><em>= 乘法赋值运算符 c </em>= a 等效于 c = c <em> a<br>/= 除法赋值运算符 c /= a 等效于 c = c / a<br>%= 取模赋值运算符 c %= a 等效于 c = c % a<br>\</em>*= 幂赋值运算符 c **= a 等效于 c = c ** a<br>//= 取整除赋值运算符 c //= a 等效于 c = c // a</p>
-
+<h2 id="python赋值运算符">python赋值运算符</h2>
+<p><em>= 乘法赋值运算符 c </em>= a 等效于 c = c * a /= 除法赋值运算符 c /= a 等效于 c = c / a %= 取模赋值运算符 c %= a 等效于 c = c % a **= 幂赋值运算符 c **= a 等效于 c = c ** a //= 取整除赋值运算符 c //= a 等效于 c = c // a</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -589,6 +595,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

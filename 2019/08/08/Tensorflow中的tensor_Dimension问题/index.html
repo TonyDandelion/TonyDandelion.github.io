@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      817 字
+      796 字
     </span>
   
 
@@ -253,17 +253,26 @@
             <div class="markdown-body">
               <p>记录一个耗时一天多才排除的bug</p>
 <a id="more"></a>
-<h1 id="起因-在一份代码-A-上添加了另外一份代码-B-的部分内容"><a href="#起因-在一份代码-A-上添加了另外一份代码-B-的部分内容" class="headerlink" title="起因: 在一份代码(A)上添加了另外一份代码(B)的部分内容"></a>起因: 在一份代码(A)上添加了另外一份代码(B)的部分内容</h1><p>原代码(A)在python脚本开始时做了如下声明</p>
+<h1 id="起因-在一份代码a上添加了另外一份代码b的部分内容">起因: 在一份代码(A)上添加了另外一份代码(B)的部分内容</h1>
+<p>原代码(A)在python脚本开始时做了如下声明</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">K.set_image_data_format(<span class="hljs-string">&#x27;channels_first&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
-<p>将全局所有含有<code>data_format</code>参数的<code>keras.layer</code>都设置了<code>data_format=&#39;channels_first&#39;</code><br>而实际上<code>keras.layer</code>默认<code>data_format=&#39;channels_last&#39;</code><br><code>data_format=&#39;channels_first&#39;</code>和<code>data_format=&#39;channels_last</code>的区别是指定这一层的输入哪一个维度是channel<br>而待移植代码(B)没有做声明, 就保持了默认的<code>data_format=&#39;channels_last</code>.</p>
-<h1 id="结果-移植代码-B-的过程中忽视了data-format这个全局参数"><a href="#结果-移植代码-B-的过程中忽视了data-format这个全局参数" class="headerlink" title="结果: 移植代码(B)的过程中忽视了data_format这个全局参数"></a>结果: 移植代码(B)的过程中忽视了data_format这个全局参数</h1><p>将另一份代码(B)的部分移植到原来的代码(A)上时, Dense层一直报错. 报错如下<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ValueError: Dimensions must be equal, but are 32 and 256 <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;dense_1/add&#x27;</span> (op: <span class="hljs-string">&#x27;Add&#x27;</span>) with input shapes: [?,32,256], [1,256,1].<br></code></pre></div></td></tr></table></figure><br>原因在于, 当设置了全局 <code>K.set_image_data_format(&#39;channels_first&#39;)</code> 之后, 前面的网络层生成都按照第一维为通道数的逻辑, 到Dense层, 也就是全连接层再进行相乘时就无法继续正常完成矩阵相乘了.</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>1.尝试将代码A向代码B上移植, 在这个过程中, 由于没有设置<code>K.set_image_data_format(&#39;channels_first&#39;)</code>, 所以全局默认<code>data_format=&#39;channels_last</code>, Dense层不再报错.<br>2.在Dense层不再报错的情况下, 发现步骤1获得的代码输出与预计不一样,  主要表现在输出不一致, 执行同样一段代码, 进行卷积操作结果却不一样.</p>
+<p>将全局所有含有<code>data_format</code>参数的<code>keras.layer</code>都设置了<code>data_format='channels_first'</code><br />
+而实际上<code>keras.layer</code>默认<code>data_format='channels_last'</code><br />
+<code>data_format='channels_first'</code>和<code>data_format='channels_last</code>的区别是指定这一层的输入哪一个维度是channel<br />
+而待移植代码(B)没有做声明, 就保持了默认的<code>data_format='channels_last</code>.</p>
+<h1 id="结果-移植代码b的过程中忽视了data_format这个全局参数">结果: 移植代码(B)的过程中忽视了data_format这个全局参数</h1>
+<p>将另一份代码(B)的部分移植到原来的代码(A)上时, Dense层一直报错. 报错如下 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ValueError: Dimensions must be equal, but are 32 and 256 <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;dense_1/add&#x27;</span> (op: <span class="hljs-string">&#x27;Add&#x27;</span>) with input shapes: [?,32,256], [1,256,1].<br></code></pre></div></td></tr></table></figure> 原因在于, 当设置了全局 <code>K.set_image_data_format('channels_first')</code> 之后, 前面的网络层生成都按照第一维为通道数的逻辑, 到Dense层, 也就是全连接层再进行相乘时就无法继续正常完成矩阵相乘了.</p>
+<h1 id="解决">解决</h1>
+<p>1.尝试将代码A向代码B上移植, 在这个过程中, 由于没有设置<code>K.set_image_data_format('channels_first')</code>, 所以全局默认<code>data_format='channels_last</code>, Dense层不再报错. 2.在Dense层不再报错的情况下, 发现步骤1获得的代码输出与预计不一样, 主要表现在输出不一致, 执行同样一段代码, 进行卷积操作结果却不一样.</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">spec_x = Conv2D(filters=_cnn_nb_filt, kernel_size=(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), padding=<span class="hljs-string">&#x27;same&#x27;</span>)(spec_x)<br></code></pre></div></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/03/11/KL57Ry8vZJEMVwa.png" srcset="/img/loading.gif" alt="20190808215219133.png"></p>
-<p>上图左侧是实际结果(代码B) 2,256,40 卷积之后变成了 2,256,128 以最后一维为channel(错误结果).<br>上图右侧是目标输出结果(代码A), 2,256,40 卷积之后变成了 128, 256,40 以第一维为channel(正确结果).</p>
-<p>由于 <code>K.set_image_data_format(&#39;channels_first&#39;)</code> 是在文件最开始, 浪费了很多时间都没有发现, 最终通过仔细阅读文档中Conv2D的部分, 才发现可能是data_format这个参数的问题.  最终取消全局设置<code>K.set_image_data_format(&#39;channels_first&#39;)</code> , 只在特殊层手动设置 <code>data_format=&#39;channels_first&#39;</code> 的方法实现了输出维度的可控, 至此解决了这问题.</p>
-<h1 id="教训"><a href="#教训" class="headerlink" title="教训"></a>教训</h1><p>1.进行代码合并融合时, 一定要多关注诸如 <code>K.set_image_data_format(&#39;channels_first&#39;)</code> 这样的公共设置.<br>2.当发现直接将B的部分代码移植到A之上有报错但B单独运行就能正常运行的时候, 尝试新开一个文件夹, 将A的部分代码移植到B上, 看看还能不能正常运行.<br>3.如果出现像上述情况, 执行一样的代码 <code>spec_x = Conv2D(filters=_cnn_nb_filt, kernel_size=(3, 3), padding=&#39;same&#39;)(spec_x)</code> , 输入维度一样却出现不一样的输出, 千万不要懵逼, 记得使用pycharm等ide, 打上断点, 看看两边执行到这里之后, 除了 <code>filters</code> 和 <code>kernel_size</code> 这种显式声眀的参数以外其他参数是否有区别, 这样就能较快的发现是哪一个参数的区别导致了输出的变化. 如果IDE无法确认参数, 就仔细看文档, 确认区别。</p>
-
+<figure>
+<img src="https://i.loli.net/2020/03/11/KL57Ry8vZJEMVwa.png" srcset="/img/loading.gif" alt="20190808215219133.png" /><figcaption aria-hidden="true">20190808215219133.png</figcaption>
+</figure>
+<p>上图左侧是实际结果(代码B) 2,256,40 卷积之后变成了 2,256,128 以最后一维为channel(错误结果). 上图右侧是目标输出结果(代码A), 2,256,40 卷积之后变成了 128, 256,40 以第一维为channel(正确结果).</p>
+<p>由于 <code>K.set_image_data_format('channels_first')</code> 是在文件最开始, 浪费了很多时间都没有发现, 最终通过仔细阅读文档中Conv2D的部分, 才发现可能是data_format这个参数的问题. 最终取消全局设置<code>K.set_image_data_format('channels_first')</code> , 只在特殊层手动设置 <code>data_format='channels_first'</code> 的方法实现了输出维度的可控, 至此解决了这问题.</p>
+<h1 id="教训">教训</h1>
+<p>1.进行代码合并融合时, 一定要多关注诸如 <code>K.set_image_data_format('channels_first')</code> 这样的公共设置. 2.当发现直接将B的部分代码移植到A之上有报错但B单独运行就能正常运行的时候, 尝试新开一个文件夹, 将A的部分代码移植到B上, 看看还能不能正常运行. 3.如果出现像上述情况, 执行一样的代码 <code>spec_x = Conv2D(filters=_cnn_nb_filt, kernel_size=(3, 3), padding='same')(spec_x)</code> , 输入维度一样却出现不一样的输出, 千万不要懵逼, 记得使用pycharm等ide, 打上断点, 看看两边执行到这里之后, 除了 <code>filters</code> 和 <code>kernel_size</code> 这种显式声眀的参数以外其他参数是否有区别, 这样就能较快的发现是哪一个参数的区别导致了输出的变化. 如果IDE无法确认参数, 就仔细看文档, 确认区别。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -507,6 +516,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -281,7 +281,7 @@
 <p>使用<code>git diff readme.txt</code>命令，查看文本的更改情况</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ git diff readme.txt<br>diff --git a/readme.txt b/readme.txt<br>index e69de29..5367626 100644<br>--- a/readme.txt<br>+++ b/readme.txt<br>@@ -0,0 +1,2 @@<br>+Git is a distributed version control system.<br>+Git is a free software.<br>warning: LF will be replaced by CRLF <span class="hljs-keyword">in</span> readme.txt.<br>The file will have its original line endings <span class="hljs-keyword">in</span> your working directory.<br><br></code></pre></div></td></tr></table></figure>
-<ol>
+<ol type="1">
 <li><strong>一般来说，修改文件之后在add之前马上使用git diff才能看到区别</strong></li>
 <li><strong>add提交之后再使用diff就不能看到区别了</strong></li>
 <li><strong>add之前使用git status看到的是修改文件是红色的</strong></li>
@@ -289,15 +289,15 @@
 <li><strong>commit之后再使用git status就看不到变化了</strong></li>
 </ol>
 <blockquote>
-<p>使用<code>git log --pretty=oneline</code>查看修改情况  </p>
+<p>使用<code>git log --pretty=oneline</code>查看修改情况</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ git <span class="hljs-built_in">log</span> --pretty=oneline<br>9e86558600d190136a1b109dff14f70587b0c11a modify tow line<br>afd2594462a539056a88b978f1062d02f54e3bfb add a line<br>86905b5f5584d902eb78fd1d589bc8fbddccfd66 remove distribute<br>47a40c4bb05c2ac81c56148e0135aef78defc219 fisrt modify<br>f8f397cb4868fd77a08cffb8e6b277fe8f0eee5c remove distirbute<br>432d801fe7c3720a8ca5a4b52eb83ba7272a5760 Change the discription<br>e7facd5759491dcefdb73b4b2cd004d71fd72645 Change the discription<br>3ea98a88c081d219804cb661a46d3349b1bd44df wrote a readme file<br><br></code></pre></div></td></tr></table></figure>
 <blockquote>
-<p>使用命令<code>git reset --hard HEAD^</code>返回上一个版本  </p>
+<p>使用命令<code>git reset --hard HEAD^</code>返回上一个版本</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ git reset --hard HEAD^<br>HEAD is now at afd2594 add a line<br></code></pre></div></td></tr></table></figure>
 <blockquote>
-<p>在窗口未关闭的情况下，查看之前各个版本的commit id再使用<code>git reset --hard commitID</code>命令就可以返回对应的版本了。  </p>
+<p>在窗口未关闭的情况下，查看之前各个版本的commit id再使用<code>git reset --hard commitID</code>命令就可以返回对应的版本了。</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ git reset --hard HEAD^<br>HEAD is now at afd2594 add a line<br></code></pre></div></td></tr></table></figure>
 <blockquote>
@@ -309,12 +309,13 @@
 <p>使用Git命令丢弃修改</p>
 </blockquote>
 <ul>
-<li>git checkout — readme.txt命令撤销工作区的修改  </li>
-<li>命令git checkout — readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：  <ul>
+<li>git checkout -- readme.txt命令撤销工作区的修改<br />
+</li>
+<li>命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+<ul>
 <li>一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</li>
 <li>一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ git status<br>On branch master<br>Changes not staged <span class="hljs-keyword">for</span> commit:<br>  (use <span class="hljs-string">&quot;git add/rm &lt;file&gt;...&quot;</span> to update what will be committed)<br>  (use <span class="hljs-string">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes <span class="hljs-keyword">in</span> working directory)<br>		<span class="hljs-comment">#modified:   readme.txt还存在</span><br>        deleted:    readme<br>        modified:   readme.txt<br>        modified:   test.txt<br><br>no changes added to commit (use <span class="hljs-string">&quot;git add&quot;</span> and/or <span class="hljs-string">&quot;git commit -a&quot;</span>)<br><br><span class="hljs-comment">#使用git checkout -- readme.txt命令</span><br>Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ git checkout -- readme.txt<br><br>Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ git status<br>On branch master<br>Changes not staged <span class="hljs-keyword">for</span> commit:<br>  (use <span class="hljs-string">&quot;git add/rm &lt;file&gt;...&quot;</span> to update what will be committed)<br>  (use <span class="hljs-string">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes <span class="hljs-keyword">in</span> working directory)<br>		<span class="hljs-comment">#使用git checkout -- readme.txt, modified:   readme.txt记录就消失了</span><br>        deleted:    readme<br>        modified:   test.txt<br><br>no changes added to commit (use <span class="hljs-string">&quot;git add&quot;</span> and/or <span class="hljs-string">&quot;git commit -a&quot;</span>)<br></code></pre></div></td></tr></table></figure>
 <blockquote>
@@ -324,40 +325,48 @@
 <blockquote>
 <p>场景应对</p>
 </blockquote>
-<p><strong>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout — file。中间是两个-</strong></p>
+<p><strong>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。中间是两个-</strong></p>
 <p><strong>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。</strong></p>
 <p><strong>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。</strong></p>
 <blockquote>
-<p>Git命令撤销删除 </p>
+<p>Git命令撤销删除</p>
 </blockquote>
 <p><strong>使用rm -rf filename命令删除文件之后，有两个选择：</strong></p>
 <p>1、确实要从版本库中删除该文件，那就用命令<code>git rm</code>删掉，并且<code>git commit</code>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ git rm test.txt<br>rm <span class="hljs-string">&#x27;test.txt&#x27;</span><br><br>Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ git commit -m<span class="hljs-string">&quot;delete test.txt&quot;</span><br>[master 381a470] delete test.txt<br> 1 file changed, 6 deletions(-)<br> delete mode 100644 test.txt<br><br>Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ git status<br>On branch master<br>nothing to commit, working directory clean<br><br></code></pre></div></td></tr></table></figure>
 <p><strong>现在，文件就从版本库中被删除了。</strong></p>
-<p><strong>这时候你要恢复就只能使用 git reset —hard HEAD^</strong></p>
+<p><strong>这时候你要恢复就只能使用 git reset --hard HEAD^</strong></p>
 <p>2、你只是在误删文件，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ git checkout -- test.txt<br><br>Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ ll<br>total 2<br>-rw-r--r-- 1 Tony 197121  81 七月 11 10:23 readme.txt<br>-rw-r--r-- 1 Tony 197121 172 七月 11 11:00 test.txt<br></code></pre></div></td></tr></table></figure>
-<p><strong>这样文件删除就直接恢复了</strong><br><strong>需要注意的是删除操作提交到缓冲区之后是不能回撤到工作区的，必须再git rm filename+git commit -m”      “，然后再版本回退，git reset —hard HEAD^。</strong></p>
+<p><strong>这样文件删除就直接恢复了</strong> <strong>需要注意的是删除操作提交到缓冲区之后是不能回撤到工作区的，必须再git rm filename+git commit -m" "，然后再版本回退，git reset --hard HEAD^。</strong></p>
 <blockquote>
 <p>远程仓库</p>
 </blockquote>
 <p>1、创建SHH Key</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></div></td></tr></table></figure>
-<p>2、 在Github上添加SSHKey<br><strong>点击设置，然后将为sshkey取名字，将刚刚生成的id_rsa.pub的内容复制到Github的设置界面，点击确认之后就能得到SSHkey了。</strong></p>
-<p>3、新建一个名为learngit的repository<br><strong>在GitHub上新建一个repository，默认设置。 </strong></p>
-<p>4、将本地的git库关联到Github上的码仓<br><strong>注意输入正确的码仓地址git@github.com:TonyDandelion/learngit.git,TonyDandelion是独一无二的GitHub名字。</strong><br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ git remote add origin git@github.com:TonyDandelion/learngit.git<br></code></pre></div></td></tr></table></figure><br>5、将本地的文件push到Github上  </p>
+<p>2、 在Github上添加SSHKey<br />
+<strong>点击设置，然后将为sshkey取名字，将刚刚生成的id_rsa.pub的内容复制到Github的设置界面，点击确认之后就能得到SSHkey了。</strong></p>
+<p>3、新建一个名为learngit的repository<br />
+<strong>在GitHub上新建一个repository，默认设置。 </strong></p>
+<p>4、将本地的git库关联到Github上的码仓<br />
+<strong>注意输入正确的码仓地址git@github.com:TonyDandelion/learngit.git,TonyDandelion是独一无二的GitHub名字。</strong> <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ git remote add origin git@github.com:TonyDandelion/learngit.git<br></code></pre></div></td></tr></table></figure> 5、将本地的文件push到Github上</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/learngit (master)<br>$ git push -u origin master<br>The authenticity of host <span class="hljs-string">&#x27;github.com (192.30.253.113)&#x27;</span> can<span class="hljs-string">&#x27;t be established.</span><br><span class="hljs-string">RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.</span><br><span class="hljs-string">Are you sure you want to continue connecting (yes/no)? y</span><br><span class="hljs-string">Please type &#x27;</span>yes<span class="hljs-string">&#x27; or &#x27;</span>no<span class="hljs-string">&#x27;: yes</span><br><span class="hljs-string">Warning: Permanently added &#x27;</span>github.com,192.30.253.113<span class="hljs-string">&#x27; (RSA) to the list of known hosts.</span><br><span class="hljs-string">Counting objects: 38, done.</span><br><span class="hljs-string">Delta compression using up to 8 threads.</span><br><span class="hljs-string">Compressing objects: 100% (35/35), done.</span><br><span class="hljs-string">Writing objects: 100% (38/38), 3.22 KiB | 0 bytes/s, done.</span><br><span class="hljs-string">Total 38 (delta 11), reused 0 (delta 0)</span><br><span class="hljs-string">To git@github.com:TonyDandelion/learngit.git</span><br><span class="hljs-string"> * [new branch]      master -&gt; master</span><br><span class="hljs-string">Branch master set up to track remote branch master from origin.</span><br></code></pre></div></td></tr></table></figure>
 <p><strong>由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</strong></p>
 <p>6、只要本地做了修改，使用命令$ git push origin master就能把本地master分支的最新修改推送至GitHub！</p>
-<p><strong>小结</strong><br><strong>要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；</strong><br><strong>关联后，使用命令git push -u origin master第一次推送master分支的所有内容；</strong><br><strong>此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；</strong>  </p>
+<p><strong>小结</strong><br />
+<strong>要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；</strong><br />
+<strong>关联后，使用命令git push -u origin master第一次推送master分支的所有内容；</strong><br />
+<strong>此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；</strong></p>
 <blockquote>
 <p>远程库的克隆</p>
 </blockquote>
 <p><strong>只有用ssh方式连接，才能获取修改权限。</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#ssh方式连接</span><br>git <span class="hljs-built_in">clone</span> git@git.coding.net:quseitlab/tianjin1che.git<br>git <span class="hljs-built_in">clone</span> git@github.com:TonyDandelion/gitskills.git<br><br><span class="hljs-comment">#https方式连接</span><br><span class="hljs-comment">#git clone https://git.coding.net/quseitlab/tianjin1che.git</span><br></code></pre></div></td></tr></table></figure>
-<p>实例  </p>
+<p>实例</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository<br>$ git <span class="hljs-built_in">clone</span> git@github.com:TonyDandelion/gitskills.git<br>Cloning into <span class="hljs-string">&#x27;gitskills&#x27;</span>...<br>remote: Counting objects: 3, <span class="hljs-keyword">done</span>.<br>remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0<br>Receiving objects: 100% (3/3), <span class="hljs-keyword">done</span>.<br>Checking connectivity... <span class="hljs-keyword">done</span>.<br></code></pre></div></td></tr></table></figure>
-<p><strong>要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。 </strong><br><strong>Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。 </strong><br><strong>生成shh公钥</strong>  </p>
+<p><strong>要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。 </strong><br />
+<strong>Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。 </strong><br />
+<strong>生成shh公钥</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh-keygen -t rsa<br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <p>分支管理</p>
@@ -368,16 +377,23 @@
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ git branch dev<br>$ git checkout dev<br>Switched to branch <span class="hljs-string">&#x27;dev&#x27;</span><br></code></pre></div></td></tr></table></figure>
 <p>2、使用git branch来查看当前的分支</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ git branch<br>* dev<br>  master<br></code></pre></div></td></tr></table></figure>
-<p>3、在当前分支下修改文本文件<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/gitskills (master)<br>$ cat README.md<br><span class="hljs-comment"># gitskills</span><br>Creating a new branch is quick<br></code></pre></div></td></tr></table></figure><br>4、操作完成，切回master。</p>
+<p>3、在当前分支下修改文本文件 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/gitskills (master)<br>$ cat README.md<br><span class="hljs-comment"># gitskills</span><br>Creating a new branch is quick<br></code></pre></div></td></tr></table></figure> 4、操作完成，切回master。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/gitskills (dev)<br>$ git checkout master<br>Switched to branch <span class="hljs-string">&#x27;master&#x27;</span><br>Your branch is up-to-date with <span class="hljs-string">&#x27;origin/master&#x27;</span>.<br><br>Tony@Tony-PC MINGW64 /e/gitrepository/gitskills (master)<br>$ git branch<br>  dev<br>* master<br></code></pre></div></td></tr></table></figure>
 <p>5、将在dev上做的修改一起整合到master</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/gitskills (master)<br>$ git merge dev<br>Updating e9c4711..9b2d797<br>Fast-forward<br> README.md | 3 ++-<br> 1 file changed, 2 insertions(+), 1 deletion(-)<br><br>Tony@Tony-PC MINGW64 /e/gitrepository/gitskills (master)<br>$ cat README.md<br><span class="hljs-comment"># gitskills</span><br>Creating a new branch is quick<br></code></pre></div></td></tr></table></figure>
 <p><strong>git merge命令用于合并指定分支到当前分支。合并后，再查看readme.txt的内容，就可以看到，和dev分支的最新提交是完全一样的。</strong></p>
 <p>6、合并修改之后就能直接删除分支了</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Tony@Tony-PC MINGW64 /e/gitrepository/gitskills (master)<br>$ git branch -d dev<br>Deleted branch dev (was 9b2d797).<br><br><span class="hljs-comment">#这时查看分支就只有一个分支了</span><br>Tony@Tony-PC MINGW64 /e/gitrepository/gitskills (master)<br>$ git branch<br>* master<br></code></pre></div></td></tr></table></figure>
-<p>7、总结<br>Git鼓励大量使用分支：<br>查看分支：<code>git branch</code><br>创建分支：<code>git branch</code><br>切换分支：<code>git checkout</code><br>创建+切换分支：<code>git checkout -b</code><br>合并某分支到当前分支：<code>git merge</code><br>删除分支：<code>git branch -d</code></p>
+<p>7、总结<br />
+Git鼓励大量使用分支：<br />
+查看分支：<code>git branch</code><br />
+创建分支：<code>git branch</code><br />
+切换分支：<code>git checkout</code><br />
+创建+切换分支：<code>git checkout -b</code><br />
+合并某分支到当前分支：<code>git merge</code><br />
+删除分支：<code>git branch -d</code></p>
 <p><a target="_blank" rel="noopener" href="http://www.liaoxuefeng.com/">参考链接:廖雪峰</a></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -614,6 +630,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

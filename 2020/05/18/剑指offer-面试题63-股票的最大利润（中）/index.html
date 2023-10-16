@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      634 字
+      636 字
     </span>
   
 
@@ -253,22 +253,26 @@
             <div class="markdown-body">
               <p>考查应聘者的抽象建模能力。应聘者需要从股票买卖的特点入手总结出股票交易获得最大利润的条件。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。<br>注意：你不能在买入股票前卖出股票。</p>
-<p>示例 1:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [7,1,5,3,6,4]</span><br><span class="hljs-section">输出: 5</span><br></code></pre></div></td></tr></table></figure><br>解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</p>
-<p>示例 2:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [7,6,4,3,1]</span><br><span class="hljs-section">输出: 0</span><br></code></pre></div></td></tr></table></figure><br>解释: 在这种情况下, 没有交易完成, 所以最大利润为0。</p>
+<h1 id="question">Question</h1>
+<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。 注意：你不能在买入股票前卖出股票。</p>
+<p>示例 1: <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [7,1,5,3,6,4]</span><br><span class="hljs-section">输出: 5</span><br></code></pre></div></td></tr></table></figure> 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</p>
+<p>示例 2: <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: [7,6,4,3,1]</span><br><span class="hljs-section">输出: 0</span><br></code></pre></div></td></tr></table></figure> 解释: 在这种情况下, 没有交易完成, 所以最大利润为0。</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（存储股票价格的数组无序、单调递增、单调递减）。<br>边界值测试（存储股票价格的数组中只有两个数字）。特殊输入测试（指向数组的指针为nullptr）。</p>
+<p>功能测试（存储股票价格的数组无序、单调递增、单调递减）。 边界值测试（存储股票价格的数组中只有两个数字）。特殊输入测试（指向数组的指针为nullptr）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者的抽象建模能力。应聘者需要从股票买卖的特点入手总结出股票交易获得最大利润的条件。<br>考查应聘者对数组的编程能力。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>我们先定义变量 <code>curr_diff</code> 为当卖出价为数组中第 <code>i</code> 个数字时<strong>可能获得的最大利润</strong>。<br><strong>显然，在卖出价固定时，买入价越低获得的利润越大。</strong><br>也就是说，如果在扫描到数组中的第 <code>i</code> 个数字时，只要我们能够记住之前的 <code>i-1</code> 个数字中的最小值，就能算出在当前价位卖出时可能得到的最大利润。我们用变量 <code>_min</code> 记录之前的 <code>i-1</code> 个数字中的最小值，用 <code>max_diff</code> 和 <code>curr_diff</code> 比较，然后记录获得的最大利润。</p>
-<p>时间复杂度：$O(n)$；<br>空间复杂度：$O(1)$。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxProfit</span>(<span class="hljs-params">self, prices: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        length = <span class="hljs-built_in">len</span>(prices)<br>        <span class="hljs-keyword">if</span> length &lt; <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        _min = prices[<span class="hljs-number">0</span>] <br>        max_diff = prices[<span class="hljs-number">1</span>] - _min<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, length):<br>            <span class="hljs-keyword">if</span> prices[i-<span class="hljs-number">1</span>] &lt; _min:<br>                _min = prices[i-<span class="hljs-number">1</span>]<br>            curr_diff = prices[i] - _min<br>            <span class="hljs-keyword">if</span> curr_diff &gt; max_diff:<br>                max_diff = curr_diff<br>        <span class="hljs-comment"># 特判股价一直下跌的情况，max_diff可能为负。</span><br>        <span class="hljs-keyword">return</span> max_diff <span class="hljs-keyword">if</span> max_diff &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&amp;mid=2247484509&amp;idx=1&amp;sn=21ace57f19d996d46e82bd7d806a2e3c&amp;source=41#wechat_redirect">LeetCode 股票问题的一种通用解法</a></p>
-
+<p>考查应聘者的抽象建模能力。应聘者需要从股票买卖的特点入手总结出股票交易获得最大利润的条件。 考查应聘者对数组的编程能力。</p>
+<h1 id="intuition">Intuition</h1>
+<p>我们先定义变量 <code>curr_diff</code> 为当卖出价为数组中第 <code>i</code> 个数字时<strong>可能获得的最大利润</strong>。 <strong>显然，在卖出价固定时，买入价越低获得的利润越大。</strong> 也就是说，如果在扫描到数组中的第 <code>i</code> 个数字时，只要我们能够记住之前的 <code>i-1</code> 个数字中的最小值，就能算出在当前价位卖出时可能得到的最大利润。我们用变量 <code>_min</code> 记录之前的 <code>i-1</code> 个数字中的最小值，用 <code>max_diff</code> 和 <code>curr_diff</code> 比较，然后记录获得的最大利润。</p>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span>； 空间复杂度：<span class="math inline">\(O(1)\)</span>。</p>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxProfit</span>(<span class="hljs-params">self, prices: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        length = <span class="hljs-built_in">len</span>(prices)<br>        <span class="hljs-keyword">if</span> length &lt; <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        _min = prices[<span class="hljs-number">0</span>] <br>        max_diff = prices[<span class="hljs-number">1</span>] - _min<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, length):<br>            <span class="hljs-keyword">if</span> prices[i-<span class="hljs-number">1</span>] &lt; _min:<br>                _min = prices[i-<span class="hljs-number">1</span>]<br>            curr_diff = prices[i] - _min<br>            <span class="hljs-keyword">if</span> curr_diff &gt; max_diff:<br>                max_diff = curr_diff<br>        <span class="hljs-comment"># 特判股价一直下跌的情况，max_diff可能为负。</span><br>        <span class="hljs-keyword">return</span> max_diff <span class="hljs-keyword">if</span> max_diff &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="extension">Extension</h1>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&amp;mid=2247484509&amp;idx=1&amp;sn=21ace57f19d996d46e82bd7d806a2e3c&amp;source=41#wechat_redirect">LeetCode 股票问题的一种通用解法</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -514,6 +518,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

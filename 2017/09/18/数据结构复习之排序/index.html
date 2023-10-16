@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      28
+      29
        分钟
     </span>
   
@@ -253,8 +253,11 @@
             <div class="markdown-body">
               <p>排序算法千千万万，为什么是你？</p>
 <a id="more"></a>
-<h1 id="比较类排序"><a href="#比较类排序" class="headerlink" title="比较类排序"></a>比较类排序</h1><p>通过元素比较来决定相对次序，时间复杂度不能突破 $O(nlogn)$，又称<strong>非线性时间比较类排序</strong>。</p>
-<h2 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h2><h3 id="冒泡排序（Bubble-Sort）"><a href="#冒泡排序（Bubble-Sort）" class="headerlink" title="冒泡排序（Bubble Sort）"></a>冒泡排序（Bubble Sort）</h3><blockquote>
+<h1 id="比较类排序">比较类排序</h1>
+<p>通过元素比较来决定相对次序，时间复杂度不能突破 <span class="math inline">\(O(nlogn)\)</span>，又称<strong>非线性时间比较类排序</strong>。</p>
+<h2 id="交换排序">交换排序</h2>
+<h3 id="冒泡排序bubble-sort">冒泡排序（Bubble Sort）</h3>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>重复地走访过要排序的数列，一次比较两个元素，如果它们<strong>的顺序错误</strong>就把它们交换过来。走访数列的工作是<strong>重复地进行直到没有再需要交换的元素</strong>，也就是说该数列已经排序完成。</p>
@@ -267,7 +270,9 @@
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://i.loli.net/2020/04/05/5knH3oXZv9OxRwU.gif" srcset="/img/loading.gif" alt="v2-33a947c71ad62b254cab62e5364d2813_b.gif"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/05/5knH3oXZv9OxRwU.gif" srcset="/img/loading.gif" alt="v2-33a947c71ad62b254cab62e5364d2813_b.gif" /><figcaption aria-hidden="true">v2-33a947c71ad62b254cab62e5364d2813_b.gif</figcaption>
+</figure>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -275,10 +280,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -287,17 +291,17 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>稳定</td>
-<td>$O(n^2)$</td>
-<td>$O(n^2)$</td>
-<td>$O(n)$</td>
-<td>$O(1)$</td>
+<td><span class="math inline">\(O(n^2)\)</span></td>
+<td><span class="math inline">\(O(n^2)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="快速排序（Quick-Sort）"><a href="#快速排序（Quick-Sort）" class="headerlink" title="快速排序（Quick Sort）"></a>快速排序（Quick Sort）</h3><blockquote>
+<h3 id="快速排序quick-sort">快速排序（Quick Sort）</h3>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>基于<strong>分治</strong>的思想</p>
@@ -309,7 +313,7 @@
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://pic1.zhimg.com/v2-c411339b79f92499dcb7b5f304c826f4_b.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://pic1.zhimg.com/v2-c411339b79f92499dcb7b5f304c826f4_b.webp" srcset="/img/loading.gif" /></p>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -317,10 +321,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -329,25 +332,26 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>不稳定</td>
-<td>$O(nlog_2n)$</td>
-<td>$O(n^2)$</td>
-<td>$O(nlog_2n)$</td>
-<td>$O(nlog_2n)$</td>
+<td><span class="math inline">\(O(nlog_2n)\)</span></td>
+<td><span class="math inline">\(O(n^2)\)</span></td>
+<td><span class="math inline">\(O(nlog_2n)\)</span></td>
+<td><span class="math inline">\(O(nlog_2n)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<hr>
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="简单插入排序（Insertion-Sort）"><a href="#简单插入排序（Insertion-Sort）" class="headerlink" title="简单插入排序（Insertion Sort）"></a>简单插入排序（Insertion Sort）</h3><blockquote>
+<hr />
+<h2 id="插入排序">插入排序</h2>
+<h3 id="简单插入排序insertion-sort">简单插入排序（Insertion Sort）</h3>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>将无序部分中的元素插入到有序部分。初始化时，从第一个元素开始，依次搜索每一个元素的待插入位置，算法中，<strong>有序部分在前，无序部分在后，一边寻找插入位置，一边将元素后移一个单元。</strong>一直在<strong>往前</strong>找适和当前元素的位置。</p>
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://pic3.zhimg.com/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://pic3.zhimg.com/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp" srcset="/img/loading.gif" /></p>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -355,10 +359,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -367,24 +370,26 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>稳定</td>
-<td>$O(n^2)$</td>
-<td>$n(n^2)$</td>
-<td>$O(n)$</td>
-<td>$O(1)$</td>
+<td><span class="math inline">\(O(n^2)\)</span></td>
+<td><span class="math inline">\(n(n^2)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="希尔排序（Shell-Sort）"><a href="#希尔排序（Shell-Sort）" class="headerlink" title="希尔排序（Shell Sort）"></a>希尔排序（Shell Sort）</h3><blockquote>
+<h3 id="希尔排序shell-sort">希尔排序（Shell Sort）</h3>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
-<p>简单插入排序的修改版，根据<strong>步长由长到短分组，进行排序</strong>，直到步长为1为止，属于插入排序的一种。1959年Shell发明，第一个突破 $O(n^2)$ 的排序算法，它会优先比较距离较远的元素。希尔排序又叫<strong>缩小增量排序</strong>。</p>
+<p>简单插入排序的修改版，根据<strong>步长由长到短分组，进行排序</strong>，直到步长为1为止，属于插入排序的一种。1959年Shell发明，第一个突破 <span class="math inline">\(O(n^2)\)</span> 的排序算法，它会优先比较距离较远的元素。希尔排序又叫<strong>缩小增量排序</strong>。</p>
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://i.loli.net/2020/04/05/1Fdmg2BH64sIGNO.jpg" srcset="/img/loading.gif" alt="v2-c52e08027910d98f78ee1d225cf03a8b_720w.jpg"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/05/1Fdmg2BH64sIGNO.jpg" srcset="/img/loading.gif" alt="v2-c52e08027910d98f78ee1d225cf03a8b_720w.jpg" /><figcaption aria-hidden="true">v2-c52e08027910d98f78ee1d225cf03a8b_720w.jpg</figcaption>
+</figure>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -393,10 +398,9 @@
 <p>时空复杂度和稳定性</p>
 </blockquote>
 <p>希尔排序的平均时间复杂度和步长序列有之间关系</p>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>步长序列</th>
 <th>时间复杂度（最坏）</th>
@@ -405,39 +409,40 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>不稳定</td>
-<td>$2^i3^j$</td>
-<td>$O(nlog^2n)$</td>
-<td>$O(n)$</td>
-<td>$O(n)$</td>
+<td><span class="math inline">\(2^i3^j\)</span></td>
+<td><span class="math inline">\(O(nlog^2n)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
-<td>$2^k-1$</td>
-<td>$O(n^{\frac{3}{2}})$</td>
-<td>$O(n)$</td>
-<td>$O(n)$</td>
+<td><span class="math inline">\(2^k-1\)</span></td>
+<td><span class="math inline">\(O(n^{\frac{3}{2}})\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td></td>
-<td>$\frac{n}{2^i}$</td>
-<td>$O(n^2)$</td>
-<td>$O(n)$</td>
-<td>$O(n)$</td>
+<td><span class="math inline">\(\frac{n}{2^i}\)</span></td>
+<td><span class="math inline">\(O(n^2)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<hr>
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><h3 id="简单选择排序（Selection-Sort）"><a href="#简单选择排序（Selection-Sort）" class="headerlink" title="简单选择排序（Selection Sort）"></a>简单选择排序（Selection Sort）</h3><blockquote>
+<hr />
+<h2 id="选择排序">选择排序</h2>
+<h3 id="简单选择排序selection-sort">简单选择排序（Selection Sort）</h3>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始（末尾）位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到<strong>未排序序列</strong>的末尾。以此类推，直到所有元素均排序完毕。注意，这里有个有序区和无序区的概念。</p>
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://pic1.zhimg.com/v2-1c7e20f306ddc02eb4e3a50fa7817ff4_b.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://pic1.zhimg.com/v2-1c7e20f306ddc02eb4e3a50fa7817ff4_b.webp" srcset="/img/loading.gif" /></p>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -445,10 +450,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -457,21 +461,23 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>不稳定</td>
-<td>$O(n^2)$</td>
-<td>$n(n^2)$</td>
-<td>$O(n^2)$</td>
-<td>$O(1)$</td>
+<td><span class="math inline">\(O(n^2)\)</span></td>
+<td><span class="math inline">\(n(n^2)\)</span></td>
+<td><span class="math inline">\(O(n^2)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="堆排序（Heap-Sort）"><a href="#堆排序（Heap-Sort）" class="headerlink" title="堆排序（Heap Sort）"></a>堆排序（Heap Sort）</h3><blockquote>
+<h3 id="堆排序heap-sort">堆排序（Heap Sort）</h3>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>堆排序是一种基于二叉堆（Binary Heap）结构的排序算法，所谓二叉堆，就是一种特殊的完全二叉树，只不过相比较完全二叉树而言，二叉堆的所有父节点的值都大于（或者小于）它的孩子节点，像这样：</p>
-<p><img src="https://i.loli.net/2020/04/05/rPs7YM2T9xlcKHE.jpg" srcset="/img/loading.gif" alt="v2-5d6119c9801eadb83402ef68f6d4b689_720w.jpg"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/05/rPs7YM2T9xlcKHE.jpg" srcset="/img/loading.gif" alt="v2-5d6119c9801eadb83402ef68f6d4b689_720w.jpg" /><figcaption aria-hidden="true">v2-5d6119c9801eadb83402ef68f6d4b689_720w.jpg</figcaption>
+</figure>
 <p>首先需要引入最大堆（大根堆）的定义：</p>
 <ul>
 <li>最大堆中的<strong>最大元素值</strong>出现在根结点（堆顶）</li>
@@ -482,12 +488,14 @@
 <li>最大堆中的<strong>最小元素值</strong>出现在根结点（堆顶）</li>
 <li>堆中每个父节点的元素值都<strong>小于等于</strong>其孩子结点</li>
 </ul>
-<p><img src="https://i.loli.net/2020/04/05/CnHVsfE5pu3L1GQ.png" srcset="/img/loading.gif" alt="650075-91f1549ff0c87c15.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/05/CnHVsfE5pu3L1GQ.png" srcset="/img/loading.gif" alt="650075-91f1549ff0c87c15.png" /><figcaption aria-hidden="true">650075-91f1549ff0c87c15.png</figcaption>
+</figure>
 <p>那么，堆排序算法的内容就很简单了，最大堆堆顶的最大数取出，将剩余的堆继续调整为最大堆，再次将堆顶的最大数取出，这个过程持续到剩余数只有一个时结束。</p>
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://pic4.zhimg.com/v2-7073c729230e1a2c3c3c9207b25f6b43_b.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://pic4.zhimg.com/v2-7073c729230e1a2c3c3c9207b25f6b43_b.webp" srcset="/img/loading.gif" /></p>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -495,10 +503,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -507,18 +514,19 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>不稳定</td>
-<td>$O(nlog_2n)$</td>
-<td>$n(nlog_2n)$</td>
-<td>$O(nlog_2n)$</td>
-<td>$O(1)$</td>
+<td><span class="math inline">\(O(nlog_2n)\)</span></td>
+<td><span class="math inline">\(n(nlog_2n)\)</span></td>
+<td><span class="math inline">\(O(nlog_2n)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<hr>
-<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="二路归并排序（Merge-Sort）"><a href="#二路归并排序（Merge-Sort）" class="headerlink" title="二路归并排序（Merge Sort）"></a>二路归并排序（Merge Sort）</h3><blockquote>
+<hr />
+<h2 id="归并排序">归并排序</h2>
+<h3 id="二路归并排序merge-sort">二路归并排序（Merge Sort）</h3>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>归并排序是建立在<strong>归并操作</strong>上的一种有效的排序算法。该算法是采用<strong>分治法</strong>（Divide and Conquer）思想。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将<strong>两个</strong>有序表合并成一个有序表，称为<strong>二路归并</strong>。若将K个有序表合并成一个有序表，称为<strong>多路归并排序。</strong></p>
@@ -531,8 +539,10 @@
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://pic3.zhimg.com/v2-cdda3f11c6efbc01577f5c29a9066772_b.webp" srcset="/img/loading.gif" alt=""></p>
-<p><img src="https://i.loli.net/2020/04/05/62YikepNGmcXyQM.jpg" srcset="/img/loading.gif" alt="v2-6639ef7ed441b0e2b7a71ee202e3ad05_720w.jpg"></p>
+<p><img src="https://pic3.zhimg.com/v2-cdda3f11c6efbc01577f5c29a9066772_b.webp" srcset="/img/loading.gif" /></p>
+<figure>
+<img src="https://i.loli.net/2020/04/05/62YikepNGmcXyQM.jpg" srcset="/img/loading.gif" alt="v2-6639ef7ed441b0e2b7a71ee202e3ad05_720w.jpg" /><figcaption aria-hidden="true">v2-6639ef7ed441b0e2b7a71ee202e3ad05_720w.jpg</figcaption>
+</figure>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -540,10 +550,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -552,26 +561,27 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>稳定</td>
-<td>$O(nlog_2n)$</td>
-<td>$O(nlog_2n)$</td>
-<td>$O(nlog_2n)$</td>
-<td>$O(n)$</td>
+<td><span class="math inline">\(O(nlog_2n)\)</span></td>
+<td><span class="math inline">\(O(nlog_2n)\)</span></td>
+<td><span class="math inline">\(O(nlog_2n)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<hr>
-<h1 id="非比较类排序"><a href="#非比较类排序" class="headerlink" title="非比较类排序"></a>非比较类排序</h1><p><strong>不通过比较来决定元素间的相对次序</strong>，时间复杂度可以达到 $O(n)$，又称<strong>线性时间非比较类排序</strong>。</p>
-<h2 id="计数排序（Counting-Sort）"><a href="#计数排序（Counting-Sort）" class="headerlink" title="计数排序（Counting Sort）"></a>计数排序（Counting Sort）</h2><blockquote>
+<hr />
+<h1 id="非比较类排序">非比较类排序</h1>
+<p><strong>不通过比较来决定元素间的相对次序</strong>，时间复杂度可以达到 <span class="math inline">\(O(n)\)</span>，又称<strong>线性时间非比较类排序</strong>。</p>
+<h2 id="计数排序counting-sort">计数排序（Counting Sort）</h2>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>计数排序不是基于比较的排序算法，其核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。 作为一种线性时间复杂度的排序，计数排序要求<strong><font color="red">输入的数据必须是有确定范围的整数。</font></strong>条件苛刻，且牺牲空间换取时间。</p>
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://pic4.zhimg.com/v2-3c7ddb59df2d21b287e42a7b908409cb_b.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://pic4.zhimg.com/v2-3c7ddb59df2d21b287e42a7b908409cb_b.webp" srcset="/img/loading.gif" /></p>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -579,10 +589,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -591,22 +600,22 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>稳定</td>
-<td>$O(n + k)$</td>
-<td>$O(n + k)$</td>
-<td>$O(n + k)$</td>
-<td>$O(n + k)$</td>
+<td><span class="math inline">\(O(n + k)\)</span></td>
+<td><span class="math inline">\(O(n + k)\)</span></td>
+<td><span class="math inline">\(O(n + k)\)</span></td>
+<td><span class="math inline">\(O(n + k)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<p>$n$ 是待排序元素个数，$k$ 是待排序元素区间长度。</p>
-<h2 id="桶排序（Bucket-sort）"><a href="#桶排序（Bucket-sort）" class="headerlink" title="桶排序（Bucket sort）"></a>桶排序（Bucket sort）</h2><blockquote>
+<p><span class="math inline">\(n\)</span> 是待排序元素个数，<span class="math inline">\(k\)</span> 是待排序元素区间长度。</p>
+<h2 id="桶排序bucket-sort">桶排序（Bucket sort）</h2>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>桶排序是计数排序的升级版，桶排序 (Bucket sort)的工作的原理：假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排）。</p>
-<p>桶排序过程中存在两个关键环节：<br>1、元素值域的划分，也就是元素到桶的映射规则。映射规则需要根据待排序集合的元素分布特性进行选择。<br>2、排序算法的选择，从待排序集合中元素映射到各个桶上的过程，并不存在元素的比较和交换操作，在对各个桶中元素进行排序时，可以自主选择合适的排序算法，桶排序算法的复杂度和稳定性，都根据选择的排序算法不同而不同。</p>
+<p>桶排序过程中存在两个关键环节： 1、元素值域的划分，也就是元素到桶的映射规则。映射规则需要根据待排序集合的元素分布特性进行选择。 2、排序算法的选择，从待排序集合中元素映射到各个桶上的过程，并不存在元素的比较和交换操作，在对各个桶中元素进行排序时，可以自主选择合适的排序算法，桶排序算法的复杂度和稳定性，都根据选择的排序算法不同而不同。</p>
 <p>算法过程：</p>
 <ul>
 <li>设置一个<strong>定量的数组</strong>当作空桶；</li>
@@ -617,7 +626,7 @@
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://pic3.zhimg.com/v2-58b4d4b9e802104727677d7b0b60157a_b.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://pic3.zhimg.com/v2-58b4d4b9e802104727677d7b0b60157a_b.webp" srcset="/img/loading.gif" /></p>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -625,10 +634,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -637,18 +645,18 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>稳定</td>
-<td>$O(n+k)$</td>
-<td>$n(n^2)$</td>
-<td>$O(n)$</td>
-<td>$O(n+k)$</td>
+<td><span class="math inline">\(O(n+k)\)</span></td>
+<td><span class="math inline">\(n(n^2)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(n+k)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<p>$n$ 是待排序元素个数，$k$ 是待排序元素区间长度。</p>
-<h2 id="基数排序（Radix-Sort）"><a href="#基数排序（Radix-Sort）" class="headerlink" title="基数排序（Radix Sort）"></a>基数排序（Radix Sort）</h2><blockquote>
+<p><span class="math inline">\(n\)</span> 是待排序元素个数，<span class="math inline">\(k\)</span> 是待排序元素区间长度。</p>
+<h2 id="基数排序radix-sort">基数排序（Radix Sort）</h2>
+<blockquote>
 <p>算法思想</p>
 </blockquote>
 <p>基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序。最后的次序就是高优先级高的在前，高优先级相同的低优先级高的在前。</p>
@@ -660,7 +668,7 @@
 <blockquote>
 <p>图示</p>
 </blockquote>
-<p><img src="https://pic3.zhimg.com/v2-3a6f1e5059386523ed941f0d6c3a136e_b.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://pic3.zhimg.com/v2-3a6f1e5059386523ed941f0d6c3a136e_b.webp" srcset="/img/loading.gif" /></p>
 <blockquote>
 <p>C++实现</p>
 </blockquote>
@@ -668,10 +676,9 @@
 <blockquote>
 <p>时空复杂度和稳定性</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>稳定性</th>
 <th>时间复杂度（平均）</th>
 <th>时间复杂度（最坏）</th>
@@ -680,18 +687,17 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>稳定</td>
-<td>$O(n \times k)$</td>
-<td>$O(n \times k)$</td>
-<td>$O(n \times k)$</td>
-<td>$O(n + k)$</td>
+<td><span class="math inline">\(O(n \times k)\)</span></td>
+<td><span class="math inline">\(O(n \times k)\)</span></td>
+<td><span class="math inline">\(O(n \times k)\)</span></td>
+<td><span class="math inline">\(O(n + k)\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<p>其中 $n$ 是排序元素个数，$k$ 是数字位数。</p>
-
+<p>其中 <span class="math inline">\(n\)</span> 是排序元素个数，<span class="math inline">\(k\)</span> 是数字位数。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -928,6 +934,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

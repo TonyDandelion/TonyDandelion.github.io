@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      364 字
+      365 字
     </span>
   
 
@@ -253,19 +253,22 @@
             <div class="markdown-body">
               <p>典型的二叉树深度优先遍历的应用</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。</p>
-<p>示例：给定如下二叉树，以及目标和 sum = 22，<br><figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">      5<br>     / \<br>   <span class="hljs-number"> 4 </span>  8<br>   /   / \<br> <span class="hljs-number"> 11 </span><span class="hljs-number"> 13 </span> 4<br> /  \    / \<br>7   <span class="hljs-number"> 2 </span><span class="hljs-number"> 5 </span>  1<br></code></pre></div></td></tr></table></figure><br>返回：<br><figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">[<br>   [<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">11</span>,<span class="hljs-number">2</span>],<br>   [<span class="hljs-number">5</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br>]<br></code></pre></div></td></tr></table></figure><br>提示：节点总数 &lt;= 10000</p>
+<h1 id="question">Question</h1>
+<p>输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。</p>
+<p>示例：给定如下二叉树，以及目标和 sum = 22， <figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">      5<br>     / \<br>   <span class="hljs-number"> 4 </span>  8<br>   /   / \<br> <span class="hljs-number"> 11 </span><span class="hljs-number"> 13 </span> 4<br> /  \    / \<br>7   <span class="hljs-number"> 2 </span><span class="hljs-number"> 5 </span>  1<br></code></pre></div></td></tr></table></figure> 返回： <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">[<br>   [<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">11</span>,<span class="hljs-number">2</span>],<br>   [<span class="hljs-number">5</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br>]<br></code></pre></div></td></tr></table></figure> 提示：节点总数 &lt;= 10000</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（二叉树中有一条、多条符合要求的路径；二叉树中没有符合要求的路径）。<br>特殊输入测试（指向二叉树根节点的指针为nullptr指针）。</p>
+<p>功能测试（二叉树中有一条、多条符合要求的路径；二叉树中没有符合要求的路径）。 特殊输入测试（指向二叉树根节点的指针为nullptr指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者分析复杂问题的思维能力。应聘者遇到这个问题的时候，如果一下子没有思路，则不妨从一个具体的例子开始，一步步分析路径上包含哪些节点，这样就能找出其中的规律，从而想到解决方案。<br>考查应聘者对二叉树的前序遍历的理解。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>典型的二叉树深度优先遍历的应用</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pathSum</span>(<span class="hljs-params">self, root: TreeNode, _sum: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_dfs</span>(<span class="hljs-params">path=[], root=root</span>):</span><br>            <span class="hljs-keyword">if</span> root.left == root.right == <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">sum</span>(path + [root.val]) == _sum:<br>                res.append(path[:] + [root.val])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">if</span> root.left:<br>                _dfs(path + [root.val], root.left)<br>            <span class="hljs-keyword">if</span> root.right:<br>                _dfs(path + [root.val], root.right)<br><br>        res = []<br>        _dfs()<br><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-
+<p>考查应聘者分析复杂问题的思维能力。应聘者遇到这个问题的时候，如果一下子没有思路，则不妨从一个具体的例子开始，一步步分析路径上包含哪些节点，这样就能找出其中的规律，从而想到解决方案。 考查应聘者对二叉树的前序遍历的理解。</p>
+<h1 id="intuition">Intuition</h1>
+<p>典型的二叉树深度优先遍历的应用</p>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pathSum</span>(<span class="hljs-params">self, root: TreeNode, _sum: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_dfs</span>(<span class="hljs-params">path=[], root=root</span>):</span><br>            <span class="hljs-keyword">if</span> root.left == root.right == <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">sum</span>(path + [root.val]) == _sum:<br>                res.append(path[:] + [root.val])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">if</span> root.left:<br>                _dfs(path + [root.val], root.left)<br>            <span class="hljs-keyword">if</span> root.right:<br>                _dfs(path + [root.val], root.right)<br><br>        res = []<br>        _dfs()<br><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -511,6 +514,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

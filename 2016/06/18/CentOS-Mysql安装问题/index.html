@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      469 字
+      463 字
     </span>
   
 
@@ -253,27 +253,35 @@
             <div class="markdown-body">
               <p>CentOS下安装Mysql方法</p>
 <a id="more"></a>
-<h1 id="下载server和client"><a href="#下载server和client" class="headerlink" title="下载server和client"></a>下载server和client</h1><p>下载server和client，将其上传到服务器。  </p>
+<h1 id="下载server和client">下载server和client</h1>
+<p>下载server和client，将其上传到服务器。</p>
 <ul>
 <li><strong>MySQL-server-5.6.31-1.rhel5.x86_64.rpm</strong></li>
 <li><strong>MySQL-client-5.6.31-1.rhel5.x86_64.rpm</strong></li>
 </ul>
-<h1 id="进行安装"><a href="#进行安装" class="headerlink" title="进行安装"></a>进行安装</h1><p>执行命令进行安装</p>
+<h1 id="进行安装">进行安装</h1>
+<p>执行命令进行安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">rpm -ivh MySQL-server-5.6.31-1.rhel5.x86_64.rpm<br>rpm -ivh MySQL-client-5.6.31-1.rhel5.x86_64.rpm<br></code></pre></div></td></tr></table></figure>
-<h1 id="设置开机启动mysql"><a href="#设置开机启动mysql" class="headerlink" title="设置开机启动mysql"></a>设置开机启动mysql</h1><p>查看是否开机启动<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chkconfig --list | grep mysqld<br></code></pre></div></td></tr></table></figure><br>或者<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chkconfig --list | grep mysql<br></code></pre></div></td></tr></table></figure><br>设置开机启动<br><figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">chkconfig</span> mysqld <span class="hljs-literal">on</span><br></code></pre></div></td></tr></table></figure><br>或者<br><figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">chkconfig mysql <span class="hljs-keyword">on</span><br>chkconfig <span class="hljs-comment">--list | grep mysqld</span><br></code></pre></div></td></tr></table></figure></p>
-<h1 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h1><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>bin/mysqladmin -u root password <span class="hljs-string">&#x27;root&#x27;</span>  <br></code></pre></div></td></tr></table></figure>
-<h1 id="进入Mysql"><a href="#进入Mysql" class="headerlink" title="进入Mysql"></a>进入Mysql</h1><figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">mysql -uroot -<span class="hljs-selector-tag">p</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h1><p><strong>出现如下报错的应对措施：</strong></p>
-<p>1、<code>error: &#39;Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: YES)&#39; 或者error: &#39;Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: NO)&#39;</code></p>
-<p>方法一：<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"># /etc/init.d/mysql stop<br># mysqld_safe <span class="hljs-comment">--user=mysql --skip-grant-tables --skip-networking &amp;</span><br># mysql -u root mysql<br>mysql&gt; <span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">SET</span> <span class="hljs-keyword">Password</span>=<span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&#x27;newpassword&#x27;</span>) <span class="hljs-keyword">where</span> <span class="hljs-keyword">USER</span>=<span class="hljs-string">&#x27;root&#x27;</span>;<br>mysql&gt; FLUSH <span class="hljs-keyword">PRIVILEGES</span>;<br>mysql&gt; quit<br># /etc/init.d/mysqld <span class="hljs-keyword">restart</span><br># mysql -uroot -p<br>Enter <span class="hljs-keyword">password</span>: &lt;输入新设的密码newpassword&gt;<br>mysql&gt;<br></code></pre></div></td></tr></table></figure><br>方法二：<br>直接使用/etc/mysql/debian.cnf文件中[client]节提供的用户名和密码:<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"># mysql -udebian-sys-maint -p<br>Enter <span class="hljs-keyword">password</span>: &lt;输入[client]节的密码&gt;<br>mysql&gt; <span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">SET</span> <span class="hljs-keyword">Password</span>=<span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&#x27;newpassword&#x27;</span>) <span class="hljs-keyword">where</span> <span class="hljs-keyword">USER</span>=<span class="hljs-string">&#x27;root&#x27;</span>;<br>mysql&gt; FLUSH <span class="hljs-keyword">PRIVILEGES</span>;<br>mysql&gt; quit<br><br># mysql -uroot -p<br>Enter <span class="hljs-keyword">password</span>: &lt;输入新设的密码newpassword&gt;<br><br>mysql&gt;<br></code></pre></div></td></tr></table></figure><br>方法三：<br>这种方法我没有进行过测试，因为我的root用户默认密码已经被我修改过了，那位有空测试一下，把结果告诉我，谢谢！！</p>
+<h1 id="设置开机启动mysql">设置开机启动mysql</h1>
+<p>查看是否开机启动<br />
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chkconfig --list | grep mysqld<br></code></pre></div></td></tr></table></figure> 或者 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chkconfig --list | grep mysql<br></code></pre></div></td></tr></table></figure> 设置开机启动 <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">chkconfig</span> mysqld <span class="hljs-literal">on</span><br></code></pre></div></td></tr></table></figure> 或者 <figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">chkconfig mysql <span class="hljs-keyword">on</span><br>chkconfig <span class="hljs-comment">--list | grep mysqld</span><br></code></pre></div></td></tr></table></figure> # 设置密码</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>bin/mysqladmin -u root password <span class="hljs-string">&#x27;root&#x27;</span>  <br></code></pre></div></td></tr></table></figure>
+<h1 id="进入mysql">进入Mysql</h1>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">mysql -uroot -<span class="hljs-selector-tag">p</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="报错处理">报错处理</h1>
+<p><strong>出现如下报错的应对措施：</strong></p>
+<p>1、<code>error: 'Access denied for user 'root'@'localhost' (using password: YES)' 或者error: 'Access denied for user 'root'@'localhost' (using password: NO)'</code></p>
+<p>方法一： <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"># /etc/init.d/mysql stop<br># mysqld_safe <span class="hljs-comment">--user=mysql --skip-grant-tables --skip-networking &amp;</span><br># mysql -u root mysql<br>mysql&gt; <span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">SET</span> <span class="hljs-keyword">Password</span>=<span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&#x27;newpassword&#x27;</span>) <span class="hljs-keyword">where</span> <span class="hljs-keyword">USER</span>=<span class="hljs-string">&#x27;root&#x27;</span>;<br>mysql&gt; FLUSH <span class="hljs-keyword">PRIVILEGES</span>;<br>mysql&gt; quit<br># /etc/init.d/mysqld <span class="hljs-keyword">restart</span><br># mysql -uroot -p<br>Enter <span class="hljs-keyword">password</span>: &lt;输入新设的密码newpassword&gt;<br>mysql&gt;<br></code></pre></div></td></tr></table></figure> 方法二： 直接使用/etc/mysql/debian.cnf文件中[client]节提供的用户名和密码: <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"># mysql -udebian-sys-maint -p<br>Enter <span class="hljs-keyword">password</span>: &lt;输入[client]节的密码&gt;<br>mysql&gt; <span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">SET</span> <span class="hljs-keyword">Password</span>=<span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&#x27;newpassword&#x27;</span>) <span class="hljs-keyword">where</span> <span class="hljs-keyword">USER</span>=<span class="hljs-string">&#x27;root&#x27;</span>;<br>mysql&gt; FLUSH <span class="hljs-keyword">PRIVILEGES</span>;<br>mysql&gt; quit<br><br># mysql -uroot -p<br>Enter <span class="hljs-keyword">password</span>: &lt;输入新设的密码newpassword&gt;<br><br>mysql&gt;<br></code></pre></div></td></tr></table></figure> 方法三： 这种方法我没有进行过测试，因为我的root用户默认密码已经被我修改过了，那位有空测试一下，把结果告诉我，谢谢！！</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment"># mysql -uroot -p</span><br>Enter password: &lt;输入<span class="hljs-regexp">/etc/my</span>sql/debian.cnf文件中[client]节提供的密码&gt;<br></code></pre></div></td></tr></table></figure>
 <p>2、<code>ERROR 1820 (HY000): You must SET PASSWORD before executing this statement</code></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">mysql&gt;  <span class="hljs-keyword">SET</span> <span class="hljs-keyword">PASSWORD</span> = <span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&#x27;123456&#x27;</span>);<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.03</span> sec)<br>MySQL&gt; <span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> roger;<br>Query OK, <span class="hljs-number">1</span> <span class="hljs-keyword">row</span> affected (<span class="hljs-number">0.00</span> sec)<br>也就是用mysql&gt;  <span class="hljs-keyword">SET</span> <span class="hljs-keyword">PASSWORD</span> = <span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&#x27;123456&#x27;</span>);这句话重新设置一次密码！<br></code></pre></div></td></tr></table></figure>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="http://blog.163.com/ygw_923581/blog/static/119916417200911149475650/">转载链接1</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://blog.163.com/ygw_923581/blog/static/119916417200911149475650/">转载链接1</a></p>
+</blockquote>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="http://blog.csdn.net/rogerzhanglijie/article/details/9182125">转载链接2</a></p>
 </blockquote>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -517,6 +525,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

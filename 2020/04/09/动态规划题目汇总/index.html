@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,90 +253,88 @@
             <div class="markdown-body">
               <p>整理了LeetCode、剑指Offer、面试真题中的动态规划题目</p>
 <a id="more"></a>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>原题</th>
 <th>备注</th>
 <th>题解</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/regular-expression-matching/">10. 正则表达式匹配</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/generate-parentheses/">22. 括号生成</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-valid-parentheses/">32. 最长有效括号</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/">53. 最大子序和</a></td>
 <td>动态规划（Kadane 算法）</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">62. 不同路径</a></td>
 <td>一道经典的动态规划问题 也可以用回溯法解决</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-ii/">63. 不同路径 II</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/">72. 编辑距离</a></td>
 <td>字符串和动态规划相结合的问题</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/scramble-string/">87. 扰乱字符串</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/gray-code/">89. 格雷编码</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-ways/">91. 解码方法</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-binary-search-trees-ii/">95. 不同的二叉搜索树 II</a></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/interleaving-string/">97. 交错字符串</a></td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-</div>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -566,6 +564,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

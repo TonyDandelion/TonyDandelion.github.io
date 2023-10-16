@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      885 字
+      895 字
     </span>
   
 
@@ -252,33 +252,50 @@
             
             <div class="markdown-body">
               <p>纯数组题目，巧用第一行、第一列对结果进行存储。</p>
-<p><img src="https://i.loli.net/2020/03/19/vpA4yfdbrhGuSL9.png" srcset="/img/loading.gif" alt="6a4f63f58794b71cd4521a224fc1823ac5e4639e219dad519d0d8d8a421cf89f-image.png"> </p>
+<figure>
+<img src="https://i.loli.net/2020/03/19/vpA4yfdbrhGuSL9.png" srcset="/img/loading.gif" alt="6a4f63f58794b71cd4521a224fc1823ac5e4639e219dad519d0d8d8a421cf89f-image.png" /><figcaption aria-hidden="true">6a4f63f58794b71cd4521a224fc1823ac5e4639e219dad519d0d8d8a421cf89f-image.png</figcaption>
+</figure>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个 m x n 的矩阵，如果一个元素为 0，则将其所在行和列的所有元素都设为 0。请使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地算法</a>。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例 1:</strong>  </p>
+<h1 id="题目">题目</h1>
+<p>给定一个 m x n 的矩阵，如果一个元素为 0，则将其所在行和列的所有元素都设为 0。请使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地算法</a>。</p>
+<h1 id="示例">示例</h1>
+<p><strong>示例 1:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 输入: </span><br>[<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]<br>]<br><span class="hljs-comment"># 输出: </span><br>[<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],<br>  [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>]<br>]<br></code></pre></div></td></tr></table></figure>
-<p><strong>示例 2:</strong>  </p>
+<p><strong>示例 2:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 输入: </span><br>[<br>  [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>],<br>  [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>]<br>]<br><span class="hljs-comment"># 输出: </span><br>[<br>  [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],<br>  [<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>],<br>  [<span class="hljs-number">0</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]<br>]<br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>数组</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>空间复杂度 $O(n \times m)$ 的实现方法</strong><br>直接新建一个和matrix等大小的矩阵，然后一行一行的扫，只要有0，就将新建的矩阵的对应行全赋0，行扫完再扫列，然后把更新完的矩阵赋给matrix即可。  </p>
-<p><strong>空间复杂度 $O(n + m)$ 的实现方法</strong><br>用一个长度为m的一维数组记录各行中是否有0，用一个长度为n的一维数组记录各列中是否有0，最后直接更新matrix数组即可。  </p>
-<p><strong>空间复杂度 $O(1)$ 的实现方法</strong><br>不能新建数组，我们考虑就<strong>用原数组的第一行第一列来记录各行各列是否有0</strong>。  </p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>数组</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>空间复杂度 <span class="math inline">\(O(n \times m)\)</span> 的实现方法</strong><br />
+直接新建一个和matrix等大小的矩阵，然后一行一行的扫，只要有0，就将新建的矩阵的对应行全赋0，行扫完再扫列，然后把更新完的矩阵赋给matrix即可。</p>
+<p><strong>空间复杂度 <span class="math inline">\(O(n + m)\)</span> 的实现方法</strong><br />
+用一个长度为m的一维数组记录各行中是否有0，用一个长度为n的一维数组记录各列中是否有0，最后直接更新matrix数组即可。</p>
+<p><strong>空间复杂度 <span class="math inline">\(O(1)\)</span> 的实现方法</strong> 不能新建数组，我们考虑就<strong>用原数组的第一行第一列来记录各行各列是否有0</strong>。</p>
 <ul>
 <li>声明行和列为0的flag <code>row_zero</code> 和 <code>col_zero</code>， 先扫描第一行第一列，如果有0，则将各自的flag设置为true。</li>
 <li>然后扫描除去第一行第一列的整个数组，如果有0，则将对应的第一行和第一列的数字赋0，即当 <code>matrix[i][j]==0</code> 时，设置 <code>matrix[0][j]=0</code> 和 <code>matrix[i][0]=0</code>。</li>
 <li>再次遍历除去第一行第一列的整个数组，如果对应的第一行和第一列的数字有一个为0，即<code>matrix[0][j]=0</code> 或者 <code>matrix[i][0]=0</code>，则将当前值赋0。</li>
 <li>最后根据第一行第一列的flag来更新第一行第一列（<strong>注意这一个操作最后进行</strong>）。</li>
 </ul>
-<p><img src="https://i.loli.net/2020/03/19/vpA4yfdbrhGuSL9.png" srcset="/img/loading.gif" alt="6a4f63f58794b71cd4521a224fc1823ac5e4639e219dad519d0d8d8a421cf89f-image.png"> </p>
-<p><img src="https://i.loli.net/2020/03/19/BmPDbgAztUJpui3.png" srcset="/img/loading.gif" alt="a22aff099ed0c9aa58df2b30e375a72d7ae6bf00515ec16ebee1f181dbb3f4cb-image.png"> </p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><p><strong>空间复杂度 $O(1)$ 的实现方法，对第一行和第一列进行特殊处理，不用遍历整个 $M \times N$ 的矩阵了，只用遍历$(M-1) \times (N-1)$ 的矩阵。</strong></p>
+<figure>
+<img src="https://i.loli.net/2020/03/19/vpA4yfdbrhGuSL9.png" srcset="/img/loading.gif" alt="6a4f63f58794b71cd4521a224fc1823ac5e4639e219dad519d0d8d8a421cf89f-image.png" /><figcaption aria-hidden="true">6a4f63f58794b71cd4521a224fc1823ac5e4639e219dad519d0d8d8a421cf89f-image.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2020/03/19/BmPDbgAztUJpui3.png" srcset="/img/loading.gif" alt="a22aff099ed0c9aa58df2b30e375a72d7ae6bf00515ec16ebee1f181dbb3f4cb-image.png" /><figcaption aria-hidden="true">a22aff099ed0c9aa58df2b30e375a72d7ae6bf00515ec16ebee1f181dbb3f4cb-image.png</figcaption>
+</figure>
+<h1 id="python版本">Python版本</h1>
+<p><strong>空间复杂度 <span class="math inline">\(O(1)\)</span> 的实现方法，对第一行和第一列进行特殊处理，不用遍历整个 <span class="math inline">\(M \times N\)</span> 的矩阵了，只用遍历<span class="math inline">\((M-1) \times (N-1)\)</span> 的矩阵。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setZeroes</span>(<span class="hljs-params">self, matrix: List[List[<span class="hljs-built_in">int</span>]]</span>) -&gt; <span class="hljs-keyword">None</span>:</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Do not return anything, modify matrix in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(matrix) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>]): <span class="hljs-keyword">return</span><br>        m, n = <span class="hljs-built_in">len</span>(matrix), <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])<br>        rowZero, colZero = <span class="hljs-literal">False</span>, <span class="hljs-literal">False</span><br>        <span class="hljs-comment"># 判断第一行和第一列中是否有0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m):<br>            <span class="hljs-keyword">if</span> matrix[i][<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>: colZero = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            <span class="hljs-keyword">if</span> matrix[<span class="hljs-number">0</span>][i] == <span class="hljs-number">0</span>: rowZero = <span class="hljs-literal">True</span><br>        <span class="hljs-comment"># 处理 m-1 * n-1 子矩阵</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, m):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>                <span class="hljs-keyword">if</span> matrix[i][j] == <span class="hljs-number">0</span>:<br>                    matrix[<span class="hljs-number">0</span>][j] = <span class="hljs-number">0</span><br>                    matrix[i][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>        <span class="hljs-comment"># 更新 m-1 * n-1 子矩阵</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, m):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>                <span class="hljs-keyword">if</span> matrix[<span class="hljs-number">0</span>][j] == <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> matrix[i][<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>:<br>                    matrix[i][j] = <span class="hljs-number">0</span><br>        <span class="hljs-comment"># 更新第一行、第一列</span><br>        <span class="hljs-keyword">if</span> rowZero:<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n): matrix[<span class="hljs-number">0</span>][i] = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> colZero:<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m): matrix[i][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br><br>Input = [<br>    [<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]<br>    ],<br>    [<br>        [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>],<br>        [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>]<br>    ]<br>]<br>Answer = [<br>    [<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],<br>        [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>]<br>    ],<br>    [<br>        [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],<br>        [<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>],<br>        [<span class="hljs-number">0</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]<br>    ]<br>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        solution.setZeroes(Input[i])<br>        <span class="hljs-keyword">if</span> Input[i] == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(Answer[i])<br>            print(Input[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(M-1 \times N-1)$<br>空间复杂度：$O(1)$<br>执行用时 :44 ms, 在所有 Python3 提交中击败了<strong>95.11%</strong>的用户<br>内存消耗 :13.8 MB, 在所有 Python3 提交中击败了5.31%的用户  </p>
+<p>时间复杂度：<span class="math inline">\(O(M-1 \times N-1)\)</span><br />
+空间复杂度：<span class="math inline">\(O(1)\)</span><br />
+执行用时 :44 ms, 在所有 Python3 提交中击败了<strong>95.11%</strong>的用户<br />
+内存消耗 :13.8 MB, 在所有 Python3 提交中击败了5.31%的用户</p>
 <blockquote>
 <p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-matrix-zeroes/solution/ju-zhen-zhi-ling-by-leetcode/">LeetCode官方题解</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4341590.html">Grandyang</a>  </p>
-
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-matrix-zeroes/solution/ju-zhen-zhi-ling-by-leetcode/">LeetCode官方题解</a><br />
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4341590.html">Grandyang</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -522,6 +539,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

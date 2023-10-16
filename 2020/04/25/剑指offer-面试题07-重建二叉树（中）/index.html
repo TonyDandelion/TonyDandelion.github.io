@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -254,23 +254,26 @@
               <p>经典面试题，考察对树的中序、前序、后续遍历的理解以及递归算法的运用。</p>
 <a id="more"></a>
 <blockquote>
-<p><em>Tag</em> </p>
+<p><em>Tag</em></p>
 </blockquote>
 <p>树</p>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。</p>
+<h1 id="题目">题目</h1>
+<p>输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。</p>
 <p>例如，给出：</p>
-<p>前序遍历 preorder = [3,9,20,15,7]<br>中序遍历 inorder = [9,3,15,20,7]</p>
+<p>前序遍历 preorder = [3,9,20,15,7] 中序遍历 inorder = [9,3,15,20,7]</p>
 <p>返回如下的二叉树：</p>
 <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure>
 <p>限制：0 &lt;= 节点个数 &lt;= 5000</p>
-<h1 id="直觉"><a href="#直觉" class="headerlink" title="直觉"></a>直觉</h1><p>前序遍历 preorder = [3,9,20,15,7]  根 左 右<br>中序遍历 inorder = [9,3,15,20,7]     左 根 右<br>3 为根节点，[9]为第二层左子树，[15,20,7]为第二层右子树。</p>
-<ol>
+<h1 id="直觉">直觉</h1>
+<p>前序遍历 preorder = [3,9,20,15,7] 根 左 右 中序遍历 inorder = [9,3,15,20,7] 左 根 右 3 为根节点，[9]为第二层左子树，[15,20,7]为第二层右子树。</p>
+<ol type="1">
 <li>根据前序遍历结果得到根节点。</li>
 <li>再利用根节点在中序遍历中的位置，分割中序遍历结果，得到左右子树。</li>
 <li>接着递归调用recur处理左右子树。</li>
 </ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">buildTree</span>(<span class="hljs-params">self, preorder: List[<span class="hljs-built_in">int</span>], inorder: List[<span class="hljs-built_in">int</span>]</span>) -&gt; TreeNode:</span><br>        self.dic, self.po = &#123;&#125;, preorder  <span class="hljs-comment"># 注意这种self成员变量的声明和使用方法</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(inorder)):<br>            self.dic[inorder[i]] = i<br>        <span class="hljs-keyword">return</span> self.recur(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(inorder)-<span class="hljs-number">1</span>)<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recur</span>(<span class="hljs-params">self, pre_root, in_left, in_right</span>):</span><br>        <span class="hljs-keyword">if</span> in_left &gt; in_right: <span class="hljs-keyword">return</span><br>        <span class="hljs-comment"># 1. 根据前序遍历结果得到根节点。</span><br>        root_node = TreeNode(self.po[pre_root])<br>        <span class="hljs-comment"># 2. 再利用根节点在中序遍历中的位置，分割中序遍历结果，得到左右子树。</span><br>        index = self.dic[self.po[pre_root]]<br>        <span class="hljs-comment"># 3. 接着递归调用recur处理左右子树。</span><br>        root_node.left = self.recur(pre_root + <span class="hljs-number">1</span>, in_left, index - <span class="hljs-number">1</span>)<br>        root_node.right = self.recur(index - in_left + pre_root + <span class="hljs-number">1</span>, index + <span class="hljs-number">1</span>, in_right)<br>        <span class="hljs-keyword">return</span> root_node<br></code></pre></div></td></tr></table></figure>
-
+<h1 id="代码">代码</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">buildTree</span>(<span class="hljs-params">self, preorder: List[<span class="hljs-built_in">int</span>], inorder: List[<span class="hljs-built_in">int</span>]</span>) -&gt; TreeNode:</span><br>        self.dic, self.po = &#123;&#125;, preorder  <span class="hljs-comment"># 注意这种self成员变量的声明和使用方法</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(inorder)):<br>            self.dic[inorder[i]] = i<br>        <span class="hljs-keyword">return</span> self.recur(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(inorder)-<span class="hljs-number">1</span>)<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recur</span>(<span class="hljs-params">self, pre_root, in_left, in_right</span>):</span><br>        <span class="hljs-keyword">if</span> in_left &gt; in_right: <span class="hljs-keyword">return</span><br>        <span class="hljs-comment"># 1. 根据前序遍历结果得到根节点。</span><br>        root_node = TreeNode(self.po[pre_root])<br>        <span class="hljs-comment"># 2. 再利用根节点在中序遍历中的位置，分割中序遍历结果，得到左右子树。</span><br>        index = self.dic[self.po[pre_root]]<br>        <span class="hljs-comment"># 3. 接着递归调用recur处理左右子树。</span><br>        root_node.left = self.recur(pre_root + <span class="hljs-number">1</span>, in_left, index - <span class="hljs-number">1</span>)<br>        root_node.right = self.recur(index - in_left + pre_root + <span class="hljs-number">1</span>, index + <span class="hljs-number">1</span>, in_right)<br>        <span class="hljs-keyword">return</span> root_node<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -516,6 +519,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -257,27 +257,34 @@
 <p>链表</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list/">206. 反转链表</a></p>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>反转一个单链表。</p>
-<p>示例:<br><figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean">输入: <span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>-&gt;NULL<br>输出: <span class="hljs-number">5</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">1</span>-&gt;NULL<br></code></pre></div></td></tr></table></figure><br>进阶: 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
+<h1 id="题目">题目</h1>
+<p>反转一个单链表。</p>
+<p>示例: <figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean">输入: <span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>-&gt;NULL<br>输出: <span class="hljs-number">5</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">1</span>-&gt;NULL<br></code></pre></div></td></tr></table></figure> 进阶: 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
 <blockquote>
 <p>测试用例</p>
 </blockquote>
-<p>输入的链表头指针是 <code>nullptr</code>。<br>输入的链表只有一个节点。<br>输入的链表有多个节点。</p>
-<h1 id="直觉"><a href="#直觉" class="headerlink" title="直觉"></a>直觉</h1><p>1、递归</p>
+<p>输入的链表头指针是 <code>nullptr</code>。 输入的链表只有一个节点。 输入的链表有多个节点。</p>
+<h1 id="直觉">直觉</h1>
+<p>1、递归</p>
 <p>递归是从后往前递归的，假设后面一部分已经反转好，现在要反转前面一部分。递归的最后一层就是 <code>tail</code>，<code>tail</code> 被逐层 <code>return</code>。</p>
 <p>假设列表为：</p>
-<script type="math/tex; mode=display">
-n_{1}\rightarrow ... \rightarrow n_{k-1} \rightarrow n_{k} \rightarrow n_{k+1} \rightarrow ... \rightarrow n_{m} \rightarrow \mbox{None}</script><p>若从节点 $n<em>{k+1}$ 到 $n</em>{m}$  已经被反转，而我们正处于 $n_{k}$。</p>
-<script type="math/tex; mode=display">
-n_{1}\rightarrow ... \rightarrow n_{k-1} \rightarrow n_{k} \rightarrow n_{k+1} \leftarrow ... \leftarrow n_{m}</script><p>我们希望 $n<em>{k+1}$的下一个节点指向 $n</em>{k}$，所以 $n<em>{k}.next.next = n</em>{k}$。</p>
-<p><strong>要小心的是 $n_{1}$ 的下一个必须指向 <code>None</code> 。</strong>如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。</p>
+<p><span class="math display">\[
+n_{1}\rightarrow ... \rightarrow n_{k-1} \rightarrow n_{k} \rightarrow n_{k+1} \rightarrow ... \rightarrow n_{m} \rightarrow \mbox{None}
+\]</span></p>
+<p>若从节点 <span class="math inline">\(n_{k+1}\)</span> 到 <span class="math inline">\(n_{m}\)</span> 已经被反转，而我们正处于 <span class="math inline">\(n_{k}\)</span>。</p>
+<p><span class="math display">\[
+n_{1}\rightarrow ... \rightarrow n_{k-1} \rightarrow n_{k} \rightarrow n_{k+1} \leftarrow ... \leftarrow n_{m}
+\]</span></p>
+<p>我们希望 <span class="math inline">\(n_{k+1}\)</span>的下一个节点指向 <span class="math inline">\(n_{k}\)</span>，所以 <span class="math inline">\(n_{k}.next.next = n_{k}\)</span>。</p>
+<p><strong>要小心的是 <span class="math inline">\(n_{1}\)</span> 的下一个必须指向 <code>None</code> 。</strong>如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。</p>
 <p>2、循环</p>
 <p>更新 <code>pre_p</code>、<code>p</code>、<code>next_p</code> 四个指针，设置哑节点，每次把要反转的 <code>p</code> 节点指向 <code>pre_p</code> ，先利用 <code>p</code> 更新 <code>pre_p</code>，再利用 <code>next_p</code> 更新 <code>p</code> 。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">  A -&gt; B -&gt; C -&gt; D<br>  ^    ^    ^  <br>pre_p  p  next_p<br>     cur_p<br><br><span class="hljs-comment"># p.next = pre_p</span><br>  A &lt;- B    C -&gt; D<br>  ^    ^    ^  <br>pre_p  p  next_p<br>     cur_p<br><br><span class="hljs-comment"># p = p_next</span><br>  A &lt;- B    C -&gt; D<br>  ^    ^    ^  <br>pre_p cur_p p<br>          next_p<br>     <br><span class="hljs-comment"># pre_p = cur_p</span><br>  A &lt;- B    C -&gt; D<br>       ^    ^  <br>     cur_p  p<br>     pre_p next_p<br></code></pre></div></td></tr></table></figure>
 <p>关键的7行代码</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">while</span> p:  <span class="hljs-comment"># 保留 pre_p、p/cur_p、next_p四个指针</span><br>    next_p = p.<span class="hljs-built_in">next</span>  <span class="hljs-comment"># 保留下一个位置</span><br>    cur_p = p  <span class="hljs-comment"># 保留当前位置</span><br>    p.<span class="hljs-built_in">next</span> = pre_p  <span class="hljs-comment"># 当前节点断开与后续节点的链接，反向链接前一个节点。  </span><br>    p = next_p  <span class="hljs-comment"># p指针依靠next_p向后移动</span><br>    pre_p = cur_p  <span class="hljs-comment"># pre_p依靠cur_p指针向后移动</span><br>head.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span>  <span class="hljs-comment"># 这一步很重要，之前的head已经变成tail了，所以要把head.next设置为None</span><br></code></pre></div></td></tr></table></figure>
 <p>特别注意 <code>head.next = None</code></p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><blockquote>
+<h1 id="代码">代码</h1>
+<blockquote>
 <p>递归</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseList</span>(<span class="hljs-params">self, head: ListNode</span>) -&gt; ListNode:</span>      <span class="hljs-comment"># 1</span><br>        <span class="hljs-string">&quot;&quot;&quot;reverse Linked List</span><br><span class="hljs-string">        :param head: ListNonde</span><br><span class="hljs-string">        :return: ListNonde</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> head == <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> head.<span class="hljs-built_in">next</span> == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> head  <span class="hljs-comment"># 2</span><br>        p = self.reverseList(head.<span class="hljs-built_in">next</span>)                     <span class="hljs-comment"># 3</span><br>        head.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span> = head                               <span class="hljs-comment"># 4</span><br>        head.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span>                                    <span class="hljs-comment"># 5</span><br>        <span class="hljs-keyword">return</span> p                                            <span class="hljs-comment"># 6</span><br></code></pre></div></td></tr></table></figure>
@@ -285,7 +292,7 @@ n_{1}\rightarrow ... \rightarrow n_{k-1} \rightarrow n_{k} \rightarrow n_{k+1} \
 <p>迭代</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseList</span>(<span class="hljs-params">self, head: ListNode</span>) -&gt; ListNode:</span>       <span class="hljs-comment"># 1</span><br>        <span class="hljs-string">&quot;&quot;&quot;reverse Linked List</span><br><span class="hljs-string">        :param head: ListNonde</span><br><span class="hljs-string">        :return: ListNonde</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> head == <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> head.<span class="hljs-built_in">next</span> == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> head   <span class="hljs-comment"># 2</span><br>        dummy = ListNode(<span class="hljs-literal">None</span>)                               <span class="hljs-comment"># 3</span><br>        dummy.<span class="hljs-built_in">next</span> = head                                    <span class="hljs-comment"># 4</span><br>        pre_p = dummy                                        <span class="hljs-comment"># 5</span><br>        p = head                                             <span class="hljs-comment"># 6</span><br>        <span class="hljs-keyword">while</span> p:                                             <span class="hljs-comment"># 7</span><br>            next_p = p.<span class="hljs-built_in">next</span>                                  <span class="hljs-comment"># 8</span><br>            p.<span class="hljs-built_in">next</span> = pre_p                                   <span class="hljs-comment"># 9</span><br>            pre_p = p                                        <span class="hljs-comment"># 10</span><br>            p = next_p                                       <span class="hljs-comment"># 11</span><br>        <span class="hljs-comment"># 这一步很重要，之前的head已经变成tail了，所以要把head.next设置为None</span><br>        head.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span>                                     <span class="hljs-comment"># 12</span><br>        <span class="hljs-keyword">return</span> pre_p                                         <span class="hljs-comment"># 13</span><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -531,6 +538,26 @@ n_{1}\rightarrow ... \rightarrow n_{k-1} \rightarrow n_{k} \rightarrow n_{k+1} \
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

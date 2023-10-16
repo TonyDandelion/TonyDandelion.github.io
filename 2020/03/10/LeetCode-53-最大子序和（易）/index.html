@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,45 +253,52 @@
             <div class="markdown-body">
               <p>动态规划、分治算法的应用</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个整数数组 <code>nums</code> ，找到一个<strong>具有最大和的连续子数组（子数组最少包含一个元素）</strong>，返回其最大和。<br>如果你已经实现复杂度为 $O(n)$ 的解法，尝试使用更为精妙的分治法求解。</p>
+<h1 id="题目">题目</h1>
+<p>给定一个整数数组 <code>nums</code> ，找到一个<strong>具有最大和的连续子数组（子数组最少包含一个元素）</strong>，返回其最大和。 如果你已经实现复杂度为 <span class="math inline">\(O(n)\)</span> 的解法，尝试使用更为精妙的分治法求解。</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入的数组中有正数也有负数；输入的数组中全是正数；输入的数组中全是负数）。<br>特殊输入测试（表示数组的指针为nullptr指针）。</p>
+<p>功能测试（输入的数组中有正数也有负数；输入的数组中全是正数；输入的数组中全是负数）。 特殊输入测试（表示数组的指针为nullptr指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者对时间复杂度的理解。这道题如果应聘者给出时间复杂度为 $O(n^2)$ 甚至  $O(n^3)$  的算法，则是不能通过面试的。<strong>考查应聘者对动态规划的理解。</strong>如果应聘者熟练掌握了动态规划算法，那么他就能轻松地找到解题方案。<strong>如果没有想到用动态规划的思想，那么应聘者就需要仔细地分析累加子数组的和的过程，从而找到解题的规律。</strong><br>考查应聘者思维的全面性。<strong>能否合理地处理无效的输入</strong>，对面试结果有很重要的影响。</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">输入: [<span class="hljs-string">-2</span>,1,<span class="hljs-string">-3</span>,4,<span class="hljs-string">-1</span>,2,1,<span class="hljs-string">-5</span>,4],<br>输出: 6<br></code></pre></div></td></tr></table></figure>
+<p>考查应聘者对时间复杂度的理解。这道题如果应聘者给出时间复杂度为 <span class="math inline">\(O(n^2)\)</span> 甚至 <span class="math inline">\(O(n^3)\)</span> 的算法，则是不能通过面试的。<strong>考查应聘者对动态规划的理解。</strong>如果应聘者熟练掌握了动态规划算法，那么他就能轻松地找到解题方案。<strong>如果没有想到用动态规划的思想，那么应聘者就需要仔细地分析累加子数组的和的过程，从而找到解题的规律。</strong> 考查应聘者思维的全面性。<strong>能否合理地处理无效的输入</strong>，对面试结果有很重要的影响。</p>
+<h1 id="示例">示例</h1>
+<figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">输入: [<span class="hljs-string">-2</span>,1,<span class="hljs-string">-3</span>,4,<span class="hljs-string">-1</span>,2,1,<span class="hljs-string">-5</span>,4],<br>输出: 6<br></code></pre></div></td></tr></table></figure>
 <p>解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>数组、分治算法、动态规划</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><h2 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h2><p>下面是用分治法解决问题的模板：<br>1、定义基本情况。<br>2、将问题分解为子问题并递归地解决它们。<br>3、合并子问题的解以获得原始问题的解。</p>
-<p>将数组二分为两部分<code>nums1[]</code>、<code>nums2[]</code>，则最大子序和一定是下面三种情况中的一种：<br>1、最大子序和在<code>nums1[]</code>中<br>2、最大子序和在<code>nums2[]</code>中<br>3、最大子序和跨越<code>nums1</code>和<code>nums2</code>，此时需计算<code>nums1[]</code>中<strong>从右端点开始（包含右端点）的最大子序的数值和</strong>以及<code>nums2[]</code>中<strong>从左端点开始（包含左端点）的最大自序的数值和</strong>，求这两个最大自序和之和。</p>
-<p><img src="https://i.loli.net/2020/03/05/wFBpjvzkVUqxyaJ.png" srcset="/img/loading.gif" alt="1.png"></p>
-<h2 id="动态规划（Kadane-算法）"><a href="#动态规划（Kadane-算法）" class="headerlink" title="动态规划（Kadane 算法）"></a>动态规划（Kadane 算法）</h2><p>在整个数组或在固定大小的滑动窗口中找到总和或最大值或最小值的问题可以通过动态规划（DP）在线性时间内解决。  有两种标准 DP 方法适用于数组：  </p>
-<ol>
-<li><strong>常数空间，沿数组移动并在原数组修改。</strong>  </li>
-<li>线性空间，首先沿 left-&gt;right 方向移动，然后再沿 right-&gt;left 方向移动。 合并结果。 </li>
-</ol>
-<p>我们在这里使用第一种方法，因为可以修改数组跟踪当前位置的最大和。下一步是在知道当前位置的最大和后更新全局最大和。  </p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>数组、分治算法、动态规划</p>
+<h1 id="核心思想">核心思想</h1>
+<h2 id="分治算法">分治算法</h2>
+<p>下面是用分治法解决问题的模板： 1、定义基本情况。 2、将问题分解为子问题并递归地解决它们。 3、合并子问题的解以获得原始问题的解。</p>
+<p>将数组二分为两部分<code>nums1[]</code>、<code>nums2[]</code>，则最大子序和一定是下面三种情况中的一种： 1、最大子序和在<code>nums1[]</code>中 2、最大子序和在<code>nums2[]</code>中 3、最大子序和跨越<code>nums1</code>和<code>nums2</code>，此时需计算<code>nums1[]</code>中<strong>从右端点开始（包含右端点）的最大子序的数值和</strong>以及<code>nums2[]</code>中<strong>从左端点开始（包含左端点）的最大自序的数值和</strong>，求这两个最大自序和之和。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/05/wFBpjvzkVUqxyaJ.png" srcset="/img/loading.gif" alt="1.png" /><figcaption aria-hidden="true">1.png</figcaption>
+</figure>
+<h2 id="动态规划kadane-算法">动态规划（Kadane 算法）</h2>
+<p>在整个数组或在固定大小的滑动窗口中找到总和或最大值或最小值的问题可以通过动态规划（DP）在线性时间内解决。 有两种标准 DP 方法适用于数组：<br />
+1. <strong>常数空间，沿数组移动并在原数组修改。</strong><br />
+2. 线性空间，首先沿 left-&gt;right 方向移动，然后再沿 right-&gt;left 方向移动。 合并结果。</p>
+<p>我们在这里使用第一种方法，因为可以修改数组跟踪当前位置的最大和。下一步是在知道当前位置的最大和后更新全局最大和。</p>
 <p><strong>算法</strong></p>
 <ul>
 <li>得到 <code>nums</code> 长度。</li>
 <li>设置第一值为默认最大和 <code>max_sum</code> 。</li>
-<li>依次遍历。<ul>
+<li>依次遍历。
+<ul>
 <li>如果<strong>前一个 <code>cur_sum</code> 是正数</strong>，当前值 <code>nums[i]</code> 加上前一个 <code>cur_sum</code>（由于 <code>cur_sum</code> 就保存在 <code>nums</code> 中，所以是加上 <code>nums[i-1]</code>）。这里是把累加和 <code>cur_sum</code> 保存在原来的数组 <code>nums</code> 里面了。</li>
-<li>如果<strong>前一个  <code>cur_sum</code> 是负数</strong>，选择当前值 <code>nums[i]</code> 和最大和 <code>max_sum</code> 两者中最大的那个值为新的最大和。</li>
-</ul>
-</li>
+<li>如果<strong>前一个 <code>cur_sum</code> 是负数</strong>，选择当前值 <code>nums[i]</code> 和最大和 <code>max_sum</code> 两者中最大的那个值为新的最大和。</li>
+</ul></li>
 <li>返回最大和 <code>max_sum</code> 。</li>
 </ul>
-<p><img src="https://i.loli.net/2020/03/05/B1qeJ5vRDi43ocM.png" srcset="/img/loading.gif" alt="picture"></p>
+<figure>
+<img src="https://i.loli.net/2020/03/05/B1qeJ5vRDi43ocM.png" srcset="/img/loading.gif" alt="picture" /><figcaption aria-hidden="true">picture</figcaption>
+</figure>
 <p><strong><em>一张表格说清楚</em></strong></p>
 <p>以 <code>[1, -2, 3, 10, -4, 7, 2, -5]</code> 为例，当加3时，前一个 <code>cur_sum</code> 为负数，即就选择 <code>max_sum(1)</code> 和 <code>nums[i](3)</code> 中较大的那一个，也就是3，作为新的 <code>max_sum</code>。当全部遍历之后，返回最终的 <code>max_sum(18)</code> 即可。</p>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>num</th>
 <th>1</th>
 <th>-2</th>
@@ -304,7 +311,7 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>cur_sum(dp)</td>
 <td>1</td>
 <td>-1</td>
@@ -315,7 +322,7 @@
 <td>18</td>
 <td>13</td>
 </tr>
-<tr>
+<tr class="even">
 <td>max_sum</td>
 <td>1</td>
 <td>1</td>
@@ -328,28 +335,43 @@
 </tr>
 </tbody>
 </table>
-</div>
-<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>使用单个数组作为输入来查找最大（或最小）元素（或总和）的问题，贪心算法是可以在线性时间解决的方法之一。<strong>每一步都选择最佳方案，到最后就是全局最优的方案。</strong></p>
-<p><strong>算法：</strong><br>该算法通用且简单：遍历数组并在每个步骤中更新：当前元素 <code>current element</code>、当前元素位置的最大和 <code>current max sum</code> 、迄今为止的最大和 <code>mas sum seen so far</code></p>
+<h2 id="贪心算法">贪心算法</h2>
+<p>使用单个数组作为输入来查找最大（或最小）元素（或总和）的问题，贪心算法是可以在线性时间解决的方法之一。<strong>每一步都选择最佳方案，到最后就是全局最优的方案。</strong></p>
+<p><strong>算法：</strong> 该算法通用且简单：遍历数组并在每个步骤中更新：当前元素 <code>current element</code>、当前元素位置的最大和 <code>current max sum</code> 、迄今为止的最大和 <code>mas sum seen so far</code></p>
 <ul>
 <li>得到 <code>nums</code>长度，设置当前元素位置的最大和 <code>max_sum</code>、迄今为止的最大 <code>curr_sum</code>。</li>
-<li>开始遍历，<code>1-(n-1)</code>。<ul>
+<li>开始遍历，<code>1-(n-1)</code>。
+<ul>
 <li>从当前值 <code>nums[i]</code> 及其当前元素位置的最大和之和 <code>curr_sum + nums[i]</code> 之间选择一个最大值作为当前元素位置的最大和 <code>curr_sum</code> 。</li>
 <li>从当前元素位置的最大和 <code>curr_sum</code>、当前迄今为止的最大 <code>curr_sum</code> 中，选择一个作为新的迄今为止的最大 <code>curr_sum</code> 。</li>
-</ul>
-</li>
+</ul></li>
 <li>最终返回迄今为止的最大 <code>curr_sum</code> 。</li>
 </ul>
-<p><img src="https://i.loli.net/2020/03/05/3ZytVRaz4GWdID8.png" srcset="/img/loading.gif" alt="2.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/03/05/3ZytVRaz4GWdID8.png" srcset="/img/loading.gif" alt="2.png" /><figcaption aria-hidden="true">2.png</figcaption>
+</figure>
 <p>上图蓝色箭头表示<strong>当前字符串起点位置</strong>，一直保持在使得和最大的位置，直到遍历到最后一个元素。单步最优解为 <code>max_sum = max(max_sum, max(nums[i], curr_sum + nums[i]))</code> 。</p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/solution/zui-da-zi-xu-he-by-leetcode/">LeetCode题解</a></p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><h2 id="分治算法-1"><a href="#分治算法-1" class="headerlink" title="分治算法"></a>分治算法</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cross_sum</span>(<span class="hljs-params">self, nums, left, right, p</span>):</span> <br>            <span class="hljs-keyword">if</span> left == right:<br>                <span class="hljs-keyword">return</span> nums[left]<br><br>            left_subsum = <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;-inf&#x27;</span>)<br>            curr_sum = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(p, left - <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                curr_sum += nums[i]<br>                left_subsum = <span class="hljs-built_in">max</span>(left_subsum, curr_sum)<br><br>            right_subsum = <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;-inf&#x27;</span>)<br>            curr_sum = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(p + <span class="hljs-number">1</span>, right + <span class="hljs-number">1</span>):<br>                curr_sum += nums[i]<br>                right_subsum = <span class="hljs-built_in">max</span>(right_subsum, curr_sum)<br><br>            <span class="hljs-keyword">return</span> left_subsum + right_subsum   <br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">helper</span>(<span class="hljs-params">self, nums, left, right</span>):</span> <br>        <span class="hljs-keyword">if</span> left == right:<br>            <span class="hljs-keyword">return</span> nums[left]<br>        <br>        p = (left + right) // <span class="hljs-number">2</span><br>            <br>        left_sum = self.helper(nums, left, p)<br>        right_sum = self.helper(nums, p + <span class="hljs-number">1</span>, right)<br>        cross_sum = self.cross_sum(nums, left, right, p)<br>        <br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(left_sum, right_sum, cross_sum)<br>        <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        <span class="hljs-keyword">return</span> self.helper(nums, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(nums) - <span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(N \log N)$。<br>空间复杂度：$O(\log N)$，递归时栈使用的空间。<br>执行用时 :144 ms, 在所有 Python3 提交中击败了10.27%的用户<br>内存消耗 :14.2 MB, 在所有 Python3 提交中击败了22.59%的用户  </p>
-<h2 id="动态规划（Kadane-算法）-1"><a href="#动态规划（Kadane-算法）-1" class="headerlink" title="动态规划（Kadane 算法）"></a>动态规划（Kadane 算法）</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        n = <span class="hljs-built_in">len</span>(nums)  <span class="hljs-comment"># 得到nums长度</span><br>        max_sum = nums[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 设置第一值为默认最大和</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):  <span class="hljs-comment"># 依次遍历</span><br>            <span class="hljs-keyword">if</span> nums[i - <span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 当前一个是正数时当前值nums[i]加上前一个值nums[i-1]，否则跳过。这里等于说是把累加和保存在原来的数组nums里面了。</span><br>                nums[i] += nums[i - <span class="hljs-number">1</span>] <br>            max_sum = <span class="hljs-built_in">max</span>(nums[i], max_sum)  <span class="hljs-comment"># 选择当前值nums[i]和最大和max_sum两者中最大的那个值为新的最大和</span><br><br>        <span class="hljs-keyword">return</span> max_sum  <span class="hljs-comment"># 返回最大和 max_sum</span><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(N)$。只遍历了一次数组。<br>空间复杂度：$O(1)$，使用了常数的空间。<br>执行用时 :52 ms, 在所有 Python3 提交中击败了90.50%的用户<br>内存消耗 :14.4 MB, 在所有 Python3 提交中击败了21.63%的用户  </p>
-<h2 id="贪心算法-1"><a href="#贪心算法-1" class="headerlink" title="贪心算法"></a>贪心算法</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        n = <span class="hljs-built_in">len</span>(nums)  <span class="hljs-comment"># 得到nums长度</span><br>        curr_sum = max_sum = nums[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 设置当前元素位置的最大和max_sum、迄今为止的最大curr_sum</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):  <span class="hljs-comment"># 开始遍历</span><br>            curr_sum = <span class="hljs-built_in">max</span>(nums[i], curr_sum + nums[i])  <span class="hljs-comment"># 从当前值nums[i]及其当前元素位置的最大和之和curr_sum + nums[i] 之间选择一个最大值作为当前元素位置的最大和curr_sum</span><br>            max_sum = <span class="hljs-built_in">max</span>(max_sum, curr_sum)  <span class="hljs-comment"># 从当前元素位置的最大和curr_sum、当前迄今为止的最大curr_sum中，选择一个作为新的迄今为止的最大curr_sum</span><br>            <br>        <span class="hljs-keyword">return</span> max_sum  <span class="hljs-comment"># 最终返回迄今为止的最大curr_sum</span><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(N)$。只遍历一次数组。<br>空间复杂度：$O(1)$，只使用了常数空间。<br>执行用时 :48 ms, 在所有 Python3 提交中击败了93.17%的用户<br>内存消耗 :14 MB, 在所有 Python3 提交中击败了22.63%的用户  </p>
-
+<h1 id="python版本">Python版本</h1>
+<h2 id="分治算法-1">分治算法</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cross_sum</span>(<span class="hljs-params">self, nums, left, right, p</span>):</span> <br>            <span class="hljs-keyword">if</span> left == right:<br>                <span class="hljs-keyword">return</span> nums[left]<br><br>            left_subsum = <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;-inf&#x27;</span>)<br>            curr_sum = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(p, left - <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                curr_sum += nums[i]<br>                left_subsum = <span class="hljs-built_in">max</span>(left_subsum, curr_sum)<br><br>            right_subsum = <span class="hljs-built_in">float</span>(<span class="hljs-string">&#x27;-inf&#x27;</span>)<br>            curr_sum = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(p + <span class="hljs-number">1</span>, right + <span class="hljs-number">1</span>):<br>                curr_sum += nums[i]<br>                right_subsum = <span class="hljs-built_in">max</span>(right_subsum, curr_sum)<br><br>            <span class="hljs-keyword">return</span> left_subsum + right_subsum   <br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">helper</span>(<span class="hljs-params">self, nums, left, right</span>):</span> <br>        <span class="hljs-keyword">if</span> left == right:<br>            <span class="hljs-keyword">return</span> nums[left]<br>        <br>        p = (left + right) // <span class="hljs-number">2</span><br>            <br>        left_sum = self.helper(nums, left, p)<br>        right_sum = self.helper(nums, p + <span class="hljs-number">1</span>, right)<br>        cross_sum = self.cross_sum(nums, left, right, p)<br>        <br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(left_sum, right_sum, cross_sum)<br>        <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        <span class="hljs-keyword">return</span> self.helper(nums, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(nums) - <span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(N \log N)\)</span>。<br />
+空间复杂度：<span class="math inline">\(O(\log N)\)</span>，递归时栈使用的空间。<br />
+执行用时 :144 ms, 在所有 Python3 提交中击败了10.27%的用户<br />
+内存消耗 :14.2 MB, 在所有 Python3 提交中击败了22.59%的用户</p>
+<h2 id="动态规划kadane-算法-1">动态规划（Kadane 算法）</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        n = <span class="hljs-built_in">len</span>(nums)  <span class="hljs-comment"># 得到nums长度</span><br>        max_sum = nums[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 设置第一值为默认最大和</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):  <span class="hljs-comment"># 依次遍历</span><br>            <span class="hljs-keyword">if</span> nums[i - <span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 当前一个是正数时当前值nums[i]加上前一个值nums[i-1]，否则跳过。这里等于说是把累加和保存在原来的数组nums里面了。</span><br>                nums[i] += nums[i - <span class="hljs-number">1</span>] <br>            max_sum = <span class="hljs-built_in">max</span>(nums[i], max_sum)  <span class="hljs-comment"># 选择当前值nums[i]和最大和max_sum两者中最大的那个值为新的最大和</span><br><br>        <span class="hljs-keyword">return</span> max_sum  <span class="hljs-comment"># 返回最大和 max_sum</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(N)\)</span>。只遍历了一次数组。<br />
+空间复杂度：<span class="math inline">\(O(1)\)</span>，使用了常数的空间。<br />
+执行用时 :52 ms, 在所有 Python3 提交中击败了90.50%的用户<br />
+内存消耗 :14.4 MB, 在所有 Python3 提交中击败了21.63%的用户</p>
+<h2 id="贪心算法-1">贪心算法</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-string">&#x27;List[int]&#x27;</span></span>) -&gt; &#x27;int&#x27;:</span><br>        n = <span class="hljs-built_in">len</span>(nums)  <span class="hljs-comment"># 得到nums长度</span><br>        curr_sum = max_sum = nums[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 设置当前元素位置的最大和max_sum、迄今为止的最大curr_sum</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):  <span class="hljs-comment"># 开始遍历</span><br>            curr_sum = <span class="hljs-built_in">max</span>(nums[i], curr_sum + nums[i])  <span class="hljs-comment"># 从当前值nums[i]及其当前元素位置的最大和之和curr_sum + nums[i] 之间选择一个最大值作为当前元素位置的最大和curr_sum</span><br>            max_sum = <span class="hljs-built_in">max</span>(max_sum, curr_sum)  <span class="hljs-comment"># 从当前元素位置的最大和curr_sum、当前迄今为止的最大curr_sum中，选择一个作为新的迄今为止的最大curr_sum</span><br>            <br>        <span class="hljs-keyword">return</span> max_sum  <span class="hljs-comment"># 最终返回迄今为止的最大curr_sum</span><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(N)\)</span>。只遍历一次数组。<br />
+空间复杂度：<span class="math inline">\(O(1)\)</span>，只使用了常数空间。<br />
+执行用时 :48 ms, 在所有 Python3 提交中击败了93.17%的用户<br />
+内存消耗 :14 MB, 在所有 Python3 提交中击败了22.63%的用户</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -597,6 +619,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

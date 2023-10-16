@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      566 字
+      571 字
     </span>
   
 
@@ -254,21 +254,26 @@
               <p>你已经是一个成熟的哲学家了，应该自己学着解决问题，不能老想着靠别人。ヽ(￣▽￣)ﾉ</p>
 <a id="more"></a>
 <p>原题连接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-dining-philosophers/">1226. 哲学家进餐</a></p>
-<p>多线程问题集合：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problemset/concurrency/（4月29日开始，每一天一道！）">https://leetcode-cn.com/problemset/concurrency/（4月29日开始，每一天一道！）</a></p>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>Five silent philosophers sit at a round table with bowls of spaghetti. Forks are placed between each pair of adjacent philosophers.</p>
+<p>多线程问题集合：https://leetcode-cn.com/problemset/concurrency/（4月29日开始，每一天一道！）</p>
+<h1 id="question">Question</h1>
+<p>Five silent philosophers sit at a round table with bowls of spaghetti. Forks are placed between each pair of adjacent philosophers.</p>
 <p>Each philosopher must alternately think and eat. However, a philosopher can only eat spaghetti when they have both left and right forks. Each fork can be held by only one philosopher and so a philosopher can use the fork only if it is not being used by another philosopher. After an individual philosopher finishes eating, they need to put down both forks so that the forks become available to others. A philosopher can take the fork on their right or the one on their left as they become available, but cannot start eating before getting both forks.</p>
 <p>Eating is not limited by the remaining amounts of spaghetti or stomach space; an infinite supply and an infinite demand are assumed.</p>
 <p>Design a discipline of behaviour (a concurrent algorithm) such that no philosopher will starve; i.e., each can forever continue to alternate between eating and thinking, assuming that no philosopher can know when others may want to eat or think.</p>
 <p>The problem statement and the image above are taken from wikipedia.org</p>
-<p><img src="https://i.loli.net/2020/04/28/nRVwoUlrOWuPCLD.png" srcset="/img/loading.gif" alt="an_illustration_of_the_dining_philosophers_problem.png"></p>
-<p>The philosophers’ ids are numbered from 0 to 4 in a clockwise order. Implement the function void wantsToEat(philosopher, pickLeftFork, pickRightFork, eat, putLeftFork, putRightFork) where:</p>
-<p>philosopher is the id of the philosopher who wants to eat.<br>pickLeftFork and pickRightFork are functions you can call to pick the corresponding forks of that philosopher.<br>eat is a function you can call to let the philosopher eat once he has picked both forks.<br>putLeftFork and putRightFork are functions you can call to put down the corresponding forks of that philosopher.<br>The philosophers are assumed to be thinking as long as they are not asking to eat (the function is not being called with their number).<br>Five threads, each representing a philosopher, will simultaneously use one object of your class to simulate the process. The function may be called for the same philosopher more than once, even before the last call ends.</p>
-<p>Example 1:<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">Input: n = 1<br>Output: <span class="hljs-comment">[<span class="hljs-comment">[4,2,1]</span>,<span class="hljs-comment">[4,1,1]</span>,<span class="hljs-comment">[0,1,1]</span>,<span class="hljs-comment">[2,2,1]</span>,<span class="hljs-comment">[2,1,1]</span>,<span class="hljs-comment">[2,0,3]</span>,<span class="hljs-comment">[2,1,2]</span>,<span class="hljs-comment">[2,2,2]</span>,<span class="hljs-comment">[4,0,3]</span>,<span class="hljs-comment">[4,1,2]</span>,<span class="hljs-comment">[0,2,1]</span>,<span class="hljs-comment">[4,2,2]</span>,<span class="hljs-comment">[3,2,1]</span>,<span class="hljs-comment">[3,1,1]</span>,<span class="hljs-comment">[0,0,3]</span>,<span class="hljs-comment">[0,1,2]</span>,<span class="hljs-comment">[0,2,2]</span>,<span class="hljs-comment">[1,2,1]</span>,<span class="hljs-comment">[1,1,1]</span>,<span class="hljs-comment">[3,0,3]</span>,<span class="hljs-comment">[3,1,2]</span>,<span class="hljs-comment">[3,2,2]</span>,<span class="hljs-comment">[1,0,3]</span>,<span class="hljs-comment">[1,1,2]</span>,<span class="hljs-comment">[1,2,2]</span>]</span><br></code></pre></div></td></tr></table></figure><br>Explanation:<br><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">n <span class="hljs-keyword">is</span> the number <span class="hljs-keyword">of</span> times each philosopher will call the <span class="hljs-keyword">function</span>.<br>The output <span class="hljs-keyword">array</span> describes the calls you made to the functions controlling the forks <span class="hljs-keyword">and</span> the eat <span class="hljs-keyword">function</span>, its format <span class="hljs-keyword">is</span>:<br>output[i] = [a, b, c] (three integers)<br>- a <span class="hljs-keyword">is</span> the id <span class="hljs-keyword">of</span> a philosopher.<br>- b specifies the fork: &#123;<span class="hljs-number">1</span> : <span class="hljs-type">left</span>, <span class="hljs-number">2</span> : <span class="hljs-type">right</span>&#125;.<br>- c specifies the operation: &#123;<span class="hljs-number">1</span> : <span class="hljs-type">pick</span>, <span class="hljs-number">2</span> : <span class="hljs-type">put</span>, <span class="hljs-number">3</span> : <span class="hljs-type">eat</span>&#125;.<br></code></pre></div></td></tr></table></figure><br>Constraints: 1 &lt;= n &lt;= 60</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p>Python Version</p>
+<figure>
+<img src="https://i.loli.net/2020/04/28/nRVwoUlrOWuPCLD.png" srcset="/img/loading.gif" alt="an_illustration_of_the_dining_philosophers_problem.png" /><figcaption aria-hidden="true">an_illustration_of_the_dining_philosophers_problem.png</figcaption>
+</figure>
+<p>The philosophers' ids are numbered from 0 to 4 in a clockwise order. Implement the function void wantsToEat(philosopher, pickLeftFork, pickRightFork, eat, putLeftFork, putRightFork) where:</p>
+<p>philosopher is the id of the philosopher who wants to eat. pickLeftFork and pickRightFork are functions you can call to pick the corresponding forks of that philosopher. eat is a function you can call to let the philosopher eat once he has picked both forks. putLeftFork and putRightFork are functions you can call to put down the corresponding forks of that philosopher. The philosophers are assumed to be thinking as long as they are not asking to eat (the function is not being called with their number). Five threads, each representing a philosopher, will simultaneously use one object of your class to simulate the process. The function may be called for the same philosopher more than once, even before the last call ends.</p>
+<p>Example 1: <figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">Input: n = 1<br>Output: <span class="hljs-comment">[<span class="hljs-comment">[4,2,1]</span>,<span class="hljs-comment">[4,1,1]</span>,<span class="hljs-comment">[0,1,1]</span>,<span class="hljs-comment">[2,2,1]</span>,<span class="hljs-comment">[2,1,1]</span>,<span class="hljs-comment">[2,0,3]</span>,<span class="hljs-comment">[2,1,2]</span>,<span class="hljs-comment">[2,2,2]</span>,<span class="hljs-comment">[4,0,3]</span>,<span class="hljs-comment">[4,1,2]</span>,<span class="hljs-comment">[0,2,1]</span>,<span class="hljs-comment">[4,2,2]</span>,<span class="hljs-comment">[3,2,1]</span>,<span class="hljs-comment">[3,1,1]</span>,<span class="hljs-comment">[0,0,3]</span>,<span class="hljs-comment">[0,1,2]</span>,<span class="hljs-comment">[0,2,2]</span>,<span class="hljs-comment">[1,2,1]</span>,<span class="hljs-comment">[1,1,1]</span>,<span class="hljs-comment">[3,0,3]</span>,<span class="hljs-comment">[3,1,2]</span>,<span class="hljs-comment">[3,2,2]</span>,<span class="hljs-comment">[1,0,3]</span>,<span class="hljs-comment">[1,1,2]</span>,<span class="hljs-comment">[1,2,2]</span>]</span><br></code></pre></div></td></tr></table></figure> Explanation: <figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">n <span class="hljs-keyword">is</span> the number <span class="hljs-keyword">of</span> times each philosopher will call the <span class="hljs-keyword">function</span>.<br>The output <span class="hljs-keyword">array</span> describes the calls you made to the functions controlling the forks <span class="hljs-keyword">and</span> the eat <span class="hljs-keyword">function</span>, its format <span class="hljs-keyword">is</span>:<br>output[i] = [a, b, c] (three integers)<br>- a <span class="hljs-keyword">is</span> the id <span class="hljs-keyword">of</span> a philosopher.<br>- b specifies the fork: &#123;<span class="hljs-number">1</span> : <span class="hljs-type">left</span>, <span class="hljs-number">2</span> : <span class="hljs-type">right</span>&#125;.<br>- c specifies the operation: &#123;<span class="hljs-number">1</span> : <span class="hljs-type">pick</span>, <span class="hljs-number">2</span> : <span class="hljs-type">put</span>, <span class="hljs-number">3</span> : <span class="hljs-type">eat</span>&#125;.<br></code></pre></div></td></tr></table></figure> Constraints: 1 &lt;= n &lt;= 60</p>
+<h1 id="intuition">Intuition</h1>
+<h1 id="code">Code</h1>
+<p>Python Version</p>
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pyton"><br></code></pre></div></td></tr></table></figure>
 <p>C++ Version</p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -512,6 +517,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

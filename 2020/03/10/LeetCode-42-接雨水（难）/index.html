@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,90 +253,126 @@
             <div class="markdown-body">
               <p>用栈来跟踪可能储水的最长的条形块。使用栈就可以在一次遍历内完成计算。我们在遍历数组时维护一个栈。如果当前的条形块小于或等于栈顶的条形块，我们将条形块的索引入栈，意思是<strong>当前的条形块被栈中的前一个条形块界定。如果我们发现一个条形块长于栈顶，我们可以确定栈顶的条形块被当前条形块和栈的前一个条形块界定，因此我们可以弹出栈顶元素并且累加答案到 <code>ans</code> </strong> 。</p>
 <a id="more"></a>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定 <em>n</em> 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
-<p><img src="https://i.loli.net/2020/03/02/62sIr9UzRjVMEtb.png" srcset="/img/loading.gif" alt="rainwatertrap.png"></p>
+<h2 id="题目">题目</h2>
+<p>给定 <em>n</em> 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/02/62sIr9UzRjVMEtb.png" srcset="/img/loading.gif" alt="rainwatertrap.png" /><figcaption aria-hidden="true">rainwatertrap.png</figcaption>
+</figure>
 <p>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]<br>输出: <span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>栈、数组、双指针</p>
+<h2 id="示例">示例</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]<br>输出: <span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="考察知识点">考察知识点</h2>
+<p>栈、数组、双指针</p>
 <p>做这个题的关键，是要知道，一个位置的积水量，是左边最大边界和右边最大边界中较小的那一个，乘以宽度，或者减去当前位置高度，来计算得到的。</p>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="方法一、暴力破解法"><a href="#方法一、暴力破解法" class="headerlink" title="方法一、暴力破解法"></a>方法一、暴力破解法</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">index [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-number">11</span>]<br>value [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure>
-<p><strong>直观想法</strong><br>直接按问题描述进行。对于数组中的每个元素，我们找出下雨后水能达到的最高位置，等于<strong>两边最大高度的较小值减去当前高度的值</strong>。以index=2为例，其两边最大高度分别是height[1]=1和height[3]=2，这二者中的较小值是height[1]=1，当前值height[2]=0，所以可以接到水滴的个数为1=height[1]-height[0]。</p>
+<h2 id="核心思想">核心思想</h2>
+<h3 id="方法一暴力破解法">方法一、暴力破解法</h3>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">index [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-number">11</span>]<br>value [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure>
+<p><strong>直观想法</strong> 直接按问题描述进行。对于数组中的每个元素，我们找出下雨后水能达到的最高位置，等于<strong>两边最大高度的较小值减去当前高度的值</strong>。以index=2为例，其两边最大高度分别是height[1]=1和height[3]=2，这二者中的较小值是height[1]=1，当前值height[2]=0，所以可以接到水滴的个数为1=height[1]-height[0]。</p>
 <p><strong>算法</strong></p>
 <ul>
 <li>初始化 ans=0</li>
-<li>从左向右扫描数组：<ul>
-<li>初始化 $\text{max_left}=0$ 和 $\text{max_right}=0$</li>
-<li>从当前元素向左扫描并更新：<ul>
-<li>$\text{max_left}=\max(\text{max_left}, \text{height}[j])$</li>
+<li>从左向右扫描数组：
+<ul>
+<li>初始化 <span class="math inline">\(\text{max_left}=0\)</span> 和 <span class="math inline">\(\text{max_right}=0\)</span></li>
+<li>从当前元素向左扫描并更新：
+<ul>
+<li><span class="math inline">\(\text{max_left}=\max(\text{max_left}, \text{height}[j])\)</span></li>
+</ul></li>
+<li>从当前元素向右扫描并更新：
+<ul>
+<li><span class="math inline">\(\text{max_right}=\max(\text{max_right}, \text{height}[j])\)</span></li>
+</ul></li>
+<li>将<span class="math inline">\(\min(\text{max_left},\text{max_right}) - \text{height}[i]\)</span>累加到 <span class="math inline">\(\text{ans}\)</span></li>
+</ul></li>
 </ul>
-</li>
-<li>从当前元素向右扫描并更新：<ul>
-<li>$\text{max_right}=\max(\text{max_right}, \text{height}[j])$</li>
-</ul>
-</li>
-<li>将$\min(\text{max_left},\text{max_right}) - \text{height}[i]$累加到 $\text{ans}$</li>
-</ul>
-</li>
-</ul>
-<h3 id="方法二、动态规划"><a href="#方法二、动态规划" class="headerlink" title="方法二、动态规划"></a>方法二、动态规划</h3><p>在暴力破解的基础上，将最大值保存起来，动态规划的最显著特点就是将之前的计算结果进行保存，避免重复计算。</p>
+<h3 id="方法二动态规划">方法二、动态规划</h3>
+<p>在暴力破解的基础上，将最大值保存起来，动态规划的最显著特点就是将之前的计算结果进行保存，避免重复计算。</p>
 <p><strong>直观想法</strong></p>
 <p>在暴力方法中，我们仅仅为了找到最大值每次都要向左和向右扫描一次。但是我们可以提前存储这个值。因此，可以通过动态编程解决。</p>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">while</span> i &lt; length:<br>    left_max[i] = <span class="hljs-built_in">max</span>(height[i], left_max[i - <span class="hljs-number">1</span>])<br>    i += <span class="hljs-number">1</span><br><span class="hljs-keyword">while</span> i &gt;= <span class="hljs-number">0</span>:<br>    right_max[i] = <span class="hljs-built_in">max</span>(height[i], right_max[i + <span class="hljs-number">1</span>])<br>    i -= <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
 <p>这个概念可以见下图解释：</p>
 <p><img src="https://i.loli.net/2020/03/02/h7qvKgL82jktdlA.png" srcset="/img/loading.gif" alt="1.png" style="zoom: 50%;" /></p>
-<p><strong>代码步骤</strong><br>1、特判height为空的情况，直接返回0。<br>2、声明ans、left_max、right_max等变量。<br>3、从左往右边寻找每个位置的left_max。<br>4、从右往左寻找每个位置的right_max。<br>5、利用left_max和right_max计算容量。  </p>
-<h3 id="方法三、使用栈实现计算"><a href="#方法三、使用栈实现计算" class="headerlink" title="方法三、使用栈实现计算"></a>方法三、使用栈实现计算</h3><p><strong>直观想法</strong></p>
+<p><strong>代码步骤</strong><br />
+1、特判height为空的情况，直接返回0。<br />
+2、声明ans、left_max、right_max等变量。<br />
+3、从左往右边寻找每个位置的left_max。<br />
+4、从右往左寻找每个位置的right_max。<br />
+5、利用left_max和right_max计算容量。</p>
+<h3 id="方法三使用栈实现计算">方法三、使用栈实现计算</h3>
+<p><strong>直观想法</strong></p>
 <p>我们可以不用像方法 2 那样存储最大高度，而是用栈来跟踪可能储水的最长的条形块。使用栈就可以在一次遍历内完成计算。</p>
 <p>我们在遍历数组时维护一个栈。如果当前的条形块小于或等于栈顶的条形块，我们将条形块的索引入栈，意思是<strong>当前的条形块被栈中的前一个条形块界定。如果我们发现一个条形块长于栈顶，我们可以确定栈顶的条形块被当前条形块和栈的前一个条形块界定，因此我们可以弹出栈顶元素并且累加答案到 <code>ans</code> </strong> 。</p>
 <p><strong>算法</strong></p>
 <ul>
 <li>使用栈来存储条形块的索引下标。</li>
-<li>遍历数组：<ul>
-<li>当栈非空且 $\text{height}[current]&gt;\text{height}[st.top()]$<ul>
-<li>意味着栈中元素可以被弹出。弹出栈顶元素 $\text{top}$。</li>
-<li>计算当前元素和栈顶元素的距离，准备进行填充操作 $\text{distance} = \text{current} - \text{st.top}() - 1$</li>
-<li>找出界定高度 $\text{bounded_height} = \min(\text{height[current]}, \text{height[st.top()]}) - \text{height[top]}$</li>
-<li>往答案中累加积水量 $\text{ans} \mathrel{+}= \text{distance} \times \text{bounded_height}$</li>
-</ul>
-</li>
+<li>遍历数组：
+<ul>
+<li>当栈非空且 <span class="math inline">\(\text{height}[current]&gt;\text{height}[st.top()]\)</span>
+<ul>
+<li>意味着栈中元素可以被弹出。弹出栈顶元素 <span class="math inline">\(\text{top}\)</span>。</li>
+<li>计算当前元素和栈顶元素的距离，准备进行填充操作 <span class="math inline">\(\text{distance} = \text{current} - \text{st.top}() - 1\)</span></li>
+<li>找出界定高度 <span class="math inline">\(\text{bounded_height} = \min(\text{height[current]}, \text{height[st.top()]}) - \text{height[top]}\)</span></li>
+<li>往答案中累加积水量 <span class="math inline">\(\text{ans} \mathrel{+}= \text{distance} \times \text{bounded_height}\)</span></li>
+</ul></li>
 <li>将当前索引下标入栈</li>
-<li>将 $\text{current}$ 移动到下个位置</li>
+<li>将 <span class="math inline">\(\text{current}\)</span> 移动到下个位置</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="方法四、双指针"><a href="#方法四、双指针" class="headerlink" title="方法四、双指针"></a>方法四、双指针</h3><p>直观想法</p>
-<p>和方法 2 相比，我们不从左和从右分开计算，我们想办法一次完成遍历。<br>从动态编程方法的示意图中我们注意到，只要  $ \text{right<em>max}[i]&gt;\text{left_max}[i]$（元素 0 到元素 6），积水高度将由 $left\</em>{max}$ 决定，类似地  $\text{left_max}[i]&gt;\text{right_max}[i]$（元素 8 到元素 11）。<br>所以我们可以认为如果一端有更高的条形块（例如右端），积水的高度依赖于当前方向的高度（从左到右）。当我们发现另一侧（右侧）的条形块高度不是最高的，我们则开始从相反的方向遍历（从右到左）。<br>我们必须在遍历时维护 $\text{left_max}$ 和 $\text{right_max}$ ，但是我们现在可以使用两个指针交替进行，实现 1 次遍历即可完成。  </p>
-<p><img src="https://i.loli.net/2020/03/02/a2pRFBbOYvMNiDo.png" srcset="/img/loading.gif" alt="2.png"></p>
+<h3 id="方法四双指针">方法四、双指针</h3>
+<p>直观想法</p>
+<p>和方法 2 相比，我们不从左和从右分开计算，我们想办法一次完成遍历。<br />
+从动态编程方法的示意图中我们注意到，只要 $ [i]&gt;[i]$（元素 0 到元素 6），积水高度将由 <span class="math inline">\(left\_{max}\)</span> 决定，类似地 <span class="math inline">\(\text{left_max}[i]&gt;\text{right_max}[i]\)</span>（元素 8 到元素 11）。<br />
+所以我们可以认为如果一端有更高的条形块（例如右端），积水的高度依赖于当前方向的高度（从左到右）。当我们发现另一侧（右侧）的条形块高度不是最高的，我们则开始从相反的方向遍历（从右到左）。<br />
+我们必须在遍历时维护 <span class="math inline">\(\text{left_max}\)</span> 和 <span class="math inline">\(\text{right_max}\)</span> ，但是我们现在可以使用两个指针交替进行，实现 1 次遍历即可完成。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/02/a2pRFBbOYvMNiDo.png" srcset="/img/loading.gif" alt="2.png" /><figcaption aria-hidden="true">2.png</figcaption>
+</figure>
 <p><strong>算法</strong></p>
 <ul>
 <li>初始化 <code>left</code> 指针为 0 并且 <code>right</code> 指针为 length-1</li>
-<li><code>While left&lt;right, do</code><ul>
-<li><code>if height[left] &lt; height[right]</code> 满足该条件，即，left更小，以left为有效bound_height。<ul>
+<li><code>While left&lt;right, do</code>
+<ul>
+<li><code>if height[left] &lt; height[right]</code> 满足该条件，即，left更小，以left为有效bound_height。
+<ul>
 <li><code>if height[left] &gt;= left_max</code> 更新 <code>left_max</code></li>
 <li><code>else</code> 累加 <code>left_max - height[left]</code> 到 <code>ans</code> 每次就计算一个位置对应能够积累的水珠就行了。</li>
-<li><code>left = left + 1</code> </li>
-</ul>
-</li>
-<li><code>else</code>  否则right更小，以right为有效bound_height。<ul>
+<li><code>left = left + 1</code></li>
+</ul></li>
+<li><code>else</code> 否则right更小，以right为有效bound_height。
+<ul>
 <li><code>if height[right] &gt;= right_max</code>， 更新 <code>right_max</code></li>
-<li><code>else</code>  累加 <code>right_max - height[right]</code> 到 <code>ans</code></li>
+<li><code>else</code> 累加 <code>right_max - height[right]</code> 到 <code>ans</code></li>
 <li><code>right= right - 1</code></li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/solution/jie-yu-shui-by-leetcode/">LeetCode 题解</a></p>
-<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="方法一的实现"><a href="#方法一的实现" class="headerlink" title="方法一的实现"></a>方法一的实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trap</span>(<span class="hljs-params">self, height: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        ans = <span class="hljs-number">0</span><br>        length = <span class="hljs-built_in">len</span>(height)<br>        i = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> i &lt; length - <span class="hljs-number">1</span>:  <br>            max_left, max_right = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>            j = i<br>            <span class="hljs-keyword">while</span> j &gt;= <span class="hljs-number">0</span>:  <span class="hljs-comment"># 寻找i位置左边最大bound</span><br>                max_left = <span class="hljs-built_in">max</span>(max_left, height[j])<br>                j -= <span class="hljs-number">1</span>  <span class="hljs-comment"># j一个一个的减到0</span><br>            j = i<br>            <span class="hljs-keyword">while</span> j &lt; length:  <span class="hljs-comment"># 寻找i位置右边最大bound</span><br>                max_right = <span class="hljs-built_in">max</span>(max_right, height[j])<br>                j += <span class="hljs-number">1</span>  <span class="hljs-comment"># j一个一个的加到length</span><br>            ans += <span class="hljs-built_in">min</span>(max_left, max_right) - height[i]<br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度： $O(n^2)$。数组中的每个元素都需要向左向右扫描。<br>空间复杂度 $O(1)$ 的额外空间。<br>通过测试用例314 / 315 个，最后一个用例，长度为10732，未能通过。  </p>
-<h3 id="方法二的实现"><a href="#方法二的实现" class="headerlink" title="方法二的实现"></a>方法二的实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trap</span>(<span class="hljs-params">self, height: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        length = <span class="hljs-built_in">len</span>(height)<br>        <span class="hljs-keyword">if</span> length == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 特判height为空的情况，直接返回0。</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><br>        ans = <span class="hljs-number">0</span>  <span class="hljs-comment"># 声明ans、left_max、right_max等变量</span><br>        left_max = [<span class="hljs-number">0</span>] * length<br>        right_max = [<span class="hljs-number">0</span>] * length<br><br>        <span class="hljs-comment"># 从左往右边寻找每个位置的left_max</span><br>        left_max[<span class="hljs-number">0</span>] = height[<span class="hljs-number">0</span>]<br>        i = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> i &lt; length:<br>            left_max[i] = <span class="hljs-built_in">max</span>(height[i], left_max[i - <span class="hljs-number">1</span>])<br>            i += <span class="hljs-number">1</span><br>        <br>        <span class="hljs-comment"># 从右往左寻找每个位置的right_max</span><br>        right_max[length - <span class="hljs-number">1</span>] = height[length - <span class="hljs-number">1</span>]<br>        i = length - <span class="hljs-number">2</span><br>        <span class="hljs-keyword">while</span> i &gt;= <span class="hljs-number">0</span>:<br>            right_max[i] = <span class="hljs-built_in">max</span>(height[i], right_max[i + <span class="hljs-number">1</span>])<br>            i -= <span class="hljs-number">1</span><br><br>        <span class="hljs-comment"># 利用left_max和right_max计算容量</span><br>        i = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> i &lt; length - <span class="hljs-number">1</span>:<br>            ans += <span class="hljs-built_in">min</span>(left_max[i], right_max[i]) - height[i]<br>            i += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> ans<br><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(n)$，存储最大高度数组，需要两次遍历，每次 $O(n)$ 。最终使用存储的数据更新$\text{ans}$ ，$O(n)$。<br>空间复杂度：$O(n)$ ，额外空间。和方法 1 相比使用了额外的 $O(n)$ 空间用来放置$\text{left_max}$ 和 $\text{right_max}$ 数组。<br>执行用时 :80 ms, 在所有 Python3 提交中击败了26.42%的用户<br>内存消耗 :13.9 MB, 在所有 Python3 提交中击败了28.11%的用户  </p>
-<h3 id="方法三实现"><a href="#方法三实现" class="headerlink" title="方法三实现"></a>方法三实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trap</span>(<span class="hljs-params">self, height: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        ans, current = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>  <span class="hljs-comment"># 声明ans、current变量来保存结果和游标位置</span><br>        st = []  <span class="hljs-comment"># st里面保存的是位置下标</span><br>        length = <span class="hljs-built_in">len</span>(height)<br>        <span class="hljs-keyword">while</span> current &lt; length:<br>            <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(st) <span class="hljs-keyword">and</span> height[current] &gt; height[st[-<span class="hljs-number">1</span>]]:  <span class="hljs-comment"># 当st不为空且当前条块高度大于st中最后一个下标所对应条块的高度时，就形成了一个洼地，可以计算洼地存雨多少了。</span><br>                top = st[-<span class="hljs-number">1</span>]  <span class="hljs-comment"># 先获得中间条块的下标</span><br>                st.pop()  <span class="hljs-comment"># 再弹出中间条块，这时st[-1]所对应的条块，就变成了洼地的左边界。</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(st) == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 如果st为空了，说明这个洼地计算完成了。</span><br>                    <span class="hljs-keyword">break</span><br>                distance = current - st[-<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>  <span class="hljs-comment"># 计算底边</span><br>                bound_height = <span class="hljs-built_in">min</span>(height[current], height[st[-<span class="hljs-number">1</span>]]) - height[top]  <span class="hljs-comment"># bound_height可能为0，只有st通过pop回退到一定位置（也就是不断左移左边界），才能有min(height[current], height[st[-1]])&gt;height[top]，此时才能得到一个有效的bound_height。而distance也会因为st通过pop回退到一定位置（也就是不断左移左边界）而变大。</span><br>                ans += distance * bound_height  <span class="hljs-comment"># ans可以会因为bound_height为0而为0。当bound_height有效时，ans也会最终加上一个有效值。</span><br>            st.append(current)  <span class="hljs-comment"># 把当前最新下标保存进去</span><br>            current += <span class="hljs-number">1</span>  <span class="hljs-comment"># 先保存再自增</span><br><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(n)$。单次遍历 $O(n)$ ，每个条形块最多访问两次（由于栈的弹入和弹出），并且弹入和弹出栈都是 $O(1)$ 的。<br>空间复杂度：$O(n)$。 栈最多在阶梯型或平坦型条形块结构中占用 $O(n)$ 的空间。<br>执行用时 :64 ms, 在所有 Python3 提交中击败了52.06%的用户<br>内存消耗 :14 MB, 在所有 Python3 提交中击败了28.11%的用户  </p>
-<h3 id="方法四实现"><a href="#方法四实现" class="headerlink" title="方法四实现"></a>方法四实现</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trap</span>(<span class="hljs-params">self, height: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        ans, left, right = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(height) - <span class="hljs-number">1</span><br>        left_max, right_max = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> left &lt; right:<br>            <span class="hljs-keyword">if</span> height[left] &lt; height[right]:  <span class="hljs-comment"># 满足该条件，即，left更小，以left为有效bound_height。</span><br>                <span class="hljs-keyword">if</span> height[left] &gt;= left_max:<br>                    left_max = height[left]<br>                <span class="hljs-keyword">else</span>:<br>                    ans += (left_max - height[left])  <span class="hljs-comment"># 每次就计算一个位置对应能够积累的水珠数量就行了。</span><br>                left += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 否则right更小，以right为有效bound_height。</span><br>                <span class="hljs-keyword">if</span> height[right] &gt;= right_max:  <span class="hljs-comment"># </span><br>                    right_max = height[right]<br>                <span class="hljs-keyword">else</span>:<br>                    ans += (right_max - height[right])  <span class="hljs-comment"># 同样，只用计算一个位置对应能够积累的水珠数量。</span><br>                right -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(n)$，单次遍历的时间O(n)。<br>空间复杂度：$O(1)$ ，<code>left, right,  left_max 和 ight_max</code> 只需要常数的空间。<br>执行用时 :32 ms, 在所有 Python3 提交中击败了99.55%的用户<br>内存消耗 :13.8 MB, 在所有 Python3 提交中击败了28.30%的用户  </p>
-
+<h2 id="python版本">Python版本</h2>
+<h3 id="方法一的实现">方法一的实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trap</span>(<span class="hljs-params">self, height: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        ans = <span class="hljs-number">0</span><br>        length = <span class="hljs-built_in">len</span>(height)<br>        i = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> i &lt; length - <span class="hljs-number">1</span>:  <br>            max_left, max_right = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>            j = i<br>            <span class="hljs-keyword">while</span> j &gt;= <span class="hljs-number">0</span>:  <span class="hljs-comment"># 寻找i位置左边最大bound</span><br>                max_left = <span class="hljs-built_in">max</span>(max_left, height[j])<br>                j -= <span class="hljs-number">1</span>  <span class="hljs-comment"># j一个一个的减到0</span><br>            j = i<br>            <span class="hljs-keyword">while</span> j &lt; length:  <span class="hljs-comment"># 寻找i位置右边最大bound</span><br>                max_right = <span class="hljs-built_in">max</span>(max_right, height[j])<br>                j += <span class="hljs-number">1</span>  <span class="hljs-comment"># j一个一个的加到length</span><br>            ans += <span class="hljs-built_in">min</span>(max_left, max_right) - height[i]<br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度： <span class="math inline">\(O(n^2)\)</span>。数组中的每个元素都需要向左向右扫描。<br />
+空间复杂度 <span class="math inline">\(O(1)\)</span> 的额外空间。<br />
+通过测试用例314 / 315 个，最后一个用例，长度为10732，未能通过。</p>
+<h3 id="方法二的实现">方法二的实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trap</span>(<span class="hljs-params">self, height: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        length = <span class="hljs-built_in">len</span>(height)<br>        <span class="hljs-keyword">if</span> length == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 特判height为空的情况，直接返回0。</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><br>        ans = <span class="hljs-number">0</span>  <span class="hljs-comment"># 声明ans、left_max、right_max等变量</span><br>        left_max = [<span class="hljs-number">0</span>] * length<br>        right_max = [<span class="hljs-number">0</span>] * length<br><br>        <span class="hljs-comment"># 从左往右边寻找每个位置的left_max</span><br>        left_max[<span class="hljs-number">0</span>] = height[<span class="hljs-number">0</span>]<br>        i = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> i &lt; length:<br>            left_max[i] = <span class="hljs-built_in">max</span>(height[i], left_max[i - <span class="hljs-number">1</span>])<br>            i += <span class="hljs-number">1</span><br>        <br>        <span class="hljs-comment"># 从右往左寻找每个位置的right_max</span><br>        right_max[length - <span class="hljs-number">1</span>] = height[length - <span class="hljs-number">1</span>]<br>        i = length - <span class="hljs-number">2</span><br>        <span class="hljs-keyword">while</span> i &gt;= <span class="hljs-number">0</span>:<br>            right_max[i] = <span class="hljs-built_in">max</span>(height[i], right_max[i + <span class="hljs-number">1</span>])<br>            i -= <span class="hljs-number">1</span><br><br>        <span class="hljs-comment"># 利用left_max和right_max计算容量</span><br>        i = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> i &lt; length - <span class="hljs-number">1</span>:<br>            ans += <span class="hljs-built_in">min</span>(left_max[i], right_max[i]) - height[i]<br>            i += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> ans<br><br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span>，存储最大高度数组，需要两次遍历，每次 <span class="math inline">\(O(n)\)</span> 。最终使用存储的数据更新<span class="math inline">\(\text{ans}\)</span> ，<span class="math inline">\(O(n)\)</span>。<br />
+空间复杂度：<span class="math inline">\(O(n)\)</span> ，额外空间。和方法 1 相比使用了额外的 <span class="math inline">\(O(n)\)</span> 空间用来放置<span class="math inline">\(\text{left_max}\)</span> 和 <span class="math inline">\(\text{right_max}\)</span> 数组。<br />
+执行用时 :80 ms, 在所有 Python3 提交中击败了26.42%的用户<br />
+内存消耗 :13.9 MB, 在所有 Python3 提交中击败了28.11%的用户</p>
+<h3 id="方法三实现">方法三实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trap</span>(<span class="hljs-params">self, height: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        ans, current = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>  <span class="hljs-comment"># 声明ans、current变量来保存结果和游标位置</span><br>        st = []  <span class="hljs-comment"># st里面保存的是位置下标</span><br>        length = <span class="hljs-built_in">len</span>(height)<br>        <span class="hljs-keyword">while</span> current &lt; length:<br>            <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(st) <span class="hljs-keyword">and</span> height[current] &gt; height[st[-<span class="hljs-number">1</span>]]:  <span class="hljs-comment"># 当st不为空且当前条块高度大于st中最后一个下标所对应条块的高度时，就形成了一个洼地，可以计算洼地存雨多少了。</span><br>                top = st[-<span class="hljs-number">1</span>]  <span class="hljs-comment"># 先获得中间条块的下标</span><br>                st.pop()  <span class="hljs-comment"># 再弹出中间条块，这时st[-1]所对应的条块，就变成了洼地的左边界。</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(st) == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 如果st为空了，说明这个洼地计算完成了。</span><br>                    <span class="hljs-keyword">break</span><br>                distance = current - st[-<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>  <span class="hljs-comment"># 计算底边</span><br>                bound_height = <span class="hljs-built_in">min</span>(height[current], height[st[-<span class="hljs-number">1</span>]]) - height[top]  <span class="hljs-comment"># bound_height可能为0，只有st通过pop回退到一定位置（也就是不断左移左边界），才能有min(height[current], height[st[-1]])&gt;height[top]，此时才能得到一个有效的bound_height。而distance也会因为st通过pop回退到一定位置（也就是不断左移左边界）而变大。</span><br>                ans += distance * bound_height  <span class="hljs-comment"># ans可以会因为bound_height为0而为0。当bound_height有效时，ans也会最终加上一个有效值。</span><br>            st.append(current)  <span class="hljs-comment"># 把当前最新下标保存进去</span><br>            current += <span class="hljs-number">1</span>  <span class="hljs-comment"># 先保存再自增</span><br><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span>。单次遍历 <span class="math inline">\(O(n)\)</span> ，每个条形块最多访问两次（由于栈的弹入和弹出），并且弹入和弹出栈都是 <span class="math inline">\(O(1)\)</span> 的。<br />
+空间复杂度：<span class="math inline">\(O(n)\)</span>。 栈最多在阶梯型或平坦型条形块结构中占用 <span class="math inline">\(O(n)\)</span> 的空间。<br />
+执行用时 :64 ms, 在所有 Python3 提交中击败了52.06%的用户<br />
+内存消耗 :14 MB, 在所有 Python3 提交中击败了28.11%的用户</p>
+<h3 id="方法四实现">方法四实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trap</span>(<span class="hljs-params">self, height: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        ans, left, right = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(height) - <span class="hljs-number">1</span><br>        left_max, right_max = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> left &lt; right:<br>            <span class="hljs-keyword">if</span> height[left] &lt; height[right]:  <span class="hljs-comment"># 满足该条件，即，left更小，以left为有效bound_height。</span><br>                <span class="hljs-keyword">if</span> height[left] &gt;= left_max:<br>                    left_max = height[left]<br>                <span class="hljs-keyword">else</span>:<br>                    ans += (left_max - height[left])  <span class="hljs-comment"># 每次就计算一个位置对应能够积累的水珠数量就行了。</span><br>                left += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 否则right更小，以right为有效bound_height。</span><br>                <span class="hljs-keyword">if</span> height[right] &gt;= right_max:  <span class="hljs-comment"># </span><br>                    right_max = height[right]<br>                <span class="hljs-keyword">else</span>:<br>                    ans += (right_max - height[right])  <span class="hljs-comment"># 同样，只用计算一个位置对应能够积累的水珠数量。</span><br>                right -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span>，单次遍历的时间O(n)。<br />
+空间复杂度：<span class="math inline">\(O(1)\)</span> ，<code>left, right,  left_max 和 ight_max</code> 只需要常数的空间。<br />
+执行用时 :32 ms, 在所有 Python3 提交中击败了99.55%的用户<br />
+内存消耗 :13.8 MB, 在所有 Python3 提交中击败了28.30%的用户</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -580,6 +616,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

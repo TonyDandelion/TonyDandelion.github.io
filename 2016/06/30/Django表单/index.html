@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      335 字
+      341 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      5
        分钟
     </span>
   
@@ -253,14 +253,23 @@
             <div class="markdown-body">
               <p>Django固定表单的用法</p>
 <a id="more"></a>
-<h1 id="Django表单的优点"><a href="#Django表单的优点" class="headerlink" title="Django表单的优点"></a>Django表单的优点</h1><p>1、模板中表单的渲染<br>2、数据的验证工作，某一些输入不合法也不会丢失已经输入的数据。<br>3、还可以定制更复杂的验证工作，如果提供了10个输入框，必须必须要输入其中两个以上，在 forms.py 中都很容易实现  </p>
-<h1 id="创建APP"><a href="#创建APP" class="headerlink" title="创建APP"></a>创建APP</h1><p>创建一个tools APP 记得在setting.py中注册</p>
-<h1 id="创建-forms-py"><a href="#创建-forms-py" class="headerlink" title="创建 forms.py"></a>创建 <code>forms.py</code></h1><p>在tools文件中新建一个forms.py文件</p>
+<h1 id="django表单的优点">Django表单的优点</h1>
+<p>1、模板中表单的渲染<br />
+2、数据的验证工作，某一些输入不合法也不会丢失已经输入的数据。<br />
+3、还可以定制更复杂的验证工作，如果提供了10个输入框，必须必须要输入其中两个以上，在 forms.py 中都很容易实现</p>
+<h1 id="创建app">创建APP</h1>
+<p>创建一个tools APP 记得在setting.py中注册</p>
+<h1 id="创建-forms.py">创建 <code>forms.py</code></h1>
+<p>在tools文件中新建一个forms.py文件</p>
 <figure class="highlight haskell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haskell"><span class="hljs-title">from</span> django <span class="hljs-keyword">import</span> forms<br> <br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-type">AddForm</span>(<span class="hljs-title">forms</span>.<span class="hljs-type">Form</span>):</span><br><span class="hljs-class">    a = forms.<span class="hljs-type">IntegerField</span>()</span><br><span class="hljs-class">    b = forms.<span class="hljs-type">IntegerField</span>()</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="index函数"><a href="#index函数" class="headerlink" title="index函数"></a>index函数</h1><p>在views.py中书写index函数</p>
+<h1 id="index函数">index函数</h1>
+<p>在views.py中书写index函数</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 引入我们创建的表单类</span><br><span class="hljs-keyword">from</span> .forms <span class="hljs-keyword">import</span> AddFrom<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>(<span class="hljs-params">request</span>):</span><br>	<span class="hljs-keyword">if</span> request.method == <span class="hljs-string">&#x27;POST&#x27;</span>:<span class="hljs-comment">#当提交表单时</span><br>		form = AddFrom(request.POST)<br>		<span class="hljs-keyword">if</span> form.is_valid(): <span class="hljs-comment"># 如果提交的数据合法</span><br>			a = form.cleaned_data[<span class="hljs-string">&#x27;a&#x27;</span>]<br>			b = form.cleaned_data[<span class="hljs-string">&#x27;b&#x27;</span>]<br>			<span class="hljs-keyword">return</span> HttpResponse(<span class="hljs-built_in">str</span>(<span class="hljs-built_in">int</span>(a) + <span class="hljs-built_in">int</span>(b)))<br>	<span class="hljs-keyword">else</span>: <span class="hljs-comment">#当正常访问的时候</span><br>		form = AddFrom()<br>	<span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&#x27;index.html&#x27;</span>,&#123;<span class="hljs-string">&#x27;form&#x27;</span>: form&#125;)<br><br></code></pre></div></td></tr></table></figure>
-<h1 id="修改index-html"><a href="#修改index-html" class="headerlink" title="修改index.html"></a>修改index.html</h1><figure class="highlight django"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs django"><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&#x27;post&#x27;</span>&gt;</span></span><br><span class="hljs-template-tag">&#123;% <span class="hljs-name"><span class="hljs-name">csrf_token</span></span> %&#125;</span><br><span class="hljs-template-variable">&#123;&#123; form &#125;&#125;</span><span class="xml"> <span class="hljs-comment">&lt;!-- 这个是 CSRF 认证，如果是 POST 方法就必须有 --&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;提交&quot;</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
-<h1 id="在对应的urls-py中添加记录"><a href="#在对应的urls-py中添加记录" class="headerlink" title="在对应的urls.py中添加记录"></a>在对应的urls.py中添加记录</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url<br><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin<br><span class="hljs-keyword">from</span> tools <span class="hljs-keyword">import</span> views <span class="hljs-keyword">as</span> tools_views<br><br>urlpatterns = [<br>    url(<span class="hljs-string">r&#x27;^$&#x27;</span>, tools_views.index, name=<span class="hljs-string">&#x27;home&#x27;</span>),<br>    url(<span class="hljs-string">r&#x27;^admin/&#x27;</span>, admin.site.urls),<br>]<br><br></code></pre></div></td></tr></table></figure>
+<h1 id="修改index.html">修改index.html</h1>
+<figure class="highlight django"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs django"><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&#x27;post&#x27;</span>&gt;</span></span><br><span class="hljs-template-tag">&#123;% <span class="hljs-name"><span class="hljs-name">csrf_token</span></span> %&#125;</span><br><span class="hljs-template-variable">&#123;&#123; form &#125;&#125;</span><span class="xml"> <span class="hljs-comment">&lt;!-- 这个是 CSRF 认证，如果是 POST 方法就必须有 --&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;提交&quot;</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span><br></code></pre></div></td></tr></table></figure>
+<h1 id="在对应的urls.py中添加记录">在对应的urls.py中添加记录</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url<br><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin<br><span class="hljs-keyword">from</span> tools <span class="hljs-keyword">import</span> views <span class="hljs-keyword">as</span> tools_views<br><br>urlpatterns = [<br>    url(<span class="hljs-string">r&#x27;^$&#x27;</span>, tools_views.index, name=<span class="hljs-string">&#x27;home&#x27;</span>),<br>    url(<span class="hljs-string">r&#x27;^admin/&#x27;</span>, admin.site.urls),<br>]<br><br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -504,6 +513,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

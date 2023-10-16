@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.3k 字
+      4.3k 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      57
+      47
        分钟
     </span>
   
@@ -253,55 +253,15 @@
             <div class="markdown-body">
               <p>《C++大学教材速读 》第一章<strong><em>计算机和 C++简介</em></strong></p>
 <a id="more"></a>
-<h1 id="编程语言与计算机基础"><a href="#编程语言与计算机基础" class="headerlink" title="编程语言与计算机基础"></a>编程语言与计算机基础</h1><blockquote>
+<h1 id="编程语言与计算机基础">编程语言与计算机基础</h1>
+<blockquote>
 <p>计算机组成单元</p>
 </blockquote>
 <p>如果不考虑外表上的不同，计算机都可以视为由输入单元（input unit）、输出单元（output unit）、内存单元（memory unit）、算术逻辑单元（arithmetic and logic unit）、中央处理器（central processing unit）、辅助存储单元（secondary storage unit）</p>
 <blockquote>
 <p>数据的层次结构</p>
 </blockquote>
-<p>由位到字符，再到字段，…，层次越来越庞大，结构也越来越复杂。</p>
-<p><img src="https://i.loli.net/2020/05/28/sudb1lNyzgVtH3X.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-28_22-03-08"></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>层次</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>bit（位）</td>
-<td>计算机中最小的数据项可以假定是数值0或者数值1。这样的一个数据项称作1个位（是“二进制数字（binary digit）”的简称，一个二进制数字只能是0和1两个数值之一）。值得注意的是，计算机那些令人印象深刻的功能，在执行时仅仅涉及对0和1组成数据的最简单的操作一—检查一个位的值、设置一个位的值和对一个位的值求反。</td>
-</tr>
-<tr>
-<td>character（字符）</td>
-<td>对于人来说，在以位这种低级形式的数据上工作是非常乏味和痛苦的事。相反，人们更喜欢使用十进制数字（0~9）、字母（A~Z和a~z）和特殊符号（例如$、@、%、&amp;、*、（、）、一、十、”、：、？和/）。我们称数字、字母和特殊符号为字符。计算机的字符集是用于编写程序和表示数据项的所有字符的集合。计算机只处理0和1组成的数据，因此每个字符也被表示成0和1组合的形式。Unicode字符集包含了世界上的许多种语言。C++支持多个字符集，包括16位Unicode字符。这种字符每个由两个字节构成，每个字节是8位。关于ASCII（美国信息交换标准代码）字符集的更多信息请参阅附录B。该字符集非常流行，是Unicode的子集，由大小写字母、数字和一些常用的特殊字符组成</td>
-</tr>
-<tr>
-<td>field（字段）</td>
-<td>正如字符是由位构成的一样，字段则是由字符或字节组成的。一个字段是一组能表达意义的字符或字节。例如，由大写和小写字符组成的一个字段可能用于表示一个人名，而由十进制数字组成的一个字段则可以表示一个人的年龄</td>
-</tr>
-<tr>
-<td>Record（记录）</td>
-<td>若干相关的字段可用于组成一个记录。例如，在一个工资管理系统中，一位员工的记录可能由下面的几个字段组成（在括号中说明了这些字段可能的数据类型）：<br/>- 员工的身份证号码（一个整数）<br/>- 姓名（一个字符串）<br />- 地址（一个字符串）<br/>- 每小时工资（一个小数）<br/>- 年初至今的收入（一个小数）<br/>- 代扣的税金（一个小数）<br />由此可见，一个记录是一组相关的字段。在上述例子中，所有的字段都属于同一员工。一个公司可能拥有许多员工，而每位员工都有一个工资记录</td>
-</tr>
-<tr>
-<td>File（文件）</td>
-<td>一个文件是一组相关的记录。【注意：更一般地，一个文件包含任意格式的任意数据。在一些操作系统中，一个文件可以被简单地视作是一个字节序列——对于一个文件而言，其中字节的任何组织形式，例如将数据组织成记录，都是由应用程序员所创建的一个数据视图。】对于一个机构来说，其拥有很多文件，一些文件包含数十亿、甚至数万亿的字符信息量，这都是很正常的事</td>
-</tr>
-<tr>
-<td>Database（数据库）</td>
-<td>一个数据库是一个电子化的数据集合，对它的组织要便于访问和操作。最受欢迎的数据库模型是关系型数据库，在关系型数据库中数据存储在简单的表中，每张表包括若干记录和若干字段。例如，一张关于学生的表可能包括姓名、专业、入学年份、学生的ID号以及总平均成绩等。每个学生的这些数据是一个记录，每个记录中单独的信息片段就是字段。基于与多个表或数据库之间的关系，可以对这些数据进行搜索、排序和操纵。例如，一所大学可以结合学生数据库、课程数据库、校园用房数据库和用餐计划等来使用数据</td>
-</tr>
-</tbody>
-</table>
-</div>
-<blockquote>
-<p>编程语言和机器语言</p>
-</blockquote>
-<p>编译型高级语言（C++、Java、C#、Python）</p>
+<p>由位到字符，再到字段，...，层次越来越庞大，结构也越来越复杂。</p>
 <pre><code class=" mermaid">graph LR;
     高级语言 -- 编译器 --&gt; 机器语言;
 </code></pre>
@@ -309,7 +269,8 @@
 <pre><code class=" mermaid">graph LR;
     高级语言 -- 解释器 --&gt; 机器语言;
 </code></pre>
-<h1 id="C-面向对象"><a href="#C-面向对象" class="headerlink" title="C++面向对象"></a>C++面向对象</h1><blockquote>
+<h1 id="c面向对象">C++面向对象</h1>
+<blockquote>
 <p>C++和C</p>
 </blockquote>
 <p>C++是对C的一个扩展，由贝尔实验室的Bjarne Stroustrup在1979年推出。最初这种语言被称作“带类的C（Cwith Classes）”，而在20世纪80年代早期改名为C++。C++提供了许多使C语言“焕然一新”的特性。不过更重要的是，C++提供了面向对象编程（object-oriented programming）的能力。</p>
@@ -356,11 +317,12 @@
 <p>面向对象分析与设计（OOAD）</p>
 </blockquote>
 <p><strong>如果分析和设计系统是从面向对象的角度来考虑的，那么就称为面向对象分析与设计（OOAD）</strong>。C++之类的语言是面向对象的，使用这样的语言编程称为面向对象编程（object-oriented programming，0OP），它可以让计算机程序员将一个面向对象的设计实现成为一个可工作的软件系统。</p>
-<h1 id="典型的C-程序开发环境"><a href="#典型的C-程序开发环境" class="headerlink" title="典型的C++程序开发环境"></a>典型的C++程序开发环境</h1><p>通常，C++程序要经历六个阶段，它们是编辑（edit）、预处理（preprocess）、编译（compile）、链接（link）、载入（load）和执行（execute）。</p>
+<h1 id="典型的c程序开发环境">典型的C++程序开发环境</h1>
+<p>通常，C++程序要经历六个阶段，它们是编辑（edit）、预处理（preprocess）、编译（compile）、链接（link）、载入（load）和执行（execute）。</p>
 <pre><code class=" mermaid">graph LR;
     编辑源代码 --&gt; 预编译 --&gt; 编译 --&gt; 链接 --&gt; 载入 --&gt; 执行;
 </code></pre>
-<ol>
+<ol type="1">
 <li>编辑源代码：用IDE编辑源代码</li>
 <li>预编译：C++预处理器执行一些称为预处理器指令的命令，指示了在编译之前要先对程序进行某些处理。这些处理通常是包含其他要编译文件的文本和实现各种文本替换。</li>
 <li>编译：编译器将C++程序翻译成机器语言代码——也就是目标代码。</li>
@@ -368,126 +330,136 @@
 <li>载入：在一个程序可以执行之前，必须先将它放入内存中。这由载入器来完成。载入器首先从磁盘中取得可执行程序，然后将其传输到内存，支持该程序的其他共享库组件在需要时载入器也会载入，最终会形成进程。</li>
 <li>执行：在中央处理器的控制下，计算机以每次一条指令的方式执行程序。一些现代计算机体系结构可以并行地执行多条指令。</li>
 </ol>
-<h1 id="试运行一个C-应用程序"><a href="#试运行一个C-应用程序" class="headerlink" title="试运行一个C++应用程序"></a>试运行一个C++应用程序</h1><p>输出0-100的随机数，然后进行猜测。</p>
+<h1 id="试运行一个c应用程序">试运行一个C++应用程序</h1>
+<p>输出0-100的随机数，然后进行猜测。</p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ctime&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    srand((<span class="hljs-keyword">int</span>)time(<span class="hljs-number">0</span>));  <span class="hljs-comment">// 产生随机种子  把0换成NULL也行</span><br>    <span class="hljs-keyword">int</span> targetNumber =  rand() % <span class="hljs-number">100</span>;<br>    <span class="hljs-comment">// cout &lt;&lt; &quot;target number is &quot; &lt;&lt; targetNumber &lt;&lt; endl;</span><br>    <span class="hljs-keyword">bool</span> flag = <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">while</span>(!flag)&#123;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;*************************&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;please input guess number&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>        <span class="hljs-keyword">int</span> guess_number;<br>        <span class="hljs-built_in">cin</span> &gt;&gt; guess_number;<br>        <span class="hljs-keyword">if</span>(guess_number == targetNumber)&#123;<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;winner winner, chicken dinner!&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>            flag = <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(guess_number &lt; targetNumber)&#123;<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;smeller then target number&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;bigger then target number&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>        &#125;<br>    &#125;<br>    system(<span class="hljs-string">&quot;pause&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h1 id="相关技术"><a href="#相关技术" class="headerlink" title="相关技术"></a>相关技术</h1><p>操作系统：包含操作系统核心组件的软件称作内核（kernel）。</p>
+<h1 id="相关技术">相关技术</h1>
+<p>操作系统：包含操作系统核心组件的软件称作内核（kernel）。</p>
 <p>Mosalc、Netscape u web2.0的出现：1993年出现的Mosaic浏览器，使人们对网络的使用呈爆炸性增长。Mosaic浏览器的特点是具有用户友好的图形用户界面。Mare Andreessen，他在国家超级计算机应用中心的团队开发了Mosaic浏览器。他继续创立了Netscape公司。Netscape被很多人认为是点燃了20世纪90年代后期互联网经济大爆炸的公司。</p>
-<h1 id="软件开发的一些关键术语"><a href="#软件开发的一些关键术语" class="headerlink" title="软件开发的一些关键术语"></a>软件开发的一些关键术语</h1><div class="table-container">
+<h1 id="软件开发的一些关键术语">软件开发的一些关键术语</h1>
 <table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>术语</th>
 <th>描述</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>Ajax</td>
 <td>Ajax是非常重要的Web2.0软件技术之一。Ajax可以帮助基于互联网的应用程序的执行像桌面应用程序一样——这是非常困难的一项任务，因为对于这样的应用，数据要来来回回地在用户的计算机和互联网上的服务器之间进行传递，造成了传输延迟</td>
 </tr>
-<tr>
+<tr class="even">
 <td>敏捷软件开发</td>
 <td>敏捷软件开发（Agile Software Development）相比原来的软件开发方法，是用更少的资源获得更快的软件开发速度的一组方法。大家可以查看一下敏捷联盟（www.agilealliance.org）和敏捷宣言（www.agilemanifesto.org）</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>重构</td>
 <td>重构（Refactoring）是指在保持程序原来的正确性和功能的基础上，对程序进行返工使代码更加清晰，更加容易维护。它被广泛使用在敏捷开发方法中。现在也有很多的IDE（集成开发环境）提供重构工具，它们可以自动完成大部分的重构工作。</td>
 </tr>
-<tr>
+<tr class="even">
 <td>设计模式</td>
 <td><strong>设计模式（Design patterns）是已经证明的体系结构，能够构造灵活的、可维护的面向对象软件。</strong>设计模式领域试图列举出那些重复出现的模式，鼓励软件设计者通过重用设计模式，用更少的时间、成本和精力来开发质量更佳的软件。</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>LAMP</td>
 <td>LAMP是许多开发者用于构建web应用程序的一组开源技术的缩写，它代表Linux、Apache、MySQL和PHP（或者Perl，或者Python——用于相似目的的另外两种语言）。MySQL是一个开源数据库管理系统。PHP是最受欢迎的开源服务器端互联网“脚本编写”语言，用于开发基于互联网的应用程序</td>
 </tr>
-<tr>
+<tr class="even">
 <td>软件即服务</td>
 <td>一般来说，软件已经被视为一种产品，很多软件仍然以产品的方式给用户使用。如果想运行一个应用程序，你必须从软件开发商那里购买软件包——常常是一张CD或DVD，或是网络下载。然后在你的电脑上安装它，并在你需要时运行它。当软件的新版本出现时，你需要花很多的时间和相当的费用来升级你的软件。这个过程对于拥有成千上万的系统，而这些系统又运行在多种多样不同设备上，需要进行维护的机构来说，是非常令人头痛的。通过软件即服务（Software as a Serv-<br/>ice，SaaS）技术，软件运行在互联网上其他处的服务器上。当服务器更新时，所有全球的客户不需要任何本地安装就能看到新的功能。你通过浏览器来访问服务。浏览器很轻便，你可以在全世界任何地方的不同种类的计算机上运行相同的应用程序。Salesforce.com、谷歌公司，以及微软公司的Office Live和Windows Live都提供SaaS。SaaS是一种云计算的能力</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>平台即服务</td>
 <td>平台即服务（PaaS）是另一种云计算的能力。它为作为网络服务的应用程序的开发和运行提供一个计算平台，而不是在你的电脑上安装工具。PaaS提供者包括Google App Engine、Amazon EC2和Bungee labs等。</td>
 </tr>
-<tr>
+<tr class="even">
 <td>软件开发工具包</td>
 <td>软件开发工具包（SDK）包括开发人员用于编写应用程序的工具和文档</td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>软件开发版本</p>
-<div class="table-container">
 <table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 85%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>版本</th>
 <th>描述</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>Alpha</td>
 <td>软件的alpha版本是仍在积极开发中的软件产品的最早发布。Alpha版本常常是有错误、不完整和不稳定的，它们发布给相对数量较少的开发人员，用来测试新的特性，获得早期的反馈，等等</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Bate</td>
 <td>在软件开发过程后期，当大多数主要的错误已定位排除，新的特性接近完成之后，向大批开发人员发布软件的Beta版本。该版本软件更稳定，但仍可能发生变化</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>候选发布版</td>
 <td>候选发布版（Release candidate）的软件版本一般而言功能完整，（据说）无错误，并准备让大众使用。它提供了一个多样化的测试环境——该软件用在不同的系统上，有不同的约束和用于各种各样的目的。任何出现的错误被纠正后，将最终的产品向公众发布。软件公司通常通过互联网发布增量式的更新。</td>
 </tr>
-<tr>
+<tr class="even">
 <td>连续beta</td>
 <td>使用这种方法开发的软件通常没有版本号（例如，谷歌搜索或者Gmail）。这种软件驻留在“云”上（不是安装在您的计算机上），不断地在演化。因此，用户总是拥有最新的版本</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h1 id="C-11和开源的Boost库"><a href="#C-11和开源的Boost库" class="headerlink" title="C++11和开源的Boost库"></a>C++11和开源的Boost库</h1><p>2011年以前的C++标准为 <code>C++0X</code><br>2011年以后的C++标准为 <code>C++1X</code><br>C++11是具有里程碑意义的C++标准<br>新标准扩展了C++标准库，包含了若干关于提高性能和安全的特性和增强内容。主流的C++编译器供应商已经实现了许多新C++11特性（如表所示）。欲了解更多信息，请访问C++标准委员会的网站www.open-std.org/jte1/sc22/wg21/和isocpp.org 。</p>
-<div class="table-container">
+<h1 id="c11和开源的boost库">C++11和开源的Boost库</h1>
+<p>2011年以前的C++标准为 <code>C++0X</code> 2011年以后的C++标准为 <code>C++1X</code> C++11是具有里程碑意义的C++标准 新标准扩展了C++标准库，包含了若干关于提高性能和安全的特性和增强内容。主流的C++编译器供应商已经实现了许多新C++11特性（如表所示）。欲了解更多信息，请访问C++标准委员会的网站www.open-std.org/jte1/sc22/wg21/和isocpp.org 。</p>
 <table>
+<colgroup>
+<col style="width: 66%" />
+<col style="width: 33%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>编译器</th>
 <th>描述C++11特性的URL</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>在每个主流C++编译器中实现的C++11特性</td>
 <td>www.wiki.apache.org/stdexx/C%2B%2BOxCompilerSupport</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Microsoft Visual C++</td>
 <td>www.msdn.microsoft.com/en-us/library/hh567368.aspx</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>GNU编译器集（g++）</td>
 <td>www.gec.gnu.org/projects/cxx0x.html</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Intel C++编译器</td>
 <td>www.software.intel.com/en-us/articles/cOx-features-supported-by-intel-c-compiler/</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>IBM XL C/C++</td>
 <td>www.ibm.com/developerworks/mydeveloperworks/blogs/5894415f-be62-4bc0-81c5-3956e822763/entry/xle_compiler_s_c_11_support50?lang=en</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Clang</td>
 <td>clang.llvm.org/cxx_status.html</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>EDG ecpp</td>
 <td>www.edg.com/docs/edg_cpp.pdf</td>
 </tr>
 </tbody>
 </table>
-</div>
-<p><strong>Boost C++库是由C++社区成员创建的一个免费的开源库。它们经同行评议，可以跨许多编译器和平台。如今Boost已经增长到超过100个库了，并且还在定期不断增长。现今在Boost开源社区已经有数千名程序员。Boost提供给C++程序员很多有用的设计良好的库，这些库与现在的C++标准库兼容。</strong>C++程序员可以在各种平台、多种不同的编译器上使用Boost库。<strong>一些新的C++11标准库的特性来自相应的Boost库。</strong>我们对这些库进行了概述，同时也提供了关于“正则表达式”和“智能指针”库的示例代码，等等。<br>正则表达式（Regular expressions）用于文本中特定字符模式的匹配。它可以用于验证数据，以确保数据是某一特定格式，或者用另外的字符串替换一个字符串中的某一部分，或者分割一个字符串。</p>
-
+<p><strong>Boost C++库是由C++社区成员创建的一个免费的开源库。它们经同行评议，可以跨许多编译器和平台。如今Boost已经增长到超过100个库了，并且还在定期不断增长。现今在Boost开源社区已经有数千名程序员。Boost提供给C++程序员很多有用的设计良好的库，这些库与现在的C++标准库兼容。</strong>C++程序员可以在各种平台、多种不同的编译器上使用Boost库。<strong>一些新的C++11标准库的特性来自相应的Boost库。</strong>我们对这些库进行了概述，同时也提供了关于“正则表达式”和“智能指针”库的示例代码，等等。 正则表达式（Regular expressions）用于文本中特定字符模式的匹配。它可以用于验证数据，以确保数据是某一特定格式，或者用另外的字符串替换一个字符串中的某一部分，或者分割一个字符串。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -731,6 +703,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

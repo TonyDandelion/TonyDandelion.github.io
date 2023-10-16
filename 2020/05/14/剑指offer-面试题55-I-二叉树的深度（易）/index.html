@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,58 +253,69 @@
             <div class="markdown-body">
               <p>这两道题的解法实际上只是树的遍历算法的应用。剑指offer 面试题55 - I是深度优先遍历一棵树，剑指offer 面试题55 - II 是广度优先遍历一棵树。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。</p>
-<p>例如：给定二叉树 [3,9,20,null,null,15,7]，<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure><br>返回它的最大深度 3 。</p>
+<h1 id="question">Question</h1>
+<p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。</p>
+<p>例如：给定二叉树 [3,9,20,null,null,15,7]， <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure> 返回它的最大深度 3 。</p>
 <p>提示：节点总数 &lt;= 10000</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入普通的二叉树；二叉树中所有节点都没有左/右子树）。<br>特殊输入测试（二叉树只有一个节点；二叉树的头节点为nullptr指针）。</p>
+<p>功能测试（输入普通的二叉树；二叉树中所有节点都没有左/右子树）。 特殊输入测试（二叉树只有一个节点；二叉树的头节点为nullptr指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者对二叉树的理解及编程能力。这两道题的解法实际上只是树的遍历算法的应用。<br>考查应聘者对新概念的学习能力。面试官提出一个新的概念即树的深度，这就要求我们在较短的时间内理解这个概念并解决相关的问题。这是一种常见的面试题型。能在较短时间内掌握、理解新概念的能力就是一种学习能力。<br>考查应聘者的知识迁移能力。如果面试官先问如何求二叉树的深度，再问如何判断一棵二叉树是不是平衡的，那么应聘者应该从求二叉树深度的分析过程中得到启发，找到判断平衡二叉树的突破口。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h2><p>对树进行深度优先遍历，每次保存最大深度。</p>
-<h2 id="左右子树遍历"><a href="#左右子树遍历" class="headerlink" title="左右子树遍历"></a>左右子树遍历</h2><p>如果一棵树只有一个节点，那么它的深度为1。<br>如果根节点只有左子树而没有右子树，那么树的深度应该是其左子树的深度加1；<br>同样，如果根节点只有右子树而没有左子树那么树的深度应该是其右子树的深度加1。<br>如果既有右子树又有左子树，那么该树的深度就是其左、右子树深度的较大值再加1。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="深度优先遍历-1"><a href="#深度优先遍历-1" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxDepth</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        self._max = <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_dfs</span>(<span class="hljs-params">depth, node</span>):</span><br>            <span class="hljs-keyword">if</span> node.left == <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> node.right == <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> depth &gt; self._max:<br>                self._max = depth<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">if</span> node.left:<br>                _dfs(depth + <span class="hljs-number">1</span>, node.left)<br>            <span class="hljs-keyword">if</span> node.right:<br>                _dfs(depth + <span class="hljs-number">1</span>, node.right)<br>    <br>        _dfs(<span class="hljs-number">1</span>, root)   <span class="hljs-comment"># 从root开始，已经有一层了。</span><br>        <span class="hljs-keyword">return</span> self._max<br></code></pre></div></td></tr></table></figure>
-<h2 id="左右子树遍历-1"><a href="#左右子树遍历-1" class="headerlink" title="左右子树遍历"></a>左右子树遍历</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxDepth</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        left = self.maxDepth(root.left)<br>        right = self.maxDepth(root.right)<br><br>        <span class="hljs-keyword">return</span> left + <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> left &gt; right <span class="hljs-keyword">else</span> right + <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="Extention"><a href="#Extention" class="headerlink" title="Extention"></a>Extention</h1><h2 id="Question-1"><a href="#Question-1" class="headerlink" title="Question"></a>Question</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/">面试题55 - II. 平衡二叉树</a></p>
+<p>考查应聘者对二叉树的理解及编程能力。这两道题的解法实际上只是树的遍历算法的应用。 考查应聘者对新概念的学习能力。面试官提出一个新的概念即树的深度，这就要求我们在较短的时间内理解这个概念并解决相关的问题。这是一种常见的面试题型。能在较短时间内掌握、理解新概念的能力就是一种学习能力。 考查应聘者的知识迁移能力。如果面试官先问如何求二叉树的深度，再问如何判断一棵二叉树是不是平衡的，那么应聘者应该从求二叉树深度的分析过程中得到启发，找到判断平衡二叉树的突破口。</p>
+<h1 id="intuition">Intuition</h1>
+<h2 id="深度优先遍历">深度优先遍历</h2>
+<p>对树进行深度优先遍历，每次保存最大深度。</p>
+<h2 id="左右子树遍历">左右子树遍历</h2>
+<p>如果一棵树只有一个节点，那么它的深度为1。 如果根节点只有左子树而没有右子树，那么树的深度应该是其左子树的深度加1； 同样，如果根节点只有右子树而没有左子树那么树的深度应该是其右子树的深度加1。 如果既有右子树又有左子树，那么该树的深度就是其左、右子树深度的较大值再加1。</p>
+<h1 id="code">Code</h1>
+<h2 id="深度优先遍历-1">深度优先遍历</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxDepth</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        self._max = <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_dfs</span>(<span class="hljs-params">depth, node</span>):</span><br>            <span class="hljs-keyword">if</span> node.left == <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> node.right == <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> depth &gt; self._max:<br>                self._max = depth<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">if</span> node.left:<br>                _dfs(depth + <span class="hljs-number">1</span>, node.left)<br>            <span class="hljs-keyword">if</span> node.right:<br>                _dfs(depth + <span class="hljs-number">1</span>, node.right)<br>    <br>        _dfs(<span class="hljs-number">1</span>, root)   <span class="hljs-comment"># 从root开始，已经有一层了。</span><br>        <span class="hljs-keyword">return</span> self._max<br></code></pre></div></td></tr></table></figure>
+<h2 id="左右子树遍历-1">左右子树遍历</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxDepth</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        left = self.maxDepth(root.left)<br>        right = self.maxDepth(root.right)<br><br>        <span class="hljs-keyword">return</span> left + <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> left &gt; right <span class="hljs-keyword">else</span> right + <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="extention">Extention</h1>
+<h2 id="question-1">Question</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/">面试题55 - II. 平衡二叉树</a></p>
 <p>输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。</p>
-<p> 示例 1：给定二叉树 [3,9,20,null,null,15,7]<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure><br>返回 true 。</p>
-<p>示例 2：给定二叉树 [1,2,2,3,3,null,null,4,4]<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">      <span class="hljs-number">1</span><br>     / <span class="hljs-string">\</span><br>    <span class="hljs-number">2</span>   <span class="hljs-number">2</span><br>   / <span class="hljs-string">\</span><br>  <span class="hljs-number">3</span>   <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">4</span>   <span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure><br>返回 false 。</p>
+<p>示例 1：给定二叉树 [3,9,20,null,null,15,7] <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure> 返回 true 。</p>
+<p>示例 2：给定二叉树 [1,2,2,3,3,null,null,4,4] <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">      <span class="hljs-number">1</span><br>     / <span class="hljs-string">\</span><br>    <span class="hljs-number">2</span>   <span class="hljs-number">2</span><br>   / <span class="hljs-string">\</span><br>  <span class="hljs-number">3</span>   <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">4</span>   <span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure> 返回 false 。</p>
 <p>限制：1 &lt;= 树的结点个数 &lt;= 10000</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（平衡的二叉树；不是平衡的二叉树；二叉树中所有节点都没有左/右子树）。<br>特殊输入测试（二叉树中只有一个节点；二叉树的头节点为 <code>nullptr</code> 指针）。</p>
-<h2 id="Intuition-1"><a href="#Intuition-1" class="headerlink" title="Intuition"></a>Intuition</h2><p><strong><em>简单思路</em></strong></p>
+<p>功能测试（平衡的二叉树；不是平衡的二叉树；二叉树中所有节点都没有左/右子树）。 特殊输入测试（二叉树中只有一个节点；二叉树的头节点为 <code>nullptr</code> 指针）。</p>
+<h2 id="intuition-1">Intuition</h2>
+<p><strong><em>简单思路</em></strong></p>
 <p>在遍历树的每个节点的时候，调用函数TreeDepth得到它的左、右子树的深度。如果每个节点的左、右子树的深度相差都不超过1，那么按照定义它就是一棵平衡二叉树。面试官不会喜欢这种思路，因为，在自顶向下遍历的过程中，每个节点会被重复计算。</p>
 <p><strong><em>每个节点只遍历一次的思路</em></strong></p>
 <p>如果我们<strong>用后序遍历的方式遍历二叉树的每个节点</strong>，那么在遍历到一个节点之前我们就已经遍历了它的左、右子树。只要在遍历每个节点的时候记录它的深度（某一节点的深度等于它到叶节点的路径的长度），我们就可以一边遍历一边判断每个节点是不是平衡的。</p>
 <p><strong><em>后序遍历 + 剪枝 （从底至顶）</em></strong></p>
 <p>思路是对二叉树做后序遍历，从底至顶返回子树深度，若判定某子树不是平衡树则 “剪枝” ，直接向上返回。此方法为本题的最优解法，但剪枝的方法不易第一时间想到。</p>
 <p><strong>算法流程</strong></p>
-<p><code>recur(root)</code>  函数：</p>
+<p><code>recur(root)</code> 函数：</p>
 <ul>
-<li>返回值：<ul>
+<li>返回值：
+<ul>
 <li>当节点root 左 / 右子树的深度差 ≤1 ：则返回当前子树的深度，即节点 root 的左 / 右子树的深度最大值 +1 （ <code>max(left, right) + 1</code> ）；</li>
 <li>当节点root 左 / 右子树的深度差 &gt; 2 ：则返回 -1−1 ，代表此<strong>子树</strong>不是平衡树 。</li>
-</ul>
-</li>
-<li>终止条件：<ul>
+</ul></li>
+<li>终止条件：
+<ul>
 <li>当 root 为空：说明越过叶节点，因此返回高度 0；</li>
 <li>当左（右）子树深度为 -1 ：代表此树的 左（右）子树不是平衡树，<strong>因此剪枝</strong>，直接返回 -1；</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><code>isBalanced(root)</code> 函数：</p>
 <ul>
-<li>返回值： 若 <code>recur(root) != -1</code> ，则说明此树平衡，返回 true； </li>
+<li>返回值： 若 <code>recur(root) != -1</code> ，则说明此树平衡，返回 true；</li>
 <li>否则返回 falsefalse 。</li>
 </ul>
 <p><strong>参考连接</strong></p>
-<p>作者：Krahets<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/solution/mian-shi-ti-55-ii-ping-heng-er-cha-shu-cong-di-zhi/">https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/solution/mian-shi-ti-55-ii-ping-heng-er-cha-shu-cong-di-zhi/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h2><ul>
+<p>作者：Krahets 链接：https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/solution/mian-shi-ti-55-ii-ping-heng-er-cha-shu-cong-di-zhi/ 来源：力扣（LeetCode） 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h2 id="code-1">Code</h2>
+<ul>
 <li>简单思路</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.flag = <span class="hljs-literal">True</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isBalanced</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; bool:</span><br>        self.getDepth(root)<br>        <span class="hljs-keyword">return</span> self.flag<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getDepth</span>(<span class="hljs-params">self, root</span>):</span><br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        left = <span class="hljs-number">1</span> + self.getDepth(root.left)<br>        right = <span class="hljs-number">1</span> + self.getDepth(root.right)<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(left - right) &gt; <span class="hljs-number">1</span>:<br>            self.flag = <span class="hljs-literal">False</span><br>        <br>        <span class="hljs-keyword">return</span> left <span class="hljs-keyword">if</span> left &gt; right <span class="hljs-keyword">else</span> right<br></code></pre></div></td></tr></table></figure>
@@ -316,6 +327,7 @@
 <li>后序遍历 + 剪枝 （从底至顶）Krahets大佬版本（<strong>推荐</strong>）</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isBalanced</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; bool:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recur</span>(<span class="hljs-params">root</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>            left = recur(root.left)<br>            <span class="hljs-keyword">if</span> left == -<span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>            right = recur(root.right)<br>            <span class="hljs-keyword">if</span> right == -<span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(left, right) + <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(left - right) &lt;= <span class="hljs-number">1</span> <span class="hljs-keyword">else</span> -<span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> recur(root) != -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -561,6 +573,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

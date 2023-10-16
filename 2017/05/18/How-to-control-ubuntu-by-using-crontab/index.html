@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      722 字
+      724 字
     </span>
   
 
@@ -253,56 +253,58 @@
             <div class="markdown-body">
               <p>cron是一个Linux下的后台进程，用来定期的执行一些任务。我用的是Ubuntu，所以这篇文章中的所有命令也只能保证在Ubuntu下有效，但其他系统应该也差不多。</p>
 <a id="more"></a>
-<h1 id="第一步：编写一个你想执行的bash脚本"><a href="#第一步：编写一个你想执行的bash脚本" class="headerlink" title="第一步：编写一个你想执行的bash脚本"></a>第一步：编写一个你想执行的bash脚本</h1><p><strong>vim test.sh</strong></p>
+<h1 id="第一步编写一个你想执行的bash脚本">第一步：编写一个你想执行的bash脚本</h1>
+<p><strong>vim test.sh</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span><br>echo success!<br></code></pre></div></td></tr></table></figure>
-<h1 id="第二步：设置定时执行bash脚本的bash脚本"><a href="#第二步：设置定时执行bash脚本的bash脚本" class="headerlink" title="第二步：设置定时执行bash脚本的bash脚本"></a>第二步：设置定时执行bash脚本的bash脚本</h1><p>编辑crontab文件</p>
+<h1 id="第二步设置定时执行bash脚本的bash脚本">第二步：设置定时执行bash脚本的bash脚本</h1>
+<p>编辑crontab文件</p>
 <p><strong>sudo vim /etc/crontab</strong></p>
-<p>在其中添加<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">* * * * * root bash /home/tony/test.sh &gt; /home/tony/<span class="hljs-built_in">log</span><br></code></pre></div></td></tr></table></figure><br>前面的五个*代表不同的意思</p>
+<p>在其中添加 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">* * * * * root bash /home/tony/test.sh &gt; /home/tony/<span class="hljs-built_in">log</span><br></code></pre></div></td></tr></table></figure> 前面的五个*代表不同的意思</p>
 <p>前5个*分别代表：<strong>分钟，小时，天，月，星期</strong>，每个部分的取值范围如下：</p>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>意义</th>
 <th>范围</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>分钟</td>
 <td>0 - 59</td>
 </tr>
-<tr>
+<tr class="even">
 <td>小时</td>
 <td>0 - 23</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>天</td>
 <td>1 - 31</td>
 </tr>
-<tr>
+<tr class="even">
 <td>月</td>
 <td>1 - 12</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>星期</td>
 <td>0 - 6 (0表示星期天)</td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>root代表执行用户，<strong>有时候，发现命令没有按时执行，可将root换成你当前的用户名，如ubuntu或者tony，bash /home/tony/test.sh &gt; /home/tony/log</strong>为具体执行的命令。</p>
-<p>举些例子：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">* * * * *                  <span class="hljs-comment"># 每隔一分钟执行一次任务</span><br>0 * * * *                  <span class="hljs-comment"># 每小时的0点执行一次任务，比如6:00，10:00</span><br>6,10 * 2 * *               <span class="hljs-comment"># 每个月2号，每小时的6分和10分执行一次任务</span><br>*/3,*/5 * * * *            <span class="hljs-comment"># 每隔3分钟或5分钟执行一次任务，比如10:03，10:05，10:06</span><br></code></pre></div></td></tr></table></figure><br>|名称  |解释|<br>|:——|:—|<br>|星号|表示任意值，比如在小时部分填写 <em> 代表任意小时（每小时）|<br>|逗号|可以允许在一个部分中填写多个值，比如在分钟部分填写 1,3 表示一分钟或三分钟|<br>|斜线 /|一般配合 \</em> 使用，代表每隔多长时间，比如在小时部分填写 */2 代表每隔两分钟。<br />所以 */1 和 * 没有区别。*/2 可以看成是能被2整除的任意值。|</p>
+<p>举些例子： <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">* * * * *                  <span class="hljs-comment"># 每隔一分钟执行一次任务</span><br>0 * * * *                  <span class="hljs-comment"># 每小时的0点执行一次任务，比如6:00，10:00</span><br>6,10 * 2 * *               <span class="hljs-comment"># 每个月2号，每小时的6分和10分执行一次任务</span><br>*/3,*/5 * * * *            <span class="hljs-comment"># 每隔3分钟或5分钟执行一次任务，比如10:03，10:05，10:06</span><br></code></pre></div></td></tr></table></figure> |名称 |解释| |:----|:--| |星号|表示任意值，比如在小时部分填写 * 代表任意小时（每小时）| |逗号|可以允许在一个部分中填写多个值，比如在分钟部分填写 1,3 表示一分钟或三分钟| |斜线 /|一般配合 * 使用，代表每隔多长时间，比如在小时部分填写 */2 代表每隔两分钟。<br />所以 */1 和 * 没有区别。*/2 可以看成是能被2整除的任意值。|</p>
 <p>更多例子：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">a. 30 21 * * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart // 表示每天21：30重启apache <br>b. 45 4 1,10,22 * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart // 表示每月1，10，22号<br>4:45重启apache<br>c. 0,30 18-23 * * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart // 表示每天18:00至23:00之间每隔30分钟重启apache<br>d. * */1 * * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart // 表示每一小时重启apache  <br>e. */5 * * * * /usr/<span class="hljs-built_in">local</span>/etc/rc.d/lighttpd restart // 表示每5分钟重启apache<br>f. 0 6 * * * <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Good morning.&quot;</span> &gt;&gt; /tmp/test.txt // 注意单纯<span class="hljs-built_in">echo</span>，从屏幕上看不到任何输出，因为cron把任何输出都写入了 /tmp/test.txt 中<br></code></pre></div></td></tr></table></figure>
-<h1 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h1><blockquote>
+<h1 id="需要注意">需要注意</h1>
+<blockquote>
 <p>如果发现crontab脚本没有按时执行，可以将root换成ubuntu。</p>
 </blockquote>
-<h1 id="重启crontab服务"><a href="#重启crontab服务" class="headerlink" title="重启crontab服务"></a>重启crontab服务</h1><p>可以分为两种情况：</p>
+<h1 id="重启crontab服务">重启crontab服务</h1>
+<p>可以分为两种情况：</p>
 <p>1.在系统中有service这个命令时：这个命令在red hat当中常用，有的linux发行版本中没有这个命令.</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ service crond start //启动服务<br>$ service crond stop //关闭服务<br>$ service crond restart //重启服务<br></code></pre></div></td></tr></table></figure>
-<p>2.linux发行版本没有service这个命令时：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">/etc/init.d/cron stop<br>/etc/init.d/cron start<br>或者<br>/etc/init.d/crond stop<br>/etc/init.d/crond start<br></code></pre></div></td></tr></table></figure></p>
-
+<p>2.linux发行版本没有service这个命令时： <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">/etc/init.d/cron stop<br>/etc/init.d/cron start<br>或者<br>/etc/init.d/crond stop<br>/etc/init.d/crond start<br></code></pre></div></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -539,6 +541,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      292 字
+      288 字
     </span>
   
 
@@ -253,120 +253,124 @@
             <div class="markdown-body">
               <p>记录一些Spring boot中常用的注解（Annotation）</p>
 <a id="more"></a>
-<div class="table-container">
 <table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 62%" />
+<col style="width: 7%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Annotation</th>
 <th>Role</th>
 <th>Remark</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><strong>基础Annotation</strong></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>@ResponseBody</code></td>
 <td>该类返回text/json</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>@Controller</code></td>
 <td>该class负责处理http请求</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>@RestController</code></td>
 <td><code>@RestController</code>是<code>@ResponseBody</code>和<code>@Controller</code>的组合注解。</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>@RequestMapping</code></td>
 <td>配置url映射，可以在class层面，也可以在function层面。</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong><code>lombok</code>相关的<code>Annotation</code></strong></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>@Data</code></td>
 <td>Getter,Setter,equals,canEqual,hasCode,toString等方法在编译时会自动加进去。</td>
 <td><code>import lombok.Data;</code></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>@AllArgsConstructor</code></td>
 <td>添加一个构造函数，该构造函数含有所有已声明字段属性参数</td>
 <td><code>import lombok.AllArgsConstructor;</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>@NoArgsConstructor</code></td>
 <td>创建一个无参构造函数</td>
 <td><code>import lombok.NoArgsConstructor</code></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>@Builder</code></td>
-<td>Builder的作用之一是为了解决在某个类有很多构造函数的情况，也省去写很多构造函数的麻烦，在设计模式中的思想是：<strong>用一个内部类去实例化一个对象，避免一个类出现过多构造函数。</strong>使用方法如下：<br /><code>Student stu1 = new Student.StudentBuilder().name(&quot;wang&quot;).age(&quot;12&quot;).build();</code></td>
+<td>Builder的作用之一是为了解决在某个类有很多构造函数的情况，也省去写很多构造函数的麻烦，在设计模式中的思想是：<strong>用一个内部类去实例化一个对象，避免一个类出现过多构造函数。</strong>使用方法如下：<br /><code>Student stu1 = new Student.StudentBuilder().name("wang").age("12").build();</code></td>
 <td><code>import lombok.Builder</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>处理URL的Annotation</strong></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>@PathVaribale</code></td>
 <td>获取url中的数据</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>@RequestParam</code></td>
 <td>获取请求参数的值</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>@GetMapping</code></td>
 <td>组合注解</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
+<td></td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>东汉末年，天下大乱。中山靖王后裔，刘玄德，一人结庐南山之下，欲起事而不得。</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -603,6 +607,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

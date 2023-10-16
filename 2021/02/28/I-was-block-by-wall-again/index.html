@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      148 字
+      150 字
     </span>
   
 
@@ -253,13 +253,15 @@
             <div class="markdown-body">
               <p>记录生活过程中因为“wall”而被坑的各种情况</p>
 <a id="more"></a>
-<h1 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h1><p>PicGo配合阿里云OSS使用，由于新建了位于香港机房的OSS，导致一直无法正常使用。</p>
+<h1 id="picgo">PicGo</h1>
+<p>PicGo配合阿里云OSS使用，由于新建了位于香港机房的OSS，导致一直无法正常使用。</p>
 <p>曾经以为是Access key的问题，后面才发现是OSS在香港，PicGo无法直接上传图片，配置了代理也不行。</p>
 <p>解决方法，新建位于杭州的OSS使用。</p>
-<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>在新创建的docker container中换用阿里云的apt-get源，一直报错。</p>
+<h1 id="docker">Docker</h1>
+<p>在新创建的docker container中换用阿里云的apt-get源，一直报错。</p>
 <figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm"><span class="hljs-symbol">Err:</span><span class="hljs-number">1</span> http:<span class="hljs-comment">//mirrors.aliyun.com/ubuntu bionic InRelease</span><br>  Connection failed [<span class="hljs-built_in">IP</span>: <span class="hljs-number">117</span>.<span class="hljs-number">157</span>.<span class="hljs-number">232</span>.<span class="hljs-number">88</span> <span class="hljs-number">80</span><br></code></pre></div></td></tr></table></figure>
 <p>把翻墙用的代理关闭就好。</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -489,6 +491,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

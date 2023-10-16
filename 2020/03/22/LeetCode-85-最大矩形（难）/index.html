@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      22
        分钟
     </span>
   
@@ -251,46 +251,66 @@
             <h1 style="display: none">LeetCode 85. 最大矩形（难）</h1>
             
             <div class="markdown-body">
-              <p>84题的改进，从单个直方图变成多个直方图。每行看成一个直方图，累加height，注意判断遇到0的情况即可。  </p>
+              <p>84题的改进，从单个直方图变成多个直方图。每行看成一个直方图，累加height，注意判断遇到0的情况即可。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个仅包含 0 和 1 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>Example:</p>
+<h1 id="题目">题目</h1>
+<p>给定一个仅包含 0 和 1 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。</p>
+<h1 id="示例">示例</h1>
+<p>Example:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">Input:<br>[<br>  [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],<br>  [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>],<br>  [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>],<br>  [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>]<br>]<br>Output: <span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <p>:artificial_satellite: 考察知识点</p>
 </blockquote>
-<p>动态规划、哈希表、数组、栈  </p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、基于栈的方法</strong><br>本题是 84. 柱状图中最大的矩形 的扩展，这道题的二维矩阵每一行都可以看做一个直方图，输入矩阵有多少行，就可以形成多少个直方图，对每个直方图都调用 84题 中的方法，就可以得到最大的矩形面积。由于题目限定了输入矩阵的字符只有 ‘0’ 和 ‘1’ 两种，所以处理起来也相对简单。方法是，对于每一个点，如果是 ‘0’，则赋0，如果是 ‘1’，就赋之前的 height 值加上1。<br>这里遇到 ‘0’ 代表之前height数组在该位置上的累加都无效了，就赋0，这样就解决了对齐问题。  </p>
-<p><img src="https://i.loli.net/2020/03/22/mvzUtROlkWiwXr3.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-22_12-16-20.png"></p>
-<p><strong>方法二、动态规划</strong>  </p>
-<p>解法一 暴力求解<br>该方法本质上是 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84 - 柱状图中最大的矩形</a> 题中优化暴力算法的复用。<font color='red'><strong>挺复杂的，不推荐。</strong></font>  </p>
-<p>解法二 寻找每个点的最大高度<br>想象一个算法，对于每个点我们会通过以下步骤计算一个矩形：  </p>
+<p>动态规划、哈希表、数组、栈</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>方法一、基于栈的方法</strong><br />
+本题是 84. 柱状图中最大的矩形 的扩展，这道题的二维矩阵每一行都可以看做一个直方图，输入矩阵有多少行，就可以形成多少个直方图，对每个直方图都调用 84题 中的方法，就可以得到最大的矩形面积。由于题目限定了输入矩阵的字符只有 '0' 和 '1' 两种，所以处理起来也相对简单。方法是，对于每一个点，如果是 ‘0’，则赋0，如果是 ‘1’，就赋之前的 height 值加上1。<br />
+这里遇到 '0' 代表之前height数组在该位置上的累加都无效了，就赋0，这样就解决了对齐问题。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/22/mvzUtROlkWiwXr3.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-22_12-16-20.png" /><figcaption aria-hidden="true">Snipaste_2020-03-22_12-16-20.png</figcaption>
+</figure>
+<p><strong>方法二、动态规划</strong></p>
+<p>解法一 暴力求解 该方法本质上是 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84 - 柱状图中最大的矩形</a> 题中优化暴力算法的复用。<font color='red'><strong>挺复杂的，不推荐。</strong></font></p>
+<p>解法二 寻找每个点的最大高度<br />
+想象一个算法，对于每个点我们会通过以下步骤计算一个矩形：</p>
 <ul>
-<li>不断向上方遍历，直到遇到“0”，以此找到矩形的最大高度。  </li>
-<li>向左右两边扩展，直到无法容纳矩形最大高度。<br>例如，找到黄色点对应的矩形：  </li>
+<li>不断向上方遍历，直到遇到“0”，以此找到矩形的最大高度。<br />
+</li>
+<li>向左右两边扩展，直到无法容纳矩形最大高度。<br />
+例如，找到黄色点对应的矩形：</li>
 </ul>
 <p><img src="https://i.loli.net/2020/03/22/AvHDfKes7iC1XTr.png" srcset="/img/loading.gif" alt="492476afc9693ce2cb7352c9c29094508573b4635b121633eafb07c382115141-image.png" style="zoom:60%;" /></p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<h1 id="python版本">Python版本</h1>
+<ul>
 <li>方法一的错误示范</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">largestRectangleArea</span>(<span class="hljs-params">self, heights: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        res = <span class="hljs-number">0</span><br>        st = []<br>        heights.append(<span class="hljs-number">0</span>)<br>        i = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> i &lt; <span class="hljs-built_in">len</span>(heights):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(st) <span class="hljs-keyword">or</span> heights[st[-<span class="hljs-number">1</span>]] &lt; heights[i]:<br>                st.append(i)<br>            <span class="hljs-keyword">else</span>:<br>                cur = st.pop()<br>                width = i <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(st) <span class="hljs-keyword">else</span> (i - st[-<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>)<br>                res = <span class="hljs-built_in">max</span>(res, heights[cur] * width)<br>                i -= <span class="hljs-number">1</span><br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maximalRectangle</span>(<span class="hljs-params">self, matrix: List[List[<span class="hljs-built_in">str</span>]]</span>) -&gt; int:</span><br>        matrix = [[<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> row] <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> matrix]<br>        sub_matrix = []<br>        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> matrix:<br>            sub_matrix.append(self.largestRectangleArea(row))<br>        res = self.largestRectangleArea(sub_matrix)<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-<p>这种写法，解决不了 输入：[[“0”,”1”],[“1”,”0”]]，预期：1，这种测试用例，存在对齐问题。  </p>
+<p>这种写法，解决不了 输入：[["0","1"],["1","0"]]，预期：1，这种测试用例，存在对齐问题。</p>
 <ul>
 <li>方法一解决对齐问题的解法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">largestRectangleArea</span>(<span class="hljs-params">self, heights: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        res = <span class="hljs-number">0</span><br>        st = []<br>        heights.append(<span class="hljs-number">0</span>)<br>        i = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> i &lt; <span class="hljs-built_in">len</span>(heights):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(st) <span class="hljs-keyword">or</span> heights[st[-<span class="hljs-number">1</span>]] &lt; heights[i]:<br>                st.append(i)<br>            <span class="hljs-keyword">else</span>:<br>                cur = st.pop()<br>                width = i <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(st) <span class="hljs-keyword">else</span> (i - st[-<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>)<br>                res = <span class="hljs-built_in">max</span>(res, heights[cur] * width)<br>                i -= <span class="hljs-number">1</span>  <br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maximalRectangle</span>(<span class="hljs-params">self, matrix</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(matrix) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>]):  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        res = <span class="hljs-number">0</span><br>        heights = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>]))]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(matrix)):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(matrix[i])):<br>                heights[j] = <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> matrix[i][j] == <span class="hljs-string">&quot;0&quot;</span> <span class="hljs-keyword">else</span> (<span class="hljs-number">1</span> + heights[j])  <span class="hljs-comment"># 注意这里，</span><br>            res = <span class="hljs-built_in">max</span>(res, self.largestRectangleArea(heights))<br>        <span class="hljs-keyword">return</span> res<br><br>Input = [<br>    [<br>        [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>],<br>        [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>],<br>        [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>],<br>        [<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>]<br>    ],<br>    [[<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>],[<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>]]<br>]<br>Answer = [<span class="hljs-number">6</span>, <span class="hljs-number">1</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.maximalRectangle(Input[i])<br>        print(reslut == Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(m \times n^2)$，m是行数，n是列数。<br>空间复杂度 : $O(n)$。我们声明了长度等于列数的数组，用于存储每一行的宽度。<br>执行用时 :162 ms, 在所有 Python3 提交中击败了71.60%的用户<br>内存消耗 :14.2 MB, 在所有 Python3 提交中击败了5.06%的用户  </p>
+<p>时间复杂度：<span class="math inline">\(O(m \times n^2)\)</span>，m是行数，n是列数。<br />
+空间复杂度 : <span class="math inline">\(O(n)\)</span>。我们声明了长度等于列数的数组，用于存储每一行的宽度。 执行用时 :162 ms, 在所有 Python3 提交中击败了71.60%的用户<br />
+内存消耗 :14.2 MB, 在所有 Python3 提交中击败了5.06%的用户</p>
 <ul>
 <li>方法二动态规划的实现</li>
 </ul>
-<p><strong>解法一的实现</strong>  </p>
+<p><strong>解法一的实现</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maximalRectangle</span>(<span class="hljs-params">self, matrix: List[List[<span class="hljs-built_in">str</span>]]</span>) -&gt; int:</span><br>        maxarea = <span class="hljs-number">0</span><br>        dp = [[<span class="hljs-number">0</span>] * <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(matrix))]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(matrix)):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])):<br>                <span class="hljs-keyword">if</span> matrix[i][j] == <span class="hljs-string">&#x27;0&#x27;</span>: <span class="hljs-keyword">continue</span><br>                width = dp[i][j] = dp[i][j-<span class="hljs-number">1</span>] + <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> j <span class="hljs-keyword">else</span> <span class="hljs-number">1</span><br>                <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(i, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                    width = <span class="hljs-built_in">min</span>(width, dp[k][j])<br>                    maxarea = <span class="hljs-built_in">max</span>(maxarea, width * (i-k+<span class="hljs-number">1</span>))<br>        <span class="hljs-keyword">return</span> maxarea<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 : $O(N^2 \times M)$。由于需要遍历同一列中的值，计算每个点对应最大面积需要 $O(N)$。对全部 $N \times  M$个点都要计算，因此总共$O(N) * O(N \times M) = O(N^2 \times M)$<br>空间复杂度 : $O(N \times M)$。我们分配了一个等大的数组，用于存储每个点的最大宽度。<br>执行用时 :2764 ms, 在所有 Python3 提交中击败了5.02%的用户<br>内存消耗 :14.4 MB, 在所有 Python3 提交中击败了5.06%的用户  </p>
-<p><strong>解法二的实现</strong>  </p>
+<p>时间复杂度 : <span class="math inline">\(O(N^2 \times M)\)</span>。由于需要遍历同一列中的值，计算每个点对应最大面积需要 <span class="math inline">\(O(N)\)</span>。对全部 <span class="math inline">\(N \times M\)</span>个点都要计算，因此总共<span class="math inline">\(O(N) * O(N \times M) = O(N^2 \times M)\)</span><br />
+空间复杂度 : <span class="math inline">\(O(N \times M)\)</span>。我们分配了一个等大的数组，用于存储每个点的最大宽度。 执行用时 :2764 ms, 在所有 Python3 提交中击败了5.02%的用户<br />
+内存消耗 :14.4 MB, 在所有 Python3 提交中击败了5.06%的用户</p>
+<p><strong>解法二的实现</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maximalRectangle</span>(<span class="hljs-params">self, matrix: List[List[<span class="hljs-built_in">str</span>]]</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> matrix: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><br>        m = <span class="hljs-built_in">len</span>(matrix)<br>        n = <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])<br><br>        left = [<span class="hljs-number">0</span>] * n <span class="hljs-comment"># initialize left as the leftmost boundary possible</span><br>        right = [n] * n <span class="hljs-comment"># initialize right as the rightmost boundary possible</span><br>        height = [<span class="hljs-number">0</span>] * n<br><br>        maxarea = <span class="hljs-number">0</span><br><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m):<br><br>            cur_left, cur_right = <span class="hljs-number">0</span>, n<br>            <span class="hljs-comment"># update height</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                <span class="hljs-keyword">if</span> matrix[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>: height[j] += <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>: height[j] = <span class="hljs-number">0</span><br>            <span class="hljs-comment"># update left</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                <span class="hljs-keyword">if</span> matrix[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>: left[j] = <span class="hljs-built_in">max</span>(left[j], cur_left)<br>                <span class="hljs-keyword">else</span>:<br>                    left[j] = <span class="hljs-number">0</span><br>                    cur_left = j + <span class="hljs-number">1</span><br>            <span class="hljs-comment"># update right</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                <span class="hljs-keyword">if</span> matrix[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>: right[j] = <span class="hljs-built_in">min</span>(right[j], cur_right)<br>                <span class="hljs-keyword">else</span>:<br>                    right[j] = n<br>                    cur_right = j<br>            <span class="hljs-comment"># update the area</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                maxarea = <span class="hljs-built_in">max</span>(maxarea, height[j] * (right[j] - left[j]))<br><br>        <span class="hljs-keyword">return</span> maxarea<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 : $O(N \times M)$。每次对于N的迭代我们会对M迭代常数次。<br>空间复杂度 : $O(M)$， M 是我们保留的额外数组的长度。<br>执行用时 :108 ms, 在所有 Python3 提交中击败了83.42%的用户<br>内存消耗 :14.1 MB, 在所有 Python3 提交中击败了5.06%的用户  </p>
-<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-rectangle/solution/zui-da-ju-xing-by-leetcode/">LeetCode官方题解</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4322667.html">Grandeyang</a>  </p>
-
+<p>时间复杂度 : <span class="math inline">\(O(N \times M)\)</span>。每次对于N的迭代我们会对M迭代常数次。<br />
+空间复杂度 : <span class="math inline">\(O(M)\)</span>， M 是我们保留的额外数组的长度。<br />
+执行用时 :108 ms, 在所有 Python3 提交中击败了83.42%的用户<br />
+内存消耗 :14.1 MB, 在所有 Python3 提交中击败了5.06%的用户</p>
+<h1 id="有效语法糖">有效语法糖</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-rectangle/solution/zui-da-ju-xing-by-leetcode/">LeetCode官方题解</a><br />
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4322667.html">Grandeyang</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -536,6 +556,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

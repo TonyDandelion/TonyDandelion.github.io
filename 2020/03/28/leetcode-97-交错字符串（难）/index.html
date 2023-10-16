@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      933 字
+      939 字
     </span>
   
 
@@ -253,36 +253,54 @@
             <div class="markdown-body">
               <p>这道题，难在读懂题意，找到状态转移方程。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定三个字符串 <em>s1</em>, <em>s2</em>, <em>s3</em>, 验证 <em>s3</em> 是否是由 <em>s1</em> 和 <em>s2</em> 交错组成的。</p>
+<h1 id="题目">题目</h1>
+<p>给定三个字符串 <em>s1</em>, <em>s2</em>, <em>s3</em>, 验证 <em>s3</em> 是否是由 <em>s1</em> 和 <em>s2</em> 交错组成的。</p>
 <p>动态规划</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:</p>
+<h1 id="示例">示例</h1>
+<p>示例 1:</p>
 <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">s1</span> = <span class="hljs-string">&quot;aabcc&quot;</span>, <span class="hljs-attr">s2</span> = <span class="hljs-string">&quot;dbbca&quot;</span>, <span class="hljs-attr">s3</span> = <span class="hljs-string">&quot;aadbbcbcac&quot;</span><br>输出: <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
 <p>示例 2:</p>
 <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">s1</span> = <span class="hljs-string">&quot;aabcc&quot;</span>, <span class="hljs-attr">s2</span> = <span class="hljs-string">&quot;dbbca&quot;</span>, <span class="hljs-attr">s3</span> = <span class="hljs-string">&quot;aadbbbaccc&quot;</span><br>输出: <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>动态规划、回溯算法</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>方法一、动态规划算法  </p>
-<p>考虑用 <code>s1</code> 和 <code>s2</code> 的某个前缀是否能形成 <code>s3</code> 的一个前缀。<br>这个方法的前提建立于：判断一个 <code>s3</code> 的前缀（用下标 <code>k</code> 表示），能否用 <code>s1</code> 和 <code>s2</code> 的前缀（下标分别为 <code>i</code> 和 <code>j</code>），仅仅依赖于 <code>s1</code> 前 <code>i</code> 个字符和 <code>s2</code> 前 <code>j</code> 个字符，而与后面的字符无关。<br>为了实现这个算法， 我们将使用一个 2D 的布尔数组 <code>dp</code> 。<code>dp[i][j]</code> 表示用 <code>s1</code> 的前 <code>(i+1)</code> 和 <code>s2</code> 的前 <code>(j+1)</code> 个字符，总共 <code>(i+j+2)</code> 个字符，是否交错构成 <code>s3</code> 的前缀。为了求出 <code>dp[i][j]</code>，我们需要考虑 2 种情况：  </p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>动态规划、回溯算法</p>
+<h1 id="核心思想">核心思想</h1>
+<p>方法一、动态规划算法</p>
+<p>考虑用 <code>s1</code> 和 <code>s2</code> 的某个前缀是否能形成 <code>s3</code> 的一个前缀。<br />
+这个方法的前提建立于：判断一个 <code>s3</code> 的前缀（用下标 <code>k</code> 表示），能否用 <code>s1</code> 和 <code>s2</code> 的前缀（下标分别为 <code>i</code> 和 <code>j</code>），仅仅依赖于 <code>s1</code> 前 <code>i</code> 个字符和 <code>s2</code> 前 <code>j</code> 个字符，而与后面的字符无关。<br />
+为了实现这个算法， 我们将使用一个 2D 的布尔数组 <code>dp</code> 。<code>dp[i][j]</code> 表示用 <code>s1</code> 的前 <code>(i+1)</code> 和 <code>s2</code> 的前 <code>(j+1)</code> 个字符，总共 <code>(i+j+2)</code> 个字符，是否交错构成 <code>s3</code> 的前缀。为了求出 <code>dp[i][j]</code>，我们需要考虑 2 种情况：</p>
 <ul>
 <li><code>s1</code> 的第 <code>i</code> 个字符和 <code>s2</code> 的第 <code>j</code> 个字符都不能匹配 <code>s3</code> 的第 <code>k</code> 个字符，其中 <code>k=i+j+1</code> 。这种情况下，<code>s1</code> 和 <code>s2</code> 的前缀无法交错形成 <code>s3</code> 长度为 <code>k+1</code> 的前缀。因此，我们让 <code>dp[i][j]</code> 为 <code>False</code>。</li>
 <li><code>s1</code> 的第 <code>i</code> 个字符或者 <code>s2</code> 的第 <code>j</code> 个字符可以匹配 <code>s3</code> 的第 <code>k</code> 个字符，其中 <code>k=i+j+1</code> 。假设匹配的字符是 <code>x</code> 且与 <code>s1</code> 的第 <code>i</code> 个字符匹配，我们就需要把 <code>x</code> 放在已经形成的交错字符串的最后一个位置。此时，为了我们必须确保 <code>s1</code> 的前 <code>(i-1)</code> 个字符和 <code>s2</code> 的前 <code>j</code> 个字符能形成 <code>s3</code> 的一个前缀。类似的，如果我们将 <code>s2</code> 的第 <code>j</code>个字符与 <code>s3</code> 的第 <code>k</code> 个字符匹配，我们需要确保 <code>s1</code> 的前 <code>i</code> 个字符和 <code>s2</code> 的前 <code>(j-1)</code> 个字符能形成 <code>s3</code> 的一个前缀，我们就让 <code>dp[i][j]</code> 为 <code>True</code>。</li>
 </ul>
-<p>状态转换方程为（下图中<code>i=1，j=0，dp[1][0] = True</code>） </p>
-<script type="math/tex; mode=display">
-dp[i][j] = True\ if\ dp[i][j-1] = True\ and\ S_2(j) = S_3[j+i+1]</script><p><img src="https://i.loli.net/2020/03/28/rUnTb2E1FYd3sf6.png" srcset="/img/loading.gif" alt="1.png"></p>
-<p>或（下图中<code>i=2，j=3，dp[2][3] = True</code>）</p>
-<script type="math/tex; mode=display">
-dp[i][j] = True\ if\ dp[i-1][j] = True\ and\ S_1(i) = S_3[j+i+1]</script><p><img src="https://i.loli.net/2020/03/28/en1QSHxkwpYuhFi.png" srcset="/img/loading.gif" alt="2.png"></p>
+<p>状态转换方程为（下图中<code>i=1，j=0，dp[1][0] = True</code>） <span class="math display">\[
+dp[i][j] = True\ if\ dp[i][j-1] = True\ and\ S_2(j) = S_3[j+i+1]
+\]</span></p>
+<figure>
+<img src="https://i.loli.net/2020/03/28/rUnTb2E1FYd3sf6.png" srcset="/img/loading.gif" alt="1.png" /><figcaption aria-hidden="true">1.png</figcaption>
+</figure>
+<p>或（下图中<code>i=2，j=3，dp[2][3] = True</code>） <span class="math display">\[
+dp[i][j] = True\ if\ dp[i-1][j] = True\ and\ S_1(i) = S_3[j+i+1]
+\]</span></p>
+<figure>
+<img src="https://i.loli.net/2020/03/28/en1QSHxkwpYuhFi.png" srcset="/img/loading.gif" alt="2.png" /><figcaption aria-hidden="true">2.png</figcaption>
+</figure>
 <p>否则（下图中<code>i=2，j=2，dp[2][2] = False</code>）</p>
-<script type="math/tex; mode=display">
-dp[i][j] = False</script><p><img src="https://i.loli.net/2020/03/28/KWgDb3A6dwq8iTL.png" srcset="/img/loading.gif" alt="3.png"></p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><p>方法一动态规划算法实现  </p>
+<p><span class="math display">\[
+dp[i][j] = False
+\]</span></p>
+<figure>
+<img src="https://i.loli.net/2020/03/28/KWgDb3A6dwq8iTL.png" srcset="/img/loading.gif" alt="3.png" /><figcaption aria-hidden="true">3.png</figcaption>
+</figure>
+<h1 id="python版本">Python版本</h1>
+<p>方法一动态规划算法实现</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isInterleave</span>(<span class="hljs-params">self, s1: <span class="hljs-built_in">str</span>, s2: <span class="hljs-built_in">str</span>, s3: <span class="hljs-built_in">str</span></span>) -&gt; bool:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(s3) != <span class="hljs-built_in">len</span>(s1) + <span class="hljs-built_in">len</span>(s2):  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        dp = [[<span class="hljs-literal">False</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s2)+<span class="hljs-number">1</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(s1)+<span class="hljs-number">1</span>)]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(s1) + <span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(s2) + <span class="hljs-number">1</span>):<br>                <span class="hljs-keyword">if</span> i == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> j == <span class="hljs-number">0</span>:<br>                    dp[i][j] = <span class="hljs-literal">True</span><br>                <span class="hljs-keyword">elif</span> i == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 初始化第一行 此时 j &gt;= 1 且 i = 0</span><br>                    dp[i][j] = dp[i][j-<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> s2[j-<span class="hljs-number">1</span>] == s3[i+j-<span class="hljs-number">1</span>]<br>                <span class="hljs-keyword">elif</span> j == <span class="hljs-number">0</span>:  <span class="hljs-comment"># 初始化第一列 此时 i &gt;= 1 且 j = 0</span><br>                    dp[i][j] = dp[i-<span class="hljs-number">1</span>][j] <span class="hljs-keyword">and</span> s1[i-<span class="hljs-number">1</span>] == s3[i+j-<span class="hljs-number">1</span>]<br>                <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 开始状态转移部分 i &gt;= 1 且 j &gt;= 1</span><br>                    dp[i][j] = (dp[i-<span class="hljs-number">1</span>][j] <span class="hljs-keyword">and</span> s1[i-<span class="hljs-number">1</span>] == s3[i+j-<span class="hljs-number">1</span>]) <span class="hljs-keyword">or</span> (dp[i][j-<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> s2[j-<span class="hljs-number">1</span>] == s3[i+j-<span class="hljs-number">1</span>])<br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-built_in">len</span>(s1)][-<span class="hljs-number">1</span>]<br><br><br>Input = [<span class="hljs-string">&quot;aabcc&quot;</span>, <span class="hljs-string">&quot;aabcc&quot;</span>]<br>Input2 = [<span class="hljs-string">&quot;dbbca&quot;</span>, <span class="hljs-string">&quot;dbbca&quot;</span>]<br>Input3 = [<span class="hljs-string">&quot;aadbbcbcac&quot;</span>, <span class="hljs-string">&quot;aadbbbaccc&quot;</span>]<br>Answer = [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.isInterleave(Input[i], Input2[i], Input3[i])<br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(m \times n)$ ，计算 <code>dp</code> 数组需要 $m \times n$ 的时间。<br>空间复杂度：$O(m \times n)$，2 维的 <code>dp</code> 数组需要  $(m+1) \times (n+1)$ 的空间。$m$ 和 $n$ 分别是 <code>s1</code> 和 <code>s2</code> 字符串的长度。    </p>
+<p>时间复杂度：<span class="math inline">\(O(m \times n)\)</span> ，计算 <code>dp</code> 数组需要 <span class="math inline">\(m \times n\)</span> 的时间。<br />
+空间复杂度：<span class="math inline">\(O(m \times n)\)</span>，2 维的 <code>dp</code> 数组需要 <span class="math inline">\((m+1) \times (n+1)\)</span> 的空间。<span class="math inline">\(m\)</span> 和 <span class="math inline">\(n\)</span> 分别是 <code>s1</code> 和 <code>s2</code> 字符串的长度。</p>
 <blockquote>
-<p>参考链接  </p>
+<p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/interleaving-string/solution/jiao-cuo-zi-fu-chuan-by-leetcode/">LeetCode官方题解</a>  </p>
-
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/interleaving-string/solution/jiao-cuo-zi-fu-chuan-by-leetcode/">LeetCode官方题解</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -526,6 +544,26 @@ dp[i][j] = False</script><p><img src="https://i.loli.net/2020/03/28/KWgDb3A6dwq8
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      984 字
+      992 字
     </span>
   
 
@@ -253,7 +253,8 @@
             <div class="markdown-body">
               <p>整理一些面试时可能会问到的C++问题和比较基础但容易混淆的问题</p>
 <a id="more"></a>
-<h1 id="i-和-i"><a href="#i-和-i" class="headerlink" title="++i 和 i++"></a><code>++i</code> 和 <code>i++</code></h1><ul>
+<h1 id="i-和-i"><code>++i</code> 和 <code>i++</code></h1>
+<ul>
 <li><code>i++</code> 是先赋值再自加</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> b = a++;  <span class="hljs-comment">// 先赋值 后自增</span><br>    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    system(<span class="hljs-string">&quot;pause&quot;</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
@@ -270,7 +271,8 @@
 </ul>
 <p><code>++</code> 在 <code>i</code> <strong>前面</strong>的时候就是<strong>先自加</strong>，后赋值。</p>
 <p><code>++</code> 在 <code>i</code> <strong>后面</strong>的时候就是先赋值，<strong>后自加</strong>。</p>
-<h1 id="typedef的三种用法"><a href="#typedef的三种用法" class="headerlink" title="typedef的三种用法"></a>typedef的三种用法</h1><p><strong><code>typedef</code> 在C/C++ 是用来重命名的关键字</strong>。</p>
+<h1 id="typedef的三种用法">typedef的三种用法</h1>
+<p><strong><code>typedef</code> 在C/C++ 是用来重命名的关键字</strong>。</p>
 <p><strong>1、当你不想用极长的一段代码来定义一个数据类型是，可用此来重新命名，如下：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">typedef</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">map</span>&lt;strCarIndex, STRU_TrafficCarData&gt; MapCarID2CarData<br></code></pre></div></td></tr></table></figure>
 <p>以此方式，后面在遍历查找增加删除等操作时便方便了许多。</p>
@@ -286,22 +288,12 @@
 <p>第一个 <code>typename</code> 是函数返回类型，后面的 <code>typename1</code>， <code>typename2</code> 表示函数的参数类型。导出函数的使用方法也是同样的。</p>
 <p><em>参考连接</em></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_24388023/article/details/81461581">C/C++ typedef关键字的几种简单用法</a></p>
-<h1 id="C-方法名前加-是什么意思？"><a href="#C-方法名前加-是什么意思？" class="headerlink" title="C++ 方法名前加~是什么意思？"></a>C++ 方法名前加~是什么意思？</h1><p>意思是<strong>该函数为析构函数</strong><br>也就是说 该类对象在生存期结束的时候会自动调用的一个函数</p>
+<h1 id="c-方法名前加是什么意思">C++ 方法名前加~是什么意思？</h1>
+<p>意思是<strong>该函数为析构函数</strong> 也就是说 该类对象在生存期结束的时候会自动调用的一个函数</p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span>&#123;</span><br>	<span class="hljs-keyword">public</span>:<br>	~Test()&#123;&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>C++提供构造函数来处理对象的初始化。</p>
-<ol>
-<li>构造函数是一种特殊的成员函数，不需要用户来调用，定义对象时被自动执行。</li>
-<li>构造函数名字与类名相同，无返回类型。</li>
-<li>可以由用户自己定义实现，根据需要设计对数据成员进行初始化，依旧可以设置函数的默认参数。</li>
-<li>如果我们没有定义构造函数，系统会为我们自动定义一个无参的默认构造函数的，它不对成员属性做任何操作，如果我们自己定义了构造函数，系统就不会为我们创建默认构造函数了。</li>
-</ol>
-<p>系统会默认的提供一个析构函数。在对象的生命周期结束的时候，程序就会自动执行析构函数来完成这些工作。同构造函数，用户可以自己定义析构函数，系统自动调用。</p>
-<ol>
-<li>析构函数没有返回值，没有参数；</li>
-<li>没有参数，所以不能重载，一个类仅有一个析构函数；</li>
-<li>析构函数除了释放工作，还可以做一些用户希望它做的一些工作，比如输出一些信息。</li>
-</ol>
-
+<p>C++提供构造函数来处理对象的初始化。 1. 构造函数是一种特殊的成员函数，不需要用户来调用，定义对象时被自动执行。 2. 构造函数名字与类名相同，无返回类型。 3. 可以由用户自己定义实现，根据需要设计对数据成员进行初始化，依旧可以设置函数的默认参数。 4. 如果我们没有定义构造函数，系统会为我们自动定义一个无参的默认构造函数的，它不对成员属性做任何操作，如果我们自己定义了构造函数，系统就不会为我们创建默认构造函数了。</p>
+<p>系统会默认的提供一个析构函数。在对象的生命周期结束的时候，程序就会自动执行析构函数来完成这些工作。同构造函数，用户可以自己定义析构函数，系统自动调用。 1. 析构函数没有返回值，没有参数； 2. 没有参数，所以不能重载，一个类仅有一个析构函数； 3. 析构函数除了释放工作，还可以做一些用户希望它做的一些工作，比如输出一些信息。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -538,6 +530,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

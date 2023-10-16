@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.2k 字
     </span>
   
 
@@ -253,57 +253,65 @@
             <div class="markdown-body">
               <p>对撞指针和滑动窗口的应用</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。</p>
-<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[2,7,11,15]</span>, target = 9<br>输出：<span class="hljs-comment">[2,7]</span> 或者 <span class="hljs-comment">[7,2]</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[10,26,30,31,47,60]</span>, target = 40<br>输出：<span class="hljs-comment">[10,30]</span> 或者 <span class="hljs-comment">[30,10]</span><br></code></pre></div></td></tr></table></figure><br>限制：$1 &lt;= nums.length &lt;= 10^5$，$1 &lt;= nums[i] &lt;= 10^6$。</p>
+<h1 id="question">Question</h1>
+<p>输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。</p>
+<p>示例 1： <figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[2,7,11,15]</span>, target = 9<br>输出：<span class="hljs-comment">[2,7]</span> 或者 <span class="hljs-comment">[7,2]</span><br></code></pre></div></td></tr></table></figure> 示例 2： <figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[10,26,30,31,47,60]</span>, target = 40<br>输出：<span class="hljs-comment">[10,30]</span> 或者 <span class="hljs-comment">[30,10]</span><br></code></pre></div></td></tr></table></figure> 限制：<span class="math inline">\(1 &lt;= nums.length &lt;= 10^5\)</span>，<span class="math inline">\(1 &lt;= nums[i] &lt;= 10^6\)</span>。</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（数组中存在和为s的两个数；<strong>数组中不存在和为s的两个数</strong>）。<br>特殊输入测试（表示数组的指针为nullptr指针）。</p>
+<p>功能测试（数组中存在和为s的两个数；<strong>数组中不存在和为s的两个数</strong>）。 特殊输入测试（表示数组的指针为nullptr指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者思考复杂问题的思维能力。应聘者如果能够通过一两个具体的例子找到规律，那么解决这个问题就容易多了。<br>考查应聘者的<strong>知识迁移能力。应聘者面对第二个问题的时候，能不能把解决第一个问题的思路应用到新的题目上</strong>，是面试官考查知识迁移能力的重要指标。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><strong><em>对撞指针（双指针的一种特殊形式）</em></strong></p>
+<p>考查应聘者思考复杂问题的思维能力。应聘者如果能够通过一两个具体的例子找到规律，那么解决这个问题就容易多了。 考查应聘者的<strong>知识迁移能力。应聘者面对第二个问题的时候，能不能把解决第一个问题的思路应用到新的题目上</strong>，是面试官考查知识迁移能力的重要指标。</p>
+<h1 id="intuition">Intuition</h1>
+<p><strong><em>对撞指针（双指针的一种特殊形式）</em></strong></p>
 <ul>
-<li>考虑用两个数 <code>small</code> 和 <code>big</code> 分别表示序列的最小值和最大值。首先把 <code>small</code> 初始化为 <code>1</code>，<code>big</code> 初始化为 <code>len(nums)-1</code>。<ul>
+<li>考虑用两个数 <code>small</code> 和 <code>big</code> 分别表示序列的最小值和最大值。首先把 <code>small</code> 初始化为 <code>1</code>，<code>big</code> 初始化为 <code>len(nums)-1</code>。
+<ul>
 <li>如果从 <code>small + big &gt; s</code>，则应该<strong>减小两个数的和，也就是减小 <code>big</code> 的值。</strong></li>
 <li>如果从 <code>small + big &lt; s</code>，则应该<strong>增加两个数的和，也就是增加 <code>small</code> 的值。</strong></li>
-</ul>
-</li>
+</ul></li>
 <li>如果 <code>small &gt;= big</code>，说明没有找到 <code>smll + big = s</code>，返回 <code>[]</code>。</li>
 </ul>
-<p><img src="https://i.loli.net/2020/05/16/4HfD2wcO63uZFpd.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-16_11-07-57"></p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">twoSum</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        small = <span class="hljs-number">0</span><br>        big = <span class="hljs-built_in">len</span>(nums)-<span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> small &lt; big:<br>            <span class="hljs-keyword">if</span> nums[small] + nums[big] == target:<br>                <span class="hljs-keyword">return</span> [nums[small], nums[big]]<br>            <span class="hljs-keyword">elif</span> nums[small] + nums[big] &gt; target:<br>                big -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                small += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> []<br></code></pre></div></td></tr></table></figure>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><p><strong><em>Question</em></strong></p>
+<figure>
+<img src="https://i.loli.net/2020/05/16/4HfD2wcO63uZFpd.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-16_11-07-57" /><figcaption aria-hidden="true">Snipaste_2020-05-16_11-07-57</figcaption>
+</figure>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">twoSum</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        small = <span class="hljs-number">0</span><br>        big = <span class="hljs-built_in">len</span>(nums)-<span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> small &lt; big:<br>            <span class="hljs-keyword">if</span> nums[small] + nums[big] == target:<br>                <span class="hljs-keyword">return</span> [nums[small], nums[big]]<br>            <span class="hljs-keyword">elif</span> nums[small] + nums[big] &gt; target:<br>                big -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                small += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> []<br></code></pre></div></td></tr></table></figure>
+<h1 id="extension">Extension</h1>
+<p><strong><em>Question</em></strong></p>
 <p><strong><em>面试题 57 - II. 和为 s 的连续正数序列</em></strong></p>
 <p>输入一个正整数 target ，输出<strong>所有</strong>和为 target 的连续正整数序列（至少含有两个数）。序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。</p>
 <p>示例 1：</p>
 <figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：target = <span class="hljs-number">9</span><br>输出：<span class="hljs-string">[[2,3,4],[4,5]]</span><br></code></pre></div></td></tr></table></figure>
 <p>示例 2：</p>
 <figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">输入：target = <span class="hljs-number">15</span><br>输出：<span class="hljs-string">[[1,2,3,4,5],[4,5,6],[7,8]]</span><br></code></pre></div></td></tr></table></figure>
-<p>限制：$1 &lt;= target &lt;= 10^5$</p>
+<p>限制：<span class="math inline">\(1 &lt;= target &lt;= 10^5\)</span></p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（存在和为s的连续序列，如9、100等；<strong>不存在和为s的连续序列，如4、0等</strong>）。<br>边界值测试（连续序列的最小和3）。</p>
+<p>功能测试（存在和为s的连续序列，如9、100等；<strong>不存在和为s的连续序列，如4、0等</strong>）。 边界值测试（连续序列的最小和3）。</p>
 <p><strong><em>Intuition</em></strong></p>
 <p><strong>滑动窗口</strong></p>
 <ul>
-<li>考虑用两个数 <code>small</code> 和 <code>big</code> 分别表示序列的最小值和最大值。首先把 <code>small</code> 初始化为 <code>1</code>，<code>big</code> 初始化为 <code>2</code>。<ul>
+<li>考虑用两个数 <code>small</code> 和 <code>big</code> 分别表示序列的最小值和最大值。首先把 <code>small</code> 初始化为 <code>1</code>，<code>big</code> 初始化为 <code>2</code>。
+<ul>
 <li>如果从 <code>small</code> 到 <code>big</code> 的序列和<strong>大于</strong> <code>s</code>，则可以从序列中去掉较小的值，<strong>也就是增大small的值。</strong></li>
 <li>如果从 <code>small</code> 到 <code>big</code> 的序列和<strong>小于</strong> <code>s</code>，则<strong>可以增大<code>big</code></strong>，让这个序列包含更多的数字。因为这个序列至少要有两个数字，我们一直增加 <code>small</code> 到<code>(1+s)/2</code>为止。</li>
-</ul>
-</li>
+</ul></li>
 <li>如果 <code>small &gt;= big</code>，说明没有从 <code>small</code> 到 <code>big</code> 的序列和<strong>等于</strong> <code>s</code>，返回 <code>[]</code>。</li>
 </ul>
 <p>以求和为9的所有连续序列为例，可以用表总结整个过程。</p>
-<p><img src="https://i.loli.net/2020/05/16/JBmWgsE6P5jocAO.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-16_10-56-13"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/16/JBmWgsE6P5jocAO.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-16_10-56-13" /><figcaption aria-hidden="true">Snipaste_2020-05-16_10-56-13</figcaption>
+</figure>
 <p><strong><em>Code</em></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findContinuousSequence</span>(<span class="hljs-params">self, target: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-keyword">if</span> target &lt; <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> []<br>        left = <span class="hljs-number">1</span>  <span class="hljs-comment"># 滑动窗口的左边界</span><br>        right = <span class="hljs-number">1</span>  <span class="hljs-comment"># 滑动窗口的右边界</span><br>        res = []<br>        <span class="hljs-keyword">while</span> left &lt; target:<br>            _list = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(left, right+<span class="hljs-number">1</span>))<br>            _sum = <span class="hljs-built_in">sum</span>(_list)<br>            <span class="hljs-keyword">if</span> _sum == target:<br>                res.append(_list[:])<br>                <span class="hljs-comment"># 左边界向右移动</span><br>                left += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> _sum &lt; target:<br>                 <span class="hljs-comment"># 右边界向右移动</span><br>                right += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-comment"># 左边界向右移动</span><br>                left += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
 <p><strong><em>Optimization</em></strong></p>
 <p>以上代码还可以做进一步提升，通常我们可以用循环求一个连续序列的和，但考虑到每次操作之后的序列和操作之前的序列相比大部分数字都是一样的，只是增加或者减少了一个数字，因此我们可以在前一个序列的和的基础上求操作之后的序列的和。这样可以减少很多不必要的运算，从而提高代码的效率。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findContinuousSequence</span>(<span class="hljs-params">self, target: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        i = <span class="hljs-number">1</span> <span class="hljs-comment"># 滑动窗口的左边界</span><br>        j = <span class="hljs-number">1</span> <span class="hljs-comment"># 滑动窗口的右边界</span><br>        <span class="hljs-built_in">sum</span> = <span class="hljs-number">0</span> <span class="hljs-comment"># 滑动窗口中数字的和</span><br>        res = []<br><br>        <span class="hljs-keyword">while</span> i &lt;= target // <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">sum</span> &lt; target:<br>                <span class="hljs-comment"># 右边界向右移动</span><br>                <span class="hljs-built_in">sum</span> += j<br>                j += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> <span class="hljs-built_in">sum</span> &gt; target:<br>                <span class="hljs-comment"># 左边界向右移动</span><br>                <span class="hljs-built_in">sum</span> -= i<br>                i += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-comment"># 记录结果</span><br>                arr = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(i, j))<br>                res.append(arr)<br>                <span class="hljs-comment"># 左边界向右移动</span><br>                <span class="hljs-built_in">sum</span> -= i<br>                i += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -547,6 +555,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

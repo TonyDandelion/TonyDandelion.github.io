@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      669 字
+      679 字
     </span>
   
 
@@ -253,29 +253,36 @@
             <div class="markdown-body">
               <p>如何搭建自己的工具</p>
 <a id="more"></a>
-<h1 id="一键安装shadowsocks"><a href="#一键安装shadowsocks" class="headerlink" title="一键安装shadowsocks"></a>一键安装shadowsocks</h1><blockquote>
+<h1 id="一键安装shadowsocks">一键安装shadowsocks</h1>
+<blockquote>
 <p>上banwagong去买一个VPS（Virtual Private Server 虚拟专用服务器），支持支付宝支付，一年120+￥左右，每月500G流量，然后一键安装好shadowsocks。在注册邮箱中会有ssh端口号、密码等信息，记住IP、密码、ssh端口号、ss密码。</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/00a07f3842e53982d128dc7d.html">参考链接1</a><br><a target="_blank" rel="noopener" href="https://glorystar.me/archives/one-key-install-ss-in-BWG.html">参考链接2</a></p>
+<p><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/00a07f3842e53982d128dc7d.html">参考链接1</a> <a target="_blank" rel="noopener" href="https://glorystar.me/archives/one-key-install-ss-in-BWG.html">参考链接2</a></p>
 <p><strong>不建议去使用banwagong自带的SSR一键安装服务 会使得监控你的ssh服务 限制ssh访问</strong></p>
-<p>手动安装方法如下:<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">yum install -y git<br>yum install python-setuptools &amp;&amp; easy_install pip<br>pip install git+https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/shadowsocks/</span>shadowsocks.git@master<br></code></pre></div></td></tr></table></figure><br>安装成功后，需要启动shadowsocks服务端<br>输入命令 vi /etc/shadowsocks.json 创建一个配置文件。<br>按i进入编辑模式，复制粘贴以下信息：<br><figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>    <span class="hljs-attr">&quot;server&quot;</span>:<span class="hljs-string">&quot;banwagong的ip&quot;</span>,<br>    <span class="hljs-attr">&quot;server_port&quot;</span>:<span class="hljs-number">8388</span>(自定义即可),<br>    <span class="hljs-attr">&quot;local_address&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>,<br>    <span class="hljs-attr">&quot;local_port&quot;</span>:<span class="hljs-number">1080</span>,<br>    <span class="hljs-attr">&quot;password&quot;</span>:<span class="hljs-string">&quot;mypassword(自定义即可)&quot;</span>,<br>    <span class="hljs-attr">&quot;timeout&quot;</span>:<span class="hljs-number">300</span>,<br>    <span class="hljs-attr">&quot;method&quot;</span>:<span class="hljs-string">&quot;aes-256-cfb&quot;</span>,<br>    <span class="hljs-attr">&quot;fast_open&quot;</span>: <span class="hljs-literal">false</span><br>&#125;<br></code></pre></div></td></tr></table></figure><br>启动服务<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">ssserver -c <span class="hljs-regexp">/etc/</span>shadowsocks.json -d start<br>ssserver -c <span class="hljs-regexp">/etc/</span>shadowsocks.json -d stop<br></code></pre></div></td></tr></table></figure></p>
-<h1 id="腾讯云利用pac模式做中转"><a href="#腾讯云利用pac模式做中转" class="headerlink" title="腾讯云利用pac模式做中转"></a>腾讯云利用pac模式做中转</h1><blockquote>
+<p>手动安装方法如下: <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">yum install -y git<br>yum install python-setuptools &amp;&amp; easy_install pip<br>pip install git+https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/shadowsocks/</span>shadowsocks.git@master<br></code></pre></div></td></tr></table></figure> 安装成功后，需要启动shadowsocks服务端 输入命令 vi /etc/shadowsocks.json 创建一个配置文件。 按i进入编辑模式，复制粘贴以下信息： <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>    <span class="hljs-attr">&quot;server&quot;</span>:<span class="hljs-string">&quot;banwagong的ip&quot;</span>,<br>    <span class="hljs-attr">&quot;server_port&quot;</span>:<span class="hljs-number">8388</span>(自定义即可),<br>    <span class="hljs-attr">&quot;local_address&quot;</span>: <span class="hljs-string">&quot;127.0.0.1&quot;</span>,<br>    <span class="hljs-attr">&quot;local_port&quot;</span>:<span class="hljs-number">1080</span>,<br>    <span class="hljs-attr">&quot;password&quot;</span>:<span class="hljs-string">&quot;mypassword(自定义即可)&quot;</span>,<br>    <span class="hljs-attr">&quot;timeout&quot;</span>:<span class="hljs-number">300</span>,<br>    <span class="hljs-attr">&quot;method&quot;</span>:<span class="hljs-string">&quot;aes-256-cfb&quot;</span>,<br>    <span class="hljs-attr">&quot;fast_open&quot;</span>: <span class="hljs-literal">false</span><br>&#125;<br></code></pre></div></td></tr></table></figure> 启动服务 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">ssserver -c <span class="hljs-regexp">/etc/</span>shadowsocks.json -d start<br>ssserver -c <span class="hljs-regexp">/etc/</span>shadowsocks.json -d stop<br></code></pre></div></td></tr></table></figure></p>
+<h1 id="腾讯云利用pac模式做中转">腾讯云利用pac模式做中转</h1>
+<blockquote>
 <p>用腾讯云做中转的好处是比较稳定，毕竟是数据中心到数据中心之间的链路。</p>
 </blockquote>
-<h2 id="安装shadowsocks客户端"><a href="#安装shadowsocks客户端" class="headerlink" title="安装shadowsocks客户端"></a>安装shadowsocks客户端</h2><p>方法一、用pip安装</p>
-<p>打开终端，输入：<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> update<br>sudo apt-<span class="hljs-builtin-name">get</span> install python-pip<br>sudo apt-<span class="hljs-builtin-name">get</span> install python-setuptools m2crypto<br></code></pre></div></td></tr></table></figure><br>安装Shadowsocks，输入：<br><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">sudo pip <span class="hljs-keyword">install</span> shadowsocks<br></code></pre></div></td></tr></table></figure><br>方法二、用apt-get安装<br><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">sudo pip <span class="hljs-keyword">install</span> shadowsocks<br></code></pre></div></td></tr></table></figure></p>
-<h2 id="启动shadowsocks客户端"><a href="#启动shadowsocks客户端" class="headerlink" title="启动shadowsocks客户端"></a>启动shadowsocks客户端</h2><p>编辑配置文件 vim shadowsocks.json其中local_port必须是0.0.0.0, 本地端口local_port设置1080</p>
+<h2 id="安装shadowsocks客户端">安装shadowsocks客户端</h2>
+<p>方法一、用pip安装</p>
+<p>打开终端，输入： <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> update<br>sudo apt-<span class="hljs-builtin-name">get</span> install python-pip<br>sudo apt-<span class="hljs-builtin-name">get</span> install python-setuptools m2crypto<br></code></pre></div></td></tr></table></figure> 安装Shadowsocks，输入： <figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">sudo pip <span class="hljs-keyword">install</span> shadowsocks<br></code></pre></div></td></tr></table></figure> 方法二、用apt-get安装 <figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">sudo pip <span class="hljs-keyword">install</span> shadowsocks<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="启动shadowsocks客户端">启动shadowsocks客户端</h2>
+<p>编辑配置文件 vim shadowsocks.json其中local_port必须是0.0.0.0, 本地端口local_port设置1080</p>
 <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>    <span class="hljs-attr">&quot;server&quot;</span>:<span class="hljs-string">&quot;banwagongVPS的IP&quot;</span>,<br>    <span class="hljs-attr">&quot;server_port&quot;</span>:banwagongVPS的SS端口,<br>    <span class="hljs-attr">&quot;local_address&quot;</span>: <span class="hljs-string">&quot;0.0.0.0&quot;</span>,<br>    <span class="hljs-attr">&quot;local_port&quot;</span>:<span class="hljs-number">1080</span>,<br>    <span class="hljs-attr">&quot;password&quot;</span>:<span class="hljs-string">&quot;banwagongVPS的SS&quot;</span>,<br>    <span class="hljs-attr">&quot;timeout&quot;</span>:<span class="hljs-number">300</span>,<br>    <span class="hljs-attr">&quot;method&quot;</span>:<span class="hljs-string">&quot;aes-256-cfb&quot;</span>,<br>    <span class="hljs-attr">&quot;fast-open&quot;</span>: <span class="hljs-literal">false</span><br>&#125;    <br></code></pre></div></td></tr></table></figure>
-<p>ubuntu下开放1080端口<br><figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">apt-<span class="hljs-built_in">get</span> install ufw<br>ufw <span class="hljs-built_in">status</span><br>ufw allow <span class="hljs-number">1080</span><br>ufw <span class="hljs-built_in">status</span><br></code></pre></div></td></tr></table></figure><br>启动Shadowsocks<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">sslocal -c shadowsocks.json -d <span class="hljs-keyword">start</span><br></code></pre></div></td></tr></table></figure><br>正常启动之后tail一下日志<br><figure class="highlight lasso"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lasso">tail <span class="hljs-params">-f</span> /<span class="hljs-built_in">var</span>/<span class="hljs-keyword">log</span>/shadowsocks.<span class="hljs-keyword">log</span><br></code></pre></div></td></tr></table></figure></p>
-<p>也可以用命令启动  日志直接输出 推荐用配置文件 日志输出到了日志文件中<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sslocal</span> -s 服务器域名或IP -p 服务器端口号 -k “密码” -l <span class="hljs-number">1080</span> -t <span class="hljs-number">600</span> -m rc<span class="hljs-number">4</span>-md<span class="hljs-number">5</span> <br></code></pre></div></td></tr></table></figure></p>
-<h1 id="配置本地pac文件"><a href="#配置本地pac文件" class="headerlink" title="配置本地pac文件"></a>配置本地pac文件</h1><h2 id="修改pac文件的IP为腾讯云IP"><a href="#修改pac文件的IP为腾讯云IP" class="headerlink" title="修改pac文件的IP为腾讯云IP"></a>修改pac文件的IP为腾讯云IP</h2><p>参考pac文件</p>
-<p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1kUYaKAF">https://pan.baidu.com/s/1kUYaKAF</a> 密码: 7hzm</p>
+<p>ubuntu下开放1080端口 <figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">apt-<span class="hljs-built_in">get</span> install ufw<br>ufw <span class="hljs-built_in">status</span><br>ufw allow <span class="hljs-number">1080</span><br>ufw <span class="hljs-built_in">status</span><br></code></pre></div></td></tr></table></figure> 启动Shadowsocks <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">sslocal -c shadowsocks.json -d <span class="hljs-keyword">start</span><br></code></pre></div></td></tr></table></figure> 正常启动之后tail一下日志 <figure class="highlight lasso"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lasso">tail <span class="hljs-params">-f</span> /<span class="hljs-built_in">var</span>/<span class="hljs-keyword">log</span>/shadowsocks.<span class="hljs-keyword">log</span><br></code></pre></div></td></tr></table></figure></p>
+<p>也可以用命令启动 日志直接输出 推荐用配置文件 日志输出到了日志文件中 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sslocal</span> -s 服务器域名或IP -p 服务器端口号 -k “密码” -l <span class="hljs-number">1080</span> -t <span class="hljs-number">600</span> -m rc<span class="hljs-number">4</span>-md<span class="hljs-number">5</span> <br></code></pre></div></td></tr></table></figure></p>
+<h1 id="配置本地pac文件">配置本地pac文件</h1>
+<h2 id="修改pac文件的ip为腾讯云ip">修改pac文件的IP为腾讯云IP</h2>
+<p>参考pac文件</p>
+<p>链接: https://pan.baidu.com/s/1kUYaKAF 密码: 7hzm</p>
 <blockquote>
 <p>写在pac文件的最开始 端口号和上面的local_port保持一致，都是1080。</p>
 </blockquote>
 <figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">var proxy</span> = <span class="hljs-string">&quot;SOCKS5 腾讯云服务器IP:1080; SOCKS 腾讯云服务器IP:1080; DIRECT;&quot;</span>;<br></code></pre></div></td></tr></table></figure>
 <p>不同操作系统都能设置启用pac脚本，百度一下如何设置即可。</p>
-<h1 id="在浏览器地址栏输入www-那啥你懂的-com并敲回车"><a href="#在浏览器地址栏输入www-那啥你懂的-com并敲回车" class="headerlink" title="在浏览器地址栏输入www.那啥你懂的.com并敲回车"></a>在浏览器地址栏输入www.那啥你懂的.com并敲回车</h1>
+<h1 id="在浏览器地址栏输入www.那啥你懂的.com并敲回车">在浏览器地址栏输入www.那啥你懂的.com并敲回车</h1>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -512,6 +519,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

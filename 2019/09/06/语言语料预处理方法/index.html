@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,27 +251,28 @@
             <h1 style="display: none">语音数据振幅归一化方法</h1>
             
             <div class="markdown-body">
-              <p>对 <strong>语音情绪识别</strong> 和 <strong>语音识别</strong> 等语音处理任务的 <strong>语音数据</strong> 进行振幅归一化方法<br>how to normalize the amplitude of audio with python</p>
+              <p>对 <strong>语音情绪识别</strong> 和 <strong>语音识别</strong> 等语音处理任务的 <strong>语音数据</strong> 进行振幅归一化方法<br />
+how to normalize the amplitude of audio with python</p>
 <a id="more"></a>
 <p>网上找了一圈都没有找到比较靠谱的方法, 有一篇<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43094346/article/details/82846059">文章</a>提到用什么<code>do_pcm</code>工具, 但是全网都没有相关的内容, 这里贴上一个调用<code>pydub.effects.normalize</code>方法进行振幅归一化的方法，方便后面的同学。</p>
 <blockquote>
-<p>主要思想  </p>
+<p>主要思想</p>
 </blockquote>
 <p>取一段语料中幅度最大的点将其幅度拉大到接近1，记录拉大的比例，再将其他所有点均按这个比例拉伸。</p>
 <blockquote>
-<p>pydub.effects.normalize源码  </p>
+<p>pydub.effects.normalize源码</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">@register_pydub_effect</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">normalize</span>(<span class="hljs-params">seg, headroom=<span class="hljs-number">0.1</span></span>):</span>  <span class="hljs-comment"># 传入一个pydub的AudioSegment对象&lt;class &#x27;pydub.audio_segment.AudioSegment&#x27;&gt;</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    headroom is how close to the maximum volume to boost the signal up to (specified in dB)</span><br><span class="hljs-string">    headroom是多远接近最大音量(振幅)以提升信号（以dB为单位）</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    peak_sample_val = seg.<span class="hljs-built_in">max</span>  <span class="hljs-comment"># 计算传入的sound的最大振幅作为 峰值样本振幅值</span><br>    <br>    <span class="hljs-comment"># if the max is 0, this audio segment is silent, and can&#x27;t be normalized</span><br>    <span class="hljs-comment"># 如果最大值为0，则此音频段是静默的，无法标准化 直接返回seg就好</span><br>    <span class="hljs-keyword">if</span> peak_sample_val == <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> seg<br>    <br>    target_peak = seg.max_possible_amplitude * db_to_float(-headroom)  <span class="hljs-comment"># 目标峰值 = seg的最大可能振幅 * 转化成浮点数的理论最大振幅</span><br><br>    needed_boost = ratio_to_db(target_peak / peak_sample_val)  <span class="hljs-comment"># 用 目标峰值/峰值样本振幅值 得到 浮点形式的音频缩放比例 再用ratio_to_db方法把这个值从浮点单位转成dB单位</span><br>    <span class="hljs-keyword">return</span> seg.apply_gain(needed_boost)  <span class="hljs-comment"># 调用apply_gain对seg执行needed_boost尺度的全局增益</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
-<p>python调用 <code>pydub.effects.normalize</code> 进行振幅归一化的方法  </p>
+<p>python调用 <code>pydub.effects.normalize</code> 进行振幅归一化的方法</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pydub <span class="hljs-keyword">import</span> effects<br>_sound = AudioSegment.from_file(<span class="hljs-string">&quot;./input.wav&quot;</span>, <span class="hljs-string">&quot;wav&quot;</span>)<br>sound = effects.normalize(_sound)<br><br>before normalized `<span class="hljs-built_in">input</span>.wav`<br>sound.export(<span class="hljs-string">&quot;./output.wav&quot;</span>, <span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;wav&quot;</span>)<br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <p>实际效果</p>
 </blockquote>
-<p>before normalized <code>input.wav</code><br><img src="https://i.loli.net/2020/03/11/2CTXQcy8mf9jrI7.png" srcset="/img/loading.gif" alt="20190906105029702.png"></p>
-<p>after normalized <code>output.wav</code><br><img src="https://i.loli.net/2020/03/11/hgJwW1FeXfuLcpm.png" srcset="/img/loading.gif" alt="20190906105121264.png"></p>
-
+<p>before normalized <code>input.wav</code> <img src="https://i.loli.net/2020/03/11/2CTXQcy8mf9jrI7.png" srcset="/img/loading.gif" alt="20190906105029702.png" /></p>
+<p>after normalized <code>output.wav</code> <img src="https://i.loli.net/2020/03/11/hgJwW1FeXfuLcpm.png" srcset="/img/loading.gif" alt="20190906105121264.png" /></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -508,6 +509,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

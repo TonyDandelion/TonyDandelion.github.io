@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      508 字
+      515 字
     </span>
   
 
@@ -253,20 +253,25 @@
             <div class="markdown-body">
               <p>画图，将抽象问题形象化。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。</p>
-<p>例如输入：<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">      <span class="hljs-number">4</span><br>    /   <span class="hljs-string">\</span><br>  <span class="hljs-number">2</span>       <span class="hljs-number">7</span><br> / <span class="hljs-string">\</span>     / <span class="hljs-string">\</span><br><span class="hljs-number">1</span>   <span class="hljs-number">3</span>   <span class="hljs-number">6</span>   <span class="hljs-number">9</span><br></code></pre></div></td></tr></table></figure><br>镜像输出：<br><figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">      <span class="hljs-number">4</span><br>    /   <span class="hljs-string">\</span><br>  <span class="hljs-number">7</span>       <span class="hljs-number">2</span><br> / <span class="hljs-string">\</span>     / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>   <span class="hljs-number">6</span>   <span class="hljs-number">3</span>   <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><br>示例 1：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：root = <span class="hljs-string">[4,2,7,1,3,6,9]</span><br>输出：<span class="hljs-string">[4,7,2,9,6,3,1]</span><br></code></pre></div></td></tr></table></figure><br>限制：0 &lt;= 节点个数 &lt;= 1000</p>
+<h1 id="question">Question</h1>
+<p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。</p>
+<p>例如输入： <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">      <span class="hljs-number">4</span><br>    /   <span class="hljs-string">\</span><br>  <span class="hljs-number">2</span>       <span class="hljs-number">7</span><br> / <span class="hljs-string">\</span>     / <span class="hljs-string">\</span><br><span class="hljs-number">1</span>   <span class="hljs-number">3</span>   <span class="hljs-number">6</span>   <span class="hljs-number">9</span><br></code></pre></div></td></tr></table></figure> 镜像输出： <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">      <span class="hljs-number">4</span><br>    /   <span class="hljs-string">\</span><br>  <span class="hljs-number">7</span>       <span class="hljs-number">2</span><br> / <span class="hljs-string">\</span>     / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>   <span class="hljs-number">6</span>   <span class="hljs-number">3</span>   <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure> 示例 1： <figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：root = <span class="hljs-string">[4,2,7,1,3,6,9]</span><br>输出：<span class="hljs-string">[4,7,2,9,6,3,1]</span><br></code></pre></div></td></tr></table></figure> 限制：0 &lt;= 节点个数 &lt;= 1000</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（普通的二叉树；二叉树的所有节点都没有左子树或者右子树：只有一个节点的二叉树）。<br>特殊输入测试（二叉树的根节点为nullptr指针）。</p>
+<p>功能测试（普通的二叉树；二叉树的所有节点都没有左子树或者右子树：只有一个节点的二叉树）。 特殊输入测试（二叉树的根节点为nullptr指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者对<strong>二叉树的理解</strong>。本题实质上是利用<strong>树的遍历算法</strong>解决问题。<br>考查应聘者的<strong>思维能力</strong>。树的镜像是一个抽象的概念，应聘者需要在短时间内想清楚求镜像的步骤并转换为代码。应聘者可以通过画图把抽象的问题形象化，这有助于其快速找到解题思路。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>总结上面的过程，我们得出求一棵树的镜像的过程：<strong>先前序遍历这棵树的每个节点，如果遍历到的节点有子节点，就交换它的两个子节点。</strong>当交换完所有非叶节点的左、右子节点之后，就得到了树的镜像。</p>
-<p><img src="https://i.loli.net/2020/05/09/J9yQqxnckSOm1dN.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-09_10-20-26.png"></p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, x</span>):</span><br>        self.val = x<br>        self.left = <span class="hljs-literal">None</span><br>        self.right = <span class="hljs-literal">None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span>	<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mirrorTree</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; TreeNode:</span><br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>  <span class="hljs-comment"># 输入根节点为空，也就是空树，直接返回None</span><br>        <br>        <span class="hljs-comment"># 递归终止</span><br>        <span class="hljs-comment"># 到达叶子节点就不交换子节点了，直接返回叶子，本来是可以不做处理的，</span><br>        <span class="hljs-comment"># 但是如果输入的就是一个单节点树，那么还是返回root的，否则会报错。</span><br>        <span class="hljs-keyword">if</span> root.left == <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> root.right == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> root<br><br>        <span class="hljs-comment"># 左右子树交换</span><br>        p = root.left<br>        root.left = root.right<br>        root.right = p<br>        <br>        <span class="hljs-comment"># 递归</span><br>        <span class="hljs-keyword">if</span> root.left:<br>            root.left = self.mirrorTree(root.left)<br>        <span class="hljs-keyword">if</span> root.right:<br>            root.right = self.mirrorTree(root.right)<br>        <br>        <span class="hljs-comment"># 返回根节点</span><br>        <span class="hljs-keyword">return</span> root<br></code></pre></div></td></tr></table></figure>
-
+<p>考查应聘者对<strong>二叉树的理解</strong>。本题实质上是利用<strong>树的遍历算法</strong>解决问题。 考查应聘者的<strong>思维能力</strong>。树的镜像是一个抽象的概念，应聘者需要在短时间内想清楚求镜像的步骤并转换为代码。应聘者可以通过画图把抽象的问题形象化，这有助于其快速找到解题思路。</p>
+<h1 id="intuition">Intuition</h1>
+<p>总结上面的过程，我们得出求一棵树的镜像的过程：<strong>先前序遍历这棵树的每个节点，如果遍历到的节点有子节点，就交换它的两个子节点。</strong>当交换完所有非叶节点的左、右子节点之后，就得到了树的镜像。</p>
+<figure>
+<img src="https://i.loli.net/2020/05/09/J9yQqxnckSOm1dN.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-09_10-20-26.png" /><figcaption aria-hidden="true">Snipaste_2020-05-09_10-20-26.png</figcaption>
+</figure>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, x</span>):</span><br>        self.val = x<br>        self.left = <span class="hljs-literal">None</span><br>        self.right = <span class="hljs-literal">None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span>	<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mirrorTree</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; TreeNode:</span><br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>  <span class="hljs-comment"># 输入根节点为空，也就是空树，直接返回None</span><br>        <br>        <span class="hljs-comment"># 递归终止</span><br>        <span class="hljs-comment"># 到达叶子节点就不交换子节点了，直接返回叶子，本来是可以不做处理的，</span><br>        <span class="hljs-comment"># 但是如果输入的就是一个单节点树，那么还是返回root的，否则会报错。</span><br>        <span class="hljs-keyword">if</span> root.left == <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> root.right == <span class="hljs-literal">None</span>:  <span class="hljs-keyword">return</span> root<br><br>        <span class="hljs-comment"># 左右子树交换</span><br>        p = root.left<br>        root.left = root.right<br>        root.right = p<br>        <br>        <span class="hljs-comment"># 递归</span><br>        <span class="hljs-keyword">if</span> root.left:<br>            root.left = self.mirrorTree(root.left)<br>        <span class="hljs-keyword">if</span> root.right:<br>            root.right = self.mirrorTree(root.right)<br>        <br>        <span class="hljs-comment"># 返回根节点</span><br>        <span class="hljs-keyword">return</span> root<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -512,6 +517,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

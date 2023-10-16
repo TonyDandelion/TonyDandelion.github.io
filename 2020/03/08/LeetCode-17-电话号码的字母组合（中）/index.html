@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      795 字
+      803 字
     </span>
   
 
@@ -251,24 +251,33 @@
             <h1 style="display: none">LeetCode  17. 电话号码的字母组合（中）</h1>
             
             <div class="markdown-body">
-              <p> 一道典型的回溯算法题目 </p>
+              <p>一道典型的回溯算法题目</p>
 <a id="more"></a>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。</p>
+<h2 id="题目">题目</h2>
+<p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。</p>
 <p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
-<p><img src="https://i.loli.net/2020/02/18/6CRAgrKSx5Dk1Bu.png" srcset="/img/loading.gif" alt="17_telephone_keypad.png"></p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入：<span class="hljs-string">&quot;23&quot;</span><br>输出：[<span class="hljs-string">&quot;ad&quot;</span>, <span class="hljs-string">&quot;ae&quot;</span>, <span class="hljs-string">&quot;af&quot;</span>, <span class="hljs-string">&quot;bd&quot;</span>, <span class="hljs-string">&quot;be&quot;</span>, <span class="hljs-string">&quot;bf&quot;</span>, <span class="hljs-string">&quot;cd&quot;</span>, <span class="hljs-string">&quot;ce&quot;</span>, <span class="hljs-string">&quot;cf&quot;</span>].<br></code></pre></div></td></tr></table></figure>
-<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>字符串、回溯算法、深度遍历（DFS）、</p>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>回溯是一种通过穷举所有可能情况来找到所有解的算法。<strong>如果一个候选解最后被发现并不是可行解</strong>，回溯算法会舍弃它，并在前面的一些步骤做出一些修改，并重新尝试找到可行解。</p>
-<p>给出如下回溯函数 <code>backtrack(combination, next_digits)</code> ，它将一个目前已经产生的组合 <code>combination</code> 和接下来准备要输入的数字 <code>next_digits</code> 作为参数。<br>如果没有更多的数字需要被输入，那意味着当前的组合已经产生好了，可以直接添加。<br>如果还有数字需要被输入：<br>遍历下一个数字所对应的所有映射的字母。<br>将当前的字母添加到组合最后，也就是 <code>combination = combination + letter</code> 。<br>重复这个过程，输入剩下的数字： <code>backtrack(combination + letter, next_digits[1:])</code></p>
-<p><img src="https://i.loli.net/2020/02/20/oYNkPLMRGhejaOr.png" srcset="/img/loading.gif" alt="Snipaste_2020-02-20_00-14-09.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/02/18/6CRAgrKSx5Dk1Bu.png" srcset="/img/loading.gif" alt="17_telephone_keypad.png" /><figcaption aria-hidden="true">17_telephone_keypad.png</figcaption>
+</figure>
+<h2 id="示例">示例</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入：<span class="hljs-string">&quot;23&quot;</span><br>输出：[<span class="hljs-string">&quot;ad&quot;</span>, <span class="hljs-string">&quot;ae&quot;</span>, <span class="hljs-string">&quot;af&quot;</span>, <span class="hljs-string">&quot;bd&quot;</span>, <span class="hljs-string">&quot;be&quot;</span>, <span class="hljs-string">&quot;bf&quot;</span>, <span class="hljs-string">&quot;cd&quot;</span>, <span class="hljs-string">&quot;ce&quot;</span>, <span class="hljs-string">&quot;cf&quot;</span>].<br></code></pre></div></td></tr></table></figure>
+<h2 id="考察知识点">考察知识点</h2>
+<p>字符串、回溯算法、深度遍历（DFS）、</p>
+<h2 id="核心思想">核心思想</h2>
+<p>回溯是一种通过穷举所有可能情况来找到所有解的算法。<strong>如果一个候选解最后被发现并不是可行解</strong>，回溯算法会舍弃它，并在前面的一些步骤做出一些修改，并重新尝试找到可行解。</p>
+<p>给出如下回溯函数 <code>backtrack(combination, next_digits)</code> ，它将一个目前已经产生的组合 <code>combination</code> 和接下来准备要输入的数字 <code>next_digits</code> 作为参数。 如果没有更多的数字需要被输入，那意味着当前的组合已经产生好了，可以直接添加。 如果还有数字需要被输入： 遍历下一个数字所对应的所有映射的字母。 将当前的字母添加到组合最后，也就是 <code>combination = combination + letter</code> 。 重复这个过程，输入剩下的数字： <code>backtrack(combination + letter, next_digits[1:])</code></p>
+<figure>
+<img src="https://i.loli.net/2020/02/20/oYNkPLMRGhejaOr.png" srcset="/img/loading.gif" alt="Snipaste_2020-02-20_00-14-09.png" /><figcaption aria-hidden="true">Snipaste_2020-02-20_00-14-09.png</figcaption>
+</figure>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/dian-hua-hao-ma-de-zi-mu-zu-he-by-leetcode/">LeetCode题解</a></p>
-<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><ul>
+<h2 id="python版本">Python版本</h2>
+<ul>
 <li>类似DFS的回溯法实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># coding: utf-8</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">letterCombinations</span>(<span class="hljs-params">self, digits</span>):</span><br>        phone = &#123;<span class="hljs-string">&#x27;2&#x27;</span>: [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>],<br>                 <span class="hljs-string">&#x27;3&#x27;</span>: [<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>],<br>                 <span class="hljs-string">&#x27;4&#x27;</span>: [<span class="hljs-string">&#x27;g&#x27;</span>, <span class="hljs-string">&#x27;h&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>],<br>                 <span class="hljs-string">&#x27;5&#x27;</span>: [<span class="hljs-string">&#x27;j&#x27;</span>, <span class="hljs-string">&#x27;k&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>],<br>                 <span class="hljs-string">&#x27;6&#x27;</span>: [<span class="hljs-string">&#x27;m&#x27;</span>, <span class="hljs-string">&#x27;n&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>],<br>                 <span class="hljs-string">&#x27;7&#x27;</span>: [<span class="hljs-string">&#x27;p&#x27;</span>, <span class="hljs-string">&#x27;q&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>, <span class="hljs-string">&#x27;s&#x27;</span>],<br>                 <span class="hljs-string">&#x27;8&#x27;</span>: [<span class="hljs-string">&#x27;t&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>, <span class="hljs-string">&#x27;v&#x27;</span>],<br>                 <span class="hljs-string">&#x27;9&#x27;</span>: [<span class="hljs-string">&#x27;w&#x27;</span>, <span class="hljs-string">&#x27;x&#x27;</span>, <span class="hljs-string">&#x27;y&#x27;</span>, <span class="hljs-string">&#x27;z&#x27;</span>]&#125;<br>                <br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">combination, next_digits</span>):</span>  <span class="hljs-comment"># 内部函数必须写在调用语句之前。</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> next_digits:  <span class="hljs-comment"># 如果没有更多的数字需要被输入，那意味着当前的组合已经产生好了，可以直接添加。</span><br>                output.append(combination)<br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment">#如果还有数字需要被输入，遍历下一个数字所对应的所有映射的字母。</span><br>                <span class="hljs-keyword">for</span> letter <span class="hljs-keyword">in</span> phone[next_digits[<span class="hljs-number">0</span>]]:  <span class="hljs-comment"># phone[next_digits[0]]是数字代表的字母构成的list [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br>                    backtrack(combination + letter, next_digits[<span class="hljs-number">1</span>:])  <span class="hljs-comment"># 在这里添加letter到前面的combination上，将遍历得到的字母添加到组合最后。</span><br><br>        output = []<br>        <span class="hljs-keyword">if</span> digits:<br>            backtrack(<span class="hljs-string">&quot;&quot;</span>, digits)<br>        <span class="hljs-keyword">return</span> output<br><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [<span class="hljs-string">&quot;23&quot;</span>]<br>Answer = [[<span class="hljs-string">&quot;ad&quot;</span>, <span class="hljs-string">&quot;ae&quot;</span>, <span class="hljs-string">&quot;af&quot;</span>, <span class="hljs-string">&quot;bd&quot;</span>, <span class="hljs-string">&quot;be&quot;</span>, <span class="hljs-string">&quot;bf&quot;</span>, <span class="hljs-string">&quot;cd&quot;</span>, <span class="hljs-string">&quot;ce&quot;</span>, <span class="hljs-string">&quot;cf&quot;</span>]]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.letterCombinations(Input[i])<br>        print(result)<br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度： $O(3^N \times 4^M)$ ，其中 N 是输入数字中对应 3 个字母的数目（比方说 2，3，4，5，6，8）， M 是输入数字中对应 4 个字母的数目（比方说 7，9），N+M 是输入数字的总数。</p>
-<p>空间复杂度：$O(3^N \times 4^M)$，这是因为需要保存 $3^N \times 4^M$个结果。</p>
-
+<p>时间复杂度： <span class="math inline">\(O(3^N \times 4^M)\)</span> ，其中 N 是输入数字中对应 3 个字母的数目（比方说 2，3，4，5，6，8）， M 是输入数字中对应 4 个字母的数目（比方说 7，9），N+M 是输入数字的总数。</p>
+<p>空间复杂度：<span class="math inline">\(O(3^N \times 4^M)\)</span>，这是因为需要保存 <span class="math inline">\(3^N \times 4^M\)</span>个结果。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -512,6 +521,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

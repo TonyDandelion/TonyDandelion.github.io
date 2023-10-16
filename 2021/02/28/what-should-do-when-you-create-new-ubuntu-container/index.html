@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      553 字
+      556 字
     </span>
   
 
@@ -253,8 +253,10 @@
             <div class="markdown-body">
               <p>Just Do it! Right Now!</p>
 <a id="more"></a>
-<h1 id="创建一个新容器"><a href="#创建一个新容器" class="headerlink" title="创建一个新容器"></a>创建一个新容器</h1><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> -v LOCALPATH:/data --name CONTAINERNAME -t -i ubuntu:<span class="hljs-number">18</span>.<span class="hljs-number">04</span> /bin/bash<br></code></pre></div></td></tr></table></figure>
-<h1 id="修改apt-get源为国内源"><a href="#修改apt-get源为国内源" class="headerlink" title="修改apt-get源为国内源"></a>修改apt-get源为国内源</h1><p>备份原文件</p>
+<h1 id="创建一个新容器">创建一个新容器</h1>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> -v LOCALPATH:/data --name CONTAINERNAME -t -i ubuntu:<span class="hljs-number">18</span>.<span class="hljs-number">04</span> /bin/bash<br></code></pre></div></td></tr></table></figure>
+<h1 id="修改apt-get源为国内源">修改apt-get源为国内源</h1>
+<p>备份原文件</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">cp <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list /</span>etc<span class="hljs-regexp">/apt/</span>sources.list.bak<br></code></pre></div></td></tr></table></figure>
 <p>初始化的的ubuntu docker container，可能啥都没有，所以 <code>sources.list</code> 文件只能复制进去。</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">deb http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic main restricted universe multiverse<br>deb-src http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic main restricted universe multiverse<br><br>deb http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic-security main restricted universe multiverse<br>deb-src http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic-security main restricted universe multiverse<br><br>deb http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic-updates main restricted universe multiverse<br>deb-src http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic-updates main restricted universe multiverse<br><br>deb http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic-backports main restricted universe multiverse<br>deb-src http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic-backports main restricted universe multiverse<br><br>deb http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic-proposed main restricted universe multiverse<br>deb-src http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/ubuntu/</span> bionic-proposed main restricted universe multiverse<br></code></pre></div></td></tr></table></figure>
@@ -262,21 +264,24 @@
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">update</span><br></code></pre></div></td></tr></table></figure>
 <p>更新软件包，把本地已安装的软件，与刚下载的软件列表里对应软件进行对比，如果发现已安装的软件版本太低，就会提示你更新。</p>
 <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> upgrade<br></code></pre></div></td></tr></table></figure>
-<h1 id="Install-vim"><a href="#Install-vim" class="headerlink" title="Install vim"></a>Install vim</h1><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> install vim<br></code></pre></div></td></tr></table></figure>
-<h1 id="Install-Python"><a href="#Install-Python" class="headerlink" title="Install Python"></a>Install Python</h1><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> install python3<br></code></pre></div></td></tr></table></figure>
-<h1 id="Install-Conda3"><a href="#Install-Conda3" class="headerlink" title="Install Conda3"></a>Install Conda3</h1><p>前往<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=A">清华镜像网站</a>下载 <code>Anaconda3-2020.11-Linux-x86_64.sh</code> 并，复制到与conda container共享的文件夹下。</p>
+<h1 id="install-vim">Install vim</h1>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> install vim<br></code></pre></div></td></tr></table></figure>
+<h1 id="install-python">Install Python</h1>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> install python3<br></code></pre></div></td></tr></table></figure>
+<h1 id="install-conda3">Install Conda3</h1>
+<p>前往<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=A">清华镜像网站</a>下载 <code>Anaconda3-2020.11-Linux-x86_64.sh</code> 并，复制到与conda container共享的文件夹下。</p>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sh</span> Anaconda<span class="hljs-number">3</span>-<span class="hljs-number">2020</span>.<span class="hljs-number">11</span>-Linux-x<span class="hljs-number">86</span>_<span class="hljs-number">64</span>.sh<br></code></pre></div></td></tr></table></figure>
 <p>需要自己建立软链接</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">ln -s <span class="hljs-regexp">/root/</span>anaconda3<span class="hljs-regexp">/bin/</span>conda <span class="hljs-regexp">/usr/</span>bin/conda<br></code></pre></div></td></tr></table></figure>
 <p>修改conda为国内源</p>
 <ul>
 <li><p>查看所有源</p>
-  <figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">conda <span class="hljs-built_in">config</span> <span class="hljs-comment">--show channels</span><br></code></pre></div></td></tr></table></figure></li>
+<p><figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">conda <span class="hljs-built_in">config</span> <span class="hljs-comment">--show channels</span><br></code></pre></div></td></tr></table></figure></p></li>
 <li><p>添加清华源</p>
- <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>pkgs<span class="hljs-regexp">/free/</span><br>   conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>pkgs<span class="hljs-regexp">/main/</span><br>   conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>cloud/conda-forge <br>   conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>cloud<span class="hljs-regexp">/msys2/</span><br></code></pre></div></td></tr></table></figure>
-</li>
+<p><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>pkgs<span class="hljs-regexp">/free/</span><br>   conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>pkgs<span class="hljs-regexp">/main/</span><br>   conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>cloud/conda-forge <br>   conda config --add channels https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/anaconda/</span>cloud<span class="hljs-regexp">/msys2/</span><br></code></pre></div></td></tr></table></figure></p></li>
 </ul>
-<h1 id="Install-Mysql"><a href="#Install-Mysql" class="headerlink" title="Install Mysql"></a>Install Mysql</h1><p>安装mysql</p>
+<h1 id="install-mysql">Install Mysql</h1>
+<p>安装mysql</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">apt-<span class="hljs-keyword">get</span> install mysql-<span class="hljs-keyword">server</span><br></code></pre></div></td></tr></table></figure>
 <p>mysql服务控制命令</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">启动 mysql：<br>方式一：sudo <span class="hljs-regexp">/etc/i</span>nit.d/mysql start<br>方式二：sudo service mysql start<br><br>停止 mysql：<br>方式一：sudo <span class="hljs-regexp">/etc/i</span>nit.d/mysql stop<br>方式二：sudo service mysql stop<br><br>重启 mysql：<br>方式一：sudo<span class="hljs-regexp">/etc/i</span>nit.d/mysql restart<br>方式二：sudo service mysql restart<br></code></pre></div></td></tr></table></figure>
@@ -286,7 +291,7 @@
 <figure class="highlight abnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs abnf">mysqladmin -u root password “<span class="hljs-number">666666</span>”<span class="hljs-comment">;</span><br></code></pre></div></td></tr></table></figure>
 <p>为Python安装对应 <code>mysql-python</code></p>
 <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> install python-dev<br>apt-<span class="hljs-builtin-name">get</span> install libmysqlclient-dev<br>apt-<span class="hljs-builtin-name">get</span> install gcc<br>pip install mysql-python<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -516,6 +521,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

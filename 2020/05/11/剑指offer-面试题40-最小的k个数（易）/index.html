@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,56 +251,57 @@
             <h1 style="display: none">剑指offer 面试题40. 最小的k个数（易）</h1>
             
             <div class="markdown-body">
-              <p>海量数据Top-K问题，要了解从 $O(nlog_{2}n)$ 到 $O(n)$ 的多种方法。如果面试时遇到的面试题有多种解法，并且每种解法都各有优缺点，那么我们要向面试官问清楚题目的要求、输入的特点，从而选择最合适的解法。</p>
+              <p>海量数据Top-K问题，要了解从 <span class="math inline">\(O(nlog_{2}n)\)</span> 到 <span class="math inline">\(O(n)\)</span> 的多种方法。如果面试时遇到的面试题有多种解法，并且每种解法都各有优缺点，那么我们要向面试官问清楚题目的要求、输入的特点，从而选择最合适的解法。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。</p>
-<p>示例 1：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：arr = <span class="hljs-comment">[3,2,1]</span>, k = 2<br>输出：<span class="hljs-comment">[1,2]</span> 或者 <span class="hljs-comment">[2,1]</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：arr = <span class="hljs-comment">[0,1,2,1]</span>, k = 1<br>输出：<span class="hljs-comment">[0]</span><br></code></pre></div></td></tr></table></figure><br>限制：<br><code>0 &lt;= k &lt;= arr.length &lt;= 10000</code><br><code>0 &lt;= arr[i] &lt;= 10000</code></p>
+<h1 id="question">Question</h1>
+<p>输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。</p>
+<p>示例 1： <figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：arr = <span class="hljs-comment">[3,2,1]</span>, k = 2<br>输出：<span class="hljs-comment">[1,2]</span> 或者 <span class="hljs-comment">[2,1]</span><br></code></pre></div></td></tr></table></figure> 示例 2： <figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">输入：arr = <span class="hljs-comment">[0,1,2,1]</span>, k = 1<br>输出：<span class="hljs-comment">[0]</span><br></code></pre></div></td></tr></table></figure> 限制： <code>0 &lt;= k &lt;= arr.length &lt;= 10000</code> <code>0 &lt;= arr[i] &lt;= 10000</code></p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p><strong>功能测试</strong>（输入的数组中有相同的数字；输入的数组中没有相同的数字）。<br><strong>边界测试</strong>（输入的k等于1或者等于数组的长度）。<br><strong>特殊输入测试</strong>（k小于1；k大于数组的长度；指向数组的指针为NULL）。</p>
+<p><strong>功能测试</strong>（输入的数组中有相同的数字；输入的数组中没有相同的数字）。 <strong>边界测试</strong>（输入的k等于1或者等于数组的长度）。 <strong>特殊输入测试</strong>（k小于1；k大于数组的长度；指向数组的指针为NULL）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者对时间复杂度的分析能力。面试的时候每想出一种解法，我们都要能分析出这种解法的时间复杂度是多少。<br>如果采用第一种思路，则本题考查应聘者对Partition函数的理解。这个函数既是快速排序的基础，也可以用来查找n个数中第k大的数字。<br>如果采用第二种思路，则本题考查应聘者对堆、红黑树等数据结构的理解。当需要在某个数据容器内频繁查找及替换最大值时，我们要想到二叉树是一个合适的选择，并能想到用堆或者红黑树等特殊的二叉树来实现。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><strong><em>基于排序的方法</em></strong></p>
-<p><strong>速度慢，时间复杂度为 $O(nlog_{2}n)$。</strong>基于快排将输入序列排序，取排序之后的前 $n$ 个数字作为结果。</p>
+<p>考查应聘者对时间复杂度的分析能力。面试的时候每想出一种解法，我们都要能分析出这种解法的时间复杂度是多少。 如果采用第一种思路，则本题考查应聘者对Partition函数的理解。这个函数既是快速排序的基础，也可以用来查找n个数中第k大的数字。 如果采用第二种思路，则本题考查应聘者对堆、红黑树等数据结构的理解。当需要在某个数据容器内频繁查找及替换最大值时，我们要想到二叉树是一个合适的选择，并能想到用堆或者红黑树等特殊的二叉树来实现。</p>
+<h1 id="intuition">Intuition</h1>
+<p><strong><em>基于排序的方法</em></strong></p>
+<p><strong>速度慢，时间复杂度为 <span class="math inline">\(O(nlog_{2}n)\)</span>。</strong>基于快排将输入序列排序，取排序之后的前 <span class="math inline">\(n\)</span> 个数字作为结果。</p>
 <p><strong><em>基于二分查找的方法</em></strong></p>
-<p><strong>速度快，时间复杂度为 $O(n)$。</strong>从解决面试题39“数组中出现次数超过一半的数字”得到了启发，我们同样可以基于<code>Partition</code> 函数来解决这个问题。如果<strong>基于数组的第k个数字来调整，则使得比第k个数字小的所有数字都位于数组的左边，比第k个数字大的所有数字都位于数组的右边。这样调整之后，位于数组中左边的k个数字就是最小的k个数字（这k个数字不一定是排序的）。</strong></p>
+<p><strong>速度快，时间复杂度为 <span class="math inline">\(O(n)\)</span>。</strong>从解决面试题39“数组中出现次数超过一半的数字”得到了启发，我们同样可以基于<code>Partition</code> 函数来解决这个问题。如果<strong>基于数组的第k个数字来调整，则使得比第k个数字小的所有数字都位于数组的左边，比第k个数字大的所有数字都位于数组的右边。这样调整之后，位于数组中左边的k个数字就是最小的k个数字（这k个数字不一定是排序的）。</strong></p>
 <p><strong><em>基于额外空间的方法</em></strong></p>
-<p>我们可以先创建一个大小为 $k$ 的数据容器来存储最小的 $k$ 个数字，接下来每次从输入的n个整数中读入一个数。如果容器中已有的数字少于 $k$ 个，则直接把这次读入的整数放入容器之中；如果容器中已有 $k$ 个数字了，也就是容器已满，此时我们不能再插入新的数字而只能替换已有的数字。<strong>找出这已有的k个数中的最大值，然后拿这次待插入的整数和最大值进行比较。如果待插入的值比当前已有的最大值小，则用这个数替换当前已有的最大值；如果待插入的值比当前已有的最大值还要大，那么这个数不可能是最小的k个整数之一，于是我们可以抛弃这个整数。</strong></p>
-<p><del>如果我们使用一个 <code>list</code> 保存k个最小数，使用一个 <code>int</code> 保存 $max\ number$，找出这已有的 $k$ 个数中的最大值的时间开销就是 $O(1)$，整体的时间复杂度就是遍历 $n$ 个数带来的 $O(n)$ 。</del>这种方法不可行，<strong>必须要进行查找</strong>，才能确认新加入的数字和之前剩余数字中哪一个最大。 <code>list</code> + <code>int</code> 的方法，也避免不了查找过程。</p>
-<p>可以选择用<strong>红黑树</strong>和<strong>大根堆</strong>来实现存储最小的 $k$ 个数字。<strong><em>红黑树</em></strong> 通过把节点分为红、黑两种颜色并根据一些规则确保树在一定程度上是平衡的，从而保证在红黑树中的查找、删除和插入操作都只需要 $O(logK)$ 时间。在 <strong><em>大根堆</em></strong> 中，根节点的值总是大于它的子树中任意节点的值。于是我们每次可以在 $O(1)$时间内得到已有的 $k$ 个数字中的最大值，但需要 $O(logK)$ 时间完成删除及插入操作。由于单次在 $k$ 个数字中查找得到最大数的开销是 $O(logK)$，因此，对于 $n$ 个输入数字而言，总的时间效率就是 $O(nlogK)$。</p>
+<p>我们可以先创建一个大小为 <span class="math inline">\(k\)</span> 的数据容器来存储最小的 <span class="math inline">\(k\)</span> 个数字，接下来每次从输入的n个整数中读入一个数。如果容器中已有的数字少于 <span class="math inline">\(k\)</span> 个，则直接把这次读入的整数放入容器之中；如果容器中已有 <span class="math inline">\(k\)</span> 个数字了，也就是容器已满，此时我们不能再插入新的数字而只能替换已有的数字。<strong>找出这已有的k个数中的最大值，然后拿这次待插入的整数和最大值进行比较。如果待插入的值比当前已有的最大值小，则用这个数替换当前已有的最大值；如果待插入的值比当前已有的最大值还要大，那么这个数不可能是最小的k个整数之一，于是我们可以抛弃这个整数。</strong></p>
+<p><del>如果我们使用一个 <code>list</code> 保存k个最小数，使用一个 <code>int</code> 保存 <span class="math inline">\(max\ number\)</span>，找出这已有的 <span class="math inline">\(k\)</span> 个数中的最大值的时间开销就是 <span class="math inline">\(O(1)\)</span>，整体的时间复杂度就是遍历 <span class="math inline">\(n\)</span> 个数带来的 <span class="math inline">\(O(n)\)</span> 。</del>这种方法不可行，<strong>必须要进行查找</strong>，才能确认新加入的数字和之前剩余数字中哪一个最大。 <code>list</code> + <code>int</code> 的方法，也避免不了查找过程。</p>
+<p>可以选择用<strong>红黑树</strong>和<strong>大根堆</strong>来实现存储最小的 <span class="math inline">\(k\)</span> 个数字。<strong><em>红黑树</em></strong> 通过把节点分为红、黑两种颜色并根据一些规则确保树在一定程度上是平衡的，从而保证在红黑树中的查找、删除和插入操作都只需要 <span class="math inline">\(O(logK)\)</span> 时间。在 <strong><em>大根堆</em></strong> 中，根节点的值总是大于它的子树中任意节点的值。于是我们每次可以在 <span class="math inline">\(O(1)\)</span>时间内得到已有的 <span class="math inline">\(k\)</span> 个数字中的最大值，但需要 <span class="math inline">\(O(logK)\)</span> 时间完成删除及插入操作。由于单次在 <span class="math inline">\(k\)</span> 个数字中查找得到最大数的开销是 <span class="math inline">\(O(logK)\)</span>，因此，对于 <span class="math inline">\(n\)</span> 个输入数字而言，总的时间效率就是 <span class="math inline">\(O(nlogK)\)</span>。</p>
 <p><strong><em>对比</em></strong></p>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th></th>
 <th>基于Partition的算法</th>
 <th>基于红黑树或者堆的算法</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>时间复杂度</td>
-<td>$O(n)$</td>
-<td>$O(nlog_{2}K)$</td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(nlog_{2}K)\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>是否是原地算法</td>
 <td>否</td>
 <td>是</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>是否适用于海量数据</td>
 <td>是</td>
 <td>否</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<h1 id="code">Code</h1>
+<ul>
 <li>基于排序的方法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getLeastNumbers</span>(<span class="hljs-params">self, arr: List[<span class="hljs-built_in">int</span>], k: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span>  <br>        _len = <span class="hljs-built_in">len</span>(arr)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.checkValid(arr, _len):<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        arr = self.quickSort(arr, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(arr)-<span class="hljs-number">1</span>)<br>        print(arr)<br>        <span class="hljs-keyword">return</span> arr[:k]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkValid</span>(<span class="hljs-params">self, arr, _len</span>):</span><br>        <span class="hljs-keyword">if</span> arr == <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> _len &lt; <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">quickSort</span>(<span class="hljs-params">self, nums, left, right</span>):</span><br>        <span class="hljs-keyword">if</span> left &gt;= right:<br>            <span class="hljs-keyword">return</span><br>        i, j, key = left, right, nums[left]<br>        <span class="hljs-keyword">while</span> i &lt; j:<br>            <span class="hljs-comment"># 必须先从右向左找第一个小于等于key的值</span><br>            <span class="hljs-keyword">while</span> i &lt; j <span class="hljs-keyword">and</span> nums[j] &gt;= key:  <span class="hljs-comment"># 从右向左找第一个小于等于key的值</span><br>                j -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> i &lt; j:  <span class="hljs-comment"># 找到了小于等于key的就扔到前面</span><br>                nums[i] = nums[j]<br>                i += <span class="hljs-number">1</span><br>            <br>            <span class="hljs-keyword">while</span> i &lt; j <span class="hljs-keyword">and</span> nums[i] &lt;= key:   <span class="hljs-comment"># 从左向右找第一个大于等于key的值</span><br>                i += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> i &lt; j:  <span class="hljs-comment"># 找到大于等于key的就扔到后面</span><br>                nums[j] = nums[i]<br>                j -= <span class="hljs-number">1</span><br><br>        nums[i] = key<br>        self.quickSort(nums, left, i-<span class="hljs-number">1</span>)<br>        self.quickSort(nums, i+<span class="hljs-number">1</span>, right)<br>        <span class="hljs-keyword">return</span> nums<br></code></pre></div></td></tr></table></figure>
@@ -316,7 +317,7 @@
 <li>基于额外空间的方法（这里使用了堆来完成k个元素的存储），调用系统的 <code>heap Class</code> 。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> heapq<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-comment"># O(nlogk)的算法, 适合海量数据</span><br>    <span class="hljs-comment"># 利用一个k容量的容器存放数组, 构造最大堆, 当下一个数据大于最大数, 跳过, 小于最大数, 则进入容器替换之前的最大数</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getLeastNumbers</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>], k: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span>  <br>        _len = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.checkValid(nums, _len, k):<br>            <span class="hljs-keyword">return</span> []<br>        res = []<br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) &lt; k:<br>                res.append(num)<br>            <span class="hljs-keyword">else</span>:<br>                res = heapq.nlargest(k, res)<br>                <span class="hljs-keyword">if</span> num &lt; res[<span class="hljs-number">0</span>]:<br>                    res[<span class="hljs-number">0</span>] = num<br>        <span class="hljs-keyword">return</span> res[::-<span class="hljs-number">1</span>]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkValid</span>(<span class="hljs-params">self, nums, _len, k</span>):</span><br>        <span class="hljs-keyword">if</span> nums == <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> _len &lt; k <span class="hljs-keyword">or</span> _len &lt; <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> k &lt; <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -562,6 +563,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

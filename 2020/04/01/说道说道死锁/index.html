@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,11 +251,12 @@
             <h1 style="display: none">说道说道死锁</h1>
             
             <div class="markdown-body">
-              <p>Interviewer: Explain us the deadlock, and we’ll hire you.</p>
-<p>Me: Hire me, and I’ll explain it to you.</p>
+              <p>Interviewer: Explain us the deadlock, and we'll hire you.</p>
+<p>Me: Hire me, and I'll explain it to you.</p>
 <a id="more"></a>
 <p>死锁是指<strong>两个或两个以上的进程（线程）在运行过程中因争夺资源而造成的一种僵局（DeadlyEmbrace) ，每一个进程都在等待另一个死锁进程所占有的资源</strong>。若无外力作用，这些进程（线程）都将无法向前推进。</p>
-<h1 id="死锁产生的必要条件"><a href="#死锁产生的必要条件" class="headerlink" title="死锁产生的必要条件"></a>死锁产生的必要条件</h1><p>产生死锁，需要具备以下四个条件，只要其中任何一个条件不成立，死锁就不会发生。  </p>
+<h1 id="死锁产生的必要条件">死锁产生的必要条件</h1>
+<p>产生死锁，需要具备以下四个条件，只要其中任何一个条件不成立，死锁就不会发生。</p>
 <p>1、互斥条件</p>
 <p>进程要求对所分配的资源（如打印机）进行排他性控制，即在一段时间内某资源仅为一个进程所占有。此时若有其他进程请求该资源，则请求进程只能等待。</p>
 <p>2、不可剥夺条件</p>
@@ -264,64 +265,83 @@
 <p>进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。</p>
 <p>4、循环等待条件</p>
 <p>在发生死锁时，必然存在一个进程一资源的循环链，即进程集合{P0, P1, P2, …, Pn）中的P0正在等待一个P1占用的资源，P1正在等待P2占用的资源，……，Pn正在等待已被P0占用的资源。</p>
-<p><img src="https://i.loli.net/2020/04/01/7Id1Sgmu2oPOcAK.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-01_00-29-19.png"></p>
-<h1 id="解决死锁的策略"><a href="#解决死锁的策略" class="headerlink" title="解决死锁的策略"></a>解决死锁的策略</h1><h2 id="预防死锁（破坏条件）"><a href="#预防死锁（破坏条件）" class="headerlink" title="预防死锁（破坏条件）"></a>预防死锁（破坏条件）</h2><h3 id="破环请求和保持条件"><a href="#破环请求和保持条件" class="headerlink" title="破环请求和保持条件"></a>破环请求和保持条件</h3><p><strong>当进程在申请资源的时候，不能持有不可抢占资源，</strong>这个可以通过协议实现。</p>
-<ul>
-<li><strong>第一种协议</strong>：一次申请所有所需资源。缺点：1、资源被浪费，利用率低下。2、会导致饥饿现象，<strong>饥饿现象是指一个可运行的进程尽管能继续执行，但被调度器无限期地忽视，而不能被调度执行的情况。</strong>这里出现饥饿现象的原因是某个进程所需要的资源长期被其他进程所占用，导致其成为了饥饿进程，迟迟无法运行。</li>
-<li><strong>第二种协议</strong>：允许一个进程<strong>只获得运行初期所需的资源</strong>后，便开始运行。进程运行过程中再<strong>逐步释放已分配给自己的、且已用毕的全部资源</strong>，然后再请求新的所需资源。</li>
-</ul>
-<h3 id="破坏不可抢占条件"><a href="#破坏不可抢占条件" class="headerlink" title="破坏不可抢占条件"></a>破坏不可抢占条件</h3><p>为了能破坏“不可抢占”条件，协议中规定，<strong>当一个已经保持了某些不可被抢占资源的进程，提出新的资源请求而不能得到满足时，它必须释放已经保持的所有资源，待以后需要时再重新申请。</strong>这意味着进程已占有的资源会被暂时地释放，或者说是被抢占了，从而破坏了“不可抢占”条件。缺点<strong>：该方法实现起来比较复杂，且需付出很大的代价。</strong>因为一个不可抢占的资源如打印机、CD刻录机等在使用一段时间后被抢占，可能会造成进程<strong>前一阶段工作的失效</strong>，即使是采取了某些防范措施，也还会使进程前后两次运行的信息不连续。这种策略还可能因为<strong>反复地申请和释放资源致使进程的执行被无限地推迟</strong>，这<strong>不仅延长了进程的周转时间</strong>，而且<strong>也增加了系统开销，降低了系统吞吐量</strong>。</p>
-<h3 id="破坏循环等待条件"><a href="#破坏循环等待条件" class="headerlink" title="破坏循环等待条件"></a>破坏循环等待条件</h3><p>将系统资源编号，只要进程提出申请分配资源 $R_i$，则在之后的申请中，只能申请资源号大于 $R_i$ 的资源。</p>
-<h2 id="避免死锁（防止死锁）"><a href="#避免死锁（防止死锁）" class="headerlink" title="避免死锁（防止死锁）"></a>避免死锁（防止死锁）</h2><p>避免死锁的实质在于，系统在进行资源分配时，应使系统不进入不安全状态。</p>
-<h3 id="安全状态"><a href="#安全状态" class="headerlink" title="安全状态"></a>安全状态</h3><p>在死锁避免方法中，<strong>把系统的状态分为安全状态和不安全状态</strong>。当系统处于安全状态时，可避免发生死锁。反之，当系统处于不安全状态时，则可能进入到死锁状态。</p>
-<p>在该方法中，<strong>允许进程动态地申请资源，但系统在进行资源分配之前，应先计算此次资源分配的安全性。若此次分配不会导致系统进入不安全状态，才可将资源分配给进程，否则，令进程等待。</strong>所谓安全状态，是指系统能<strong>按某种进程推进顺序</strong> $(P_1, P_2, …, P_a)$ 为每个进程 $P$，分配其所需资源，直至满足每个进程对资源的最大需求，使每个进程都可顺利地完成。此时称 $(P_1, P_2, …, P_a)$ 为安全序列。如果系统无法找到这样一个安全序列，则称系统处不安全状态。<strong>简单来说：安全性检测是指能否找到一个序列，使得能满足所有进程的资源申请要求。</strong></p>
-<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><p><strong>银行家算法实现了破环请求和保持条件的第二种协议</strong></p>
+<figure>
+<img src="https://i.loli.net/2020/04/01/7Id1Sgmu2oPOcAK.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-01_00-29-19.png" /><figcaption aria-hidden="true">Snipaste_2020-04-01_00-29-19.png</figcaption>
+</figure>
+<h1 id="解决死锁的策略">解决死锁的策略</h1>
+<h2 id="预防死锁破坏条件">预防死锁（破坏条件）</h2>
+<h3 id="破环请求和保持条件">破环请求和保持条件</h3>
+<p><strong>当进程在申请资源的时候，不能持有不可抢占资源，</strong>这个可以通过协议实现。 - <strong>第一种协议</strong>：一次申请所有所需资源。缺点：1、资源被浪费，利用率低下。2、会导致饥饿现象，<strong>饥饿现象是指一个可运行的进程尽管能继续执行，但被调度器无限期地忽视，而不能被调度执行的情况。</strong>这里出现饥饿现象的原因是某个进程所需要的资源长期被其他进程所占用，导致其成为了饥饿进程，迟迟无法运行。 - <strong>第二种协议</strong>：允许一个进程<strong>只获得运行初期所需的资源</strong>后，便开始运行。进程运行过程中再<strong>逐步释放已分配给自己的、且已用毕的全部资源</strong>，然后再请求新的所需资源。</p>
+<h3 id="破坏不可抢占条件">破坏不可抢占条件</h3>
+<p>为了能破坏“不可抢占”条件，协议中规定，<strong>当一个已经保持了某些不可被抢占资源的进程，提出新的资源请求而不能得到满足时，它必须释放已经保持的所有资源，待以后需要时再重新申请。</strong>这意味着进程已占有的资源会被暂时地释放，或者说是被抢占了，从而破坏了“不可抢占”条件。缺点<strong>：该方法实现起来比较复杂，且需付出很大的代价。</strong>因为一个不可抢占的资源如打印机、CD刻录机等在使用一段时间后被抢占，可能会造成进程<strong>前一阶段工作的失效</strong>，即使是采取了某些防范措施，也还会使进程前后两次运行的信息不连续。这种策略还可能因为<strong>反复地申请和释放资源致使进程的执行被无限地推迟</strong>，这<strong>不仅延长了进程的周转时间</strong>，而且<strong>也增加了系统开销，降低了系统吞吐量</strong>。</p>
+<h3 id="破坏循环等待条件">破坏循环等待条件</h3>
+<p>将系统资源编号，只要进程提出申请分配资源 <span class="math inline">\(R_i\)</span>，则在之后的申请中，只能申请资源号大于 <span class="math inline">\(R_i\)</span> 的资源。</p>
+<h2 id="避免死锁防止死锁">避免死锁（防止死锁）</h2>
+<p>避免死锁的实质在于，系统在进行资源分配时，应使系统不进入不安全状态。</p>
+<h3 id="安全状态">安全状态</h3>
+<p>在死锁避免方法中，<strong>把系统的状态分为安全状态和不安全状态</strong>。当系统处于安全状态时，可避免发生死锁。反之，当系统处于不安全状态时，则可能进入到死锁状态。</p>
+<p>在该方法中，<strong>允许进程动态地申请资源，但系统在进行资源分配之前，应先计算此次资源分配的安全性。若此次分配不会导致系统进入不安全状态，才可将资源分配给进程，否则，令进程等待。</strong>所谓安全状态，是指系统能<strong>按某种进程推进顺序</strong> <span class="math inline">\((P_1, P_2, ..., P_a)\)</span> 为每个进程 <span class="math inline">\(P\)</span>，分配其所需资源，直至满足每个进程对资源的最大需求，使每个进程都可顺利地完成。此时称 <span class="math inline">\((P_1, P_2, ..., P_a)\)</span> 为安全序列。如果系统无法找到这样一个安全序列，则称系统处不安全状态。<strong>简单来说：安全性检测是指能否找到一个序列，使得能满足所有进程的资源申请要求。</strong></p>
+<h3 id="银行家算法">银行家算法</h3>
+<p><strong>银行家算法实现了破环请求和保持条件的第二种协议</strong></p>
 <ul>
 <li>每一个新进程在进入系统时，它必须申明在运行过程中，可能需要每种资源类型的最大单元数目，其数目不应超过系统所拥有的资源总量。</li>
-<li>当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。<ul>
-<li>若有足够的资源分配给该进程，再进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。<ul>
+<li>当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。
+<ul>
+<li>若有足够的资源分配给该进程，再进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。
+<ul>
 <li>如果不会，才将资源分配给它。</li>
 <li>如果会导致系统处于不安全状态，就不会将资源分配给它，让进程等待。</li>
-</ul>
-</li>
+</ul></li>
 <li>如果没有足够的资源分配给该进程，让进程等待。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="银行家算法的数据结构"><a href="#银行家算法的数据结构" class="headerlink" title="银行家算法的数据结构"></a>银行家算法的数据结构</h4><p>为了实现银行家算法，在系统中必须设置这样四个数据结构，分别用来描述<br>1、系统中可<strong>利用的资源向量 <code>Available</code></strong>。这是一个含有 <code>m</code> 个元素的数组，其中的每一个元素代表一类可利用的资源数目，其初始值是系统中所配置的该类全部可用资源的数目，其数值随该类资源的分配和回收而动态地改变。如果 <code>Available[j]=K</code>，则表示系统中现有 $R_i$ 类资源 <code>K</code>个。<br>2、所有进程对资源的<strong>最大需求矩阵 <code>Max</code> </strong>。这是一个 $n \times m$ 的矩阵，它定义了系统中 <code>n</code> 个进程中的每一个进程对 <code>m</code> 类资源的最大需求。如果 <code>Max[i, j]=K</code>，则表示进程 <code>i</code> 需要 $R_j $类资源的最大数目为 <code>K</code>。<br>3、系统中的<strong>资源分配矩阵 <code>Allocation</code></strong>。这也是一个 $n \times m$ 的矩阵，它定义了系统中 <code>m</code> 类资源当前已分配给 <code>n</code> 个进程的资源数。如果 <code>Allocation[i, j]=K</code>，则表示进程 <code>i</code> 当前已分得 $R_j$ 类资源的数目为 <code>K</code>。<br>4、所有进程还需要多少资源的情况，<strong>需求矩阵<code>Need</code></strong>。这也是一个 $n \times m$ 的矩阵，用以表示每一个进程尚需的各类资源数。如果 <code>Need[i, j]=K</code>，则表示进程 <code>i</code> 还需要 $R_j$ 类资源 <code>K</code> 个才能完成其任务。</p>
-<p>上述三个矩阵间存在下述关系：</p>
-<script type="math/tex; mode=display">
-Need[i, j] = Max[i, j] - Allocation[i, j]</script><h4 id="银行家算法-1"><a href="#银行家算法-1" class="headerlink" title="银行家算法"></a>银行家算法</h4><p>设 $Request_i$ 是进程 $P_i$ 的请求向量，如果 $Request_i[j]=K$，表示进程 $P_i$，需要 $K$ 个 $R_j$ 类型的资源。当 $P_i$ 发出资源请求后，系统按下述步骤进行检查：<br>（1）如果 $Request[i]≤Need[i, j]$，便转向步骤（2）；否则认为出错，因为它所需要的资源数已超过它所宣布的最大值。<br>（2）如果 $Request[i]≤Available[j]$，便转向步骤（3）；否则，表示尚无足够资源，$P_i$ 须等待。<br>（3）系统试探着把资源分配给进程 $P_i$ ，并修改下面数据结构中的数值：</p>
-<p>$Available[j]=Available[j]-Request_i[j]$<br>$Allocation[i, j]=Allocation[i, j]+Request[j]$<br>$Need[i, j]=Need[i, j]-Request_i[j]$</p>
-<p>（4）系统<strong>执行安全性算法，检查此次资源分配后系统是否处于安全状态。</strong>若安全，才正式将资源分配给进程 $P_i$，以完成本次分配；否则，将本次的<strong>试探分配</strong>作废，恢复原来的资源分配状态，让进程 $P_i$ 等待。</p>
-<h4 id="安全性算法"><a href="#安全性算法" class="headerlink" title="安全性算法"></a>安全性算法</h4><p>系统所执行的安全性算法可描述如下：<br>（1）设置两个向量：①工作向量 <code>Work</code> ，它表示系统可提供给进程继续运行所需的各类资源数目，它含有 <code>m</code> 个元素，在执行安全算法开始时，$Work:=Available$ ；② $Finish$：它表示系统是否有足够的资源分配给进程，使之运行完成。开始时先设置 $Finish[i]:=false$；当有足够资源分配给进程时，再令 $Finish[i] := true$ 。<br>（2）从进程集合中找到一个能满足下述条件的进程：<br>$Finish[i]==false$<br>$Need[i,j]≤Work[i]$<br>若找到，执行步骤（3），否则，执行步骤（4）。<br>（3）当进程 $P_i$ 获得资源后，可顺利执行，直至完成，并释放出分配给它的资源，故应执行：<br>$Work[i]=Work[i]+Allocation[i,j]$<br>$Finish[i]=true$<br>$go\ to\ step\ 2$<br>（4）如果所有进程的 $Finish[i]=true$ 都满足，则表示系统处于安全状态；否则，系统处于不安全状态。</p>
-<h4 id="银行家算法举例"><a href="#银行家算法举例" class="headerlink" title="银行家算法举例"></a>银行家算法举例</h4><p>假定系统中有五个进程  $ {P_0, P_1, P_2, P_3, P_4} $  和三类资源  ${A, B, C}$ ，各种资源的数量分别为10、5、7，在$T_0$时刻的资源分配情况如图3-15所示</p>
-<p><img src="https://i.loli.net/2020/04/01/qk7jr3zyUOcoaCQ.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-01_16-35-40.png"></p>
-<p>$T_0$ 时刻的安全性：利用安全性算法对 $T_0$ 时刻的资源分配情况进行分析（如图3-16所示）可知，在 $T_0$ 时刻存在着一个<strong>安全序列</strong> $ {P_1, P_3, P_4, P_2, P_0} $ ，故系统是安全的，可以向 $P_1$ 分配资源。</p>
-<p><img src="https://i.loli.net/2020/04/01/aO9Qdxlukgsbver.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-01_16-45-33.png"></p>
-<p>$P_1$ 请求资源：$P_1$ 发出请求向量 $Request_1(1, 0, 2)$，系统按银行家算法进行检查：<br>① $Request_i(1, 0, 2) ≤ Need_1(1,2,2)$<br>② $Request_i(1,0,2) ≤ Available_1(3,3,2)$<br>③ 系统先假定可为 $P_1$ 分配资源，并修改 $Available$，$Allocation_1$ 和 $Need_1$ 向量，由此形成的资源变化情况如图3-15中的圆括号所示；<br>④再利用安全性算法检查此时系统是否安全，如图3-17所示。</p>
-<p><img src="https://i.loli.net/2020/04/01/g4qTZzXGOEs9iuv.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-01_16-50-16.png"></p>
-<p>由所进行的安全性检查得知，可以找到一个安全序列$ {P_1, P_3, P_4, P_2, P_0} $ 。因此，系统是安全的，可以立即将 $P_1$ 所申请的资源分配给它。接着，$P_4$ 请求资源，以此类推，<strong>每次请求资源之前，先做一次预分配，然后判断系统安全性，确定系统安全之后，再真正给他分配，真正分配之后，还要进行一次安全性检测。</strong></p>
+<h4 id="银行家算法的数据结构">银行家算法的数据结构</h4>
+<p>为了实现银行家算法，在系统中必须设置这样四个数据结构，分别用来描述 1、系统中可<strong>利用的资源向量 <code>Available</code></strong>。这是一个含有 <code>m</code> 个元素的数组，其中的每一个元素代表一类可利用的资源数目，其初始值是系统中所配置的该类全部可用资源的数目，其数值随该类资源的分配和回收而动态地改变。如果 <code>Available[j]=K</code>，则表示系统中现有 <span class="math inline">\(R_i\)</span> 类资源 <code>K</code>个。 2、所有进程对资源的<strong>最大需求矩阵 <code>Max</code> </strong>。这是一个 <span class="math inline">\(n \times m\)</span> 的矩阵，它定义了系统中 <code>n</code> 个进程中的每一个进程对 <code>m</code> 类资源的最大需求。如果 <code>Max[i, j]=K</code>，则表示进程 <code>i</code> 需要 $R_j $类资源的最大数目为 <code>K</code>。 3、系统中的<strong>资源分配矩阵 <code>Allocation</code></strong>。这也是一个 <span class="math inline">\(n \times m\)</span> 的矩阵，它定义了系统中 <code>m</code> 类资源当前已分配给 <code>n</code> 个进程的资源数。如果 <code>Allocation[i, j]=K</code>，则表示进程 <code>i</code> 当前已分得 <span class="math inline">\(R_j\)</span> 类资源的数目为 <code>K</code>。 4、所有进程还需要多少资源的情况，<strong>需求矩阵<code>Need</code></strong>。这也是一个 <span class="math inline">\(n \times m\)</span> 的矩阵，用以表示每一个进程尚需的各类资源数。如果 <code>Need[i, j]=K</code>，则表示进程 <code>i</code> 还需要 <span class="math inline">\(R_j\)</span> 类资源 <code>K</code> 个才能完成其任务。</p>
+<p>上述三个矩阵间存在下述关系： <span class="math display">\[
+Need[i, j] = Max[i, j] - Allocation[i, j]
+\]</span></p>
+<h4 id="银行家算法-1">银行家算法</h4>
+<p>设 <span class="math inline">\(Request_i\)</span> 是进程 <span class="math inline">\(P_i\)</span> 的请求向量，如果 <span class="math inline">\(Request_i[j]=K\)</span>，表示进程 <span class="math inline">\(P_i\)</span>，需要 <span class="math inline">\(K\)</span> 个 <span class="math inline">\(R_j\)</span> 类型的资源。当 <span class="math inline">\(P_i\)</span> 发出资源请求后，系统按下述步骤进行检查： （1）如果 <span class="math inline">\(Request[i]≤Need[i, j]\)</span>，便转向步骤（2）；否则认为出错，因为它所需要的资源数已超过它所宣布的最大值。 （2）如果 <span class="math inline">\(Request[i]≤Available[j]\)</span>，便转向步骤（3）；否则，表示尚无足够资源，<span class="math inline">\(P_i\)</span> 须等待。 （3）系统试探着把资源分配给进程 <span class="math inline">\(P_i\)</span> ，并修改下面数据结构中的数值：</p>
+<p><span class="math inline">\(Available[j]=Available[j]-Request_i[j]\)</span> <span class="math inline">\(Allocation[i, j]=Allocation[i, j]+Request[j]\)</span> <span class="math inline">\(Need[i, j]=Need[i, j]-Request_i[j]\)</span></p>
+<p>（4）系统<strong>执行安全性算法，检查此次资源分配后系统是否处于安全状态。</strong>若安全，才正式将资源分配给进程 <span class="math inline">\(P_i\)</span>，以完成本次分配；否则，将本次的<strong>试探分配</strong>作废，恢复原来的资源分配状态，让进程 <span class="math inline">\(P_i\)</span> 等待。</p>
+<h4 id="安全性算法">安全性算法</h4>
+<p>系统所执行的安全性算法可描述如下： （1）设置两个向量：①工作向量 <code>Work</code> ，它表示系统可提供给进程继续运行所需的各类资源数目，它含有 <code>m</code> 个元素，在执行安全算法开始时，<span class="math inline">\(Work:=Available\)</span> ；② <span class="math inline">\(Finish\)</span>：它表示系统是否有足够的资源分配给进程，使之运行完成。开始时先设置 <span class="math inline">\(Finish[i]:=false\)</span>；当有足够资源分配给进程时，再令 <span class="math inline">\(Finish[i] := true\)</span> 。 （2）从进程集合中找到一个能满足下述条件的进程： <span class="math inline">\(Finish[i]==false\)</span> <span class="math inline">\(Need[i,j]≤Work[i]\)</span> 若找到，执行步骤（3），否则，执行步骤（4）。 （3）当进程 <span class="math inline">\(P_i\)</span> 获得资源后，可顺利执行，直至完成，并释放出分配给它的资源，故应执行： <span class="math inline">\(Work[i]=Work[i]+Allocation[i,j]\)</span> <span class="math inline">\(Finish[i]=true\)</span> <span class="math inline">\(go\ to\ step\ 2\)</span> （4）如果所有进程的 <span class="math inline">\(Finish[i]=true\)</span> 都满足，则表示系统处于安全状态；否则，系统处于不安全状态。</p>
+<h4 id="银行家算法举例">银行家算法举例</h4>
+<p>假定系统中有五个进程 $ {P_0, P_1, P_2, P_3, P_4} $ 和三类资源 <span class="math inline">\({A, B, C}\)</span> ，各种资源的数量分别为10、5、7，在<span class="math inline">\(T_0\)</span>时刻的资源分配情况如图3-15所示</p>
+<figure>
+<img src="https://i.loli.net/2020/04/01/qk7jr3zyUOcoaCQ.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-01_16-35-40.png" /><figcaption aria-hidden="true">Snipaste_2020-04-01_16-35-40.png</figcaption>
+</figure>
+<p><span class="math inline">\(T_0\)</span> 时刻的安全性：利用安全性算法对 <span class="math inline">\(T_0\)</span> 时刻的资源分配情况进行分析（如图3-16所示）可知，在 <span class="math inline">\(T_0\)</span> 时刻存在着一个<strong>安全序列</strong> $ {P_1, P_3, P_4, P_2, P_0} $ ，故系统是安全的，可以向 <span class="math inline">\(P_1\)</span> 分配资源。</p>
+<figure>
+<img src="https://i.loli.net/2020/04/01/aO9Qdxlukgsbver.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-01_16-45-33.png" /><figcaption aria-hidden="true">Snipaste_2020-04-01_16-45-33.png</figcaption>
+</figure>
+<p><span class="math inline">\(P_1\)</span> 请求资源：<span class="math inline">\(P_1\)</span> 发出请求向量 <span class="math inline">\(Request_1(1, 0, 2)\)</span>，系统按银行家算法进行检查： ① <span class="math inline">\(Request_i(1, 0, 2) ≤ Need_1(1,2,2)\)</span> ② <span class="math inline">\(Request_i(1,0,2) ≤ Available_1(3,3,2)\)</span> ③ 系统先假定可为 <span class="math inline">\(P_1\)</span> 分配资源，并修改 <span class="math inline">\(Available\)</span>，<span class="math inline">\(Allocation_1\)</span> 和 <span class="math inline">\(Need_1\)</span> 向量，由此形成的资源变化情况如图3-15中的圆括号所示； ④再利用安全性算法检查此时系统是否安全，如图3-17所示。</p>
+<figure>
+<img src="https://i.loli.net/2020/04/01/g4qTZzXGOEs9iuv.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-01_16-50-16.png" /><figcaption aria-hidden="true">Snipaste_2020-04-01_16-50-16.png</figcaption>
+</figure>
+<p>由所进行的安全性检查得知，可以找到一个安全序列$ {P_1, P_3, P_4, P_2, P_0} $ 。因此，系统是安全的，可以立即将 <span class="math inline">\(P_1\)</span> 所申请的资源分配给它。接着，<span class="math inline">\(P_4\)</span> 请求资源，以此类推，<strong>每次请求资源之前，先做一次预分配，然后判断系统安全性，确定系统安全之后，再真正给他分配，真正分配之后，还要进行一次安全性检测。</strong></p>
 <p>在银行家算法中，进程每次请求不会请求完所有所需的资源，只请求当前需要的资源，所以，<strong>银行家算法实现了破环请求和保持条件的第二种协议</strong>。</p>
 <ul>
 <li><strong>第二种协议</strong>：允许一个进程<strong>只获得运行初期所需的资源</strong>后，便开始运行。进程运行过程中再<strong>逐步释放已分配给自己的、且已用毕的全部资源</strong>，然后再请求新的所需资源。</li>
 </ul>
-<h2 id="检测死锁及解除死锁"><a href="#检测死锁及解除死锁" class="headerlink" title="检测死锁及解除死锁"></a>检测死锁及解除死锁</h2><blockquote>
+<h2 id="检测死锁及解除死锁">检测死锁及解除死锁</h2>
+<blockquote>
 <p>检测死锁</p>
 </blockquote>
 <ul>
 <li>资源分配图</li>
 </ul>
 <blockquote>
-<p> 解除死锁</p>
+<p>解除死锁</p>
 </blockquote>
 <ul>
 <li>资源剥夺</li>
 <li>撤销进程</li>
 <li>进程回退</li>
 </ul>
-<h1 id="Python检测和解除死锁"><a href="#Python检测和解除死锁" class="headerlink" title="Python检测和解除死锁"></a>Python检测和解除死锁</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dancesir/p/9171677.html">Python中死锁的形成示例及死锁情况的防止</a></p>
-
+<h1 id="python检测和解除死锁">Python检测和解除死锁</h1>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dancesir/p/9171677.html">Python中死锁的形成示例及死锁情况的防止</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -560,6 +580,26 @@ Need[i, j] = Max[i, j] - Allocation[i, j]</script><h4 id="银行家算法-1"><a 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      180 字
+      183 字
     </span>
   
 
@@ -256,9 +256,9 @@
 <blockquote>
 <p>安装 <code>hexo-generator-searchdb</code></p>
 </blockquote>
-<p>1.在站点的根目录下执行以下命令：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install hexo-generator-searchdb --save<br></code></pre></div></td></tr></table></figure><br>2.编辑站点配置文件 <code>_config.yml</code> ，新增以下内容到任意位置：<br><figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-attr">search:</span><br>  <span class="hljs-attr">path:</span> <span class="hljs-string">search.xml</span><br>  <span class="hljs-attr">field:</span> <span class="hljs-string">post</span><br>  <span class="hljs-attr">format:</span> <span class="hljs-string">html</span><br>  <span class="hljs-attr">limit:</span> <span class="hljs-number">10000</span><br></code></pre></div></td></tr></table></figure><br>3.编辑主题配置文件 <code>_config.yml</code> ，启用本地搜索功能：<br><figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-attr">local_search:</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-comment"># if auto, trigger search by changing input</span><br>  <span class="hljs-comment"># if manual, trigger search by pressing enter key or search button</span><br>  <span class="hljs-attr">trigger:</span> <span class="hljs-string">auto</span><br>  <span class="hljs-comment"># show top n results per article, show all results by setting to -1</span><br>  <span class="hljs-attr">top_n_per_article:</span> <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><br>4.然后 重新生成 查看:<br><figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">$ hexo clean<br>$ hexo g<br>$ hexo s<br><span class="hljs-keyword">INFO</span>  <span class="hljs-keyword">Start</span> processing<br><span class="hljs-keyword">INFO</span>  Hexo <span class="hljs-keyword">is</span> running at http://localhost:<span class="hljs-number">4000</span>/. Press Ctrl+C <span class="hljs-keyword">to</span> stop.<br></code></pre></div></td></tr></table></figure><br>5.这样,搜索功能就添加上了。</p>
+<p>1.在站点的根目录下执行以下命令： <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install hexo-generator-searchdb --save<br></code></pre></div></td></tr></table></figure> 2.编辑站点配置文件 <code>_config.yml</code> ，新增以下内容到任意位置： <figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-attr">search:</span><br>  <span class="hljs-attr">path:</span> <span class="hljs-string">search.xml</span><br>  <span class="hljs-attr">field:</span> <span class="hljs-string">post</span><br>  <span class="hljs-attr">format:</span> <span class="hljs-string">html</span><br>  <span class="hljs-attr">limit:</span> <span class="hljs-number">10000</span><br></code></pre></div></td></tr></table></figure> 3.编辑主题配置文件 <code>_config.yml</code> ，启用本地搜索功能： <figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-attr">local_search:</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-comment"># if auto, trigger search by changing input</span><br>  <span class="hljs-comment"># if manual, trigger search by pressing enter key or search button</span><br>  <span class="hljs-attr">trigger:</span> <span class="hljs-string">auto</span><br>  <span class="hljs-comment"># show top n results per article, show all results by setting to -1</span><br>  <span class="hljs-attr">top_n_per_article:</span> <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure> 4.然后 重新生成 查看: <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">$ hexo clean<br>$ hexo g<br>$ hexo s<br><span class="hljs-keyword">INFO</span>  <span class="hljs-keyword">Start</span> processing<br><span class="hljs-keyword">INFO</span>  Hexo <span class="hljs-keyword">is</span> running at http://localhost:<span class="hljs-number">4000</span>/. Press Ctrl+C <span class="hljs-keyword">to</span> stop.<br></code></pre></div></td></tr></table></figure> 5.这样,搜索功能就添加上了。</p>
 <p>6.<a target="_blank" rel="noopener" href="https://www.itfanr.cc/2017/10/27/add-search-function-to-hexo-blog/">参考连接</a></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -495,6 +495,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

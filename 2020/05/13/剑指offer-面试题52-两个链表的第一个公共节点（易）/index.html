@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,45 +253,63 @@
             <div class="markdown-body">
               <p>考查应聘者对时间复杂度和空间复杂度的理解及分析能力。解决这道题有多种不同的思路。每当应聘者想到一种思路的时候，都要很快分析出这种思路的时间复杂度和空间复杂度各是多少，并找到可以优化的地方。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入两个链表，找出它们的第一个公共节点。</p>
+<h1 id="question">Question</h1>
+<p>输入两个链表，找出它们的第一个公共节点。</p>
 <p>如下面的两个链表：</p>
-<p><img src="https://i.loli.net/2020/05/13/XlOrCi2YqnudasB.png" srcset="/img/loading.gif" alt="160_statement"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/13/XlOrCi2YqnudasB.png" srcset="/img/loading.gif" alt="160_statement" /><figcaption aria-hidden="true">160_statement</figcaption>
+</figure>
 <p><strong>在节点 c1 开始相交</strong></p>
 <p><strong>示例 1：</strong></p>
-<p><img src="https://i.loli.net/2020/05/13/3cm9buWpYPBiyed.png" srcset="/img/loading.gif" alt="160_example_1"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/13/3cm9buWpYPBiyed.png" srcset="/img/loading.gif" alt="160_example_1" /><figcaption aria-hidden="true">160_example_1</figcaption>
+</figure>
 <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">intersectVal</span> = <span class="hljs-number">8</span>, <span class="hljs-attr">listA</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>], <span class="hljs-attr">listB</span> = [<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>], <span class="hljs-attr">skipA</span> = <span class="hljs-number">2</span>, <span class="hljs-attr">skipB</span> = <span class="hljs-number">3</span><br>输出：Reference of the node <span class="hljs-keyword">with</span> <span class="hljs-attr">value</span> = <span class="hljs-number">8</span><br></code></pre></div></td></tr></table></figure>
 <p>输入解释：<strong>相交节点的值为 8</strong> （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</p>
 <p><strong>示例 2：</strong></p>
-<p><img src="https://i.loli.net/2020/05/13/XjMqWiZoIUd2QKA.png" srcset="/img/loading.gif" alt="160_example_2"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/13/XjMqWiZoIUd2QKA.png" srcset="/img/loading.gif" alt="160_example_2" /><figcaption aria-hidden="true">160_example_2</figcaption>
+</figure>
 <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">intersectVal</span> = <span class="hljs-number">2</span>, <span class="hljs-attr">listA</span> = [<span class="hljs-number">0</span>,<span class="hljs-number">9</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>], <span class="hljs-attr">listB</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>], <span class="hljs-attr">skipA</span> = <span class="hljs-number">3</span>, <span class="hljs-attr">skipB</span> = <span class="hljs-number">1</span><br>输出：Reference of the node <span class="hljs-keyword">with</span> <span class="hljs-attr">value</span> = <span class="hljs-number">2</span><br></code></pre></div></td></tr></table></figure>
 <p>输入解释：<strong>相交节点的值为 2</strong> （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</p>
 <p><strong>示例 3：</strong></p>
-<p><img src="https://i.loli.net/2020/05/13/14gLcaKtP7u8sZe.png" srcset="/img/loading.gif" alt="160_example_3"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/13/14gLcaKtP7u8sZe.png" srcset="/img/loading.gif" alt="160_example_3" /><figcaption aria-hidden="true">160_example_3</figcaption>
+</figure>
 <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入：<span class="hljs-attr">intersectVal</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">listA</span> = [<span class="hljs-number">2</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>], <span class="hljs-attr">listB</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">5</span>], <span class="hljs-attr">skipA</span> = <span class="hljs-number">3</span>, <span class="hljs-attr">skipB</span> = <span class="hljs-number">2</span><br>输出：<span class="hljs-literal">null</span><br></code></pre></div></td></tr></table></figure>
-<p>输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。<strong>由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</strong><br>解释：这两个链表不相交，因此返回 null。</p>
-<p>注意：<br>如果两个链表没有交点，返回 null.<br>在返回结果后，两个链表仍须保持原有的结构。<br>可假定整个链表结构中没有循环。<br>程序尽量满足 $O(n)$ 时间复杂度，且仅用 $O(1)$ 内存。</p>
+<p>输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。<strong>由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</strong> 解释：这两个链表不相交，因此返回 null。</p>
+<p>注意： 如果两个链表没有交点，返回 null. 在返回结果后，两个链表仍须保持原有的结构。 可假定整个链表结构中没有循环。 程序尽量满足 <span class="math inline">\(O(n)\)</span> 时间复杂度，且仅用 <span class="math inline">\(O(1)\)</span> 内存。</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入的两个链表有公共节点：第一个公共节点在链表的中间，第一个公共节点在链表的末尾，第一个公共节点是链表的头节点；输入的两个链表没有公共节点）。<br>特殊输入测试（输入的链表头节点是 <code>nullptr</code> 指针）。</p>
+<p>功能测试（输入的两个链表有公共节点：第一个公共节点在链表的中间，第一个公共节点在链表的末尾，第一个公共节点是链表的头节点；输入的两个链表没有公共节点）。 特殊输入测试（输入的链表头节点是 <code>nullptr</code> 指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者对时间复杂度和空间复杂度的理解及分析能力。解决这道题有多种不同的思路。每当应聘者想到一种思路的时候，都要很快分析出这种思路的时间复杂度和空间复杂度各是多少，并找到可以优化的地方。<br>考查应聘者对链表的编程能力。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="基于链表翻转"><a href="#基于链表翻转" class="headerlink" title="基于链表翻转"></a>基于链表翻转</h2><p>将两条链表翻转过来，然后从新链表的head往后移动指针，直到第一个后续节点不一样的节点，就是之前链表的公共节点，链表翻转可以在 $O(n)$ 的时间复杂度内完成。假设两条链表的长度分别为 $O(n)$ 和 $O(m)$。则该算法的时间复杂度为 $O(n+m)$，空间复杂度为 $O(1)$。</p>
-<h2 id="基于栈"><a href="#基于栈" class="headerlink" title="基于栈"></a>基于栈</h2><p><strong>分别把两个链表的节点放入两个栈里</strong>，这样两个链表的尾节点就位于两个栈的栈顶，<strong>接下来比较两个栈顶的节点是否相同</strong>。如果相同，则把栈顶弹出接着比较下一个栈顶，<strong>直到找到最后一个相同的节点</strong>。该算法的时间复杂度为 $O(n+m)$，空间复杂度由于需要辅助栈，所以是 $O(m+n)$。</p>
-<h2 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h2><p>首先遍历两个链表得到它们的长度，就能知道哪个链表比较长，以及长的链表比短的链表多几个节点。在第二次遍历的时候，在较长的链表上先走若干步，接着同时在两个链表上遍历，找到的第一个相同的节点就是它们的第一个公共节点。该算法的时间复杂度为 $O(n+m)$，空间复杂度由于不需要辅助栈，所以是 $O(1)$。三种方法中，这种实现简单，时间、空间开销都比较小。</p>
-<h2 id="相交链表"><a href="#相交链表" class="headerlink" title="相交链表"></a>相交链表</h2><p>我们通常做这种题的思路是设定两个指针分别指向两个链表头部，一起向前走直到其中一个到达末端，另一个与末端距离则是两链表的 长度差。再通过长链表指针先走的方式消除长度差，最终两链表即可同时走到相交点。</p>
-<p>换个方式消除长度差： 拼接两链表。<br>设长-短链表为的表头指针为<code>C</code>，短-长链表的表头指针为<code>D</code>（分别代表长链表在前和短链表在前的拼接链表），则当 <code>C</code> 走到长短链表交接处时，<code>D</code> 走在长链表中，且<code>D</code>与长链表头距离为长度差;</p>
+<p>考查应聘者对时间复杂度和空间复杂度的理解及分析能力。解决这道题有多种不同的思路。每当应聘者想到一种思路的时候，都要很快分析出这种思路的时间复杂度和空间复杂度各是多少，并找到可以优化的地方。 考查应聘者对链表的编程能力。</p>
+<h1 id="intuition">Intuition</h1>
+<h2 id="基于链表翻转">基于链表翻转</h2>
+<p>将两条链表翻转过来，然后从新链表的head往后移动指针，直到第一个后续节点不一样的节点，就是之前链表的公共节点，链表翻转可以在 <span class="math inline">\(O(n)\)</span> 的时间复杂度内完成。假设两条链表的长度分别为 <span class="math inline">\(O(n)\)</span> 和 <span class="math inline">\(O(m)\)</span>。则该算法的时间复杂度为 <span class="math inline">\(O(n+m)\)</span>，空间复杂度为 <span class="math inline">\(O(1)\)</span>。</p>
+<h2 id="基于栈">基于栈</h2>
+<p><strong>分别把两个链表的节点放入两个栈里</strong>，这样两个链表的尾节点就位于两个栈的栈顶，<strong>接下来比较两个栈顶的节点是否相同</strong>。如果相同，则把栈顶弹出接着比较下一个栈顶，<strong>直到找到最后一个相同的节点</strong>。该算法的时间复杂度为 <span class="math inline">\(O(n+m)\)</span>，空间复杂度由于需要辅助栈，所以是 <span class="math inline">\(O(m+n)\)</span>。</p>
+<h2 id="快慢指针">快慢指针</h2>
+<p>首先遍历两个链表得到它们的长度，就能知道哪个链表比较长，以及长的链表比短的链表多几个节点。在第二次遍历的时候，在较长的链表上先走若干步，接着同时在两个链表上遍历，找到的第一个相同的节点就是它们的第一个公共节点。该算法的时间复杂度为 <span class="math inline">\(O(n+m)\)</span>，空间复杂度由于不需要辅助栈，所以是 <span class="math inline">\(O(1)\)</span>。三种方法中，这种实现简单，时间、空间开销都比较小。</p>
+<h2 id="相交链表">相交链表</h2>
+<p>我们通常做这种题的思路是设定两个指针分别指向两个链表头部，一起向前走直到其中一个到达末端，另一个与末端距离则是两链表的 长度差。再通过长链表指针先走的方式消除长度差，最终两链表即可同时走到相交点。</p>
+<p>换个方式消除长度差： 拼接两链表。 设长-短链表为的表头指针为<code>C</code>，短-长链表的表头指针为<code>D</code>（分别代表长链表在前和短链表在前的拼接链表），则当 <code>C</code> 走到长短链表交接处时，<code>D</code> 走在长链表中，且<code>D</code>与长链表头距离为长度差;</p>
 <p>以下图片帮助理解：当 <code>ha == hb</code> 时跳出，返回即可</p>
-<p><img src="https://i.loli.net/2020/05/13/N5YDqxeX6vnrVlR.png" srcset="/img/loading.gif" alt="5651993ddb76ae6a42f0b338aec9382206f567041113f49d6ca670832ac75791-Picture1"></p>
-<p>该算法的时间复杂度为 $O(2m-n)$，$m&gt;n$；空间复杂度由于不需要辅助栈，所以是 $O(1)$。</p>
-<p>作者：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/jyd/">Krahets</a><br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/intersection-of-two-linked-lists-shuang-zhi-zhen-l/">https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/intersection-of-two-linked-lists-shuang-zhi-zhen-l/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getLength</span>(<span class="hljs-params">self, head</span>):</span><br>        <span class="hljs-keyword">if</span> head == <span class="hljs-literal">None</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        p = head<br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> p:<br>            count += <span class="hljs-number">1</span><br>            p = p.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> count<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIntersectionNode</span>(<span class="hljs-params">self, headA: ListNode, headB: ListNode</span>) -&gt; ListNode:</span><br>        A_len = self.getLength(headA)<br>        B_len = self.getLength(headB)<br>        residual = <span class="hljs-built_in">abs</span>(A_len - B_len)<br>        print(A_len)<br>        print(B_len)<br>        print(residual)<br><br>        p_A = headA<br>        p_B = headB<br>        <br>        <span class="hljs-comment"># 开始快慢指针</span><br>        <span class="hljs-keyword">if</span> A_len &gt; B_len:<br>            <span class="hljs-keyword">while</span> residual:<br>                p_A = p_A.<span class="hljs-built_in">next</span><br>                residual -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">while</span> residual:<br>                p_B = p_B.<span class="hljs-built_in">next</span><br>                residual -= <span class="hljs-number">1</span><br>        <br>        <span class="hljs-comment"># 开始寻找公共节点</span><br>        <span class="hljs-keyword">while</span> p_A <span class="hljs-keyword">and</span> p_B:<br>            <span class="hljs-keyword">if</span> p_A == p_B:  <span class="hljs-comment"># 这里不能用p_A.val == p_B.val</span><br>                <span class="hljs-keyword">return</span> p_A<br>            <span class="hljs-keyword">else</span>:<br>                p_A = p_A.<span class="hljs-built_in">next</span><br>                p_B = p_B.<span class="hljs-built_in">next</span><br></code></pre></div></td></tr></table></figure>
+<figure>
+<img src="https://i.loli.net/2020/05/13/N5YDqxeX6vnrVlR.png" srcset="/img/loading.gif" alt="5651993ddb76ae6a42f0b338aec9382206f567041113f49d6ca670832ac75791-Picture1" /><figcaption aria-hidden="true">5651993ddb76ae6a42f0b338aec9382206f567041113f49d6ca670832ac75791-Picture1</figcaption>
+</figure>
+<p>该算法的时间复杂度为 <span class="math inline">\(O(2m-n)\)</span>，<span class="math inline">\(m&gt;n\)</span>；空间复杂度由于不需要辅助栈，所以是 <span class="math inline">\(O(1)\)</span>。</p>
+<p>作者：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/jyd/">Krahets</a> 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/intersection-of-two-linked-lists-shuang-zhi-zhen-l/ 来源：力扣（LeetCode） 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getLength</span>(<span class="hljs-params">self, head</span>):</span><br>        <span class="hljs-keyword">if</span> head == <span class="hljs-literal">None</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        p = head<br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> p:<br>            count += <span class="hljs-number">1</span><br>            p = p.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> count<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIntersectionNode</span>(<span class="hljs-params">self, headA: ListNode, headB: ListNode</span>) -&gt; ListNode:</span><br>        A_len = self.getLength(headA)<br>        B_len = self.getLength(headB)<br>        residual = <span class="hljs-built_in">abs</span>(A_len - B_len)<br>        print(A_len)<br>        print(B_len)<br>        print(residual)<br><br>        p_A = headA<br>        p_B = headB<br>        <br>        <span class="hljs-comment"># 开始快慢指针</span><br>        <span class="hljs-keyword">if</span> A_len &gt; B_len:<br>            <span class="hljs-keyword">while</span> residual:<br>                p_A = p_A.<span class="hljs-built_in">next</span><br>                residual -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">while</span> residual:<br>                p_B = p_B.<span class="hljs-built_in">next</span><br>                residual -= <span class="hljs-number">1</span><br>        <br>        <span class="hljs-comment"># 开始寻找公共节点</span><br>        <span class="hljs-keyword">while</span> p_A <span class="hljs-keyword">and</span> p_B:<br>            <span class="hljs-keyword">if</span> p_A == p_B:  <span class="hljs-comment"># 这里不能用p_A.val == p_B.val</span><br>                <span class="hljs-keyword">return</span> p_A<br>            <span class="hljs-keyword">else</span>:<br>                p_A = p_A.<span class="hljs-built_in">next</span><br>                p_B = p_B.<span class="hljs-built_in">next</span><br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>交叉链表方法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIntersectionNode</span>(<span class="hljs-params">self, headA, headB</span>):</span><br>        ha, hb = headA, headB<br>        <span class="hljs-keyword">while</span> ha != hb:<br>            ha = ha.<span class="hljs-built_in">next</span> <span class="hljs-keyword">if</span> ha <span class="hljs-keyword">else</span> headB<br>            hb = hb.<span class="hljs-built_in">next</span> <span class="hljs-keyword">if</span> hb <span class="hljs-keyword">else</span> headA<br>        <span class="hljs-keyword">return</span> ha<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -537,6 +555,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

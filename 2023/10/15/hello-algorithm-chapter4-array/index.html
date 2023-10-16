@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>hello algorithm chapter 4 / Array - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="hello algorithm chapter 4 / Array">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-10-15 22:51" pubdate>
+        2023年10月15日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">hello algorithm chapter 4 / Array</h1>
+            
+            <div class="markdown-body">
+              <p>数据结构的世界如同一堵厚实的砖墙。</p>
+<p>数组的砖块整齐排列，逐个紧贴。</p>
+<p>Reference: <a target="_blank" rel="noopener" href="https://www.hello-algo.com/chapter_array_and_linkedlist/array/">Hello 算法 数组</a></p>
+<a id="more"></a>
+<h2 id="overview">Overview</h2>
+<blockquote class="pullquote mindmap mindmap-md"><ul>
+<li>Array
+<ul>
+<li>Definition
+<ul>
+<li>将相同类型元素存储在连续的内存空间中的线性数据结构 就是数组</li>
+<li>元素在数组中的位置称为该元素的「索引 index」</li>
+</ul></li>
+<li>Common operation
+<ul>
+<li>Initial Array
+<ul>
+<li>无初始值</li>
+<li>给定初始值</li>
+</ul></li>
+<li>Index Array:
+<ul>
+<li>O(1)</li>
+<li>索引的含义本质上是内存地址的偏移量。首个元素的地址偏移量是 0 ，因此它的索引为 0 也是合理的。</li>
+</ul></li>
+<li>Insert Element
+<ul>
+<li>O(n)</li>
+<li>插入一个元素，则需要将该元素之后的所有元素都向后移动一位，之后再把元素赋值给该索引。</li>
+<li>必定会导致数组尾部元素的 “丢失”。</li>
+</ul></li>
+<li>Delete Element
+<ul>
+<li>O(n)</li>
+<li>若想要删除索引 n 处的元素，则需要把索引 n 之后的元素都向前移动一位。</li>
+<li>Disadvantage
+<ul>
+<li>时间复杂度高</li>
+<li>丢失元素</li>
+<li>内存浪费</li>
+</ul></li>
+</ul></li>
+<li>Traverse Array
+<ul>
+<li>O(n)</li>
+<li>通过索引直接遍历数组</li>
+<li>遍历获取数组中的每个元素</li>
+</ul></li>
+<li>Search Element
+<ul>
+<li>O(n)</li>
+<li>线性查找：遍历数组，每轮判断元素值是否匹配。</li>
+</ul></li>
+<li>Expand array
+<ul>
+<li>O(n)</li>
+<li>扩容数组，需重新建立一个更大的数组，然后把原数组元素依次拷贝到新数组。</li>
+</ul></li>
+</ul></li>
+<li>Advantage and disadvantage
+<ul>
+<li>Advantage
+<ul>
+<li>空间效率高</li>
+<li>支持随机访问</li>
+<li>缓存局部性：当访问数组元素时，计算机不仅会加载它，还会缓存其周围的其他数据</li>
+</ul></li>
+<li>Disadvantage
+<ul>
+<li>空间浪费</li>
+<li>插入与删除效率低 O(n)</li>
+<li>长度不可变</li>
+</ul></li>
+</ul></li>
+<li>Applications of arrays
+<ul>
+<li>随机访问</li>
+<li>排序和搜索：快速排序、归并排序、二分查找</li>
+<li>查找表：速查找一个元素或者需要查找一个元素的对应关系，类似ASCII。</li>
+<li>机器学习：神经网络中大量使用了向量、矩阵、张量之间的线性代数运算。</li>
+<li>数据结构实现：数组可以用于实现栈、队列、哈希表、堆、图等数据结构。</li>
+</ul></li>
+</ul></li>
+</ul>
+</blockquote>
+<h2 id="definition">Definition</h2>
+<p>将相同类型元素存储在连续的内存空间中的线性数据结构 就是数组</p>
+<p>元素在数组中的位置称为该元素的「索引 index」</p>
+<h2 id="common-operation">Common operation</h2>
+<h3 id="initial-array">Initial Array</h3>
+<p>两种初始化方式：</p>
+<ol type="1">
+<li>无初始值，在未指定初始值的情况下，大多数编程语言会将数组元素初始化为 0 。</li>
+<li>给定初始值。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 初始化数组 */</span><br><span class="hljs-keyword">int</span>[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">5</span>]; <span class="hljs-comment">// &#123; 0, 0, 0, 0, 0 &#125;</span><br><span class="hljs-keyword">int</span>[] nums = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span> &#125;;<br></code></pre></div></td></tr></table></figure>
+<h3 id="index-array">Index Array</h3>
+<p>时间复杂度 <span class="math inline">\(O(1)\)</span></p>
+<p><img src="https://s2.loli.net/2023/10/16/sGqulV6vPCUatmb.png" srcset="/img/loading.gif" /></p>
+<p><strong>索引的含义本质上是内存地址的偏移量</strong>。首个元素的地址偏移量是 0 ，因此它的索引为 0 也是合理的。</p>
+<h3 id="insert-element">Insert Element</h3>
+<p>插入一个元素，则需要将该元素之后的所有元素都向后移动一位，之后再把元素赋值给该索引。</p>
+<p>插入一个元素必定会导致数组尾部元素的 “丢失”。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 在数组的索引 index 处插入元素 num */</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> num, <span class="hljs-keyword">int</span> index)</span> </span>&#123;<br>    <span class="hljs-comment">// 把索引 index 以及之后的所有元素向后移动一位</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = nums.length - <span class="hljs-number">1</span>; i &gt; index; i--) &#123;<br>        nums[i] = nums[i - <span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-comment">// 将 num 赋给 index 处元素</span><br>    nums[index] = num;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="delete-element">Delete Element</h3>
+<p>若想要删除索引 <span class="math inline">\(n\)</span> 处的元素，则需要把索引 <span class="math inline">\(n\)</span> 之后的元素都向前移动一位。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 删除索引 index 处元素 */</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> index)</span> </span>&#123;<br>    <span class="hljs-comment">// 把索引 index 之后的所有元素向前移动一位</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = index; i &lt; nums.length - <span class="hljs-number">1</span>; i++) &#123;<br>        nums[i] = nums[i + <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>数组的插入与删除操作有以下缺点。</p>
+<ul>
+<li><strong>时间复杂度高</strong>：数组的插入和删除的平均时间复杂度均为 �(�) ，其中 � 为数组长度。</li>
+<li><strong>丢失元素</strong>：由于数组的长度不可变，因此在插入元素后，超出数组长度范围的元素会丢失。</li>
+<li><strong>内存浪费</strong>：我们可以初始化一个比较长的数组，只用前面一部分，这样在插入数据时，丢失的末尾元素都是 “无意义” 的，但这样做也会造成部分内存空间的浪费。</li>
+</ul>
+<h3 id="traverse-array">Traverse Array</h3>
+<p>既可以通过索引遍历数组，也可以直接遍历获取数组中的每个元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 遍历数组 */</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">traverse</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-comment">// 通过索引遍历数组</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>        count++;<br>    &#125;<br>    <span class="hljs-comment">// 直接遍历数组</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums) &#123;<br>        count++;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="search-element">Search Element</h3>
+<p>线性查找：遍历数组，每轮判断元素值是否匹配。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 在数组中查找指定元素 */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>        <span class="hljs-keyword">if</span> (nums[i] == target)<br>            <span class="hljs-keyword">return</span> i;<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="expand-array">Expand array</h3>
+<p>扩容数组，需重新建立一个更大的数组，然后把原数组元素依次拷贝到新数组。</p>
+<p>这是一个 <span class="math inline">\(O(n)\)</span> 的操作，在数组很大的情况下是非常耗时的。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 扩展数组长度 */</span><br><span class="hljs-keyword">int</span>[] extend(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> enlarge) &#123;<br>    <span class="hljs-comment">// 初始化一个扩展长度后的数组</span><br>    <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[nums.length + enlarge];<br>    <span class="hljs-comment">// 将原数组中的所有元素复制到新数组</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>        res[i] = nums[i];<br>    &#125;<br>    <span class="hljs-comment">// 返回扩展后的新数组</span><br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="advantage-and-disadvantage">Advantage and disadvantage</h2>
+<p>数组存储在连续的内存空间内，且元素类型相同。这种做法包含丰富的先验信息，系统可以利用这些信息来优化数据结构的操作效率。</p>
+<ul>
+<li><strong>空间效率高</strong>: 数组为数据分配了连续的内存块，无须额外的结构开销。</li>
+<li><strong>支持随机访问</strong>: 数组允许在 <span class="math inline">\(O(1)\)</span> 时间内访问任何元素。</li>
+<li><strong>缓存局部性</strong>: 当访问数组元素时，计算机不仅会加载它，还会缓存其周围的其他数据，从而借助高速缓存来提升后续操作的执行速度。</li>
+</ul>
+<p>连续空间存储是一把双刃剑，其存在以下缺点。</p>
+<ul>
+<li><strong>空间浪费</strong>: 如果数组分配的大小超过了实际所需，那么多余的空间就被浪费了。</li>
+<li><strong>插入与删除效率低</strong>: 当数组中元素较多时，插入与删除操作需要移动大量的元素。</li>
+<li><strong>长度不可变</strong>: 数组在初始化后长度就固定了，扩容数组需要将所有数据复制到新数组，开销很大。</li>
+</ul>
+<h2 id="applications-of-arrays">Applications of arrays</h2>
+<ul>
+<li><strong>随机访问</strong>：如果我们想要随机抽取一些样本，那么可以用数组存储，并生成一个随机序列，根据索引实现样本的随机抽取。</li>
+<li><strong>排序和搜索</strong>：数组是排序和搜索算法最常用的数据结构。快速排序、归并排序、二分查找等都主要在数组上进行。</li>
+<li><strong>查找表</strong>：当我们需要快速查找一个元素或者需要查找一个元素的对应关系时，可以使用数组作为查找表。假如我们想要实现字符到 ASCII 码的映射，则可以将字符的 ASCII 码值作为索引，对应的元素存放在数组中的对应位置。</li>
+<li><strong>机器学习</strong>：神经网络中大量使用了向量、矩阵、张量之间的线性代数运算，这些数据都是以数组的形式构建的。数组是神经网络编程中最常使用的数据结构。</li>
+<li><strong>数据结构实现</strong>：数组可以用于实现栈、队列、哈希表、堆、图等数据结构。例如，图的邻接矩阵表示实际上是一个二维数组。</li>
+</ul>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/hello-algorithm/">hello algorithm</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/15/hello-algorithm-chapter4-linked-list/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">hello algorithm chapter 4 / linked list</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/15/fomula-render-bug-fixed/">
+                        <span class="hidden-mobile">Fix the bug that latex formula does not render in hexo-fluid</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2023/10/15/hello-algorithm-chapter4-array/';
+        this.page.identifier = '/2023/10/15/hello-algorithm-chapter4-array/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+
+</body>
+</html>

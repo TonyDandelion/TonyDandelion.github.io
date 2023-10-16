@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -252,7 +252,7 @@
             
             <div class="markdown-body">
               <p>如果面试题是关于n位的整数并且没有限定n的取值范围，或者输入任意大小的整数，那么这道题目很有可能是需要考虑大数问题的。<strong>字符串是一种简单、有效地表示大数的方法。</strong>在Python中，由于字符串string是不可变对象，所以选择使用列表list来替代string解决大数问题。</p>
-<a id="more"></a> 
+<a id="more"></a>
 <blockquote>
 <p><em>Tag</em></p>
 </blockquote>
@@ -266,26 +266,31 @@
 <li>如果应聘者采用第二种思路，则面试官还将考查他<strong>用递归方法解决问题</strong>的能力。</li>
 <li>面试官还将关注<strong>应聘者打印数字时会不会打印出位于数字前面的0</strong>。这里<strong>能体现出应聘者在设计开发软件时是不是会考虑用户</strong>的使用习惯。通常我们的软件设计和开发需要符合大部分用户的人机交互习惯。</li>
 </ul>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。</p>
-<p>示例 1:<br><figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入: n = <span class="hljs-number">1</span><br>输出: [<span class="hljs-number">1,2,3,4</span>,<span class="hljs-number">5,6,7,8</span>,<span class="hljs-number">9</span>]<br></code></pre></div></td></tr></table></figure><br>说明：用返回一个<strong>整数列表</strong>来代替打印，n 为正整数。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>Python的int变量范围，和计算机内存大小有关，不受32位限制。所以不用考虑大数问题，但是面试官问这道题，就是想知道你会怎么解决大数溢出，所以要在代码中体现这一部分设计。</p>
+<h1 id="question">Question</h1>
+<p>输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。</p>
+<p>示例 1: <figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入: n = <span class="hljs-number">1</span><br>输出: [<span class="hljs-number">1,2,3,4</span>,<span class="hljs-number">5,6,7,8</span>,<span class="hljs-number">9</span>]<br></code></pre></div></td></tr></table></figure> 说明：用返回一个<strong>整数列表</strong>来代替打印，n 为正整数。</p>
+<h1 id="intuition">Intuition</h1>
+<p>Python的int变量范围，和计算机内存大小有关，不受32位限制。所以不用考虑大数问题，但是面试官问这道题，就是想知道你会怎么解决大数溢出，所以要在代码中体现这一部分设计。</p>
 <p>原题是要打印出来，实际上这里要考虑的就是一个大数问题。LeetCode上的题目要求返回一个<strong>整数列表</strong>，所以最终的代码应该是<strong>既能返回一个整数列表</strong>（直接保存打印出来的结果即可，不考虑溢出），<strong>又能打印</strong>（使用特殊数据结构表示大数，将其打印，防止溢出）。</p>
 <p><strong><font color='red'>字符串是一种简单、有效地表示大数的方法。在Python中，由于字符串string是不可变对象，所以选择使用列表list来替代string解决大数问题。</font></strong></p>
-<h2 id="在列表上模拟数字加法"><a href="#在列表上模拟数字加法" class="headerlink" title="在列表上模拟数字加法"></a>在列表上模拟数字加法</h2><p>主函数</p>
+<h2 id="在列表上模拟数字加法">在列表上模拟数字加法</h2>
+<p>主函数</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 方法一、在列表上模拟数字加法</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> []<br>        res = []<br>        number = [<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)]  <span class="hljs-comment"># 生产一个n的list</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> increment(number):<br>            printNumber(number)<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
 <p><code>increment</code> 函数负责实现在表示数字的列表 <code>number</code>上增加1。<code>printNumber</code>负责打印出number。这两个看似简单的函数都暗藏着<strong>小小的玄机</strong>。</p>
 <blockquote>
-<p><code>increment</code> </p>
+<p><code>increment</code></p>
 </blockquote>
 <p><code>increment</code> 函数需要判断什么时候停止在 <code>number</code>上增加1，即 <code>n=3</code> 时，到达了 999（3个9），就要停止加1了。</p>
-<p>一个最简单的办法是在每次递增之后，都调用库函数 <code>strcmp</code> 比较表示数字的字符串 <code>number</code> 和最大的n位数999，如果相等则表示已经到了最大的n位数并终止递增（仅适用于C++，Python需要把list转成int再和999比较，这种方法还可能会溢出）。虽然调用 <code>strcmp</code> 很简单，但对于长度为n的字符串，它的时间复杂度为 $O(n)$。</p>
-<p>我们注意到只有对 “999…99” 加1的时候，才会在第一个字符（下标为0）的基础上产生进位，而其他所有情况都不会在第一个字符上产生进位。因此，当我们发现在加1时<strong>第一个字符产生了进位</strong>，则已经是最大的n位数，此时 <code>Increment</code> 返回true，因此函数 <code>printNumbers</code> 中的 <code>while</code> 循环终止。如<strong>何在每一次增加1之后快速判断是不是到了最大的n位数是本题的一个小陷阱。</strong>它实现了用 $O(1)$ 时间判断是不是已经到了最大的n位数。</p>
+<p>一个最简单的办法是在每次递增之后，都调用库函数 <code>strcmp</code> 比较表示数字的字符串 <code>number</code> 和最大的n位数999，如果相等则表示已经到了最大的n位数并终止递增（仅适用于C++，Python需要把list转成int再和999比较，这种方法还可能会溢出）。虽然调用 <code>strcmp</code> 很简单，但对于长度为n的字符串，它的时间复杂度为 <span class="math inline">\(O(n)\)</span>。</p>
+<p>我们注意到只有对 “999…99” 加1的时候，才会在第一个字符（下标为0）的基础上产生进位，而其他所有情况都不会在第一个字符上产生进位。因此，当我们发现在加1时<strong>第一个字符产生了进位</strong>，则已经是最大的n位数，此时 <code>Increment</code> 返回true，因此函数 <code>printNumbers</code> 中的 <code>while</code> 循环终止。如<strong>何在每一次增加1之后快速判断是不是到了最大的n位数是本题的一个小陷阱。</strong>它实现了用 <span class="math inline">\(O(1)\)</span> 时间判断是不是已经到了最大的n位数。</p>
 <blockquote>
 <p><code>printNumber</code></p>
 </blockquote>
 <p>接下来<strong>我们再考虑</strong>如何打印用字符串表示的数字。虽然库函数 <code>printf</code> 可以很方便地打印出一个字符串，但在本题中调用 <code>printf</code> 并不是最合适的解决方案。前面我们提到，当数字不够 <code>n</code> 位的时候，在数字的前面补 <code>0</code>，打印的时候这些补位的 <code>0</code> 不应该打印出来。比如输入 <code>3</code> 的时候，数字98用字符串表示成 <code>098</code>。如果直接打印出098，就不符合我们的阅读习惯。为此，我们定义了函数 <code>PrintNumber</code>，在这个函数里，<strong>只有在碰到第一个非0的字符之后才开始打印，直至字符串的结尾。能不能按照我们的阅读习惯打印是本题的另一个小陷阱。</strong></p>
-<h2 id="基于递归将问题转换为排列问题"><a href="#基于递归将问题转换为排列问题" class="headerlink" title="基于递归将问题转换为排列问题"></a>基于递归将问题转换为排列问题</h2><p>如果我们在数字前面补 <code>0</code>，就会发现 <code>n</code> 位所有十进制数其实就是 <code>n</code> 个从 <code>0</code> 到 <code>9</code> 的全排列。也就是说，<strong>我们把数字的每一位都从 <code>0</code> 到 <code>9</code> 排列一遍，就得到了所有的十进制数。</strong>只是在打印的时候，排在前面的 <code>0</code> 不打印出来罢了。全排列用递归很容易表达，数字的每一位都可能是 <code>0~9</code> 中的一个数，然后设置下一位。递归结束的条件是我们已经设置了数字的最后一位。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<h2 id="基于递归将问题转换为排列问题">基于递归将问题转换为排列问题</h2>
+<p>如果我们在数字前面补 <code>0</code>，就会发现 <code>n</code> 位所有十进制数其实就是 <code>n</code> 个从 <code>0</code> 到 <code>9</code> 的全排列。也就是说，<strong>我们把数字的每一位都从 <code>0</code> 到 <code>9</code> 排列一遍，就得到了所有的十进制数。</strong>只是在打印的时候，排在前面的 <code>0</code> 不打印出来罢了。全排列用递归很容易表达，数字的每一位都可能是 <code>0~9</code> 中的一个数，然后设置下一位。递归结束的条件是我们已经设置了数字的最后一位。</p>
+<h1 id="code">Code</h1>
+<ul>
 <li>暴力解：不做大数问题处理的Python代码，利用 <code>n</code> 计算出 <code>limit</code>，然后打印并保存出 <code>1</code> 到 <code>limit</code> 之间的结果即可。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span>:  <span class="hljs-keyword">return</span> []<br>        res = []<br>        limit = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> n:<br>            limit = limit * <span class="hljs-number">10</span><br>            n -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, limit):<br>            print(i)<br>            res.append(i)<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
@@ -297,7 +302,8 @@
 <li>基于递归将问题转换为排列问题</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumber</span>(<span class="hljs-params">number</span>):</span><br>            is_begin0 = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 默认前面为0</span><br>            _length = <span class="hljs-built_in">len</span>(number)<br>            out_put = <span class="hljs-string">&quot;&quot;</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_length):  <span class="hljs-comment"># 从0到_length</span><br>                <span class="hljs-comment"># 如果前面number[i] == &#x27;0&#x27;，就跳过前面为0的部分。</span><br>                <span class="hljs-comment"># 直到遇到第一个number[i] != &#x27;0&#x27;，结束跳过，设置is_begin0 = False，开始输出有效数字。</span><br>                <span class="hljs-keyword">if</span> is_begin0 <span class="hljs-keyword">and</span> number[i] != <span class="hljs-string">&#x27;0&#x27;</span>:<br>                    is_begin0 = <span class="hljs-literal">False</span><br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> is_begin0:<br>                    out_put = out_put + number[i]  <span class="hljs-comment"># i从0到n-1，前面是高位，先加入的是高位字符，所以是out_put+number[i]</span><br>            <span class="hljs-keyword">if</span> out_put:  <span class="hljs-comment"># 排除[&#x27;0&#x27;, &#x27;0&#x27;]导致的out_put=&#x27;&#x27;的特殊情况</span><br>                print(out_put)  <span class="hljs-comment"># 打印</span><br>                res.append(<span class="hljs-built_in">int</span>(out_put))  <span class="hljs-comment"># 保存到list中，既然要求保存在list中，那就不考虑溢出啦。</span><br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print_1_to_maxofNdigits_recursively</span>(<span class="hljs-params">number, length, index</span>):</span><br>            <span class="hljs-keyword">if</span> index == length - <span class="hljs-number">1</span>:  <span class="hljs-comment"># index位于个位位置 length - 1 也就是扩展到了最低位也就是个位上时，直接将加1结果直接打印出来。</span><br>                printNumber(number)<br>                <span class="hljs-keyword">return</span> <br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):  <span class="hljs-comment"># index不在个位位置，</span><br>                number[index+<span class="hljs-number">1</span>] = <span class="hljs-built_in">str</span>(i)  <span class="hljs-comment"># index+1 从高位扩展到低位</span><br>                print_1_to_maxofNdigits_recursively(number, length, index+<span class="hljs-number">1</span>)  <span class="hljs-comment"># index+1 从高位扩展到低位</span><br><br><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span>:  <span class="hljs-keyword">return</span> []<br>        res = []<br>        number = [<span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):<br>            <span class="hljs-comment"># 递归循环的最外层10次每次将number最高位（0位）上的值分别修改为0、1、2、3、4、5、6、7、8、9，然后递归调用 print_1_to_maxofNdigits_recursively 函数，去生成次高位的0、1、2、3、4、5、6、7、8、9，在带递归调用 print_1_to_maxofNdigits_recursively 函数，去生成次次高位的0、1、2、3、4、5、6、7、8、9。直到扩展到了最低位也就是个位上时，再输出。由于是在最高位（0位）上的值分别修改为0、1、2、3、4、5、6、7、8、9，所以肯定不会在 99 之后再加1。</span><br>            number[<span class="hljs-number">0</span>] = <span class="hljs-built_in">str</span>(i)<br>            print_1_to_maxofNdigits_recursively(number, n, <span class="hljs-number">0</span>)<br><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-<h1 id="Big-Number-Problem"><a href="#Big-Number-Problem" class="headerlink" title="Big Number Problem"></a>Big Number Problem</h1><p><strong><font color='red'>字符串是一种简单、有效地表示大数的方法。在Python中，由于字符串string是不可变对象，所以选择使用列表list来替代string解决大数问题。</font></strong></p>
+<h1 id="big-number-problem">Big Number Problem</h1>
+<p><strong><font color='red'>字符串是一种简单、有效地表示大数的方法。在Python中，由于字符串string是不可变对象，所以选择使用列表list来替代string解决大数问题。</font></strong></p>
 <blockquote>
 <p>将int转换成列表的函数</p>
 </blockquote>
@@ -318,7 +324,7 @@
 <p>在两个列表数字上进行<strong>相除</strong></p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -562,6 +568,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

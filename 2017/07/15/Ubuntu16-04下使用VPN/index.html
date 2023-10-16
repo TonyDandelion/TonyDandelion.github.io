@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,19 +253,19 @@
             <div class="markdown-body">
               <p>记录一下在Ubuntu16.04下如何使用VPN，之前设置了很久才弄好。</p>
 <a id="more"></a>
-<ol>
-<li>点击桌面右上角的连接图标，点击编辑连接。点击增加，选择类型为<strong>VPN 点到点隧道协议</strong>。 </li>
+<ol type="1">
+<li>点击桌面右上角的连接图标，点击编辑连接。点击增加，选择类型为<strong>VPN 点到点隧道协议</strong>。</li>
 </ol>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/2017-07-15%2013-16-00%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt="">  </p>
-<ol>
-<li>输入VPN服务器地址，账户以及密码 </li>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/2017-07-15%2013-16-00%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" /></p>
+<ol start="2" type="1">
+<li>输入VPN服务器地址，账户以及密码</li>
 </ol>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/2017-07-15%2013-17-44%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt="">  </p>
-<ol>
-<li>点击高级 勾选<strong> 使用点到点加密(MPPE)(P) 和 允许有状态的加密(A) </strong>  </li>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/2017-07-15%2013-17-44%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" /></p>
+<ol start="3" type="1">
+<li>点击高级 勾选** 使用点到点加密(MPPE)(P) 和 允许有状态的加密(A) **</li>
 </ol>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/2017-07-15%2013-18-34%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" alt="">  </p>
-
+<p><img src="http://oke9xbto1.bkt.clouddn.com/2017-07-15%2013-18-34%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" srcset="/img/loading.gif" /></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -502,6 +502,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

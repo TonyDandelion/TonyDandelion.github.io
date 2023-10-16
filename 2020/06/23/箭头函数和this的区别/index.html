@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -262,11 +262,11 @@
 <p>=&gt;必将指向外层function，如果外层不是function则指向window。</p>
 <p><em>以一个React组件为例</em></p>
 <figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;<br>    <span class="hljs-comment">// 我们用 state 来实现所谓“记忆”的功能。</span><br>    <span class="hljs-comment">// constructor函数会初始化this.state</span><br>    <span class="hljs-comment">// this.state 中存储当前每个方格（Square）的值，并且在每次方格被点击的时候改变这个值。</span><br>    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">props</span>)</span> &#123;<br>        <span class="hljs-built_in">super</span>(props);<br>        <span class="hljs-built_in">this</span>.state = &#123;<br>            value: <span class="hljs-literal">null</span>,<br>        &#125;;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> (<br>        <span class="hljs-comment">// Square组件渲染了一个单独的&lt;button&gt;</span><br>        <span class="hljs-comment">// 在 Square 组件 render 方法中的 onClick 事件监听函数中调用 this.setState，</span><br>        <span class="hljs-comment">// 我们就可以在每次 &lt;button&gt; 被点击的时候通知 React 去重新渲染 Square 组件。</span><br>        &lt;button<br>            className=<span class="hljs-string">&quot;square&quot;</span> <br>            onClick=&#123;<span class="hljs-function">() =&gt;</span> &#123;<span class="hljs-built_in">this</span>.setState(&#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;X&#x27;</span>&#125;)&#125;&#125;<br>            <span class="hljs-comment">// onClick=&#123;function() &#123;this.setState(&#123;value: &#x27;X&#x27;&#125;)&#125;&#125;  // 用这种方法声明，就会报 TypeError: Cannot read property &#x27;setState&#x27; of undefined 的错误。</span><br>        &gt;<br>            &#123;<span class="hljs-comment">/* 添加数字绑定 */</span>&#125;<br>            &#123;<span class="hljs-built_in">this</span>.state.value&#125;<br>        &lt;/button&gt;<br>    );<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>用这种方法声明，就会报 TypeError: Cannot read property ‘setState’ of undefined 的错误。因为 <code>setState()</code> 方法是Square类的方法。</p>
+<p>用这种方法声明，就会报 TypeError: Cannot read property 'setState' of undefined 的错误。因为 <code>setState()</code> 方法是Square类的方法。</p>
 <figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">onClick=&#123;<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<span class="hljs-built_in">this</span>.setState(&#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;X&#x27;</span>&#125;)&#125;&#125;<br></code></pre></div></td></tr></table></figure>
 <p>而用下面这种方法，就不会报错，因为=&gt;必将指向外层function，也就是Square类的方法，也就是Square.setState()。</p>
 <figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">onClick=&#123;<span class="hljs-function">() =&gt;</span> &#123;<span class="hljs-built_in">this</span>.setState(&#123;<span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;X&#x27;</span>&#125;)&#125;&#125;<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -503,6 +503,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

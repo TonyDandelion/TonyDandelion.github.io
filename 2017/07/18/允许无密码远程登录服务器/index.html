@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      349 字
+      352 字
     </span>
   
 
@@ -253,20 +253,23 @@
             <div class="markdown-body">
               <p>介绍Ubuntu远程服务器无密码登录的配置方法</p>
 <a id="more"></a>
-<h1 id="登录远程服务器-进入root状态"><a href="#登录远程服务器-进入root状态" class="headerlink" title="登录远程服务器 进入root状态"></a>登录远程服务器 进入root状态</h1><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh ubuntu@x.x.x.x   <span class="hljs-comment"># 输入密码 ubuntu的默认登录账号是Ubuntu 而centos的默认登录账号是root</span><br>sudo su<br></code></pre></div></td></tr></table></figure>
-<h1 id="在-root目录下新建一个-ssh文件夹"><a href="#在-root目录下新建一个-ssh文件夹" class="headerlink" title="在/root目录下新建一个.ssh文件夹"></a>在/root目录下新建一个.ssh文件夹</h1><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mkdir .ssh<br><span class="hljs-built_in">cd</span> .ssh<br></code></pre></div></td></tr></table></figure>
-<h1 id="设置authorized-keys"><a href="#设置authorized-keys" class="headerlink" title="设置authorized_keys"></a>设置authorized_keys</h1><p><strong>第一种方法</strong></p>
-<p>将其他服务器上的 <code>authorized_keys</code> 文件转移到待配置的服务器上 然后修改这个被复制 过来的 authorized_keys的用户为root用户 </p>
+<h1 id="登录远程服务器-进入root状态">登录远程服务器 进入root状态</h1>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh ubuntu@x.x.x.x   <span class="hljs-comment"># 输入密码 ubuntu的默认登录账号是Ubuntu 而centos的默认登录账号是root</span><br>sudo su<br></code></pre></div></td></tr></table></figure>
+<h1 id="在root目录下新建一个.ssh文件夹">在/root目录下新建一个.ssh文件夹</h1>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mkdir .ssh<br><span class="hljs-built_in">cd</span> .ssh<br></code></pre></div></td></tr></table></figure>
+<h1 id="设置authorized_keys">设置authorized_keys</h1>
+<p><strong>第一种方法</strong></p>
+<p>将其他服务器上的 <code>authorized_keys</code> 文件转移到待配置的服务器上 然后修改这个被复制 过来的 authorized_keys的用户为root用户</p>
 <p>即chmod以及chown，其中可以用递归参数-R来实现更改所有子文件和子目录的权限。</p>
 <p>1、利用chmod修改权限：</p>
-<p>对Document/目录下的所有子文件与子目录执行相同的权限变更：<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chmod -R 700 Document/<br></code></pre></div></td></tr></table></figure><br><strong>-R</strong> 参数是递归 处理目录下的所有文件以及子文件夹</p>
+<p>对Document/目录下的所有子文件与子目录执行相同的权限变更： <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chmod -R 700 Document/<br></code></pre></div></td></tr></table></figure> <strong>-R</strong> 参数是递归 处理目录下的所有文件以及子文件夹</p>
 <p>700是变更后的权限表示（只有所有者有读和写以及执行的权限）</p>
 <p>Document/ 是需要执行的目录</p>
 <p>2、利用chown改变所有者：</p>
-<p>对Document/ 目录下的所有文件与子目录执行相同的所有者变更，修改所有者为users用户组的username用户<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chown -R username:users Document/<br></code></pre></div></td></tr></table></figure><br><code>username: users</code> 用户组的username，用户组参数不是必须有</p>
-<p><strong>第二种方法</strong> </p>
+<p>对Document/ 目录下的所有文件与子目录执行相同的所有者变更，修改所有者为users用户组的username用户 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">chown -R username:users Document/<br></code></pre></div></td></tr></table></figure> <code>username: users</code> 用户组的username，用户组参数不是必须有</p>
+<p><strong>第二种方法</strong></p>
 <p>以 <code>root</code> 身份新建一个 <code>authorized_keys</code> 文件把复制的 <code>authorized_keys</code> 文件中的数据复制到新建的<code>authorized_keys</code> 中。</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -503,6 +506,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

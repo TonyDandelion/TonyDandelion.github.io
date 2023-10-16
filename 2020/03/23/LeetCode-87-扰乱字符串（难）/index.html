@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,82 +251,123 @@
             <h1 style="display: none">LeetCode 87. 扰乱字符串（难）</h1>
             
             <div class="markdown-body">
-              <p>一道挺难的动态规划题目，dp矩阵达到了三维的规模。<br>关键是理解状态转换方程的推导。  </p>
-<script type="math/tex; mode=display">
-dp[i][j][k] = dp[j][j][w]\ and\ dp[i+w][j+w][k-w] (1 \leq w \leq k-1 )</script><p>OR  </p>
-<script type="math/tex; mode=display">
-dp[i][j][k] = dp[j][j+k-w][w]\ and\ dp[i+w][j][k-w] (1 \leq w \leq k-1 )</script><a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个字符串 s1，我们可以把它递归地分割成两个非空子字符串，从而将其表示为二叉树。<br>下图是字符串 s1 = “great” 的一种可能的表示形式。  </p>
+              <p>一道挺难的动态规划题目，dp矩阵达到了三维的规模。<br />
+关键是理解状态转换方程的推导。</p>
+<p><span class="math display">\[
+dp[i][j][k] = dp[j][j][w]\ and\ dp[i+w][j+w][k-w] (1 \leq w \leq k-1 )
+\]</span> OR<br />
+<span class="math display">\[
+dp[i][j][k] = dp[j][j+k-w][w]\ and\ dp[i+w][j][k-w] (1 \leq w \leq k-1 )
+\]</span></p>
+<a id="more"></a>
+<h1 id="题目">题目</h1>
+<p>给定一个字符串 s1，我们可以把它递归地分割成两个非空子字符串，从而将其表示为二叉树。<br />
+下图是字符串 s1 = "great" 的一种可能的表示形式。</p>
 <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">    great<br>   /    <span class="hljs-string">\</span><br>  gr    eat<br> / <span class="hljs-string">\</span>    /  <span class="hljs-string">\</span><br>g   r  e   at<br>           / <span class="hljs-string">\</span><br>          a   t<br></code></pre></div></td></tr></table></figure>
-<p>在扰乱这个字符串的过程中，我们可以挑选任何一个非叶节点，然后交换它的两个子节点。<br>例如，如果我们挑选非叶节点 “gr” ，交换它的两个子节点，将会产生扰乱字符串 “rgeat” 。  </p>
+<p>在扰乱这个字符串的过程中，我们可以挑选任何一个非叶节点，然后交换它的两个子节点。<br />
+例如，如果我们挑选非叶节点 "gr" ，交换它的两个子节点，将会产生扰乱字符串 "rgeat" 。</p>
 <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">    rgeat<br>   /    <span class="hljs-string">\</span><br>  rg    eat<br> / <span class="hljs-string">\</span>    /  <span class="hljs-string">\</span><br>r   g  e   at<br>           / <span class="hljs-string">\</span><br>          a   t<br></code></pre></div></td></tr></table></figure>
-<p>我们将 “rgeat” 称作 “great” 的一个扰乱字符串。<br>同样地，如果我们继续交换节点 “eat” 和 “at” 的子节点，将会产生另一个新的扰乱字符串 “rgtae” 。   </p>
+<p>我们将 "rgeat” 称作 "great" 的一个扰乱字符串。<br />
+同样地，如果我们继续交换节点 "eat" 和 "at" 的子节点，将会产生另一个新的扰乱字符串 "rgtae" 。</p>
 <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">    rgtae<br>   /    <span class="hljs-string">\</span><br>  rg    tae<br> / <span class="hljs-string">\</span>    /  <span class="hljs-string">\</span><br>r   g  ta  e<br>       / <span class="hljs-string">\</span><br>      t   a<br></code></pre></div></td></tr></table></figure>
-<p>我们将 “rgtae” 称作 “great” 的一个扰乱字符串。<br>给出两个长度相等的字符串 s1 和 s2，判断 s2 是否是 s1 的扰乱字符串。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:  </p>
+<p>我们将 "rgtae” 称作 "great" 的一个扰乱字符串。<br />
+给出两个长度相等的字符串 s1 和 s2，判断 s2 是否是 s1 的扰乱字符串。</p>
+<h1 id="示例">示例</h1>
+<p>示例 1:</p>
 <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">s1</span> = <span class="hljs-string">&quot;great&quot;</span>, <span class="hljs-attr">s2</span> = <span class="hljs-string">&quot;rgeat&quot;</span><br>输出: <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
-<p>示例 2:  </p>
+<p>示例 2:</p>
 <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">s1</span> = <span class="hljs-string">&quot;abcde&quot;</span>, <span class="hljs-attr">s2</span> = <span class="hljs-string">&quot;caebd&quot;</span><br>输出: <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>递归、动态规划</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、递归</strong><br>S 和 T  如果是 扰动 的话，那么必然存在一个在 S 上的长度 l1，将 S 分成 S1 和 S2 两段，同样 T 上也有一个长度l2，把 T 分为 T1 和 T2。<br>1、那么要么 S1 和 T1 是 <strong>扰动</strong> 的且 S2 和 T2 是 <strong>扰动</strong> 的，即字符串未交换。<br>2、要么 S1 和 T2 是 <strong>扰动</strong> 的且 S2 和 T1 是 <strong>扰动</strong> 的，即字符串交换了。<br>就拿题目中的例子 rgeat 和 great 来说，rgeat 可分成 rg 和 eat 两段， great 可分成 gr 和 eat 两段，rg 和gr是扰动的， eat和eat也是扰动的。  </p>
-<p><strong>方法二、动态规划</strong><br><em>直觉</em><br>给定两个字符串 $T$ 和 $S$，假设 $T$ 是由 $S$ 变换而来。  </p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>递归、动态规划</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>方法一、递归</strong><br />
+S 和 T 如果是 扰动 的话，那么必然存在一个在 S 上的长度 l1，将 S 分成 S1 和 S2 两段，同样 T 上也有一个长度l2，把 T 分为 T1 和 T2。<br />
+1、那么要么 S1 和 T1 是 <strong>扰动</strong> 的且 S2 和 T2 是 <strong>扰动</strong> 的，即字符串未交换。<br />
+2、要么 S1 和 T2 是 <strong>扰动</strong> 的且 S2 和 T1 是 <strong>扰动</strong> 的，即字符串交换了。<br />
+就拿题目中的例子 rgeat 和 great 来说，rgeat 可分成 rg 和 eat 两段， great 可分成 gr 和 eat 两段，rg 和gr是扰动的， eat和eat也是扰动的。</p>
+<p><strong>方法二、动态规划</strong><br />
+<em>直觉</em><br />
+给定两个字符串 <span class="math inline">\(T\)</span> 和 <span class="math inline">\(S\)</span>，假设 <span class="math inline">\(T\)</span> 是由 <span class="math inline">\(S\)</span> 变换而来。</p>
 <ul>
-<li>如果 $T$ 和 $S$ 长度不一样，必定不能变来。  </li>
-<li>如果长度一样，顶层字符串 $S$ 能够划分为 $S_1$ 和 $S_2$，同理，字符串$T$也可以划分为​ $T_1$ 和 $T_2$。<ul>
-<li>情况一：没交换，$S_1 = T_1$  且 $S_2 = T_2$。  </li>
-<li>情况二：交换了，$S_1 = T_2$  且 $S_2 = T_1$。  </li>
-</ul>
+<li>如果 <span class="math inline">\(T\)</span> 和 <span class="math inline">\(S\)</span> 长度不一样，必定不能变来。<br />
 </li>
-<li>子问题就是分别讨论两种情况，$T_1$ 是否由 $S_1$ 变来且$T_2$ 是否由 $S_2$ 变来。或者，$T_1$ 是否由 $S_2$ 变来且$T_2$是否由$S_1$ 变来。  </li>
-</ul>
-<p><img src="https://i.loli.net/2020/03/23/SiOWz4y51PkNgj2.png" srcset="/img/loading.gif" alt="8358f1da723d09be915a17570d13e05d1b0b105839b751763429dcb876ce452d-image.png"></p>
-<p><em>状态</em><br>$dp[i][j][k][h]$ 表示 $T[k…h]$ 是否由 $S[i…j]$ 变来。由于变换必须长度一样，所以上述变换关系可以从四维简化为三维，即，$dp[i][j][len]$ 表示从字符串 $S$ 中 $i$ 开始长度为 $len$ 的字符串是否能变换为从字符串 $T$ 中 $j$ 开始长度为 $len$ 的字符串，因此转换方程如下：  </p>
-<script type="math/tex; mode=display">
-dp[i][j][k] = dp[j][j][w]\ and\ dp[i+w][j+w][k-w] (1 \leq w \leq k-1 )\ \ OR\ \  \\
-dp[i][j][k] = dp[j][j+k-w][w]\ and\ dp[i+w][j][k-w] (1 \leq w \leq k-1 )</script><p>解释下：枚举 $S_1$长度 $w$（从$1～k-1$，因为要划分），$f[i][j][w]$ 表示 $S_1$ 能变成 $T_1$，$f[i+w][j+w][k-w]$表示 $S_2$ 可以变成 $T_1$。而 $f[j][j+k-w][w]$ 表示 $S_1$ 能变成 $T_2$，$f[i+w][j][k-w]$ 表示 $S_2$ 能变成 $T_1$。  </p>
-<p><em>初始条件</em><br>对于长度是1的子串，只有相等才能变过去，相等为 true，不相等为 false。  </p>
-<p><em>终止条件</em><br>$dp[i][j][len]$ 表示字符串$S$从$i$开始长度为$len$的子串能否变换成字符串$T$从$j$开始长度为$len$的子串，所以终止条件为 $dp[0][0][n] = True$，其中 $n$ 为输入字符串的长度。  </p>
-<p><em>算法</em>  </p>
+<li>如果长度一样，顶层字符串 <span class="math inline">\(S\)</span> 能够划分为 <span class="math inline">\(S_1\)</span> 和 <span class="math inline">\(S_2\)</span>，同理，字符串<span class="math inline">\(T\)</span>也可以划分为​ <span class="math inline">\(T_1\)</span> 和 <span class="math inline">\(T_2\)</span>。
 <ul>
-<li>特判 <code>S</code> 和 <code>T</code> 长度不一样的情况  </li>
+<li>情况一：没交换，<span class="math inline">\(S_1 = T_1\)</span> 且 <span class="math inline">\(S_2 = T_2\)</span>。<br />
+</li>
+<li>情况二：交换了，<span class="math inline">\(S_1 = T_2\)</span> 且 <span class="math inline">\(S_2 = T_1\)</span>。<br />
+</li>
+</ul></li>
+<li>子问题就是分别讨论两种情况，<span class="math inline">\(T_1\)</span> 是否由 <span class="math inline">\(S_1\)</span> 变来且<span class="math inline">\(T_2\)</span> 是否由 <span class="math inline">\(S_2\)</span> 变来。或者，<span class="math inline">\(T_1\)</span> 是否由 <span class="math inline">\(S_2\)</span> 变来且<span class="math inline">\(T_2\)</span>是否由<span class="math inline">\(S_1\)</span> 变来。</li>
+</ul>
+<figure>
+<img src="https://i.loli.net/2020/03/23/SiOWz4y51PkNgj2.png" srcset="/img/loading.gif" alt="8358f1da723d09be915a17570d13e05d1b0b105839b751763429dcb876ce452d-image.png" /><figcaption aria-hidden="true">8358f1da723d09be915a17570d13e05d1b0b105839b751763429dcb876ce452d-image.png</figcaption>
+</figure>
+<p><em>状态</em><br />
+<span class="math inline">\(dp[i][j][k][h]\)</span> 表示 <span class="math inline">\(T[k...h]\)</span> 是否由 <span class="math inline">\(S[i...j]\)</span> 变来。由于变换必须长度一样，所以上述变换关系可以从四维简化为三维，即，<span class="math inline">\(dp[i][j][len]\)</span> 表示从字符串 <span class="math inline">\(S\)</span> 中 <span class="math inline">\(i\)</span> 开始长度为 <span class="math inline">\(len\)</span> 的字符串是否能变换为从字符串 <span class="math inline">\(T\)</span> 中 <span class="math inline">\(j\)</span> 开始长度为 <span class="math inline">\(len\)</span> 的字符串，因此转换方程如下：<br />
+<span class="math display">\[
+dp[i][j][k] = dp[j][j][w]\ and\ dp[i+w][j+w][k-w] (1 \leq w \leq k-1 )\ \ OR\ \  \\
+dp[i][j][k] = dp[j][j+k-w][w]\ and\ dp[i+w][j][k-w] (1 \leq w \leq k-1 )
+\]</span></p>
+<p>解释下：枚举 <span class="math inline">\(S_1\)</span>长度 <span class="math inline">\(w\)</span>（从<span class="math inline">\(1～k-1\)</span>，因为要划分），<span class="math inline">\(f[i][j][w]\)</span> 表示 <span class="math inline">\(S_1\)</span> 能变成 <span class="math inline">\(T_1\)</span>，<span class="math inline">\(f[i+w][j+w][k-w]\)</span>表示 <span class="math inline">\(S_2\)</span> 可以变成 <span class="math inline">\(T_1\)</span>。而 <span class="math inline">\(f[j][j+k-w][w]\)</span> 表示 <span class="math inline">\(S_1\)</span> 能变成 <span class="math inline">\(T_2\)</span>，<span class="math inline">\(f[i+w][j][k-w]\)</span> 表示 <span class="math inline">\(S_2\)</span> 能变成 <span class="math inline">\(T_1\)</span>。</p>
+<p><em>初始条件</em><br />
+对于长度是1的子串，只有相等才能变过去，相等为 true，不相等为 false。</p>
+<p><em>终止条件</em><br />
+<span class="math inline">\(dp[i][j][len]\)</span> 表示字符串<span class="math inline">\(S\)</span>从<span class="math inline">\(i\)</span>开始长度为<span class="math inline">\(len\)</span>的子串能否变换成字符串<span class="math inline">\(T\)</span>从<span class="math inline">\(j\)</span>开始长度为<span class="math inline">\(len\)</span>的子串，所以终止条件为 <span class="math inline">\(dp[0][0][n] = True\)</span>，其中 <span class="math inline">\(n\)</span> 为输入字符串的长度。</p>
+<p><em>算法</em></p>
+<ul>
+<li>特判 <code>S</code> 和 <code>T</code> 长度不一样的情况<br />
+</li>
 <li>初始化三维数组 <code>dp</code></li>
 <li>初始化单个字符的情况。如果把 <code>dp</code> 三维数组想象成一个立方体，初始化单个字符的操作，就是设置<code>w=1</code> 然后初始化 <code>i</code>和<code>j</code> 组成的平面，也就是立方体的最底面。</li>
-<li>开始划分区间，区间长度为n，也就是划分为 <code>s1[:k]</code> 和 <code>s1[k:]</code>，枚举区间长度2～n（n为字符串长度）  <ul>
+<li>开始划分区间，区间长度为n，也就是划分为 <code>s1[:k]</code> 和 <code>s1[k:]</code>，枚举区间长度2～n（n为字符串长度）
+<ul>
 <li>枚举S中的起点位置 <code>i</code>，也就是在 <code>S</code> 中枚举i的位置，因为后面会出现 <code>i+w</code> 的情况，而 <code>w</code> 最大就是 <code>k</code>，就会有 <code>i+k</code> 的情况，所以 <code>i</code> 的取值范围就是 <code>0~n-k</code>。</li>
 <li>枚举 <code>T</code> 中的起点位置 <code>j</code>，同上，<code>j</code> 的取值范围就是 <code>0~n-k</code>。</li>
-<li>枚举划分位置 <code>w</code>，范围是 <code>1~k</code>。<ul>
+<li>枚举划分位置 <code>w</code>，范围是 <code>1~k</code>。
+<ul>
 <li>第一种情况：<code>S1-&gt;T1, S2-&gt;T2</code>，当前层的两个子串未经过交换的情况。</li>
 <li>第二种情况：<code>S1-&gt;T2, S2-&gt;T1</code>，当前层的两个子串经过交换的情况。</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li>返回 <code>dp[0][0][n]</code></li>
 </ul>
 <p>两种情况的判定的代码</p>
-<p><img src="https://i.loli.net/2020/03/23/6HDARnvrGKjPIqw.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-23_14-04-54.png"></p>
-<p><em>图解</em>  </p>
-<p><img src="https://i.loli.net/2020/03/23/zFjSrfa4AkvGtnN.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-23_12-32-04.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/03/23/6HDARnvrGKjPIqw.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-23_14-04-54.png" /><figcaption aria-hidden="true">Snipaste_2020-03-23_14-04-54.png</figcaption>
+</figure>
+<p><em>图解</em></p>
+<figure>
+<img src="https://i.loli.net/2020/03/23/zFjSrfa4AkvGtnN.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-23_12-32-04.png" /><figcaption aria-hidden="true">Snipaste_2020-03-23_12-32-04.png</figcaption>
+</figure>
 <p>从这张图就可以知道动态规划的<strong>自底向上</strong>特性了。</p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<h1 id="python版本">Python版本</h1>
+<ul>
 <li>方法一递归的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> functools<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br><span class="hljs-meta">    @functools.lru_cache(<span class="hljs-params"><span class="hljs-literal">None</span></span>)</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isScramble</span>(<span class="hljs-params">self, s1: <span class="hljs-built_in">str</span>, s2: <span class="hljs-built_in">str</span></span>) -&gt; bool:</span><br>        <span class="hljs-keyword">if</span> s1 == s2:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">sorted</span>(s1) != <span class="hljs-built_in">sorted</span>(s2):<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(s1)):<br>            <span class="hljs-keyword">if</span> self.isScramble(s1[:i],s2[:i]) <span class="hljs-keyword">and</span> self.isScramble(s1[i:],s2[i:]):<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> self.isScramble(s1[:i],s2[-i:]) <span class="hljs-keyword">and</span> self.isScramble(s1[i:],s2[:-i]):<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br></code></pre></div></td></tr></table></figure>
-<p>简单的递归加上Python3自带的缓存机制 <code>@functools.lru_cache(None)</code>，以可以提高效率。<br>执行用时 :36 ms, 在所有 Python3 提交中击败了96.29%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了21.88%的用户<br>实际上，递归的时间复杂度要大于动态规划，但是测试样例不存在 $n!$ 的情况，所以效果还行。</p>
+<p>简单的递归加上Python3自带的缓存机制 <code>@functools.lru_cache(None)</code>，以可以提高效率。<br />
+执行用时 :36 ms, 在所有 Python3 提交中击败了96.29%的用户<br />
+内存消耗 :13.5 MB, 在所有 Python3 提交中击败了21.88%的用户<br />
+实际上，递归的时间复杂度要大于动态规划，但是测试样例不存在 <span class="math inline">\(n!\)</span> 的情况，所以效果还行。</p>
 <ul>
-<li>方法二动态规划的实现  </li>
+<li>方法二动态规划的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isScramble</span>(<span class="hljs-params">self, s1, s2</span>):</span><br>        S_len = <span class="hljs-built_in">len</span>(s1)<br>        T_len = <span class="hljs-built_in">len</span>(s2)<br>        <br>        <span class="hljs-comment"># 一些特判</span><br>        <span class="hljs-keyword">if</span> S_len != T_len:  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> s1 == s2:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">sorted</span>(s1) != <span class="hljs-built_in">sorted</span>(s2):  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <br>        <span class="hljs-comment"># 初始化 dp 3维数组dp[i][j][k]</span><br>        <span class="hljs-comment"># i为0~S_len共S_len+1个， j为0~S_len-1共S_len个， k为1~S_len+1共S_len个</span><br>        dp = [ [ [<span class="hljs-literal">False</span>]*(S_len+<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(S_len) ] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(S_len) ]<br><br>        <span class="hljs-comment"># 初始化单个字符的情况</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(S_len):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(T_len):<br>                dp[i][j][<span class="hljs-number">1</span>] = s1[i] == s2[j]  <br>        <br>        <span class="hljs-comment"># 前面排除了s1和s2为单个字符的情况，那么我们就要划分区间了，k从2到S_len，也就是划分为s1[:k]和s1[k:]</span><br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, S_len + <span class="hljs-number">1</span>):  <span class="hljs-comment"># 枚举区间长度2～S_len</span><br>            <span class="hljs-comment"># 枚举S中的起点位置 i，也就是在s1中枚举i的位置，因为后面会出现i+w的情况，而w最大就是k，就会有i+k的情况，所以i的取值范围就是0~S_len-k。</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(S_len - k + <span class="hljs-number">1</span>):<br>                <span class="hljs-comment"># 枚举T中的起点位置 j</span><br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(T_len - k + <span class="hljs-number">1</span>):<br>                    <span class="hljs-comment"># 枚举划分位置 w</span><br>                    <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, k):<br>                        <span class="hljs-comment"># 第一种情况：S1-&gt;T1,S2-&gt;T2，没有交换过。</span><br>                        <span class="hljs-keyword">if</span> dp[i][j][w] <span class="hljs-keyword">and</span> dp[i + w][j + w][k - w]:<br>                            dp[i][j][k] = <span class="hljs-literal">True</span><br>                            <span class="hljs-keyword">break</span><br>                        <span class="hljs-comment"># 第二种情况：S1-&gt;T2,S2-&gt;T1，发生了交换。</span><br>                        <span class="hljs-comment"># S1起点i，T2起点j + 前面那段长度 k-w，S2起点i+前面长度w，T1起点为j。</span><br>                        <span class="hljs-keyword">if</span> dp[i][j + k - w][w] <span class="hljs-keyword">and</span> dp[i + w][j][k - w]:<br>                            dp[i][j][k] = <span class="hljs-literal">True</span><br>                            <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][S_len]<br><br><br>Input = [<span class="hljs-string">&quot;great&quot;</span>, <span class="hljs-string">&quot;abcde&quot;</span>]<br>Input1 = [<span class="hljs-string">&quot;rgeat&quot;</span>, <span class="hljs-string">&quot;caebd&quot;</span>]<br>Answer = [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.isScramble(Input[i], Input1[i])<br>        print(reslut == Answer[i])<br><br></code></pre></div></td></tr></table></figure>
-<p>执行用时 :276 ms, 在所有 Python3 提交中击败了25.00%的用户<br>内存消耗 :13.8 MB, 在所有 Python3 提交中击败了17.19%的用户  </p>
-<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><p>1、Python 缓存机制与 functools.lru_cache  </p>
-<p>缓存是一种将定量数据加以保存以备迎合后续获取需求的处理方式，旨在加快数据获取的速度。数据的生成过程可能需要经过计算，规整，远程获取等操作，如果是同一份数据需要多次使用，每次都重新生成会大大浪费时间。所以，如果将计算或者远程请求等操作获得的数据缓存下来，会加快后续的数据获取需求。  </p>
+<p>执行用时 :276 ms, 在所有 Python3 提交中击败了25.00%的用户<br />
+内存消耗 :13.8 MB, 在所有 Python3 提交中击败了17.19%的用户</p>
+<h1 id="有效语法糖">有效语法糖</h1>
+<p>1、Python 缓存机制与 functools.lru_cache</p>
+<p>缓存是一种将定量数据加以保存以备迎合后续获取需求的处理方式，旨在加快数据获取的速度。数据的生成过程可能需要经过计算，规整，远程获取等操作，如果是同一份数据需要多次使用，每次都重新生成会大大浪费时间。所以，如果将计算或者远程请求等操作获得的数据缓存下来，会加快后续的数据获取需求。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> lru_cache<br><span class="hljs-meta">&gt;&gt;&gt; </span>@lru_cache(<span class="hljs-literal">None</span>)<br><span class="hljs-meta">... </span><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span>(<span class="hljs-params">x, y</span>):</span><br><span class="hljs-meta">... </span>    print(<span class="hljs-string">&quot;calculating: %s + %s&quot;</span> % (x, y))<br><span class="hljs-meta">... </span>    <span class="hljs-keyword">return</span> x + y<br>...<br><span class="hljs-meta">&gt;&gt;&gt; </span>print(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>))<br>calculating: <span class="hljs-number">1</span> + <span class="hljs-number">2</span><br><span class="hljs-number">3</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>print(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>))<br><span class="hljs-number">3</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>print(add(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>))<br>calculating: <span class="hljs-number">2</span> + <span class="hljs-number">3</span><br><span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure>
 <p>从结果可以看出，当第二次调用 add(1, 2) 时，并没有真正执行函数体，而是直接返回缓存的结果。</p>
 <blockquote>
-<p>参考链接  </p>
+<p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/scramble-string/solution/di-gui-by-powcai/">力扣（LeetCode）powcai</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/scramble-string/solution/miao-dong-de-qu-jian-xing-dpsi-lu-by-sha-yu-la-jia/">力扣（LeetCode）jerry_njuT_1</a><br><a target="_blank" rel="noopener" href="https://kuanghy.github.io/2016/04/20/python-cache">Python 缓存机制与 functools.lru_cache</a></p>
-
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/scramble-string/solution/di-gui-by-powcai/">力扣（LeetCode）powcai</a><br />
+<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/scramble-string/solution/miao-dong-de-qu-jian-xing-dpsi-lu-by-sha-yu-la-jia/">力扣（LeetCode）jerry_njuT_1</a><br />
+<a target="_blank" rel="noopener" href="https://kuanghy.github.io/2016/04/20/python-cache">Python 缓存机制与 functools.lru_cache</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -570,6 +611,26 @@ dp[i][j][k] = dp[j][j+k-w][w]\ and\ dp[i+w][j][k-w] (1 \leq w \leq k-1 )</script
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

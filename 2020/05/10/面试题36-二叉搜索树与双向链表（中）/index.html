@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.5k 字
     </span>
   
 
@@ -253,7 +253,8 @@
             <div class="markdown-body">
               <p>我们可以把树分为3部分：根节点、左子树和右子树，然后把左子树中最大的节点、根节点、右子树中最小的节点链接起来。至于如何把左子树和右子树内部的节点链接成链表，那和原来的问题的实质是一样的，因此可以递归解决。解决这个问题的关键在于把一个大的问题分解成几个小问题，并递归地解决小问题。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个<strong>排序的循环双向链表</strong>。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p>
+<h1 id="question">Question</h1>
+<p>输入一棵二叉搜索树，将该二叉搜索树转换成一个<strong>排序的循环双向链表</strong>。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p>
 <p>为了让您更好地理解问题，以下面的二叉搜索树为例：</p>
 <p><img src="https://i.loli.net/2020/05/10/WsaiqlLpwxFrEh7.png" srcset="/img/loading.gif" alt="bstdlloriginalbst.png" style="zoom:50%;" /></p>
 <p>我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。</p>
@@ -263,17 +264,23 @@
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入的二叉树是完全二叉树；所有节点都没有左/右子树的二叉树：只有一个节点的二叉树）。<br>特殊输入测试（指向二叉树根节点的指针为 nullptr 指针）。</p>
+<p>功能测试（输入的二叉树是完全二叉树；所有节点都没有左/右子树的二叉树：只有一个节点的二叉树）。 特殊输入测试（指向二叉树根节点的指针为 nullptr 指针）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者分析复杂问题的能力。无论是二叉树还是双向链表，都有很多指针。要实现这两种不同数据结构的转换，需要调整大量的指针，因此这个过程会很复杂。为了把这个复杂的问题分析清楚，我们可以把树分为3部分：根节点、左子树和右子树，然后把左子树中最大的节点、根节点、右子树中最小的节点链接起来。至于如何把左子树和右子树内部的节点链接成链表，那和原来的问题的实质是一样的，因此可以递归解决。解决这个问题的关键在于把一个大的问题分解成几个小问题，并递归地解决小问题。<br>考查应聘者对二叉树和双向链表的理解及编程能力。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><img src="https://i.loli.net/2020/05/10/cOYCxMA6b3GZsyf.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_18-44-17"></p>
+<p>考查应聘者分析复杂问题的能力。无论是二叉树还是双向链表，都有很多指针。要实现这两种不同数据结构的转换，需要调整大量的指针，因此这个过程会很复杂。为了把这个复杂的问题分析清楚，我们可以把树分为3部分：根节点、左子树和右子树，然后把左子树中最大的节点、根节点、右子树中最小的节点链接起来。至于如何把左子树和右子树内部的节点链接成链表，那和原来的问题的实质是一样的，因此可以递归解决。解决这个问题的关键在于把一个大的问题分解成几个小问题，并递归地解决小问题。 考查应聘者对二叉树和双向链表的理解及编程能力。</p>
+<h1 id="intuition">Intuition</h1>
+<figure>
+<img src="https://i.loli.net/2020/05/10/cOYCxMA6b3GZsyf.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_18-44-17" /><figcaption aria-hidden="true">Snipaste_2020-05-10_18-44-17</figcaption>
+</figure>
 <p>理论上有可能实现二叉搜索树和排序双向链表的转换。在搜索二叉树中，左子节点的值总是小于父节点的值，右子节点的值总是大于父节点的值。因此，我们在将二叉搜索树转换成排序双向链表时，原先指向左子节点的指针调整为链表中指向前一个节点的指针，原先指向右子节点的指针调整为链表中指向后一个节点的指针。</p>
 <p>中序遍历算法的特点是按照从小到大的顺序遍历二叉树的每个节点。当遍历到根节点的时候，我们把树看成3部分：值为10的节点；根节点值为6的左子树；根节点值为14的右子树。根据排序链表的定义，值为10的节点将和它的左子树的最大一个节点（值为8的节点）链接起来，同时它还将和右子树最小的节点（值为12的节点）链接起来，如图4.16所示。</p>
-<p><img src="https://i.loli.net/2020/05/10/OU28HgJY4ZxPNoD.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_18-44-05"></p>
+<figure>
+<img src="https://i.loli.net/2020/05/10/OU28HgJY4ZxPNoD.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-10_18-44-05" /><figcaption aria-hidden="true">Snipaste_2020-05-10_18-44-05</figcaption>
+</figure>
 <p>按照中序遍历的顺序，<strong><em>1.</em> 当我们遍历转换到根节点（值为10的节点）时，它的左子树已经转换成一个排序的链表了，并且处在链表中的最后一个节点是当前值最大的节点。</strong> <strong><em>2.</em></strong> 我们把值为8的节点和根节点链接起来，此时链表中的最后一个节点就是10了。<strong><em>3.</em></strong> 接着我们去遍历转换右子树，并把根节点和右子树中最小的节点链接起来。至于怎么去转换它的左子树和右子树，由于遍历和转换过程是一样的，我们很自然地想到<strong>可以用递归</strong>。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<h1 id="code">Code</h1>
+<ul>
 <li>剑指offer版本</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">treeToDoublyList</span>(<span class="hljs-params">self, root: <span class="hljs-string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span> <br>        <span class="hljs-keyword">if</span> root == <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root.left <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> root.right:<br>            <span class="hljs-keyword">return</span> root<br>        <br>        <span class="hljs-comment"># 处理左子树</span><br>        self.treeToDoublyList(root.left)<br>        left = root.left<br><br><br>        <span class="hljs-comment"># 连接根与左子树最大节点</span><br>        <span class="hljs-keyword">if</span> left:<br>            <span class="hljs-keyword">while</span> left.right:<br>                left = left.right<br>            root.left, left.right = left, root<br>        <br>        <span class="hljs-comment"># 处理右子树</span><br>        self.treeToDoublyList(root.right)<br>        right = root.right<br><br>        <span class="hljs-comment"># 连接根与右子树最小节点</span><br>        <span class="hljs-keyword">if</span> right:<br>            <span class="hljs-keyword">while</span> right.left:<br>                right = right.left<br>            root.right, right.left = right, root<br>        <br>        <span class="hljs-keyword">while</span> root.left:<br>            root = root.left<br>        <br>        <span class="hljs-keyword">return</span> root<br></code></pre></div></td></tr></table></figure>
@@ -281,8 +288,8 @@
 <li>LeetCode版本，要求双向链表是循环的。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">treeToDoublyList</span>(<span class="hljs-params">self, root: <span class="hljs-string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">cur</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> cur: <span class="hljs-keyword">return</span><br>            dfs(cur.left) <span class="hljs-comment"># 递归左子树</span><br>            <span class="hljs-keyword">if</span> self.pre: <span class="hljs-comment"># 修改节点引用</span><br>                self.pre.right, cur.left = cur, self.pre<br>            <span class="hljs-keyword">else</span>: <span class="hljs-comment"># 记录头节点，到达树的最左下角叶子了</span><br>                self.head = cur<br>            self.pre = cur <span class="hljs-comment"># 保存 cur</span><br>            dfs(cur.right) <span class="hljs-comment"># 递归右子树</span><br>        <br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span><br>        self.pre = <span class="hljs-literal">None</span><br>        dfs(root)<br>        self.head.left, self.pre.right = self.pre, self.head<br>        <span class="hljs-keyword">return</span> self.head<br></code></pre></div></td></tr></table></figure>
-<p><strong><em>参考连接</em></strong><br>作者：jyd<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/solution/mian-shi-ti-36-er-cha-sou-suo-shu-yu-shuang-xian-5/">https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/solution/mian-shi-ti-36-er-cha-sou-suo-shu-yu-shuang-xian-5/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-
+<p><strong><em>参考连接</em></strong> 作者：jyd 链接：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/solution/mian-shi-ti-36-er-cha-sou-suo-shu-yu-shuang-xian-5/ 来源：力扣（LeetCode） 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -532,6 +539,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,19 +251,27 @@
             <h1 style="display: none">Visual Studio Code C++环境搭建</h1>
             
             <div class="markdown-body">
-              <p>之前一直用 Visual Studio 2013 写 C++。<br>后面电脑重装之后，就没有环境了。<br>这次换成 Visual Studio Code + MinGW的模式试试。</p>
+              <p>之前一直用 Visual Studio 2013 写 C++。 后面电脑重装之后，就没有环境了。 这次换成 Visual Studio Code + MinGW的模式试试。</p>
 <a id="more"></a>
-<h1 id="安装-Visual-Studio-Code"><a href="#安装-Visual-Studio-Code" class="headerlink" title="安装 Visual Studio Code"></a>安装 Visual Studio Code</h1><p>前往<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">官网</a>下载安装包，然后一路 <strong>next</strong> 安装就行。</p>
-<h1 id="安装编译器：MinGW"><a href="#安装编译器：MinGW" class="headerlink" title="安装编译器：MinGW"></a>安装编译器：MinGW</h1><h2 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h2><p>MinGW官网进行下载安装。<strong><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mingw/files/">点击下载</a></strong>，选择好安装路径（如C:\MinWG）。</p>
+<h1 id="安装-visual-studio-code">安装 Visual Studio Code</h1>
+<p>前往<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">官网</a>下载安装包，然后一路 <strong>next</strong> 安装就行。</p>
+<h1 id="安装编译器mingw">安装编译器：MinGW</h1>
+<h2 id="在线安装">在线安装</h2>
+<p>MinGW官网进行下载安装。<strong><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mingw/files/">点击下载</a></strong>，选择好安装路径（如C:）。</p>
 <p>如果你网速不好的话，那你就需要看我的这一篇文章。</p>
-<h2 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h2><p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1278b39kz585Q9Fw27IYbGw">https://pan.baidu.com/s/1278b39kz585Q9Fw27IYbGw</a> 提取码: idda </p>
-<p>解压之后放置到安装目录（如C:\MinWG）即可。</p>
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>鼠标右键“我的电脑”-&gt;“属性”，选择“高级”选项卡下的“环境变量”，在系统变量里点“新建”，之后填写MinGW的安装路径，如下：</p>
+<h2 id="离线安装">离线安装</h2>
+<p>链接: https://pan.baidu.com/s/1278b39kz585Q9Fw27IYbGw 提取码: idda</p>
+<p>解压之后放置到安装目录（如C:）即可。</p>
+<h2 id="配置环境变量">配置环境变量</h2>
+<p>鼠标右键“我的电脑”-&gt;“属性”，选择“高级”选项卡下的“环境变量”，在系统变量里点“新建”，之后填写MinGW的安装路径，如下：</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mathematica">变量名：<span class="hljs-variable">MinGW</span><br>变量值：<span class="hljs-built_in">D</span><span class="hljs-operator">:</span>\<span class="hljs-built_in">Environment</span>\<span class="hljs-variable">MinGW</span>    <br></code></pre></div></td></tr></table></figure>
 <p>之后找到Path，在最前面添加下面这段声明<code>%MinGW%\bin</code>，之后点击确定。</p>
-<h2 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h2><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">C</span>:\Users\Tommy&gt;gcc -v<br><span class="hljs-attribute">Using</span> built-in specs.<br><span class="hljs-attribute">Target</span>: i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span><br><span class="hljs-attribute">Configured</span> with: ../gcc<span class="hljs-number">44</span>-svn/configure --target=i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span> --host=i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span> --disable-multilib --disable-nls --disable-win<span class="hljs-number">32</span>-registry --prefix=/mingw<span class="hljs-number">32</span> --with-gmp=/mingw<span class="hljs-number">32</span> --with-mpfr=/mingw<span class="hljs-number">32</span> --enable-languages=c,c++<br><span class="hljs-attribute">Thread</span> model: win<span class="hljs-number">32</span><br><span class="hljs-attribute">gcc</span> version <span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">3</span> (GCC)<br><br><span class="hljs-attribute">C</span>:\Users\Tommy&gt;g++ -v<br><span class="hljs-attribute">Using</span> built-in specs.<br><span class="hljs-attribute">Target</span>: i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span><br><span class="hljs-attribute">Configured</span> with: ../gcc<span class="hljs-number">44</span>-svn/configure --target=i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span> --host=i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span> --disable-multilib --disable-nls --disable-win<span class="hljs-number">32</span>-registry --prefix=/mingw<span class="hljs-number">32</span> --with-gmp=/mingw<span class="hljs-number">32</span> --with-mpfr=/mingw<span class="hljs-number">32</span> --enable-languages=c,c++<br><span class="hljs-attribute">Thread</span> model: win<span class="hljs-number">32</span><br><span class="hljs-attribute">gcc</span> version <span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">3</span> (GCC)<br></code></pre></div></td></tr></table></figure>
-<h1 id="安装C-编辑器插件"><a href="#安装C-编辑器插件" class="headerlink" title="安装C++编辑器插件"></a>安装C++编辑器插件</h1><p>在vscode的插件搜索输入框输入“C++”，搜索插件“C/C++ for Visual Studio Code”。点击install安装插件。</p>
-<h1 id="工作空间配置文件"><a href="#工作空间配置文件" class="headerlink" title="工作空间配置文件"></a>工作空间配置文件</h1><p>建立一个空文件夹，新建 <code>.vscode</code> 文件。</p>
+<h2 id="检查是否安装成功">检查是否安装成功</h2>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">C</span>:\Users\Tommy&gt;gcc -v<br><span class="hljs-attribute">Using</span> built-in specs.<br><span class="hljs-attribute">Target</span>: i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span><br><span class="hljs-attribute">Configured</span> with: ../gcc<span class="hljs-number">44</span>-svn/configure --target=i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span> --host=i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span> --disable-multilib --disable-nls --disable-win<span class="hljs-number">32</span>-registry --prefix=/mingw<span class="hljs-number">32</span> --with-gmp=/mingw<span class="hljs-number">32</span> --with-mpfr=/mingw<span class="hljs-number">32</span> --enable-languages=c,c++<br><span class="hljs-attribute">Thread</span> model: win<span class="hljs-number">32</span><br><span class="hljs-attribute">gcc</span> version <span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">3</span> (GCC)<br><br><span class="hljs-attribute">C</span>:\Users\Tommy&gt;g++ -v<br><span class="hljs-attribute">Using</span> built-in specs.<br><span class="hljs-attribute">Target</span>: i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span><br><span class="hljs-attribute">Configured</span> with: ../gcc<span class="hljs-number">44</span>-svn/configure --target=i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span> --host=i<span class="hljs-number">686</span>-w<span class="hljs-number">64</span>-mingw<span class="hljs-number">32</span> --disable-multilib --disable-nls --disable-win<span class="hljs-number">32</span>-registry --prefix=/mingw<span class="hljs-number">32</span> --with-gmp=/mingw<span class="hljs-number">32</span> --with-mpfr=/mingw<span class="hljs-number">32</span> --enable-languages=c,c++<br><span class="hljs-attribute">Thread</span> model: win<span class="hljs-number">32</span><br><span class="hljs-attribute">gcc</span> version <span class="hljs-number">4</span>.<span class="hljs-number">4</span>.<span class="hljs-number">3</span> (GCC)<br></code></pre></div></td></tr></table></figure>
+<h1 id="安装c编辑器插件">安装C++编辑器插件</h1>
+<p>在vscode的插件搜索输入框输入“C++”，搜索插件“C/C++ for Visual Studio Code”。点击install安装插件。</p>
+<h1 id="工作空间配置文件">工作空间配置文件</h1>
+<p>建立一个空文件夹，新建 <code>.vscode</code> 文件。</p>
 <p>文件下建立三个配置文件，文件名和内容分别为下面三个。</p>
 <ul>
 <li><code>launch.json</code> 注意 修改miDebuggerPath为你自己的路径</li>
@@ -277,10 +285,11 @@
 <li><code>c_cpp_properties.json</code></li>
 </ul>
 <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>    <span class="hljs-attr">&quot;configurations&quot;</span>: [<br>        &#123;<br>            <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;MinGW64&quot;</span>,<br>            <span class="hljs-attr">&quot;intelliSenseMode&quot;</span>: <span class="hljs-string">&quot;gcc-x64&quot;</span>,<br>            <span class="hljs-attr">&quot;compilerPath&quot;</span>: <span class="hljs-string">&quot;C:\\MinWG\\bin\\g++.exe&quot;</span>,<br>            <span class="hljs-attr">&quot;includePath&quot;</span>: [<br>                <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;&quot;</span><br>            ],<br>            <span class="hljs-attr">&quot;cppStandard&quot;</span>: <span class="hljs-string">&quot;c++17&quot;</span><br>        &#125;<br>    ],<br>    <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-number">4</span><br> &#125;<br></code></pre></div></td></tr></table></figure>
-<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p>在 <code>.vscode</code> 文件同层目录下，新建一个 <code>test.cpp</code>，然后F5调试运行即可。</p>
+<h1 id="hello-world">Hello World</h1>
+<p>在 <code>.vscode</code> 文件同层目录下，新建一个 <code>test.cpp</code>，然后F5调试运行即可。</p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Hello World&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>   	system(<span class="hljs-string">&quot;pause&quot;</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>​    </p>
-
+<p>​</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -519,6 +528,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

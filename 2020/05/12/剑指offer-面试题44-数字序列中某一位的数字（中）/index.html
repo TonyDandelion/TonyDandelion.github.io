@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,21 +253,24 @@
             <div class="markdown-body">
               <p>考查应聘者面对复杂问题的思维能力。应聘者<strong>需要有严密的数学思维能力，并且还要通过分析具体例子一步步找到通用的规律，才能想出好的算法。</strong>这些能力在实际工作中面对复杂问题的时候都非常有用。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。请写一个函数，求任意第n位对应的数字。</p>
-<p>示例 1：<br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">3</span><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">11</span><br>输出：<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure><br>限制：$0 &lt;= n &lt; 2^{31}$</p>
+<h1 id="question">Question</h1>
+<p>数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。请写一个函数，求任意第n位对应的数字。</p>
+<p>示例 1： <figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">3</span><br>输出：<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure> 示例 2： <figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">11</span><br>输出：<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure> 限制：<span class="math inline">\(0 &lt;= n &lt; 2^{31}\)</span></p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入10、190、1000等）。<br>边界值测试（输入0、1等）。</p>
+<p>功能测试（输入10、190、1000等）。 边界值测试（输入0、1等）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p><strong>考查应聘者做优化的激情和能力。</strong>最直观的方法很多应聘者都能想到。当面试官提示还有更快的方法之后，应聘者千万不要轻易放弃尝试。虽然想出好的方法不容易，但应聘者要展示自己追求更快算法的激情，多尝试不同的方法，必要的时候可以要求面试官给出提示，但<strong>不能轻易说自己想不出来并且放弃努力。</strong><br>考查应聘者面对复杂问题的思维能力。应聘者<strong>需要有严密的数学思维能力，并且还要通过分析具体例子一步步找到通用的规律，才能想出好的算法。</strong>这些能力在实际工作中面对复杂问题的时候都非常有用。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><strong><em>简单思路</em></strong></p>
+<p><strong>考查应聘者做优化的激情和能力。</strong>最直观的方法很多应聘者都能想到。当面试官提示还有更快的方法之后，应聘者千万不要轻易放弃尝试。虽然想出好的方法不容易，但应聘者要展示自己追求更快算法的激情，多尝试不同的方法，必要的时候可以要求面试官给出提示，但<strong>不能轻易说自己想不出来并且放弃努力。</strong> 考查应聘者面对复杂问题的思维能力。应聘者<strong>需要有严密的数学思维能力，并且还要通过分析具体例子一步步找到通用的规律，才能想出好的算法。</strong>这些能力在实际工作中面对复杂问题的时候都非常有用。</p>
+<h1 id="intuition">Intuition</h1>
+<p><strong><em>简单思路</em></strong></p>
 <p>从0开始逐个遍历，每遍历过一个数字，就将 <code>count</code> 变量加1，直到 <code>count</code> 等于 <code>n</code> 为止。</p>
 <p><strong><em>优化思路</em></strong></p>
-<p><strong>可以找出某些规律从而跳过若干数字</strong>，接下来用一个具体的例子来分析如何解决这个问题。比如，序列的第1001位是什么？<br>序列的<strong>前10位是0~9这10个只有一位的数字。</strong>显然第1001位在这10个数字之后，因此这10个数字可以直接跳过。我们再从后面紧跟着的序列中找第<strong>991（991=1001-10）</strong>位的数字。<br><strong>接下来180位数字是90个10~99的两位数。</strong>由于991&gt;180，所以第991位在所有的两位数之后。我们再跳过90个两位数，继续从后面找<strong>881（881=991-180）</strong>位。<br><strong>接下来的2700位是900个100~999的三位数。</strong>由于811&lt;2700，所以第811位是某个三位数中的一位。由于<strong>811=270×3+1</strong>，这意味着第811位是从100开始的第270个数字即370的中间一位，也就是7。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<p><strong>可以找出某些规律从而跳过若干数字</strong>，接下来用一个具体的例子来分析如何解决这个问题。比如，序列的第1001位是什么？ 序列的<strong>前10位是0<sub>9这10个只有一位的数字。<strong>显然第1001位在这10个数字之后，因此这10个数字可以直接跳过。我们再从后面紧跟着的序列中找第</strong>991（991=1001-10）<strong>位的数字。 </strong>接下来180位数字是90个10</sub>99的两位数。</strong>由于991&gt;180，所以第991位在所有的两位数之后。我们再跳过90个两位数，继续从后面找<strong>881（881=991-180）</strong>位。 <strong>接下来的2700位是900个100~999的三位数。</strong>由于811&lt;2700，所以第811位是某个三位数中的一位。由于<strong>811=270×3+1</strong>，这意味着第811位是从100开始的第270个数字即370的中间一位，也就是7。</p>
+<h1 id="code">Code</h1>
+<ul>
 <li>简单思想，超出时间限制。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findNthDigit</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        _str = <span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-built_in">str</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(n+<span class="hljs-number">1</span>))])<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>(_str[n])<br></code></pre></div></td></tr></table></figure>
@@ -275,7 +278,7 @@
 <li>仔细分析优化之后的代码</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">countOfIntergers</span>(<span class="hljs-params">self, digit</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;计算digit位的数字共有多少个 10（0-9），90（10-99），900（100-999）</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> digit == <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">10</span><br>        count = <span class="hljs-number">10</span> ** (digit-<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">9</span> * count<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">digitAtIndex</span>(<span class="hljs-params">self, index, digits</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;确定具体位置上的数是多少</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        number = <span class="hljs-built_in">int</span>(self.beginNumber(digits) + index/digits)  <span class="hljs-comment"># 计算出index那一位数字，具体在哪个数字中，例如index=1001的数字在370这个数字中。</span><br>        position = digits - index % digits  <span class="hljs-comment"># 计算出index那一位数字，具体在哪一位，例如，输入index=1001，对应在370（number）这个数字的第2（position）位。</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, position):  <span class="hljs-comment"># 从第1位开始循环</span><br>            number //= <span class="hljs-number">10</span><br>        <span class="hljs-keyword">return</span> number % <span class="hljs-number">10</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">beginNumber</span>(<span class="hljs-params">self, digit</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;计算digit位的数字第一位的值 0，10，100</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> digit == <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">10</span> ** (digit-<span class="hljs-number">1</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findNthDigit</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        <span class="hljs-string">&quot;&quot;&quot;求解数字序列中的一个数</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        index = n<br>        <span class="hljs-keyword">if</span> index &lt; <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>        digits = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            numbers = self.countOfIntergers(digits)<br>            <span class="hljs-keyword">if</span> index &lt; numbers * digits:  <span class="hljs-comment"># 假设digits=2，number=90，那么之后的180个数，都是属于2进制的数。</span><br>                <span class="hljs-keyword">return</span> self.digitAtIndex(index, digits)<br>            index -= numbers * digits  <span class="hljs-comment"># 如果范围在这180个数字之后，直接跳过即可。</span><br>            digits += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -521,6 +524,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

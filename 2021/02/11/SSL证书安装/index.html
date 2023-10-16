@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      458 字
+      460 字
     </span>
   
 
@@ -254,16 +254,23 @@
               <p>转载自 <a target="_blank" rel="noopener" href="https://molinz.com/2019/07/19/nginx%E4%BB%A5%E5%8F%8Acertbot%E5%9C%A8Ubuntu18-04%E4%B8%8A%E7%9A%84%E9%83%A8%E7%BD%B2/">nginx 以及 certbot 在 Ubuntu18.04 上的部署</a>。</p>
 <a id="more"></a>
 <p>本文介绍 Nginx 在 Ubuntu18.04 上的安装，以及使用 Certbot 配置 HTTPS。</p>
-<h3 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h3><figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>sudo apt update<br><span class="hljs-variable">$ </span>sudo apt install nginx<br></code></pre></div></td></tr></table></figure>
-<h3 id="Ngnix-相关命令"><a href="#Ngnix-相关命令" class="headerlink" title="Ngnix 相关命令"></a>Ngnix 相关命令</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 开始nginx服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl start nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 停止nginx服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl stop nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 重启nginx服务，一般用于修改nginx配置文件后</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl restart nginx</span><br><span class="hljs-meta">$</span><span class="bash"> sudo nginx -s reload</span><br><span class="hljs-meta">#</span><span class="bash"> 默认情况下nginx开机启动，如果禁止开机启动，可以使用如下命令</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl <span class="hljs-built_in">disable</span> nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 开启开机自动启动nginx</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl <span class="hljs-built_in">enable</span> nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 检查nginx配置文件语法（配置信息通常在文件 /etc/nginx/nginx.conf 或者 /etc/nginx/sites-available/default 当中配置）</span><br><span class="hljs-meta">$</span><span class="bash"> sudo nginx -t</span><br></code></pre></div></td></tr></table></figure>
-<h3 id="安装-Certbot"><a href="#安装-Certbot" class="headerlink" title="安装 Certbot"></a>安装 Certbot</h3><figure class="highlight smali"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smali">$ sudo<span class="hljs-built_in"> add-apt-repository </span>ppa:certbot/certbot<br>$ sudo apt install python-certbot-nginx<br></code></pre></div></td></tr></table></figure>
-<h3 id="使用-Certbot-获取免费-SSL-证书"><a href="#使用-Certbot-获取免费-SSL-证书" class="headerlink" title="使用 Certbot 获取免费 SSL 证书"></a>使用 Certbot 获取免费 SSL 证书</h3><figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">$ sudo certbot --nginx -d <span class="hljs-built_in">example</span>.com -d www.<span class="hljs-built_in">example</span>.com<br></code></pre></div></td></tr></table></figure>
+<h3 id="安装-nginx">安装 Nginx</h3>
+<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>sudo apt update<br><span class="hljs-variable">$ </span>sudo apt install nginx<br></code></pre></div></td></tr></table></figure>
+<h3 id="ngnix-相关命令">Ngnix 相关命令</h3>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 开始nginx服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl start nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 停止nginx服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl stop nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 重启nginx服务，一般用于修改nginx配置文件后</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl restart nginx</span><br><span class="hljs-meta">$</span><span class="bash"> sudo nginx -s reload</span><br><span class="hljs-meta">#</span><span class="bash"> 默认情况下nginx开机启动，如果禁止开机启动，可以使用如下命令</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl <span class="hljs-built_in">disable</span> nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 开启开机自动启动nginx</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl <span class="hljs-built_in">enable</span> nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 检查nginx配置文件语法（配置信息通常在文件 /etc/nginx/nginx.conf 或者 /etc/nginx/sites-available/default 当中配置）</span><br><span class="hljs-meta">$</span><span class="bash"> sudo nginx -t</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="安装-certbot">安装 Certbot</h3>
+<figure class="highlight smali"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smali">$ sudo<span class="hljs-built_in"> add-apt-repository </span>ppa:certbot/certbot<br>$ sudo apt install python-certbot-nginx<br></code></pre></div></td></tr></table></figure>
+<h3 id="使用-certbot-获取免费-ssl-证书">使用 Certbot 获取免费 SSL 证书</h3>
+<figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">$ sudo certbot --nginx -d <span class="hljs-built_in">example</span>.com -d www.<span class="hljs-built_in">example</span>.com<br></code></pre></div></td></tr></table></figure>
 <p>–nginx 选项指明使用 nginx 插件，生成证书后 certbot 会修改 nginx/sites-available/default 中的路由配置文件，如果希望手动更改路由配置可以再生成证书时选择 [1]。</p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc">Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.<br>-------------------------------------------------------------------------------<br>1: No redirect - Make no further changes to the webserver configuration.<br>2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for<br>new sites, or if you&#x27;re confident your site works on HTTPS. You can undo this<br>change by editing your web server&#x27;s configuration.<br>-------------------------------------------------------------------------------<br>Select the appropriate number [1-2] then [enter] (press <span class="hljs-emphasis">&#x27;c&#x27;</span> to cancel):<br></code></pre></div></td></tr></table></figure>
-<h3 id="配置生效"><a href="#配置生效" class="headerlink" title="配置生效"></a>配置生效</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nginx -s reload<br></code></pre></div></td></tr></table></figure>
-<h3 id="证书自动重申"><a href="#证书自动重申" class="headerlink" title="证书自动重申"></a>证书自动重申</h3><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">$ sudo certbot renew <span class="hljs-comment">--dry-run</span><br></code></pre></div></td></tr></table></figure>
-<h3 id="Nginx-相关配置文件目录和日志目录"><a href="#Nginx-相关配置文件目录和日志目录" class="headerlink" title="Nginx 相关配置文件目录和日志目录"></a>Nginx 相关配置文件目录和日志目录</h3><p>/var/www/html <strong>默认的 nginx 提供的返回页面</strong><br>/var/log/nginx/*log <strong>通过 log 文件查询请求和错误信息</strong><br>/etc/nginx/nginx.conf <strong>nginx 默认的配置文件</strong><br>/etc/nginx/sites-available/ <strong>默认配置文件为 default，可以手动添加和修改文件</strong><br>/etc/nginx/sites-enabled/ <strong>此文件夹的内容与sites-available下内容关联</strong></p>
-
+<h3 id="配置生效">配置生效</h3>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nginx -s reload<br></code></pre></div></td></tr></table></figure>
+<h3 id="证书自动重申">证书自动重申</h3>
+<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">$ sudo certbot renew <span class="hljs-comment">--dry-run</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="nginx-相关配置文件目录和日志目录">Nginx 相关配置文件目录和日志目录</h3>
+<p>/var/www/html <strong>默认的 nginx 提供的返回页面</strong> /var/log/nginx/*log <strong>通过 log 文件查询请求和错误信息</strong> /etc/nginx/nginx.conf <strong>nginx 默认的配置文件</strong> /etc/nginx/sites-available/ <strong>默认配置文件为 default，可以手动添加和修改文件</strong> /etc/nginx/sites-enabled/ <strong>此文件夹的内容与sites-available下内容关联</strong></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -493,6 +500,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

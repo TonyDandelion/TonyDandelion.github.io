@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -254,11 +254,14 @@
               <p>适合用Dynamic Program解决的问题，存在着状态传递。</p>
 <p>将递归过程中的状态存储起来，用于推导后续状态就是动态规划。</p>
 <a id="more"></a>
-<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>动态规划的本质就是对<strong>中间状态</strong>进行保存，对<strong>子问题</strong>的解答结果进行保存，自底向上解出许多子问题，然后再做出选择，往往每一个步骤都求做一个选择，这个<strong>选择往往依赖于之前子问题的解</strong>。递归（分而治之）加上状态记录，<strong>利用记忆状态</strong>，避免重复判断，就是动态规划。</p>
+<h1 id="基础概念">基础概念</h1>
+<p>动态规划的本质就是对<strong>中间状态</strong>进行保存，对<strong>子问题</strong>的解答结果进行保存，自底向上解出许多子问题，然后再做出选择，往往每一个步骤都求做一个选择，这个<strong>选择往往依赖于之前子问题的解</strong>。递归（分而治之）加上状态记录，<strong>利用记忆状态</strong>，避免重复判断，就是动态规划。</p>
 <p>简而言之，动态规划是<strong>从上往下</strong>分析问题，<strong>从下往上</strong>求解问题。</p>
-<h2 id="动态规划、DFS、回溯、递归之间的关系？"><a href="#动态规划、DFS、回溯、递归之间的关系？" class="headerlink" title="动态规划、DFS、回溯、递归之间的关系？"></a>动态规划、DFS、回溯、递归之间的关系？</h2><p>递归是DFS（深度优先搜索）的一种实现方式，<strong>DFS是动态规划的一种实现方式</strong>。回溯法是DFS过程中可以进行的可选操作。<code>动态规划 &gt; DFS(回溯法) &gt; 递归</code></p>
-<h2 id="哪些问题可以用动态规划解决？"><a href="#哪些问题可以用动态规划解决？" class="headerlink" title="哪些问题可以用动态规划解决？"></a>哪些问题可以用动态规划解决？</h2><p>满足以下四个条件的问题可以考虑用动态规划解决：</p>
-<ol>
+<h2 id="动态规划dfs回溯递归之间的关系">动态规划、DFS、回溯、递归之间的关系？</h2>
+<p>递归是DFS（深度优先搜索）的一种实现方式，<strong>DFS是动态规划的一种实现方式</strong>。回溯法是DFS过程中可以进行的可选操作。<code>动态规划 &gt; DFS(回溯法) &gt; 递归</code></p>
+<h2 id="哪些问题可以用动态规划解决">哪些问题可以用动态规划解决？</h2>
+<p>满足以下四个条件的问题可以考虑用动态规划解决：</p>
+<ol type="1">
 <li>该问题要求最优解。</li>
 <li>整体问题的最优解是依赖各个子问题的最优解。</li>
 <li>子问题之间还有相互重叠的更小的子问题。</li>
@@ -269,58 +272,72 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">n</span>):</span><br>    <span class="hljs-comment"># 给递归一个出口  第一位和第二位都是1</span><br>    <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> n == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-comment"># 从第三位开始  返回上一个数加上上一个数</span><br>        <span class="hljs-keyword">return</span> func(n-<span class="hljs-number">1</span>) + func(n-<span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
 <p>我们抽象出递归算法的框架：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>):</span><br>    fib(n - <span class="hljs-number">1</span>)<br>    fib(n - <span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
-<p>看着这个框架，请问原问题 $f(n)$，<strong>如何触达子问题 $f(n - 2)$？</strong>有两种路径，</p>
-<p>一是</p>
-<script type="math/tex; mode=display">
-f(n) -> f(n-1) -> f(n - 1 - 1)</script><p>二是 </p>
-<script type="math/tex; mode=display">
-f(n) -> f(n - 2)</script><p>前者经过两次递归，后者进过一次递归而已。两条不同的计算路径都到达了同一个问题，这就是<strong>「重叠子问题」</strong>，而且<strong>可以肯定的是，只要你发现一条重复路径，这样的重复路径一定存在千万条，意味着巨量子问题重叠。</strong></p>
-<h2 id="代码实现过程"><a href="#代码实现过程" class="headerlink" title="代码实现过程"></a>代码实现过程</h2><blockquote>
+<p>看着这个框架，请问原问题 <span class="math inline">\(f(n)\)</span>，<strong>如何触达子问题 <span class="math inline">\(f(n - 2)\)</span>？</strong>有两种路径，</p>
+<p>一是 <span class="math display">\[
+f(n) -&gt; f(n-1) -&gt; f(n - 1 - 1)
+\]</span> 二是 <span class="math display">\[
+f(n) -&gt; f(n - 2)
+\]</span> 前者经过两次递归，后者进过一次递归而已。两条不同的计算路径都到达了同一个问题，这就是<strong>「重叠子问题」</strong>，而且<strong>可以肯定的是，只要你发现一条重复路径，这样的重复路径一定存在千万条，意味着巨量子问题重叠。</strong></p>
+<h2 id="代码实现过程">代码实现过程</h2>
+<blockquote>
 <p>直接入手（简单问题）</p>
 </blockquote>
-<p>以 <a href="/2020/05/13/剑指offer-面试题47-礼物的最大价值（中）/">剑指offer 面试题47. 礼物的最大价值（中）</a> 为例：<br>1、状态定义：设函数 $f(i, j)$ 为到达坐标 $(i, j)$ 能拿到的礼物总和的<strong>最大值</strong>。<br>2、转移方程确定：由题意可知，通过 $(i,j-1)$ 和 $(i-1, j)$ 都可以达到 $(i, j)$。则状态转移方程为：$f(i, j) = max(f(i, j-1), f(i-1, j)) + gift(i, j)$。其中，$gift(i,j)$ 为坐标$(i, j)$的格子里礼物的价值。</p>
+<p>以 <a href="/2020/05/13/剑指offer-面试题47-礼物的最大价值（中）/">剑指offer 面试题47. 礼物的最大价值（中）</a> 为例： 1、状态定义：设函数 <span class="math inline">\(f(i, j)\)</span> 为到达坐标 <span class="math inline">\((i, j)\)</span> 能拿到的礼物总和的<strong>最大值</strong>。 2、转移方程确定：由题意可知，通过 <span class="math inline">\((i,j-1)\)</span> 和 <span class="math inline">\((i-1, j)\)</span> 都可以达到 <span class="math inline">\((i, j)\)</span>。则状态转移方程为：<span class="math inline">\(f(i, j) = max(f(i, j-1), f(i-1, j)) + gift(i, j)\)</span>。其中，<span class="math inline">\(gift(i,j)\)</span> 为坐标<span class="math inline">\((i, j)\)</span>的格子里礼物的价值。</p>
 <blockquote>
 <p>曲线救国（复杂问题）</p>
 </blockquote>
-<p>1、将原问题用递归实现（可以用到回溯法）<br>2、<strong>添加保存（记忆）状态的变量，将递归代码写入dp函数。</strong></p>
-<h2 id="动态规划算法框架"><a href="#动态规划算法框架" class="headerlink" title="动态规划算法框架"></a>动态规划算法框架</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">mono = &#123;&#125;  <span class="hljs-comment"># 声明记忆状态的变量</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dp</span>(<span class="hljs-params">指定状态的参数</span>):</span><br>	<span class="hljs-comment"># 判断该状态是否处理过，如果处理过，就直接返回</span><br>	<span class="hljs-keyword">if</span> memo中保存了该状态:<br>		<span class="hljs-keyword">return</span> mono中该状态的保存结果<br>	<span class="hljs-comment"># 针对该状态的递归代码</span><br>	<span class="hljs-keyword">if</span> ...:<br>		... <span class="hljs-comment"># 更新指定状态的参数</span><br>		ans = dp(指定状态的参数)<br>	<span class="hljs-keyword">else</span>:<br>		... <span class="hljs-comment"># 更新指定状态的参数</span><br>		ans = dp(指定状态的参数)<br>	<br>	mono[指定状态的参数作为<span class="hljs-built_in">dict</span>的key] = ans  <span class="hljs-comment"># 将这个未添加的状态添加到mono钟</span><br>	<span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
-<h2 id="状态转移方程"><a href="#状态转移方程" class="headerlink" title="状态转移方程"></a>状态转移方程</h2><p>求解动态规划问题过程中，理清楚状态转移方程至关重要，基于<strong>状态转移方程</strong>才能将前面记忆的结果用于后面状态的计算。  </p>
+<p>1、将原问题用递归实现（可以用到回溯法） 2、<strong>添加保存（记忆）状态的变量，将递归代码写入dp函数。</strong></p>
+<h2 id="动态规划算法框架">动态规划算法框架</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">mono = &#123;&#125;  <span class="hljs-comment"># 声明记忆状态的变量</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dp</span>(<span class="hljs-params">指定状态的参数</span>):</span><br>	<span class="hljs-comment"># 判断该状态是否处理过，如果处理过，就直接返回</span><br>	<span class="hljs-keyword">if</span> memo中保存了该状态:<br>		<span class="hljs-keyword">return</span> mono中该状态的保存结果<br>	<span class="hljs-comment"># 针对该状态的递归代码</span><br>	<span class="hljs-keyword">if</span> ...:<br>		... <span class="hljs-comment"># 更新指定状态的参数</span><br>		ans = dp(指定状态的参数)<br>	<span class="hljs-keyword">else</span>:<br>		... <span class="hljs-comment"># 更新指定状态的参数</span><br>		ans = dp(指定状态的参数)<br>	<br>	mono[指定状态的参数作为<span class="hljs-built_in">dict</span>的key] = ans  <span class="hljs-comment"># 将这个未添加的状态添加到mono钟</span><br>	<span class="hljs-keyword">return</span> ans<br></code></pre></div></td></tr></table></figure>
+<h2 id="状态转移方程">状态转移方程</h2>
+<p>求解动态规划问题过程中，理清楚状态转移方程至关重要，基于<strong>状态转移方程</strong>才能将前面记忆的结果用于后面状态的计算。</p>
 <ul>
-<li>以斐波 那契数列举例，我们知道当前求解的数，是前面一个数和前前面一个数的和，所以状态转移方程如下：<script type="math/tex; mode=display">
-f(n) = f(n - 1) + f(n - 2)</script></li>
-<li>以LeetCode 62. 不同路径为例，由于只能水平向右和竖直向下行进，所以达到当前位置的可能路径条数，只能是达到右边位置的路径条数和到达上边位置的路径条数之和，所以状态转移方程如下：  <script type="math/tex; mode=display">
-dp[i][j] = dp[i-1][j] * dp[i][j-1]</script></li>
+<li>以斐波 那契数列举例，我们知道当前求解的数，是前面一个数和前前面一个数的和，所以状态转移方程如下： <span class="math display">\[
+f(n) = f(n - 1) + f(n - 2)
+\]</span></li>
+<li>以LeetCode 62. 不同路径为例，由于只能水平向右和竖直向下行进，所以达到当前位置的可能路径条数，只能是达到右边位置的路径条数和到达上边位置的路径条数之和，所以状态转移方程如下：<br />
+<span class="math display">\[
+dp[i][j] = dp[i-1][j] * dp[i][j-1]
+\]</span></li>
 </ul>
-<p>有了<strong>状态转移方程</strong>，将过去的状态根据题意，以 <code>list</code> 或者 <code>matrix</code> 的形式保存，持续更新，就能得到最终的结果了。<font color='red'><strong>注意初始状态的更新方法</strong></font>。  </p>
-<h1 id="关键思想总结"><a href="#关键思想总结" class="headerlink" title="关键思想总结"></a>关键思想总结</h1><p>关于动态规划的模板算法，可以参看 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112075593">动态规划套路秒杀背包问题</a> 这篇文章。</p>
-<h1 id="相关LeetCode题目"><a href="#相关LeetCode题目" class="headerlink" title="相关LeetCode题目"></a>相关LeetCode题目</h1><h2 id="LeetCode-10-正则表达式匹配（难）"><a href="#LeetCode-10-正则表达式匹配（难）" class="headerlink" title="LeetCode 10. 正则表达式匹配（难）"></a>LeetCode 10. 正则表达式匹配（难）</h2><p><strong>直觉</strong></p>
-<p>这个题目，递归回溯实现比较复杂，用动态规划更简单。这道题也是剑指offer原题，值得推荐，从递归到到动态规划，逐层递进，需要多学习，多复习。    </p>
+<p>有了<strong>状态转移方程</strong>，将过去的状态根据题意，以 <code>list</code> 或者 <code>matrix</code> 的形式保存，持续更新，就能得到最终的结果了。<font color='red'><strong>注意初始状态的更新方法</strong></font>。</p>
+<h1 id="关键思想总结">关键思想总结</h1>
+<p>关于动态规划的模板算法，可以参看 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112075593">动态规划套路秒杀背包问题</a> 这篇文章。</p>
+<h1 id="相关leetcode题目">相关LeetCode题目</h1>
+<h2 id="leetcode-10.-正则表达式匹配难">LeetCode 10. 正则表达式匹配（难）</h2>
+<p><strong>直觉</strong></p>
+<p>这个题目，递归回溯实现比较复杂，用动态规划更简单。这道题也是剑指offer原题，值得推荐，从递归到到动态规划，逐层递进，需要多学习，多复习。</p>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isMatch</span>(<span class="hljs-params">self, text, pattern</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> pattern:<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> text<br><br>        first_match = <span class="hljs-built_in">bool</span>(text) <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">0</span>] <span class="hljs-keyword">in</span> &#123;text[<span class="hljs-number">0</span>], <span class="hljs-string">&#x27;.&#x27;</span>&#125;<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(pattern) &gt;= <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>:<br>            res = (<br>                self.isMatch(text, pattern[<span class="hljs-number">2</span>:])<br>                <span class="hljs-keyword">or</span><br>                (first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>:], pattern))<br>            )<br>            <span class="hljs-keyword">return</span> res<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>: ], pattern[<span class="hljs-number">1</span>: ])<br><br>        <br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isMatch</span>(<span class="hljs-params">self, text, pattern</span>):</span><br>        memo = <span class="hljs-built_in">dict</span>()<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dp</span>(<span class="hljs-params">i, j</span>):</span><br>            <span class="hljs-keyword">if</span> (i, j) <span class="hljs-keyword">in</span> memo:  <span class="hljs-keyword">return</span> memo[(i, j)]<br>            <span class="hljs-keyword">if</span> j == <span class="hljs-built_in">len</span>(pattern):  <span class="hljs-keyword">return</span> i == <span class="hljs-built_in">len</span>(text)<br>            first_match = i &lt; <span class="hljs-built_in">len</span>(text) <span class="hljs-keyword">and</span> pattern[j] <span class="hljs-keyword">in</span> &#123;text[i], <span class="hljs-string">&#x27;.&#x27;</span>&#125;<br><br>            <span class="hljs-keyword">if</span> j &lt;= <span class="hljs-built_in">len</span>(pattern) - <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> pattern[j + <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>:<br>                ans = dp(i, j+<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> first_match <span class="hljs-keyword">and</span> dp(i+<span class="hljs-number">1</span>, j)<br>            <span class="hljs-keyword">else</span>:<br>                ans = first_match <span class="hljs-keyword">and</span> dp(i+<span class="hljs-number">1</span>, j+<span class="hljs-number">1</span>)<br>            <br>            memo[(i, j)] = ans<br>            <span class="hljs-keyword">return</span> ans<br>        <span class="hljs-keyword">return</span> dp(<span class="hljs-number">0</span>, <span class="hljs-number">0</span> )<br></code></pre></div></td></tr></table></figure>
 <p><strong>题解</strong></p>
 <p><a href="/2020/03/08/LeetCode-10-正则表达式匹配（难）/">LeetCode-10-正则表达式匹配（难）</a></p>
-<h2 id="LeetCode-64-最小路径和（中）"><a href="#LeetCode-64-最小路径和（中）" class="headerlink" title="LeetCode 64. 最小路径和（中）"></a>LeetCode 64. 最小路径和（中）</h2><p><strong>直觉</strong></p>
+<h2 id="leetcode-64.-最小路径和中">LeetCode 64. 最小路径和（中）</h2>
+<p><strong>直觉</strong></p>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br></code></pre></div></td></tr></table></figure>
 <p><strong>题解</strong></p>
 <p><a href="/2020/03/17/LeetCode-64-最小路径和（中）/">LeetCode 64. 最小路径和（中）</a></p>
-<h2 id="LeetCode-70-爬楼梯（易）"><a href="#LeetCode-70-爬楼梯（易）" class="headerlink" title="LeetCode 70. 爬楼梯（易）"></a>LeetCode 70. 爬楼梯（易）</h2><p><strong>直觉</strong></p>
+<h2 id="leetcode-70.-爬楼梯易">LeetCode 70. 爬楼梯（易）</h2>
+<p><strong>直觉</strong></p>
 <p>计算从第一层到达每一层可能的N方法，一直叠加。动态规划的状态转移公式为： <code>dp[n] = dp[n-1] + dp[n-2]</code>。</p>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">n</span>):</span><br>    dp = [<span class="hljs-number">0</span>] * n<br>    <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">3</span>:  <span class="hljs-keyword">return</span> n<br>	dp[<span class="hljs-number">0</span>], dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>, <span class="hljs-number">2</span> <br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, n):<br>        dp[n] = dp[n-<span class="hljs-number">2</span>] + dp[n-<span class="hljs-number">1</span>] <br><span class="hljs-keyword">return</span> dp[-<span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure>
 <p><strong>题解</strong></p>
 <p><a href="/2020/03/17/LeetCode-70-爬楼梯（易）/">LeetCode 70. 爬楼梯（易）</a></p>
-<h2 id="LeetCode-89-格雷编码（中）"><a href="#LeetCode-89-格雷编码（中）" class="headerlink" title="LeetCode 89. 格雷编码（中）"></a>LeetCode 89. 格雷编码（中）</h2><p><strong>题目</strong></p>
-<p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。<br>给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。格雷编码序列必须以 0 开头。</p>
+<h2 id="leetcode-89.-格雷编码中">LeetCode 89. 格雷编码（中）</h2>
+<p><strong>题目</strong></p>
+<p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。 给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。格雷编码序列必须以 0 开头。</p>
 <p><strong>直觉</strong></p>
-<p>1、先翻转 <code>0 1</code>，得到长度为 <code>n</code> 的排列 <code>0 1 1 0</code> （n=4）。<br>2、在前 <code>n/2</code> 个数字不变，在后 <code>n/2</code> 个排列前加 <code>1</code>。组成新排列，以此类推。  </p>
-<p>这个解法也可以理解成动态规划，状态转移方程就是：  </p>
+<p>1、先翻转 <code>0 1</code>，得到长度为 <code>n</code> 的排列 <code>0 1 1 0</code> （n=4）。<br />
+2、在前 <code>n/2</code> 个数字不变，在后 <code>n/2</code> 个排列前加 <code>1</code>。组成新排列，以此类推。</p>
+<p>这个解法也可以理解成动态规划，状态转移方程就是：</p>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">dp</span>[j] += dp[j-<span class="hljs-number">1</span>] | <span class="hljs-number">1</span> &lt;&lt; i<br></code></pre></div></td></tr></table></figure>
 <p><strong>关键代码</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">grayCode</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; List[int]:</span><br>        res = [<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            size = <span class="hljs-built_in">len</span>(res)<br>            <span class="hljs-comment"># 为啥要从后面往前循环，因为是镜像的，由0 1得到1 0，所以必须从后往前循环。</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(size-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>                res.append(res[j] | (<span class="hljs-number">1</span> &lt;&lt; i))<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
 <p><strong>题解</strong></p>
 <p><a href="2020/03/23/LeetCode-89-格雷编码（中）/">LeetCode 89. 格雷编码（中）</a></p>
-<h2 id="LeetCode-97-交错字符串（难）"><a href="#LeetCode-97-交错字符串（难）" class="headerlink" title="LeetCode 97. 交错字符串（难）"></a>LeetCode 97. 交错字符串（难）</h2><p><strong>题目</strong></p>
+<h2 id="leetcode-97.-交错字符串难">LeetCode 97. 交错字符串（难）</h2>
+<p><strong>题目</strong></p>
 <p>给定三个字符串 <em>s1</em>, <em>s2</em>, <em>s3</em>, 验证 <em>s3</em> 是否是由 <em>s1</em> 和 <em>s2</em> 交错组成的。</p>
 <p><strong>直觉</strong></p>
 <p>设立一个表示进位的变量carried，建立一个新链表，把输入的两个链表从头往后同时处理，每两个相加，将结果加上carried后的值作为一个新节点到新链表后面。</p>
@@ -328,7 +345,7 @@ dp[i][j] = dp[i-1][j] * dp[i][j-1]</script></li>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><br></code></pre></div></td></tr></table></figure>
 <p><strong>题解</strong></p>
 <p><a href="/2020/03/28/leetcode-97-交错字符串（难）/">LeetCode 97. 交错字符串（难）</a></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -565,6 +582,26 @@ dp[i][j] = dp[i-1][j] * dp[i][j-1]</script></li>
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

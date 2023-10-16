@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,15 +253,18 @@
             <div class="markdown-body">
               <p>高频设<strong>设计类</strong>面试题目</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。<br>示例：</p>
+<h1 id="question">Question</h1>
+<p>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。 示例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++">Trie trie = <span class="hljs-keyword">new</span> Trie();<br>trie.insert(<span class="hljs-string">&quot;apple&quot;</span>);<br>trie.search(<span class="hljs-string">&quot;apple&quot;</span>);   <span class="hljs-comment">// 返回 true</span><br>trie.search(<span class="hljs-string">&quot;app&quot;</span>);     <span class="hljs-comment">// 返回 false</span><br>trie.startsWith(<span class="hljs-string">&quot;app&quot;</span>); <span class="hljs-comment">// 返回 true</span><br>trie.insert(<span class="hljs-string">&quot;app&quot;</span>);   <br>trie.search(<span class="hljs-string">&quot;app&quot;</span>);     <span class="hljs-comment">// 返回 true</span><br></code></pre></div></td></tr></table></figure>
 <p>说明：你可以假设所有的输入都是由小写字母 a-z 构成的。保证所有输入均为非空字符串。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><em>参考连接</em><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/shi-xian-trie-qian-zhui-shu-by-leetcode/">力扣（LeetCode）LeetCode</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/trie-tree-de-shi-xian-gua-he-chu-xue-zhe-by-huwt/">力扣（LeetCode）huwt</a></p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<h1 id="intuition">Intuition</h1>
+<p><em>参考连接</em> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/shi-xian-trie-qian-zhui-shu-by-leetcode/">力扣（LeetCode）LeetCode</a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/trie-tree-de-shi-xian-gua-he-chu-xue-zhe-by-huwt/">力扣（LeetCode）huwt</a></p>
+<h1 id="code">Code</h1>
+<ul>
 <li>C++版本</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Trie</span> &#123;</span><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-keyword">bool</span> isEnd;<br>    Trie* next[<span class="hljs-number">26</span>];<br><span class="hljs-keyword">public</span>:<br>    Trie() &#123;<br>        isEnd = <span class="hljs-literal">false</span>;<br>        <span class="hljs-built_in">memset</span>(next, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(next));<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-built_in">string</span> word)</span> </span>&#123;<br>        Trie* node = <span class="hljs-keyword">this</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : word) &#123;<br>            <span class="hljs-keyword">if</span> (node-&gt;next[c-<span class="hljs-string">&#x27;a&#x27;</span>] == <span class="hljs-literal">NULL</span>) &#123;<br>                node-&gt;next[c-<span class="hljs-string">&#x27;a&#x27;</span>] = <span class="hljs-keyword">new</span> Trie();<br>            &#125;<br>            node = node-&gt;next[c-<span class="hljs-string">&#x27;a&#x27;</span>];<br>        &#125;<br>        node-&gt;isEnd = <span class="hljs-literal">true</span>;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-built_in">string</span> word)</span> </span>&#123;<br>        Trie* node = <span class="hljs-keyword">this</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : word) &#123;<br>            node = node-&gt;next[c - <span class="hljs-string">&#x27;a&#x27;</span>];<br>            <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> node-&gt;isEnd;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">startsWith</span><span class="hljs-params">(<span class="hljs-built_in">string</span> prefix)</span> </span>&#123;<br>        Trie* node = <span class="hljs-keyword">this</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : prefix) &#123;<br>            node = node-&gt;next[c-<span class="hljs-string">&#x27;a&#x27;</span>];<br>            <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;;<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -500,6 +503,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

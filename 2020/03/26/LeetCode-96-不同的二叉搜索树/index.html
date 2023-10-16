@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      359 字
+      366 字
     </span>
   
 
@@ -253,24 +253,38 @@
             <div class="markdown-body">
               <p>一个披着二叉树外衣的动态规划问题</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个整数 n，求以 1 … n 为节点组成的二叉搜索树有多少种？</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例:</strong></p>
+<h1 id="题目">题目</h1>
+<p>给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？</p>
+<h1 id="示例">示例</h1>
+<p><strong>示例:</strong></p>
 <figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">输入: 3<br>输出: 5<br>解释:<br>给定 n = 3, 一共有<span class="hljs-number"> 5 </span>种不同结构的二叉搜索树:<br><br>  <span class="hljs-number"> 1 </span>       <span class="hljs-number"> 3 </span>   <span class="hljs-number"> 3 </span>    <span class="hljs-number"> 2 </span>     1<br>    \       /     /      / \      \<br>    <span class="hljs-number"> 3 </span>   <span class="hljs-number"> 2 </span>   <span class="hljs-number"> 1 </span>    <span class="hljs-number"> 1 </span> <span class="hljs-number"> 3 </span>     2<br>    /     /       \                 \<br>  <span class="hljs-number"> 2 </span>   <span class="hljs-number"> 1 </span>       <span class="hljs-number"> 2 </span>                3<br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>动态规划、数学（卡塔兰数）</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>这是一个披着二叉树外衣的动态规划问题，实际上，这就是卡塔兰数的求解过程。<br>下图展示了状态转换的关系：  </p>
-<p><img src="https://i.loli.net/2020/03/26/TIAs5CR6aldf3ho.png" srcset="/img/loading.gif" alt="1.png"></p>
-<p><img src="https://i.loli.net/2020/03/26/J7YsyZnVkKCTDFt.png" srcset="/img/loading.gif" alt="2.png"></p>
-<p>由上图可知状态转换方程为：  </p>
-<script type="math/tex; mode=display">
-dp[i] = dp[0]*dp[i-1] + dp[1]*dp[i-2]  + ... + dp[i-2]*dp[1] + dp[i-1]*dp[0]</script><p>实际上就是卡塔兰数的求解方程，卡塔兰数是组合数学中一个常在各种计数问题中出现的数列。卡塔兰数的一般项公式为</p>
-<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/57de4926a69e67cdcdf999030c5ec3c25d97b0c9" srcset="/img/loading.gif" alt="公式"></p>
-<p>前20项的卡塔兰数为：1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 9694845, 35357670, 129644790, 477638700, 1767263190, …  </p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">numTrees</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        dp = [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] + [<span class="hljs-number">0</span>] * (n - <span class="hljs-number">1</span>)<br>        i = <span class="hljs-number">2</span><br>        <span class="hljs-keyword">while</span> i &lt;= n:<br>            j = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">while</span> j &lt; i:<br>                dp[i] += dp[j] * dp[i-j-<span class="hljs-number">1</span>]<br>                j += <span class="hljs-number">1</span><br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> dp[-<span class="hljs-number">1</span>]<br><br>Input = [<span class="hljs-number">3</span>]<br>Answer = [<span class="hljs-number">5</span>]<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.numTrees(Input[i])<br>        print(result == Answer[i])<br></code></pre></div></td></tr></table></figure>
+<h1 id="考察知识点">考察知识点</h1>
+<p>动态规划、数学（卡塔兰数）</p>
+<h1 id="核心思想">核心思想</h1>
+<p>这是一个披着二叉树外衣的动态规划问题，实际上，这就是卡塔兰数的求解过程。<br />
+下图展示了状态转换的关系：</p>
+<figure>
+<img src="https://i.loli.net/2020/03/26/TIAs5CR6aldf3ho.png" srcset="/img/loading.gif" alt="1.png" /><figcaption aria-hidden="true">1.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2020/03/26/J7YsyZnVkKCTDFt.png" srcset="/img/loading.gif" alt="2.png" /><figcaption aria-hidden="true">2.png</figcaption>
+</figure>
+<p>由上图可知状态转换方程为：<br />
+<span class="math display">\[
+dp[i] = dp[0]*dp[i-1] + dp[1]*dp[i-2]  + ... + dp[i-2]*dp[1] + dp[i-1]*dp[0]
+\]</span></p>
+<p>实际上就是卡塔兰数的求解方程，卡塔兰数是组合数学中一个常在各种计数问题中出现的数列。卡塔兰数的一般项公式为</p>
+<figure>
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/57de4926a69e67cdcdf999030c5ec3c25d97b0c9" srcset="/img/loading.gif" alt="公式" /><figcaption aria-hidden="true">公式</figcaption>
+</figure>
+<p>前20项的卡塔兰数为：1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 9694845, 35357670, 129644790, 477638700, 1767263190, ...</p>
+<h1 id="python版本">Python版本</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">numTrees</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        dp = [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>] + [<span class="hljs-number">0</span>] * (n - <span class="hljs-number">1</span>)<br>        i = <span class="hljs-number">2</span><br>        <span class="hljs-keyword">while</span> i &lt;= n:<br>            j = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">while</span> j &lt; i:<br>                dp[i] += dp[j] * dp[i-j-<span class="hljs-number">1</span>]<br>                j += <span class="hljs-number">1</span><br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> dp[-<span class="hljs-number">1</span>]<br><br>Input = [<span class="hljs-number">3</span>]<br>Answer = [<span class="hljs-number">5</span>]<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.numTrees(Input[i])<br>        print(result == Answer[i])<br></code></pre></div></td></tr></table></figure>
 <blockquote>
-<p>参考链接  </p>
+<p>参考链接</p>
 </blockquote>
-<p>!(Grandyang)[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4299608.html">https://www.cnblogs.com/grandyang/p/4299608.html</a>]  </p>
-
+<p>!(Grandyang)[https://www.cnblogs.com/grandyang/p/4299608.html]</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -514,6 +528,26 @@ dp[i] = dp[0]*dp[i-1] + dp[1]*dp[i-2]  + ... + dp[i-2]*dp[1] + dp[i-1]*dp[0]</sc
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,18 +253,21 @@
             <div class="markdown-body">
               <p>记腾讯云上的一个小bug</p>
 <a id="more"></a>
-<h1 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h1><p>执行了 <code>docker commit</code> 之后，腾讯云轻量服务器就卡住了，然后关掉了terminal，接着就ssh不上服务器了。</p>
+<h1 id="复现">复现</h1>
+<p>执行了 <code>docker commit</code> 之后，腾讯云轻量服务器就卡住了，然后关掉了terminal，接着就ssh不上服务器了。</p>
 <p>接着重启重置了密码，按照 <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/1207/44643">使用 SSH 登录 Linux 实例</a> 进行了配置，依旧无法登里。</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>首先，在腾讯云轻量服务器的详情页进行了系统备份。</p>
+<h1 id="解决">解决</h1>
+<p>首先，在腾讯云轻量服务器的详情页进行了系统备份。</p>
 <p>然后，对接的售后工程师上去发现 <strong>“服务器防火墙规则有拦截，部分配置文件异常，这边目前为您将防火墙规则放通 22 端口，然后修改 ssh_config 文件，目前服务器已可以正常登录。”</strong>检测方法是使用SVN登陆，执行 <code>ssh 127.0.0.1</code>，发现被拒绝，说明ssh端口没开启。</p>
 <p>最后，修改了 sshd_config 文件。</p>
-<p>1、登录服务器，打开 sshd_config 文件<br>vim /etc/ssh/sshd_config</p>
+<p>1、登录服务器，打开 sshd_config 文件 vim /etc/ssh/sshd_config</p>
 <p>2、找到 #Port 22，默认是注释掉的，先把前面的 #号去掉，再插入一行设置成你想要的端口号，注意不要跟现有端口号重复</p>
 <p>Port 22</p>
-<p>3、保存后退出，执行重启命令<br>/etc/init.d/sshd restart</p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>使用 <code>ufw</code> 查看防火墙，可以发现，并没有对22端口进行限制。实际上，拦截是发生在 <code>ssh服务</code>上的。</p>
+<p>3、保存后退出，执行重启命令 /etc/init.d/sshd restart</p>
+<h1 id="思考">思考</h1>
+<p>使用 <code>ufw</code> 查看防火墙，可以发现，并没有对22端口进行限制。实际上，拦截是发生在 <code>ssh服务</code>上的。</p>
 <figure class="highlight armasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs armasm"><span class="hljs-symbol">root</span><span class="hljs-comment">@VM-4-13-ubuntu:~# ufw status</span><br><span class="hljs-symbol">Status:</span> active<br><br><span class="hljs-symbol">To</span>                         Action      From<br>--                         ------      ----<br><span class="hljs-symbol">Nginx</span> Full                 ALLOW       Anywhere                  <br><span class="hljs-number">80</span>                         ALLOW       Anywhere                  <br><span class="hljs-number">8080</span>                       ALLOW       Anywhere                  <br><span class="hljs-symbol">Nginx</span> Full (<span class="hljs-built_in">v6</span>)            ALLOW       Anywhere (<span class="hljs-built_in">v6</span>)             <br><span class="hljs-number">80</span> (<span class="hljs-built_in">v6</span>)                    ALLOW       Anywhere (<span class="hljs-built_in">v6</span>)             <br><span class="hljs-number">8080</span> (<span class="hljs-built_in">v6</span>)                  ALLOW       Anywhere (<span class="hljs-built_in">v6</span>) <br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -494,6 +497,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

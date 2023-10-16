@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      586 字
+      588 字
     </span>
   
 
@@ -259,21 +259,13 @@
 <p>逐个删除，然后计算中位数。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>():</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">notify</span>(<span class="hljs-params">self, nums</span>):</span><br>        tmp = nums <br>        nums.sort()<br>        <span class="hljs-keyword">for</span> <br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)):<br>            num = nums[i]<br>            nums.pop(i)<br>            print(<span class="hljs-built_in">int</span>(self.get_median(nums)))<br>            nums.append(num)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_median</span>(<span class="hljs-params">self, nums, <span class="hljs-built_in">sum</span></span>):</span><br>        nums.sort()<br>        half = <span class="hljs-built_in">len</span>(nums) // <span class="hljs-number">2</span><br>        <span class="hljs-keyword">return</span> (nums[half] + nums[~half]) / <span class="hljs-number">2</span><br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br><br>    <span class="hljs-comment"># 代码提交模式</span><br>    res = []<br>    s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>) <br>    <span class="hljs-keyword">while</span> s != <span class="hljs-string">&quot;&quot;</span>:<br>        res.append(s)<br>        s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>)<br><br>    N = <span class="hljs-built_in">int</span>(res[<span class="hljs-number">0</span>].split(<span class="hljs-string">&quot; &quot;</span>)[<span class="hljs-number">0</span>])<br>    nums = [<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> res[<span class="hljs-number">1</span>].split(<span class="hljs-string">&quot; &quot;</span>)]<br><br>    solution = Solution()<br>    ans = solution.notify(nums)<br></code></pre></div></td></tr></table></figure>
 <p><em>朱老师的优秀解法</em></p>
-<p>输入的是偶数个数字，所以：</p>
-<ol>
-<li>先排序，计算出左右中位数。</li>
-<li>再遍历原数组，将每个数字其与 <code>Rmind</code>(右中位数) 比较</li>
-</ol>
-<ul>
-<li>如果大于等于  <code>Rmind</code>，去掉这个数字之后，剩下的数组只能得到较小的 <code>Lmid</code> ，输出 <code>Lmid</code> 。</li>
-<li>如果小于  <code>Rmind</code>，去掉这个数字之后，剩下的数组可以得到较大的 <code>Rmid</code> ，输出 <code>Rmid</code> 。</li>
-</ul>
+<p>输入的是偶数个数字，所以： 1. 先排序，计算出左右中位数。 2. 再遍历原数组，将每个数字其与 <code>Rmind</code>(右中位数) 比较 - 如果大于等于 <code>Rmind</code>，去掉这个数字之后，剩下的数组只能得到较小的 <code>Lmid</code> ，输出 <code>Lmid</code> 。 - 如果小于 <code>Rmind</code>，去掉这个数字之后，剩下的数组可以得到较大的 <code>Rmid</code> ，输出 <code>Rmid</code> 。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>():</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getMedian</span>(<span class="hljs-params">self, nums</span>):</span><br>        n = <span class="hljs-built_in">len</span>(nums)<br>        origin = nums[:]<br>        nums.sort()<br>        Lmind = nums[n//<span class="hljs-number">2</span> - <span class="hljs-number">1</span>]<br>        Rmind = nums[n//<span class="hljs-number">2</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            <span class="hljs-keyword">if</span> origin[i] &gt;= Rmind:<br>                print(Lmind)<br>            <span class="hljs-keyword">else</span>:<br>                print(Rmind)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br><br>    <span class="hljs-comment"># 代码提交模式</span><br>    res = []<br>    s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>) <br>    <span class="hljs-keyword">while</span> s != <span class="hljs-string">&quot;&quot;</span>:<br>        res.append(s)<br>        s = sys.stdin.readline().strip(<span class="hljs-string">&quot;\n&quot;</span>)<br><br>    N = <span class="hljs-built_in">int</span>(res[<span class="hljs-number">0</span>].split(<span class="hljs-string">&quot; &quot;</span>)[<span class="hljs-number">0</span>])<br>    nums = [<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> res[<span class="hljs-number">1</span>].split(<span class="hljs-string">&quot; &quot;</span>)]<br><br>    solution = Solution()<br>    ans = solution.getMedian(nums)<br></code></pre></div></td></tr></table></figure>
 <p><em>其余题目的Java解法</em></p>
-<p><a target="_blank" rel="noopener" href="https://zihao.blog.csdn.net/article/details/108437612">https://zihao.blog.csdn.net/article/details/108437612</a></p>
+<p>https://zihao.blog.csdn.net/article/details/108437612</p>
 <p><em>复盘</em></p>
-<p>这道题，很简单，应该全部AC的，最终只AC了50%。<br>也应该首先做这道题，以后笔试，首先留够每道题2-3分钟的读题时间，易懂易做的题目，优先完成。<br><strong>做题要注意观察，把握规律，不要硬怼，要学会取巧。</strong></p>
-
+<p>这道题，很简单，应该全部AC的，最终只AC了50%。 也应该首先做这道题，以后笔试，首先留够每道题2-3分钟的读题时间，易懂易做的题目，优先完成。 <strong>做题要注意观察，把握规律，不要硬怼，要学会取巧。</strong></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -510,6 +502,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

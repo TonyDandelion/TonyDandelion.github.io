@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>hello algorithm chapter 2 / time complexity - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="hello algorithm chapter 2 / time complexity">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-10-12 10:23" pubdate>
+        2023年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">hello algorithm chapter 2 / time complexity</h1>
+            
+            <div class="markdown-body">
+              <p>Reference: <a target="_blank" rel="noopener" href="https://www.hello-algo.com/chapter_computational_complexity/time_complexity/">Hello 算法 - 时间复杂度</a></p>
+<a id="more"></a>
+<h2 id="overview">Overview</h2>
+<blockquote class="pullquote mindmap mindmap-md"><ul>
+<li>time complexity
+<ul>
+<li>Definition
+<ul>
+<li>Trend of algorithm running time</li>
+<li>The essence of analysis of time complexity is finding an asymptotic upper bound on the 'number of operations function'.</li>
+</ul></li>
+<li>Deductive method
+<ul>
+<li>Ignore the constant terms</li>
+<li>Omit all coefficients.</li>
+<li>Use multiplication when nesting loops.</li>
+<li>judge asymptotic upper bound</li>
+</ul></li>
+<li>Common Time-Complexity
+<ul>
+<li>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(2^n) &lt; O(n!)</li>
+<li>constant order</li>
+<li>linear order: single-layer loops</li>
+<li>square order: nested loops.</li>
+<li>exponential order
+<ul>
+<li>recursive functions</li>
+<li>exhaustive methods (brute force search, backtracking, etc.).</li>
+</ul></li>
+<li>logarithmic order
+<ul>
+<li>recursive functions</li>
+<li>divide-and-conquer strategy</li>
+</ul></li>
+<li>linear logarithmic order
+<ul>
+<li>nested loops</li>
+<li>mainstream sorting algorithms, such as quicksort, merge sort, heapsort, etc.</li>
+</ul></li>
+<li>factorial order
+<ul>
+<li>recursion functions</li>
+<li>total permutation</li>
+</ul></li>
+</ul></li>
+<li>Worst, Best, Average time complexity.
+<ul>
+<li>we usually use the worst time complexity as a criterion for the efficiency of the algorithm.</li>
+</ul></li>
+</ul></li>
+</ul>
+</blockquote>
+<h2 id="trend-of-algorithm-running-time">Trend of algorithm running time</h2>
+<p><strong>算法运行时间随着数据量变大时的增长趋势</strong> = 时间复杂度</p>
+<p><strong>The growth trend of algorithm running time as the amount of data becomes larger</strong> = time complexity</p>
+<p>Code for Algorithms</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 算法 A 的时间复杂度：常数阶</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">algorithm_A</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    System.out.println(<span class="hljs-number">0</span>);<br>&#125;<br><span class="hljs-comment">// 算法 B 的时间复杂度：线性阶</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">algorithm_B</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        System.out.println(<span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br><span class="hljs-comment">// 算法 C 的时间复杂度：常数阶</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">algorithm_C</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000000</span>; i++) &#123;<br>        System.out.println(<span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Algorithm A and algorith C are both constant order. There are no difference between algorithm A and algorithm C.</p>
+<p>Algorithm B is linear order.</p>
+<p><img src="https://s2.loli.net/2023/10/12/YujJif6eTBHhG8P.png" srcset="/img/loading.gif" /></p>
+<p>Positive</p>
+<ul>
+<li>more efficient</li>
+<li>More convenient</li>
+</ul>
+<p>Negative</p>
+<ul>
+<li>we can not judge time usage of algorithm depending on time complexity only.</li>
+</ul>
+<h2 id="asymptotic-upper-bound">Asymptotic upper bound</h2>
+<p>Assume that the <strong><u>number of operations</u></strong> of the algorithm is a <strong><u>function</u></strong> of the input data size <span class="math inline">\(n\)</span>, recorded as <span class="math inline">\(T(n)\)</span>.</p>
+<p>The essence of analysis of time complexity is finding an <strong><u>asymptotic upper bound</u></strong> on the "<strong><u>number of operations function</u></strong>"</p>
+<p>So, what is <u><strong>asymptotic upper bound</strong></u>?</p>
+<p>If there are positive real numbers <span class="math inline">\(c\)</span> and real numbers <span class="math inline">\(n_0\)</span>, such that for all <span class="math inline">\(n &gt; n_0\)</span>, <span class="math inline">\(T(n) &lt; c \times f(n)\)</span>, then <span class="math inline">\(f(n)\)</span> can be considered as an asymptotic upper bound of <span class="math inline">\(T(n)\)</span>, Marked as <span class="math inline">\(T(n)=O(f(n)\)</span>).</p>
+<p><img src="https://s2.loli.net/2023/10/12/aSTNLDcEJbMytPj.png" srcset="/img/loading.gif" /></p>
+<h2 id="deductive-method">Deductive method</h2>
+<p>Step 1. statistics operation number</p>
+<ol type="1">
+<li>Ignore the constant terms in <span class="math inline">\(T(n)\)</span>.</li>
+<li>Omit all coefficients. For example, loop <span class="math inline">\(2n\)</span> times, loop <span class="math inline">\(5n+1\)</span> times, etc. can be simplified and recorded as <span class="math inline">\(n\)</span> times.</li>
+<li>Use multiplication when nesting loops. The total number of operations is equal to the product of the number of operations in the outer loop and the inner loop.</li>
+</ol>
+<p><span class="math inline">\(T(n)=2n + 1 + n^2\)</span> equals <span class="math inline">\(T(n) = n + n^2\)</span></p>
+<p>Step 2. judge asymptotic upper bound</p>
+<p>The time complexity is determined by the term of the highest order in the polynomial. Cause that the term of the <strong><u>highest order will play a dominant role</u></strong> as it approaches infinity, the effects of all other terms can be ignored.</p>
+<p>For exmaple, <span class="math inline">\(T(n) = n + n^2\)</span> and <span class="math inline">\(O(T(n)) = O(n(^2))\)</span>.</p>
+<h2 id="common-time-complexity">Common Time-Complexity</h2>
+<p><span class="math inline">\(O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(2^n) &lt; O(n!)\)</span></p>
+<p>Constant order &lt; logarithmic order &lt; linear order &lt; linear logarithmic order (线性对数阶) &lt; square order &lt; exponential order (指数阶) &lt; factorial order (阶乘阶)</p>
+<p><img src="https://s2.loli.net/2023/10/13/xW4nBJ92ykGtNh7.png" srcset="/img/loading.gif" /></p>
+<h3 id="constant-order">constant order</h3>
+<p>The number of operations of the constant order is independent of the input data size <span class="math inline">\(n\)</span>, that is, does not change with the change of <span class="math inline">\(n\)</span>.</p>
+<p>Following function contain a loop, but time-complexity is <span class="math inline">\(O(1)\)</span>.</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 常数阶 */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">constant</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> size = <span class="hljs-number">100000</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++)<br>        count++;<br>    <span class="hljs-keyword">return</span> count;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="linear-order">linear order</h3>
+<p>The number of operations of linear order function grows in linear order relative to the size of the input data.</p>
+<p>Linear order usually occurs in single-layer loops.</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 线性阶 */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">linear</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>        count++;<br>    <span class="hljs-keyword">return</span> count;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="square-order">square order</h3>
+<p>Square order usually occurs in nested loops.</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 平方阶 */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">quadratic</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-comment">// 循环次数与数组长度成平方关系</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>            count++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> count;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="exponential-order-指数阶">exponential order (指数阶)</h3>
+<p>In practical algorithms, exponential order often occurs in recursive functions.</p>
+<p>在实际算法中，指数阶常出现于递归函数中。</p>
+<p>For example, in the following code, it recursively splits in two and stops after a second split:</p>
+<p>例如，在下面的代码中，它递归地分成两段，并在第二次分裂后停止:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 指数阶（递归实现） */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">expRecur</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span> expRecur(n - <span class="hljs-number">1</span>) + expRecur(n - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-comment">/* 指数阶（循环实现） */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">exponential</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>, base = <span class="hljs-number">1</span>;<br>    <span class="hljs-comment">// 细胞每轮一分为二，形成数列 1, 2, 4, 8, ..., 2^(n-1)</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; base; j++) &#123;<br>            count++;<br>        &#125;<br>        base *= <span class="hljs-number">2</span>;<br>    &#125;<br>    <span class="hljs-comment">// count = 1 + 2 + 4 + 8 + .. + 2^(n-1) = 2^n - 1</span><br>    <span class="hljs-keyword">return</span> count;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Exponential growth is very rapid and is more common in exhaustive methods (brute force search, backtracking, etc.).</p>
+<p>指数阶增长非常迅速，在穷举法（暴力搜索、回溯等）中比较常见。</p>
+<p>For problems with large data sizes, exponential order is not acceptable and usually needs to be solved using algorithms such as dynamic programming or greed.</p>
+<p>对于数据规模较大的问题，指数阶是不可接受的，通常需要使用动态规划或贪心等算法来解决。</p>
+<h3 id="logarithmic-order">logarithmic order</h3>
+<p>In contrast to the exponential order, the logarithmic order reflects the situation where "each round is reduced to half."</p>
+<p>与指数阶相反，对数阶反映了“每轮缩减到一半”的情况。</p>
+<p>Let the input data size be <span class="math inline">\(n\)</span>, since each round is reduced to half, the number of cycles is the inverse function of, i.e.</p>
+<p>设输入数据大小为 <span class="math inline">\(n\)</span>,，由于每轮缩减到一半，因此循环次数是 <span class="math inline">\(log_2n\)</span>, 即 <span class="math inline">\(2^n\)</span> 的反函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Java"><span class="hljs-comment">/* 对数阶（循环实现） */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">logarithmic</span><span class="hljs-params">(<span class="hljs-keyword">float</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (n &gt; <span class="hljs-number">1</span>) &#123;<br>        n = n / <span class="hljs-number">2</span>;<br>        count++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> count;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<p>Similar to exponential order, logarithmic order is often found in recursive functions.</p>
+<p>与指数阶类似，对数阶也常出现于递归函数中。</p>
+<p>The following code forms a recursive tree with a height of <span class="math inline">\(n\)</span>:</p>
+<p>以下代码形成了一个高度为 <span class="math inline">\(n\)</span> 的递归树：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 对数阶（递归实现） */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">logRecur</span><span class="hljs-params">(<span class="hljs-keyword">float</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">return</span> logRecur(n / <span class="hljs-number">2</span>) + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Logarithmic order often appears in the algorithm based on divide-and-conquer strategy, which reflects the algorithmic thought of "one is divided into many" and "making complex into simple".</p>
+<p>对数阶常出现于基于分治策略的算法中，体现了“一分为多”和“化繁为简”的算法思想。</p>
+<p>It grows slowly and is the ideal time complexity after constant order.</p>
+<p>它增长缓慢，是仅次于常数阶的理想的时间复杂度。</p>
+<p><img src="https://s2.loli.net/2023/10/13/6RlrzQa574O3bxV.png" srcset="/img/loading.gif" /></p>
+<h3 id="linear-logarithmic-order-线性对数阶">linear logarithmic order (线性对数阶)</h3>
+<p>The linear logarithmic order often occurs in nested loops, and the time complexity of the two layers is <span class="math inline">\(O(n)\)</span> and <span class="math inline">\(O(log_2n)\)</span>, respectively.</p>
+<p>线性对数阶常出现于嵌套循环中，两层循环的时间复杂度分别为 <span class="math inline">\(O(n)\)</span> 和 <span class="math inline">\(O(log_2n)\)</span>。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 线性对数阶 */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">linearLogRecur</span><span class="hljs-params">(<span class="hljs-keyword">float</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> count = linearLogRecur(n / <span class="hljs-number">2</span>) + linearLogRecur(n / <span class="hljs-number">2</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        count++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> count;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Follow graph show the process of generation of linear logarithmic order.</p>
+<p>下图显示了线性对数阶的生成过程。</p>
+<p>The total number of operations at each layer of the binary tree is <span class="math inline">\(n\)</span>, and the tree has <span class="math inline">\(log_2 n + 1\)</span> layers, so the time complexity is <span class="math inline">\(O(nlogn)\)</span>.</p>
+<p>二叉树的每一层的操作总数都为 <span class="math inline">\(n\)</span>，树共有 <span class="math inline">\(logn\)</span> 层，因此时间复杂度为 <span class="math inline">\(O(nlogn)\)</span>。</p>
+<p><img src="https://s2.loli.net/2023/10/13/FLRj3hd1TPxigsk.png" srcset="/img/loading.gif" /></p>
+<p>The time complexity of mainstream sorting algorithms is <span class="math inline">\(O(nlogn)\)</span> usually, such as quicksort, merge sort, heapsort, etc.</p>
+<p>主流排序算法的时间复杂度通常为 <span class="math inline">\(O(nlogn)\)</span>，例如快速排序、归并排序、堆排序等。</p>
+<h3 id="factorial-order-阶乘阶">factorial order (阶乘阶)</h3>
+<p>The factorial order corresponds to the "total permutation" problem in mathematics.</p>
+<p>阶乘阶对应数学上的“全排列”问题。</p>
+<p>Given a non-repeating element <span class="math inline">\(n\)</span>, find all possible permutations of it, the number of schemes is:</p>
+<p>给定 <span class="math inline">\(n\)</span> 个互不重复的元素，求其所有可能的排列方案，方案数量为： <span class="math display">\[
+!n = n \times (n-1) \times (n-2) \times ... \times 2 \times 1
+\]</span> Factorial is usually implemented using recursion.</p>
+<p>阶乘通常使用递归实现。</p>
+<p>As shown in Figure 2-14 and the following code, the first layer splits, the second layer splits, and so on until the first layer stops splitting:</p>
+<p>如图 2-14 和以下代码所示，第一层分裂出 <span class="math inline">\(n\)</span> 个，第二层分裂出 <span class="math inline">\(n-1\)</span> 个，以此类推，直至第 <span class="math inline">\(n\)</span> 层时停止分裂：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 阶乘阶（递归实现） */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">factorialRecur</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-comment">// 从 1 个分裂出 n 个</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        count += factorialRecur(n - <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> count;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2023/10/13/BuTHk3yeqrU6Ica.png" srcset="/img/loading.gif" /></p>
+<p>$ n! &gt; 2^n$ when <span class="math inline">\(n &gt;= 4\)</span>. Therefore the factorial order grows faster than the exponential order, which is also unacceptable at large <span class="math inline">\(n\)</span>.</p>
+<p>因为当 <span class="math inline">\(n &gt;= 4\)</span> 时恒有 $ n! &gt; 2^n$ ，所以阶乘阶比指数阶增长得更快，在 <span class="math inline">\(n\)</span> 较大时也是不可接受的。</p>
+<h2 id="worst-best-average-time-complexity">Worst, Best, Average time complexity</h2>
+<p>The time efficiency of an algorithm is often not fixed, but is related to the distribution of the input data</p>
+<p>算法的时间效率往往不是固定的，而是与输入数据的分布有关</p>
+<p>The "worst time complexity" corresponds to the asymptotic upper bound of the function, which is represented by the large <span class="math inline">\(O\)</span>notation.</p>
+<p>“最差时间复杂度”对应函数渐近上界，使用大 <span class="math inline">\(O\)</span> 记号表示。</p>
+<p>Accordingly, the "best time complexity" corresponds to the asymptotic lower bound of the function, denoted by the token <span class="math inline">\(\Omega\)</span>.</p>
+<p>相应地，“最佳时间复杂度”对应函数渐近下界，用记号 <span class="math inline">\(\Omega\)</span> 表示。</p>
+<p>The worst time complexity is more practical because it gives a safe value for efficiency.</p>
+<p>而最差时间复杂度更为实用，因为它给出了一个效率安全值。</p>
+<p>The worst or best time complexity occurs only in "special data distributions", which may be very rare and do not truly reflect the efficiency of the algorithm.</p>
+<p>最差或最佳时间复杂度只出现于“特殊的数据分布”，这些情况的出现概率可能很小，并不能真实地反映算法运行效率。</p>
+<p>In contrast, <strong>average time complexity represents the efficiency of an algorithm with random input data </strong> and is represented by the <span class="math inline">\(\Theta\)</span>notation.</p>
+<p>相比之下，<strong>平均时间复杂度可以体现算法在随机输入数据下的运行效率</strong>，用 <span class="math inline">\(\Theta\)</span> 记号来表示。</p>
+<p>For more complex algorithms, it is often difficult to calculate the average time complexity because it is difficult to analyze the overall mathematical expectation under the data distribution.</p>
+<p>对于较为复杂的算法，计算平均时间复杂度往往是比较困难的，因为很难分析出在数据分布下的整体数学期望。</p>
+<p>In this case, we usually use the worst time complexity as a criterion for the efficiency of the algorithm.</p>
+<p>在这种情况下，我们通常使用最差时间复杂度作为算法效率的评判标准。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/hello-algorithm/">hello algorithm</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/14/hello-algorithm-chapter2-space-complexity/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">hello algorithm chapter 2  / space complexity</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/12/programming-thoughts/">
+                        <span class="hidden-mobile">programming_thoughts</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2023/10/12/hello-algorithm-chapter2-time-complexity/';
+        this.page.identifier = '/2023/10/12/hello-algorithm-chapter2-time-complexity/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+
+</body>
+</html>

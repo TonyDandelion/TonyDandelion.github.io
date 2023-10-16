@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,29 +251,37 @@
             <h1 style="display: none">LeetCode 94. 二叉树的中序遍历（中）</h1>
             
             <div class="markdown-body">
-              <p>常见的二叉树操作，用循环和递归两种方式进行中序遍历（左 -&gt; 中 -&gt; 右）。  </p>
+              <p>常见的二叉树操作，用循环和递归两种方式进行中序遍历（左 -&gt; 中 -&gt; 右）。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个二叉树，返回它的 <em>中序</em> 遍历。<br>进阶: 递归算法很简单，你可以通过迭代算法完成吗？<br>注意: 输入不一定是二叉搜索树。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例:</strong></p>
+<h1 id="题目">题目</h1>
+<p>给定一个二叉树，返回它的 <em>中序</em> 遍历。<br />
+进阶: 递归算法很简单，你可以通过迭代算法完成吗？<br />
+注意: 输入不一定是二叉搜索树。</p>
+<h1 id="示例">示例</h1>
+<p><strong>示例:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-number">1</span>,null,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br>   <span class="hljs-number">1</span><br>    \<br>     <span class="hljs-number">2</span><br>    /<br>   <span class="hljs-number">3</span><br><br>输出: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>]<br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>二叉树</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>方法一、递归调用  </p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>二叉树</p>
+<h1 id="核心思想">核心思想</h1>
+<p>方法一、递归调用</p>
 <ul>
 <li>保存根节点在 <code>res</code> 中。</li>
 <li>传入左节点递归，将结果保存在 <code>left</code> 中。</li>
-<li>传入右节点递归，将结果保存在 <code>right</code> 中。  </li>
+<li>传入右节点递归，将结果保存在 <code>right</code> 中。<br />
+</li>
 <li>返回 <code>[left, res, right]</code></li>
 </ul>
-<p>方法二、循环方法  </p>
+<p>方法二、循环方法</p>
 <ul>
-<li>把当前节点的所有左侧子结点压入栈 </li>
-<li>访问节点，处理该节点的右子树<ul>
+<li>把当前节点的所有左侧子结点压入栈</li>
+<li>访问节点，处理该节点的右子树
+<ul>
 <li>由于之前把左子树先压入了，所以这里先弹出左子树节点</li>
-<li>然后设置新的 <code>node</code> 为右子树，下一次 <code>while</code> 循环就会去处理右子树了。这样一来就实现了 “左 -&gt; 根 -&gt; 右” 的顺序。</li>
+<li>然后设置新的 <code>node</code> 为右子树，下一次 <code>while</code> 循环就会去处理右子树了。这样一来就实现了 "左 -&gt; 根 -&gt; 右" 的顺序。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<h1 id="python版本">Python版本</h1>
+<ul>
 <li><strong>方法一的实现</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inorderTraversal</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; List[int]:</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        In-Order Traversal of binary tree</span><br><span class="hljs-string">        :param root: root node of target binary tree</span><br><span class="hljs-string">        :return: TreeNode</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root:  <span class="hljs-keyword">return</span> []  <span class="hljs-comment"># 空节点</span><br>        res = [root.val]<br>        left_tree = self.inorderTraversal(root.left)<br>        right_tree = self.inorderTraversal(root.right)<br>        <span class="hljs-keyword">return</span> left_tree + res + right_tree<br></code></pre></div></td></tr></table></figure>
@@ -281,7 +289,7 @@
 <li><strong>方法二的实现</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inorderTraversal</span>(<span class="hljs-params">self, root</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        In-Order Traversal of binary tree based on circulation</span><br><span class="hljs-string">        :param root: root node of target binary tree</span><br><span class="hljs-string">        :return: TreeNode</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        res = []<br>        stack = []<br>        node = root<br>        <span class="hljs-keyword">while</span> node <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(stack) &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">while</span> node:  <span class="hljs-comment"># 把当前节点的所有左侧子结点压入栈 </span><br>                stack.append(node)<br>                node = node.left<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(stack):  <span class="hljs-comment"># 访问节点，处理该节点的右子树</span><br>                node = stack.pop()  <span class="hljs-comment"># 由于之前把左子树先压入了，所以这里先弹出左子树节点</span><br>                res.append(node.val)<br>                node = node.right  <span class="hljs-comment">#  然后设置新的node为右子树，下一次while循环就会去处理右子树了。这样一来就实现了左 -&gt; 根 -&gt; 右 的顺序。</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -525,6 +533,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

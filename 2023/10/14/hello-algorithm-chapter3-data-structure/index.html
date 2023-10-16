@@ -1,0 +1,829 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>hello algorithm chapter 3 / data structure types - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="hello algorithm chapter 3 / data structure types">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-10-14 23:15" pubdate>
+        2023年10月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      53
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">hello algorithm chapter 3 / data structure types</h1>
+            
+            <div class="markdown-body">
+              <p>Reference：<a target="_blank" rel="noopener" href="https://www.hello-algo.com/chapter_data_structure/">Hello 算法 第 3 章 数据结构</a></p>
+<a id="more"></a>
+<h2 id="思维导图">思维导图</h2>
+<blockquote class="pullquote mindmap mindmap-md"><ul>
+<li>data structure types
+<ul>
+<li>逻辑结构
+<ul>
+<li>线性数据结构：数组、链表、栈、队列、哈希表。</li>
+<li>非线性数据结构
+<ul>
+<li>网状结构：树、堆、哈希表，元素之间是一对多的关系。</li>
+<li>树形结构：图，元素之间是多对多的关系。</li>
+</ul></li>
+</ul></li>
+<li>物理结构
+<ul>
+<li>连续空间存储
+<ul>
+<li>静态数据结构，初始化之后长度不可变。底层数据结构：数组。</li>
+<li>基于数组可实现：栈、队列、哈希表、树、堆、图、矩阵、张量（维度 ≥3 的数组）等。</li>
+</ul></li>
+<li>分散空间存储
+<ul>
+<li>动态数据结构，初始化之后长度可变。底层数据结构：链表。</li>
+<li>基于链表可实现：栈、队列、哈希表、树、堆、图等。</li>
+</ul></li>
+</ul></li>
+<li>基本数据类型
+<ul>
+<li>基本数据类型以二进制的形式存储在计算机中</li>
+<li>整数类型 byte、short、int、long</li>
+<li>浮点类型 float、double</li>
+<li>字符类型 char</li>
+<li>布尔类型 boolean</li>
+</ul></li>
+<li>数字编码
+<ul>
+<li>整数编码：
+<ul>
+<li>底层：原码、反码、补码。</li>
+<li>计算机内部的硬件电路主要是基于加法运算。</li>
+<li>解决零的歧义性</li>
+</ul></li>
+<li>浮点数编码：
+<ul>
+<li>底层：将 32-bit 长度的二进制数分段拆分为符号位 S、指数位 E、分数位 N。</li>
+<li>指数位 E = 0 和 E = 255 具有特殊含义，用于表示零、无穷大、NaN 等。</li>
+</ul></li>
+<li>字符编码：
+<ul>
+<li>ASCII： 7 位二进制数（即一个字节的低 7 位）表示一个字符</li>
+<li>GBK：ASCII 字符使用一个字节表示，汉字使用两个字节表示。</li>
+<li>Unicode：Unicode 是一种字符集标准，而非一种字符集，本质上是给每个字符分配一个编号（称为 “码点”）。</li>
+<li>UTF-8（8-bit Unicode Transformation Format）：对于长度为 1 字节的字符，将最高位设置为 0、其余 7 位设置为 Unicode 码点。对于长度为 n 字节的字符（其中 n &gt; 1 ），将首个字节的高 n 位都设置为 1、第 n + 1 位设置为 0 ；从第二个字节开始，将每个字节的高 2 位都设置为 10 ；其余所有位用于填充字符的 Unicode 码点。</li>
+<li>编程语言的字符编码：UTF-16（Java、C#、Python），UTF-8（Go、Rust），Unicode变长（Python）。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</blockquote>
+<h2 id="逻辑结构线性与非线性">逻辑结构：线性与非线性</h2>
+<p>数据结构如同一副稳固而多样的框架。 算法是运行在框架上逻辑。</p>
+<p>线性结构比较直观，指数据在逻辑关系上呈线性排列；非线性结构则相反，数据无任何线性关系。</p>
+<p><img src="https://s2.loli.net/2023/10/14/QCYqzulkZPgtITp.png" srcset="/img/loading.gif" /></p>
+<h2 id="物理结构连续与分散">物理结构：连续与分散</h2>
+<p>在计算机中，内存和硬盘是两种主要的存储硬件设备。</p>
+<ol type="1">
+<li>硬盘：主要用于长期存储数据，容量较大（通常可达到 TB 级别）、速度较慢。</li>
+<li>内存：用于运行程序时暂存数据，速度较快，但容量较小（通常为 GB 级别）。</li>
+</ol>
+<p><img src="https://s2.loli.net/2023/10/14/5XxrnsZI4TyG18O.png" srcset="/img/loading.gif" /></p>
+<p><strong>在算法运行过程中，相关数据都存储在内存中</strong>。图 3-2 展示了一个计算机内存条，其中每个黑色方块都包含一块内存空间。我们可以将内存想象成一个巨大的 Excel 表格，其中每个单元格都可以存储一定大小的数据，在算法运行时，所有数据都被存储在这些单元格中。</p>
+<p><strong>系统通过内存地址来访问目标位置的数据</strong>。如图 3-2 所示，计算机根据特定规则为表格中的每个单元格分配编号，确保每个内存空间都有唯一的内存地址。有了这些地址，程序便可以访问内存中的数据。</p>
+<p><u>内存是所有程序的共享资源</u>，当某块内存被某个程序占用时，则无法被其他程序同时使用了。<strong>因此在数据结构与算法的设计中，内存资源是一个重要的考虑因素</strong>。比如，算法所占用的内存峰值不应超过系统剩余空闲内存；如果缺少连续大块的内存空间，那么所选用的数据结构必须能够存储在分散的内存空间内。</p>
+<p><strong>物理结构反映了数据在计算机内存中的存储方式</strong>，可分为连续空间存储（数组）和分散空间存储（链表）。物理结构从底层决定了数据的访问、更新、增删等操作方法，同时在时间效率和空间效率方面呈现出互补的特点。</p>
+<p><img src="https://s2.loli.net/2023/10/15/YAiI3QrS2aXKp4z.png" srcset="/img/loading.gif" /></p>
+<blockquote>
+<p><strong>所有数据结构都是基于数组、链表或二者的组合实现的</strong>。例如，栈和队列既可以使用数组实现，也可以使用链表实现；而哈希表的实现可能同时包含数组和链表。</p>
+<ul>
+<li><strong>基于数组可实现</strong>：栈、队列、哈希表、树、堆、图、矩阵、张量（维度 ≥3 的数组）等。“静态数据结构”，这意味着此类数据结构在初始化后长度不可变。</li>
+<li><strong>基于链表可实现</strong>：栈、队列、哈希表、树、堆、图等。 “动态数据结构”，这类数据结构在初始化后，仍可以在程序运行过程中对其长度进行调整。</li>
+</ul>
+</blockquote>
+<h2 id="基本数据类型">基本数据类型</h2>
+<p><strong>基本数据类型是 CPU 可以直接进行运算的类型</strong>，在算法中直接被使用，主要包括以下几种类型。</p>
+<ul>
+<li>整数类型 <code>byte</code>、<code>short</code>、<code>int</code>、<code>long</code> 。</li>
+<li>浮点数类型 <code>float</code>、<code>double</code> ，用于表示小数。</li>
+<li>字符类型 <code>char</code> ，用于表示各种语言的字母、标点符号、甚至表情符号等。</li>
+<li>布尔类型 <code>bool</code> ，用于表示 “是” 与 “否” 判断。</li>
+</ul>
+<p><strong>基本数据类型以二进制的形式存储在计算机中</strong>。一个二进制位即为 1 比特。在绝大多数现代系统中，1 字节（byte）由 8 比特（bits）组成。</p>
+<p>基本数据类型的取值范围取决于其占用的空间大小。下面以 Java 为例。</p>
+<ul>
+<li>整数类型 <code>byte</code> 占用 1 byte = 8 bits ，可以表示 28 个数字。</li>
+<li>整数类型 <code>int</code> 占用 4 bytes = 32 bits ，可以表示 232 个数字。</li>
+</ul>
+<p>下图展示了各种基本数据类型的占用空间、取值范围和默认值。</p>
+<p><img src="https://s2.loli.net/2023/10/15/WgbSE9LpArcwiuP.png" srcset="/img/loading.gif" /></p>
+<p>数据结构是在计算机中组织与存储数据的方式。它的主语是 “结构” 而非 “数据”。</p>
+<p><strong>基本数据类型提供了数据的 “内容类型”，而数据结构提供了数据的 “组织方式”</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 使用多种基本数据类型来初始化数组</span><br><span class="hljs-keyword">int</span>[] numbers = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">5</span>];<br><span class="hljs-keyword">float</span>[] decimals = <span class="hljs-keyword">new</span> <span class="hljs-keyword">float</span>[<span class="hljs-number">5</span>];<br><span class="hljs-keyword">char</span>[] characters = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[<span class="hljs-number">5</span>];<br><span class="hljs-keyword">boolean</span>[] bools = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[<span class="hljs-number">5</span>];<br></code></pre></div></td></tr></table></figure>
+<h2 id="数字编码">数字编码</h2>
+<h3 id="整数编码">整数编码</h3>
+<p>首先，了解清楚什么是 原码反码补码。</p>
+<p><img src="https://s2.loli.net/2023/10/15/DSVAM1NowHf2bTe.png" srcset="/img/loading.gif" /></p>
+<p>为什么不直接用原码？</p>
+<p>原因一：原码无法直接加减</p>
+<p>问题：在原码下计算 <span class="math inline">\(1+(−2)\)</span> ，得到的结果是 <span class="math inline">\(−3\)</span> ，这显然是不对的。</p>
+<p><span class="math display">\[
+1 + (-2)
+\]</span></p>
+<p><span class="math display">\[
+-&gt; 0000 0001(原码) + 1000 0010(原码)
+\]</span></p>
+<p><span class="math display">\[
+= 1000 0011 (原码 -3)
+\]</span></p>
+<p>解决方案：引入反码。</p>
+<p>为了解决此问题，计算机引入了「反码 1's complement code」。如果我们先将原码转换为反码，并在反码下计算 <span class="math inline">\(1+(−2)\)</span> ，最后将结果从反码转化回原码，则可得到正确结果 <span class="math inline">\(−1\)</span> 。</p>
+<p><span class="math display">\[
+1 + (-2)
+\]</span></p>
+<p><span class="math display">\[
+-&gt; 0000 0001(反码) + 0111 1101(反码)
+\]</span></p>
+<p><span class="math display">\[
+= 0111 1110(反码)
+\]</span></p>
+<p><span class="math display">\[
+= 1000 0001(原码)
+\]</span></p>
+<p>原因二：<strong>解决零的歧义性</strong></p>
+<p>问题：<strong>数字零的原码有 +0 和 −0 两种表示方式</strong>。这意味着数字零对应着两个不同的二进制编码，其可能会带来歧义。比如在条件判断中，如果没有区分正零和负零，则可能会导致判断结果出错。而如果我们想要处理正零和负零歧义，则需要引入额外的判断操作，其可能会降低计算机的运算效率。</p>
+<p>解决方案：在反码的基础上引入补码。</p>
+<p><strong>负零的补码为 00000000 ，与正零的补码相同</strong>。这意味着在补码表示中只存在一个零，正负零歧义从而得到解决。在负零的反码基础上加 1 会产生进位，但 <code>byte</code> 类型的长度只有 8 位，因此<strong><font color="red">溢出到第 9 位的 1 会被舍弃</font></strong>。也就是说，<strong>负零的补码为 00000000 ，与正零的补码相同</strong>。这意味着在补码表示中只存在一个零，正负零歧义从而得到解决。 <span class="math display">\[
+-0  --&gt;  1000 0000 (原码)
+\]</span></p>
+<p><span class="math display">\[
+        = 1111 1111(反码)
+\]</span></p>
+<p><span class="math display">\[
+= 1 0000 0000 (反码)
+\]</span></p>
+<p>最后的疑问：<span class="math inline">\(-128\)</span>是怎么来的？</p>
+<p>回答：1字节整的范围是 <span class="math inline">\([-128, 127]\)</span>， <span class="math inline">\(-128\)</span> 是如何得到的呢？</p>
+<p>区间$ [-127,+127]$ 内的所有整数都有对应的原码、反码和补码，并且原码和补码之间是可以互相转换的。</p>
+<p>然而，<strong>补码 1000 0000 是一个例外，它并没有对应的原码</strong>。按照负数的 原码 -&gt; 反码 -&gt; 补码 规则，补码 1000 0000 的原码就是 0000 0000。这显然是矛盾的，因为该原码表示数字 0 ，它的补码应该是自身。计算机规定这个特殊的补码 10000000 就是 <span class="math inline">\(-128\)</span> 的补码 。实际上，$ (−1)+(−127)$ 在补码下的计算结果就是 <span class="math inline">\(-128\)</span> 。</p>
+<p><span class="math display">\[
+(-127) + (-1)
+\]</span></p>
+<p><span class="math display">\[
+-&gt; 1111 1111(原码) + 1000 0001(原码)
+\]</span></p>
+<p><span class="math display">\[
+= 1000 0000(反码) + 1111 1110(反码)
+\]</span></p>
+<p><span class="math display">\[
+= 1000 0001(补码) + 1111 1111(补码)
+\]</span></p>
+<p><span class="math display">\[
+= 1000 0000(补码)
+\]</span></p>
+<blockquote>
+<p>上述的所有计算都是加法运算。这暗示着一个重要事实：<strong><font color="red">计算机内部的硬件电路主要是基于加法运算设计的</font></strong>。</p>
+<p><strong>通过将加法与一些基本逻辑运算结合，计算机能够实现各种其他的数学运算</strong>。例如，计算减法 <span class="math inline">\(a-b\)</span> 可以转换为计算加法 <span class="math inline">\(a + (-b)\)</span>；计算乘法和除法可以转换为计算多次加法或减法。</p>
+</blockquote>
+<p>计算机使用补码的原因：</p>
+<ol type="1">
+<li>基于补码表示，计算机可以用同样的电路和操作来处理正数和负数加法，不需要设计特殊的硬件电路来处理减法。</li>
+<li>并且无须特别处理正负零的歧义问题。这大大简化了硬件设计，提高了运算效率。</li>
+</ol>
+<h3 id="浮点数编码">浮点数编码</h3>
+<p>问：<code>int</code> 和 <code>float</code> 长度相同，都是 4 bytes ，但为什么 <code>float</code> 的取值范围远大于 <code>int</code> ？</p>
+<p>答：这非常反直觉，因为按理说 <code>float</code> 需要表示小数，取值范围应该变小才对。</p>
+<p>实际上，<strong>这是因为浮点数 <code>float</code> 采用了不同的表示方式</strong>。记一个 32-bit 长度的二进制数为：</p>
+<p>$ b_{31}b_{30}b_{29}...b_{2}b_{1}b_{0} $</p>
+<p>根据 IEEE 754 标准，32-bit 长度的 <code>float</code> 由以下三个部分构成。</p>
+<ul>
+<li>符号位 S ：占 1 bit ，对应 <span class="math inline">\(b_{31}\)</span>。</li>
+<li>指数位 E ：占 8 bits ，对应 <span class="math inline">\(b_{30}b_{29}...b_{23}\)</span>。</li>
+<li>分数位 N ：占 23 bits ，对应 <span class="math inline">\(b_{22}b_{21}...b_{0}\)</span>。</li>
+</ul>
+<p>二进制数 <code>float</code> 对应的值的计算方法如下：</p>
+<p><img src="https://s2.loli.net/2023/10/15/q7rtnPI25UdASbl.png" srcset="/img/loading.gif" /></p>
+<p><span class="math inline">\(S\)</span>、<span class="math inline">\(E\)</span>、<span class="math inline">\(N\)</span> 的取值范围如下： <span class="math display">\[
+S \in \{0, 1\} \\
+E \in \{1, 2, 3, 4, 5, ..., 254\} \\ 
+1 + N = (1 +  \sum_{i=1}^{23}{b_{23-i}2^{-i}}) \subset [1+0, 1+(1-2^{-23})] = [1, 2-2^{-23}]
+\]</span> 现在我们可以回答最初的问题：<strong><code>float</code> 的表示方式包含指数位，导致其取值范围远大于 <code>int</code></strong> 。根据以上计算，<code>float</code> 可表示的最大正数为 <span class="math inline">\(2^{254-127} \times (2−2^{−23}) \approx 3.4 \times 1038\)</span> ，切换符号位便可得到最小负数。</p>
+<p><strong>浮点数 <code>float</code> 扩展了取值范围，但其副作用是牺牲了精度</strong>。</p>
+<ul>
+<li>整数类型 <code>int</code> 将全部 32 位用于表示数字，数字是均匀分布的；</li>
+<li>而由于指数位的存在，浮点数 <code>float</code> 的数值越大，相邻两个数字之间的差值就会趋向越大。</li>
+</ul>
+<p>指数位 <span class="math inline">\(E=0\)</span> 和 <span class="math inline">\(E=255\)</span> 具有特殊含义，<strong>用于表示零、无穷大、NaN 等</strong>。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">指数位 E</th>
+<th style="text-align: center;">分数位 <span class="math inline">\(N = 0\)</span></th>
+<th style="text-align: center;">分数位 <span class="math inline">\(N\neq 0\)</span></th>
+<th style="text-align: center;">计算公式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="math inline">\(\pm 0\)</span></td>
+<td style="text-align: center;">次正规数</td>
+<td style="text-align: center;"><span class="math inline">\((-1)^s \times 2^{-127} \times (0 + N)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1, 2, ..., 254</td>
+<td style="text-align: center;">正规数</td>
+<td style="text-align: center;">正规数</td>
+<td style="text-align: center;"><span class="math inline">\((-1)^s \times 2^{E-127} \times (1 + N)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">255</td>
+<td style="text-align: center;"><span class="math inline">\(\pm \infty\)</span></td>
+<td style="text-align: center;">NaN</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+</tbody>
+</table>
+<p>次正规数显著提升了浮点数的精度。最小正正规数为 <span class="math inline">\(2^{−126}\)</span> ，最小正次正规数为 <span class="math inline">\(2^{−126} \times 2^{−23}\)</span>。</p>
+<p>双精度 <code>double</code> 也采用类似 <code>float</code> 的表示方法（<span class="math inline">\(S\)</span>、<span class="math inline">\(E\)</span>、<span class="math inline">\(N\)</span> 的取值位范围如下图所示，详情见<a target="_blank" rel="noopener" href="https://standards.ieee.org/ieee/754/6210/">IEEE 745 standards</a>），在此不做赘述。</p>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/Double-Precision-IEEE-754-Floating-Point-Standard-1024x266.jpg" srcset="/img/loading.gif" /></p>
+<h2 id="字符编码">字符编码</h2>
+<ul>
+<li><p>所有数据都是二进制数形式存储。</p></li>
+<li><p>建立一套 “字符集”，规定每个字符和二进制数之间的一一对应关系。</p></li>
+<li><p>计算机就可以通过“字符集”表完成二进制数到字符的转换。</p></li>
+</ul>
+<h3 id="ascii">ASCII</h3>
+<p>ASCII使用 7 位二进制数（即一个字节的低 7 位）表示一个字符，最多能够表示 128 个不同的字符。如图 3-6 所示，ASCII 码包括英文字母的大小写、数字 0 ~ 9、一些标点符号，以及一些控制字符（如换行符和制表符）。</p>
+<p><strong>ASCII 码仅能够表示英文</strong>。</p>
+<h3 id="gbk">GBK</h3>
+<ul>
+<li>中国国家标准总局于 1980 年发布了「GB2312」字符集，其收录了 6763 个汉字，基本满足了汉字的计算机处理需要。</li>
+<li>「GBK」字符集是在 GB2312 的基础上扩展得到的，它共收录了 21886 个汉字。在 GBK 的编码方案中，ASCII 字符使用一个字节表示，汉字使用两个字节表示。</li>
+</ul>
+<h3 id="unicode">Unicode</h3>
+<ul>
+<li>「Unicode」的全称为 “统一字符编码”，理论上能容纳一百多万个字符。它致力于将全球范围内的字符纳入到统一的字符集之中，提供一种通用的字符集来处理和显示各种语言文字，减少因为编码标准不同而产生的乱码问题。</li>
+<li><strong><font color="red">Unicode 是一种字符集标准，而非一种字符集</font></strong>，本质上是给每个字符分配一个编号（称为 “码点”），<strong>但它并没有规定在计算机中如何存储这些字符码点</strong>。如果使用定长的bit来存储字符，不同语种使用同样的长度，就会造成存储空间的浪费（英文字母只需要一个byte，中文需要两个byte，hello算法的Unicode标准编码数据如下：）。为解决上述问题，提出UTF-8编码。</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/10/15/DZAIuMxRjQBkEaW.png" srcset="/img/loading.gif" /></p>
+<h3 id="utf-8">UTF-8</h3>
+<p>UTF-8（8-bit Unicode Transformation Format） 的编码规则并不复杂，分为以下两种情况。</p>
+<ul>
+<li><p><strong>对于长度为 1 字节的字符，将最高位设置为 0、其余 7 位设置为 Unicode 码点</strong>。值得注意的是，ASCII 字符在 Unicode 字符集中占据了前 128 个码点。也就是说，<strong>UTF-8 编码可以向下兼容 ASCII 码</strong>。这意味着我们可以使用 UTF-8 来解析年代久远的 ASCII 码文本。</p></li>
+<li><p><strong>对于长度为 <span class="math inline">\(n\)</span> 字节的字符（其中 <span class="math inline">\(n &gt; 1\)</span>），将首个字节的高 <span class="math inline">\(n\)</span> 位都设置为 1、第 <span class="math inline">\(n+1\)</span> 位设置为 0 ；从第二个字节开始，将每个字节的高 2 位都设置为 10 ；其余所有位用于填充字符的 Unicode 码点。</strong></p></li>
+<li><p>10能够起到校验符的作用，之所以<strong><u>将 10 当作校验符，是因为在 UTF-8 编码规则下，不可能有字符的最高两位是 10 。</u></strong>这个结论可以用反证法来证明：假设一个字符的最高两位是 10 ，说明该字符的长度为 1 ，对应 ASCII 码。而 ASCII 码的最高位应该是 0 ，与假设矛盾。</p></li>
+<li><p><strong>UTF-16 编码</strong>：使用 2 或 4 个字节来表示一个字符。所有的 ASCII 字符和常用的非英文字符，都用 2 个字节表示；少数字符需要用到 4 个字节表示。对于 2 字节的字符，UTF-16 编码与 Unicode 码点相等。</p></li>
+<li><p><strong>UTF-32 编码</strong>：每个字符都使用 4 个字节。这意味着 UTF-32 会比 UTF-8 和 UTF-16 更占用空间，特别是对于 ASCII 字符占比较高的文本。</p>
+<p>hello算法的utf-8编码数据如下：</p></li>
+</ul>
+<p><img src="https://s2.loli.net/2023/10/15/HhjGn32MxUbpaBm.png" srcset="/img/loading.gif" /></p>
+<h3 id="编程语言的字符编码">编程语言的字符编码</h3>
+<p>问：字符串在编程语言中的存储方式是怎样的？</p>
+<p>答：对于以往的大多数编程语言，<strong><u>程序运行中的字符串都采用 UTF-16 或 UTF-32 这类等长的编码。</u></strong></p>
+<p>在等长编码下，我们可以将字符串看作数组来处理，这种做法具有以下优点。</p>
+<ul>
+<li><strong>随机访问</strong>: 由于每个部分等长，UTF-16 编码的字符串可以很容易地进行随机访问，时间复杂度为 <span class="math inline">\(O(1)\)</span>。UTF-8 是一种变长编码，要找到第 <span class="math inline">\(i\)</span> 个字符，我们需要从字符串的开始处遍历到第 <span class="math inline">\(i\)</span> 个字符，这需要 <span class="math inline">\(O(n)\)</span> 的时间。</li>
+<li><strong>字符计数</strong>: 与随机访问类似，计算 UTF-16 字符串的长度也是 <span class="math inline">\(O(1)\)</span> 的操作。但是，计算 UTF-8 编码的字符串的长度需要遍历整个字符串。</li>
+<li><strong>字符串操作</strong>: 在 UTF-16 编码的字符串中，很多字符串操作（如分割、连接、插入、删除等）都更容易进行。在 UTF-8 编码的字符串上进行这些操作通常需要额外的计算，以确保不会产生无效的 UTF-8 编码。</li>
+</ul>
+<p>实际上，编程语言的字符编码方案设计是一个很有趣的话题，其涉及到许多因素。</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">编程语言</th>
+<th style="text-align: left;">默认字符编码方案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Java</td>
+<td style="text-align: left;">Java 的 <code>String</code> 类型使用 UTF-16 编码，每个字符占用 2 字节。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">JavaScript/TypeScript</td>
+<td style="text-align: left;">JavaScript 和 TypeScript 的字符串使用 UTF-16 编码的原因与 Java 类似。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C#</td>
+<td style="text-align: left;">C# 使用 UTF-16 编码，主要因为 .NET 平台是由 Microsoft 设计的，而 Microsoft 使用 UTF-16 编码。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Python</td>
+<td style="text-align: left;">Python 中的 <code>str</code> 使用 Unicode 编码，并采用一种灵活的字符串表示，存储的字符长度取决于字符串中最大的 Unicode 码点。举个例子，若字符串中全部是 ASCII 字符，则每个字符占用 1 个字节；如果有字符超出了 ASCII 范围，但全部在基本多语言平面（BMP）内，则每个字符占用 2 个字节；如果有超出 BMP 的字符，则每个字符占用 4 个字节。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Go</td>
+<td style="text-align: left;">Go 语言的 <code>string</code> 类型在内部使用 UTF-8 编码。Go 语言还提供了 <code>rune</code> 类型，它用于表示单个 Unicode 码点。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Rust</td>
+<td style="text-align: left;">Rust 语言的 str 和 String 类型在内部使用 UTF-8 编码。Rust 也提供了 <code>char</code> 类型，用于表示单个 Unicode 码点。</td>
+</tr>
+</tbody>
+</table>
+<p>由于Java等使用UTF-16编码，低估来字符数量，它们不得不采取 “<strong><u>代理对（一对 16 位的值）</u></strong>” 的方式来表示超过 16 位长度的 Unicode 字符。使用代理对存在如下缺点：</p>
+<ul>
+<li>一方面，包含代理对的字符串中，一个字符可能占用 2 字节或 4 字节，从而丧失了等长编码的优势。</li>
+<li>另一方面，处理代理对需要增加额外代码，这增加了编程的复杂性和 Debug 难度。</li>
+</ul>
+<p>以上讨论的都是字符串在编程语言中的存储方式，<strong>这和字符串如何在文件中存储或在网络中传输是两个不同的问题</strong>。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/hello-algorithm/">hello algorithm</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/15/fomula-render-bug-fixed/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Fix the bug that latex formula does not render in hexo-fluid</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/14/hello-algorithm-chapter2-space-complexity/">
+                        <span class="hidden-mobile">hello algorithm chapter 2  / space complexity</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2023/10/14/hello-algorithm-chapter3-data-structure/';
+        this.page.identifier = '/2023/10/14/hello-algorithm-chapter3-data-structure/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+
+</body>
+</html>

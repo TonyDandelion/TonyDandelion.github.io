@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      232 字
+      236 字
     </span>
   
 
@@ -263,14 +263,17 @@
 <p>适用平台</p>
 </blockquote>
 <p><strong>ubuntu18.04</strong></p>
-<hr>
-<h1 id="配置目录"><a href="#配置目录" class="headerlink" title="配置目录"></a>配置目录</h1><p><code>sites-available/</code> 下保留原始配置文件xxx</p>
+<hr />
+<h1 id="配置目录">配置目录</h1>
+<p><code>sites-available/</code> 下保留原始配置文件xxx</p>
 <p><code>sites-enabled/</code> 下建立xxx的链接文件，使得xxx生效。</p>
-<hr>
-<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>重加载nginx配置<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nginx -s reload<br></code></pre></div></td></tr></table></figure><br>查看服务状态<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl status nginx<br></code></pre></div></td></tr></table></figure><br>重启服务<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl restart nginx<br>sudo /etc/init.d/nginx restart<br></code></pre></div></td></tr></table></figure><br>开启服务<br><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start nginx<br>sudo /etc/init.d/nginx start<br></code></pre></div></td></tr></table></figure><br>关闭服务</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl stop nginx<br>sudo /etc/init.d/nginx stop<br></code></pre></div></td></tr></table></figure></h2><h1 id="多域名"><a href="#多域名" class="headerlink" title="多域名"></a>多域名</h1><p>一台服务器同时监听多个域名的访问，导向不同静态资源。</p>
-<p><code>sites-available/</code>目录下 <code>vim xxx</code>，写入以下内容。<br><figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>        <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>        <span class="hljs-attribute">server_name</span> coding4.art;<br>        <span class="hljs-comment"># listen [::]:80;</span><br><br>        <span class="hljs-attribute">root</span> /root/hexo_app/public;<br>        <span class="hljs-attribute">index</span> index.html index.htm index.nginx-debian.html;<br><br>        <span class="hljs-attribute">location</span> / &#123;<br>                <span class="hljs-attribute">try_files</span> $uri $uri/ =<span class="hljs-number">404</span>;<br>        &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure></p>
-
+<hr />
+<h1 id="常用命令">常用命令</h1>
+<p>重加载nginx配置 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nginx -s reload<br></code></pre></div></td></tr></table></figure> 查看服务状态 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl status nginx<br></code></pre></div></td></tr></table></figure> 重启服务 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl restart nginx<br>sudo /etc/init.d/nginx restart<br></code></pre></div></td></tr></table></figure> 开启服务 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl start nginx<br>sudo /etc/init.d/nginx start<br></code></pre></div></td></tr></table></figure> 关闭服务 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl stop nginx<br>sudo /etc/init.d/nginx stop<br></code></pre></div></td></tr></table></figure> ---</p>
+<h1 id="多域名">多域名</h1>
+<p>一台服务器同时监听多个域名的访问，导向不同静态资源。</p>
+<p><code>sites-available/</code>目录下 <code>vim xxx</code>，写入以下内容。 <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>        <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>        <span class="hljs-attribute">server_name</span> coding4.art;<br>        <span class="hljs-comment"># listen [::]:80;</span><br><br>        <span class="hljs-attribute">root</span> /root/hexo_app/public;<br>        <span class="hljs-attribute">index</span> index.html index.htm index.nginx-debian.html;<br><br>        <span class="hljs-attribute">location</span> / &#123;<br>                <span class="hljs-attribute">try_files</span> $uri $uri/ =<span class="hljs-number">404</span>;<br>        &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -514,6 +517,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

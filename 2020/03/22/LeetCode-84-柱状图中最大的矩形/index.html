@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,44 +251,61 @@
             <h1 style="display: none">LeetCode 84. 柱状图中最大的矩形</h1>
             
             <div class="markdown-body">
-              <p>和 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/container-with-most-water/">11. 盛最多水的容器</a> 类似，使用栈记录遍历的下标，计算最大面积。<br>关键是清楚计算触发的位置在<strong>局部峰值</strong>处。<br>只要当前的数字大于后面的一个数字，那么当前数字就看作一个局部峰值，跟前面的数字大小无关。</p>
+              <p>和 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/container-with-most-water/">11. 盛最多水的容器</a> 类似，使用栈记录遍历的下标，计算最大面积。<br />
+关键是清楚计算触发的位置在<strong>局部峰值</strong>处。<br />
+只要当前的数字大于后面的一个数字，那么当前数字就看作一个局部峰值，跟前面的数字大小无关。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。<br>求在该柱状图中，能够勾勒出来的矩形的最大面积。  </p>
-<p><img src="https://i.loli.net/2020/03/21/YVS6lydRxL3hP5D.png" srcset="/img/loading.gif" alt=""></p>
+<h1 id="题目">题目</h1>
+<p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。<br />
+求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
+<p><img src="https://i.loli.net/2020/03/21/YVS6lydRxL3hP5D.png" srcset="/img/loading.gif" /></p>
 <p>以上是柱状图的示例，其中每个柱子的宽度为 1，给定的高度为 <code>[2, 1, 5, 6, 2, 3]</code>。</p>
-<p><img src="https://i.loli.net/2020/03/21/yfoHvJprCg98atS.png" srcset="/img/loading.gif" alt=""></p>
-<p>图中阴影部分为所能勾勒出的最大矩形面积，其面积为 10 个单位。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例:</strong></p>
+<p><img src="https://i.loli.net/2020/03/21/yfoHvJprCg98atS.png" srcset="/img/loading.gif" /></p>
+<p>图中阴影部分为所能勾勒出的最大矩形面积，其面积为 10 个单位。</p>
+<h1 id="示例">示例</h1>
+<p><strong>示例:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br>输出: <span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>栈、数组、单调栈</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、基于局部峰值的方法（贪心算法）</strong><br>一个很好的优化方法，就是遍历数组，每找到一个<strong>局部峰值（只要当前的数字大于后面的一个数字，那么当前数字就看作一个局部峰值，跟前面的数字大小无关）</strong>，然后向前遍历所有的值，算出共同的矩形面积，每次对比保留最大值。这里再说下为啥要从局部峰值处理，看题目中的例子，局部峰值为 2(2&gt;1)，6(6&gt;2)，3(3&gt;2)，我们只需在这些局部峰值出进行处理，为啥不用在非局部峰值处统计呢，这是因为<strong>非局部峰值处的情况，后面的局部峰值都可以包括，比如1和5，由于局部峰值6是高于1和5的，所有1和5能组成的矩形，到6这里都能组成，并且还可以加上6本身的一部分组成更大的矩形，那么就不用费力气去再统计一个1和5处能组成的矩形了。</strong>  </p>
-<p><strong>方法二、基单调于栈的方法</strong>  </p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>栈、数组、单调栈</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>方法一、基于局部峰值的方法（贪心算法）</strong><br />
+一个很好的优化方法，就是遍历数组，每找到一个<strong>局部峰值（只要当前的数字大于后面的一个数字，那么当前数字就看作一个局部峰值，跟前面的数字大小无关）</strong>，然后向前遍历所有的值，算出共同的矩形面积，每次对比保留最大值。这里再说下为啥要从局部峰值处理，看题目中的例子，局部峰值为 2(2&gt;1)，6(6&gt;2)，3(3&gt;2)，我们只需在这些局部峰值出进行处理，为啥不用在非局部峰值处统计呢，这是因为<strong>非局部峰值处的情况，后面的局部峰值都可以包括，比如1和5，由于局部峰值6是高于1和5的，所有1和5能组成的矩形，到6这里都能组成，并且还可以加上6本身的一部分组成更大的矩形，那么就不用费力气去再统计一个1和5处能组成的矩形了。</strong></p>
+<p><strong>方法二、基单调于栈的方法</strong></p>
 <p><em>什么是单调栈？</em></p>
-<p>单调栈分为单调递增栈和单调递减栈<br>1、单调递增栈即栈内元素保持单调递增的栈<br>2、同理单调递减栈即栈内元素保持单调递减的栈</p>
-<p>操作规则（下面都以单调递增栈为例）<br>1、如果新的元素比栈顶元素大，就入栈。<br>2、如果新的元素较小，那就一直把栈内元素弹出来，直到栈顶比新元素小</p>
-<p>加入这样一个规则之后，会有什么效果<br>1、栈内的元素是递增的<br>2、当元素出栈时，说明这个新元素是出栈元素向后找第一个比其小的元素</p>
+<p>单调栈分为单调递增栈和单调递减栈 1、单调递增栈即栈内元素保持单调递增的栈 2、同理单调递减栈即栈内元素保持单调递减的栈</p>
+<p>操作规则（下面都以单调递增栈为例） 1、如果新的元素比栈顶元素大，就入栈。 2、如果新的元素较小，那就一直把栈内元素弹出来，直到栈顶比新元素小</p>
+<p>加入这样一个规则之后，会有什么效果 1、栈内的元素是递增的 2、当元素出栈时，说明这个新元素是出栈元素向后找第一个比其小的元素</p>
 <p><em>本题思路</em></p>
-<p>维护一个栈，用来保存递增序列，相当于上面那种方法的找局部峰值。<br>我们可以看到，直方图矩形面积要最大的话，需要尽可能的使得连续的矩形多，并且最低一块的高度要高。<br>那么既然需要用<strong>单调栈</strong>来做，首先要考虑到底用<strong>递增栈（栈内的元素，从栈底到栈顶，依次增大）</strong>，还是用<strong>递减栈（栈内的元素，从栈底到栈顶，依次减小）</strong>来做。<br>递增栈是维护递增的顺序，当遇到小于栈顶元素的数就开始处理，而递减栈正好相反，维护递减的顺序，当遇到大于栈顶元素的数开始处理。<br>那么根据这道题的特点，我们需要按从高板子到低板子的顺序处理，先处理最高的板子，宽度为1，然后再处理旁边矮一些的板子，此时长度为2，因为之前的高板子可组成矮板子的矩形 ，因此我们需要一个<strong>递增栈，当遇到大的数字直接进栈，而当遇到小于栈顶元素的数字时，就要取出栈顶元素进行处理了，那取出的顺序就是从高板子到矮板子了（且栈是从栈顶取数字，所以越到栈顶，数字越大才能保证取出顺序是从大到小，因此栈内从栈底到栈顶，数字依次递增，所以该栈是一个递增栈</strong>），也就是说，<strong>遇到的较小的数字才触发，需要开始计算矩形面积了</strong><br>为了使得最后一块板子也被处理，这里用了个小 trick，在高度数组 <code>heights</code> 最后面加上一个0，这样原先的最后一个板子也可以被处理了。<br>由于栈顶元素是矩形的高度，那么关键就是求出来宽度，那么跟之前那道 Trapping Rain Water 一样，<strong>单调栈中不能放高度，而是需要放坐标。</strong><br>由于我们先取出栈中最高的板子，那么就可以先算出长度为1的矩形面积了，然后再取下一个板子，此时根据矮板子的高度算长度为2的矩形面积，以此类推，<strong>直到数字大于栈顶元素为止，再次进栈，巧妙的一比。</strong>  </p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/84-by-ikaruga/">力扣（LeetCode）ikaruga</a><br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<p>维护一个栈，用来保存递增序列，相当于上面那种方法的找局部峰值。<br />
+我们可以看到，直方图矩形面积要最大的话，需要尽可能的使得连续的矩形多，并且最低一块的高度要高。<br />
+那么既然需要用<strong>单调栈</strong>来做，首先要考虑到底用<strong>递增栈（栈内的元素，从栈底到栈顶，依次增大）</strong>，还是用<strong>递减栈（栈内的元素，从栈底到栈顶，依次减小）</strong>来做。<br />
+递增栈是维护递增的顺序，当遇到小于栈顶元素的数就开始处理，而递减栈正好相反，维护递减的顺序，当遇到大于栈顶元素的数开始处理。<br />
+那么根据这道题的特点，我们需要按从高板子到低板子的顺序处理，先处理最高的板子，宽度为1，然后再处理旁边矮一些的板子，此时长度为2，因为之前的高板子可组成矮板子的矩形 ，因此我们需要一个<strong>递增栈，当遇到大的数字直接进栈，而当遇到小于栈顶元素的数字时，就要取出栈顶元素进行处理了，那取出的顺序就是从高板子到矮板子了（且栈是从栈顶取数字，所以越到栈顶，数字越大才能保证取出顺序是从大到小，因此栈内从栈底到栈顶，数字依次递增，所以该栈是一个递增栈</strong>），也就是说，<strong>遇到的较小的数字才触发，需要开始计算矩形面积了</strong><br />
+为了使得最后一块板子也被处理，这里用了个小 trick，在高度数组 <code>heights</code> 最后面加上一个0，这样原先的最后一个板子也可以被处理了。<br />
+由于栈顶元素是矩形的高度，那么关键就是求出来宽度，那么跟之前那道 Trapping Rain Water 一样，<strong>单调栈中不能放高度，而是需要放坐标。</strong><br />
+由于我们先取出栈中最高的板子，那么就可以先算出长度为1的矩形面积了，然后再取下一个板子，此时根据矮板子的高度算长度为2的矩形面积，以此类推，<strong>直到数字大于栈顶元素为止，再次进栈，巧妙的一比。</strong></p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/84-by-ikaruga/">力扣（LeetCode）ikaruga</a> 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="python版本">Python版本</h1>
+<ul>
 <li>方法一的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">largestRectangleArea</span>(<span class="hljs-params">self, heights: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        res = <span class="hljs-number">0</span><br>        i = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> i &lt; <span class="hljs-built_in">len</span>(heights):<br>            <span class="hljs-keyword">if</span> i + <span class="hljs-number">1</span> &lt; <span class="hljs-built_in">len</span>(heights) <span class="hljs-keyword">and</span> heights[i] &lt;= heights[i+<span class="hljs-number">1</span>]:<br>                i += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 局部峰值</span><br>                minH = heights[i]<br>                j = i  <span class="hljs-comment"># 设置 j = i 从局部峰值出现的地方往前推导计算area，知道第一个条块。</span><br>                <span class="hljs-keyword">while</span> j &gt;= <span class="hljs-number">0</span>:<br>                    minH = <span class="hljs-built_in">min</span>(minH, heights[j])<br>                    area = minH * (i - j + <span class="hljs-number">1</span>)<br>                    res = <span class="hljs-built_in">max</span>(res, area)<br>                    j -= <span class="hljs-number">1</span><br>                i += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> res<br><br><br>Input = [[<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]]<br>Answer = [<span class="hljs-number">10</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.largestRectangleArea(Input[i])<br>        print(reslut == Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(n^2)$， 需要枚举所有可能的柱子对。<br><br>空间复杂度：$O(1)$，不需要额外的空间。<br></p>
+<p>时间复杂度：<span class="math inline">\(O(n^2)\)</span>， 需要枚举所有可能的柱子对。<br> 空间复杂度：<span class="math inline">\(O(1)\)</span>，不需要额外的空间。<br></p>
 <ul>
 <li>方法二的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">largestRectangleArea</span>(<span class="hljs-params">self, heights: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        res = <span class="hljs-number">0</span><br>        st = []<br>        heights.append(<span class="hljs-number">0</span>)<br>        i = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> i &lt; <span class="hljs-built_in">len</span>(heights):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(st) <span class="hljs-keyword">or</span> heights[st[-<span class="hljs-number">1</span>]] &lt; heights[i]:  <span class="hljs-comment"># 当遇到更高的条块时就入栈</span><br>                st.append(i)<br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># heights[st[-1]] &gt;= heights[i]，否则就是遇到了下降，也就是局部峰值后面的那个条块。</span><br>                cur = st.pop()  <span class="hljs-comment"># 弹出栈顶，也就是局部峰值那个条块的下标。</span><br>                width = i <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(st) <span class="hljs-keyword">else</span> (i - st[-<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>)<br>                res = <span class="hljs-built_in">max</span>(res, heights[cur] * width)<br>                i -= <span class="hljs-number">1</span>  <span class="hljs-comment"># 这个减一很关键，将i回退到了局部峰值的位置，下一次遍历i又会变到局部峰值后面的那个条块对应的那个下标。</span><br>            i += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(n)$。 $n$ 个数字每个会被压栈弹栈各一次。<br><br>空间复杂度： $O(n)$。用来存放栈中元素。<br></p>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span>。 <span class="math inline">\(n\)</span> 个数字每个会被压栈弹栈各一次。<br> 空间复杂度： <span class="math inline">\(O(n)\)</span>。用来存放栈中元素。<br></p>
 <blockquote>
-<p>参考链接  </p>
+<p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4322653.html">Grandyang</a>  </p>
-<h1 id="C-版本"><a href="#C-版本" class="headerlink" title="C++版本"></a>C++版本</h1><ul>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4322653.html">Grandyang</a></p>
+<h1 id="c版本">C++版本</h1>
+<ul>
 <li>方法二的实现</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br>    <span class="hljs-keyword">public</span>:<br>        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; heights)</span> </span>&#123;<br>            <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;<br>            <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-built_in">stack</span>;<br>            heights.insert(heights.begin(), <span class="hljs-number">0</span>);  <span class="hljs-comment">// heights.appedn(0) 在 heights 的末尾加入 0 作为初始值</span><br>            heights.push_back(<span class="hljs-number">0</span>);<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; heights.size(); i++)&#123;<br>                <span class="hljs-keyword">while</span>(!<span class="hljs-built_in">stack</span>.empty() &amp;&amp; heights[<span class="hljs-built_in">stack</span>.back()] &gt; heights[i])&#123;  <span class="hljs-comment">// heights[st[-1]] &gt; heights[i]，否则就是遇到了下降，也就是局部峰值后面的那个条块。</span><br>                    <span class="hljs-keyword">int</span> cur = <span class="hljs-built_in">stack</span>.back();  <span class="hljs-comment">// 弹出栈顶，也就是局部峰值那个条块的下标。</span><br>                    <span class="hljs-built_in">stack</span>.pop_back();<br>                    <span class="hljs-keyword">int</span> left = <span class="hljs-built_in">stack</span>.back() + <span class="hljs-number">1</span>;<br>                    <span class="hljs-keyword">int</span> right = i - <span class="hljs-number">1</span>;<br>                    res = max(res, (right - left + <span class="hljs-number">1</span>) * heights[cur]);<br>                &#125;<br>                <span class="hljs-comment">// 当遇到更高的条块时就入栈</span><br>                <span class="hljs-built_in">stack</span>.push_back(i);<br>            &#125;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    Solution solve;<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; input = &#123;<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;;<br>    <span class="hljs-built_in">cout</span> &lt;&lt; solve.largestRectangleArea(input) &lt;&lt; <span class="hljs-built_in">endl</span>;<br>    system(<span class="hljs-string">&quot;pause&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -534,6 +551,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

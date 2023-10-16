@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,40 +251,63 @@
             <h1 style="display: none">LeetCode 88. 合并两个有序数组（易）</h1>
             
             <div class="markdown-body">
-              <p>这道题不但可以从前往后双指针遍历，还可以从后往前三指针遍历，实现了空间复杂度为$O(1)$，时间复杂度为$O(m+n)$。  </p>
+              <p>这道题不但可以从前往后双指针遍历，还可以从后往前三指针遍历，实现了空间复杂度为<span class="math inline">\(O(1)\)</span>，时间复杂度为<span class="math inline">\(O(m+n)\)</span>。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 num1 成为一个有序数组。  </p>
-<p>说明:<br>初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。<br>你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例:</p>
+<h1 id="题目">题目</h1>
+<p>给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 num1 成为一个有序数组。</p>
+<p>说明:<br />
+初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。<br />
+你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。</p>
+<h1 id="示例">示例</h1>
+<p>示例:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入:<br>nums1 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], m = <span class="hljs-number">3</span><br>nums2 = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],       n = <span class="hljs-number">3</span><br><br>输出: [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]<br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>数组、双指针</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、合并加排序</strong><br><em>直觉</em>：先将 <code>nums1</code> 和 <code>nums2</code> 合并，然后再对其进行排序。  </p>
-<p><strong>方法二、双指针（从前往后）</strong>  </p>
-<p><em>常数空间复杂度</em><br><code>i</code> 指针指向 <code>nums1</code> 中应该插入的位置，<code>j</code>指针指向 <code>nums2</code> 中等待插入的位置，每次插入之前先回退。  </p>
-<p><em>m级别空间复杂度</em><br>将 <code>nums1</code> 复制一份 <code>nums1_copy</code>，遍历 <code>nums1_copy</code> 和 <code>nums2</code>，每次插入即可，不用回退。 </p>
-<p><strong>方法三、双指针（从前后往前）<font color="green"> 此方法最好 时间复杂度和空间复杂度都最小</font></strong>  </p>
-<p><img src="https://i.loli.net/2020/03/23/jKMxGtiRYCBuVEe.png" srcset="/img/loading.gif" alt="791f88a8618cae4a78f15a2d2b16f94414930c813df663207c2a37b4621ea763-image.png"></p>
-<p><img src="https://i.loli.net/2020/03/23/Hy2X5GPJSfa9iTO.png" srcset="/img/loading.gif" alt="bac9fc86e104b5fa65f144e0604e0f4ffe4585efac12c1942b618be1c70363ca-image.png"></p>
-<p><img src="https://i.loli.net/2020/03/23/3sBju4HE6X27Npc.png" srcset="/img/loading.gif" alt="c1ab224d0cf26c76320168efde66951bedd2d02ae89b8942e97121acf04fa36b-image.png"></p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
+<h1 id="考察知识点">考察知识点</h1>
+<p>数组、双指针</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>方法一、合并加排序</strong><br />
+<em>直觉</em>：先将 <code>nums1</code> 和 <code>nums2</code> 合并，然后再对其进行排序。</p>
+<p><strong>方法二、双指针（从前往后）</strong></p>
+<p><em>常数空间复杂度</em><br />
+<code>i</code> 指针指向 <code>nums1</code> 中应该插入的位置，<code>j</code>指针指向 <code>nums2</code> 中等待插入的位置，每次插入之前先回退。</p>
+<p><em>m级别空间复杂度</em><br />
+将 <code>nums1</code> 复制一份 <code>nums1_copy</code>，遍历 <code>nums1_copy</code> 和 <code>nums2</code>，每次插入即可，不用回退。</p>
+<p><strong>方法三、双指针（从前后往前）<font color="green"> 此方法最好 时间复杂度和空间复杂度都最小</font></strong></p>
+<figure>
+<img src="https://i.loli.net/2020/03/23/jKMxGtiRYCBuVEe.png" srcset="/img/loading.gif" alt="791f88a8618cae4a78f15a2d2b16f94414930c813df663207c2a37b4621ea763-image.png" /><figcaption aria-hidden="true">791f88a8618cae4a78f15a2d2b16f94414930c813df663207c2a37b4621ea763-image.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2020/03/23/Hy2X5GPJSfa9iTO.png" srcset="/img/loading.gif" alt="bac9fc86e104b5fa65f144e0604e0f4ffe4585efac12c1942b618be1c70363ca-image.png" /><figcaption aria-hidden="true">bac9fc86e104b5fa65f144e0604e0f4ffe4585efac12c1942b618be1c70363ca-image.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2020/03/23/3sBju4HE6X27Npc.png" srcset="/img/loading.gif" alt="c1ab224d0cf26c76320168efde66951bedd2d02ae89b8942e97121acf04fa36b-image.png" /><figcaption aria-hidden="true">c1ab224d0cf26c76320168efde66951bedd2d02ae89b8942e97121acf04fa36b-image.png</figcaption>
+</figure>
+<h1 id="python版本">Python版本</h1>
+<ul>
 <li>方法一的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge</span>(<span class="hljs-params">self, nums1: List[<span class="hljs-built_in">int</span>], m: <span class="hljs-built_in">int</span>, nums2: List[<span class="hljs-built_in">int</span>], n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-keyword">None</span>:</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Do not return anything, modify nums1 in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        nums1[m:] = nums2<br>        nums1.sort()<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 : $O((n + m)\log(n + m))$。<br>空间复杂度 : $O(1)$。<br>执行用时 :36 ms, 在所有 Python3 提交中击败了84.18%的用户<br>内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.05%的用户  </p>
+<p>时间复杂度 : <span class="math inline">\(O((n + m)\log(n + m))\)</span>。<br />
+空间复杂度 : <span class="math inline">\(O(1)\)</span>。<br />
+执行用时 :36 ms, 在所有 Python3 提交中击败了84.18%的用户<br />
+内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.05%的用户</p>
 <ul>
 <li>方法二双指针（从前往后）的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge</span>(<span class="hljs-params">self, nums1: List[<span class="hljs-built_in">int</span>], m: <span class="hljs-built_in">int</span>, nums2: List[<span class="hljs-built_in">int</span>], n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-keyword">None</span>:</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Do not return anything, modify nums1 in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">goBack</span>(<span class="hljs-params">index</span>):</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums1) - <span class="hljs-number">1</span>, index, -<span class="hljs-number">1</span>):<br>                nums1[i] = nums1[i-<span class="hljs-number">1</span>]<br><br>        <span class="hljs-comment"># if m == 0:  return nums2  # nums1为空 这是一个原地算法，所以不能返回，只能修改nums1</span><br>        <span class="hljs-keyword">if</span> m == <span class="hljs-number">0</span>:  <br>            nums1[:] = nums2[:]<br>            <span class="hljs-keyword">return</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> m != <span class="hljs-number">0</span>:<br>            nums1 = nums1[:m+<span class="hljs-number">1</span>]  <span class="hljs-comment"># nums2为空</span><br>            <span class="hljs-keyword">return</span><br>        <span class="hljs-keyword">if</span> m == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> m == <span class="hljs-number">0</span>:<br>            nums1 = []<br>            <span class="hljs-keyword">return</span><br>        i = j = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> m &lt; <span class="hljs-built_in">len</span>(nums1):<br>            <span class="hljs-keyword">if</span> nums1[i] &lt; nums2[j]:<br>                <span class="hljs-keyword">while</span> nums1[i] &lt; nums2[j] <span class="hljs-keyword">and</span> i &lt; m:<br>                    i += <span class="hljs-number">1</span><br>            goBack(i)<br>            nums1[i] = nums2[j]<br>            i += <span class="hljs-number">1</span><br>            j += <span class="hljs-number">1</span><br>            m += <span class="hljs-number">1</span>  <span class="hljs-comment"># 每插入一个数 m就要加一</span><br><br>Input = [[<span class="hljs-number">2</span>,<span class="hljs-number">0</span>], [<span class="hljs-number">0</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]]<br>Input1 = [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>]<br>Input2 = [[<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>], [], [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]]<br>Input3 = [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>]<br>Answer = [[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]]<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)): <br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        solution.merge(Input[i], Input1[i], Input2[i], Input3[i])<br>        print(Input[i] == Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 :  $O(n! + m)$，goback()函数挺费时间的。<br>空间复杂度 : $O(1)$，仅使用了 <code>i</code> 和 <code>j</code> 这两个指针，也就是常数空间。  </p>
-<p><strong>另一个双指针版本，使用了$O(n)$的额外空间。</strong></p>
+<p>时间复杂度 : <span class="math inline">\(O(n! + m)\)</span>，goback()函数挺费时间的。<br />
+空间复杂度 : <span class="math inline">\(O(1)\)</span>，仅使用了 <code>i</code> 和 <code>j</code> 这两个指针，也就是常数空间。</p>
+<p><strong>另一个双指针版本，使用了<span class="math inline">\(O(n)\)</span>的额外空间。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge</span>(<span class="hljs-params">self, nums1, m, nums2, n</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type nums1: List[int]</span><br><span class="hljs-string">        :type m: int</span><br><span class="hljs-string">        :type nums2: List[int]</span><br><span class="hljs-string">        :type n: int</span><br><span class="hljs-string">        :rtype: void Do not return anything, modify nums1 in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># Make a copy of nums1.</span><br>        nums1_copy = nums1[:m] <br>        nums1[:] = []<br><br>        <span class="hljs-comment"># Two get pointers for nums1_copy and nums2.</span><br>        p1 = <span class="hljs-number">0</span> <br>        p2 = <span class="hljs-number">0</span><br>        <br>        <span class="hljs-comment"># Compare elements from nums1_copy and nums2</span><br>        <span class="hljs-comment"># and add the smallest one into nums1.</span><br>        <span class="hljs-keyword">while</span> p1 &lt; m <span class="hljs-keyword">and</span> p2 &lt; n: <br>            <span class="hljs-keyword">if</span> nums1_copy[p1] &lt; nums2[p2]: <br>                nums1.append(nums1_copy[p1])<br>                p1 += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                nums1.append(nums2[p2])<br>                p2 += <span class="hljs-number">1</span><br><br>        <span class="hljs-comment"># if there are still elements to add</span><br>        <span class="hljs-keyword">if</span> p1 &lt; m: <br>            nums1[p1 + p2:] = nums1_copy[p1:]<br>        <span class="hljs-keyword">if</span> p2 &lt; n:<br>            nums1[p1 + p2:] = nums2[p2:]<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 : $O(n + m)$。<br>空间复杂度 : $O(m)$。  </p>
+<p>时间复杂度 : <span class="math inline">\(O(n + m)\)</span>。<br />
+空间复杂度 : <span class="math inline">\(O(m)\)</span>。</p>
 <ul>
 <li>方法三双指针（从后往前）的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge</span>(<span class="hljs-params">self, nums1, m, nums2, n</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        :type nums1: List[int]</span><br><span class="hljs-string">        :type m: int</span><br><span class="hljs-string">        :type nums2: List[int]</span><br><span class="hljs-string">        :type n: int</span><br><span class="hljs-string">        :rtype: void Do not return anything, modify nums1 in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># two get pointers for nums1 and nums2</span><br>        p1 = m - <span class="hljs-number">1</span><br>        p2 = n - <span class="hljs-number">1</span><br>        <span class="hljs-comment"># set pointer for nums1</span><br>        p = m + n - <span class="hljs-number">1</span><br>        <br>        <span class="hljs-comment"># while there are still elements to compare</span><br>        <span class="hljs-keyword">while</span> p1 &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> p2 &gt;= <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">if</span> nums1[p1] &lt; nums2[p2]:<br>                nums1[p] = nums2[p2]<br>                p2 -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                nums1[p] =  nums1[p1]<br>                p1 -= <span class="hljs-number">1</span><br>            p -= <span class="hljs-number">1</span><br>        <br>        <span class="hljs-comment"># add missing elements from nums2</span><br>        nums1[:p2 + <span class="hljs-number">1</span>] = nums2[:p2 + <span class="hljs-number">1</span>]<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 : $O(n + m)$。<br>空间复杂度 : $O(1)$ 。  </p>
-<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><p>1、Python在全局修改一个可变对象的方法</p>
+<p>时间复杂度 : <span class="math inline">\(O(n + m)\)</span>。<br />
+空间复杂度 : <span class="math inline">\(O(1)\)</span> 。</p>
+<h1 id="有效语法糖">有效语法糖</h1>
+<p>1、Python在全局修改一个可变对象的方法</p>
 <p>错误的修改方法1</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span>(<span class="hljs-params">self, nums1, nums2</span>):</span><br>        nums1 = nums2<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    nums1 = [<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, <span class="hljs-number">50</span>, <span class="hljs-number">36</span>, <span class="hljs-number">99</span>]<br>    nums2 = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>] <br>    su = Solution()<br>    su.test(nums1, nums2)<br>    print(nums1)<br><br><span class="hljs-comment"># Output</span><br>[<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, <span class="hljs-number">50</span>, <span class="hljs-number">36</span>, <span class="hljs-number">99</span>]<br></code></pre></div></td></tr></table></figure>
 <p>错误的修改方法2</p>
@@ -295,7 +318,7 @@
 <p>参考链接</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-sorted-array/solution/he-bing-liang-ge-you-xu-shu-zu-by-leetcode/">LeetCode官方题解</a></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -539,6 +562,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

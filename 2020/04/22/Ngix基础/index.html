@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -254,26 +254,39 @@
               <p>转载一篇介绍Ngix基础的博客</p>
 <a id="more"></a>
 <p><em>转载链接</em></p>
-<p>作者：大婶N72<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/01be3a5bc5b3">https://www.jianshu.com/p/01be3a5bc5b3</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>作者：大婶N72 链接：https://www.jianshu.com/p/01be3a5bc5b3 来源：简书 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <p>图片如果失效，请参看原文。</p>
 <p>【Nginx是什么】</p>
 <p>Nginx是开源的、高性能的HTTP服务器和反向代理服务器；</p>
 <p>Nginx可以为反向代理进行负载均衡；</p>
 <p>Nginx基于事件架构驱动，模块化、跨平台。</p>
-<h1 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h1><p>举个简单例子，公司的私人电脑不允许访问外网，如果想访问外网只能走测试服务器，那私人电脑想访问外网怎么办？可以设置正向代理，即在浏览器中设置代理服务器(测试服务器)，通过代理服务器代理访问外网。出发点是使用者主动去配置代理服务器。 正向向代理最大的特点是客户端非常明确要访问的服务器地址；服务器只清楚请求来自哪个代理服务器，而不清楚来自哪个具体的客户端；正向代理模式屏蔽或者隐藏了真实客户端信息，结构如下图所示</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2134179-f72fabba2d888d02.png?imageMogr2/auto-orient/strip|imageView2/2/w/594/format/webp" srcset="/img/loading.gif" alt="img"></p>
-<h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><p>举个简单例子，在tomcat中发布一个war包，我们可以直接访问这个tomcat，也可以通过一个代理服务器，由代理服务器去访问tomcat，而这个过程并不需要浏览器知道代理服务器，而是通过反向代理来实现。出发点是客户端不知道有代理服务器，代理服务器代理的是服务端。这个过程隐藏了真正处理业务的服务端信息。结构如下图所示：</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2134179-43fc54d447657a8d.png?imageMogr2/auto-orient/strip|imageView2/2/w/573/format/webp" srcset="/img/loading.gif" alt="img"></p>
-<h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><p>所谓负载均衡，就是将接受到的请求按照某种规则分摊到其他server上，达到减少单台server压力的作用。结构如下图所示</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2134179-4cc71621b117e0e1.png?imageMogr2/auto-orient/strip|imageView2/2/w/555/format/webp" srcset="/img/loading.gif" alt="img"></p>
-<h1 id="负载均衡常用调度算法"><a href="#负载均衡常用调度算法" class="headerlink" title="负载均衡常用调度算法"></a>负载均衡常用调度算法</h1><p>(1). 轮训(默认)：即请求按照顺序逐一分配到服务器，这种方式可以给服务器设置权重（weight），用于跳转请求的分配率，权重越大，被分配到请求的几率越大；<br> (2). ip_hash： 每个请求按照发起客户端的 ip 的 hash 结果进行匹配，这样的算法下一个固定 ip 地址的客户端总会访问到同一个后端服务器，这也在一定程度上解决了集群部署环境下 Session 共享的问题；<br> (3). fair：智能调整调度算法，动态的根据后端服务器的请求处理到响应的时间进行均衡分配。响应时间短处理效率高的服务器分配到请求的概率高，响应时间长处理效率低的服务器分配到的请求少，它是结合了前两者的优点的一种调度算法。但是需要注意的是 Nginx 默认不支持 fair 算法，如果要使用这种调度算法，请安装 upstream_fair 模块。</p>
-<h1 id="反向代理配置"><a href="#反向代理配置" class="headerlink" title="反向代理配置"></a>反向代理配置</h1><p> (1). 访问域名如何使其正确运行在指定的端口server上，结构如下图所示：</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/2134179-ca42fd84cfa8dd77.png?imageMogr2/auto-orient/strip|imageView2/2/w/922/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<h1 id="正向代理">正向代理</h1>
+<p>举个简单例子，公司的私人电脑不允许访问外网，如果想访问外网只能走测试服务器，那私人电脑想访问外网怎么办？可以设置正向代理，即在浏览器中设置代理服务器(测试服务器)，通过代理服务器代理访问外网。出发点是使用者主动去配置代理服务器。 正向向代理最大的特点是客户端非常明确要访问的服务器地址；服务器只清楚请求来自哪个代理服务器，而不清楚来自哪个具体的客户端；正向代理模式屏蔽或者隐藏了真实客户端信息，结构如下图所示</p>
+<figure>
+<img src="https:////upload-images.jianshu.io/upload_images/2134179-f72fabba2d888d02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/594/format/webp" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h1 id="反向代理">反向代理</h1>
+<p>举个简单例子，在tomcat中发布一个war包，我们可以直接访问这个tomcat，也可以通过一个代理服务器，由代理服务器去访问tomcat，而这个过程并不需要浏览器知道代理服务器，而是通过反向代理来实现。出发点是客户端不知道有代理服务器，代理服务器代理的是服务端。这个过程隐藏了真正处理业务的服务端信息。结构如下图所示：</p>
+<figure>
+<img src="https:////upload-images.jianshu.io/upload_images/2134179-43fc54d447657a8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/573/format/webp" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h1 id="负载均衡">负载均衡</h1>
+<p>所谓负载均衡，就是将接受到的请求按照某种规则分摊到其他server上，达到减少单台server压力的作用。结构如下图所示</p>
+<figure>
+<img src="https:////upload-images.jianshu.io/upload_images/2134179-4cc71621b117e0e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/555/format/webp" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h1 id="负载均衡常用调度算法">负载均衡常用调度算法</h1>
+<p>(1). 轮训(默认)：即请求按照顺序逐一分配到服务器，这种方式可以给服务器设置权重（weight），用于跳转请求的分配率，权重越大，被分配到请求的几率越大； (2). ip_hash： 每个请求按照发起客户端的 ip 的 hash 结果进行匹配，这样的算法下一个固定 ip 地址的客户端总会访问到同一个后端服务器，这也在一定程度上解决了集群部署环境下 Session 共享的问题； (3). fair：智能调整调度算法，动态的根据后端服务器的请求处理到响应的时间进行均衡分配。响应时间短处理效率高的服务器分配到请求的概率高，响应时间长处理效率低的服务器分配到的请求少，它是结合了前两者的优点的一种调度算法。但是需要注意的是 Nginx 默认不支持 fair 算法，如果要使用这种调度算法，请安装 upstream_fair 模块。</p>
+<h1 id="反向代理配置">反向代理配置</h1>
+<p>(1). 访问域名如何使其正确运行在指定的端口server上，结构如下图所示：</p>
+<figure>
+<img src="https:////upload-images.jianshu.io/upload_images/2134179-ca42fd84cfa8dd77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/922/format/webp" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>域名到server</p>
-<p>(2).  上述测试使用Nginx进行反向代理HTTP请求实质有经过几个步骤。首先，访问<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.test.com">www.test.com</a>后，会进入hosts文件，寻到对应访问的IP地址（节省去了域名解析的时间）。而后请求变为127.0.0.1:80，而后借助Nginx中的代理配置，将请求代理到端口为8089的端口，即完成使用域名对127.0.0.1:8089的访问。</p>
-<p> (3). 具体nginx.conf的配置</p>
+<p>(2). 上述测试使用Nginx进行反向代理HTTP请求实质有经过几个步骤。首先，访问<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http%3A%2F%2Fwww.test.com">www.test.com</a>后，会进入hosts文件，寻到对应访问的IP地址（节省去了域名解析的时间）。而后请求变为127.0.0.1:80，而后借助Nginx中的代理配置，将请求代理到端口为8089的端口，即完成使用域名对127.0.0.1:8089的访问。</p>
+<p>(3). 具体nginx.conf的配置</p>
 <figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">worker_processes  <span class="hljs-number">1</span>;<br><br>events &#123;<br>   worker_connections  <span class="hljs-number">1024</span>;<br>&#125;<br><br>http &#123;<br>   include       mime.types;<br>   default_type  application/octet-stream;<br>   sendfile        <span class="hljs-keyword">on</span>;<br>   keepalive_timeout  <span class="hljs-number">65</span>;<br>   <span class="hljs-meta"># 设定实际的服务器列表</span><br>   upstream ac_server&#123;<br>       server <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">8089</span>;<br>   &#125;<br>   server &#123;<br>       listen       <span class="hljs-number">80</span>;<br>       server_name  www.test.com;<br>       location / &#123;<br>           root   html;<br>           index  index.html index.htm;<br>       &#125;<br>       error_page   <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span>  /<span class="hljs-number">50</span>x.html;<br>       location / &#123;<br>           proxy_pass http:<span class="hljs-comment">//ac_server;</span><br>       &#125;<br>   &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -517,6 +530,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

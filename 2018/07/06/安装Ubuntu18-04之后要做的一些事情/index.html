@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      19
        分钟
     </span>
   
@@ -253,9 +253,11 @@
             <div class="markdown-body">
               <p>快速上手Ubuntu18.04</p>
 <a id="more"></a>
-<h1 id="安装Chrome"><a href="#安装Chrome" class="headerlink" title="安装Chrome"></a>安装Chrome</h1><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/<br>wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -<br>sudo apt update<br>sudo apt install google-chrome-stable<br></code></pre></div></td></tr></table></figure>
+<h1 id="安装chrome">安装Chrome</h1>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/<br>wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -<br>sudo apt update<br>sudo apt install google-chrome-stable<br></code></pre></div></td></tr></table></figure>
 <p>打开浏览器</p>
-<h1 id="安装网易云音乐"><a href="#安装网易云音乐" class="headerlink" title="安装网易云音乐"></a>安装网易云音乐</h1><p>从官网下载最新的网易云音乐，然后安装，如果发现必须用命令行以root权限在命令行才能打开网易云音乐的话，记得删除，安装之前的版本。<br>Ubuntu 卸载 网易云音乐，查询软件包是否存在。</p>
+<h1 id="安装网易云音乐">安装网易云音乐</h1>
+<p>从官网下载最新的网易云音乐，然后安装，如果发现必须用命令行以root权限在命令行才能打开网易云音乐的话，记得删除，安装之前的版本。 Ubuntu 卸载 网易云音乐，查询软件包是否存在。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">dpkg -l | grep netease-cloud-music<br></code></pre></div></td></tr></table></figure>
 <p>卸载</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get remove netease-cloud-music<br></code></pre></div></td></tr></table></figure>
@@ -266,57 +268,50 @@
 <p>安装失败记得补全，这条命令慎用 有可能删错数据，要慎用。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get install -f  <br></code></pre></div></td></tr></table></figure>
 <p>安装旧版本的网易云音乐</p>
-<p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1E9eBXC129wFXM69fVvmE6w">https://pan.baidu.com/s/1E9eBXC129wFXM69fVvmE6w</a> 密码: pvtb</p>
-<h1 id="美化桌面"><a href="#美化桌面" class="headerlink" title="美化桌面"></a>美化桌面</h1><p>要安装主题，首先要先安装相应的工具：TweakTool</p>
+<p>链接: https://pan.baidu.com/s/1E9eBXC129wFXM69fVvmE6w 密码: pvtb</p>
+<h1 id="美化桌面">美化桌面</h1>
+<p>要安装主题，首先要先安装相应的工具：TweakTool</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get update<br>sudo apt-get install gnome-tweak-tool<br></code></pre></div></td></tr></table></figure>
 <p>执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get install gnome-shell-extensions<br></code></pre></div></td></tr></table></figure>
 <p>再执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get install chrome-gnome-shell 。<br></code></pre></div></td></tr></table></figure>
 <p>这样一来，就能通过Chrome添加TweakTool插件了</p>
-<p>Gnome-shell extensions(Gnome-shell 扩展，也可以说成Gnome extensions，以下简称GSE)是每个美化Gnome桌面童鞋的必经之路。它是可以安装在Gnome之上的第三方附件组件和插件，简单的理解，它类似谷歌、火狐等一些浏览器的插件。有了GSE，你可以非常轻便的制定你的Gnome桌面。 </p>
-<p>GSE的的安装有三种方式[1]，这里主要介绍web浏览器安装的方式，这也是最常用的方式：<br>所需要的web浏览器必须是能够支持附件组件的浏览器，如chrome、firfox、opera等，用此浏览器打开<a target="_blank" rel="noopener" href="https://extensions.gnome.org/">https://extensions.gnome.org/</a> (这是一个GSE下载网站，里面有各种各样的插件)。打开，按照提醒点击链接为当前浏览器安装扩展，之后，你会发现你的浏览器多出了一个插件。</p>
+<p>Gnome-shell extensions(Gnome-shell 扩展，也可以说成Gnome extensions，以下简称GSE)是每个美化Gnome桌面童鞋的必经之路。它是可以安装在Gnome之上的第三方附件组件和插件，简单的理解，它类似谷歌、火狐等一些浏览器的插件。有了GSE，你可以非常轻便的制定你的Gnome桌面。</p>
+<p>GSE的的安装有三种方式[1]，这里主要介绍web浏览器安装的方式，这也是最常用的方式： 所需要的web浏览器必须是能够支持附件组件的浏览器，如chrome、firfox、opera等，用此浏览器打开https://extensions.gnome.org/ (这是一个GSE下载网站，里面有各种各样的插件)。打开，按照提醒点击链接为当前浏览器安装扩展，之后，你会发现你的浏览器多出了一个插件。</p>
 <p>链接中的documentation是告诉你要为系统安装chrome-gnome-shell (虽然有chrome，但与chrome没有关系)，如果你是Ubuntu，请执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt install chrome-gnome-shell <br></code></pre></div></td></tr></table></figure>
-<p>之后，你就可以根据需要找到相应的Gnome-shell扩展，如下图所示，只需要点击类似开关的按钮即可自动安装。<br>安装之后，你需要在gnome-tweak-tool（优化）工具中的扩展栏进行扩展插件的管理。<br>这四个插件是必装的：</p>
-<ol>
-<li>User Themes: 作用是从用户目录加载主题。通俗的说就是，正常的主题包下载后，要放置在user/share/themes 下，这是多用户共同使用的主题，而且系统重装后将失去该主题，而User Themes扩展能允许你把主题包放置在自己家目录.local/share/themes(themes文件夹是自己新建的)下，并使其生效。</li>
-<li>Dash to Dock : 作用是制定Dock和Dash，Dock就是类似windows系统的任务栏的东东，而Dash就是搜索的东东。你也可以用Dash to Panel 这个扩展</li>
-<li>Gnome Global Application Menu ：作用看下图，将一个应用窗口的菜单项放置在了桌面顶部栏中。 </li>
-<li>TopIcons Plus : 起到了任务栏的作用,一些程序的图标会显示出来</li>
-</ol>
-<p>下载Mac OS主题和icon，放在~/.icon和~/.theme两个文件夹下面，下载连接如下：</p>
-<p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1aI0eyML6C1jzj8fUyYBzeg">https://pan.baidu.com/s/1aI0eyML6C1jzj8fUyYBzeg</a> 密码: 45ta</p>
+<p>之后，你就可以根据需要找到相应的Gnome-shell扩展，如下图所示，只需要点击类似开关的按钮即可自动安装。 安装之后，你需要在gnome-tweak-tool（优化）工具中的扩展栏进行扩展插件的管理。 这四个插件是必装的： 1. User Themes: 作用是从用户目录加载主题。通俗的说就是，正常的主题包下载后，要放置在user/share/themes 下，这是多用户共同使用的主题，而且系统重装后将失去该主题，而User Themes扩展能允许你把主题包放置在自己家目录.local/share/themes(themes文件夹是自己新建的)下，并使其生效。 2. Dash to Dock : 作用是制定Dock和Dash，Dock就是类似windows系统的任务栏的东东，而Dash就是搜索的东东。你也可以用Dash to Panel 这个扩展 3. Gnome Global Application Menu ：作用看下图，将一个应用窗口的菜单项放置在了桌面顶部栏中。 4. TopIcons Plus : 起到了任务栏的作用,一些程序的图标会显示出来</p>
+<p>下载Mac OS主题和icon，放在<sub>/.icon和</sub>/.theme两个文件夹下面，下载连接如下：</p>
+<p>链接: https://pan.baidu.com/s/1aI0eyML6C1jzj8fUyYBzeg 密码: 45ta</p>
 <p><em>参考连接</em></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jasonzhoujx/article/details/80400245">https://blog.csdn.net/jasonzhoujx/article/details/80400245</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zyqblog/article/details/80152016">https://blog.csdn.net/zyqblog/article/details/80152016</a></p>
-<h1 id="美化命令行"><a href="#美化命令行" class="headerlink" title="美化命令行"></a>美化命令行</h1><p>使用ZSH作为命令行</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/czg13548930186/article/details/72858289">https://blog.csdn.net/czg13548930186/article/details/72858289</a><br><a target="_blank" rel="noopener" href="http://blog.51cto.com/13589319/2120571">http://blog.51cto.com/13589319/2120571</a></p>
+<p>https://blog.csdn.net/jasonzhoujx/article/details/80400245 https://blog.csdn.net/zyqblog/article/details/80152016</p>
+<h1 id="美化命令行">美化命令行</h1>
+<p>使用ZSH作为命令行</p>
+<p>https://blog.csdn.net/czg13548930186/article/details/72858289 http://blog.51cto.com/13589319/2120571</p>
 <p>如何修改终端的字体和背景等设置选项？</p>
-<ol>
+<ol type="1">
 <li>在命令行的空白处点击鼠标右键</li>
 <li>选择配置文件首选项</li>
 <li>然后勾选文本选项中的Custom</li>
 </ol>
-<h1 id="修改ubuntu18-04自带的智能输入法的备选字体大小"><a href="#修改ubuntu18-04自带的智能输入法的备选字体大小" class="headerlink" title="修改ubuntu18.04自带的智能输入法的备选字体大小"></a>修改ubuntu18.04自带的智能输入法的备选字体大小</h1><p>2018.4.26刚刚发布的Ubuntu18.04LTS desktop版本，系统使用的ibus-libpinyin输入法，其候选字体过小，在显示器分辨率日益提高的情况下，使用感到不方便，特别对弱视者和老年人，更感到吃力。本文介绍了解决方法。</p>
-<p>方法/步骤：</p>
-<ol>
-<li>原来ibus框架的拼音输入法，候选字的大小，可以在终端命令’’ibus-setup’’后调节。但是18.04版本，这个方法无效了。</li>
-<li>我们可以在“软件中心”里，搜索“ibus”,随后安装“ibus font setting”. 有时候输入ib也行，输入ibus不一定能找到。</li>
-<li>点击“扩展设置”，再点击右侧部分，调节字体大小，并“选择”。</li>
-<li>好了，候选字体大小称心如意了。</li>
-</ol>
-<h1 id="安装截图工具"><a href="#安装截图工具" class="headerlink" title="安装截图工具"></a>安装截图工具</h1><p>安装很简单，<code>sudo apt-get install flameshot</code>。<br>然后设置一个快捷键，设置&gt;设备&gt;键盘，设置一个自定义快捷键（拉到最下面）命令填写：flameshot gui<br>截完图后保存Ctrl+S，复制到剪贴板 Ctrl+C<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dunitian/p/6670560.html#img">https://www.cnblogs.com/dunitian/p/6670560.html#img</a></p>
-<h1 id="修改登陆页面的背景图片"><a href="#修改登陆页面的背景图片" class="headerlink" title="修改登陆页面的背景图片"></a>修改登陆页面的背景图片</h1><ol>
+<h1 id="修改ubuntu18.04自带的智能输入法的备选字体大小">修改ubuntu18.04自带的智能输入法的备选字体大小</h1>
+<p>2018.4.26刚刚发布的Ubuntu18.04LTS desktop版本，系统使用的ibus-libpinyin输入法，其候选字体过小，在显示器分辨率日益提高的情况下，使用感到不方便，特别对弱视者和老年人，更感到吃力。本文介绍了解决方法。</p>
+<p>方法/步骤： 1. 原来ibus框架的拼音输入法，候选字的大小，可以在终端命令''ibus-setup''后调节。但是18.04版本，这个方法无效了。 2. 我们可以在“软件中心”里，搜索“ibus”,随后安装“ibus font setting”. 有时候输入ib也行，输入ibus不一定能找到。 3. 点击“扩展设置”，再点击右侧部分，调节字体大小，并“选择”。 4. 好了，候选字体大小称心如意了。</p>
+<h1 id="安装截图工具">安装截图工具</h1>
+<p>安装很简单，<code>sudo apt-get install flameshot</code>。 然后设置一个快捷键，设置&gt;设备&gt;键盘，设置一个自定义快捷键（拉到最下面）命令填写：flameshot gui 截完图后保存Ctrl+S，复制到剪贴板 Ctrl+C https://www.cnblogs.com/dunitian/p/6670560.html#img</p>
+<h1 id="修改登陆页面的背景图片">修改登陆页面的背景图片</h1>
+<ol type="1">
 <li>先找一张你自己喜欢的图片，一般大小为1920*1080，格式为jpg或者png都行。</li>
-<li>假设我现在用的图片是mypicture.jpg , 将它移动到/usr/share/backgrounds/目录下<br>sudo mv currentdir/mypicture.jpg  /usr/share/backgrounds/。</li>
+<li>假设我现在用的图片是mypicture.jpg , 将它移动到/usr/share/backgrounds/目录下 sudo mv currentdir/mypicture.jpg /usr/share/backgrounds/。</li>
 <li>Ubuntu现在用的Gnome的桌面，和以前Unity时候的配置文件不一样，所以在网上找的16.04的教程是用不了的，18.04登录背景相关的配置是用css的：/etc/alternatives/gdm3.css/。</li>
-<li>修改这个文件sudo gedit /etc/alternatives/gdm3.css，在修改之前最好备份一个以免改错了好恢复。编辑配置这个文件，找到默认的这个部分：<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-id">#lockDialogGroup</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#2c001e</span> <span class="hljs-built_in">url</span>(<span class="hljs-string">resource:///org/gnome/shell/theme/noise-texture.png</span>);<br>  <span class="hljs-attribute">background-repeat</span>: repeat; <br>&#125;<br><span class="hljs-comment">/*改为*/</span><br><span class="hljs-selector-id">#lockDialogGroup</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#2c001e</span> <span class="hljs-built_in">url</span>(<span class="hljs-string">file:///usr/share/backgrounds/mypicture.jpg</span>);         <br>  <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>  <span class="hljs-attribute">background-size</span>: cover;<br>  <span class="hljs-attribute">background-position</span>: center; <br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<li>修改这个文件sudo gedit /etc/alternatives/gdm3.css，在修改之前最好备份一个以免改错了好恢复。编辑配置这个文件，找到默认的这个部分： <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-id">#lockDialogGroup</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#2c001e</span> <span class="hljs-built_in">url</span>(<span class="hljs-string">resource:///org/gnome/shell/theme/noise-texture.png</span>);<br>  <span class="hljs-attribute">background-repeat</span>: repeat; <br>&#125;<br><span class="hljs-comment">/*改为*/</span><br><span class="hljs-selector-id">#lockDialogGroup</span> &#123;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#2c001e</span> <span class="hljs-built_in">url</span>(<span class="hljs-string">file:///usr/share/backgrounds/mypicture.jpg</span>);         <br>  <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>  <span class="hljs-attribute">background-size</span>: cover;<br>  <span class="hljs-attribute">background-position</span>: center; <br>&#125;<br></code></pre></div></td></tr></table></figure></li>
 <li>这个文件就是css，所以如果你对css熟练的话应该可以做出很好看的效果。我之前改的时候没有加最后那两行css，背景就被分为四块乱的。</li>
 <li>保存并重启.</li>
 </ol>
 <p><em>参考连接</em></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36285997/article/details/80403620">https://blog.csdn.net/qq_36285997/article/details/80403620</a></p>
-
+<p>https://blog.csdn.net/qq_36285997/article/details/80403620</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -553,6 +548,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

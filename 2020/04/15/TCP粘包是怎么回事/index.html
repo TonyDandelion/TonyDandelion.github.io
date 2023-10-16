@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      990 字
+      989 字
     </span>
   
 
@@ -253,34 +253,39 @@
             <div class="markdown-body">
               <p>都说粘包拆包的凶手是TCP？</p>
 <a id="more"></a>
-<h1 id="粘包拆包的凶手是TCP吗"><a href="#粘包拆包的凶手是TCP吗" class="headerlink" title="粘包拆包的凶手是TCP吗"></a>粘包拆包的凶手是TCP吗</h1><blockquote>
+<h1 id="粘包拆包的凶手是tcp吗">粘包拆包的凶手是TCP吗</h1>
+<blockquote>
 <p>传输控制协议（<em>TCP</em>，Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层通信协议，由IETF的RFC 793定义。</p>
 </blockquote>
 <p>出现所谓的 “粘包”，是应用层协议没有处理好数据包分割导致的。“粘包”和“拆包”其实是应用程序中没有处理好数据包分割，两个的数据包粘在一块或者一个数据包被分开。但是，T TCP本身是面向字节流的，以字节为单位，没有包这个概念。TCP会把你的数据变成字节流发到对面去，而且保证顺序不会乱，但是你要自己搞定字节流解析。解决好“发送方应该以什么格式发送数据，接收方能正确解析出数据“，就解决了“粘包”，这实际上是应用层协议的设计。</p>
-<h1 id="案发现场复现"><a href="#案发现场复现" class="headerlink" title="案发现场复现"></a>案发现场复现</h1><p><img src="https://i.loli.net/2020/04/15/PJew8kvaDjm6qFR.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-15_12-02-49.png" style="zoom: 80%;" /></p>
+<h1 id="案发现场复现">案发现场复现</h1>
+<p><img src="https://i.loli.net/2020/04/15/PJew8kvaDjm6qFR.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-15_12-02-49.png" style="zoom: 80%;" /></p>
 <p><strong>第一种情况：</strong>如上图中的第一根<strong>bar</strong>所示，<strong>服务端一共读到两个数据包</strong>，每个数据包都是完成的，<strong>并没有发生粘包的问题</strong>，这种情况比较好处理，服务器只需要<strong>简单的从网络缓冲区去读就好了</strong>，每次服务端读取到的消息都是完成的，并不会出现数据不正确的情况。</p>
 <p><strong>第二种情况：服务端仅收到一个数据包</strong>，这个数据包包含客户端发出的两条消息的完整信息，这个时候基于第一种情况的逻辑实现的服务端就蒙了，因为服务端并不能很好的处理这个数据包，甚至不能处理，这种情况其实就是<strong>TCP粘包</strong>问题。</p>
 <p><strong>第三种情况：服务端收到了两个数据包</strong>，第一个数据包只包含了第一条消息的一部分，第一条消息的后半部分和第二条消息都在第二个数据包中，或者是第一个数据包包含了第一条消息的完整信息和第二条消息的一部分信息，第二个数据包包含了第二条消息的剩下部分，这种情况其实是发送了<strong>TCP拆包</strong>问题，因为发生了一条消息被拆分在两个包里面发送了，同样上面的服务器逻辑对于这种情况是不好处理的。</p>
-<h1 id="作案动机"><a href="#作案动机" class="headerlink" title="作案动机"></a>作案动机</h1><p><strong>粘包</strong></p>
-<ol>
+<h1 id="作案动机">作案动机</h1>
+<p><strong>粘包</strong></p>
+<ol type="1">
 <li>应用程序写入的数据小于套接字缓冲区大小，网卡将应用多次写入的数据发送到网络上，这将会发生粘包。</li>
 <li>接收方法不及时读取套接字缓冲区数据，这将发生粘包。</li>
 </ol>
 <p><strong>拆包</strong></p>
-<ol>
+<ol type="1">
 <li>应用程序写入的数据大于套接字缓冲区大小，这将会发生拆包。</li>
 <li>进行<strong>MSS</strong>（单个报文最大长度）大小的TCP分段，当 <code>TCP报文长度-TCP头部长度&gt;MSS</code> 的时候将发生拆包。</li>
 </ol>
-<h1 id="预防犯罪"><a href="#预防犯罪" class="headerlink" title="预防犯罪"></a>预防犯罪</h1><ol>
+<h1 id="预防犯罪">预防犯罪</h1>
+<ol type="1">
 <li>使用带消息头的协议、<strong>消息头存储消息开始标识及消息长度信息，服务端获取消息头的时候解析出消息长度，</strong>然后向后读取该长度的内容。</li>
 <li>设置<strong>定长消息</strong>，服务端<strong>每次读取既定长度的内容作为一条完整消息</strong>，当消息不够长时，空位补上固定字符。</li>
-<li>设置<strong>消息边界</strong>，服务端从网络流中<strong>按消息边界分离出消息内容</strong>，一般使用‘\n’。</li>
+<li>设置<strong>消息边界</strong>，服务端从网络流中<strong>按消息边界分离出消息内容</strong>，一般使用‘’。</li>
 </ol>
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>作者：李晓峰<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20210025/answer/1096399109">https://www.zhihu.com/question/20210025/answer/1096399109</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="参考链接">参考链接</h1>
+<p>作者：李晓峰 链接：https://www.zhihu.com/question/20210025/answer/1096399109 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/40279395">TCP 粘包问题浅析及其解决方案</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5oDim8z_xJhMKhHR9w-V3A">TCP粘包，难道说这是一个伪命题？？？</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/90057929">TCP 粘包问题浅析及其解决方案</a></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -517,6 +522,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

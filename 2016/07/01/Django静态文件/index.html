@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      385 字
+      386 字
     </span>
   
 
@@ -253,9 +253,13 @@
             <div class="markdown-body">
               <p>Django项目中静态文件的处理</p>
 <a id="more"></a>
-<h1 id="文件夹管理"><a href="#文件夹管理" class="headerlink" title="文件夹管理"></a>文件夹管理</h1><p>在manage.py这一层次，新建多个common_static和common_templates两个文件夹，将公用的文件放到这两个文件夹里面。</p>
-<h1 id="setting-py修改"><a href="#setting-py修改" class="headerlink" title="setting.py修改"></a>setting.py修改</h1><figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala">TEMPLATES = [<br>    &#123;<br>        <span class="hljs-string">&#x27;BACKEND&#x27;</span>: <span class="hljs-string">&#x27;django.template.backends.django.DjangoTemplates&#x27;</span>,<br>        <span class="hljs-string">&#x27;DIRS&#x27;</span>: [<br>            os.path.join(BASE_DIR, <span class="hljs-string">&#x27;common_templates&#x27;</span>),<br>        ],<br>        <span class="hljs-string">&#x27;APP_DIRS&#x27;</span>: True,<br>        <span class="hljs-string">&#x27;OPTIONS&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;context_processors&#x27;</span>: [<br>                <span class="hljs-string">&#x27;django.template.context_processors.debug&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.template.context_processors.request&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.contrib.auth.context_processors.auth&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.contrib.messages.context_processors.messages&#x27;</span>,<br>            ],<br>        &#125;,<br>    &#125;,<br>]<br><br><br><span class="hljs-meta"># Static files (CSS, JavaScript, Images)</span><br><span class="hljs-meta"># https://docs.djangoproject.com/en/1.8/howto/static-files/</span><br> <br>STATIC_URL = <span class="hljs-string">&#x27;/static/&#x27;</span><br> <br><span class="hljs-meta"># 当运行 python manage.py collectstatic 的时候</span><br><span class="hljs-meta"># STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来</span><br><span class="hljs-meta"># 把这些文件放到一起是为了用apache等部署的时候更方便</span><br>STATIC_ROOT = os.path.join(BASE_DIR, <span class="hljs-string">&#x27;collected_static&#x27;</span>)<br> <br><span class="hljs-meta"># 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT</span><br><span class="hljs-meta"># 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以</span><br>STATICFILES_DIRS = (<br>    os.path.join(BASE_DIR, <span class="hljs-string">&quot;common_static&quot;</span>),<br>    <span class="hljs-string">&#x27;/path/to/others/static/&#x27;</span>,  # 用不到的时候可以不写这一行<br>)<br> <br><span class="hljs-meta"># 这个是默认设置，Django 默认会在 STATICFILES_DIRS中的文件夹 和 各app下的static文件夹中找文件</span><br><span class="hljs-meta"># 注意有先后顺序，找到了就不再继续找了</span><br>STATICFILES_FINDERS = (<br>    <span class="hljs-string">&quot;django.contrib.staticfiles.finders.FileSystemFinder&quot;</span>,<br>    <span class="hljs-string">&quot;django.contrib.staticfiles.finders.AppDirectoriesFinder&quot;</span><br>)<br></code></pre></div></td></tr></table></figure>
-<h1 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h1><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">&lt;script <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;/static/js/jquery-1.12.1.min.js&quot;</span>&gt;&lt;/script&gt;<br><br>&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;/static/timg.jpg&quot;</span> <span class="hljs-attribute">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;<br><br></code></pre></div></td></tr></table></figure>
+<h1 id="文件夹管理">文件夹管理</h1>
+<p>在manage.py这一层次，新建多个common_static和common_templates两个文件夹，将公用的文件放到这两个文件夹里面。</p>
+<h1 id="setting.py修改">setting.py修改</h1>
+<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala">TEMPLATES = [<br>    &#123;<br>        <span class="hljs-string">&#x27;BACKEND&#x27;</span>: <span class="hljs-string">&#x27;django.template.backends.django.DjangoTemplates&#x27;</span>,<br>        <span class="hljs-string">&#x27;DIRS&#x27;</span>: [<br>            os.path.join(BASE_DIR, <span class="hljs-string">&#x27;common_templates&#x27;</span>),<br>        ],<br>        <span class="hljs-string">&#x27;APP_DIRS&#x27;</span>: True,<br>        <span class="hljs-string">&#x27;OPTIONS&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;context_processors&#x27;</span>: [<br>                <span class="hljs-string">&#x27;django.template.context_processors.debug&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.template.context_processors.request&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.contrib.auth.context_processors.auth&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.contrib.messages.context_processors.messages&#x27;</span>,<br>            ],<br>        &#125;,<br>    &#125;,<br>]<br><br><br><span class="hljs-meta"># Static files (CSS, JavaScript, Images)</span><br><span class="hljs-meta"># https://docs.djangoproject.com/en/1.8/howto/static-files/</span><br> <br>STATIC_URL = <span class="hljs-string">&#x27;/static/&#x27;</span><br> <br><span class="hljs-meta"># 当运行 python manage.py collectstatic 的时候</span><br><span class="hljs-meta"># STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来</span><br><span class="hljs-meta"># 把这些文件放到一起是为了用apache等部署的时候更方便</span><br>STATIC_ROOT = os.path.join(BASE_DIR, <span class="hljs-string">&#x27;collected_static&#x27;</span>)<br> <br><span class="hljs-meta"># 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT</span><br><span class="hljs-meta"># 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以</span><br>STATICFILES_DIRS = (<br>    os.path.join(BASE_DIR, <span class="hljs-string">&quot;common_static&quot;</span>),<br>    <span class="hljs-string">&#x27;/path/to/others/static/&#x27;</span>,  # 用不到的时候可以不写这一行<br>)<br> <br><span class="hljs-meta"># 这个是默认设置，Django 默认会在 STATICFILES_DIRS中的文件夹 和 各app下的static文件夹中找文件</span><br><span class="hljs-meta"># 注意有先后顺序，找到了就不再继续找了</span><br>STATICFILES_FINDERS = (<br>    <span class="hljs-string">&quot;django.contrib.staticfiles.finders.FileSystemFinder&quot;</span>,<br>    <span class="hljs-string">&quot;django.contrib.staticfiles.finders.AppDirectoriesFinder&quot;</span><br>)<br></code></pre></div></td></tr></table></figure>
+<h1 id="调用">调用</h1>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">&lt;script <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;/static/js/jquery-1.12.1.min.js&quot;</span>&gt;&lt;/script&gt;<br><br>&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;/static/timg.jpg&quot;</span> <span class="hljs-attribute">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;<br><br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -499,6 +503,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

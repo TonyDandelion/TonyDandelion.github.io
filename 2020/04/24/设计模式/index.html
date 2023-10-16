@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -254,18 +254,23 @@
               <p><img src="https://i.loli.net/2020/04/25/LuaRZIWTA4VPMBN.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-25_11-57-55.png" style="zoom: 80%;" /></p>
 <p>设计模式是解决问题的方案，学习现有的设计模式可以做到经验复用。<strong>使用设计模式可以在各种情况下解耦你的代码，让你的代码在运行时可以互相组合。</strong>拥有设计模式词汇，在沟通时就能用更少的词汇来讨论，并且不需要了解底层细节。</p>
 <a id="more"></a>
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/">图说设计模式</a><br><a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/设计模式%20-%20目录.md">CyC2018教程</a>（面试常考）<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31675841">Python系列干货之——Python与设计模式</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57869247">python 23种常用模式设计总结</a><br><a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-tutorial.html">除了23种常见的模式以外，还有一些如MVC这样的模式</a>（面试常考）</p>
-<h1 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h1><p>创建型设计模式的意思是从实例对象生成的角度去解耦，根据实际需求，以更合理的创建对象。</p>
-<p><strong>单例模式</strong>：创建一个同一时刻只能实例化一次的类，只要这个类的资源没有被释放，无法在被实例化。确保对象的唯一性。<br><strong>工厂模式</strong>：分简单工厂和抽象工厂，简单工厂是在创建一个对象时不向客户暴露内部细节，并提供<strong>一个</strong>创建对象的通用接口。而抽象工厂则是提供一个接口，用于创建相关的对象家族。<br><strong>建造者模式</strong>：封装一个对象的构造过程，并允许按步骤构造。也可以理解为，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。<br><strong>原型模式</strong>：使用原型实例指定要创建对象的类型，通过复制这个原型来创建新对象。</p>
-<h2 id="单例模式（Singleton）"><a href="#单例模式（Singleton）" class="headerlink" title="单例模式（Singleton）"></a>单例模式（Singleton）</h2><blockquote>
+<h1 id="参考链接">参考链接</h1>
+<p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/">图说设计模式</a> <a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/设计模式%20-%20目录.md">CyC2018教程</a>（面试常考） <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31675841">Python系列干货之——Python与设计模式</a> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57869247">python 23种常用模式设计总结</a> <a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-tutorial.html">除了23种常见的模式以外，还有一些如MVC这样的模式</a>（面试常考）</p>
+<h1 id="创建型">创建型</h1>
+<p>创建型设计模式的意思是从实例对象生成的角度去解耦，根据实际需求，以更合理的创建对象。</p>
+<p><strong>单例模式</strong>：创建一个同一时刻只能实例化一次的类，只要这个类的资源没有被释放，无法在被实例化。确保对象的唯一性。 <strong>工厂模式</strong>：分简单工厂和抽象工厂，简单工厂是在创建一个对象时不向客户暴露内部细节，并提供<strong>一个</strong>创建对象的通用接口。而抽象工厂则是提供一个接口，用于创建相关的对象家族。 <strong>建造者模式</strong>：封装一个对象的构造过程，并允许按步骤构造。也可以理解为，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 <strong>原型模式</strong>：使用原型实例指定要创建对象的类型，通过复制这个原型来创建新对象。</p>
+<h2 id="单例模式singleton">单例模式（Singleton）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>确保一个类只有一个实例，并提供该实例的全局访问点。</p>
-<p><img src="https://i.loli.net/2020/04/25/i2qe8GY3Z6lgSIz.png" srcset="/img/loading.gif" alt="Singleton.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/25/i2qe8GY3Z6lgSIz.png" srcset="/img/loading.gif" alt="Singleton.png" /><figcaption aria-hidden="true">Singleton.png</figcaption>
+</figure>
 <blockquote>
 <p>Example 举例</p>
 </blockquote>
-<p>总线是计算机各种功能部件或者设备之间传送数据、控制信号等信息的公共通信解决方案之一。现假设有如下场景：某中央处理器（CPU）通过某种协议总线与一个信号灯相连，信号灯有64种颜色可以设置，中央处理器上运行着三个线程，都可以对这个信号灯进行控制，并且可以独立设置该信号灯的颜色。抽象掉协议细节（用打印表示），如何实现线程对信号等的控制逻辑。<br>加线程锁进行控制，无疑是最先想到的方法，但各个线程对锁的控制，无疑加大了模块之间的耦合。下面，我们就用设计模式中的单例模式，来解决这个问题。<br>具体到此例中，<strong>总线对象，就是一个单例，它仅有一个实例，各个线程对总线的访问只有一个全局访问点，即惟一的实例。</strong></p>
+<p>总线是计算机各种功能部件或者设备之间传送数据、控制信号等信息的公共通信解决方案之一。现假设有如下场景：某中央处理器（CPU）通过某种协议总线与一个信号灯相连，信号灯有64种颜色可以设置，中央处理器上运行着三个线程，都可以对这个信号灯进行控制，并且可以独立设置该信号灯的颜色。抽象掉协议细节（用打印表示），如何实现线程对信号等的控制逻辑。 加线程锁进行控制，无疑是最先想到的方法，但各个线程对锁的控制，无疑加大了模块之间的耦合。下面，我们就用设计模式中的单例模式，来解决这个问题。 具体到此例中，<strong>总线对象，就是一个单例，它仅有一个实例，各个线程对总线的访问只有一个全局访问点，即惟一的实例。</strong></p>
 <blockquote>
 <p>Code 代码</p>
 </blockquote>
@@ -275,16 +280,17 @@
 <blockquote>
 <p>单例模式的优点和应用</p>
 </blockquote>
-<p>单例模式的优点：<br>1、由于单例模式要求在全局内只有一个实例，因而可以<strong>节省比较多的内存空间</strong>；<br>2、全局只有一个接入点，<strong>可以更好地进行数据同步控制，避免多重占用</strong>；<br>3、单例可长驻内存，减少系统开销。</p>
-<p>单例模式的应用举例：<br>1、<strong>生成全局惟一的序列号</strong>；<br>2、访问<strong>全局复用的惟一资源</strong>，如磁盘、总线等；<br>3、单个对象占用的资源过多，如数据库等；<br>4、<strong>系统全局统一管理</strong>，如Windows下的Task Manager；<br>5、网站计数器。</p>
+<p>单例模式的优点： 1、由于单例模式要求在全局内只有一个实例，因而可以<strong>节省比较多的内存空间</strong>； 2、全局只有一个接入点，<strong>可以更好地进行数据同步控制，避免多重占用</strong>； 3、单例可长驻内存，减少系统开销。</p>
+<p>单例模式的应用举例： 1、<strong>生成全局惟一的序列号</strong>； 2、访问<strong>全局复用的惟一资源</strong>，如磁盘、总线等； 3、单个对象占用的资源过多，如数据库等； 4、<strong>系统全局统一管理</strong>，如Windows下的Task Manager； 5、网站计数器。</p>
 <blockquote>
 <p>单例模式的缺点</p>
 </blockquote>
-<p>1、单例模式的<strong>扩展是比较困难</strong>的；<br>2、赋于了<strong>单例以太多的职责</strong>，某种程度上违反单一职责原则（六大原则后面会讲到）;<br>3、单例模式是<strong>并发协作软件模块</strong>中需要最先完成的，因而其不利于测试；<br>4、单例模式在某种情况下会导致“<strong>资源瓶颈</strong>”。</p>
-<h2 id="工厂模式（Factory）"><a href="#工厂模式（Factory）" class="headerlink" title="工厂模式（Factory）"></a>工厂模式（Factory）</h2><blockquote>
+<p>1、单例模式的<strong>扩展是比较困难</strong>的； 2、赋于了<strong>单例以太多的职责</strong>，某种程度上违反单一职责原则（六大原则后面会讲到）; 3、单例模式是<strong>并发协作软件模块</strong>中需要最先完成的，因而其不利于测试； 4、单例模式在某种情况下会导致“<strong>资源瓶颈</strong>”。</p>
+<h2 id="工厂模式factory">工厂模式（Factory）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
-<p>抽象工厂：创建一系列相关或相互依赖抽象出来的的对象接口Interface，不需要具体指明实例化A类或B类<br>简单工厂：定义一个用于创建对象的接口函数Interface，让子类决定实例化哪一个类A或者B。<br>区别：简单工厂模式下一个工厂只负责生产一个类的实现。而抽象工厂则可以生成多种类的实现。</p>
+<p>抽象工厂：创建一系列相关或相互依赖抽象出来的的对象接口Interface，不需要具体指明实例化A类或B类 简单工厂：定义一个用于创建对象的接口函数Interface，让子类决定实例化哪一个类A或者B。 区别：简单工厂模式下一个工厂只负责生产一个类的实现。而抽象工厂则可以生成多种类的实现。</p>
 <p>简单工厂（接口方法实现）</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.word = <span class="hljs-string">&quot;运行A&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span>(<span class="hljs-params">self</span>):</span><br>        print(self.word)<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.word = <span class="hljs-string">&quot;运行B&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span>(<span class="hljs-params">self</span>):</span><br>        print(self.word)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Interface</span>(<span class="hljs-params">classname</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    工厂模式接口函数</span><br><span class="hljs-string">    :param classname:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    run = <span class="hljs-built_in">dict</span>(A=A, B=B)<br>    <span class="hljs-keyword">return</span> run[classname]()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    test1 = Interface(<span class="hljs-string">&#x27;A&#x27;</span>)  <span class="hljs-comment"># test1工厂只生成A</span><br>    test1.run()<br>    test2 = Interface(<span class="hljs-string">&#x27;B&#x27;</span>)  <span class="hljs-comment"># test2工厂只生成B</span><br>    test2.run()<br>    <br><span class="hljs-comment"># 结果</span><br>运行A<br>运行B<br></code></pre></div></td></tr></table></figure>
 <p>抽象工厂（接口方法实现）</p>
@@ -297,11 +303,13 @@
 <li>ConcreteFactory：具体工厂</li>
 </ul>
 <p>最终，由具体工厂（继承自抽象工厂）生产具体产品（继承自抽象产品）。</p>
-<p><img src="https://i.loli.net/2020/04/25/EFfCcsIH9SlOULz.png" srcset="/img/loading.gif" alt="factory.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/25/EFfCcsIH9SlOULz.png" srcset="/img/loading.gif" alt="factory.png" /><figcaption aria-hidden="true">factory.png</figcaption>
+</figure>
 <blockquote>
 <p>Example 举例</p>
 </blockquote>
-<p>想必大家一定见过类似于麦当劳自助点餐台一类的点餐系统吧。在一个大的触摸显示屏上，有三类可以选择的上餐品：汉堡等主餐、小食、饮料。当我们选择好自己需要的食物，支付完成后，订单就生成了。下面，我们用今天的主角—工厂模式—来生成这些食物的逻辑主体。</p>
+<p>想必大家一定见过类似于麦当劳自助点餐台一类的点餐系统吧。在一个大的触摸显示屏上，有三类可以选择的上餐品：汉堡等主餐、小食、饮料。当我们选择好自己需要的食物，支付完成后，订单就生成了。下面，我们用今天的主角--工厂模式--来生成这些食物的逻辑主体。</p>
 <blockquote>
 <p>Code 代码</p>
 </blockquote>
@@ -311,9 +319,9 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 抽象产品</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Snack</span>():</span><br>    name = <span class="hljs-string">&quot;&quot;</span><br>    price = <span class="hljs-number">0.0</span><br>    <span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;SNACK&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getPrice</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">return</span> self.price<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setPrice</span>(<span class="hljs-params">self, price</span>):</span><br>        self.price = price<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getName</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">return</span> self.name<br><br><span class="hljs-comment"># 具体产品</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">chips</span>(<span class="hljs-params">Snack</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.name = <span class="hljs-string">&quot;chips&quot;</span><br>        self.price = <span class="hljs-number">6.0</span><br><br><span class="hljs-comment"># 具体产品</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">chickenWings</span>(<span class="hljs-params">Snack</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.name = <span class="hljs-string">&quot;chicken wings&quot;</span><br>        self.price = <span class="hljs-number">12.0</span><br></code></pre></div></td></tr></table></figure>
 <p>最后，是饮料。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 抽象产品</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Beverage</span>():</span><br>    name = <span class="hljs-string">&quot;&quot;</span><br>    price = <span class="hljs-number">0.0</span><br>    <span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;BEVERAGE&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getPrice</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">return</span> self.price<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setPrice</span>(<span class="hljs-params">self, price</span>):</span><br>        self.price = price<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getName</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">return</span> self.name<br><br><span class="hljs-comment"># 具体产品</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">coke</span>(<span class="hljs-params">Beverage</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.name = <span class="hljs-string">&quot;coke&quot;</span><br>        self.price = <span class="hljs-number">4.0</span><br><br><span class="hljs-comment"># 具体产品</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">milk</span>(<span class="hljs-params">Beverage</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.name = <span class="hljs-string">&quot;milk&quot;</span><br>        self.price = <span class="hljs-number">5.0</span><br></code></pre></div></td></tr></table></figure>
-<p>以上的Burger，Snack，Beverage，都可以认为是该快餐店的产品，由于只提供了抽象方法，我们把它们叫抽象产品类，而cheese burger等6个由抽象产品类衍生出的子类，叫作具体产品类。<br>接下来，“工厂”就要出现了。</p>
+<p>以上的Burger，Snack，Beverage，都可以认为是该快餐店的产品，由于只提供了抽象方法，我们把它们叫抽象产品类，而cheese burger等6个由抽象产品类衍生出的子类，叫作具体产品类。 接下来，“工厂”就要出现了。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 抽象工厂</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">foodFactory</span>():</span><br>    <span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">createFood</span>(<span class="hljs-params">self, foodClass</span>):</span><br>        print(self.<span class="hljs-built_in">type</span>, <span class="hljs-string">&quot;factory produce a instance.&quot;</span>)<br>        foodIns = foodClass()<br>        <span class="hljs-keyword">return</span> foodIns<br><br><span class="hljs-comment"># 具体工厂</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">burgerFactory</span>(<span class="hljs-params">foodFactory</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.<span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;BURGER&quot;</span><br><br><span class="hljs-comment"># 具体工厂</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">snackFactory</span>(<span class="hljs-params">foodFactory</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.<span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;SNACK&quot;</span><br><br><span class="hljs-comment"># 具体工厂</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">beverageFactory</span>(<span class="hljs-params">foodFactory</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.<span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;BEVERAGE&quot;</span><br></code></pre></div></td></tr></table></figure>
-<p>同样，foodFactory为抽象的工厂类，而burgerFactory，snackFactory，beverageFactory为具体的工厂类。<br>在业务场景中，工厂模式是如何“生产”产品的呢？</p>
+<p>同样，foodFactory为抽象的工厂类，而burgerFactory，snackFactory，beverageFactory为具体的工厂类。 在业务场景中，工厂模式是如何“生产”产品的呢？</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span>  __name__==<span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># 获得具体工厂的实例对象</span><br>    burger_factory = burgerFactory()<br>    snack_factorry = snackFactory()<br>    beverage_factory = beverageFactory()<br>    <span class="hljs-comment"># 具体工厂生产具体产品</span><br>    cheese_burger = burger_factory.createFood(cheeseBurger)<br>    print(cheese_burger.getName(),cheese_burger.getPrice())<br>    chicken_wings = snack_factorry.createFood(chickenWings)<br>    print(chicken_wings.getName(),chicken_wings.getPrice())<br>    coke_drink = beverage_factory.createFood(coke)<br>    print(coke_drink.getName(),coke_drink.getPrice())<br></code></pre></div></td></tr></table></figure>
 <p>输出</p>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">BURGER</span> factory produce a instance.<br><span class="hljs-attribute">cheese</span> burger <span class="hljs-number">10</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">SNACK</span> factory produce a instance.<br><span class="hljs-attribute">chicken</span> wings <span class="hljs-number">12</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">BEVERAGE</span> factory produce a instance.<br><span class="hljs-attribute">coke</span> <span class="hljs-number">4</span>.<span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
@@ -321,17 +329,20 @@
 <blockquote>
 <p>工厂模式的优点和应用</p>
 </blockquote>
-<p>工厂模式、抽象工厂模式的优点：<br>1、工厂模式<strong>具有非常好的封装性，代码结构清晰</strong>；在抽象工厂模式中，其结构还可以随着需要进行更深或者更浅的抽象层级调整，非常灵活；<br>2、屏蔽产品类，使产品被使用业务场景和产品的功能细节分开，是<strong>比较典型的解耦框架。</strong></p>
-<p>工厂模式、抽象工厂模式的使用场景：<br>1、当系统实例要求比较灵活和可扩展时，可以考虑工厂模式或者抽象工厂模式实现。比如，在通信系统中，高层通信协议会很多样化，同时，上层协议依赖于下层协议，那么就可以对应建立对应层级的抽象工厂，根据不同的“产品需求”去生产定制的实例。</p>
+<p>工厂模式、抽象工厂模式的优点： 1、工厂模式<strong>具有非常好的封装性，代码结构清晰</strong>；在抽象工厂模式中，其结构还可以随着需要进行更深或者更浅的抽象层级调整，非常灵活； 2、屏蔽产品类，使产品被使用业务场景和产品的功能细节分开，是<strong>比较典型的解耦框架。</strong></p>
+<p>工厂模式、抽象工厂模式的使用场景： 1、当系统实例要求比较灵活和可扩展时，可以考虑工厂模式或者抽象工厂模式实现。比如，在通信系统中，高层通信协议会很多样化，同时，上层协议依赖于下层协议，那么就可以对应建立对应层级的抽象工厂，根据不同的“产品需求”去生产定制的实例。</p>
 <blockquote>
 <p>工厂类模式的不足</p>
 </blockquote>
-<p>1、工厂模式相对于直接生成实例<strong>过程要复杂</strong>一些，所以，在小项目中，可以不使用工厂模式；<br>2、抽象工厂模式中，产品类的<strong>扩展比较麻烦</strong>。毕竟，每一个工厂对应每一类产品，产品扩展，就意味着相应的抽象工厂也要扩展。</p>
-<h2 id="建造者模式（Builder）"><a href="#建造者模式（Builder）" class="headerlink" title="建造者模式（Builder）"></a>建造者模式（Builder）</h2><blockquote>
+<p>1、工厂模式相对于直接生成实例<strong>过程要复杂</strong>一些，所以，在小项目中，可以不使用工厂模式； 2、抽象工厂模式中，产品类的<strong>扩展比较麻烦</strong>。毕竟，每一个工厂对应每一类产品，产品扩展，就意味着相应的抽象工厂也要扩展。</p>
+<h2 id="建造者模式builder">建造者模式（Builder）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>封装一个对象的构造过程，并允许按步骤构造。也可以理解为，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
-<p><img src="https://i.loli.net/2020/04/25/XrZCWFLnomjT3V2.png" srcset="/img/loading.gif" alt="builder.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/25/XrZCWFLnomjT3V2.png" srcset="/img/loading.gif" alt="builder.png" /><figcaption aria-hidden="true">builder.png</figcaption>
+</figure>
 <blockquote>
 <p>Example 举例</p>
 </blockquote>
@@ -353,20 +364,23 @@
 <blockquote>
 <p>建造者模式的优点和使用场景</p>
 </blockquote>
-<p>优点：<br>1、<strong>封装性好</strong>，用户可以不知道对象的内部构造和细节，就可以直接建造对象；<br>2、系统<strong>扩展容易</strong>；<br>3、建造者模式易于使用，非常灵活。在构造性的场景中很容易实现“流水线”；<br>4、<strong>便于控制细节</strong>。</p>
+<p>优点： 1、<strong>封装性好</strong>，用户可以不知道对象的内部构造和细节，就可以直接建造对象； 2、系统<strong>扩展容易</strong>； 3、建造者模式易于使用，非常灵活。在构造性的场景中很容易实现“流水线”； 4、<strong>便于控制细节</strong>。</p>
 <blockquote>
 <p>使用场景：</p>
 </blockquote>
-<p>1、<strong>目标对象由组件构成的场景中，很适合建造者模式。</strong>例如，在一款赛车游戏中，车辆生成时，需要根据级别、环境等，选择轮胎、悬挂、骨架等部件，构造一辆“赛车”；<br>2、<strong>在具体的场景中，对象内部接口需要根据不同的参数而调用顺序有所不同时，可以使用建造者模式。</strong>例如：一个植物养殖器系统，对于某些不同的植物，浇水、施加肥料的顺序要求可能会不同，因而可以在Director中维护一个类似于队列的结构，在实例化时作为参数代入到具体建造者中。</p>
+<p>1、<strong>目标对象由组件构成的场景中，很适合建造者模式。</strong>例如，在一款赛车游戏中，车辆生成时，需要根据级别、环境等，选择轮胎、悬挂、骨架等部件，构造一辆“赛车”； 2、<strong>在具体的场景中，对象内部接口需要根据不同的参数而调用顺序有所不同时，可以使用建造者模式。</strong>例如：一个植物养殖器系统，对于某些不同的植物，浇水、施加肥料的顺序要求可能会不同，因而可以在Director中维护一个类似于队列的结构，在实例化时作为参数代入到具体建造者中。</p>
 <blockquote>
 <p>建造者模式的缺点</p>
 </blockquote>
 <p>1、“加工工艺”<strong>对用户不透明</strong>。（封装的两面性）</p>
-<h2 id="原型模式（Prototype）"><a href="#原型模式（Prototype）" class="headerlink" title="原型模式（Prototype）"></a>原型模式（Prototype）</h2><blockquote>
+<h2 id="原型模式prototype">原型模式（Prototype）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>使用原型实例指定要创建对象的类型，通过复制这个原型来创建新对象。</p>
-<p><img src="https://i.loli.net/2020/04/25/fRjBW3usd6qUXEJ.png" srcset="/img/loading.gif" alt="Prototype.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/25/fRjBW3usd6qUXEJ.png" srcset="/img/loading.gif" alt="Prototype.png" /><figcaption aria-hidden="true">Prototype.png</figcaption>
+</figure>
 <blockquote>
 <p>Example 举例</p>
 </blockquote>
@@ -387,23 +401,29 @@
 <blockquote>
 <p>原型模式的优点</p>
 </blockquote>
-<p>1、<strong>性能极佳</strong>，直接拷贝比在内存里直接新建实例节省不少的资源；<br>2、<strong>简化对象创建</strong>，同时避免了构造函数的约束，不受构造函数的限制直接复制对象，是优点，也有隐患，这一点还是需要多留意一些。</p>
+<p>1、<strong>性能极佳</strong>，直接拷贝比在内存里直接新建实例节省不少的资源； 2、<strong>简化对象创建</strong>，同时避免了构造函数的约束，不受构造函数的限制直接复制对象，是优点，也有隐患，这一点还是需要多留意一些。</p>
 <blockquote>
 <p>使用场景：</p>
 </blockquote>
-<p>1、<strong>对象在修改过后，需要复制多份的场景。</strong>如本例和其它一些涉及到复制、粘贴的场景；<br>2、<strong>需要优化资源的情况。</strong>如，需要在内存中创建非常多的实例，可以通过原型模式来减少资源消耗。此时，原型模式与工厂模式配合起来，不管在逻辑上还是结构上，都会达到不错的效果；<br>3、<strong>某些重复性的复杂工作不需要多次进行。</strong>如对于一个设备的访问权限，多个对象不用各申请一遍权限，由一个设备申请后，通过原型模式将权限交给可信赖的对象，既可以提升效率，又可以节约资源。</p>
+<p>1、<strong>对象在修改过后，需要复制多份的场景。</strong>如本例和其它一些涉及到复制、粘贴的场景； 2、<strong>需要优化资源的情况。</strong>如，需要在内存中创建非常多的实例，可以通过原型模式来减少资源消耗。此时，原型模式与工厂模式配合起来，不管在逻辑上还是结构上，都会达到不错的效果； 3、<strong>某些重复性的复杂工作不需要多次进行。</strong>如对于一个设备的访问权限，多个对象不用各申请一遍权限，由一个设备申请后，通过原型模式将权限交给可信赖的对象，既可以提升效率，又可以节约资源。</p>
 <blockquote>
 <p>原型模式的缺点</p>
 </blockquote>
-<p>1、<strong>深拷贝和浅拷贝的使用需要事先考虑周到；</strong><br>2、<strong>某些编程语言中，拷贝会影响到静态变量和静态函数的使用。</strong></p>
-<h1 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h1><p>结构型的意思是处理类与类之间、系统与系统之间的逻辑结构，是协调类结构的重要模式设计思想。</p>
-<p><strong>适配器模式</strong>：将其他类或系统中的方法封装一个统一接口来调用，从而达到适配各种系统方法的目的。<br><strong>桥接模式</strong>：处理抽象部分（类）与实体（实例化）之间的结构，可以使抽象部分和实例化部分单独变化不干扰。<br><strong>组合模式</strong>：用于设计一个有层次等级的系统，处理各层次之间的关系。<br><strong>装饰模式</strong>：用于扩展一个类或者系统的功能。<br><strong>外观模式</strong>：为<strong>子系统</strong>中相似功能设计一组统一的调用界面。<br><strong>享元模式</strong>：让<strong>小粒度高频使用的类被共享</strong>，减少实例化过程，减少损耗。<br><strong>代理模式</strong>：用于控制一个对象的访问，让客户端通过代理访问，而不是直接访问。</p>
-<h2 id="适配器模式（Adapter）"><a href="#适配器模式（Adapter）" class="headerlink" title="适配器模式（Adapter）"></a>适配器模式（Adapter）</h2><blockquote>
+<p>1、<strong>深拷贝和浅拷贝的使用需要事先考虑周到；</strong> 2、<strong>某些编程语言中，拷贝会影响到静态变量和静态函数的使用。</strong></p>
+<h1 id="结构型">结构型</h1>
+<p>结构型的意思是处理类与类之间、系统与系统之间的逻辑结构，是协调类结构的重要模式设计思想。</p>
+<p><strong>适配器模式</strong>：将其他类或系统中的方法封装一个统一接口来调用，从而达到适配各种系统方法的目的。 <strong>桥接模式</strong>：处理抽象部分（类）与实体（实例化）之间的结构，可以使抽象部分和实例化部分单独变化不干扰。 <strong>组合模式</strong>：用于设计一个有层次等级的系统，处理各层次之间的关系。 <strong>装饰模式</strong>：用于扩展一个类或者系统的功能。 <strong>外观模式</strong>：为<strong>子系统</strong>中相似功能设计一组统一的调用界面。 <strong>享元模式</strong>：让<strong>小粒度高频使用的类被共享</strong>，减少实例化过程，减少损耗。 <strong>代理模式</strong>：用于控制一个对象的访问，让客户端通过代理访问，而不是直接访问。</p>
+<h2 id="适配器模式adapter">适配器模式（Adapter）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>把一个类接口转换成另一个用户需要的接口。</p>
-<p><img src="https://i.loli.net/2020/04/25/StZu9lONkeAoHU7.png" srcset="/img/loading.gif" alt="Adapter2.png"></p>
-<p><img src="https://i.loli.net/2020/04/25/u3wEDMaq8e62WvC.png" srcset="/img/loading.gif" alt="Adapter.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/25/StZu9lONkeAoHU7.png" srcset="/img/loading.gif" alt="Adapter2.png" /><figcaption aria-hidden="true">Adapter2.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2020/04/25/u3wEDMaq8e62WvC.png" srcset="/img/loading.gif" alt="Adapter.png" /><figcaption aria-hidden="true">Adapter.png</figcaption>
+</figure>
 <blockquote>
 <p>Example 举例</p>
 </blockquote>
@@ -415,10 +435,11 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 该服务器接受如下格式数据，addr代表地址，content代表接收的信息内容</span><br>info_struct = <span class="hljs-built_in">dict</span>()<br>info_struct[<span class="hljs-string">&quot;addr&quot;</span>] = <span class="hljs-number">10000</span><br>info_struct[<span class="hljs-string">&quot;content&quot;</span>] = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Server</span>:</span><br>    content=<span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recv</span>(<span class="hljs-params">self,info</span>):</span><br>        <span class="hljs-keyword">pass</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send</span>(<span class="hljs-params">self,info</span>):</span><br>        <span class="hljs-keyword">pass</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">pass</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">infoServer</span>(<span class="hljs-params">Server</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recv</span>(<span class="hljs-params">self,info</span>):</span><br>        self.content = info<br>        <span class="hljs-keyword">return</span>(<span class="hljs-string">&quot;recv OK!&quot;</span>)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send</span>(<span class="hljs-params">self,info</span>):</span><br>        <span class="hljs-keyword">pass</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&quot;SHOW:%s&quot;</span>%self.content)<br></code></pre></div></td></tr></table></figure>
 <p><code>infoServer</code> 有接收和发送的功能，发送功能由于暂时用不到，保留。另外新加一个接口 <code>show</code>，用来展示服务器接收的内容。接收的数据格式必须如 <code>info_struct</code> 所示，服务器仅接受 <code>info_struct</code> 的 content 字段。那么，<strong>如何给这个服务器设置一个白名单，使得只有白名单里的地址可以访问服务器呢？</strong>修改Server结构是个方法，但这显然不符合<strong>软件设计原则中的单一职责原则</strong>。在此基础之上，使用代理，是个不错的方法。代理配置如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">serverProxy</span>:</span><br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># `infoServerProxy` 充当`Server` 的直接接口代理</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">infoServerProxy</span>(<span class="hljs-params">serverProxy</span>):</span><br>    server = <span class="hljs-string">&quot;&quot;</span>  <span class="hljs-comment"># 代理中有一个server字段，控制代理的服务器对象</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, server</span>):</span><br>        self.server=server  <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recv</span>(<span class="hljs-params">self,info</span>):</span><br>        <span class="hljs-keyword">return</span> self.server.recv(info)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span>(<span class="hljs-params">self</span>):</span><br>        self.server.show()<br><br><span class="hljs-comment"># 而 `whiteInfoServerProxy` 直接继承了 `infoServerProxy` 对象</span><br><span class="hljs-comment"># 在 `whiteInfoServerProxy` 中添加了 `if not addr in self.white_list:` 判断 </span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">whiteInfoServerProxy</span>(<span class="hljs-params">infoServerProxy</span>):</span><br>    white_list=[]<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recv</span>(<span class="hljs-params">self,info</span>):</span><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">assert</span> <span class="hljs-built_in">type</span>(info)==<span class="hljs-built_in">dict</span><br>        <span class="hljs-keyword">except</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;info structure is not correct&quot;</span><br>        addr=info.get(<span class="hljs-string">&quot;addr&quot;</span>,<span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> addr <span class="hljs-keyword">in</span> self.white_list:  <span class="hljs-comment"># 添加白名单判断</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Your address is not in the white list.&quot;</span><br>        <span class="hljs-keyword">else</span>:<br>            content=info.get(<span class="hljs-string">&quot;content&quot;</span>,<span class="hljs-string">&quot;&quot;</span>)<br>            <span class="hljs-keyword">return</span> self.server.recv(content)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addWhite</span>(<span class="hljs-params">self,addr</span>):</span><br>        self.white_list.append(addr)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rmvWhite</span>(<span class="hljs-params">self,addr</span>):</span><br>        self.white_list.remove(addr)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">clearWhite</span>(<span class="hljs-params">self</span>):</span><br>        self.white_list=[]<br></code></pre></div></td></tr></table></figure>
-<p>代理中有一个 <code>server</code> 字段，控制代理的服务器对象，<code>infoServerProxy</code> 充当<code>Server</code> 的直接接口代理，而 <code>whiteInfoServerProxy</code> 直接继承了<code>infoServerProxy</code> 对象，在 <code>whiteInfoServerProxy</code> 中添加了 <code>if not addr in self.white_list:</code> 判断 ，同时加入了 <code>white_list</code> 和对白名单的操作。<br>这样，<strong>在场景中通过对白名单代理的访问，就可以实现服务器的白名单访问了。</strong></p>
+<p>代理中有一个 <code>server</code> 字段，控制代理的服务器对象，<code>infoServerProxy</code> 充当<code>Server</code> 的直接接口代理，而 <code>whiteInfoServerProxy</code> 直接继承了<code>infoServerProxy</code> 对象，在 <code>whiteInfoServerProxy</code> 中添加了 <code>if not addr in self.white_list:</code> 判断 ，同时加入了 <code>white_list</code> 和对白名单的操作。 这样，<strong>在场景中通过对白名单代理的访问，就可以实现服务器的白名单访问了。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span>  __name__==<span class="hljs-string">&quot;__main__&quot;</span>:<br>    info_struct = <span class="hljs-built_in">dict</span>()<br>    info_struct[<span class="hljs-string">&quot;addr&quot;</span>] = <span class="hljs-number">10010</span><br>    info_struct[<span class="hljs-string">&quot;content&quot;</span>] = <span class="hljs-string">&quot;Hello World!&quot;</span><br>    info_server = infoServer()<br>    info_server_proxy = whiteInfoServerProxy(info_server)<br>	<span class="hljs-comment"># 未添加白名单</span><br>    print(info_server_proxy.recv(info_struct))<br>    info_server_proxy.show()<br>    <span class="hljs-comment"># 已添加白名单</span><br>    info_server_proxy.addWhite(<span class="hljs-number">10010</span>)<br>    print(info_server_proxy.recv(info_struct))<br>    info_server_proxy.show()<br></code></pre></div></td></tr></table></figure>
-<p>打印如下：<br><figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">Your <span class="hljs-keyword">address </span>is not in the white list.<br><span class="hljs-keyword">SHOW:</span><br><span class="hljs-keyword">recv </span>OK!<br><span class="hljs-keyword">SHOW: </span>Hello World!<br></code></pre></div></td></tr></table></figure></p>
-<h2 id="桥接模式（Bridge）"><a href="#桥接模式（Bridge）" class="headerlink" title="桥接模式（Bridge）"></a>桥接模式（Bridge）</h2><blockquote>
+<p>打印如下： <figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">Your <span class="hljs-keyword">address </span>is not in the white list.<br><span class="hljs-keyword">SHOW:</span><br><span class="hljs-keyword">recv </span>OK!<br><span class="hljs-keyword">SHOW: </span>Hello World!<br></code></pre></div></td></tr></table></figure></p>
+<h2 id="桥接模式bridge">桥接模式（Bridge）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>将抽象与实现分离开来，使它们可以独立变化。。它是一种对象结构型模式，又称为柄体(Handle and Body)模式或接口(Interface)模式。而Python程序设计中的桥接指的是抽象部分和实体部分的连接，简单来说是<strong>类和类实例化过称中的连接</strong>。</p>
@@ -435,13 +456,14 @@
 <p>Code 代码</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span>(<span class="hljs-params">self, name</span>):</span><br>        print(<span class="hljs-string">&quot;my name is :&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(name))<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span>(<span class="hljs-params">self, name</span>):</span><br>        print(<span class="hljs-string">&quot;我的名字是：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(name))<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bridge</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, ager, classname</span>):</span><br>        self.ager = ager<br>        self.classname = classname<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bridge_run</span>(<span class="hljs-params">self</span>):</span><br>        self.classname.run(self.ager)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 默认李华为主且中文介绍</span><br>    test = Bridge(<span class="hljs-string">&#x27;李华&#x27;</span>, A())  <span class="hljs-comment"># </span><br>    test.bridge_run()  <span class="hljs-comment"># 中文介绍</span><br>	<span class="hljs-comment"># 切换为tom为主</span><br>    test.ager = <span class="hljs-string">&#x27;Tome&#x27;</span><br>    test.bridge_run()  <span class="hljs-comment"># 中文介绍</span><br>    <span class="hljs-comment"># 切换为英文介绍</span><br>    test.classname = B()<br>    test.bridge_run()<br>	<span class="hljs-comment"># 切换为李华为主</span><br>    test.ager = <span class="hljs-string">&#x27;李华&#x27;</span><br>    test.bridge_run()<br></code></pre></div></td></tr></table></figure>
-<p>上面这段示例代码的作用是李华和Tome分别用中英文介绍自己，<strong>演示抽象和实现之间的分离和桥接过称</strong>。输出：<br><figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript"><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> :李华<br><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> :Tome<br>我的名字是：Tome<br>我的名字是：李华<br></code></pre></div></td></tr></table></figure><br>在提出桥梁模式的时候指出，桥梁模式的用意是”将抽象化(Abstraction)与实现化(Implementation)脱耦，使得二者可以独立地变化”。这句话有三个关键词，也就是抽象化、实现化和脱耦。<br><strong>抽象化</strong><br>存在于多个实体中的共同的概念性联系，就是抽象化。作为一个过程，抽象化就是忽略一些信息，从而把不同的实体当做同样的实体对待。<br><strong>实现化</strong><br>抽象化给出的具体实现，就是实现化。<br><strong>脱耦</strong><br>所谓耦合，就是两个实体的行为的某种强关联。而将它们的强关联去掉，就是耦合的解脱，或称脱耦。在这里，脱耦是指将抽象化和实现化之间的耦合解脱开，或者说是将它们之间的强关联改换成弱关联。</p>
+<p>上面这段示例代码的作用是李华和Tome分别用中英文介绍自己，<strong>演示抽象和实现之间的分离和桥接过称</strong>。输出： <figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript"><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> :李华<br><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> :Tome<br>我的名字是：Tome<br>我的名字是：李华<br></code></pre></div></td></tr></table></figure> 在提出桥梁模式的时候指出，桥梁模式的用意是"将抽象化(Abstraction)与实现化(Implementation)脱耦，使得二者可以独立地变化"。这句话有三个关键词，也就是抽象化、实现化和脱耦。 <strong>抽象化</strong> 存在于多个实体中的共同的概念性联系，就是抽象化。作为一个过程，抽象化就是忽略一些信息，从而把不同的实体当做同样的实体对待。 <strong>实现化</strong> 抽象化给出的具体实现，就是实现化。 <strong>脱耦</strong> 所谓耦合，就是两个实体的行为的某种强关联。而将它们的强关联去掉，就是耦合的解脱，或称脱耦。在这里，脱耦是指将抽象化和实现化之间的耦合解脱开，或者说是将它们之间的强关联改换成弱关联。</p>
 <p>将两个角色之间的继承关系改为聚合关系，就是将它们之间的强关联改换成为弱关联。因此，桥梁模式中的所谓脱耦，就是指在一个软件系统的抽象化和实现化之间使用组合/聚合关系而不是继承关系，从而使两者可以相对独立地变化。</p>
-<h2 id="组合模式（Composite）"><a href="#组合模式（Composite）" class="headerlink" title="组合模式（Composite）"></a>组合模式（Composite）</h2><blockquote>
+<h2 id="组合模式composite">组合模式（Composite）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p><strong>将对象组合成树形结构来表示“整体/部分”层次关系，允许用户以相同的方式处理单独对象和组合对象。</strong></p>
-<p>组件（Component）类是组合类（Composite）和叶子类（Leaf）的父类，可以把组合类看成是树的中间节点。<br>组合对象拥有一个或者多个组件对象，因此组合对 象的操作可以委托给组件对象去处理，而组件对象可以是另一个组合对象或者叶子对象。</p>
+<p>组件（Component）类是组合类（Composite）和叶子类（Leaf）的父类，可以把组合类看成是树的中间节点。 组合对象拥有一个或者多个组件对象，因此组合对 象的操作可以委托给组件对象去处理，而组件对象可以是另一个组合对象或者叶子对象。</p>
 <blockquote>
 <p>Example 举例</p>
 </blockquote>
@@ -450,7 +472,8 @@
 <p>Code 代码</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComponentBases</span>:</span><br>    <span class="hljs-string">&quot;&quot;&quot;部门抽象出来的基类&quot;&quot;&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, name</span>):</span><br>        slef.name = name<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span>(<span class="hljs-params">self, obj</span>):</span><br>        <span class="hljs-keyword">pass</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">remove</span>(<span class="hljs-params">self, obj</span>):</span><br>        <span class="hljs-keyword">pass</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">display</span>(<span class="hljs-params">self, number</span>):</span><br>        <span class="hljs-keyword">pass</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>(<span class="hljs-params">ComponentBases</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, name, duty</span>):</span><br>        self.name = name<br>        self.duty = duty<br>        self.children = []<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span>(<span class="hljs-params">self, obj</span>):</span><br>        self.children.append(obj)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">remove</span>(<span class="hljs-params">self, obj</span>):</span><br>        self.children.remove(obj)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">display</span>(<span class="hljs-params">self, number=<span class="hljs-number">1</span></span>):</span><br>        print(<span class="hljs-string">&quot;部门：&#123;&#125; 级别：&#123;&#125; 职责：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(self.name, number, self.duty))<br>        n = number+<span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> self.children:<br>            obj.display(n)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    root = Node(<span class="hljs-string">&quot;总经理办公室&quot;</span>, <span class="hljs-string">&quot;总负责人&quot;</span>)<br>    node1 = Node(<span class="hljs-string">&quot;财务部门&quot;</span>, <span class="hljs-string">&quot;公司财务管理&quot;</span>)<br>    root.add(node1)<br>    node2 = Node(<span class="hljs-string">&quot;业务部门&quot;</span>, <span class="hljs-string">&quot;销售产品&quot;</span>)<br>    root.add(node2)<br>    node3 = Node(<span class="hljs-string">&quot;生产部门&quot;</span>, <span class="hljs-string">&quot;生产产品&quot;</span>)<br>    root.add(node3)<br>    node4 = Node(<span class="hljs-string">&quot;销售事业一部门&quot;</span>, <span class="hljs-string">&quot;A产品销售&quot;</span>)<br>    node2.add(node4)<br>    node5 = Node(<span class="hljs-string">&quot;销售事业二部门&quot;</span>, <span class="hljs-string">&quot;B产品销售&quot;</span>)<br>    node2.add(node5)<br>    root.display()<br><br>----------输出-----------<br>部门：总经理办公室 级别：<span class="hljs-number">1</span> 职责：总负责人<br>部门：财务部门 级别：<span class="hljs-number">2</span> 职责：公司财务管理<br>部门：业务部门 级别：<span class="hljs-number">2</span> 职责：销售产品<br>部门：销售事业一部门 级别：<span class="hljs-number">3</span> 职责：A产品销售<br>部门：销售事业二部门 级别：<span class="hljs-number">3</span> 职责：B产品销售<br>部门：生产部门 级别：<span class="hljs-number">2</span> 职责：生产产品<br></code></pre></div></td></tr></table></figure>
-<h2 id="装饰模式（Decorator）"><a href="#装饰模式（Decorator）" class="headerlink" title="装饰模式（Decorator）"></a>装饰模式（Decorator）</h2><blockquote>
+<h2 id="装饰模式decorator">装饰模式（Decorator）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>为对象动态添加功能，装饰者（Decorator）和具体组件（Concrete Component）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者的功能。装饰者的方法有一部分是自己的，这属于它的功能，然后调用被装饰者的方法实现，从而也保留了被装饰者的功能。</p>
@@ -466,7 +489,8 @@
 <blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="外观模式（Facade）"><a href="#外观模式（Facade）" class="headerlink" title="外观模式（Facade）"></a>外观模式（Facade）</h2><blockquote>
+<h2 id="外观模式facade">外观模式（Facade）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>提供了一个统一的接口，用来访问子系统中的一群接口，从而让子系统更容易使用。</p>
@@ -480,10 +504,11 @@
 <p>Code 代码</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">API1</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Save</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&#x27;保存数据A&#x27;</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Del</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&#x27;删除数据A&#x27;</span>)<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">API2</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Save</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&#x27;保存数据B&#x27;</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Del</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&#x27;删除数据B&#x27;</span>)<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Facade</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self._api1 = API1()<br>        self._api2 = API2()<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">SaveAll</span>(<span class="hljs-params">self</span>):</span><br>        [obj.Save() <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> [self._api1, self._api2]]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">DelAll</span>(<span class="hljs-params">self</span>):</span><br>        [obj.Save() <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> [self._api1, self._api2]]<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    test = Facade()<br>    test.SaveAll()<br>    test.DelAll()<br><br>----------------<br>保存数据A<br>保存数据B<br>删除数据A<br>删除数据B<br></code></pre></div></td></tr></table></figure>
-<h2 id="享元模式（Flyweight）"><a href="#享元模式（Flyweight）" class="headerlink" title="享元模式（Flyweight）"></a>享元模式（Flyweight）</h2><blockquote>
+<h2 id="享元模式flyweight">享元模式（Flyweight）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
-<p>利用共享的方式来支持大量细粒度的对象，这些对象一部分内部状态是相同的。<br>享元模式下，有三种类：<br>Flyweight：享元对象。<br>IntrinsicState：内部状态，享元对象共享内部状态。<br>ExtrinsicState：外部状态，每个享元对象的外部状态不同。</p>
+<p>利用共享的方式来支持大量细粒度的对象，这些对象一部分内部状态是相同的。 享元模式下，有三种类： Flyweight：享元对象。 IntrinsicState：内部状态，享元对象共享内部状态。 ExtrinsicState：外部状态，每个享元对象的外部状态不同。</p>
 <blockquote>
 <p>Example 举例</p>
 </blockquote>
@@ -494,86 +519,139 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyweightBase</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">offer</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;享元基类&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Flyweight</span>(<span class="hljs-params">FlyweightBase</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;共享享元类&quot;&quot;&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, name</span>):</span><br>        self.name = name<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_price</span>(<span class="hljs-params">self, price</span>):</span><br>        print(<span class="hljs-string">&#x27;产品类型：&#123;&#125; 详情：&#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(self.name, price))<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FactoryFlyweight</span>:</span><br>    <span class="hljs-string">&quot;&quot;&quot;享元工厂类&quot;&quot;&quot;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.product = &#123;&#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Getproduct</span>(<span class="hljs-params">self, key</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.product.get(key, <span class="hljs-literal">None</span>):<br>            self.product[key] = Flyweight(key)<br>        <span class="hljs-keyword">return</span> self.product[key]<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    test = FactoryFlyweight()<br>    A = test.Getproduct(<span class="hljs-string">&quot;高端&quot;</span>)<br>    A.get_price(<span class="hljs-string">&quot;香水：80&quot;</span>)<br>    B = test.Getproduct(<span class="hljs-string">&quot;高端&quot;</span>)<br>    B.get_price(<span class="hljs-string">&quot;面膜：800&quot;</span>)<br><br>产品类型：高端 详情：香水：<span class="hljs-number">80</span><br>产品类型：高端 详情：面膜：<span class="hljs-number">800</span><br></code></pre></div></td></tr></table></figure>
 <p>在这个案例中共享了报价过程的类Flyweight，<strong>同一种产品类型的报价过程只会实例化一次</strong>，这就是享元模式最核心的要义：<strong>共享业务逻辑上的最小单元。</strong></p>
 <blockquote>
-<p> 两个状态</p>
+<p>两个状态</p>
 </blockquote>
-<p><strong>内蕴状态</strong>存储在享元内部，不会随环境的改变而有所不同，是可以共享的。<br><strong>外蕴状态</strong>是不可以共享的，它随环境的改变而改变的，因此外蕴状态是由客户端来保持（因为环境的变化是由客户端引起的）。</p>
-<h2 id="代理模式（Proxy）"><a href="#代理模式（Proxy）" class="headerlink" title="代理模式（Proxy）"></a>代理模式（Proxy）</h2><blockquote>
+<p><strong>内蕴状态</strong>存储在享元内部，不会随环境的改变而有所不同，是可以共享的。 <strong>外蕴状态</strong>是不可以共享的，它随环境的改变而改变的，因此外蕴状态是由客户端来保持（因为环境的变化是由客户端引起的）。</p>
+<h2 id="代理模式proxy">代理模式（Proxy）</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>控制对其它对象的访问，在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
-<p><strong>抽象角色</strong>：通过接口或抽象类声明真实角色实现的业务方法。<br><strong>代理角色</strong>：实现抽象角色，是真实角色的代理，通过真实角色的业务逻辑方法来实现抽象方法，并可以附加自己的操作。<br><strong>真实角色</strong>：实现抽象角色，定义真实角色所要实现的业务逻辑，供代理角色调用。</p>
+<p><strong>抽象角色</strong>：通过接口或抽象类声明真实角色实现的业务方法。 <strong>代理角色</strong>：实现抽象角色，是真实角色的代理，通过真实角色的业务逻辑方法来实现抽象方法，并可以附加自己的操作。 <strong>真实角色</strong>：实现抽象角色，定义真实角色所要实现的业务逻辑，供代理角色调用。</p>
 <blockquote>
 <p>Example 举例</p>
 </blockquote>
-<p>远程（Remote）代理：为一个位于不同的地址空间的对象提供一个局域代表对象。这个不同的地址空间可以是在本机器中，也可是在另一台机器中。远程代理又叫做大使（Ambassador）。好处是系统可以将网络的细节隐藏起来，使得客户端不必考虑网络的存在。<br>虚拟（Virtual）代理（图片延迟加载的例子）：根据需要创建一个资源消耗较大的对象，使得此对象只在需要时才会被真正创建。使用虚拟代理模式的好处就是代理对象可以在必要的时候才将被代理的对象加载；代理可以对加载的过程加以必要的优化。当一个模块的加载十分耗费资源的情况下，虚拟代理的好处就非常明显。<br>保护代理（Protection Proxy ）控制对原始对象的访问。保护代理用于对象应该有不同 的访问权限的时候<br>智能引用（Smart Reference）代理：当一个对象被引用时，提供一些额外的操作，比如将对此对象调用的次数记录下来等。</p>
+<p>远程（Remote）代理：为一个位于不同的地址空间的对象提供一个局域代表对象。这个不同的地址空间可以是在本机器中，也可是在另一台机器中。远程代理又叫做大使（Ambassador）。好处是系统可以将网络的细节隐藏起来，使得客户端不必考虑网络的存在。 虚拟（Virtual）代理（图片延迟加载的例子）：根据需要创建一个资源消耗较大的对象，使得此对象只在需要时才会被真正创建。使用虚拟代理模式的好处就是代理对象可以在必要的时候才将被代理的对象加载；代理可以对加载的过程加以必要的优化。当一个模块的加载十分耗费资源的情况下，虚拟代理的好处就非常明显。 保护代理（Protection Proxy ）控制对原始对象的访问。保护代理用于对象应该有不同 的访问权限的时候 智能引用（Smart Reference）代理：当一个对象被引用时，提供一些额外的操作，比如将对此对象调用的次数记录下来等。</p>
 <blockquote>
 <p>Code 代码</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Jurisdiction</span>:</span><br>    <span class="hljs-string">&quot;&quot;&quot;权限类&quot;&quot;&quot;</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">level1</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&#x27;权限等级1&#x27;</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">level2</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&#x27;权限等级2&#x27;</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">level3</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&#x27;权限等级3&#x27;</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">level4</span>(<span class="hljs-params">self</span>):</span><br>        print(<span class="hljs-string">&#x27;权限等级4&#x27;</span>)<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Proxy</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, name</span>):</span><br>        self.user = name<br>        self._jurisdiction = Jurisdiction()<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">leve</span>(<span class="hljs-params">self</span>):</span><br><br>        <span class="hljs-keyword">if</span> self.user == <span class="hljs-string">&#x27;a&#x27;</span>:<br>            <span class="hljs-keyword">return</span> self._jurisdiction.level1()<br>        <span class="hljs-keyword">elif</span> self.user == <span class="hljs-string">&#x27;b&#x27;</span>:<br>            <span class="hljs-keyword">return</span> self._jurisdiction.level2()<br>        <span class="hljs-keyword">elif</span> self.user == <span class="hljs-string">&#x27;c&#x27;</span>:<br>            <span class="hljs-keyword">return</span> self._jurisdiction.level3()<br>        <span class="hljs-keyword">elif</span> self.user == <span class="hljs-string">&#x27;d&#x27;</span>:<br>            <span class="hljs-keyword">return</span> self._jurisdiction.level4()<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-string">&#x27;无此权限&#x27;</span>)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    test = Proxy(<span class="hljs-string">&#x27;a&#x27;</span>)<br>    test.leve()<br>    test.user = <span class="hljs-string">&#x27;b&#x27;</span><br>    test.leve()<br>    test.user = <span class="hljs-string">&#x27;c&#x27;</span><br>    test.leve()<br>    test.user = <span class="hljs-string">&#x27;d&#x27;</span><br>    test.leve()<br>    test.user = <span class="hljs-string">&#x27;e&#x27;</span><br>    test.leve()<br><br>-----------------------<br>权限等级<span class="hljs-number">1</span><br>权限等级<span class="hljs-number">2</span><br>权限等级<span class="hljs-number">3</span><br>权限等级<span class="hljs-number">4</span><br>无此权限<br></code></pre></div></td></tr></table></figure>
-<h1 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h1><p>行为型设计模式是根据不同对象之间的关系进行代码设计。不仅仅是关于类和对象的，并是关于他们之间的相互作用。</p>
-<p><strong>责任链模式</strong>：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链发送该请求，直到有一个对象处理它为止。<br><strong>观察者模式</strong>：定义对象之间的一对多依赖，当一个对象状态改变时，它的所有依赖都会收到通知并且自动更新状态。主题（Subject）是被观察的对象，而其所有依赖者（Observer）称为观察者。</p>
-<h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><blockquote>
+<h1 id="行为型">行为型</h1>
+<p>行为型设计模式是根据不同对象之间的关系进行代码设计。不仅仅是关于类和对象的，并是关于他们之间的相互作用。</p>
+<p><strong>责任链模式</strong>：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链发送该请求，直到有一个对象处理它为止。 <strong>观察者模式</strong>：定义对象之间的一对多依赖，当一个对象状态改变时，它的所有依赖都会收到通知并且自动更新状态。主题（Subject）是被观察的对象，而其所有依赖者（Observer）称为观察者。</p>
+<h2 id="责任链模式">责任链模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链发送该请求，直到有一个对象处理它为止。</p>
 <blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><blockquote>
+<h2 id="命令模式">命令模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="解释器模式"><a href="#解释器模式" class="headerlink" title="解释器模式"></a>解释器模式</h2><blockquote>
+<h2 id="解释器模式">解释器模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
+<h2 id="迭代器模式">迭代器模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="中介器模式"><a href="#中介器模式" class="headerlink" title="中介器模式"></a>中介器模式</h2><blockquote>
+<h2 id="中介器模式">中介器模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h2><blockquote>
+<h2 id="备忘录模式">备忘录模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><blockquote>
+<h2 id="观察者模式">观察者模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
 </blockquote>
 <p>定义对象之间的一对多依赖，当一个对象状态改变时，它的所有依赖都会收到通知并且自动更新状态。主题（Subject）是被观察的对象，而其所有依赖者（Observer）称为观察者。</p>
 <blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><blockquote>
+<h2 id="状态模式">状态模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><blockquote>
+<h2 id="策略模式">策略模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h2><blockquote>
+<h2 id="模板方法模式">模板方法模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-<h2 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h2><blockquote>
+<h2 id="访问者模式">访问者模式</h2>
+<blockquote>
 <p>Intent 涵义</p>
+</blockquote>
+<blockquote>
 <p>Example 举例</p>
+</blockquote>
+<blockquote>
 <p>Code 代码</p>
 </blockquote>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -810,6 +888,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

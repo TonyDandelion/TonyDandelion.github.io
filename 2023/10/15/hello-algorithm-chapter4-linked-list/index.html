@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="知无涯者">
+  <meta name="keywords" content="">
+  <title>hello algorithm chapter 4 / linked list - 代码即艺术</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>代码即艺术</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/introduction/">
+                <i class="iconfont icon-map"></i>
+                入门
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/404page.html">
+                <i class="iconfont icon-heartbeat"></i>
+                公益404
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="hello algorithm chapter 4 / linked list">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-10-15 22:52" pubdate>
+        2023年10月15日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">hello algorithm chapter 4 / linked list</h1>
+            
+            <div class="markdown-body">
+              <p>数据结构的世界如同一堵厚实的砖墙。</p>
+<p>链表的砖块分散各处，连接的藤蔓自由地穿梭于砖缝之间。</p>
+<p>Reference: <a target="_blank" rel="noopener" href="https://www.hello-algo.com/chapter_array_and_linkedlist/linked_list/">Hello 算法 链表</a></p>
+<a id="more"></a>
+<h2 id="outline">Outline</h2>
+<blockquote class="pullquote mindmap mindmap-md"><ul>
+<li>linked list
+<ul>
+<li>definition
+<ul>
+<li>链表是一种通过 “引用” 连接每个节点的线性数据结构。</li>
+<li>使用链表可以有效利用计算机系统内分散在内存各处的空间。</li>
+<li>链表节点 = 节点 + 节点指针</li>
+</ul></li>
+<li>Common operation
+<ul>
+<li>Initial Linked List: 建立链表分为两步，初始化各个节点对象，构建引用指向关系。</li>
+<li>Insert Node: 改变两个节点引用（指针）即可插入节点。</li>
+<li>Delete Node: 改变待删除节点前一个节点的指针即可。</li>
+<li>Visit Node: 从头节点出发，逐个向后遍历，直至找到目标节点。</li>
+<li>Search Node</li>
+</ul></li>
+</ul></li>
+</ul>
+</blockquote>
+<h2 id="definition">Definition</h2>
+<p>链表是一种通过“引用”连接每个节点的线性数据结构。</p>
+<p>复杂的系统运行环境下，空闲的内存空间散落在内存各处。</p>
+<p>使用链表可以有效利用计算机系统内分散在内存各处的空间。</p>
+<p>链表节点 = 节点 + 节点指针</p>
+<ul>
+<li>尾节点指向的是“空”，它在 Java、C++ 和 Python 中分别被记为 null、nullptr、None。</li>
+<li>在 C、C++、Go 和 Rust 等支持指针的语言中，上述的“引用”应被替换为“指针”。</li>
+<li>链表节点 ListNode 除了包含值，还需额外保存一个引用（指针）。在相同数据量下，<strong>链表比数组占用更多的内存空间</strong>。</li>
+</ul>
+<figure>
+<img src="https://s2.loli.net/2023/10/16/oFMGmTBd85Yv7g2.png" srcset="/img/loading.gif" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p>Java中定义链表节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ListNode</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> val;<br>    ListNode next;<br>    ListNode(<span class="hljs-keyword">int</span> x) &#123;<br>        <span class="hljs-keyword">this</span>.val = x;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="common-operation">Common operation</h2>
+<h3 id="initial-linked-list">Initial Linked List</h3>
+<p>建立链表分为两步：</p>
+<ol type="1">
+<li>初始化各个节点对象。</li>
+<li>构建引用指向关系。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 初始化链表 1 -&gt; 3 -&gt; 2 -&gt; 5 -&gt; 4 */</span><br><span class="hljs-comment">// Step 1. 初始化各个节点</span><br><span class="hljs-keyword">const</span> n0 = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">1</span>);<br><span class="hljs-keyword">const</span> n1 = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">3</span>);<br><span class="hljs-keyword">const</span> n2 = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">2</span>);<br><span class="hljs-keyword">const</span> n3 = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">5</span>);<br><span class="hljs-keyword">const</span> n4 = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">4</span>);<br><span class="hljs-comment">// Step 2. 构建引用指向</span><br>n0.next = n1;<br>n1.next = n2;<br>n2.next = n3;<br>n3.next = n4;<br></code></pre></div></td></tr></table></figure>
+<p>数组整体是一个变量，<strong>通常将头节点当作链表的代称。</strong></p>
+<h3 id="insert-node">Insert Node</h3>
+<p>想在相邻的两个节点 n0 和 n1 之间插入一个新节点 P ，<strong>则只需要改变两个节点引用（指针）即可</strong>。</p>
+<figure>
+<img src="https://s2.loli.net/2023/10/16/dLwJ3FKAZRfqv7D.png" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>时间复杂度 <span class="math inline">\(O(1)\)</span>，相比之下，数组中插入元素的时间复杂度为 <span class="math inline">\(O(n)\)</span>，在大数据量下的效率较低。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 在链表的节点 n0 之后插入节点 P */</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(ListNode n0, ListNode P)</span> </span>&#123;<br>    ListNode n1 = n0.next;<br>    P.next = n1;<br>    n0.next = P;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="delete-node">Delete Node</h3>
+<p>在链表中删除节点也非常方便，<strong>只需改变一个节点的引用（指针）即可</strong>。</p>
+<figure>
+<img src="https://s2.loli.net/2023/10/16/9OrJ7mFBpoCv5Yn.png" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>时间复杂度 <span class="math inline">\(O(1)\)</span>，相比之下，数组中删除元素的时间复杂度为 <span class="math inline">\(O(n)\)</span>，在大数据量下的效率较低。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 删除链表的节点 n0 之后的首个节点 */</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(ListNode n0)</span> </span>&#123;<br>	<span class="hljs-comment">// judge parameter node is tail node or not</span><br>    <span class="hljs-keyword">if</span> (n0.next == <span class="hljs-keyword">null</span>)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-comment">// n0 -&gt; P -&gt; n1</span><br>    ListNode P = n0.next;<br>    ListNode n1 = P.next;<br>    n0.next = n1;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="visit-node">Visit Node</h3>
+<p>访问数组中的任意元素的时间复杂度是 <span class="math inline">\(O(1)\)</span> 。</p>
+<p>访问链表中的任意元素的时间复杂度是 <span class="math inline">\(O(n)\)</span> 。</p>
+<p>因为需要从头节点出发，逐个向后遍历，直至找到目标节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 访问链表中索引为 index 的节点 */</span><br><span class="hljs-function">ListNode <span class="hljs-title">access</span><span class="hljs-params">(ListNode head, <span class="hljs-keyword">int</span> index)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; index; i++) &#123;<br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>        head = head.next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> head;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="search-node">Search Node</h3>
+<p>遍历链表，查找链表内值为 target 的节点，输出节点在链表中的索引。此过程也属于线性查找。</p>
+<p>时间复杂度为 <span class="math inline">\(O(n)\)</span>。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 在链表中查找值为 target 的首个节点 */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(ListNode head, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (head != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">if</span> (head.val == target)<br>            <span class="hljs-keyword">return</span> index;<br>        head = head.next;<br>        index++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="linked-list-v.s.-array">Linked List v.s. Array</h2>
+<p>由于数组和链表采用两种相反的存储策略，因此各种性质和操作效率也呈现对立的特点。</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>数组</th>
+<th>链表</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>存储方式</td>
+<td>连续内存空间</td>
+<td>分散内存空间</td>
+</tr>
+<tr class="even">
+<td>缓存局部性</td>
+<td>友好</td>
+<td>不友好</td>
+</tr>
+<tr class="odd">
+<td>容量扩展</td>
+<td>长度不可变</td>
+<td>可灵活扩展</td>
+</tr>
+<tr class="even">
+<td>内存效率</td>
+<td>占用内存少、内存利用率低</td>
+<td>占用内存多、内存利用率高</td>
+</tr>
+<tr class="odd">
+<td>访问元素</td>
+<td><span class="math inline">\(O(1)\)</span></td>
+<td><span class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr class="even">
+<td>添加元素</td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
+</tr>
+<tr class="odd">
+<td>删除元素</td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-linked-list-types">Common linked list types</h2>
+<ul>
+<li><strong>单向链表</strong>：即上述介绍的普通链表，尾节点指向空 None 。</li>
+<li><strong>环形链表</strong>：如果我们令单向链表的尾节点指向头节点（即首尾相接），则得到一个环形链表。</li>
+<li><strong>双向链表</strong>：与单向链表相比，双向链表记录了两个方向的引用。双向链表的节点定义同时包含指向后继节点（下一个节点）和前驱节点（上一个节点）的引用（指针）。更灵活占用更多内存。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* 双向链表节点类 */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ListNode</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> val;        <span class="hljs-comment">// 节点值</span><br>    ListNode next;  <span class="hljs-comment">// 指向后继节点的引用</span><br>    ListNode prev;  <span class="hljs-comment">// 指向前驱节点的引用</span><br>    ListNode(<span class="hljs-keyword">int</span> x) &#123; val = x; &#125;  <span class="hljs-comment">// 构造函数</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure>
+<img src="https://s2.loli.net/2023/10/16/DwiHUf4q2dmTyQv.png" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h2 id="typical-applications-of-linked-lists">Typical applications of linked lists</h2>
+<p><strong><u>单向链表</u></strong>通常用于实现<strong>栈、队列、哈希表和图</strong>等数据结构。</p>
+<ul>
+<li><strong>栈</strong>：当插入和删除操作都在链表的同一端进行时，它表现出先进后出的的特性，对应栈；</li>
+<li><strong>队列</strong>：当插入和删除操作在链表的不同端进行时，它表现出先进先出的特性，对应队列。</li>
+<li><strong>哈希表</strong>：链地址法是解决哈希冲突的主流方案之一，在该方案中，所有冲突的元素都会被放到一个链表中。</li>
+<li><strong>图</strong>：邻接表是表示图的一种常用方式，在其中，图的每个顶点都与一个链表相关联，链表中的每个元素都代表与该顶点相连的其他顶点。</li>
+</ul>
+<p><strong><u>双向链表</u></strong>常被用于需要<strong>快速查找前一个和下一个元素的场景</strong>。</p>
+<ul>
+<li><strong>高级数据结构（红黑树、B 树）</strong>：需要访问节点的父节点，这可以通过在节点中保存一个指向父节点的引用来实现，类似于双向链表。</li>
+<li><strong>浏览器历史</strong>：在网页浏览器中，当用户点击前进或后退按钮时，浏览器需要知道用户访问过的前一个和后一个网页。双向链表的特性使得这种操作变得简单。</li>
+<li><strong>LRU 算法</strong>：在缓存淘汰算法（LRU）中，我们需要快速找到最近最少使用的数据，以及支持快速地添加和删除节点。这时候使用双向链表就非常合适。</li>
+</ul>
+<p><strong><u>循环链表</u></strong>常被用于需要<strong>周期性操作的场景</strong>，比如操作系统的资源调度。</p>
+<ul>
+<li><strong>时间片轮转调度算法</strong>：在操作系统中，时间片轮转调度算法是一种常见的 CPU 调度算法，它需要对一组进程进行循环。每个进程被赋予一个时间片，当时间片用完时，CPU 将切换到下一个进程。这种循环的操作就可以通过循环链表来实现。</li>
+<li><strong>数据缓冲区</strong>：在某些数据缓冲区的实现中，也可能会使用到循环链表。比如在音频、视频播放器中，数据流可能会被分成多个缓冲块并放入一个循环链表，以便实现无缝播放。</li>
+</ul>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/hello-algorithm/">hello algorithm</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/15/moat/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">moat 护城河</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/15/hello-algorithm-chapter4-array/">
+                        <span class="hidden-mobile">hello algorithm chapter 4 / Array</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http://example.com/2023/10/15/hello-algorithm-chapter4-linked-list/';
+        this.page.identifier = '/2023/10/15/hello-algorithm-chapter4-linked-list/';
+      };
+      Fluid.utils.waitElementVisible('disqus_thread', function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'codesisart' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', new Date());
+        (d.head || d.body).appendChild(s);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+
+</body>
+</html>

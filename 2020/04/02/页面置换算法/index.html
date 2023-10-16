@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      13.2k 字
+      13.3k 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      137
+      139
        分钟
     </span>
   
@@ -251,7 +251,9 @@
             <h1 style="display: none">从存储器到页面置换</h1>
             
             <div class="markdown-body">
-              <p><img src="https://i.loli.net/2020/04/03/hUsNVIMwP691qec.jpg" srcset="/img/loading.gif" alt="main_memory.jpg"></p>
+              <figure>
+<img src="https://i.loli.net/2020/04/03/hUsNVIMwP691qec.jpg" srcset="/img/loading.gif" alt="main_memory.jpg" /><figcaption aria-hidden="true">main_memory.jpg</figcaption>
+</figure>
 <p>操作系统如何将有限的内存资源分配给无限的进程？</p>
 <a id="more"></a>
 <blockquote>
@@ -264,49 +266,72 @@
 <p>举个栗子，以一个32位系统为例，寻址空间为 <code>4GB</code>，如果该计算机的内存为 <code>16GB</code>，在不使用虚拟存储器的前提下，<strong>要满足每个进程自己独自占有当前系统完整的 <code>4G</code> 地址空间的条件</strong>，只能在多道程序的操作系统中满足 <code>4</code>（16/4）个进程的运行。但是，如果使用了虚拟存储技术，任何一个新进来的进程，都可以拥有<strong>虚拟</strong>的<strong>完整</strong>的 <code>4GB</code> 的地址空间。</p>
 <p>总之，<strong>动态运行时的装载方式、段页式数据存储方式、虚拟存储器（调页（段）功能与置换功能是其核心）</strong>几大法宝共同保证了我们用上8个G或者16个G的内存条，就能把几十个G甚至上百个G的软件、游戏运行起来。</p>
 <p>以上就是操作系统如何将有限的内存资源分配给无限的进程的<font color='red'><strong>终极奥义</strong></font>。如果你想了解多层存储器结构、动态运行时的装入方式、段页式存储方式、虚拟存储器等内容的细节，可以继续阅读这篇博客。</p>
-<h1 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Blue_Dream_/article/details/1760815">页目录和页表结构</a></p>
+<h1 id="参考连接">参考连接</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Blue_Dream_/article/details/1760815">页目录和页表结构</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79607142">TLB缓存是个神马鬼，如何查看TLB miss？</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/97871c14aaf2">linux内存</a></p>
-<h1 id="存储器管理"><a href="#存储器管理" class="headerlink" title="存储器管理"></a>存储器管理</h1><h2 id="多层存储结构"><a href="#多层存储结构" class="headerlink" title="多层存储结构"></a>多层存储结构</h2><p>对于通用计算机而言，计算机存储至少包含三层：最高层是CPU存储器，中间是主存储器（高速缓存、主存储器、磁盘缓存），最下层是辅助存储器（固定磁盘、可移动存储介质）。</p>
-<p><img src="https://i.loli.net/2020/04/03/2FuRaPbp53YlfZW.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-03_14-01-49.png"></p>
+<h1 id="存储器管理">存储器管理</h1>
+<h2 id="多层存储结构">多层存储结构</h2>
+<p>对于通用计算机而言，计算机存储至少包含三层：最高层是CPU存储器，中间是主存储器（高速缓存、主存储器、磁盘缓存），最下层是辅助存储器（固定磁盘、可移动存储介质）。</p>
+<figure>
+<img src="https://i.loli.net/2020/04/03/2FuRaPbp53YlfZW.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-03_14-01-49.png" /><figcaption aria-hidden="true">Snipaste_2020-04-03_14-01-49.png</figcaption>
+</figure>
 <p>CPU存储器和中间的主存（高速缓存、主存储器、磁盘缓存）属于操作系统<strong>存储管理</strong>的管辖范畴，被称为<strong>可执行存储器</strong>。掉电之后，这一部分存储设备中的信息会丢失。 辅存部分，固定磁盘和可移动存储介质在掉电之后依然能保存信息。</p>
 <p>对于存放于其中的信息，与存放于辅存中的信息相比较而言，计算机所采用的访问机制是不同的，所需耗费的时间也是不同的。进程可以在<strong>很少的时钟周期内</strong>使用一条 <code>load</code> 或 <code>store</code> 指令对<strong>可执行存储器</strong>进行访问。</p>
 <p>对<strong>辅存的访问则需要通过I/O设备实现</strong>，因此，在访问中将涉及到中断、设备驱动程序以及物理设备的运行，所需耗费的时间远远高于访问可执行存储器的时间，一般相差3个数量级甚至更多。</p>
-<h3 id="主存储器"><a href="#主存储器" class="headerlink" title="主存储器"></a>主存储器</h3><p>又称<strong>内存或主存</strong>，<strong>保存进程运行时的程序和数据</strong>，处理机从主存储器中取得指令和数据（<strong>中间要经过高速缓存的传递</strong>）。</p>
+<h3 id="主存储器">主存储器</h3>
+<p>又称<strong>内存或主存</strong>，<strong>保存进程运行时的程序和数据</strong>，处理机从主存储器中取得指令和数据（<strong>中间要经过高速缓存的传递</strong>）。</p>
 <p>指令放到指令寄存器，数据放到数据寄存器。</p>
 <p>反之，将数据寄存器中的数据放到主存储器中。</p>
 <p>主存储器访问速度远低于CPU执行指令的速度，为缓和这一矛盾，在计算机系统中引入了<strong>寄存器和高速缓存</strong>。</p>
-<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>寄存器具有与处理机相同的速度，故对寄存器的访问速度最快，完全能与CPU协调工作，但价格却十分昂贵，因此容量不可能做得很大。</p>
+<h3 id="寄存器">寄存器</h3>
+<p>寄存器具有与处理机相同的速度，故对寄存器的访问速度最快，完全能与CPU协调工作，但价格却十分昂贵，因此容量不可能做得很大。</p>
 <p>用寄存器存放操作数，或用作地址寄存器加快地址转换速度等。</p>
 <p>寄存器的数目都已增加到数十个到数百个，而寄存器的字长一般是32位或64位；小型的嵌入式计算机中寄存器的数目字长通常减少。</p>
-<h3 id="高速缓存和磁盘缓存"><a href="#高速缓存和磁盘缓存" class="headerlink" title="高速缓存和磁盘缓存"></a>高速缓存和磁盘缓存</h3><p><strong>高速缓存</strong>介于寄存器和存储器之间的<strong>存储器（真实存在）</strong>，主要<strong>用于备份主存中较常用的数据</strong>，以减少处理机对主存储器的访问次数，这样可大幅度提高程序的执行速度。高速缓存容量远大于寄存器，而比内存约小两到三个数量级左右，从几十KB到几MB，访问速度快于主存储器。</p>
+<h3 id="高速缓存和磁盘缓存">高速缓存和磁盘缓存</h3>
+<p><strong>高速缓存</strong>介于寄存器和存储器之间的<strong>存储器（真实存在）</strong>，主要<strong>用于备份主存中较常用的数据</strong>，以减少处理机对主存储器的访问次数，这样可大幅度提高程序的执行速度。高速缓存容量远大于寄存器，而比内存约小两到三个数量级左右，从几十KB到几MB，访问速度快于主存储器。</p>
 <p><strong>磁盘缓存</strong>，由于目前磁盘的I/O速度远低于对主存的访问速度，为了缓和两者之间在速度上的不匹配，而设置了磁盘缓存，<strong>主要用于暂时存放频繁使用的一部分磁盘数据和信息</strong>，以减少访问磁盘的次数。<strong>但磁盘缓存与高速缓存不同，它本身并不是一种实际存在的存储器（不存在），而是利用主存中的部分存储空间暂时存放从磁盘中读出（或写入）的信息。</strong>主存也可以看作是辅存的高速缓存，因为，<strong>辅存中的数据必须复制到主存方能使用，反之，数据也必须先存在主存中，才能输出到辅存。</strong></p>
-<h3 id="访问速度对比"><a href="#访问速度对比" class="headerlink" title="访问速度对比"></a>访问速度对比</h3><p>寄存器 &gt; 高速缓存（真实存在） &gt; 主存储器 = 磁盘缓存（不存在，是开辟了主存储器的一部分）&gt; 磁盘</p>
-<h3 id="分级存储和硬件的关系"><a href="#分级存储和硬件的关系" class="headerlink" title="分级存储和硬件的关系"></a>分级存储和硬件的关系</h3><p><img src="https://i.loli.net/2020/04/03/rjhRu1xgo4ifH3n.jpg" srcset="/img/loading.gif" alt="分级存储.jpg"></p>
-<h2 id="程序的装入方式"><a href="#程序的装入方式" class="headerlink" title="程序的装入方式"></a>程序的装入方式</h2><p>源代码预编译、编译、汇编、链接之后会产生完整的装入模块（可执行文件），在将一个装入模块装入内存时，可以有如下三种装入方式：</p>
-<h3 id="绝对装入方式（Absolute-Loading-Mode）"><a href="#绝对装入方式（Absolute-Loading-Mode）" class="headerlink" title="绝对装入方式（Absolute Loading Mode）"></a>绝对装入方式（Absolute Loading Mode）</h3><p>当计算机系统很小，且仅能运行单道程序时，<strong>完全有可能知道程序将驻留在内存的什么位置</strong>。此时可以采用绝对装入方式。<strong>这种装入方式，只能将目标程序装入内存中事先指定的位置，只适用于单道程序环境。</strong></p>
+<h3 id="访问速度对比">访问速度对比</h3>
+<p>寄存器 &gt; 高速缓存（真实存在） &gt; 主存储器 = 磁盘缓存（不存在，是开辟了主存储器的一部分）&gt; 磁盘</p>
+<h3 id="分级存储和硬件的关系">分级存储和硬件的关系</h3>
+<figure>
+<img src="https://i.loli.net/2020/04/03/rjhRu1xgo4ifH3n.jpg" srcset="/img/loading.gif" alt="分级存储.jpg" /><figcaption aria-hidden="true">分级存储.jpg</figcaption>
+</figure>
+<h2 id="程序的装入方式">程序的装入方式</h2>
+<p>源代码预编译、编译、汇编、链接之后会产生完整的装入模块（可执行文件），在将一个装入模块装入内存时，可以有如下三种装入方式：</p>
+<h3 id="绝对装入方式absolute-loading-mode">绝对装入方式（Absolute Loading Mode）</h3>
+<p>当计算机系统很小，且仅能运行单道程序时，<strong>完全有可能知道程序将驻留在内存的什么位置</strong>。此时可以采用绝对装入方式。<strong>这种装入方式，只能将目标程序装入内存中事先指定的位置，只适用于单道程序环境。</strong></p>
 <p>用户程序经编译后，将产生绝对地址（即物理地址）的目标代码。例如，事先已知用户程序（进程）驻留在从R处开始的位置，则<strong>编译程序所产生的目标模块（即装入模块），便可从R处开始向上扩展。</strong>绝对装入程序便可按照装入模块中的地址，<strong>将程序和数据装入内存</strong>。装入模块被装入内存后，<strong>由于程序中的相对地址（即逻辑地址）与实际内存地址完全相同</strong>，故不需对程序和数据的地址进行修改。</p>
 <p>程序中所使用的绝对地址既可在编译或汇编时给出，也可由程序员直接赋予。但由程序员直接给出绝对地址时，不仅要求程序员熟悉内存的使用情况，而且一旦程序或数据被修改后，可能要改变程序中的所有地址。因此，通常是宁可在程序中采用符号地址，然后在编译或汇编时，再将这些符号地址转换为绝对地址。</p>
-<h3 id="可重定位装入方式（Relocation-Loading-Mode）"><a href="#可重定位装入方式（Relocation-Loading-Mode）" class="headerlink" title="可重定位装入方式（Relocation Loading Mode）"></a>可重定位装入方式（Relocation Loading Mode）</h3><p>在多道程序环境下，<strong>编译程序不可能预知经编译后所得到的目标模块应放在内存的何处。</strong>因此，对于用户程序<strong>编译所形成的若干个目标模块，它们的起始地址通常都是从0开始的，程序中的其它地址也都是相对于起始地址计算的，然后基于这个相对地址进行转载。</strong></p>
-<p><strong>相对位置变化造成的错误</strong><br>值得注意的是，<strong>在采用可重定位装入程序将装入模块装入内存后，会使装入模块中的所有逻辑地址与实际装入内存后的物理地址不同</strong>，图4-3示出了这一情况。例如，在用户程序的 <code>1000</code> 号单元处有一条指令 <code>LOAD 1 2500</code>，该指令的功能是将 <code>2500</code> 单元中的整数 <code>365</code> 取至 <strong>寄存器1</strong>。但若将该用户程序装入到内存的10000~15000号单元而不进行地址变换，则在执行 <code>11000</code> 号单元中的指令时，它将仍从 <code>2500</code> 号单元中把数据取至 <strong>寄存器1</strong>，而导致数据错误。</p>
-<p><img src="https://i.loli.net/2020/04/03/pFK45xVAoqJkiGd.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-03_21-13-55.png"></p>
-<p><strong>解决方法</strong><br>正确的方法应该是，<strong>将取数指令中的地址 <code>2500</code> 修改成 <code>12500</code>，即把指令中的逻辑地址 <code>2500</code> 与本程序在内存中的起始地址 <code>10000</code> 相加，才得到正确的物理地址 <code>12500</code>。</strong>除了数据地址应修改外，指令地址也须做同样的修改，即将指令的逻辑地址 <code>1000</code> 与起始地址 <code>10000</code> 相加，得到绝对地址 <code>11000</code>。<strong>通常，把在装入时对目标程序中指令和数据地址的修改过程称为重定位。</strong>又因为<strong>地址变换通常是在进程装入时一次完成的，以后不再改变，故称为静态重定位。</strong></p>
-<h3 id="动态运行时的装入方式（Dynamic-Run-time-Loading-Mode）"><a href="#动态运行时的装入方式（Dynamic-Run-time-Loading-Mode）" class="headerlink" title="动态运行时的装入方式（Dynamic Run-time Loading Mode）"></a>动态运行时的装入方式（Dynamic Run-time Loading Mode）</h3><p>可重定位装入方式可将装入模块装入到内存中任何允许的位置，故可用于多道程序环境。<strong>但该方式并不允许程序运行时在内存中移动位置。</strong>因为，<strong>程序在内存中的移动，意味着它的物理位置发生了变化，这时必须对程序和数据的地址（绝对地址）进行修改后方能运行。</strong>然而，实际情况是，在运行过程中它在内存中的位置可能经常要改变，例如，<strong>在具有对换功能的系统中，一个进程可能被多次换出，又多次被换入，每次换入后的位置通常是不同的。在这种情况下，就应采用动态运行时装入的方式。</strong><br>动态运行时的装入程序<strong>在把装入模块装入t程序真正要执行时才进行。</strong>因此，装入内存后的所有地址都仍是逻辑地址。<strong>为使地址转换不影响指令的执行速度，这种方式需要一个重定位寄存器的支持。</strong></p>
-<h2 id="内存数据存储方式"><a href="#内存数据存储方式" class="headerlink" title="内存数据存储方式"></a>内存数据存储方式</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>内存连续分配方式会形成许多“碎片”。<br>将一个进程直接分散地装入到许多不相邻接的分区中，便可充分地利用内存空间。</p>
-<p>基于这一思想而产生了<strong>离散分配方式</strong>，根据在<strong>离散分配时所分配地址空间的基本单位</strong>的不同，又可将离散分配分为以下三种：<br>1、<strong>分页存储管理方式</strong>。在该方式中，<strong>将用户程序的地址空间分为若干个固定大小的区域，称为“页”或“页面”。</strong>典型的页面大小为<strong><code>1KB</code></strong>。相应地，<strong>也将内存空间分为若干个物理块或页框（frame），页和块的大小相同。</strong>这样可将用户程序的任一页放入任一物理块中，实现了离散分配。<br>2、<strong>分段存储管理方式</strong>。<strong>将用户程序的地址空间分为若干个大小不同的段，每段可定义一组相对完整的信息。</strong>在<strong>存储器分配时，以段为单位</strong>，这些段在内存中可以不相邻接，所以也同样实现了离散分配。</p>
+<h3 id="可重定位装入方式relocation-loading-mode">可重定位装入方式（Relocation Loading Mode）</h3>
+<p>在多道程序环境下，<strong>编译程序不可能预知经编译后所得到的目标模块应放在内存的何处。</strong>因此，对于用户程序<strong>编译所形成的若干个目标模块，它们的起始地址通常都是从0开始的，程序中的其它地址也都是相对于起始地址计算的，然后基于这个相对地址进行转载。</strong></p>
+<p><strong>相对位置变化造成的错误</strong> 值得注意的是，<strong>在采用可重定位装入程序将装入模块装入内存后，会使装入模块中的所有逻辑地址与实际装入内存后的物理地址不同</strong>，图4-3示出了这一情况。例如，在用户程序的 <code>1000</code> 号单元处有一条指令 <code>LOAD 1 2500</code>，该指令的功能是将 <code>2500</code> 单元中的整数 <code>365</code> 取至 <strong>寄存器1</strong>。但若将该用户程序装入到内存的10000~15000号单元而不进行地址变换，则在执行 <code>11000</code> 号单元中的指令时，它将仍从 <code>2500</code> 号单元中把数据取至 <strong>寄存器1</strong>，而导致数据错误。</p>
+<figure>
+<img src="https://i.loli.net/2020/04/03/pFK45xVAoqJkiGd.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-03_21-13-55.png" /><figcaption aria-hidden="true">Snipaste_2020-04-03_21-13-55.png</figcaption>
+</figure>
+<p><strong>解决方法</strong> 正确的方法应该是，<strong>将取数指令中的地址 <code>2500</code> 修改成 <code>12500</code>，即把指令中的逻辑地址 <code>2500</code> 与本程序在内存中的起始地址 <code>10000</code> 相加，才得到正确的物理地址 <code>12500</code>。</strong>除了数据地址应修改外，指令地址也须做同样的修改，即将指令的逻辑地址 <code>1000</code> 与起始地址 <code>10000</code> 相加，得到绝对地址 <code>11000</code>。<strong>通常，把在装入时对目标程序中指令和数据地址的修改过程称为重定位。</strong>又因为<strong>地址变换通常是在进程装入时一次完成的，以后不再改变，故称为静态重定位。</strong></p>
+<h3 id="动态运行时的装入方式dynamic-run-time-loading-mode">动态运行时的装入方式（Dynamic Run-time Loading Mode）</h3>
+<p>可重定位装入方式可将装入模块装入到内存中任何允许的位置，故可用于多道程序环境。<strong>但该方式并不允许程序运行时在内存中移动位置。</strong>因为，<strong>程序在内存中的移动，意味着它的物理位置发生了变化，这时必须对程序和数据的地址（绝对地址）进行修改后方能运行。</strong>然而，实际情况是，在运行过程中它在内存中的位置可能经常要改变，例如，<strong>在具有对换功能的系统中，一个进程可能被多次换出，又多次被换入，每次换入后的位置通常是不同的。在这种情况下，就应采用动态运行时装入的方式。</strong> 动态运行时的装入程序<strong>在把装入模块装入t程序真正要执行时才进行。</strong>因此，装入内存后的所有地址都仍是逻辑地址。<strong>为使地址转换不影响指令的执行速度，这种方式需要一个重定位寄存器的支持。</strong></p>
+<h2 id="内存数据存储方式">内存数据存储方式</h2>
+<h3 id="背景">背景</h3>
+<p>内存连续分配方式会形成许多“碎片”。 将一个进程直接分散地装入到许多不相邻接的分区中，便可充分地利用内存空间。</p>
+<p>基于这一思想而产生了<strong>离散分配方式</strong>，根据在<strong>离散分配时所分配地址空间的基本单位</strong>的不同，又可将离散分配分为以下三种： 1、<strong>分页存储管理方式</strong>。在该方式中，<strong>将用户程序的地址空间分为若干个固定大小的区域，称为“页”或“页面”。</strong>典型的页面大小为<strong><code>1KB</code></strong>。相应地，<strong>也将内存空间分为若干个物理块或页框（frame），页和块的大小相同。</strong>这样可将用户程序的任一页放入任一物理块中，实现了离散分配。 2、<strong>分段存储管理方式</strong>。<strong>将用户程序的地址空间分为若干个大小不同的段，每段可定义一组相对完整的信息。</strong>在<strong>存储器分配时，以段为单位</strong>，这些段在内存中可以不相邻接，所以也同样实现了离散分配。</p>
 <p>3、<strong>段页式存储管理方式</strong>。这是<strong>分页和分段两种存储管理方式相结合的产物</strong>。它同时具有两者的优点，是<strong>目前应用较广泛的一种存储管理方式。</strong></p>
-<h4 id="逻辑地址（相对地址）"><a href="#逻辑地址（相对地址）" class="headerlink" title="逻辑地址（相对地址）"></a>逻辑地址（相对地址）</h4><p>逻辑地址空间是指一个源程序在编译或者连接装配后指令和数据所用的所有<font color="red"><strong>相对地址</strong></font>的空间。它是作业进入内存，其<strong>程序、数据在内存中定位的参数。</strong>起到的是一个相对定位的作用。逻辑地址是应用程序角度看到的内存单元（memory cell）、存储单元（storage element）、网络主机（network host）的地址。 </p>
-<h4 id="物理地址（绝对地址）"><a href="#物理地址（绝对地址）" class="headerlink" title="物理地址（绝对地址）"></a>物理地址（绝对地址）</h4><p>在存储器里以<font color="red"><strong>字节（byte）为单位</strong></font>存储信息，为正确地存放或取得信息，每一个字节单元给以一个唯一的存储器地址，称为物理地址（Physical Address），又叫实际地址或绝对地址。</p>
-<h4 id="从逻辑地址到物理地址"><a href="#从逻辑地址到物理地址" class="headerlink" title="从逻辑地址到物理地址"></a>从逻辑地址到物理地址</h4><p>通过地址翻译器（address translator）或映射函数可以把逻辑地址转化为物理地址。</p>
-<h4 id="32位系统和64位系统的地址空间"><a href="#32位系统和64位系统的地址空间" class="headerlink" title="32位系统和64位系统的地址空间"></a>32位系统和64位系统的地址空间</h4><p>这里指的是物理地址空间，一个地址是一个字节，所以32位系统，有：</p>
-<script type="math/tex; mode=display">
-2^2 \times 2^{10} \times 2^{10} \times 2^{10}\ byte =  2^2 \times 2^{10} \times 2^{10} KB = 2^2 \times 2^{10} MB  = 2^2 GB</script><p>个字节可以得到唯一的、独一无二的地址，所以地址空间是 <code>4GB</code>。同理，64位系统，有：</p>
-<script type="math/tex; mode=display">
-2^4 \times 2^{10} \times 2^{10} \times 2^{10} \times 2^{10} \times 2^{10} \times 2^{10}\ byte</script><p>个字节可以得到唯一的、独一无二的地址，$1$ EB = $1024$ PB = $1024^2$ TB = $1024^3$ GB = $1024^4$ MB = $1024^5$ KB = $1024^6$ Byte，所以地址空间是 <code>16EB</code> 。<br>网络带宽的单位是：bps，b是bit（比特），bit per second， 如1Mbps。<br>网络下载速度的单位是：Bps，byte （字节）， byte per second，如100Kb/s，1 Bps = 8bps。</p>
-<div class="table-container">
+<h4 id="逻辑地址相对地址">逻辑地址（相对地址）</h4>
+<p>逻辑地址空间是指一个源程序在编译或者连接装配后指令和数据所用的所有<font color="red"><strong>相对地址</strong></font>的空间。它是作业进入内存，其<strong>程序、数据在内存中定位的参数。</strong>起到的是一个相对定位的作用。逻辑地址是应用程序角度看到的内存单元（memory cell）、存储单元（storage element）、网络主机（network host）的地址。</p>
+<h4 id="物理地址绝对地址">物理地址（绝对地址）</h4>
+<p>在存储器里以<font color="red"><strong>字节（byte）为单位</strong></font>存储信息，为正确地存放或取得信息，每一个字节单元给以一个唯一的存储器地址，称为物理地址（Physical Address），又叫实际地址或绝对地址。</p>
+<h4 id="从逻辑地址到物理地址">从逻辑地址到物理地址</h4>
+<p>通过地址翻译器（address translator）或映射函数可以把逻辑地址转化为物理地址。</p>
+<h4 id="位系统和64位系统的地址空间">32位系统和64位系统的地址空间</h4>
+<p>这里指的是物理地址空间，一个地址是一个字节，所以32位系统，有： <span class="math display">\[
+2^2 \times 2^{10} \times 2^{10} \times 2^{10}\ byte =  2^2 \times 2^{10} \times 2^{10} KB = 2^2 \times 2^{10} MB  = 2^2 GB
+\]</span> 个字节可以得到唯一的、独一无二的地址，所以地址空间是 <code>4GB</code>。同理，64位系统，有： <span class="math display">\[
+2^4 \times 2^{10} \times 2^{10} \times 2^{10} \times 2^{10} \times 2^{10} \times 2^{10}\ byte
+\]</span> 个字节可以得到唯一的、独一无二的地址，<span class="math inline">\(1\)</span> EB = <span class="math inline">\(1024\)</span> PB = <span class="math inline">\(1024^2\)</span> TB = <span class="math inline">\(1024^3\)</span> GB = <span class="math inline">\(1024^4\)</span> MB = <span class="math inline">\(1024^5\)</span> KB = <span class="math inline">\(1024^6\)</span> Byte，所以地址空间是 <code>16EB</code> 。 网络带宽的单位是：bps，b是bit（比特），bit per second， 如1Mbps。 网络下载速度的单位是：Bps，byte （字节）， byte per second，如100Kb/s，1 Bps = 8bps。</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>中文单位</th>
 <th>中文简称</th>
 <th>英文单位</th>
@@ -315,117 +340,125 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>位</td>
 <td>比特</td>
 <td>bit</td>
 <td>b</td>
-<td>$0.125$</td>
+<td><span class="math inline">\(0.125\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>字节</td>
 <td>字节</td>
 <td>Byte</td>
 <td>B</td>
-<td>$1$</td>
+<td><span class="math inline">\(1\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>千字节</td>
 <td>千字节</td>
 <td>KiloByte</td>
 <td>KB</td>
-<td>$2^{10}$</td>
+<td><span class="math inline">\(2^{10}\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>兆字节</td>
 <td>兆</td>
 <td>MegaByte</td>
 <td>MB</td>
-<td>$2^{20}$</td>
+<td><span class="math inline">\(2^{20}\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>吉字节</td>
 <td>十亿/千兆</td>
 <td>GigaByte</td>
 <td>GB</td>
-<td>$2^{30}$</td>
+<td><span class="math inline">\(2^{30}\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>太字节</td>
 <td>万亿</td>
 <td>TeraByte</td>
 <td>TB</td>
-<td>$2^{40}$</td>
+<td><span class="math inline">\(2^{40}\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>拍字节</td>
 <td>千万亿</td>
 <td>PetaByte</td>
 <td>PB</td>
-<td>$2^{50}$</td>
+<td><span class="math inline">\(2^{50}\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>艾字节</td>
 <td>百亿亿</td>
 <td>ExaByte</td>
 <td>EB</td>
-<td>$2^{60}$</td>
+<td><span class="math inline">\(2^{60}\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>泽字节</td>
 <td>十万亿亿</td>
 <td>ZettaByte</td>
 <td>ZB</td>
-<td>$2^{70}$</td>
+<td><span class="math inline">\(2^{70}\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>尧字节</td>
 <td>一亿亿亿</td>
 <td>YottaByte</td>
 <td>YB</td>
-<td>$2^{80}$</td>
+<td><span class="math inline">\(2^{80}\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>珀字节</td>
 <td>千亿亿亿</td>
 <td>BrontoByte</td>
 <td>BB</td>
-<td>$2^{90}$</td>
+<td><span class="math inline">\(2^{90}\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>诺字节</td>
 <td>一百万亿亿亿</td>
 <td>NonaByte</td>
 <td>NB</td>
-<td>$2^{100}$</td>
+<td><span class="math inline">\(2^{100}\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>刀字节</td>
 <td>十亿亿亿亿</td>
 <td>DoggaByte</td>
 <td>DB</td>
-<td>$2^{110}$</td>
+<td><span class="math inline">\(2^{110}\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>馈字节</td>
 <td>万亿亿亿亿</td>
 <td>Corydonbyte</td>
 <td>CB</td>
-<td>$2^{120}$</td>
+<td><span class="math inline">\(2^{120}\)</span></td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="分页式存储方式（信息的物理单位）"><a href="#分页式存储方式（信息的物理单位）" class="headerlink" title="分页式存储方式（信息的物理单位）"></a>分页式存储方式（信息的物理单位）</h3><p>分页存储管理方式。在该方式中，将用户程序的地址空间分为若干个固定大小的区域，称为“页”或“页面”。典型的页面大小为 <code>1KB</code>。相应地，也将内存空间分为若干个物理块或页框（frame），页和块的大小相同。这样可将用户程序的任一页放入任一物理块中，实现了离散分配。</p>
-<h4 id="页面、物理块、碎片、页面大小"><a href="#页面、物理块、碎片、页面大小" class="headerlink" title="页面、物理块、碎片、页面大小"></a>页面、物理块、碎片、页面大小</h4><p><strong>页面</strong>，<strong>分页存储管理将进程的<font color="red">逻辑地址空间</font>分成若干个页</strong>，并为各页加以编号，从0开始，如第0页、第1页等。<br><strong>物理块</strong>，把内存的物理地址空间分成若干个块，同样也为它们加以编号，如0#块、1#块等等。<br><strong>页面与物理块的关系</strong>：在为进程分配内存时，以块为单位，将进程中的若干个页分别装入到多个可以不相邻接的物理块中。<br><strong>碎片</strong>：由于进程的最后一页经常装不满块，而形成了不可利用的碎片，称之为“页内碎片”。<br><strong>页面过小</strong>，减少内存碎片总空间的作用，有利于内存利用率的提高，会造成每个进程占用较多的页面，从而导致进程的页表过长，占用大量内存，降低页面换进换出的效率。<br><strong>页面过大</strong>，可以减少页表的长度，提高页面换进换出的速度，但却又会使页内碎片增大。<br>因此，页面的大小应选择适中，且页面大小应是2的幂，通常为 <code>1KB</code> - <code>8KB</code>。</p>
-<h4 id="地址结构"><a href="#地址结构" class="headerlink" title="地址结构"></a>地址结构</h4><p><img src="https://i.loli.net/2020/04/04/uY7KSnfC6vxPOi9.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_13-13-12.png"></p>
+<h3 id="分页式存储方式信息的物理单位">分页式存储方式（信息的物理单位）</h3>
+<p>分页存储管理方式。在该方式中，将用户程序的地址空间分为若干个固定大小的区域，称为“页”或“页面”。典型的页面大小为 <code>1KB</code>。相应地，也将内存空间分为若干个物理块或页框（frame），页和块的大小相同。这样可将用户程序的任一页放入任一物理块中，实现了离散分配。</p>
+<h4 id="页面物理块碎片页面大小">页面、物理块、碎片、页面大小</h4>
+<p><strong>页面</strong>，<strong>分页存储管理将进程的<font color="red">逻辑地址空间</font>分成若干个页</strong>，并为各页加以编号，从0开始，如第0页、第1页等。 <strong>物理块</strong>，把内存的物理地址空间分成若干个块，同样也为它们加以编号，如0#块、1#块等等。 <strong>页面与物理块的关系</strong>：在为进程分配内存时，以块为单位，将进程中的若干个页分别装入到多个可以不相邻接的物理块中。 <strong>碎片</strong>：由于进程的最后一页经常装不满块，而形成了不可利用的碎片，称之为“页内碎片”。 <strong>页面过小</strong>，减少内存碎片总空间的作用，有利于内存利用率的提高，会造成每个进程占用较多的页面，从而导致进程的页表过长，占用大量内存，降低页面换进换出的效率。 <strong>页面过大</strong>，可以减少页表的长度，提高页面换进换出的速度，但却又会使页内碎片增大。 因此，页面的大小应选择适中，且页面大小应是2的幂，通常为 <code>1KB</code> - <code>8KB</code>。</p>
+<h4 id="地址结构">地址结构</h4>
+<figure>
+<img src="https://i.loli.net/2020/04/04/uY7KSnfC6vxPOi9.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_13-13-12.png" /><figcaption aria-hidden="true">Snipaste_2020-04-04_13-13-12.png</figcaption>
+</figure>
 <p>它包含两部分内容：前一部分为页号 <code>P</code>，后一部分为位（偏）移量 <code>w</code>，即<strong>页内地址</strong>。图中的地址长度为32位，其中<code>0~11</code>位为位（偏）移量（页内地址），即每页的大小为 <code>4KB</code>；<code>12~31</code> 位为页号，地址空间最多允许有 <code>1MB</code> 页，一共有 <code>4GB</code> 的地址空间。</p>
-<p>对于特定机器，如果逻辑空间中的地址为 <code>A</code>，页面大小为 <code>L</code>，则页号 <code>P</code> 和 页内地址 <code>d</code> 可按照下式求得：</p>
-<script type="math/tex; mode=display">
-P = INT[\frac{A}{L}],\ d = A\ MOD\ L</script><p>INT是整除函数，MOD是取余函数。例如，其系统的页面大小为<code>1KB</code>，设 <code>A=2170B</code>，则由上式可以求得 <code>P=2</code>，<code>d=122</code>。</p>
-<h4 id="分页式存储方式地址映射"><a href="#分页式存储方式地址映射" class="headerlink" title="分页式存储方式地址映射"></a>分页式存储方式地址映射</h4><p>为保证进程仍然能够正确地运行，即能在内存中找到每个页面所对应的物理块，系统又为每个进程建立了一张<strong>页面映像表，简称页表，每个进程只有一张页表</strong>。进程地址空间内的所有页（0～n），依次在页表中有一页表项，其中记录了相应页在内存中对应的物理块号。<strong>进程执行时，通过查找该表，即可找到每页在内存中的物理块号。</strong>可见，页表的作田是<strong>实现从页号到物理块号的地址映射。</strong></p>
-<p><img src="https://i.loli.net/2020/04/04/ePWEvoYf3IXa7Dq.png" srcset="/img/loading.gif" alt="页表的作用.png"></p>
-<h4 id="分页系统的地址变换机构"><a href="#分页系统的地址变换机构" class="headerlink" title="分页系统的地址变换机构"></a>分页系统的地址变换机构</h4><blockquote>
+<p>对于特定机器，如果逻辑空间中的地址为 <code>A</code>，页面大小为 <code>L</code>，则页号 <code>P</code> 和 页内地址 <code>d</code> 可按照下式求得： <span class="math display">\[
+P = INT[\frac{A}{L}],\ d = A\ MOD\ L
+\]</span> INT是整除函数，MOD是取余函数。例如，其系统的页面大小为<code>1KB</code>，设 <code>A=2170B</code>，则由上式可以求得 <code>P=2</code>，<code>d=122</code>。</p>
+<h4 id="分页式存储方式地址映射">分页式存储方式地址映射</h4>
+<p>为保证进程仍然能够正确地运行，即能在内存中找到每个页面所对应的物理块，系统又为每个进程建立了一张<strong>页面映像表，简称页表，每个进程只有一张页表</strong>。进程地址空间内的所有页（0～n），依次在页表中有一页表项，其中记录了相应页在内存中对应的物理块号。<strong>进程执行时，通过查找该表，即可找到每页在内存中的物理块号。</strong>可见，页表的作田是<strong>实现从页号到物理块号的地址映射。</strong></p>
+<figure>
+<img src="https://i.loli.net/2020/04/04/ePWEvoYf3IXa7Dq.png" srcset="/img/loading.gif" alt="页表的作用.png" /><figcaption aria-hidden="true">页表的作用.png</figcaption>
+</figure>
+<h4 id="分页系统的地址变换机构">分页系统的地址变换机构</h4>
+<blockquote>
 <p>基本的地址变换机构</p>
 </blockquote>
 <p>将用户地址空间中的逻辑地址变换为内存空间中的物理地址，由于它执行的频率非常高，<strong>每条指令的地址都需要进行变换</strong>，因此需要采用硬件来实现。<strong>页表功能是由一组专门的寄存器来实现的。</strong></p>
@@ -434,12 +467,14 @@ P = INT[\frac{A}{L}],\ d = A\ MOD\ L</script><p>INT是整除函数，MOD是取�
 <p><font color="blue"><strong>平时</strong></font>，进程未执行时，<strong>页表的始址和页表长度存放在本进程的PCB中。</strong>当调度程序调度到某进程时，才将这两个数据装入页表寄存器中。</p>
 <p><font color="blue"><strong>当进程要访问某个逻辑地址中的数据时</strong></font>，<font color='red'><strong>分页地址变换机构</strong></font>会自动地将<strong>逻辑地址（相对地址）</strong>分为页号和页内地址两部分，放到<strong>页表寄存器</strong>，这里的页表寄存器和下面的段表寄存器，都是<strong>用来存表在内存中的起始位置和表长度</strong>的，再以页号为索引去检索页表。</p>
 <p><strong>越界检查</strong>：查找操作由硬件执行，在执行检索之前，先将页号与页表长度进行比较，如果页号大于或等于页表长度，则表示本次所访问的地址已超越进程的地址空间，产生一个地址越界中断。</p>
-<p><strong>页号对应块号计算</strong>：若未出现越界错误，则将页表始址（page_table_start_address）与页号（page_number）和<strong>页表项长度（page_entry_length</strong>）的乘积相加，</p>
-<script type="math/tex; mode=display">
-page\_entry\_address = page\_table\_start\_address + page\_number \times page\_entry\_length</script><p>得到该逻辑地址（相对地址）的页表项地址（page_entry_address）（页表存在内存中，page_entry_address也是一个<strong>内存物理地址</strong>）中的位置，于是可以从中得到该页的<strong>物理块号</strong>。</p>
+<p><strong>页号对应块号计算</strong>：若未出现越界错误，则将页表始址（page_table_start_address）与页号（page_number）和<strong>页表项长度（page_entry_length</strong>）的乘积相加， <span class="math display">\[
+page\_entry\_address = page\_table\_start\_address + page\_number \times page\_entry\_length
+\]</span> 得到该逻辑地址（相对地址）的页表项地址（page_entry_address）（页表存在内存中，page_entry_address也是一个<strong>内存物理地址</strong>）中的位置，于是可以从中得到该页的<strong>物理块号</strong>。</p>
 <p><strong>获得物理地址</strong>：将<strong>物理块号</strong>装入<strong>物理地址寄存器</strong>中。与此同时，再将有<strong>逻辑地址（相对地址）寄存器</strong>中的页内地址（页内地址就是位（偏）移量 <code>w</code>）送入<strong>物理地址寄存器</strong>的<strong>块内地址字段</strong>中。</p>
 <p>这样便完成了从逻辑地址到物理地址的变换。图4-15示出了分页系统的地址变换机构。</p>
-<p><img src="https://i.loli.net/2020/04/04/xXe72hRFkTI8bJO.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_14-00-32.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/04/xXe72hRFkTI8bJO.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_14-00-32.png" /><figcaption aria-hidden="true">Snipaste_2020-04-04_14-00-32.png</figcaption>
+</figure>
 <figure class="highlight fix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fix"><span class="hljs-attr">1、从PCB中取出页表始址和页表长度，放入页表寄存器。</span><br><span class="hljs-attr">2、判断页号是否越界。</span><br><span class="hljs-attr">3、不越界的情况下，页表始址 + 页号 * 页表项长 </span>=<span class="hljs-string"> 页表项地址，读取页表项地址得到物理块号。</span><br><span class="hljs-string">4、将物理块号装入物理地址寄存器中，加上页内偏移地址就是物理地址。</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <p>具有快表的地址变换机构</p>
@@ -448,13 +483,16 @@ page\_entry\_address = page\_table\_start\_address + page\_number \times page\_e
 <p>为了提高地址变换速度，可在<strong>地址变换机构中增设一个具有并行查寻能力的特殊高速缓冲寄存器，又称为“联想寄存器”（Associative Memory），或称为“快表”，<font color="red">联想寄存器就是快表</font>。</strong></p>
 <p>此时的地址变换过程是：在CPU给出有效地址后，由地址变换机构自动地将页号 <code>P</code> 送入高速缓冲寄存器，并将此页号与高速缓存中的所有页号进行比较，<strong>若其中有与此相匹配的页号</strong>，便表示所要访问的页表项在快表中。于是，可直接从快表中读出该页所对应的物理块号，并送到物理地址寄存器中。</p>
 <p>如在快表中<strong>未找到</strong>对应的页表项，则还须再访问内存中的页表，找到后，把从页表项中读出的物理块号送往地址寄存器；同时，再将此页表项存入快表的一个寄存器单元中，亦即，重新修改快表。但如果联想寄存器已满，则OS必须找到一个老的且已被认为是不再需要的页表项，将它换出。图4-16示出了具有快表的地址变换机构。</p>
-<p><img src="https://i.loli.net/2020/04/04/lGrzAgBFotsJXD2.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_14-00-45.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/04/lGrzAgBFotsJXD2.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_14-00-45.png" /><figcaption aria-hidden="true">Snipaste_2020-04-04_14-00-45.png</figcaption>
+</figure>
 <p>由于成本的关系，快表不可能做得很大，通常只存放 <code>16~512</code> 个页表项，据统计，从快表中能找到所需页表项的概率可达90%以上。这样，由于增加了地址变换机构而造成的速度损失可减少到10%以下，达到了可接受的程度。</p>
-<h4 id="多级分页存储方式"><a href="#多级分页存储方式" class="headerlink" title="多级分页存储方式"></a>多级分页存储方式</h4><p>上述进程页表的<strong>基本结构</strong>仅适合于小进程地址空间，在大地址空间下，该结构发生了变化，采用了多级分页结构。</p>
+<h4 id="多级分页存储方式">多级分页存储方式</h4>
+<p>上述进程页表的<strong>基本结构</strong>仅适合于小进程地址空间，在大地址空间下，该结构发生了变化，采用了多级分页结构。</p>
 <blockquote>
 <p>为什么要有多级分页存储？</p>
 </blockquote>
-<p>举个例子：以32位系统为例，虚拟空间为 <code>4GB</code>，如果采用一级分页存储方式且一个<strong>页面</strong>大小为 <code>4KB</code>，就需要一个长度为 $2^{20}$ 的<strong>页表</strong>，假设单个<strong>页表项</strong>大小为  <code>4 byte</code>，那么这个<strong>页表</strong>就要占用 <code>4MB</code> 的内存空间，一个进程占用 <code>4 MB</code> 的内存保存页表，是很浪费的行为。</p>
+<p>举个例子：以32位系统为例，虚拟空间为 <code>4GB</code>，如果采用一级分页存储方式且一个<strong>页面</strong>大小为 <code>4KB</code>，就需要一个长度为 <span class="math inline">\(2^{20}\)</span> 的<strong>页表</strong>，假设单个<strong>页表项</strong>大小为 <code>4 byte</code>，那么这个<strong>页表</strong>就要占用 <code>4MB</code> 的内存空间，一个进程占用 <code>4 MB</code> 的内存保存页表，是很浪费的行为。</p>
 <p>如果采用二级分页存储方式，设置一个<strong>页目录</strong>，<strong>页目录</strong>是一个大小为 <code>4 KB</code> 的内存块，如果<strong>页目录项大小</strong>为 <code>4 byte</code>，该<strong>页目录</strong>就可以有 <code>1024</code> 个<strong>页目录项</strong>，每个<strong>页目录项</strong>中都存放着一个<strong>页表页</strong>的地址。页表本身的空间分配也是<strong>以页为单位</strong>，所谓页表页就是存储页表的那个页。则，每个<strong>运行进程</strong>都有 <code>1024</code> 个<strong>页表页</strong>，而<strong>页目录地址</strong>由<strong>全局寄存器 CR3</strong> 指出。这样一来，一个进程占用 <code>4 KB</code> 的内存保存一级页表，需要时再添加，就很节约内存空间。</p>
 <blockquote>
 <p>离散的页表页更需要页目录</p>
@@ -463,10 +501,14 @@ page\_entry\_address = page\_table\_start\_address + page\_number \times page\_e
 <blockquote>
 <p>二级页表结构及其地址映射</p>
 </blockquote>
-<p><img src="https://i.loli.net/2020/04/06/nZmHElUPWoCO3b1.jpg" srcset="/img/loading.gif" alt="v2-71dfd8150fe3f2f9e00cd8311b857864_720w.jpg"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/06/nZmHElUPWoCO3b1.jpg" srcset="/img/loading.gif" alt="v2-71dfd8150fe3f2f9e00cd8311b857864_720w.jpg" /><figcaption aria-hidden="true">v2-71dfd8150fe3f2f9e00cd8311b857864_720w.jpg</figcaption>
+</figure>
 <p><img src="https://i.loli.net/2020/04/06/1AeOtuxh9KkYbD3.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-06_13-55-21.png" style="zoom: 80%;" /></p>
-<p>每个虚址分为三个部分<br>页目录号 + 虚页号 + 页内位移<br>对于更大的虚址空间，采用二级进程页表结构可能不够，需要三级甚至更多级页表结构，64位系统就是采取4级分页存储结构。</p>
-<p><img src="https://i.loli.net/2020/04/06/mXUsIyB8YoSNQlP.jpg" srcset="/img/loading.gif" alt="ac228295fc858b5e1f8b_720w.jpg"></p>
+<p>每个虚址分为三个部分 页目录号 + 虚页号 + 页内位移 对于更大的虚址空间，采用二级进程页表结构可能不够，需要三级甚至更多级页表结构，64位系统就是采取4级分页存储结构。</p>
+<figure>
+<img src="https://i.loli.net/2020/04/06/mXUsIyB8YoSNQlP.jpg" srcset="/img/loading.gif" alt="ac228295fc858b5e1f8b_720w.jpg" /><figcaption aria-hidden="true">ac228295fc858b5e1f8b_720w.jpg</figcaption>
+</figure>
 <blockquote>
 <p>多级表页结构本质</p>
 </blockquote>
@@ -476,21 +518,34 @@ page\_entry\_address = page\_table\_start\_address + page\_number \times page\_e
 <blockquote>
 <p>图解</p>
 </blockquote>
-<p><img src="https://i.loli.net/2020/04/06/mYSLPioswAZl6dE.jpg" srcset="/img/loading.gif" alt="mm1.JPG"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/06/mYSLPioswAZl6dE.jpg" srcset="/img/loading.gif" alt="mm1.JPG" /><figcaption aria-hidden="true">mm1.JPG</figcaption>
+</figure>
 <p>上图说明了以下四点：</p>
-<p>1、  进程的4G 线性空间被划分成三个部分：进程空间（0-3G）、内核直接映射空间（3G – high_memory）、内核动态映射空间（VMALLOC_START  -  VMALLOC_END）。<br>2、  三个空间使用同一张页目录表，通过 CR3 可找到此页目录表。但不同的空间在页目录表中页对应不同的项，因此互相不冲突。<br>3、  内核初始化以后，根据实际物理内存的大小，计算出 high_memory、VMALLOC_START、VMALLOC_END 的值。并为“内核直接映射”空间建立好映射关系，所有的物理内存都可以通过此空间进行访问。<br>4、  “进程空间”和“内核动态映射空间”的映射关系是动态建立的（通过缺页异常）</p>
-<h3 id="分段式存储方式（信息的逻辑单位-一组相对完整的信息）"><a href="#分段式存储方式（信息的逻辑单位-一组相对完整的信息）" class="headerlink" title="分段式存储方式（信息的逻辑单位/一组相对完整的信息）"></a>分段式存储方式（信息的逻辑单位/一组相对完整的信息）</h3><p>分段存储管理方式。这是为了<strong>满足用户要求而形成的一种存储管理方式。<font color='red'>把用户程序的地址空间分为若干个大小不同的段，每段可定义一组相对完整的信息。</font></strong>在存储器分配时，以段为单位，这些段在内存中可以不相邻接，所以也同样实现了离散分配。 </p>
-<h4 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h4><p>1、方便编程<br>程序员们都迫切地需要访问的逻辑地址是由段名（段号）和段内偏移量（段内地址）决定的，这不仅可以方便程序员编程，也可使程序非常直观，更具可读性。<br><figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c">LOAD <span class="hljs-number">1</span>, [A] <span class="hljs-string">| &lt;D&gt;;</span><br>STORE <span class="hljs-number">1</span>, [B] <span class="hljs-string">| &lt;C&gt;;</span><br></code></pre></div></td></tr></table></figure><br>前一条指令的含义是，将分段A中D单元内的值读入寄存器1；后一条指令的含义是，将寄存器1的内容存入B分段的C单元中。<br>2、信息共享<br>3、信息保护<br>分页存储方式，同一个数据段、程序段被存储在多个页中，可能和其他程序的数据段、程序段共享一个页，分布的这么分散，无法进行信息共享和数据保护（只对某个数据段、程序段设置读写保护而不限制其他段）。<br>4、动态增长<br>数据段，在它们的使用过程中，由于数据量的不断增加，而使数据段动态增长，相应地它所需要的存储空间也会动态增加。分段存储管理方式却能较好地应对其变化。<br>5、动态链接<br>动态链接产生的完整装入模块（可执行文件），在执行时，首先将主程序和它立即需要用到的目标程序装入内存，即启动运行。程序运行过程中，当需要调用某个目标程序时，才将该段（目标程序）调入内存并进行链接。<strong>可见，动态链接要求的是以目标程序（即段）作为链接的基本单位，因此，分段存储管理方式非常适合于动态链接。</strong></p>
-<h4 id="地址结构-1"><a href="#地址结构-1" class="headerlink" title="地址结构"></a>地址结构</h4><p><img src="https://i.loli.net/2020/04/04/xb6ldoDnC7itK9j.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_17-45-41.png"></p>
+<p>1、 进程的4G 线性空间被划分成三个部分：进程空间（0-3G）、内核直接映射空间（3G – high_memory）、内核动态映射空间（VMALLOC_START - VMALLOC_END）。 2、 三个空间使用同一张页目录表，通过 CR3 可找到此页目录表。但不同的空间在页目录表中页对应不同的项，因此互相不冲突。 3、 内核初始化以后，根据实际物理内存的大小，计算出 high_memory、VMALLOC_START、VMALLOC_END 的值。并为“内核直接映射”空间建立好映射关系，所有的物理内存都可以通过此空间进行访问。 4、 “进程空间”和“内核动态映射空间”的映射关系是动态建立的（通过缺页异常）</p>
+<h3 id="分段式存储方式信息的逻辑单位一组相对完整的信息">分段式存储方式（信息的逻辑单位/一组相对完整的信息）</h3>
+<p>分段存储管理方式。这是为了<strong>满足用户要求而形成的一种存储管理方式。<font color='red'>把用户程序的地址空间分为若干个大小不同的段，每段可定义一组相对完整的信息。</font></strong>在存储器分配时，以段为单位，这些段在内存中可以不相邻接，所以也同样实现了离散分配。</p>
+<h4 id="好处">好处</h4>
+<p>1、方便编程 程序员们都迫切地需要访问的逻辑地址是由段名（段号）和段内偏移量（段内地址）决定的，这不仅可以方便程序员编程，也可使程序非常直观，更具可读性。 <figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c">LOAD <span class="hljs-number">1</span>, [A] <span class="hljs-string">| &lt;D&gt;;</span><br>STORE <span class="hljs-number">1</span>, [B] <span class="hljs-string">| &lt;C&gt;;</span><br></code></pre></div></td></tr></table></figure> 前一条指令的含义是，将分段A中D单元内的值读入寄存器1；后一条指令的含义是，将寄存器1的内容存入B分段的C单元中。 2、信息共享 3、信息保护 分页存储方式，同一个数据段、程序段被存储在多个页中，可能和其他程序的数据段、程序段共享一个页，分布的这么分散，无法进行信息共享和数据保护（只对某个数据段、程序段设置读写保护而不限制其他段）。 4、动态增长 数据段，在它们的使用过程中，由于数据量的不断增加，而使数据段动态增长，相应地它所需要的存储空间也会动态增加。分段存储管理方式却能较好地应对其变化。 5、动态链接 动态链接产生的完整装入模块（可执行文件），在执行时，首先将主程序和它立即需要用到的目标程序装入内存，即启动运行。程序运行过程中，当需要调用某个目标程序时，才将该段（目标程序）调入内存并进行链接。<strong>可见，动态链接要求的是以目标程序（即段）作为链接的基本单位，因此，分段存储管理方式非常适合于动态链接。</strong></p>
+<h4 id="地址结构-1">地址结构</h4>
+<figure>
+<img src="https://i.loli.net/2020/04/04/xb6ldoDnC7itK9j.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_17-45-41.png" /><figcaption aria-hidden="true">Snipaste_2020-04-04_17-45-41.png</figcaption>
+</figure>
 <p>在分段存储管理方式中，作业的地址空间被划分为若干个段，每个段定义了一组逻辑信息。例如，有主程序段 <code>MAIN</code>、子程序段 <code>X</code>、数据段 <code>D</code> 及栈段 <code>S</code> 等，如图所示。</p>
 <p>可用一个段号来代替段名，每个段都从0开始编址，并采用一段连续的地址空间。段的长度由相应的逻辑信息组的长度决定，因此各段的长度并不相等。</p>
 <p><strong>在分段存储方式中，用户程序的地址空间具有二维特性</strong>，每个段既包含了一部分地址空间，又标识了逻辑关系。其逻辑地址由段号（段名）和段内地址所组成。</p>
 <p>很多编程语言都支持了分段存储方式，<strong>编译程序能自动地根据源程序的情况产生若干个段。</strong>例如，Pascal编译程序可以为全局变量、用于存储相应参数及返回地址的过程调用栈、每个过程或函数的代码部分、每个过程或函数的局部变量等，分别建立各自的段。类似地，Fortran编译程序可以为公共块（Common block）建立单独的段，也可以为数组分配一个单独的段。装入程序将装入所有这些段，并为每个段赋予一个段号。</p>
-<h4 id="分段式存储方式地址映射"><a href="#分段式存储方式地址映射" class="headerlink" title="分段式存储方式地址映射"></a>分段式存储方式地址映射</h4><p><img src="https://i.loli.net/2020/04/04/Ymsyt2HuzjV5c1A.png" srcset="/img/loading.gif" alt="基于段表的地址映射.png"></p>
+<h4 id="分段式存储方式地址映射">分段式存储方式地址映射</h4>
+<figure>
+<img src="https://i.loli.net/2020/04/04/Ymsyt2HuzjV5c1A.png" srcset="/img/loading.gif" alt="基于段表的地址映射.png" /><figcaption aria-hidden="true">基于段表的地址映射.png</figcaption>
+</figure>
 <p>在分段式存储管理系统中，则是为每个分段分配一个连续的分区。</p>
 <p>类似于分页系统，<font color="red"><strong>需为每个进程建立一张段映射表，简称“段表，一个进程只有一个段表”。</strong></font>每个段在表中占有一个表项，一个<strong>表项由三个部分组成，段号、段长、基址</strong>，其中记录了<strong>该段在内存中的起始地址（又称为“基址”）和段的长度</strong>，如图4-19所示，可以发现，一个进程的所有段在内存空间中，并不是连续保存的，中间存在着间隔（图4-19中的阴影部分）。</p>
 <p>段表可以存放在一组寄存器中，以利于提高地址转换速度。但<strong>更常见的方法是将段表放在内存中。</strong>在配置了段表后，执行中的进程可通过查找段表，找到每个段所对应的内存区。可见，<strong>段表是用于实现从逻辑段到物理内存区的映射的。</strong></p>
-<h4 id="分段系统的地址变换机构"><a href="#分段系统的地址变换机构" class="headerlink" title="分段系统的地址变换机构"></a>分段系统的地址变换机构</h4><p><img src="https://i.loli.net/2020/04/04/S5Q16cLCWfXPTlN.png" srcset="/img/loading.gif" alt="分段式系统的地址变换过程.png"></p>
+<h4 id="分段系统的地址变换机构">分段系统的地址变换机构</h4>
+<figure>
+<img src="https://i.loli.net/2020/04/04/S5Q16cLCWfXPTlN.png" srcset="/img/loading.gif" alt="分段式系统的地址变换过程.png" /><figcaption aria-hidden="true">分段式系统的地址变换过程.png</figcaption>
+</figure>
 <p>为了实现进程从逻辑地址到物理地址的变换功能，在系统中设置了<strong>段表寄存器</strong>，负责存放<strong>该进程的段表在内存中的位置以及该段表的长度</strong>，用于存放<strong>段表始址</strong>和<strong>段表长度TL（仅用于判断是否越界）</strong>。</p>
 <p>在进行地址变换时，系统将逻辑地址中的<strong>段号</strong>与<strong>段表长度<code>TL</code></strong>进行比较。若 <code>S&gt;TL</code>，表示段号太大，是访问越界，于是产生越界中断信号。</p>
 <p>若未越界，则根据<strong>段表的始址</strong>和<strong>该段的段号</strong>，计算出该段对应<strong>段表项</strong>的位置（<strong>这个位置是个内存的物理地址</strong>），从中读出<strong>该段在内存的起始地址</strong>和<strong>段长<code>SL</code>（仅用于判断是否越界）</strong>。注意区分段表长度和段长的区别。</p>
@@ -501,14 +556,27 @@ page\_entry\_address = page\_table\_start\_address + page\_number \times page\_e
 <p>联想存储器（快表）在分段存储方式中的应用</p>
 </blockquote>
 <p>像分页系统一样，当段表放在内存中时，每要访问一个数据，都须<strong>访问两次内存</strong>，从而成倍地降低了计算机的速率。也增设一个联想存储器，用于保存最近常用的段表项。可以显著地减少存取数据的时间。</p>
-<h3 id="分段和分页的主要区别（面试重点）"><a href="#分段和分页的主要区别（面试重点）" class="headerlink" title="分段和分页的主要区别（面试重点）"></a>分段和分页的主要区别（面试重点）</h3><p> 1、<strong>页是信息的物理单位。</strong>采用分页存储管理方式是为实现离散分配方式，以消减内存的外零头，提高内存的利用率。或者说，分页仅仅只是<strong>系统管理上的需要，完全是系统的行为</strong>，对用户是不可见的。分段存储管理方式中的<strong>段则是信息的逻辑单位</strong>，它通常包含的是<strong>一组意义相对完整的信息</strong>。分段的目的主要在于能<strong>更好地满足用户的需要</strong>。<font color="red">最重要的区别</font><br>2、<strong>页的大小固定且由系统决定。</strong>在采用分页存储管理方式的系统中，在硬件结构上，就把用户程序的逻辑地址划分为页号和页内地址两部分，也就是说是直接由硬件实现的，因而在每个系统中只能有一种大小的页面。而<strong>段的长度却不固定，</strong>决定于用户所编写的程序，通常由编译程序在对源程序进行编译时，根据信息的性质来划分。<br>3、<strong>分页的用户程序地址空间是一维的</strong>。<strong>分页完全是系统的行为</strong>，故在分页系统中，用户程序的地址是属于<strong>单一的线性地址空间</strong>，程序员只需利用一个记忆符即可表示一个地址。而<strong>分段是用户的行为</strong>，故在分段系统中，<strong>用户程序的地址空间是二维的</strong>，程序员在标识一个地址时，既需给出<strong>段名（段号）</strong>，又需给出<strong>段内地址</strong>。页表中每一个页表项除了页号，就只有块号这一个数据，所以叫做一维。段表中除了段号，还有基址和段长，所以叫做二维。</p>
-<h3 id="段页式存储方式"><a href="#段页式存储方式" class="headerlink" title="段页式存储方式"></a>段页式存储方式</h3><p>段页式存储管理方式。这是分页和分段两种存储管理方式相结合的产物。它同时具有两者的优点，是目前应用较广泛的一种存储管理方式。段页式系统的基本原理是分段和分页原理的结合，即<strong>先将用户程序分成若干个段，再把每个段分成若干个页，还涉及一个页，并为每一个段赋予一个段名。</strong> 下图所示，给出了一个作业地址空间的结构。该作业有三个段：主程序段、子程序段和数据段；页面大小为 <code>4KB</code>。</p>
-<p><img src="https://i.loli.net/2020/04/05/2qIilKfXEgratUh.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-05_00-22-04.png"></p>
-<h4 id="地址结构-2"><a href="#地址结构-2" class="headerlink" title="地址结构"></a>地址结构</h4><p><img src="https://i.loli.net/2020/04/05/STUkgyP7do8wJzI.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-05_00-22-10.png"></p>
+<h3 id="分段和分页的主要区别面试重点">分段和分页的主要区别（面试重点）</h3>
+<p>1、<strong>页是信息的物理单位。</strong>采用分页存储管理方式是为实现离散分配方式，以消减内存的外零头，提高内存的利用率。或者说，分页仅仅只是<strong>系统管理上的需要，完全是系统的行为</strong>，对用户是不可见的。分段存储管理方式中的<strong>段则是信息的逻辑单位</strong>，它通常包含的是<strong>一组意义相对完整的信息</strong>。分段的目的主要在于能<strong>更好地满足用户的需要</strong>。<font color="red">最重要的区别</font> 2、<strong>页的大小固定且由系统决定。</strong>在采用分页存储管理方式的系统中，在硬件结构上，就把用户程序的逻辑地址划分为页号和页内地址两部分，也就是说是直接由硬件实现的，因而在每个系统中只能有一种大小的页面。而<strong>段的长度却不固定，</strong>决定于用户所编写的程序，通常由编译程序在对源程序进行编译时，根据信息的性质来划分。 3、<strong>分页的用户程序地址空间是一维的</strong>。<strong>分页完全是系统的行为</strong>，故在分页系统中，用户程序的地址是属于<strong>单一的线性地址空间</strong>，程序员只需利用一个记忆符即可表示一个地址。而<strong>分段是用户的行为</strong>，故在分段系统中，<strong>用户程序的地址空间是二维的</strong>，程序员在标识一个地址时，既需给出<strong>段名（段号）</strong>，又需给出<strong>段内地址</strong>。页表中每一个页表项除了页号，就只有块号这一个数据，所以叫做一维。段表中除了段号，还有基址和段长，所以叫做二维。</p>
+<h3 id="段页式存储方式">段页式存储方式</h3>
+<p>段页式存储管理方式。这是分页和分段两种存储管理方式相结合的产物。它同时具有两者的优点，是目前应用较广泛的一种存储管理方式。段页式系统的基本原理是分段和分页原理的结合，即<strong>先将用户程序分成若干个段，再把每个段分成若干个页，还涉及一个页，并为每一个段赋予一个段名。</strong> 下图所示，给出了一个作业地址空间的结构。该作业有三个段：主程序段、子程序段和数据段；页面大小为 <code>4KB</code>。</p>
+<figure>
+<img src="https://i.loli.net/2020/04/05/2qIilKfXEgratUh.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-05_00-22-04.png" /><figcaption aria-hidden="true">Snipaste_2020-04-05_00-22-04.png</figcaption>
+</figure>
+<h4 id="地址结构-2">地址结构</h4>
+<figure>
+<img src="https://i.loli.net/2020/04/05/STUkgyP7do8wJzI.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-05_00-22-10.png" /><figcaption aria-hidden="true">Snipaste_2020-04-05_00-22-10.png</figcaption>
+</figure>
 <p>在段页式系统中，其地址结构由段号、段内页号及页内地址三部分所组成，如图所示。</p>
-<h4 id="段页式存储方式地址映射"><a href="#段页式存储方式地址映射" class="headerlink" title="段页式存储方式地址映射"></a>段页式存储方式地址映射</h4><p><img src="https://i.loli.net/2020/04/05/wWtvyxbr1nTDEl4.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-05_00-24-57.png"></p>
+<h4 id="段页式存储方式地址映射">段页式存储方式地址映射</h4>
+<figure>
+<img src="https://i.loli.net/2020/04/05/wWtvyxbr1nTDEl4.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-05_00-24-57.png" /><figcaption aria-hidden="true">Snipaste_2020-04-05_00-24-57.png</figcaption>
+</figure>
 <p>在段页式系统中，同时配置段表和页表。段表的内容与分段系统略有不同，它不再是<strong>基址</strong>和<strong>段长</strong>，而是<strong>页表始址</strong>和<strong>页表大小（仅用于判断是否越界）</strong>。上图示出了利用段表和页表进行从用户地址空间到物理（内存）空间的映射。</p>
-<h4 id="段页系统的地址变换机构"><a href="#段页系统的地址变换机构" class="headerlink" title="段页系统的地址变换机构"></a>段页系统的地址变换机构</h4><p><img src="https://i.loli.net/2020/04/05/3kEaZRswm4unYc7.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-05_00-25-08.png"></p>
+<h4 id="段页系统的地址变换机构">段页系统的地址变换机构</h4>
+<figure>
+<img src="https://i.loli.net/2020/04/05/3kEaZRswm4unYc7.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-05_00-25-08.png" /><figcaption aria-hidden="true">Snipaste_2020-04-05_00-25-08.png</figcaption>
+</figure>
 <p>配置一个段表寄存器，其中存放<strong>段表始址</strong>和<strong>段长<code>TL</code>（仅用于判断是否越界）</strong>。</p>
 <p>先利用段号<code>S</code>，将它与段长<code>TL</code>进行比较。若<code>S&lt;TL</code>，表示未越界，于是利用<strong>段表始址</strong>和<strong>段号</strong>来求出该段所对应的<strong>段表项在段表中的位置</strong>（这个地址是一个内存中的物理地址），从中得到该段表项的<strong>页表始址和页表大小</strong>，之后的时期就和分页系统一样了。</p>
 <p>利用逻辑地址中的<strong>段内页号P、页表始址和页表大小</strong>来获得对应页的<strong>页表项位置（这个地址是一个内存中的物理地址）</strong>，从中读出该页所在的<strong>物理块号b</strong>。</p>
@@ -518,70 +586,77 @@ page\_entry\_address = page\_table\_start\_address + page\_number \times page\_e
 <p>联想存储器（快表）在分段存储方式中的应用</p>
 </blockquote>
 <p>在段页式系统中，为了获得一条指令或数据，须<strong>三次访问内存</strong>。第一次访问是访问内存中的段表，从中取得<strong>页表始址</strong>；第二次访问是访问内存中的页表，从中取出该页所在的<strong>物理块号</strong>，并将该块号与页内地址一起形成指令或数据的物理地址：第三次访问才是真正从第二次访问所得的地址中取出指令或数据。这使访问内存的次数增加了近两倍。为了提高执行速度，在地址变换机构中增设一个高速缓冲寄存器。每次访问它时，都须同时利用段号和页号去检索高速缓存，若找到匹配的表项，便可从中得到相应页的物理块号，用来与页内地址一起形成物理地址；若未找到匹配表项，则仍需第三次访问内存。</p>
-<h1 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>所谓虚拟存储器，是指具有请求调入功能和置换功能，能从逻辑上对内存容量加以扩充的一种存储器系统。</p>
-<p>其逻辑容量由内存容量和外存容量之和所决定<br>运行速度接近于内存速度，而每位的成本却又接近于外存。</p>
+<h1 id="虚拟存储器">虚拟存储器</h1>
+<h2 id="定义">定义</h2>
+<p>所谓虚拟存储器，是指具有请求调入功能和置换功能，能从逻辑上对内存容量加以扩充的一种存储器系统。</p>
+<p>其逻辑容量由内存容量和外存容量之和所决定 运行速度接近于内存速度，而每位的成本却又接近于外存。</p>
 <p><font color='red'><strong>关于内存条和虚拟存储器：</strong></font>以一个32位系统为例，寻址空间为 <code>4GB</code>，如果该计算机的内存为 <code>16GB</code>，如果不使用虚拟存储器，<strong>要满足每个进程自己独自占有了当前系统的 <code>4G</code> 地址空间的条件</strong>，只能在多道程序的操作系统中满足 4（16/4）个进程的运行。但是，如果使用了虚拟存储技术，任何一个新进来的进程，都可以拥有虚拟的完整的 <code>4GB</code>的地址空间。</p>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>从逻辑上扩充内存容量，解决单个作业太大无法加载入容量有限的物理内存或者同时有大量作业需要运行而物理内存太小的问题。</p>
+<h2 id="作用">作用</h2>
+<p>从逻辑上扩充内存容量，解决单个作业太大无法加载入容量有限的物理内存或者同时有大量作业需要运行而物理内存太小的问题。</p>
 <p>不同进程在运行过程中，它所看到的是自己独自占有了当前系统的 <code>4G</code> 地址空间。比如说进程A的寻址空间是 <code>0x00000000</code> 到 <code>0xffffffff</code> ，进程B也是这个，那岂不是这两个进程的地址空间是一样的 ？这两个进程的地址空间是不一样的。打个比方，<strong>每个进程的地址空间就好像是不同地区的固定电话号码空间，不同地区的电话号码可以重叠，但是不会互相影响,是不同的东西。</strong></p>
 <p>总之每个进程被分配一个地址空间（称为虚拟地址空间），进程中的程序使用的地址就是这个地址空间的地址（称为虚拟地址），而实际进行的内存读写使用的是内存条的物理地址，<strong>在程序进行内存读写时，有一个称为内存管理单元的硬件(MMU)将虚拟地址映射到物理地址进行读写。</strong></p>
-<p>所有进程共享同一个物理内存，每个进程只把自己<strong>目前需要的虚拟内存空间映射并存储到物理内存上。</strong> 事实上，在每个进程创建加载时，内核只是为进程“创建”了虚拟内存的布局，具体就是初始化进程控制表中内存相关的链表，实际上并不立即就把虚拟内存对应位置的程序数据和代码（比如.text .data段）拷贝到物理内存中，只是<strong>建立好虚拟内存和磁盘文件之间的映射</strong>就好（叫做存储器映射），等到运行到对应的程序时，才会<strong>通过缺页异常，来拷贝数据。</strong> 还有进程运行过程中，要动态分配内存，比如<code>malloc</code>时，也只是分配了虚拟内存，即为这块虚拟内存对应的页表项做相应设置。<br>当进程真正访问到此数据时，才引发缺页异常，然后调用虚拟内存管理系统的调页（段）功能和置换功能，将该数据放入到内存中。</p>
-<h2 id="所依赖的技术原理"><a href="#所依赖的技术原理" class="headerlink" title="所依赖的技术原理"></a>所依赖的技术原理</h2><p>虚拟存储器所依赖的技术原理是局部性原理，其主要表现为两个方面：</p>
-<ul>
-<li>时间局部性：同一指令和数据，在一段时间内，会被执行多次，这是因为程序中存在大量循环。</li>
-<li>空间局部性：体现为程序访问了某个存储空间之后，不久之后，附近的存储单元也会被访问。这是因为程序是顺序执行的。</li>
-</ul>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>多次性、对换性、虚拟性</p>
-<h2 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h2><p>基于局部性原理可知，应用程序在运行之前没有必要将之全部装入内存，而仅须将那些当前要运行的少数页面或段先装入内存便可运行，其余部分暂留在盘上。</p>
+<p>所有进程共享同一个物理内存，每个进程只把自己<strong>目前需要的虚拟内存空间映射并存储到物理内存上。</strong> 事实上，在每个进程创建加载时，内核只是为进程“创建”了虚拟内存的布局，具体就是初始化进程控制表中内存相关的链表，实际上并不立即就把虚拟内存对应位置的程序数据和代码（比如.text .data段）拷贝到物理内存中，只是<strong>建立好虚拟内存和磁盘文件之间的映射</strong>就好（叫做存储器映射），等到运行到对应的程序时，才会<strong>通过缺页异常，来拷贝数据。</strong> 还有进程运行过程中，要动态分配内存，比如<code>malloc</code>时，也只是分配了虚拟内存，即为这块虚拟内存对应的页表项做相应设置。 当进程真正访问到此数据时，才引发缺页异常，然后调用虚拟内存管理系统的调页（段）功能和置换功能，将该数据放入到内存中。</p>
+<h2 id="所依赖的技术原理">所依赖的技术原理</h2>
+<p>虚拟存储器所依赖的技术原理是局部性原理，其主要表现为两个方面： - 时间局部性：同一指令和数据，在一段时间内，会被执行多次，这是因为程序中存在大量循环。 - 空间局部性：体现为程序访问了某个存储空间之后，不久之后，附近的存储单元也会被访问。这是因为程序是顺序执行的。</p>
+<h2 id="特点">特点</h2>
+<p>多次性、对换性、虚拟性</p>
+<h2 id="基本工作原理">基本工作原理</h2>
+<p>基于局部性原理可知，应用程序在运行之前没有必要将之全部装入内存，而仅须将那些当前要运行的少数页面或段先装入内存便可运行，其余部分暂留在盘上。</p>
 <p>程序在运行时，如果它所要访问的页（段）已调入内存，便可继续执行下去；</p>
 <p>但如果程序所要访问的页（段）尚未调入内存（称为缺页或缺段），便<strong>发出缺页（段）中断请求</strong>，此时OS将利用请求<strong>调页（段）功能</strong>将它们调入内存，以使进程能继续执行下去。</p>
 <p>如果此时内存已满，无法再装入新的页（段），OS还须再利用页（段）的<strong>置换功能</strong>，将内存中暂时不用的页（段）调至盘上，腾出足够的内存空间后，再将要访问的<strong>页（段）调入</strong>内存，使程序继续执行下去。</p>
 <p>这样，便可使一个大的用户程序在较小的内存空间中运行，也可在内存中同时装入更多的进程，使它们并发执行。</p>
-<h2 id="CPU在内存中寻址的能力"><a href="#CPU在内存中寻址的能力" class="headerlink" title="CPU在内存中寻址的能力"></a>CPU在内存中寻址的能力</h2><p>CPU在内存中寻址的能力（寻址空间的大小）由什么决定？寻址能力就是CPU最大能查找多大范围的地址，所以，CPU对于内存寻址的能力又称为寻址空间。</p>
-<p>CPU寻址内存的能力取决于系统的地址总线的地址寄存器的宽度（位数），32位系统，2的2次方 <em> 2的十次方(Byte) </em> 2的十次方(KB) * 2的十次方(MB) = 4G，也就是说内核寻址空间为4G。</p>
-<p>64位系统的寻址空间是，16E。<br>1E = 1024P = 1024 * 1024 TB = 1024 * 1024 * 1024 GB = 1024 * 1024 * 1024 * 1024 MB = 1024 * 1024 * 1024 * 1024 * 1024 KB = 1024 * 1024 * 1024 * 1024 * 1024 * 1024 Byte</p>
-<h2 id="虚拟存储器的好处"><a href="#虚拟存储器的好处" class="headerlink" title="虚拟存储器的好处"></a>虚拟存储器的好处</h2><ul>
-<li>扩大地址空间，地址空间由处理器的寻址能力决定，比如32位操作系统的地址空间就是4G。内核空间为1G，用户空间为3G，使用了虚拟存储器技术，地址空间的大小就不仅限于4G了，而是对于每个进程都是4个G。</li>
-<li>内存保护：每个进程运行在各自的虚拟内存地址空间，互相不能干扰对方。虚存还对特定的内存地址提供写保护，可以防止代码或数据被恶意篡改。</li>
-<li>公平内存分配。采用了虚存之后，每个进程都相当于有同样大小的虚存空间。</li>
-<li><p>当不同的进程使用同样的代码时，比如库文件中的代码，物理内存中可以只存储一份这样的代码，不同的进程只需要把自己的虚拟内存映射过去就可以了，节省内存。</p>
-</li>
-<li><p>虚拟内存很适合在多道程序设计系统中使用，许多程序的片段同时保存在内存中。当一个程序等待它的一部分读入内存时，可以把CPU交给另一个进程使用。在内存中可以保留多个进程，系统并发度提高。</p>
-</li>
-<li><p>在程序需要分配连续的内存空间的时候，只需要在虚拟内存空间分配连续空间，而不需要实际物理内存的连续空间，可以利用碎片。</p>
-</li>
+<h2 id="cpu在内存中寻址的能力">CPU在内存中寻址的能力</h2>
+<p>CPU在内存中寻址的能力（寻址空间的大小）由什么决定？寻址能力就是CPU最大能查找多大范围的地址，所以，CPU对于内存寻址的能力又称为寻址空间。</p>
+<p>CPU寻址内存的能力取决于系统的地址总线的地址寄存器的宽度（位数），32位系统，2的2次方 * 2的十次方(Byte) * 2的十次方(KB) * 2的十次方(MB) = 4G，也就是说内核寻址空间为4G。</p>
+<p>64位系统的寻址空间是，16E。 1E = 1024P = 1024 * 1024 TB = 1024 * 1024 * 1024 GB = 1024 * 1024 * 1024 * 1024 MB = 1024 * 1024 * 1024 * 1024 * 1024 KB = 1024 * 1024 * 1024 * 1024 * 1024 * 1024 Byte</p>
+<h2 id="虚拟存储器的好处">虚拟存储器的好处</h2>
+<ul>
+<li><p>扩大地址空间，地址空间由处理器的寻址能力决定，比如32位操作系统的地址空间就是4G。内核空间为1G，用户空间为3G，使用了虚拟存储器技术，地址空间的大小就不仅限于4G了，而是对于每个进程都是4个G。</p></li>
+<li><p>内存保护：每个进程运行在各自的虚拟内存地址空间，互相不能干扰对方。虚存还对特定的内存地址提供写保护，可以防止代码或数据被恶意篡改。</p></li>
+<li><p>公平内存分配。采用了虚存之后，每个进程都相当于有同样大小的虚存空间。</p></li>
+<li><p>当不同的进程使用同样的代码时，比如库文件中的代码，物理内存中可以只存储一份这样的代码，不同的进程只需要把自己的虚拟内存映射过去就可以了，节省内存。</p></li>
+<li><p>虚拟内存很适合在多道程序设计系统中使用，许多程序的片段同时保存在内存中。当一个程序等待它的一部分读入内存时，可以把CPU交给另一个进程使用。在内存中可以保留多个进程，系统并发度提高。</p></li>
+<li><p>在程序需要分配连续的内存空间的时候，只需要在虚拟内存空间分配连续空间，而不需要实际物理内存的连续空间，可以利用碎片。</p></li>
 </ul>
-<h2 id="虚拟存储器同样有其缺点"><a href="#虚拟存储器同样有其缺点" class="headerlink" title="虚拟存储器同样有其缺点"></a>虚拟存储器同样有其缺点</h2><ul>
+<h2 id="虚拟存储器同样有其缺点">虚拟存储器同样有其缺点</h2>
+<ul>
 <li>虚存的管理需要建立很多数据结构，这些数据结构要占用额外的内存。（注：管理空闲块的链表）</li>
 <li>虚拟地址到物理地址的转换，增加了指令的执行时间</li>
 <li>页面的换入换出需要磁盘I/O，这是很耗时的</li>
 <li>如果一页中只有一部分数据，会浪费内存</li>
 <li>同时，虚拟存储器还需要一定的硬件支持：一定容量内，外存；页表机制；中断机构；地址变换机构。</li>
 </ul>
-<h2 id="三种虚拟内存实现方法"><a href="#三种虚拟内存实现方法" class="headerlink" title="三种虚拟内存实现方法"></a>三种虚拟内存实现方法</h2><p>常用虚拟内存实现有三种：请求分页存储管理方式，请求分段存储管理方式，请求段页存储管理方式。</p>
-<h2 id="请求分页存储管理方式"><a href="#请求分页存储管理方式" class="headerlink" title="请求分页存储管理方式"></a>请求分页存储管理方式</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>请求分页存储管理系统是在分页系统的基础上增加了<strong>请求调页功能</strong>和<strong>页面置换功能</strong>所形成的页式虚拟存储系统。</p>
+<h2 id="三种虚拟内存实现方法">三种虚拟内存实现方法</h2>
+<p>常用虚拟内存实现有三种：请求分页存储管理方式，请求分段存储管理方式，请求段页存储管理方式。</p>
+<h2 id="请求分页存储管理方式">请求分页存储管理方式</h2>
+<h3 id="定义-1">定义</h3>
+<p>请求分页存储管理系统是在分页系统的基础上增加了<strong>请求调页功能</strong>和<strong>页面置换功能</strong>所形成的页式虚拟存储系统。</p>
 <p>它允许用户程序只装入少数页面的程序（及数据）即可启动运行。以后，<strong>再通过调页功能及页面置换功能陆续地把即将运行的页面调入内存</strong>，同时把暂不运行的页面换出到外存上。<strong>置换时以页面为单位。</strong> 为了能实现请求调页和页面置换功能，系统必须提供必要的硬件支持和实现请求分页的软件。</p>
-<h3 id="硬件支持"><a href="#硬件支持" class="headerlink" title="硬件支持"></a>硬件支持</h3><p>主要的硬件支持有：<br>（1）请求分页的页表（request page table）机制。它是在纯分页的页表机制上增加若干项而形成的，作为请求分页的数据结构。</p>
-<p><img src="https://i.loli.net/2020/04/04/Wna4rbs5diVlYS9.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_00-06-19.png"></p>
-<p><strong>页表项</strong><br>页号：分页系统中给用户程序的地址空间所在的页<br>物理块号：页对应的物理块号<br>状态位 P：用于指示该页是否已调入内存，供程序访问时参考。<br>访问字段 A：用于记录本页在一段时间内被访问的次数，或记录本页最近已有多次时间未被访问。<br>修改位 M：标识该页调入内存后，是否被修改。若被修改，则在淘汰时，需写回外存。<br>外存地址：用户与指出该页在<strong>外存</strong>上上的地址，通常是物理块号，供调入该页时参考。</p>
+<h3 id="硬件支持">硬件支持</h3>
+<p>主要的硬件支持有： （1）请求分页的页表（request page table）机制。它是在纯分页的页表机制上增加若干项而形成的，作为请求分页的数据结构。</p>
+<figure>
+<img src="https://i.loli.net/2020/04/04/Wna4rbs5diVlYS9.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-04_00-06-19.png" /><figcaption aria-hidden="true">Snipaste_2020-04-04_00-06-19.png</figcaption>
+</figure>
+<p><strong>页表项</strong> 页号：分页系统中给用户程序的地址空间所在的页 物理块号：页对应的物理块号 状态位 P：用于指示该页是否已调入内存，供程序访问时参考。 访问字段 A：用于记录本页在一段时间内被访问的次数，或记录本页最近已有多次时间未被访问。 修改位 M：标识该页调入内存后，是否被修改。若被修改，则在淘汰时，需写回外存。 外存地址：用户与指出该页在<strong>外存</strong>上上的地址，通常是物理块号，供调入该页时参考。</p>
 <p>（2）缺页中断机构。每当用户程序要访问的页面尚未调入内存时，便产生一缺页中断，以请求OS将所缺的页调入内存。</p>
 <p>（3）地址变换机构。它同样是在纯分页地址变换机构的基础上发展形成的。</p>
-<h3 id="软件支持"><a href="#软件支持" class="headerlink" title="软件支持"></a>软件支持</h3><p>这里包括有用于实现请求调页的软件和实现页面置换的软件。它们在硬件的支持下，将程序正在运行时所需的页面（尚未在内存中的）调入内存，再将内存中暂时不用的页面从内存置换到磁盘上。</p>
-<h1 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h1><h2 id="常见的页面置换算法"><a href="#常见的页面置换算法" class="headerlink" title="常见的页面置换算法"></a>常见的页面置换算法</h2><p>页面置换算法旨在使得页面换入换出的频率较低，防止发生抖动</p>
+<h3 id="软件支持">软件支持</h3>
+<p>这里包括有用于实现请求调页的软件和实现页面置换的软件。它们在硬件的支持下，将程序正在运行时所需的页面（尚未在内存中的）调入内存，再将内存中暂时不用的页面从内存置换到磁盘上。</p>
+<h1 id="页面置换算法">页面置换算法</h1>
+<h2 id="常见的页面置换算法">常见的页面置换算法</h2>
+<p>页面置换算法旨在使得页面换入换出的频率较低，防止发生抖动</p>
 <ul>
-<li><p>最佳置换算法（OPT），淘汰以后永不使用或将来最长时间内不会被使用的页面。</p>
-</li>
-<li><p>先进先出（FIFO）置换算法 ，优先淘汰最早进入的页面。FIFO算法会产生Belady异常，Belady异常是指一个进程P要访问M个页,OS分配N(N &lt; M)个内存页面给进程P;对一个访问序列S,发生缺页次数为 <code>PE(S, N)</code>。当N增大(且N小于M)时, <code>PE(S, N)</code> 时而增大,时而减小。LRU和OPT算法永远不会发生Belady异常。</p>
-</li>
-<li><p>最近最久未使用置换算法（LRU），选择最近最长时间未访问过的页面予以淘汰。<strong>利用访问字段来选择置换哪个页面。</strong></p>
-</li>
-<li><p>时钟（CLOCK）置换算法，又称为最近未用（NRU)置换算法, 当页面被放入主存或被使用时，就将使用位(u)置为1。每次需要置换页面时，就从上次替换页面的下一个页面开始扫描，扫描时，将使用位置为0。当碰到的第一个使用位为0的页面时，就将其置换出去。</p>
-</li>
-<li><p>改进时钟置换算法, 由于页面置换时，若页面被修改过，需要写回主存中，所以可以新设置一位修改位（m)，其中u = 1表示被修改。第一次扫描，寻找是否有(u = 0, m = 0)页面，找到就置换；第二次扫描，寻找是否有(u = 0, m = 1)页面，并将碰到的u = 1改写为u = 0; 第三次扫描，重复第一步，如有必要，再重复第二步。</p>
-</li>
+<li><p>最佳置换算法（OPT），淘汰以后永不使用或将来最长时间内不会被使用的页面。</p></li>
+<li><p>先进先出（FIFO）置换算法 ，优先淘汰最早进入的页面。FIFO算法会产生Belady异常，Belady异常是指一个进程P要访问M个页,OS分配N(N &lt; M)个内存页面给进程P;对一个访问序列S,发生缺页次数为 <code>PE(S, N)</code>。当N增大(且N小于M)时, <code>PE(S, N)</code> 时而增大,时而减小。LRU和OPT算法永远不会发生Belady异常。</p></li>
+<li><p>最近最久未使用置换算法（LRU），选择最近最长时间未访问过的页面予以淘汰。<strong>利用访问字段来选择置换哪个页面。</strong></p></li>
+<li><p>时钟（CLOCK）置换算法，又称为最近未用（NRU)置换算法, 当页面被放入主存或被使用时，就将使用位(u)置为1。每次需要置换页面时，就从上次替换页面的下一个页面开始扫描，扫描时，将使用位置为0。当碰到的第一个使用位为0的页面时，就将其置换出去。</p></li>
+<li><p>改进时钟置换算法, 由于页面置换时，若页面被修改过，需要写回主存中，所以可以新设置一位修改位（m)，其中u = 1表示被修改。第一次扫描，寻找是否有(u = 0, m = 0)页面，找到就置换；第二次扫描，寻找是否有(u = 0, m = 1)页面，并将碰到的u = 1改写为u = 0; 第三次扫描，重复第一步，如有必要，再重复第二步。</p></li>
 </ul>
-<h2 id="Python实现LRU（最近最少使用）页面置换算法"><a href="#Python实现LRU（最近最少使用）页面置换算法" class="headerlink" title="Python实现LRU（最近最少使用）页面置换算法"></a>Python实现LRU（最近最少使用）页面置换算法</h2><p>最好能手写，再说明它在 Redis 等作为缓存置换算法。</p>
+<h2 id="python实现lru最近最少使用页面置换算法">Python实现LRU（最近最少使用）页面置换算法</h2>
+<p>最好能手写，再说明它在 Redis 等作为缓存置换算法。</p>
 <p><a href="/2020/04/11/LeetCode-146-LRU缓存机制（中）/">LeetCode-146-LRU缓存机制（中）</a></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -820,6 +895,26 @@ page\_entry\_address = page\_table\_start\_address + page\_number \times page\_e
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,44 +251,53 @@
             <h1 style="display: none">LeetCode 10. 正则表达式匹配（难）&amp; 面试题19. 正则表达式匹配（难）</h1>
             
             <div class="markdown-body">
-              <p>从递归回溯到动态规划实现正则匹配 </p>
+              <p>从递归回溯到动态规划实现正则匹配</p>
 <a id="more"></a>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p> 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 <code>.</code> 和 <code>*</code> 的正则表达式匹配。</p>
-<p><code>.</code> 匹配任意单个字符<br><code>*</code> 匹配<font color='red'><strong>或</strong></font>多个前面的那一个元素<br>所谓匹配，是要涵盖整个字符串 <code>s</code> 的，而不是部分字符串。</p>
-<p>说明:<br>s 可能为空，且只包含从 a-z 的小写字母。<br>p 可能为空，且只包含从 a-z 的小写字母，以及字符 <code>.</code> 和 <code>*</code>。</p>
+<h2 id="题目">题目</h2>
+<p>给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 <code>.</code> 和 <code>*</code> 的正则表达式匹配。</p>
+<p><code>.</code> 匹配任意单个字符 <code>*</code> 匹配<font color='red'><strong>或</strong></font>多个前面的那一个元素 所谓匹配，是要涵盖整个字符串 <code>s</code> 的，而不是部分字符串。</p>
+<p>说明: s 可能为空，且只包含从 a-z 的小写字母。 p 可能为空，且只包含从 a-z 的小写字母，以及字符 <code>.</code> 和 <code>*</code>。</p>
 <blockquote>
 <p>测试用例</p>
 </blockquote>
-<p>功能测试（模式字符串里包含普通字符、、”*”；模式字符串和输入字符串匹配/不匹配）。<br>特殊输入测试（输入字符串和模式字符串是nullptr、空字符串）。</p>
+<p>功能测试（模式字符串里包含普通字符、、”*”；模式字符串和输入字符串匹配/不匹配）。 特殊输入测试（输入字符串和模式字符串是nullptr、空字符串）。</p>
 <blockquote>
 <p>考点</p>
 </blockquote>
-<p>考查应聘者对字符串的<strong>编程能力</strong>。考查应聘者<strong>对正则表达式的理解</strong>。<br>考查应聘者<strong>思维的全面性</strong>。应聘者要全面考虑普通字符、和*并分别分析它们的匹配模式。在应聘者写完代码之后，面试官会要求他/她测试自己的代码。这时候应聘者要充分考虑普通字符、. 和 *三者的排列组合，尽量完备地想出所有可能的测试用例。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><strong>示例 1:</strong></p>
+<p>考查应聘者对字符串的<strong>编程能力</strong>。考查应聘者<strong>对正则表达式的理解</strong>。 考查应聘者<strong>思维的全面性</strong>。应聘者要全面考虑普通字符、和*并分别分析它们的匹配模式。在应聘者写完代码之后，面试官会要求他/她测试自己的代码。这时候应聘者要充分考虑普通字符、. 和 *三者的排列组合，尽量完备地想出所有可能的测试用例。</p>
+<h2 id="示例">示例</h2>
+<p><strong>示例 1:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入:<br>s = <span class="hljs-string">&quot;aa&quot;</span><br>p = <span class="hljs-string">&quot;a&quot;</span><br>输出: false<br></code></pre></div></td></tr></table></figure>
-<p>解释: “a” 无法匹配 “aa” 整个字符串。</p>
+<p>解释: "a" 无法匹配 "aa" 整个字符串。</p>
 <p><strong>示例 2:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入:<br>s = <span class="hljs-string">&quot;aa&quot;</span><br>p = <span class="hljs-string">&quot;a*&quot;</span><br>输出: true<br></code></pre></div></td></tr></table></figure>
-<p>解释: 因为 ‘*’ 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 ‘a’。因此，字符串 “aa” 可被视为 ‘a’ 重复了一次。</p>
+<p>解释: 因为 '*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。</p>
 <p><strong>示例 3:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入:<br>s = <span class="hljs-string">&quot;ab&quot;</span><br>p = <span class="hljs-string">&quot;.*&quot;</span><br>输出: true<br></code></pre></div></td></tr></table></figure>
-<p>解释: “.<em>“ 表示可匹配零个或多个（’\</em>‘）任意字符（’.’）。</p>
+<p>解释: ".*" 表示可匹配零个或多个（'*'）任意字符（'.'）。</p>
 <p><strong>示例 4:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入:<br>s = <span class="hljs-string">&quot;aab&quot;</span><br>p = <span class="hljs-string">&quot;c*a*b&quot;</span><br>输出: true<br></code></pre></div></td></tr></table></figure>
-<p>解释: 因为 ‘*’ 表示零个或多个，这里 ‘c’ 为 0 个, ‘a’ 被重复一次。因此可以匹配字符串 “aab”。</p>
+<p>解释: 因为 '*' 表示零个或多个，这里 'c' 为 0 个, 'a' 被重复一次。因此可以匹配字符串 "aab"。</p>
 <p>示例 5:**</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入:<br>s = <span class="hljs-string">&quot;mississippi&quot;</span><br>p = <span class="hljs-string">&quot;mis*is*p*.&quot;</span><br>输出: false<br>s = <span class="hljs-string">&#x27;misisisppp&#x27;</span><br>p = <span class="hljs-string">&quot;mis*is*p*.&quot;</span><br>输出: true<br></code></pre></div></td></tr></table></figure>
-<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>动态规划、回溯算法</p>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>要实现正则匹配，就要做三件事情：<br>1、对第一个字符进行匹配：<code>first_match = bool(text) and pattern[0] in &#123;text[0], &#39;.&#39;&#125;</code><br>2、当模式中的第二个字符是*时，问题要<strong>复杂一些</strong>，因为可能有多种不同的匹配方式。<strong>一种选择是在字符串不变，模式向后移动两个字符</strong>，<code>self.isMatch(text, pattern[2:])</code>。这相当于*和它前面的字符被忽略了，因为*可以匹配字符串中的0个字符。<strong>另一种选择是如果模式中的第一个字符和字符串中的第一个字符相匹配，则在字符串上向后移动一个字符，模式保持不变，</strong><code>first_match and self.isMatch(text[1:], pattern)</code>。<br>3、当模式中的第二个字符不是*时，问题要<strong>简单很多</strong>。如果字符串中的第一个字符和模式中的第一个字符相匹配，那么在字符串和模式上都向后移动一个字符，然后匹配剩余的字符串和模式。如果字符串中的第一个字符和模式中的第一个字符不相匹配，则直接返回false。<code>return first_match and self.isMatch(text[1:], pattern[1:])</code></p>
+<h2 id="考察知识点">考察知识点</h2>
+<p>动态规划、回溯算法</p>
+<h2 id="核心思想">核心思想</h2>
+<h3 id="递归">递归</h3>
+<p>要实现正则匹配，就要做三件事情： 1、对第一个字符进行匹配：<code>first_match = bool(text) and pattern[0] in &#123;text[0], '.'&#125;</code> 2、当模式中的第二个字符是*时，问题要<strong>复杂一些</strong>，因为可能有多种不同的匹配方式。<strong>一种选择是在字符串不变，模式向后移动两个字符</strong>，<code>self.isMatch(text, pattern[2:])</code>。这相当于*和它前面的字符被忽略了，因为*可以匹配字符串中的0个字符。<strong>另一种选择是如果模式中的第一个字符和字符串中的第一个字符相匹配，则在字符串上向后移动一个字符，模式保持不变，</strong><code>first_match and self.isMatch(text[1:], pattern)</code>。 3、当模式中的第二个字符不是*时，问题要<strong>简单很多</strong>。如果字符串中的第一个字符和模式中的第一个字符相匹配，那么在字符串和模式上都向后移动一个字符，然后匹配剩余的字符串和模式。如果字符串中的第一个字符和模式中的第一个字符不相匹配，则直接返回false。<code>return first_match and self.isMatch(text[1:], pattern[1:])</code></p>
 <p>如下图，当匹配进入状态2并且字符串的字符是<code>a</code>时，我们有两种选择，进入状态3（字符串不变，模式向后移动两个字符），也可以保持在状态2不变（字符串向后移动一个字符，模式保持不变）。</p>
-<p><img src="https://i.loli.net/2020/05/06/bVzQPe2AKqNXcZT.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-06_15-53-35.png"></p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>在递归的代码的基础上，添加mome保存中间结果，自下而上的解决问题。<br>有的读者也许会问，你怎么知道这个问题是个动态规划问题呢，你怎么知道它就存在「重叠子问题」呢，这似乎不容易看出来呀？<br>解答这个问题，最直观的应该是随便假设一个输入，然后画递归树，肯定是可以发现相同节点的。这属于定量分析，其实不用这么麻烦，下面我来教你定性分析，一眼就能看出「重叠子问题」性质。<br>先拿最简单的斐波那契数列举例，我们抽象出递归算法的框架：</p>
+<figure>
+<img src="https://i.loli.net/2020/05/06/bVzQPe2AKqNXcZT.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-06_15-53-35.png" /><figcaption aria-hidden="true">Snipaste_2020-05-06_15-53-35.png</figcaption>
+</figure>
+<h3 id="动态规划">动态规划</h3>
+<p>在递归的代码的基础上，添加mome保存中间结果，自下而上的解决问题。 有的读者也许会问，你怎么知道这个问题是个动态规划问题呢，你怎么知道它就存在「重叠子问题」呢，这似乎不容易看出来呀？ 解答这个问题，最直观的应该是随便假设一个输入，然后画递归树，肯定是可以发现相同节点的。这属于定量分析，其实不用这么麻烦，下面我来教你定性分析，一眼就能看出「重叠子问题」性质。 先拿最简单的斐波那契数列举例，我们抽象出递归算法的框架：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>):</span><br>    fib(n - <span class="hljs-number">1</span>)<br>    fib(n - <span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
-<p>看着这个框架，请问原问题 <code>f(n)</code> ，如何触达子问题 <code>f(n - 2)</code>？有两种路径，一是 <code>f(n) -&gt; f(n-1) -&gt; f(n - 1 - 1)</code>, 二是 <code>f(n) -&gt; f(n - 2)</code>。前者经过两次递归，后者进过一次递归而已。两条不同的计算路径都到达了同一个问题，这就是「重叠子问题」，而且可以肯定的是，只要你发现一条重复路径，这样的重复路径一定存在千万条，意味着巨量子问题重叠。<br>同理，对于本问题，我们<strong>依然先抽象出算法框架</strong>：</p>
+<p>看着这个框架，请问原问题 <code>f(n)</code> ，如何触达子问题 <code>f(n - 2)</code>？有两种路径，一是 <code>f(n) -&gt; f(n-1) -&gt; f(n - 1 - 1)</code>, 二是 <code>f(n) -&gt; f(n - 2)</code>。前者经过两次递归，后者进过一次递归而已。两条不同的计算路径都到达了同一个问题，这就是「重叠子问题」，而且可以肯定的是，只要你发现一条重复路径，这样的重复路径一定存在千万条，意味着巨量子问题重叠。 同理，对于本问题，我们<strong>依然先抽象出算法框架</strong>：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dp</span>(<span class="hljs-params">i, j</span>):</span><br>    dp(i, j + <span class="hljs-number">2</span>)     <span class="hljs-comment">#1</span><br>    dp(i + <span class="hljs-number">1</span>, j)     <span class="hljs-comment">#2</span><br>    dp(i + <span class="hljs-number">1</span>, j + <span class="hljs-number">1</span>) <span class="hljs-comment">#3</span><br></code></pre></div></td></tr></table></figure>
-<p>提出类似的问题，请问如何从原问题 <code>dp(i, j)</code>，触达子问题  <code>dp(i + 2, j + 2)</code>？至少有两种路径，一是 <code>dp(i, j) -&gt; #3 -&gt; #3</code>，二是  <code>dp(i, j) -&gt; #1 -&gt; #2 -&gt; #2</code>。因此，本问题一定存在重叠子问题，一定需要动态规划的优化技巧来处理。</p>
-<p>详情可以查看链接，由浅及深，讲述的非常准确。<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/regular-expression-matching/solution/ji-yu-guan-fang-ti-jie-gen-xiang-xi-de-jiang-jie-b/">参考连接</a></p>
-<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><ul>
+<p>提出类似的问题，请问如何从原问题 <code>dp(i, j)</code>，触达子问题 <code>dp(i + 2, j + 2)</code>？至少有两种路径，一是 <code>dp(i, j) -&gt; #3 -&gt; #3</code>，二是 <code>dp(i, j) -&gt; #1 -&gt; #2 -&gt; #2</code>。因此，本问题一定存在重叠子问题，一定需要动态规划的优化技巧来处理。</p>
+<p>详情可以查看链接，由浅及深，讲述的非常准确。 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/regular-expression-matching/solution/ji-yu-guan-fang-ti-jie-gen-xiang-xi-de-jiang-jie-b/">参考连接</a></p>
+<h2 id="python版本">Python版本</h2>
+<ul>
 <li>递归回溯，暴力破解方法。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-comment"># 暴力递归</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isMatch</span>(<span class="hljs-params">self, text, pattern</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> pattern:  <span class="hljs-comment"># 当pattern为空时执行以下逻辑</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> text  <span class="hljs-comment"># 如果text非空，空pattern无法匹配非空text，应该返回False，而not text就是False。如果txt为空，空pattern可以匹配空text，应该返回True，而 not text就是True。</span><br><br>        first_match = <span class="hljs-built_in">bool</span>(text) <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">0</span>] <span class="hljs-keyword">in</span> &#123;text[<span class="hljs-number">0</span>], <span class="hljs-string">&#x27;.&#x27;</span>&#125;  <span class="hljs-comment"># 当前第一个字符是否匹配，考虑了.作为通配符的情况。首先text必须非空所以有bool(text)的条件，其次pattern[0]需要为.或者和text[0]相等。</span><br><br>        <span class="hljs-comment"># 考虑无限匹配符*的情况</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(pattern) &gt;= <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>:<br>            res = (<br>                self.isMatch(text, pattern[<span class="hljs-number">2</span>:]) <span class="hljs-keyword">or</span> <span class="hljs-comment"># 考虑匹配0次（传入self.isMatch的是text和pattern[:2]，代表当前text不匹配且跳过pattern[0]和patter[1]，即跳过*匹配项。）</span><br>                (first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>:], pattern))  <span class="hljs-comment"># 或者考虑递归匹配1次，要求first_match为true（传入self.isMatch的是text[1:]和pattern，代表当前text[0]已经算匹配了的，继续考虑*匹配项。这两种考虑是or关系，因为题干里面说了&#x27;*&#x27;是指匹配零个或多个前面的那一个元素。）</span><br>            ) <br>            <span class="hljs-keyword">return</span> res<br>         <span class="hljs-comment"># 不是无限，匹配符*的情况，简单的把text和pattern都往后调整即可。</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>:], pattern[<span class="hljs-number">1</span>:])<br></code></pre></div></td></tr></table></figure>
@@ -300,7 +309,7 @@
 <li>去注释简洁版本</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isMatch</span>(<span class="hljs-params">self, text, pattern</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> pattern:<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> text<br><br>        first_match = <span class="hljs-built_in">bool</span>(text) <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">0</span>] <span class="hljs-keyword">in</span> &#123;text[<span class="hljs-number">0</span>], <span class="hljs-string">&#x27;.&#x27;</span>&#125;<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(pattern) &gt;= <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> pattern[<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>:<br>            res = (<br>                self.isMatch(text, pattern[<span class="hljs-number">2</span>:])<br>                <span class="hljs-keyword">or</span><br>                (first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>:], pattern))<br>            )<br>            <span class="hljs-keyword">return</span> res<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> first_match <span class="hljs-keyword">and</span> self.isMatch(text[<span class="hljs-number">1</span>: ], pattern[<span class="hljs-number">1</span>: ])<br><br>        <br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isMatch</span>(<span class="hljs-params">self, text, pattern</span>):</span><br>        memo = <span class="hljs-built_in">dict</span>()<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dp</span>(<span class="hljs-params">i, j</span>):</span><br>            <span class="hljs-keyword">if</span> (i, j) <span class="hljs-keyword">in</span> memo:  <span class="hljs-keyword">return</span> memo[(i, j)]<br>            <span class="hljs-keyword">if</span> j == <span class="hljs-built_in">len</span>(pattern):  <span class="hljs-keyword">return</span> i == <span class="hljs-built_in">len</span>(text)<br>            first_match = i &lt; <span class="hljs-built_in">len</span>(text) <span class="hljs-keyword">and</span> pattern[j] <span class="hljs-keyword">in</span> &#123;text[i], <span class="hljs-string">&#x27;.&#x27;</span>&#125;<br><br>            <span class="hljs-keyword">if</span> j &lt;= <span class="hljs-built_in">len</span>(pattern) - <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> pattern[j + <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>:<br>                ans = dp(i, j+<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> first_match <span class="hljs-keyword">and</span> dp(i+<span class="hljs-number">1</span>, j)<br>            <span class="hljs-keyword">else</span>:<br>                ans = first_match <span class="hljs-keyword">and</span> dp(i+<span class="hljs-number">1</span>, j+<span class="hljs-number">1</span>)<br>            <br>            memo[(i, j)] = ans<br>            <span class="hljs-keyword">return</span> ans<br>        <span class="hljs-keyword">return</span> dp(<span class="hljs-number">0</span>, <span class="hljs-number">0</span> )<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -548,6 +557,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

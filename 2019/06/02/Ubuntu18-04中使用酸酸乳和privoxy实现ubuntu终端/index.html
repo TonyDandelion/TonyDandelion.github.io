@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      448 字
+      455 字
     </span>
   
 
@@ -253,23 +253,33 @@
             <div class="markdown-body">
               <p>总结一下如何在Ubuntu18.04中使用酸酸乳和privoxy实现ubuntu终端的scientific surf the global Internet</p>
 <a id="more"></a>
-<h1 id="安装酸酸乳"><a href="#安装酸酸乳" class="headerlink" title="安装酸酸乳"></a>安装酸酸乳</h1><p>网上很多安装命令行酸酸乳的教程，自行百度、google即可.<br>完成之后记得用SwitchyOmega测试一下再进行后面的步骤</p>
-<p>可以使用deb文件安装可视化版本,下载链接如下:<br><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1-oBHmaDfEsxP9w96N-UPgA">https://pan.baidu.com/s/1-oBHmaDfEsxP9w96N-UPgA</a> 提取码: xspw </p>
-<p>SwitchyOmega测试方法如下:<br>1.在chrome://extensions/中打开开发者模式,<br>2.然后拖入SwitchyOmega.crx,<br>3.再在导入界面导入OmegaOptions.bak,<br>4.最后在浏览器右上角的SwitchyOmega中选择”自动切换”模式即可.</p>
-<h1 id="安装privoxy"><a href="#安装privoxy" class="headerlink" title="安装privoxy"></a>安装privoxy</h1><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install privoxy <br></code></pre></div></td></tr></table></figure>
+<h1 id="安装酸酸乳">安装酸酸乳</h1>
+<p>网上很多安装命令行酸酸乳的教程，自行百度、google即可.<br />
+完成之后记得用SwitchyOmega测试一下再进行后面的步骤</p>
+<p>可以使用deb文件安装可视化版本,下载链接如下:<br />
+https://pan.baidu.com/s/1-oBHmaDfEsxP9w96N-UPgA 提取码: xspw</p>
+<p>SwitchyOmega测试方法如下:<br />
+1.在chrome://extensions/中打开开发者模式,<br />
+2.然后拖入SwitchyOmega.crx,<br />
+3.再在导入界面导入OmegaOptions.bak,<br />
+4.最后在浏览器右上角的SwitchyOmega中选择"自动切换"模式即可.</p>
+<h1 id="安装privoxy">安装privoxy</h1>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> install privoxy <br></code></pre></div></td></tr></table></figure>
 <p>如果安装遇到报错</p>
 <figure class="highlight vbnet"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vbnet"><span class="hljs-symbol">E:</span> <span class="hljs-keyword">Sub</span>-process /usr/bin/dpkg returned an <span class="hljs-keyword">error</span> code (<span class="hljs-number">1</span>) <span class="hljs-string">&quot;的错误</span><br></code></pre></div></td></tr></table></figure>
-<p>可以在<code>/var/lib/dpkg</code>目录下执行<br><figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">sudo</span> cp <span class="hljs-literal">info</span> <span class="hljs-literal">info</span>.baksudo<br>cd <span class="hljs-literal">info</span><br>rm <span class="hljs-regexp">privoxy.*</span><br></code></pre></div></td></tr></table></figure><br>然后重新安装</p>
-<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><h2 id="修改privoxy的config"><a href="#修改privoxy的config" class="headerlink" title="修改privoxy的config"></a>修改privoxy的config</h2><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>privoxy/config <br></code></pre></div></td></tr></table></figure>
-<p>为以下内容<br><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute"><span class="hljs-nomarkup">listen</span></span>-address <span class="hljs-number">127.0.0.1:8118</span>  # privoxy监听<span class="hljs-number">8118</span>端口<br><span class="hljs-attribute">forward</span>-socks<span class="hljs-number">5</span> / <span class="hljs-number">127.0.0.1:1080</span> .  # 将发送到<span class="hljs-number">8118</span>端口请求转发到<span class="hljs-number">1080</span>，至于<span class="hljs-number">127.0.0.1:1080</span>是啥，你应该懂。<br></code></pre></div></td></tr></table></figure></p>
-<h2 id="修改终端环境配置文件"><a href="#修改终端环境配置文件" class="headerlink" title="修改终端环境配置文件"></a>修改终端环境配置文件</h2><p>修改终端环境配置文件，实现http、https、ftp请求皆转发到8118端口<br><figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">vim ~<span class="hljs-string">/.bashrc</span><br></code></pre></div></td></tr></table></figure><br>在最后添加<br><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">ftp_proxy</span>=http://127.0.0.1:8118<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">http_proxy</span>=127.0.0.1:8118<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">https_proxy</span>=127.0.0.1:8118<br></code></pre></div></td></tr></table></figure></p>
-<h1 id="privoxy常用命令"><a href="#privoxy常用命令" class="headerlink" title="privoxy常用命令"></a>privoxy常用命令</h1><p>启动<br><figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">sudo systemctl status privoxy.serivce<br><span class="hljs-keyword">OR</span><br>sudo service privoxy <span class="hljs-literal">start</span><br></code></pre></div></td></tr></table></figure><br>重启 restart<br>停止 stop<br>查看状态 status<br>关键字替换即可</p>
-<h1 id="如遇错误"><a href="#如遇错误" class="headerlink" title="如遇错误"></a>如遇错误</h1><figure class="highlight delphi"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs delphi">Failed <span class="hljs-keyword">to</span> start privoxy.service: <span class="hljs-keyword">Unit</span> privoxy.service <span class="hljs-keyword">is</span> masked.<br></code></pre></div></td></tr></table></figure>
-<p>可以直接使用以下命令启动<br><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo <span class="hljs-regexp">/usr/</span>sbin<span class="hljs-regexp">/privoxy --no-daemon --pidfile /</span>var<span class="hljs-regexp">/run/</span>privoxy.pid --user privoxy <span class="hljs-regexp">/etc/</span>privoxy/config<br></code></pre></div></td></tr></table></figure><br>具体操作参看<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuxuzzz/p/5329536.html">systemd 开机无法启动privoxy</a></p>
+<p>可以在<code>/var/lib/dpkg</code>目录下执行 <figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">sudo</span> cp <span class="hljs-literal">info</span> <span class="hljs-literal">info</span>.baksudo<br>cd <span class="hljs-literal">info</span><br>rm <span class="hljs-regexp">privoxy.*</span><br></code></pre></div></td></tr></table></figure> 然后重新安装</p>
+<h1 id="修改配置文件">修改配置文件</h1>
+<h2 id="修改privoxy的config">修改privoxy的config</h2>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>privoxy/config <br></code></pre></div></td></tr></table></figure>
+<p>为以下内容 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute"><span class="hljs-nomarkup">listen</span></span>-address <span class="hljs-number">127.0.0.1:8118</span>  # privoxy监听<span class="hljs-number">8118</span>端口<br><span class="hljs-attribute">forward</span>-socks<span class="hljs-number">5</span> / <span class="hljs-number">127.0.0.1:1080</span> .  # 将发送到<span class="hljs-number">8118</span>端口请求转发到<span class="hljs-number">1080</span>，至于<span class="hljs-number">127.0.0.1:1080</span>是啥，你应该懂。<br></code></pre></div></td></tr></table></figure> ## 修改终端环境配置文件 修改终端环境配置文件，实现http、https、ftp请求皆转发到8118端口 <figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli">vim ~<span class="hljs-string">/.bashrc</span><br></code></pre></div></td></tr></table></figure> 在最后添加 <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">ftp_proxy</span>=http://127.0.0.1:8118<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">http_proxy</span>=127.0.0.1:8118<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">https_proxy</span>=127.0.0.1:8118<br></code></pre></div></td></tr></table></figure> # privoxy常用命令 启动 <figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">sudo systemctl status privoxy.serivce<br><span class="hljs-keyword">OR</span><br>sudo service privoxy <span class="hljs-literal">start</span><br></code></pre></div></td></tr></table></figure> 重启 restart 停止 stop 查看状态 status 关键字替换即可</p>
+<h1 id="如遇错误">如遇错误</h1>
+<figure class="highlight delphi"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs delphi">Failed <span class="hljs-keyword">to</span> start privoxy.service: <span class="hljs-keyword">Unit</span> privoxy.service <span class="hljs-keyword">is</span> masked.<br></code></pre></div></td></tr></table></figure>
+<p>可以直接使用以下命令启动 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo <span class="hljs-regexp">/usr/</span>sbin<span class="hljs-regexp">/privoxy --no-daemon --pidfile /</span>var<span class="hljs-regexp">/run/</span>privoxy.pid --user privoxy <span class="hljs-regexp">/etc/</span>privoxy/config<br></code></pre></div></td></tr></table></figure> 具体操作参看<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuxuzzz/p/5329536.html">systemd 开机无法启动privoxy</a></p>
 <p>这里真的搞了好久</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">lsof</span> -i:<span class="hljs-number">8118</span><br></code></pre></div></td></tr></table></figure>
-<p>或者<br><figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">wget www.yo*t*<span class="hljs-keyword">b</span>*,<span class="hljs-keyword">com</span><br>wget www.<span class="hljs-keyword">go</span>**<span class="hljs-keyword">l</span>*,<span class="hljs-keyword">com</span><br>....<br></code></pre></div></td></tr></table></figure></p>
-
+<h1 id="测试">测试</h1>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">lsof</span> -i:<span class="hljs-number">8118</span><br></code></pre></div></td></tr></table></figure>
+<p>或者 <figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">wget www.yo*t*<span class="hljs-keyword">b</span>*,<span class="hljs-keyword">com</span><br>wget www.<span class="hljs-keyword">go</span>**<span class="hljs-keyword">l</span>*,<span class="hljs-keyword">com</span><br>....<br></code></pre></div></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -506,6 +516,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="知无涯者">
   <meta name="keywords" content="">
-  <title>标签 - Hexo - 代码即艺术</title>
+  <title>标签 - hexo - 代码即艺术</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -170,7 +170,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="标签 - Hexo">
+            <span class="h2" id="subtitle" title="标签 - hexo">
               
             </span>
 
@@ -201,11 +201,11 @@
   
     
       
-      <p class="h5">2020</p>
+      <p class="h5">2023</p>
     
-    <a href="/2020/03/10/Hexo-%E6%B7%BB%E5%8A%A0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Hexo 添加搜索功能</span>
-      <time style="float: right;">03-10</time>
+    <a href="/2023/10/15/fomula-render-bug-fixed/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Fix the bug that latex formula does not render in hexo-fluid</span>
+      <time style="float: right;">10-15</time>
     </a>
   
 </div>
@@ -353,6 +353,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

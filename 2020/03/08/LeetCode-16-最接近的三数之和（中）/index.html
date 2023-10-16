@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      555 字
+      556 字
     </span>
   
 
@@ -251,26 +251,32 @@
             <h1 style="display: none">LeetCode 16. 最接近的三数之和（中）</h1>
             
             <div class="markdown-body">
-              <p> 类似第15题，不过把判断过程修改成求最小差值，而非等于某个数。 </p>
+              <p>类似第15题，不过把判断过程修改成求最小差值，而非等于某个数。</p>
 <a id="more"></a>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。<strong>返回这三个数的和</strong>。假定每组输入只存在唯一答案。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">例如，给定数组 nums = [<span class="hljs-string">-1</span>，2，1，<span class="hljs-string">-4</span>], 和 target = 1.<br>与 target 最接近的三个数的和为 2. (<span class="hljs-string">-1</span> + 2 + 1 = 2).<br></code></pre></div></td></tr></table></figure>
-<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>数组、双指针、排序</p>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>类似第15题，不过把判断过程修改成求最小差值，而非等于某个数。</p>
+<h2 id="题目">题目</h2>
+<p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。<strong>返回这三个数的和</strong>。假定每组输入只存在唯一答案。</p>
+<h2 id="示例">示例</h2>
+<figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">例如，给定数组 nums = [<span class="hljs-string">-1</span>，2，1，<span class="hljs-string">-4</span>], 和 target = 1.<br>与 target 最接近的三个数的和为 2. (<span class="hljs-string">-1</span> + 2 + 1 = 2).<br></code></pre></div></td></tr></table></figure>
+<h2 id="考察知识点">考察知识点</h2>
+<p>数组、双指针、排序</p>
+<h2 id="核心思想">核心思想</h2>
+<p>类似第15题，不过把判断过程修改成求最小差值，而非等于某个数。</p>
 <ul>
-<li>本题目因为要计算三个数，如果靠暴力枚举的话时间复杂度会到$O(n^3)$，需要降低时间复杂度</li>
-<li>首先进行数组排序，时间复杂度 $O(nlogn)$</li>
+<li>本题目因为要计算三个数，如果靠暴力枚举的话时间复杂度会到<span class="math inline">\(O(n^3)\)</span>，需要降低时间复杂度</li>
+<li>首先进行数组排序，时间复杂度 <span class="math inline">\(O(nlogn)\)</span></li>
 <li>在数组 <code>nums</code> 中，进行遍历，每遍历一个值利用其下标<code>i</code>，形成一个固定值 <code>nums[i]</code></li>
 <li>再使用前指针指向 <code>start = i + 1</code> 处，后指针指向 <code>end = len(nums) - 1</code> 处，也就是结尾处。</li>
 <li>根据 <code>sum = nums[i] + nums[start] + nums[end]</code> 的结果，判断 <code>sum</code> 与目标 <code>target</code> 的距离，如果更近则更新结果 <code>ans</code></li>
 <li>同时判断 <code>sum</code> 与 <code>target</code> 的大小关系，因为数组有序，如果 <code>sum &gt; target</code> 则 <code>end--</code>，如果 <code>sum &lt; target</code> 则 <code>start++</code>，如果 <code>sum == target</code> 则说明距离为 0 直接返回结果</li>
-<li>整个遍历过程，固定值为 <code>n</code> 次，双指针为 <code>n</code> 次，时间复杂度为 $O(n^2)$</li>
-<li>总时间复杂度：$O(nlogn) + O(n^2) = O(n^2)$</li>
+<li>整个遍历过程，固定值为 <code>n</code> 次，双指针为 <code>n</code> 次，时间复杂度为 <span class="math inline">\(O(n^2)\)</span></li>
+<li>总时间复杂度：<span class="math inline">\(O(nlogn) + O(n^2) = O(n^2)\)</span></li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum-closest/solution/hua-jie-suan-fa-16-zui-jie-jin-de-san-shu-zhi-he-b/">LeetCode题解</a></p>
-<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="根据思路手写的一个版本"><a href="#根据思路手写的一个版本" class="headerlink" title="根据思路手写的一个版本"></a>根据思路手写的一个版本</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">threeSumClosest</span>(<span class="hljs-params">self, nums: <span class="hljs-built_in">list</span>, target: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        _len = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> nums <span class="hljs-keyword">or</span> _len&lt;<span class="hljs-number">3</span>):<br>            <span class="hljs-keyword">return</span> []<br>        nums.sort()<br>        ans = nums[<span class="hljs-number">0</span>] + nums[<span class="hljs-number">1</span>] + nums[<span class="hljs-number">2</span>]<br><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_len):<br>            L = i + <span class="hljs-number">1</span>  <span class="hljs-comment"># 左指针</span><br>            R = _len - <span class="hljs-number">1</span>  <span class="hljs-comment"># 右指针</span><br>            <span class="hljs-keyword">while</span>(L&lt;R):<br>                _sum = nums[i]+nums[L]+nums[R]<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(target-_sum) &lt; <span class="hljs-built_in">abs</span>(target-ans):<br>                    ans = _sum<br>                <span class="hljs-keyword">if</span> _sum &gt; target:                    R -= <span class="hljs-number">1</span><br><br>                <span class="hljs-keyword">elif</span> _sum &lt; target:<br>                    L += <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">return</span> ans<br>        <span class="hljs-keyword">return</span> ans<br><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [[-<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">4</span>]]<br>Input1 = [<span class="hljs-number">1</span>]<br>Answer = [<span class="hljs-number">2</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.threeSumClosest(Input[i], Input1[i])<br>        print(result)<br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度$O(n)$</p>
-
+<h2 id="python版本">Python版本</h2>
+<h3 id="根据思路手写的一个版本">根据思路手写的一个版本</h3>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">threeSumClosest</span>(<span class="hljs-params">self, nums: <span class="hljs-built_in">list</span>, target: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        _len = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> nums <span class="hljs-keyword">or</span> _len&lt;<span class="hljs-number">3</span>):<br>            <span class="hljs-keyword">return</span> []<br>        nums.sort()<br>        ans = nums[<span class="hljs-number">0</span>] + nums[<span class="hljs-number">1</span>] + nums[<span class="hljs-number">2</span>]<br><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(_len):<br>            L = i + <span class="hljs-number">1</span>  <span class="hljs-comment"># 左指针</span><br>            R = _len - <span class="hljs-number">1</span>  <span class="hljs-comment"># 右指针</span><br>            <span class="hljs-keyword">while</span>(L&lt;R):<br>                _sum = nums[i]+nums[L]+nums[R]<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(target-_sum) &lt; <span class="hljs-built_in">abs</span>(target-ans):<br>                    ans = _sum<br>                <span class="hljs-keyword">if</span> _sum &gt; target:                    R -= <span class="hljs-number">1</span><br><br>                <span class="hljs-keyword">elif</span> _sum &lt; target:<br>                    L += <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">return</span> ans<br>        <span class="hljs-keyword">return</span> ans<br><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [[-<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">4</span>]]<br>Input1 = [<span class="hljs-number">1</span>]<br>Answer = [<span class="hljs-number">2</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.threeSumClosest(Input[i], Input1[i])<br>        print(result)<br>        print(result==Answer[i])<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度<span class="math inline">\(O(n)\)</span></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -514,6 +520,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

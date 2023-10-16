@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,39 +253,54 @@
             <div class="markdown-body">
               <p>两次二分查找解决该问题，第一次可能在哪一行，第二次找这一行中是否真的存在 <code>target</code> 。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>编写一个高效的算法来判断 <em>m</em> x <em>n</em> 矩阵中，是否存在一个目标值。该矩阵具有如下特性：  </p>
-<ul>
-<li>每行中的整数从左到右按升序排列。  </li>
-<li>每行的第一个整数大于前一行的最后一个整数。  </li>
-</ul>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例 1:</strong></p>
+<h1 id="题目">题目</h1>
+<p>编写一个高效的算法来判断 <em>m</em> x <em>n</em> 矩阵中，是否存在一个目标值。该矩阵具有如下特性：<br />
+- 每行中的整数从左到右按升序排列。<br />
+- 每行的第一个整数大于前一行的最后一个整数。</p>
+<h1 id="示例">示例</h1>
+<p><strong>示例 1:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 输入:</span><br>matrix = [<br>  [<span class="hljs-number">1</span>,   <span class="hljs-number">3</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">7</span>],<br>  [<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">16</span>, <span class="hljs-number">20</span>],<br>  [<span class="hljs-number">23</span>, <span class="hljs-number">30</span>, <span class="hljs-number">34</span>, <span class="hljs-number">50</span>]<br>]<br>target = <span class="hljs-number">3</span><br><span class="hljs-comment"># 输出: true</span><br></code></pre></div></td></tr></table></figure>
 <p><strong>示例 2:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 输入:</span><br>matrix = [<br>  [<span class="hljs-number">1</span>,   <span class="hljs-number">3</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">7</span>],<br>  [<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">16</span>, <span class="hljs-number">20</span>],<br>  [<span class="hljs-number">23</span>, <span class="hljs-number">30</span>, <span class="hljs-number">34</span>, <span class="hljs-number">50</span>]<br>]<br>target = <span class="hljs-number">13</span><br><span class="hljs-comment"># 输出: false</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>二分查找</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、一次性二分查找</strong><br>利用矩阵本身的有序性，先逐行遍历，拼接成一个 <code>list</code> ，然后对这个 <code>list</code> 进行二分查找操作。</p>
-<p><strong>方法二、查找第一个大于目标值的数</strong><br>将问题转化为，查找第一个大于目标值的数，进行两次二分查找。<br>第一次二分查找，确定 <code>target</code> 所在的行。<br>第二次二分查找，确定这一行中是否有 <code>target</code>。</p>
-<p><strong>方法三、逐行遍历寻找 </strong><br>不进行二分查找，一行一行的遍历过去。  </p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
-<li>方法一的实现  </li>
+<h1 id="考察知识点">考察知识点</h1>
+<p>二分查找</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>方法一、一次性二分查找</strong><br />
+利用矩阵本身的有序性，先逐行遍历，拼接成一个 <code>list</code> ，然后对这个 <code>list</code> 进行二分查找操作。</p>
+<p><strong>方法二、查找第一个大于目标值的数</strong><br />
+将问题转化为，查找第一个大于目标值的数，进行两次二分查找。<br />
+第一次二分查找，确定 <code>target</code> 所在的行。<br />
+第二次二分查找，确定这一行中是否有 <code>target</code>。</p>
+<p><strong>方法三、逐行遍历寻找 </strong><br />
+不进行二分查找，一行一行的遍历过去。</p>
+<h1 id="python版本">Python版本</h1>
+<ul>
+<li>方法一的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">searchMatrix</span>(<span class="hljs-params">self, matrix: List[List[<span class="hljs-built_in">int</span>]], target: <span class="hljs-built_in">int</span></span>) -&gt; bool:</span><br>        all_ints = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> matrix:<br>            all_ints += i<br>        left = <span class="hljs-number">0</span><br>        right = <span class="hljs-built_in">len</span>(all_ints)<br>        <span class="hljs-keyword">while</span> left &lt; right:<br>            mid = left + (right - left) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> all_ints[mid] == target:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">elif</span> all_ints[mid] &lt; target:  <span class="hljs-comment"># 在右区间 左边界右移</span><br>                left = mid + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:  <span class="hljs-comment"># 在左区间 右边界左移</span><br>                right = mid<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><br>Input = [<br>    [<br>        [<span class="hljs-number">1</span>,   <span class="hljs-number">3</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">7</span>],<br>        [<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">16</span>, <span class="hljs-number">20</span>],<br>        [<span class="hljs-number">23</span>, <span class="hljs-number">30</span>, <span class="hljs-number">34</span>, <span class="hljs-number">50</span>]<br>    ],<br>    [<br>        [<span class="hljs-number">1</span>,   <span class="hljs-number">3</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">7</span>],<br>        [<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">16</span>, <span class="hljs-number">20</span>],<br>        [<span class="hljs-number">23</span>, <span class="hljs-number">30</span>, <span class="hljs-number">34</span>, <span class="hljs-number">50</span>]<br>    ]<br>]<br>Input1 = [<span class="hljs-number">3</span>, <span class="hljs-number">13</span>]<br>Answer = [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        result = solution.searchMatrix(Input[i], Input1[i])<br>        <span class="hljs-keyword">if</span> result == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(Answer[i])<br>            print(Input[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 : 由于是标准的二分查找，时间复杂度为 $O(log(m \times n))$。<br>空间复杂度 : $O(m*n)$。<br>执行用时 :36 ms, 在所有 Python3 提交中击败了94.68%的用户<br>内存消耗 :14.4 MB, 在所有 Python3 提交中击败了100.00%的用户    </p>
+<p>时间复杂度 : 由于是标准的二分查找，时间复杂度为 <span class="math inline">\(O(log(m \times n))\)</span>。<br />
+空间复杂度 : <span class="math inline">\(O(m\*n)\)</span>。<br />
+执行用时 :36 ms, 在所有 Python3 提交中击败了94.68%的用户<br />
+内存消耗 :14.4 MB, 在所有 Python3 提交中击败了100.00%的用户</p>
 <ul>
-<li>方法二的实现  </li>
+<li>方法二的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">searchMatrix</span>(<span class="hljs-params">self, matrix: List[List[<span class="hljs-built_in">int</span>]], target</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(matrix) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>]): <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        left, right = <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(matrix)<br>        <span class="hljs-comment"># 先通过二分查找找到那一行</span><br>        <span class="hljs-keyword">while</span> left &lt; right:<br>            mid = (left + right) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> matrix[mid][<span class="hljs-number">0</span>] == target:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> matrix[mid][<span class="hljs-number">0</span>] &lt;= target:<br>                left = mid + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                right = mid<br>        <span class="hljs-comment"># 为什么要回退，因为找的是第一个大于目标值的数，且位于这一行的首位，所以目标值一定在下一行，如果没有满足条件的，就说明在第一行，select_col=0。</span><br>        select_col = right-<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> right &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> right  <span class="hljs-comment"># 如果选中的行是0，就不能回退了，以免越界。</span><br>        left, right = <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(matrix[select_col])<br><br>        <span class="hljs-comment"># 不一定在这一行，所以还要进一步确定是否在这一行</span><br>        <span class="hljs-keyword">while</span> left &lt; right:<br>            mid = (left + right) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> matrix[select_col][mid] == target: <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> matrix[select_col][mid] &lt; target:<br>                left = mid + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                right = mid<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 : 两次二分查找，时间复杂度为 $O(log(m) + log(n))$ 也就是 $O(log(m \times n))$，但是这是极少数极端情况，大多数情况下都不会循环这么多次，所以这个方法最好。<br>空间复杂度 : $O(1)$。<br>执行用时 :28 ms, 在所有 Python3 提交中击败了<strong>99.53%</strong>的用户<br>内存消耗 :14.5 MB, 在所有 Python3 提交中击败了100.00%的用户  </p>
+<p>时间复杂度 : 两次二分查找，时间复杂度为 <span class="math inline">\(O(log(m) + log(n))\)</span> 也就是 <span class="math inline">\(O(log(m \times n))\)</span>，但是这是极少数极端情况，大多数情况下都不会循环这么多次，所以这个方法最好。<br />
+空间复杂度 : <span class="math inline">\(O(1)\)</span>。 执行用时 :28 ms, 在所有 Python3 提交中击败了<strong>99.53%</strong>的用户<br />
+内存消耗 :14.5 MB, 在所有 Python3 提交中击败了100.00%的用户</p>
 <ul>
-<li>方法三的实现 </li>
+<li>方法三的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">searchMatrix</span>(<span class="hljs-params">self, matrix: List[List[<span class="hljs-built_in">int</span>]], target: <span class="hljs-built_in">int</span></span>) -&gt; bool:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(matrix) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>]): <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        rows, cols = <span class="hljs-built_in">len</span>(matrix), <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])<br>        <span class="hljs-keyword">if</span> rows &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> cols &gt; <span class="hljs-number">0</span>:<br>            row = <span class="hljs-number">0</span><br>            col = cols - <span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> row &lt; rows <span class="hljs-keyword">and</span> col &gt;= <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">if</span> matrix[row][col] == target:<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>                <span class="hljs-keyword">elif</span> matrix[row][col] &gt; target:<br>                    col -= <span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span>:<br>                    row += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 : $O(m + n)$。<br>空间复杂度 : $O(1)$。<br>执行用时 :60 ms, 在所有 Python3 提交中击败了71.15%的用户<br>内存消耗 :14.3 MB, 在所有 Python3 提交中击败了100.00%的用户</p>
+<p>时间复杂度 : <span class="math inline">\(O(m + n)\)</span>。<br />
+空间复杂度 : <span class="math inline">\(O(1)\)</span>。 执行用时 :60 ms, 在所有 Python3 提交中击败了71.15%的用户 内存消耗 :14.3 MB, 在所有 Python3 提交中击败了100.00%的用户</p>
 <blockquote>
-<p>参考链接  </p>
+<p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4323301.html">Grandyang</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix/solution/sou-suo-er-wei-ju-zhen-by-leetcode/236868">LeetCode用户评论</a>  </p>
-
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4323301.html">Grandyang</a><br />
+<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix/solution/sou-suo-er-wei-ju-zhen-by-leetcode/236868">LeetCode用户评论</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -529,6 +544,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,58 +251,64 @@
             <h1 style="display: none">剑指offer 面试题43. 1～n整数中1出现的次数（中）&amp; LeetCode 233. 数字 1 的个数（难）</h1>
             
             <div class="markdown-body">
-              <p><strong>考查应聘者面对复杂问题的思维能力。</strong>要想找到时间复杂度为 $O(logn)$ 的方法，应聘者需要有严密的数学思维能力，并且还<strong>要通过分析具体例子一步步找到通用的规律</strong>。这些能力在实际工作中面对复杂问题的时候都非常有用。</p>
+              <p><strong>考查应聘者面对复杂问题的思维能力。</strong>要想找到时间复杂度为 <span class="math inline">\(O(logn)\)</span> 的方法，应聘者需要有严密的数学思维能力，并且还<strong>要通过分析具体例子一步步找到通用的规律</strong>。这些能力在实际工作中面对复杂问题的时候都非常有用。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。<br>例如，输入12，1～12这些整数中包含1 的数字有1、10、11和12，1一共出现了5次。</p>
-<p>示例 1：<br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">12</span><br>输出：<span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure><br>示例 2：<br><figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">13</span><br>输出：<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure><br>限制：1 &lt;= n &lt; 2^31</p>
+<h1 id="question">Question</h1>
+<p>输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。 例如，输入12，1～12这些整数中包含1 的数字有1、10、11和12，1一共出现了5次。</p>
+<p>示例 1： <figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">12</span><br>输出：<span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure> 示例 2： <figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">13</span><br>输出：<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure> 限制：1 &lt;= n &lt; 2^31</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入5、10、55、99等）。<br>边界值测试（输入0、1等）。<br>性能测试（输入较大的数字，如10000、21235等）。</p>
+<p>功能测试（输入5、10、55、99等）。 边界值测试（输入0、1等）。 性能测试（输入较大的数字，如10000、21235等）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者做优化的激情和能力。最原始的方法大部分应聘者都能想到。当面试官提示还有更快的方法之后，应聘者千万不要轻易放弃尝试。<strong>虽然想出时间复杂度为 $O(logn)$ 的方法不容易，但应聘者要展示自己追求更快算法的激情，多尝试不同的方法，必要的时候可以要求面试官给出提示，但不能轻易说自己想不出来并且放弃努力。</strong><br><strong>考查应聘者面对复杂问题的思维能力。</strong>要想找到时间复杂度为 $O(logn)$ 的方法，应聘者需要有严密的数学思维能力，并且还<strong>要通过分析具体例子一步步找到通用的规律</strong>。这些能力在实际工作中面对复杂问题的时候都非常有用。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><blockquote>
+<p>考查应聘者做优化的激情和能力。最原始的方法大部分应聘者都能想到。当面试官提示还有更快的方法之后，应聘者千万不要轻易放弃尝试。<strong>虽然想出时间复杂度为 <span class="math inline">\(O(logn)\)</span> 的方法不容易，但应聘者要展示自己追求更快算法的激情，多尝试不同的方法，必要的时候可以要求面试官给出提示，但不能轻易说自己想不出来并且放弃努力。</strong> <strong>考查应聘者面对复杂问题的思维能力。</strong>要想找到时间复杂度为 <span class="math inline">\(O(logn)\)</span> 的方法，应聘者需要有严密的数学思维能力，并且还<strong>要通过分析具体例子一步步找到通用的规律</strong>。这些能力在实际工作中面对复杂问题的时候都非常有用。</p>
+<h1 id="intuition">Intuition</h1>
+<blockquote>
 <p>基础思路</p>
 </blockquote>
-<p><strong>将 $1 \sim  n$  的个位、十位、百位、…的 $1$ 出现次数相加，即为 $1$ 出现的总次数。</strong></p>
-<p>设数字 $n$ 是个 $x$ 位数，记 $n$ 的第 $i$ 位为 $n<em>i$，则可以将 $n$ 写为 $n</em>{x}, n<em>{x-1}, \cdots n</em>{2}, n_{1}$：</p>
-<ul>
-<li>称 “ $n_i$” 为<strong>当前位</strong> ，记为 <code>cur</code> ，</li>
-<li>将 “ $n<em>{i-1} n</em>{i-2} \cdots n<em>{2} n</em>{1}$” 称为<strong>低位</strong> ，记为 <code>low</code> ；</li>
-<li>将 “ $n<em>{x} n</em>{x-1} \cdots n<em>{i+2} n</em>{i+1}$” 称为<strong>高位</strong> ，记为 <code>high</code> 。</li>
-<li>将 $10^i$ 称为<strong>位因子</strong> ，记为 <code>digit</code> 。</li>
-</ul>
-<p>某位中 $1$ 出现次数的计算方法，根据当前位 <code>cur</code> 值的不同，分为以下三种情况：</p>
-<ol>
-<li>当 <code>cur = 0</code> 时： 此位 $1$ 的出现次数<strong>只由高位 <code>high</code> 决定</strong>，计算公式为：</li>
+<p><strong>将 <span class="math inline">\(1 \sim n\)</span> 的个位、十位、百位、...的 <span class="math inline">\(1\)</span> 出现次数相加，即为 <span class="math inline">\(1\)</span> 出现的总次数。</strong></p>
+<p>设数字 <span class="math inline">\(n\)</span> 是个 <span class="math inline">\(x\)</span> 位数，记 <span class="math inline">\(n\)</span> 的第 <span class="math inline">\(i\)</span> 位为 <span class="math inline">\(n_i\)</span>，则可以将 <span class="math inline">\(n\)</span> 写为 <span class="math inline">\(n_{x}, n_{x-1}, \cdots n_{2}, n_{1}\)</span>： - 称 " <span class="math inline">\(n_i\)</span>" 为<strong>当前位</strong> ，记为 <code>cur</code> ， - 将 " <span class="math inline">\(n_{i-1} n_{i-2} \cdots n_{2} n_{1}\)</span>" 称为<strong>低位</strong> ，记为 <code>low</code> ； - 将 " <span class="math inline">\(n_{x} n_{x-1} \cdots n_{i+2} n_{i+1}\)</span>" 称为<strong>高位</strong> ，记为 <code>high</code> 。 - 将 <span class="math inline">\(10^i\)</span> 称为<strong>位因子</strong> ，记为 <code>digit</code> 。</p>
+<p>某位中 <span class="math inline">\(1\)</span> 出现次数的计算方法，根据当前位 <code>cur</code> 值的不同，分为以下三种情况：</p>
+<ol type="1">
+<li>当 <code>cur = 0</code> 时： 此位 <span class="math inline">\(1\)</span> 的出现次数<strong>只由高位 <code>high</code> 决定</strong>，计算公式为：</li>
 </ol>
-<script type="math/tex; mode=display">
-high \times digit</script><ol>
-<li>当 <code>cur = 1</code> 时： 此位 $1$ 的出现次数<strong>由高位 <code>high</code> 和低位 <code>low</code> 决定</strong>，计算公式为：</li>
+<p><span class="math display">\[
+high \times digit
+\]</span></p>
+<ol start="2" type="1">
+<li>当 <code>cur = 1</code> 时： 此位 <span class="math inline">\(1\)</span> 的出现次数<strong>由高位 <code>high</code> 和低位 <code>low</code> 决定</strong>，计算公式为：</li>
 </ol>
-<script type="math/tex; mode=display">
-high \times digit + low + 1</script><ol>
-<li>当 <code>cur = 2, 3, ... , 9</code> 时：此位 $1$ 的出现次数<strong>只由高位 <code>high</code> 决定</strong>，计算公式为：</li>
+<p><span class="math display">\[
+high \times digit + low + 1
+\]</span></p>
+<ol start="3" type="1">
+<li>当 <code>cur = 2, 3, ... , 9</code> 时：此位 <span class="math inline">\(1\)</span> 的出现次数<strong>只由高位 <code>high</code> 决定</strong>，计算公式为：</li>
 </ol>
-<script type="math/tex; mode=display">
-(high + 1) \times digit</script><p><img src="https://i.loli.net/2020/05/12/qAhvmUrFOGHIBek.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-12_14-13-52"></p>
+<p><span class="math display">\[
+(high + 1) \times digit
+\]</span></p>
+<figure>
+<img src="https://i.loli.net/2020/05/12/qAhvmUrFOGHIBek.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-12_14-13-52" /><figcaption aria-hidden="true">Snipaste_2020-05-12_14-13-52</figcaption>
+</figure>
 <p><strong>上述情况的推导过程请看<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/mian-shi-ti-43-1n-zheng-shu-zhong-1-chu-xian-de-2/">参考链接</a></strong></p>
 <blockquote>
 <p>变量递推公式</p>
 </blockquote>
-<p>设计按照 “个位、十位、…” 的顺序计算，则 $high / cur / low / digit$ 应初始化为：</p>
+<p>设计按照 “个位、十位、...” 的顺序计算，则 <span class="math inline">\(high / cur / low / digit\)</span> 应初始化为：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">high = n // <span class="hljs-number">10</span><br>cur = n % <span class="hljs-number">10</span><br>low = <span class="hljs-number">0</span><br>digit = <span class="hljs-number">1</span> <span class="hljs-comment"># 个位</span><br></code></pre></div></td></tr></table></figure>
 <p>因此，从个位到最高位的变量递推公式为：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">while</span> high != <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> cur != <span class="hljs-number">0</span>: <span class="hljs-comment"># 当 high 和 cur 同时为 0 时，说明已经越过最高位，因此跳出</span><br>   low += cur * digit <span class="hljs-comment"># 将 cur 加入 low ，组成下轮 low</span><br>   cur = high % <span class="hljs-number">10</span> <span class="hljs-comment"># 下轮 cur 是本轮 high 的最低位</span><br>   high //= <span class="hljs-number">10</span> <span class="hljs-comment"># 将本轮 high 最低位删除，得到下轮 high</span><br>   digit *= <span class="hljs-number">10</span> <span class="hljs-comment"># 位因子每轮 × 10</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
 <p>复杂度分析</p>
 </blockquote>
-<p>时间复杂度 $O(\log n)$ ： 循环内的计算操作使用 $O(1)$ 时间；循环次数为数字 $n$ 的位数，即 $\log_{10}{n}$ ，因此循环使用 $O(\log n)$ 时间。<br>空间复杂度 $O(1)$ ： 几个变量使用常数大小的额外空间。</p>
-<h1 id="Preference"><a href="#Preference" class="headerlink" title="Preference"></a>Preference</h1><p>作者：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/jyd/">Krahets</a><br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/mian-shi-ti-43-1n-zheng-shu-zhong-1-chu-xian-de-2/">https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/mian-shi-ti-43-1n-zheng-shu-zhong-1-chu-xian-de-2/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">countDigitOne</span>(<span class="hljs-params">self, n</span>):</span><br>        <span class="hljs-comment"># 对输入进行特判</span><br>        <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">1</span>:  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        digit, res = <span class="hljs-number">1</span>, <span class="hljs-number">0</span><br>        high, cur, low = n//<span class="hljs-number">10</span>, n%<span class="hljs-number">10</span>, <span class="hljs-number">0</span><br>        <span class="hljs-comment"># 当 high 和 cur 同时为 0 时，说明已经越过最高位，因此跳出。</span><br>        <span class="hljs-keyword">while</span> high != <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> cur != <span class="hljs-number">0</span>:<br>            <span class="hljs-comment"># 根据cur，分三种情况讨论。</span><br>            <span class="hljs-keyword">if</span> cur == <span class="hljs-number">0</span>:  res += high * digit<br>            <span class="hljs-keyword">elif</span> cur == <span class="hljs-number">1</span>: res += high * digit + low + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: res += (high + <span class="hljs-number">1</span>) * digit<br>            <span class="hljs-comment"># 更新low、cur、high、digit</span><br>            low += cur * digit<br>            cur = high % <span class="hljs-number">10</span><br>            high //= <span class="hljs-number">10</span><br>            digit *= <span class="hljs-number">10</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-
+<p>时间复杂度 <span class="math inline">\(O(\log n)\)</span> ： 循环内的计算操作使用 <span class="math inline">\(O(1)\)</span> 时间；循环次数为数字 <span class="math inline">\(n\)</span> 的位数，即 <span class="math inline">\(\log_{10}{n}\)</span> ，因此循环使用 <span class="math inline">\(O(\log n)\)</span> 时间。 空间复杂度 <span class="math inline">\(O(1)\)</span> ： 几个变量使用常数大小的额外空间。</p>
+<h1 id="preference">Preference</h1>
+<p>作者：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/jyd/">Krahets</a> 链接：https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/mian-shi-ti-43-1n-zheng-shu-zhong-1-chu-xian-de-2/ 来源：力扣（LeetCode） 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">countDigitOne</span>(<span class="hljs-params">self, n</span>):</span><br>        <span class="hljs-comment"># 对输入进行特判</span><br>        <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">1</span>:  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        digit, res = <span class="hljs-number">1</span>, <span class="hljs-number">0</span><br>        high, cur, low = n//<span class="hljs-number">10</span>, n%<span class="hljs-number">10</span>, <span class="hljs-number">0</span><br>        <span class="hljs-comment"># 当 high 和 cur 同时为 0 时，说明已经越过最高位，因此跳出。</span><br>        <span class="hljs-keyword">while</span> high != <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> cur != <span class="hljs-number">0</span>:<br>            <span class="hljs-comment"># 根据cur，分三种情况讨论。</span><br>            <span class="hljs-keyword">if</span> cur == <span class="hljs-number">0</span>:  res += high * digit<br>            <span class="hljs-keyword">elif</span> cur == <span class="hljs-number">1</span>: res += high * digit + low + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: res += (high + <span class="hljs-number">1</span>) * digit<br>            <span class="hljs-comment"># 更新low、cur、high、digit</span><br>            low += cur * digit<br>            cur = high % <span class="hljs-number">10</span><br>            high //= <span class="hljs-number">10</span><br>            digit *= <span class="hljs-number">10</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -548,6 +554,26 @@ high \times digit + low + 1</script><ol>
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

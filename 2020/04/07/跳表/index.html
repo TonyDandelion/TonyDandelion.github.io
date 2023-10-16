@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      960 字
+      965 字
     </span>
   
 
@@ -251,22 +251,33 @@
             <h1 style="display: none">Redis 跳表详解</h1>
             
             <div class="markdown-body">
-              <p><img src="https:////upload-images.jianshu.io/upload_images/7509658-1db5fac5ed4e8c6d.png?imageMogr2/auto-orient/strip|imageView2/2/w/1066/format/webp" srcset="/img/loading.gif" alt="img"></p>
+              <figure>
+<img src="https:////upload-images.jianshu.io/upload_images/7509658-1db5fac5ed4e8c6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1066/format/webp" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>跳表，是基于链表实现的一种类似“二分”的算法。它可以快速的实现增，删，改，查操作。</p>
 <a id="more"></a>
-<h1 id="转载链接"><a href="#转载链接" class="headerlink" title="转载链接"></a>转载链接</h1><p>作者：币来币往<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/43039adeb122">https://www.jianshu.com/p/43039adeb122</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>我们知道二叉搜索算法能够高效的查询数据，但是需要一块连续的内存，而且增删改效率很低。<br>跳表，是基于链表实现的一种类似“二分”的算法。它可以快速的实现增，删，改，查操作。<br>我们先来看一下单向链表如何实现查找</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/7509658-f619e3b97420cefd.png?imageMogr2/auto-orient/strip|imageView2/2/w/1067/format/webp" srcset="/img/loading.gif" alt="img"></p>
-<p>当我们要在该单链表中查找某个数据的时候需要的时间复杂度为O(n).<br> 怎么提高查询效率呢？如果我们给该单链表加一级索引，将会改善查询效率。</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/7509658-1db5fac5ed4e8c6d.png?imageMogr2/auto-orient/strip|imageView2/2/w/1066/format/webp" srcset="/img/loading.gif" alt="img"></p>
-<p>如图所示，当我们每隔一个节点就提取出来一个元素到上一层，把这一层称作索引，其中的down指针指向原始链表1<br>当我们查找元素16的时候，单链表需要比较10次，而加过索引的两级链表只需要比较7次。当数据量增大到一定程度的时候，效率将会有显著的提升。<br>如果我们再加多几级索引的话，效率将会进一步提升。<strong>这种链表加多级索引的结构，就叫做跳表</strong>。</p>
-<p><img src="https:////upload-images.jianshu.io/upload_images/7509658-b3caa2bc1e9db136.png?imageMogr2/auto-orient/strip|imageView2/2/w/1061/format/webp" srcset="/img/loading.gif" alt="img"></p>
-<p> <strong>跳表的查询时间复杂度可以达到O(logn)</strong></p>
-<h4 id="高效的动态插入和删除"><a href="#高效的动态插入和删除" class="headerlink" title="高效的动态插入和删除"></a>高效的动态插入和删除</h4><p>跳表也可以实现高效的动态更新，定位到要插入或者删除数据的位置需要的时间复杂度为O(logn).<br> 在插入的时候，我们需要考虑将要插入的数据也插入到索引中去。在这里使用的策略是通过随机函数生成一个随机数K,然后将要插入的数据同时插入到k级以下的每级索引中。</p>
+<h1 id="转载链接">转载链接</h1>
+<p>作者：币来币往 链接：https://www.jianshu.com/p/43039adeb122 来源：简书 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="正文">正文</h1>
+<p>我们知道二叉搜索算法能够高效的查询数据，但是需要一块连续的内存，而且增删改效率很低。 跳表，是基于链表实现的一种类似“二分”的算法。它可以快速的实现增，删，改，查操作。 我们先来看一下单向链表如何实现查找</p>
+<figure>
+<img src="https:////upload-images.jianshu.io/upload_images/7509658-f619e3b97420cefd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1067/format/webp" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>当我们要在该单链表中查找某个数据的时候需要的时间复杂度为O(n). 怎么提高查询效率呢？如果我们给该单链表加一级索引，将会改善查询效率。</p>
+<figure>
+<img src="https:////upload-images.jianshu.io/upload_images/7509658-1db5fac5ed4e8c6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1066/format/webp" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>如图所示，当我们每隔一个节点就提取出来一个元素到上一层，把这一层称作索引，其中的down指针指向原始链表1 当我们查找元素16的时候，单链表需要比较10次，而加过索引的两级链表只需要比较7次。当数据量增大到一定程度的时候，效率将会有显著的提升。 如果我们再加多几级索引的话，效率将会进一步提升。<strong>这种链表加多级索引的结构，就叫做跳表</strong>。</p>
+<figure>
+<img src="https:////upload-images.jianshu.io/upload_images/7509658-b3caa2bc1e9db136.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1061/format/webp" srcset="/img/loading.gif" alt="img" /><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>跳表的查询时间复杂度可以达到O(logn)</strong></p>
+<h4 id="高效的动态插入和删除">高效的动态插入和删除</h4>
+<p>跳表也可以实现高效的动态更新，定位到要插入或者删除数据的位置需要的时间复杂度为O(logn). 在插入的时候，我们需要考虑将要插入的数据也插入到索引中去。在这里使用的策略是通过随机函数生成一个随机数K,然后将要插入的数据同时插入到k级以下的每级索引中。</p>
 <p>下面是跳表的java代码实现</p>
 <figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">package structs;<br><br>import java.util.Random;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SkipList</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> final <span class="hljs-built_in">int</span> MAX_LEVEL = <span class="hljs-number">16</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> levelCount = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">private</span> Node head = <span class="hljs-keyword">new</span> Node();<br>    <span class="hljs-keyword">private</span> Random random = <span class="hljs-keyword">new</span> Random();<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Node <span class="hljs-title">find</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span></span>)</span>&#123;<br>        Node p = head;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = levelCount - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)&#123;<br>            <span class="hljs-keyword">while</span>(p.forwards[i] != <span class="hljs-literal">null</span> &amp;&amp; p.forwards[i].data &lt; <span class="hljs-keyword">value</span>)&#123;<br>                p = p.forwards[i];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(p.forwards[<span class="hljs-number">0</span>] != <span class="hljs-literal">null</span> &amp;&amp; p.forwards[<span class="hljs-number">0</span>].data == <span class="hljs-keyword">value</span>) <span class="hljs-keyword">return</span> p.forwards[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">insert</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span></span>)</span>&#123;<br>        Node p = head;<br>        <span class="hljs-built_in">int</span> level = randomLevel();<br>        Node node = <span class="hljs-keyword">new</span> Node();<br>        node.data = <span class="hljs-keyword">value</span>;<br>        node.maxLevel = level;<br>        Node update[] = <span class="hljs-keyword">new</span> Node[level];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = level; i &gt;= <span class="hljs-number">0</span>; i--)&#123;<br>            <span class="hljs-keyword">while</span>(p.forwards[i] != <span class="hljs-literal">null</span> &amp;&amp; p.forwards[i].data &lt; <span class="hljs-keyword">value</span>)&#123;<br>                p = p.forwards[i];<br>            &#125;<br>            update[i] = p;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; level; i++)&#123;<br>            node.forwards[i] = update[i].forwards[i];<br>            update[i].forwards[i] = node;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(levelCount &lt; level) levelCount = level;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">delete</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span></span>)</span>&#123;<br>        Node[] deleteNode = <span class="hljs-keyword">new</span> Node[MAX_LEVEL];<br>        Node p = head;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = levelCount - <span class="hljs-number">1</span>; i &gt;=<span class="hljs-number">0</span>; i--)&#123;<br>            <span class="hljs-keyword">while</span>(p.forwards[i] != <span class="hljs-literal">null</span> &amp;&amp; p.forwards[i].data &lt; <span class="hljs-keyword">value</span>)&#123;<br>                p = p.forwards[i];<br>            &#125;<br>            deleteNode[i] = p;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(p.forwards[<span class="hljs-number">0</span>] != <span class="hljs-literal">null</span> &amp;&amp; p.forwards[<span class="hljs-number">0</span>].data == <span class="hljs-keyword">value</span>)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = levelCount - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)&#123;<br>                <span class="hljs-keyword">if</span>(deleteNode[i] != <span class="hljs-literal">null</span> &amp;&amp; deleteNode[i].forwards[i].data == <span class="hljs-keyword">value</span>)&#123;<br>                    deleteNode[i].forwards[i] = deleteNode[i].forwards[i].forwards[i];<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printAll</span>(<span class="hljs-params"></span>)</span>&#123;<br>        Node p = head;<br>        <span class="hljs-keyword">while</span>(p.forwards[<span class="hljs-number">0</span>] != <span class="hljs-literal">null</span>)&#123;<br>            System.<span class="hljs-keyword">out</span>.print(p.forwards[<span class="hljs-number">0</span>] + <span class="hljs-string">&quot; &quot;</span>);<br>            p = p.forwards[<span class="hljs-number">0</span>];<br>        &#125;<br>        System.<span class="hljs-keyword">out</span>.println();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> <span class="hljs-title">randomLevel</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-built_in">int</span> level = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX_LEVEL; i++)&#123;<br>            <span class="hljs-keyword">if</span>(random.nextInt()%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>)&#123;<br>                level++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> level;<br>    &#125;<br><br>    <span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&#123;<br>        <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> data;<br>        <span class="hljs-keyword">private</span> Node[] forwards = <span class="hljs-keyword">new</span> Node[MAX_LEVEL];<br>        <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> maxLevel;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span>(<span class="hljs-params"></span>)</span>&#123;<br>            StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();<br>            sb.append(<span class="hljs-string">&quot;&#123;data: &quot;</span>);<br>            sb.append(data);<br>            sb.append(<span class="hljs-string">&quot;; level: &quot;</span>);<br>            sb.append(maxLevel);<br>            sb.append(<span class="hljs-string">&quot; &#125;&quot;</span>);<br>            <span class="hljs-keyword">return</span> sb.toString();<br>        &#125;<br>    &#125;<br><br><br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>其中理解了Node节点的结构，代码就会很好理解了。<br>Node节点中forwards存储的是该节点在各个level索引的下一个数据节点。</p>
-
+<p>其中理解了Node节点的结构，代码就会很好理解了。 Node节点中forwards存储的是该节点在各个level索引的下一个数据节点。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -510,6 +521,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

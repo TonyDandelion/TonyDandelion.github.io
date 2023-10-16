@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,63 +251,82 @@
             <h1 style="display: none">LeetCode 71. 简化路径（中）</h1>
             
             <div class="markdown-body">
-              <p>时刻注意利用栈先进先出的特点，另外这道题中利用字典<br><code>dict.get(key, default_value)</code> 函数进行条件判定的方法非常优雅，一定要学会。</p>
+              <p>时刻注意利用栈先进先出的特点，另外这道题中利用字典<br />
+<code>dict.get(key, default_value)</code> 函数进行条件判定的方法非常优雅，一定要学会。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>以 Unix 风格给出一个文件的<strong>绝对路径</strong>，你需要简化它。或者换句话说，将其转换为规范路径。<br>在 Unix 风格的文件系统中，一个点（<code>.</code>）表示当前目录本身；此外，两个点 （<code>..</code>） 表示将目录切换到上一级（指向父目录）；两者都可以是复杂相对路径的组成部分。更多信息请参阅：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011327334/article/details/50355600">Linux / Unix中的绝对路径 vs 相对路径</a><br>请注意，返回的规范路径必须始终以斜杠 <code>/</code> 开头，并且两个目录名之间必须只有一个斜杠 <code>/</code>。最后一个目录名（如果存在）<strong>不能</strong>以 <code>/</code> 结尾。此外，规范路径必须是表示绝对路径的<strong>最短</strong>字符串。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1：  </p>
+<h1 id="题目">题目</h1>
+<p>以 Unix 风格给出一个文件的<strong>绝对路径</strong>，你需要简化它。或者换句话说，将其转换为规范路径。<br />
+在 Unix 风格的文件系统中，一个点（<code>.</code>）表示当前目录本身；此外，两个点 （<code>..</code>） 表示将目录切换到上一级（指向父目录）；两者都可以是复杂相对路径的组成部分。更多信息请参阅：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011327334/article/details/50355600">Linux / Unix中的绝对路径 vs 相对路径</a><br />
+请注意，返回的规范路径必须始终以斜杠 <code>/</code> 开头，并且两个目录名之间必须只有一个斜杠 <code>/</code>。最后一个目录名（如果存在）<strong>不能</strong>以 <code>/</code> 结尾。此外，规范路径必须是表示绝对路径的<strong>最短</strong>字符串。</p>
+<h1 id="示例">示例</h1>
+<p>示例 1：</p>
 <figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c">输入：<span class="hljs-string">&quot;/home/&quot;</span><br>输出：<span class="hljs-string">&quot;/home&quot;</span><br></code></pre></div></td></tr></table></figure>
-<p>解释：注意，最后一个目录名后面没有斜杠。   </p>
-<p>示例 2：  </p>
+<p>解释：注意，最后一个目录名后面没有斜杠。</p>
+<p>示例 2：</p>
 <figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c">输入：<span class="hljs-string">&quot;/../&quot;</span><br>输出：<span class="hljs-string">&quot;/&quot;</span><br></code></pre></div></td></tr></table></figure>
-<p>解释：从根目录向上一级是不可行的，因为根是你可以到达的最高级。  </p>
-<p>示例 3：  </p>
+<p>解释：从根目录向上一级是不可行的，因为根是你可以到达的最高级。</p>
+<p>示例 3：</p>
 <figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c">输入：<span class="hljs-string">&quot;/home//foo/&quot;</span><br>输出：<span class="hljs-string">&quot;/home/foo&quot;</span><br></code></pre></div></td></tr></table></figure>
-<p>解释：在规范路径中，多个连续斜杠需要用一个斜杠替换。  </p>
-<p>示例 4：  </p>
+<p>解释：在规范路径中，多个连续斜杠需要用一个斜杠替换。</p>
+<p>示例 4：</p>
 <figure class="highlight smalltalk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smalltalk">输入：<span class="hljs-comment">&quot;/a/./b/../../c/&quot;</span><br>输出：<span class="hljs-comment">&quot;/c&quot;</span><br></code></pre></div></td></tr></table></figure>
-<p>示例 5：  </p>
+<p>示例 5：</p>
 <figure class="highlight smalltalk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smalltalk">输入：<span class="hljs-comment">&quot;/a/../../b/../c//.//&quot;</span><br>输出：<span class="hljs-comment">&quot;/c&quot;</span><br></code></pre></div></td></tr></table></figure>
-<p>示例 6：  </p>
+<p>示例 6：</p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">输入：&quot;/<span class="hljs-selector-tag">a</span>//<span class="hljs-selector-tag">b</span>////c/d//././/..&quot;<br>输出：&quot;/<span class="hljs-selector-tag">a</span>/<span class="hljs-selector-tag">b</span>/c&quot;<br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>栈、字符串</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><blockquote>
-<p><strong>方法一、直接根据规律进行字符串处理</strong>  </p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>栈、字符串</p>
+<h1 id="核心思想">核心思想</h1>
+<blockquote>
+<p><strong>方法一、直接根据规律进行字符串处理</strong></p>
 </blockquote>
-<p>这道题让简化给定的路径，光根据题目中给的那一个例子还真不太好总结出规律，应该再加上两个例子<br><code>path = &quot;/a/./b/../c/&quot;, =&gt; &quot;/a/c&quot;</code><br><code>path = &quot;/a/./b/c/&quot;, =&gt; &quot;/a/b/c&quot;</code><br>这样我们就可以知道</p>
+<p>这道题让简化给定的路径，光根据题目中给的那一个例子还真不太好总结出规律，应该再加上两个例子<br />
+<code>path = "/a/./b/../c/", =&gt; "/a/c"</code><br />
+<code>path = "/a/./b/c/", =&gt; "/a/b/c"</code><br />
+这样我们就可以知道</p>
 <ul>
-<li>中间是”.”的情况直接跳过。</li>
-<li>是”..”时删掉它上面挨着的一个路径，且跳过这个。</li>
+<li>中间是"."的情况直接跳过。</li>
+<li>是".."时删掉它上面挨着的一个路径，且跳过这个。</li>
 </ul>
 <p>而下面的边界条件给的一些情况中可以得知</p>
 <ul>
-<li>如果是空的话返回”/“</li>
-<li>如果有多个”/“只保留一个</li>
+<li>如果是空的话返回"/"</li>
+<li>如果有多个"/"只保留一个</li>
 </ul>
-<p><strong>那么我们可以把路径看做是由一个或多个”/“分割开的众多子字符串，把它们分别提取出来一一判断处理即可。</strong>  </p>
+<p><strong>那么我们可以把路径看做是由一个或多个"/"分割开的众多子字符串，把它们分别提取出来一一判断处理即可。</strong></p>
 <blockquote>
 <p><strong>方法二、基于栈</strong></p>
 </blockquote>
 <p>一句话解释: 栈解决,把当前目录压入栈中，遇到<code>..</code>弹出栈顶,最后返回栈中元素.</p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
-<li>方法一的实现  </li>
+<h1 id="python版本">Python版本</h1>
+<ul>
+<li>方法一的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simplifyPath</span>(<span class="hljs-params">self, path: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        r = []<br>        <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> path.split(<span class="hljs-string">&#x27;/&#x27;</span>):<br>            r = &#123;<span class="hljs-string">&#x27;&#x27;</span>:r, <span class="hljs-string">&#x27;.&#x27;</span>:r, <span class="hljs-string">&#x27;..&#x27;</span>:r[:-<span class="hljs-number">1</span>]&#125;.get(s, r + [s])  <span class="hljs-comment"># get(key, default_value)</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;/&#x27;</span> + <span class="hljs-string">&#x27;/&#x27;</span>.join(r)<br><br></code></pre></div></td></tr></table></figure>
-<p>执行用时 :44 ms, 在所有 Python3 提交中击败了42.23%的用户<br>内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.24%的用户  </p>
+<p>执行用时 :44 ms, 在所有 Python3 提交中击败了42.23%的用户<br />
+内存消耗 :13.6 MB, 在所有 Python3 提交中击败了5.24%的用户</p>
 <p>优化之后的结果，不用每次循环都做split。<font color='green'> <strong>推荐该方法，更加简洁，没有用到栈。</strong> </font></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simplifyPath</span>(<span class="hljs-params">self, path: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        r = []<br>        segments = path.split(<span class="hljs-string">&#x27;/&#x27;</span>)<br>        <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> segments:<br>            r = &#123;<span class="hljs-string">&#x27;&#x27;</span>:r, <span class="hljs-string">&#x27;.&#x27;</span>:r, <span class="hljs-string">&#x27;..&#x27;</span>:r[:-<span class="hljs-number">1</span>]&#125;.get(s, r + [s])  <span class="hljs-comment"># get(key, default_value)  如果key命中 &#x27;&#x27;、&#x27;.&#x27;、&#x27;..&#x27; 这三种特殊情况，就得到特殊处理的结果，分别是r不变、r不变、r最后一个去掉。如果不命中，说明是一个有效的子路径，添加进去，r + [s]。</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;/&#x27;</span> + <span class="hljs-string">&#x27;/&#x27;</span>.join(r)<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(n)$，n为 <code>/</code> 区间个数。<br>空间复杂度：$O(m)$，m为有效路径层数。<br>执行用时 :32 ms, 在所有 Python3 提交中击败了89.51%的用户<br>内存消耗 :13.4 MB, 在所有 Python3 提交中击败了5.24%的用户  </p>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span>，n为 <code>/</code> 区间个数。<br />
+空间复杂度：<span class="math inline">\(O(m)\)</span>，m为有效路径层数。<br />
+执行用时 :32 ms, 在所有 Python3 提交中击败了89.51%的用户<br />
+内存消耗 :13.4 MB, 在所有 Python3 提交中击败了5.24%的用户</p>
 <ul>
-<li>方法二的实现  </li>
+<li>方法二的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simplifyPath</span>(<span class="hljs-params">self, path: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        segments = path.split(<span class="hljs-string">&quot;/&quot;</span>)<br>        res = []<br>        <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(segments)):<br>            segment = segments[index]<br>            <span class="hljs-keyword">if</span> segment == <span class="hljs-string">&quot;&quot;</span>:<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">elif</span> segment == <span class="hljs-string">&quot;.&quot;</span>:<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">elif</span> segment == <span class="hljs-string">&quot;..&quot;</span>:<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res):  <span class="hljs-comment"># 遇到.. 弹出栈顶，最后返回栈中元素。</span><br>                    res.pop()<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">else</span>:<br>                res.append(segment)<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;/&quot;</span> + <span class="hljs-string">&quot;/&quot;</span>.join(res)<br><br><br><br>Input = [<span class="hljs-string">&quot;/home/&quot;</span>, <span class="hljs-string">&quot;/../&quot;</span>, <span class="hljs-string">&quot;/home//foo/&quot;</span>, <span class="hljs-string">&quot;/a/./b/../../c/&quot;</span>, <span class="hljs-string">&quot;/a/../../b/../c//.//&quot;</span>, <span class="hljs-string">&quot;/a//b////c/d//././/..&quot;</span>]<br>Answer = [<span class="hljs-string">&quot;/home&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;/home/foo&quot;</span>, <span class="hljs-string">&quot;/c&quot;</span>, <span class="hljs-string">&quot;/c&quot;</span>, <span class="hljs-string">&quot;/a/b/c&quot;</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.simplifyPath(Input[i])<br>        <span class="hljs-keyword">if</span> reslut == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print([Answer[i]])<br>            print(reslut)<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(n)$，n为 <code>/</code> 区间个数。<br>空间复杂度：$O(m)$，m为有效路径层数。<br>执行用时 :32 ms, 在所有 Python3交中击败了89.51%的用户<br>内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.24%的用户  </p>
-<h1 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h1><p>1、使用字典做判断，非常巧妙。</p>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span>，n为 <code>/</code> 区间个数。<br />
+空间复杂度：<span class="math inline">\(O(m)\)</span>，m为有效路径层数。<br />
+执行用时 :32 ms, 在所有 Python3交中击败了89.51%的用户<br />
+内存消耗 :13.5 MB, 在所有 Python3 提交中击败了5.24%的用户</p>
+<h1 id="有效语法糖">有效语法糖</h1>
+<p>1、使用字典做判断，非常巧妙。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simplifyPath</span>(<span class="hljs-params">self, path: <span class="hljs-built_in">str</span></span>) -&gt; str:</span><br>        r = []<br>        <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> path.split(<span class="hljs-string">&#x27;/&#x27;</span>):<br>            r = &#123;<span class="hljs-string">&#x27;&#x27;</span>:r, <span class="hljs-string">&#x27;.&#x27;</span>:r, <span class="hljs-string">&#x27;..&#x27;</span>:r[:-<span class="hljs-number">1</span>]&#125;.get(s, r + [s])  <span class="hljs-comment"># get(key, default_value)</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;/&#x27;</span> + <span class="hljs-string">&#x27;/&#x27;</span>.join(r)<br></code></pre></div></td></tr></table></figure>
 <blockquote>
-<p>参考链接  </p>
+<p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4347125.html">Grandyang</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/simplify-path/solution/python-4-line-by-qqqun902025048/">LeetCode用户题解</a>  </p>
-
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/grandyang/p/4347125.html">Grandyang</a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/simplify-path/solution/python-4-line-by-qqqun902025048/">LeetCode用户题解</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -553,6 +572,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

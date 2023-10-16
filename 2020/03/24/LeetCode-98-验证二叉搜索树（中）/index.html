@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      494 字
+      495 字
     </span>
   
 
@@ -251,23 +251,32 @@
             <h1 style="display: none">LeetCode 98. 验证二叉搜索树（中）</h1>
             
             <div class="markdown-body">
-              <p>利用二叉搜索树中序遍历结果为递增序列的特点判断该二叉树是否是二叉搜索树。  </p>
+              <p>利用二叉搜索树中序遍历结果为递增序列的特点判断该二叉树是否是二叉搜索树。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。<br>假设一个二叉搜索树具有如下特征：  </p>
+<h1 id="题目">题目</h1>
+<p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。<br />
+假设一个二叉搜索树具有如下特征：</p>
 <ul>
 <li>节点的左子树只包含小于当前节点的数。</li>
 <li>节点的右子树只包含大于当前节点的数。</li>
 <li>所有左子树和右子树自身必须也是二叉搜索树</li>
 </ul>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>示例 1:  </p>
+<h1 id="示例">示例</h1>
+<p>示例 1:</p>
 <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">输入:<br>    <span class="hljs-number">2</span><br>   / <span class="hljs-string">\</span><br>  <span class="hljs-number">1</span>   <span class="hljs-number">3</span><br>输出: <span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
-<p>示例 2:  </p>
+<p>示例 2:</p>
 <figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">输入:<br>    <span class="hljs-number">5</span><br>   / <span class="hljs-string">\</span><br>  <span class="hljs-number">1</span>   <span class="hljs-number">4</span><br>     / <span class="hljs-string">\</span><br>    <span class="hljs-number">3</span>   <span class="hljs-number">6</span><br>输出: <span class="hljs-literal">false</span><br></code></pre></div></td></tr></table></figure>
-<p>解释: 输入为: [5,1,4,null,null,3,6]。<br>根节点的值为 5 ，但是其右子节点值为 4 。</p>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>二叉树</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><em>直觉</em><br>对二叉树进行一个中序遍历，中序遍历为有序递增的，就是有效二叉树。<br>注意判断，如果结果中有重复的，直接就不认为是二叉树了  </p>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isValidBST</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; bool:</span><br>        <span class="hljs-comment"># 中序遍历为递增的，就是有效二叉树</span><br>        res = self.inorderTraversal(root)<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res)!=<span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(res)):  <span class="hljs-comment"># 如果有重复的，直接就不认为是二叉树了</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        tmp = res[:]<br>        tmp.sort()<br>        <span class="hljs-keyword">return</span> res == tmp<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inorderTraversal</span>(<span class="hljs-params">self, root</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        In-Order Traversal of binary tree based on circulation</span><br><span class="hljs-string">        :param root: root node of target binary tree</span><br><span class="hljs-string">        :return: TreeNode</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        res = []<br>        stack = []<br>        node = root<br>        <span class="hljs-keyword">while</span> node <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(stack) &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">while</span> node:  <span class="hljs-comment"># 把当前节点的所有左侧子结点压入栈 </span><br>                stack.append(node)<br>                node = node.left<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(stack):  <span class="hljs-comment"># 访问节点，处理该节点的右子树</span><br>                node = stack.pop()  <span class="hljs-comment"># 由于之前把左子树先压入了，所以这里先弹出左子树节点</span><br>                res.append(node.val)<br>                node = node.right  <span class="hljs-comment">#  然后设置新的node为右子树，下一次while循环就会去处理右子树了。这样一来就实现了左 -&gt; 根 -&gt; 右 的顺序。</span><br>        <span class="hljs-keyword">return</span> res<br><br></code></pre></div></td></tr></table></figure>
-
+<p>解释: 输入为: [5,1,4,null,null,3,6]。<br />
+根节点的值为 5 ，但是其右子节点值为 4 。</p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>二叉树</p>
+<h1 id="核心思想">核心思想</h1>
+<p><em>直觉</em><br />
+对二叉树进行一个中序遍历，中序遍历为有序递增的，就是有效二叉树。<br />
+注意判断，如果结果中有重复的，直接就不认为是二叉树了</p>
+<h1 id="python版本">Python版本</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isValidBST</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; bool:</span><br>        <span class="hljs-comment"># 中序遍历为递增的，就是有效二叉树</span><br>        res = self.inorderTraversal(root)<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res)!=<span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(res)):  <span class="hljs-comment"># 如果有重复的，直接就不认为是二叉树了</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        tmp = res[:]<br>        tmp.sort()<br>        <span class="hljs-keyword">return</span> res == tmp<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inorderTraversal</span>(<span class="hljs-params">self, root</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        In-Order Traversal of binary tree based on circulation</span><br><span class="hljs-string">        :param root: root node of target binary tree</span><br><span class="hljs-string">        :return: TreeNode</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        res = []<br>        stack = []<br>        node = root<br>        <span class="hljs-keyword">while</span> node <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(stack) &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">while</span> node:  <span class="hljs-comment"># 把当前节点的所有左侧子结点压入栈 </span><br>                stack.append(node)<br>                node = node.left<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(stack):  <span class="hljs-comment"># 访问节点，处理该节点的右子树</span><br>                node = stack.pop()  <span class="hljs-comment"># 由于之前把左子树先压入了，所以这里先弹出左子树节点</span><br>                res.append(node.val)<br>                node = node.right  <span class="hljs-comment">#  然后设置新的node为右子树，下一次while循环就会去处理右子树了。这样一来就实现了左 -&gt; 根 -&gt; 右 的顺序。</span><br>        <span class="hljs-keyword">return</span> res<br><br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -511,6 +520,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

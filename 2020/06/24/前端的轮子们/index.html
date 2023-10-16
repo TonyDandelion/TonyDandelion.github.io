@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,10 +253,12 @@
             <div class="markdown-body">
               <p>前端的新轮子层出不穷，这里集中记录一下。</p>
 <a id="more"></a>
-<h1 id="Mock"><a href="#Mock" class="headerlink" title="Mock"></a>Mock</h1><blockquote>
+<h1 id="mock">Mock</h1>
+<blockquote>
 <p>如果将mock单独翻译过来，其意义为 <em>“虚假、虚设”</em>，因此在软件开发领域，我们也可以将其理解成 <em>“虚假数据”</em>，或者 <em>“真实数据的替身”</em>。</p>
 </blockquote>
-<h2 id="Mock的好处"><a href="#Mock的好处" class="headerlink" title="Mock的好处"></a>Mock的好处</h2><ul>
+<h2 id="mock的好处">Mock的好处</h2>
+<ul>
 <li>团队可以更好地并行工作</li>
 </ul>
 <p>当使用mock之后，各团队之间可以不需要再互相等待对方的进度，只需要约定好相互之间的数据规范（文档），即可使用mock构建一个可用的接口，然后尽快的进行开发和调试以及自测，提升开发进度的的同时，也将发现缺陷的时间点大大提前。</p>
@@ -277,7 +279,8 @@
 </ul>
 <p>在使用某些接口的时候，为了避免系统中数据库被污染，我们可以将这些接口调整为Mock的模式，以此保证数据库的干净。</p>
 <p>在吹了这么多的Mock之后，相信大家一定跃跃欲试了，那么接下来我们谈一谈实现Mock的几种方法。</p>
-<h2 id="Mock实现"><a href="#Mock实现" class="headerlink" title="Mock实现"></a>Mock实现</h2><p><a target="_blank" rel="noopener" href="http://mockjs.com/">mockJs</a>，通过使用mockJs我们能根据模板和规则生成复杂的接口数据，而无需我们自己动手去书写，例如：</p>
+<h2 id="mock实现">Mock实现</h2>
+<p><a target="_blank" rel="noopener" href="http://mockjs.com/">mockJs</a>，通过使用mockJs我们能根据模板和规则生成复杂的接口数据，而无需我们自己动手去书写，例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// api</span><br><span class="hljs-keyword">import</span> api <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../api/index&#x27;</span>;<br><span class="hljs-keyword">import</span> Mock <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mockjs&#x27;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getApiMessage</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> &#123;<br>        resolve(Mock.mock(&#123;<br>            list|<span class="hljs-number">1</span>-<span class="hljs-number">20</span>: [<span class="hljs-string">&#x27;mock数据&#x27;</span>]<br>        &#125;);<br>    &#125;)<br>    <span class="hljs-comment">// return api.getApiMessage();</span><br>&#125;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 通过 Mock.mock 方法和 list|1-20: [&#x27;mock数据&#x27;] 模板</span><br><span class="hljs-comment">* 我们将生成一个长度为 1-20, 每个值都为 &#x27;mock数据&#x27; 数组</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
 <p>但是这样做始终只不过是方便了我们“造假”而已，并不能将“假货”真的从我们的业务代码中移除出去。为了实现这个目的，我们不妨先来分析我们的需求：</p>
 <ul>
@@ -321,18 +324,21 @@
 </ul>
 <p>在这几个基本原则的帮助下，我们的mock终于晋级到了“永恒钻石”段位。</p>
 <p>类似mockjs的mock工具还有 <a target="_blank" rel="noopener" href="https://easymock.org/">EasyMock</a></p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>作者：santree<br>链接：<a target="_blank" rel="noopener" href="https://juejin.im/post/5bd82d796fb9a05d25682a66">https://juejin.im/post/5bd82d796fb9a05d25682a66</a><br>来源：掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h1 id="Lint"><a href="#Lint" class="headerlink" title="Lint"></a>Lint</h1><p>代码检查工具</p>
-<h1 id="TypeScript-amp-JavaScript"><a href="#TypeScript-amp-JavaScript" class="headerlink" title="TypeScript &amp; JavaScript"></a>TypeScript &amp; JavaScript</h1><p>JS就是蹭当年Java的热度起的名字，JavaScript这个名字和Java没半点关系，Java里的接口、继承、强类型，它都没有。而TS是JS的超集，正是补全了上面那些缺失的部分，强调的是<strong>Type</strong>Script。有了强类型，就有了更好的IDE支持，包括语法提示和编译时错误信息。有了接口和继承，代码就更易读易维护。这些都是大型复杂前端工程急需的特性。</p>
+<h2 id="参考链接">参考链接</h2>
+<p>作者：santree 链接：https://juejin.im/post/5bd82d796fb9a05d25682a66 来源：掘金 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="lint">Lint</h1>
+<p>代码检查工具</p>
+<h1 id="typescript-javascript">TypeScript &amp; JavaScript</h1>
+<p>JS就是蹭当年Java的热度起的名字，JavaScript这个名字和Java没半点关系，Java里的接口、继承、强类型，它都没有。而TS是JS的超集，正是补全了上面那些缺失的部分，强调的是<strong>Type</strong>Script。有了强类型，就有了更好的IDE支持，包括语法提示和编译时错误信息。有了接口和继承，代码就更易读易维护。这些都是大型复杂前端工程急需的特性。</p>
 <ul>
 <li>语言层面：JavaScript和TypeScript都是ECMAScript（ECMA-262）的具体实现。</li>
 <li>执行环境层面：浏览器引擎和Node.js都能够直接运行JavaScript，但无法直接运行TypeScript。</li>
 <li>时序层面：TypeScript被真正执行前，会通过编译转换生成JavaScript，之后才能被解释执行。</li>
 <li>厂商层面：JavaScript由Netscape率先推出，现在主要由各大浏览器厂商实现。而TypeScript is a trademark of Microsoft Corporation，目前由微软进行设计和维护。</li>
 </ul>
-<p><img src="https://i.loli.net/2020/06/24/GU9oW6MIxCiLHZF.png" srcset="/img/loading.gif" alt=""></p>
-<p>作者：郭凯<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/334938460/answer/782030856">https://www.zhihu.com/question/334938460/answer/782030856</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-
+<p><img src="https://i.loli.net/2020/06/24/GU9oW6MIxCiLHZF.png" srcset="/img/loading.gif" /></p>
+<p>作者：郭凯 链接：https://www.zhihu.com/question/334938460/answer/782030856 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -569,6 +575,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

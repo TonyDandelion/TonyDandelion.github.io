@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      502 字
+      505 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -255,16 +255,15 @@
 <a id="more"></a>
 <p>Redis 是一款内存键值存储，以其灵活性，性能和广泛的语言支持而闻名。本教程将演示如何在 Ubuntu 18.04 服务器上安装和配置 Redis。主要内容包括：</p>
 <ul>
-<li><p>安装 Redis</p>
-</li>
-<li><p>Redis 配置</p>
-</li>
-<li><p>Redis 控制</p>
-</li>
+<li><p>安装 Redis</p></li>
+<li><p>Redis 配置</p></li>
+<li><p>Redis 控制</p></li>
 </ul>
-<h1 id="安装-Redis"><a href="#安装-Redis" class="headerlink" title="安装 Redis"></a>安装 Redis</h1><p>使用 apt 从官方 Ubuntu 存储库来安装 Redis：</p>
+<h1 id="安装-redis">安装 Redis</h1>
+<p>使用 apt 从官方 Ubuntu 存储库来安装 Redis：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo apt update<br>$ sudo apt install redis-server<br></code></pre></div></td></tr></table></figure>
-<h1 id="Redis-配置"><a href="#Redis-配置" class="headerlink" title="Redis 配置"></a>Redis 配置</h1><p>打开 Redis 的配置文件</p>
+<h1 id="redis-配置">Redis 配置</h1>
+<p>打开 Redis 的配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo vi /etc/redis/redis.conf<br></code></pre></div></td></tr></table></figure>
 <p>在文件中，找到 supervised 指令。 该指令允许您声明一个 init 系统来管理 Redis 作为服务，从而为您提供对其操作的更多控制。 受 supervised 指令默认设置为 no 。 由于您正在运行使用 systemd init 系统的 Ubuntu，请将其更改为 systemd ：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># If you run Redis from upstart or systemd, Redis can interact with your</span><br><span class="hljs-comment"># supervision tree. Options:</span><br><span class="hljs-comment">#   supervised no      - no supervision interaction</span><br><span class="hljs-comment">#   supervised upstart - signal upstart by putting Redis into SIGSTOP mode</span><br><span class="hljs-comment">#   supervised systemd - signal systemd by writing READY=1 to $NOTIFY_SOCKET</span><br><span class="hljs-comment">#   supervised auto    - detect upstart or systemd method based on</span><br><span class="hljs-comment">#                        UPSTART_JOB or NOTIFY_SOCKET environment variables</span><br><span class="hljs-comment"># Note: these supervision methods only signal &quot;process is ready.&quot;</span><br><span class="hljs-comment">#       They do not enable continuous liveness pings back to your supervisor.</span><br>supervised systemd<br></code></pre></div></td></tr></table></figure>
@@ -273,25 +272,33 @@
 <p>查看 Redis 的运行状态：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo systemctl status redis<br></code></pre></div></td></tr></table></figure>
 <p>输出如下结果表示运行成功：</p>
-<p><img src="https://wangxin1248.github.io/assets/images/2018-07/05-ubuntu-install-redis.png" srcset="/img/loading.gif" alt="redis-install-1"></p>
+<figure>
+<img src="https://wangxin1248.github.io/assets/images/2018-07/05-ubuntu-install-redis.png" srcset="/img/loading.gif" alt="redis-install-1" /><figcaption aria-hidden="true">redis-install-1</figcaption>
+</figure>
 <p>现在已经成功安装和配置了 Redis 并且已经开始运行。</p>
-<h1 id="Redis-控制"><a href="#Redis-控制" class="headerlink" title="Redis 控制"></a>Redis 控制</h1><h2 id="redis-服务控制"><a href="#redis-服务控制" class="headerlink" title="redis 服务控制"></a>redis 服务控制</h2><p>启动 redis 服务：</p>
+<h1 id="redis-控制">Redis 控制</h1>
+<h2 id="redis-服务控制">redis 服务控制</h2>
+<p>启动 redis 服务：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo service redis start<br></code></pre></div></td></tr></table></figure>
 <p>关闭 redis 服务：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo service redis stop<br></code></pre></div></td></tr></table></figure>
 <p>重启 redis 服务：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo service redis restart<br></code></pre></div></td></tr></table></figure>
-<h2 id="redis-客户端连接"><a href="#redis-客户端连接" class="headerlink" title="redis 客户端连接"></a>redis 客户端连接</h2><p>在命令行中输入如下命令来登陆进 redis 客户端</p>
+<h2 id="redis-客户端连接">redis 客户端连接</h2>
+<p>在命令行中输入如下命令来登陆进 redis 客户端</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ redis-cli<br></code></pre></div></td></tr></table></figure>
-<h2 id="redis-远程连接"><a href="#redis-远程连接" class="headerlink" title="redis 远程连接"></a>redis 远程连接</h2><p>打开配置文件</p>
+<h2 id="redis-远程连接">redis 远程连接</h2>
+<p>打开配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo vi /etc/redis/redis.conf<br></code></pre></div></td></tr></table></figure>
-<p>将 <code>bind 127.0.0.1 ::1</code> 改为<code>bind 0.0.0.0</code>，之后重新启动 <code>redis</code>。    </p>
-<h1 id="Redis-设置"><a href="#Redis-设置" class="headerlink" title="Redis 设置"></a>Redis 设置</h1><p> 打开 Redis 的配置文件</p>
+<p>将 <code>bind 127.0.0.1 ::1</code> 改为<code>bind 0.0.0.0</code>，之后重新启动 <code>redis</code>。</p>
+<h1 id="redis-设置">Redis 设置</h1>
+<p>打开 Redis 的配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo vi /etc/redis/redis.conf<br></code></pre></div></td></tr></table></figure>
 <p>找到下面这一行</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># requirepass foobared </span><br></code></pre></div></td></tr></table></figure>
 <p>将注释符号去掉，将后面修改成自己的密码，如:</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">requirepass 123456<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -528,6 +535,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

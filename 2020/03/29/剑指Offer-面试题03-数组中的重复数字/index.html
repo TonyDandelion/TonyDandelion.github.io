@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -257,57 +257,65 @@
 <p>原题链接</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">面试题03. 数组中重复的数字</a></p>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>找出数组中<strong>重复</strong>的数字。</p>
+<h1 id="question">Question</h1>
+<p>找出数组中<strong>重复</strong>的数字。</p>
 <p>在一个长度为 <code>n</code> 的数组 <code>nums</code> 里的所有数字都在 <code>0～n-1</code> 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中<strong>任意一个</strong>重复的数字。</p>
-<p>示例 1：<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：<br><span class="hljs-string">[2, 3, 1, 0, 2, 5, 3]</span><br>输出：<span class="hljs-number">2</span> 或 <span class="hljs-number">3</span> <br></code></pre></div></td></tr></table></figure><br>限制：2 &lt;= n &lt;= 100000</p>
+<p>示例 1： <figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入：<br><span class="hljs-string">[2, 3, 1, 0, 2, 5, 3]</span><br>输出：<span class="hljs-number">2</span> 或 <span class="hljs-number">3</span> <br></code></pre></div></td></tr></table></figure> 限制：2 &lt;= n &lt;= 100000</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试：长度为n的数组里包含一个或多个重复的数字。<br>特殊输入：数组中不包含重复的数字；输入空指针；长度为n的数组中包含0～n-1之外的数字）。</p>
+<p>功能测试：长度为n的数组里包含一个或多个重复的数字。 特殊输入：数组中不包含重复的数字；输入空指针；长度为n的数组中包含0～n-1之外的数字）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者对一维数组的理解及编程能力。一维数组在内存中占据连续的空间，因此我们可以根据下标定位对应的元素。<br>考查应聘者分析问题的能力。当应聘者发现问题比较复杂时，能不能通过具体的例子找出其中的规律，是能否解决这个问题的关键所在。</p>
+<p>考查应聘者对一维数组的理解及编程能力。一维数组在内存中占据连续的空间，因此我们可以根据下标定位对应的元素。 考查应聘者分析问题的能力。当应聘者发现问题比较复杂时，能不能通过具体的例子找出其中的规律，是能否解决这个问题的关键所在。</p>
 <blockquote>
 <p>注意LeetCode上的<strong>面试题03</strong>和《剑指offer》书上的<strong>面试题03</strong>题目不同</p>
 </blockquote>
 <p>LeetCode上的<strong>面试题03</strong>：在一个长度为 <code>n</code> 的数组 <code>nums</code> 里的所有数字都在 <code>0～n-1</code> 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中<strong>任意一个</strong>重复的数字。</p>
 <p>《剑指offer》书上的<strong>面试题03</strong>：在一个长度为 <code>n+1</code> 的数组 <code>nums</code> 里的所有数字都在 <code>1～n</code> 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中<strong>任意一个</strong>重复的数字。</p>
 <p>基于hash map和一次遍历算法在这两种题目上都能正常解决问题。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="基于hash-map"><a href="#基于hash-map" class="headerlink" title="基于hash map"></a>基于hash map</h2><p>遍历数组，利用 <code>hash map</code> 建立<strong>数值</strong>和<strong>数值出现次数</strong>的关系的映射，一旦发现有出现两次以上的数字，即停止遍历输出即可。</p>
-<p><strong><em>算法</em></strong> </p>
+<h1 id="intuition">Intuition</h1>
+<h2 id="基于hash-map">基于hash map</h2>
+<p>遍历数组，利用 <code>hash map</code> 建立<strong>数值</strong>和<strong>数值出现次数</strong>的关系的映射，一旦发现有出现两次以上的数字，即停止遍历输出即可。</p>
+<p><strong><em>算法</em></strong></p>
 <ul>
 <li>声明 <code>hash map</code></li>
-<li><code>for</code> 循环 <code>nums</code><ul>
+<li><code>for</code> 循环 <code>nums</code>
+<ul>
 <li>如果当前 <code>num</code> 在 <code>hash map</code> 中，就直接 <code>ruturn</code> 当前 <code>num</code>。</li>
 <li>否则就将当前 <code>num</code> 加入到 <code>hash map</code> 中。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong><em>复杂度分析</em></strong></p>
-<p>时间复杂度：$O(n)$ <br><br>空间复杂度：$O(n)$</p>
-<h2 id="一次遍历"><a href="#一次遍历" class="headerlink" title="一次遍历"></a>一次遍历</h2><p>我们注意到数组中的数字都在0~n-1的范围内。如果这个数组中没有重复的数字，那么当数组排序之后数字 <code>i</code> 将出现在下标为 <code>i</code> 的位置。由于数组中有重复的数字，有些位置可能存在多个数字，同时有些位置可能没有数字。<br>现在让我们重排这个数组。从头到尾依次扫描这个数组中的每个数字。</p>
-<p><strong><em>算法</em></strong> </p>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span> <br> 空间复杂度：<span class="math inline">\(O(n)\)</span></p>
+<h2 id="一次遍历">一次遍历</h2>
+<p>我们注意到数组中的数字都在0~n-1的范围内。如果这个数组中没有重复的数字，那么当数组排序之后数字 <code>i</code> 将出现在下标为 <code>i</code> 的位置。由于数组中有重复的数字，有些位置可能存在多个数字，同时有些位置可能没有数字。 现在让我们重排这个数组。从头到尾依次扫描这个数组中的每个数字。</p>
+<p><strong><em>算法</em></strong></p>
 <ul>
-<li>当扫描到下标为 <code>i</code> 的数字时，首先比较这个数字（用 <code>m=nums[i]</code> 表示）是不是等于 <code>i</code> 。<ul>
+<li>当扫描到下标为 <code>i</code> 的数字时，首先比较这个数字（用 <code>m=nums[i]</code> 表示）是不是等于 <code>i</code> 。
+<ul>
 <li>如果是，则接着扫描下一个数字；</li>
-<li>如果不是，则再拿它和第 <code>m</code> 个数字进行比较。<ul>
+<li>如果不是，则再拿它和第 <code>m</code> 个数字进行比较。
+<ul>
 <li>如果它和第 <code>m</code> 个数字<strong>相等</strong>，就找到了一个重复的数字（该数字在下标为<code>i</code> 和 <code>m</code> 的位置都出现了），<code>return</code> 这个找到数字。</li>
 <li>如果它和第 <code>m</code> 个数字<strong>不相等</strong>，就把第 <code>i</code> 个数字和第 <code>m</code> 个数字交换，把 <code>m</code> 放到属于它的位置。</li>
-</ul>
-</li>
+</ul></li>
 <li>接下来再重复这个比较、交换的过程，直到我们发现一个重复的数字。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong><em>复杂度分析</em></strong></p>
-<p>时间复杂度：$O(n)$ <br><br>空间复杂度：$O(1)$</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="基于hash-map-1"><a href="#基于hash-map-1" class="headerlink" title="基于hash map"></a>基于hash map</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># coding: utf-8</span><br><br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        <span class="hljs-comment"># 声明hash map</span><br>        hash_map = <span class="hljs-built_in">dict</span>()<br>        <span class="hljs-comment"># for循环nums</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> num <span class="hljs-keyword">in</span> hash_map:<br>                <span class="hljs-keyword">return</span> num<br>            <span class="hljs-keyword">else</span>:<br>                hash_map[num] = <span class="hljs-number">1</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    arguments = [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>]]<br>    answers = [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]]<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(arguments)):<br>        result = solution.findRepeatNumber(arguments[i])<br>        print(result <span class="hljs-keyword">in</span> answers[i])<br></code></pre></div></td></tr></table></figure>
-<h2 id="一次遍历-1"><a href="#一次遍历-1" class="headerlink" title="一次遍历"></a>一次遍历</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            length = <span class="hljs-built_in">len</span>(nums)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">if</span> nums[i] &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> nums[i] &gt; length:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">while</span> nums[i] != i:<br>                <span class="hljs-comment"># 找到重复</span><br>                <span class="hljs-keyword">if</span> nums[i] == nums[nums[i]]:<br>                    <span class="hljs-keyword">return</span> nums[i]<br>                <span class="hljs-comment"># 交换nums[i]和nums[nums[i] 数字归位</span><br>                tmp = nums[nums[i]]<br>                nums[nums[i]] = nums[i]<br>                nums[i] = tmp<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><blockquote>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span> <br> 空间复杂度：<span class="math inline">\(O(1)\)</span></p>
+<h1 id="code">Code</h1>
+<h2 id="基于hash-map-1">基于hash map</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># coding: utf-8</span><br><br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        <span class="hljs-comment"># 声明hash map</span><br>        hash_map = <span class="hljs-built_in">dict</span>()<br>        <span class="hljs-comment"># for循环nums</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> num <span class="hljs-keyword">in</span> hash_map:<br>                <span class="hljs-keyword">return</span> num<br>            <span class="hljs-keyword">else</span>:<br>                hash_map[num] = <span class="hljs-number">1</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    arguments = [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>]]<br>    answers = [[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]]<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(arguments)):<br>        result = solution.findRepeatNumber(arguments[i])<br>        print(result <span class="hljs-keyword">in</span> answers[i])<br></code></pre></div></td></tr></table></figure>
+<h2 id="一次遍历-1">一次遍历</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            length = <span class="hljs-built_in">len</span>(nums)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">if</span> nums[i] &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> nums[i] &gt; length:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">while</span> nums[i] != i:<br>                <span class="hljs-comment"># 找到重复</span><br>                <span class="hljs-keyword">if</span> nums[i] == nums[nums[i]]:<br>                    <span class="hljs-keyword">return</span> nums[i]<br>                <span class="hljs-comment"># 交换nums[i]和nums[nums[i] 数字归位</span><br>                tmp = nums[nums[i]]<br>                nums[nums[i]] = nums[i]<br>                nums[i] = tmp<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="extension">Extension</h1>
+<blockquote>
 <p><strong><em>Question</em></strong></p>
 </blockquote>
-<p>题目二：不修改数组找出重复的数字。<br>在一个长度为n+1的数组里的所有数字都在1～n的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为8的数组 [2, 3, 5, 4, 3, 2, 6, 7]，那么对应的输出是重复的数字2或者3。</p>
+<p>题目二：不修改数组找出重复的数字。 在一个长度为n+1的数组里的所有数字都在1～n的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为8的数组 [2, 3, 5, 4, 3, 2, 6, 7]，那么对应的输出是重复的数字2或者3。</p>
 <blockquote>
 <p><strong><em>Related Question</em></strong></p>
 </blockquote>
@@ -315,29 +323,21 @@
 <blockquote>
 <p><strong><em>Test Case</em></strong></p>
 </blockquote>
-<p>长度为n的数组里包含一个或多个重复的数字。<br>数组中不包含重复的数字。<br>无效输入测试用例（输入空指针）。</p>
+<p>长度为n的数组里包含一个或多个重复的数字。 数组中不包含重复的数字。 无效输入测试用例（输入空指针）。</p>
 <blockquote>
 <p><strong><em>Knowledge</em></strong></p>
 </blockquote>
-<p>考查应聘者对一维数组的理解及编程能力。一维数组在内存中占据连续的空间，因此我们可以根据下标定位对应的元素。<br>考查应聘者对二分查找算法的理解，并能快速、正确地实现二分查找算法的代码。<br>考查应聘者的沟通能力。应聘者只有具备良好的沟通能力，才能充分了解面试官的需求，从而有针对性地选择算法解决问题。</p>
+<p>考查应聘者对一维数组的理解及编程能力。一维数组在内存中占据连续的空间，因此我们可以根据下标定位对应的元素。 考查应聘者对二分查找算法的理解，并能快速、正确地实现二分查找算法的代码。 考查应聘者的沟通能力。应聘者只有具备良好的沟通能力，才能充分了解面试官的需求，从而有针对性地选择算法解决问题。</p>
 <blockquote>
 <p><strong><em>Intuition</em></strong></p>
 </blockquote>
-<p>之前空间复杂度为 $O(n)$ 的 <code>hash map</code> 方案，一样可以解决这个问题。这里讨论一个空间复杂度为 $O(1)$ 的新方案。</p>
-<p><em>算法</em></p>
-<ul>
-<li>我们把从 <code>1～n</code> 的数字从中间的数字 <code>m</code> 分为两部分，前面一半为 <code>1～m</code>，后面一半为 <code>m+1～n</code>。<ul>
-<li>如果 <code>1~m</code> 的数字的数目超过 <code>m</code>，那么这一半的区间里一定包含重复的数字，设置 <code>end = middle</code>，将 <code>end</code>前移动，在 <code>[start, middle]</code> 区间寻找重复元素；</li>
-<li>否则，另一半 <code>m+1～n</code> 的区间里一定包含重复的数字。设置 <code>start = middle + 1</code>，将 <code>start</code> 后移，在<code>[middle+1, end]</code> 区间内寻找重复元素；</li>
-</ul>
-</li>
-<li>我们可以继续把包含重复数字的区间一分为二，直到找到一个重复的数字。这个过程和二分查找算法很类似，只是多了一步统计区间里数字的数目。</li>
-</ul>
-<p><em>举例</em><br>我们以长度为 <code>8</code> 的数组为 <code>[2, 3, 5, 4, 3, 2, 6, 7]</code> 例分析查找的过程。根据题目要求，这个长度为 <code>8</code> 的所有数字都在<code>1~7</code>的范围内。中间的数字 <code>4</code> 把<code>1~7</code>的范围分为两段，一段是<code>1~4</code>，另一段是<code>5～7</code>。<strong>接下来我们统计<code>1~4</code>这4个数字在数组中出现的次数，它们一共出现了5次，因此这4个数字中一定有重复的数字。</strong></p>
+<p>之前空间复杂度为 <span class="math inline">\(O(n)\)</span> 的 <code>hash map</code> 方案，一样可以解决这个问题。这里讨论一个空间复杂度为 <span class="math inline">\(O(1)\)</span> 的新方案。</p>
+<p><em>算法</em> - 我们把从 <code>1～n</code> 的数字从中间的数字 <code>m</code> 分为两部分，前面一半为 <code>1～m</code>，后面一半为 <code>m+1～n</code>。 - 如果 <code>1~m</code> 的数字的数目超过 <code>m</code>，那么这一半的区间里一定包含重复的数字，设置 <code>end = middle</code>，将 <code>end</code>前移动，在 <code>[start, middle]</code> 区间寻找重复元素； - 否则，另一半 <code>m+1～n</code> 的区间里一定包含重复的数字。设置 <code>start = middle + 1</code>，将 <code>start</code> 后移，在<code>[middle+1, end]</code> 区间内寻找重复元素； - 我们可以继续把包含重复数字的区间一分为二，直到找到一个重复的数字。这个过程和二分查找算法很类似，只是多了一步统计区间里数字的数目。</p>
+<p><em>举例</em> 我们以长度为 <code>8</code> 的数组为 <code>[2, 3, 5, 4, 3, 2, 6, 7]</code> 例分析查找的过程。根据题目要求，这个长度为 <code>8</code> 的所有数字都在<code>1~7</code>的范围内。中间的数字 <code>4</code> 把<code>1~7</code>的范围分为两段，一段是<code>1~4</code>，另一段是<code>5～7</code>。<strong>接下来我们统计<code>1~4</code>这4个数字在数组中出现的次数，它们一共出现了5次，因此这4个数字中一定有重复的数字。</strong></p>
 <p>接下来我们再把<code>1~4</code>的范围一分为二，一段是<code>1、2</code>两个数字，另一段是<code>3、4</code>两个数字。数字 <code>1</code> 或者 <code>2</code> 在数组中一共出现了两次。我们再统计数字 <code>3</code> 或者 <code>4</code> 在数组中出现的次数，它们一共出现了<code>3</code>次。</p>
 <p>这意味着 <code>3</code>、<code>4</code> 两个数字中一定有一个重复了。我们再分别统计这两个数字在数组中出现的次数。接着我们发现数字 <code>3</code> 出现了两次，是一个重复的数字。</p>
-<p><em>复杂度分析</em><br>上述代码按照二分查找的思路，如果输入长度为n的数组，那么函数 <code>countRange</code> 将被调用 $O(logn)$ 次，每次需要 $O(n)$ 的时间，因此总的时间复杂度是 $O(nlogn)$，空间复杂度为 $O(1)$。<strong>和最前面提到的需要 $O(n)$ 的辅助空间的算法相比，这种算法相当于以时间换空间。</strong><br>需要指出的是，这种算法不能保证找出所有重复的数字。例如，<strong>该算法不能找出数组 <code>[2, 3, 5, 4, 3, 2, 6, 7]</code> 中重复的数字2。</strong>这是因为在 <code>1~2</code> 的范围里有 <code>1</code> 和 <code>2</code> 两个数字，这个范围的数字也出现 <code>2</code> 次，<strong>此时我们用该算法不能确定是每个数字各出现一次还是某个数字出现了2次。</strong></p>
-<p><em>总结</em><br>从上述分析中我们可以看出，<strong>如果面试官提出不同的功能要求（找出任意一个重复的数字、找出所有重复的数字）或者性能要求（时间效率优先、空间效率优先），那么我们最终选取的算法也将不同。</strong>这也说明在面试中和面试官交流的重要性，我们一定要在动手写代码之前弄清楚面试官的需求。</p>
+<p><em>复杂度分析</em> 上述代码按照二分查找的思路，如果输入长度为n的数组，那么函数 <code>countRange</code> 将被调用 <span class="math inline">\(O(logn)\)</span> 次，每次需要 <span class="math inline">\(O(n)\)</span> 的时间，因此总的时间复杂度是 <span class="math inline">\(O(nlogn)\)</span>，空间复杂度为 <span class="math inline">\(O(1)\)</span>。<strong>和最前面提到的需要 <span class="math inline">\(O(n)\)</span> 的辅助空间的算法相比，这种算法相当于以时间换空间。</strong> 需要指出的是，这种算法不能保证找出所有重复的数字。例如，<strong>该算法不能找出数组 <code>[2, 3, 5, 4, 3, 2, 6, 7]</code> 中重复的数字2。</strong>这是因为在 <code>1~2</code> 的范围里有 <code>1</code> 和 <code>2</code> 两个数字，这个范围的数字也出现 <code>2</code> 次，<strong>此时我们用该算法不能确定是每个数字各出现一次还是某个数字出现了2次。</strong></p>
+<p><em>总结</em> 从上述分析中我们可以看出，<strong>如果面试官提出不同的功能要求（找出任意一个重复的数字、找出所有重复的数字）或者性能要求（时间效率优先、空间效率优先），那么我们最终选取的算法也将不同。</strong>这也说明在面试中和面试官交流的重要性，我们一定要在动手写代码之前弄清楚面试官的需求。</p>
 <blockquote>
 <p><strong><em>Code</em></strong></p>
 </blockquote>
@@ -352,22 +352,22 @@
 <p>start就会被设置为5，但实际上下一个搜索区间应该是start=0，end=4。因此需要对<code>count == middle - start + 1</code> 进行讨论。<code>start</code> 初始值也要从1改为0。</p>
 <p><strong><em>算法</em></strong></p>
 <ul>
-<li>我们把从 <code>1～n</code> 的数字从中间的数字 <code>m</code> 分为两部分，前面一半为 <code>1～m</code>，后面一半为 <code>m+1～n</code>。<ul>
-<li>如果 <code>1~m</code> 的数字的数目等于 <code>m</code>，那么就要判断 <code>1~m</code> 的数字是否都在 <code>nums</code> 中。<ul>
+<li>我们把从 <code>1～n</code> 的数字从中间的数字 <code>m</code> 分为两部分，前面一半为 <code>1～m</code>，后面一半为 <code>m+1～n</code>。
+<ul>
+<li>如果 <code>1~m</code> 的数字的数目等于 <code>m</code>，那么就要判断 <code>1~m</code> 的数字是否都在 <code>nums</code> 中。
+<ul>
 <li>如果都在其中， <code>m+1～n</code> 的区间里一定包含重复的数字。</li>
 <li>否则，<code>1~m</code> 的区间里一定包含重复的数字。</li>
-</ul>
-</li>
+</ul></li>
 <li>如果 <code>1~m</code> 的数字的数目超过 <code>m</code>，那么这一半的区间里一定包含重复的数字；</li>
 <li>否则，另一半 <code>m+1～n</code> 的区间里一定包含重复的数字。</li>
-</ul>
-</li>
+</ul></li>
 <li>我们可以继续把包含重复数字的区间一分为二，直到找到一个重复的数字。这个过程和二分查找算法很类似，只是多了一步统计区间里数字的数目。</li>
 </ul>
 <p><strong><em>代码</em></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">contRange</span>(<span class="hljs-params">self, nums, length, start, end</span>):</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">if</span> start &lt;= nums[i] &lt;= end:<br>                count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> count<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; int:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> nums:  <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        length = <span class="hljs-built_in">len</span>(nums)<br>        start = <span class="hljs-number">0</span>  <span class="hljs-comment"># 剑指offer原题里面数组第一个数字是1，LeetCode题目里面数组第一个数字是0，所以这个改成0。</span><br>        end = length - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> start &lt;= end:<br>            middle = start + (end - start) // <span class="hljs-number">2</span><br>            count = self.contRange(nums, length, start, middle)<br>            <span class="hljs-keyword">if</span> start == end:<br>                <span class="hljs-keyword">if</span> count &gt; <span class="hljs-number">1</span>:<br>                    <span class="hljs-keyword">return</span> start<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">break</span><br>            <span class="hljs-comment"># 相等的情况下有两种情况，一是 0, 1, 2, 3 的情况，二是 2, 2, 3, 3</span><br>            <span class="hljs-keyword">if</span> count == middle - start + <span class="hljs-number">1</span>:<br>                flag = <span class="hljs-literal">True</span><br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, middle+<span class="hljs-number">1</span>):<br>                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> j <span class="hljs-keyword">in</span> nums:<br>                        flag = <span class="hljs-literal">False</span><br>                        <span class="hljs-keyword">break</span><br>                <span class="hljs-comment"># 第一种情况就在后面查找 start = middle + 1</span><br>                <span class="hljs-keyword">if</span> flag:<br>                    start = middle + <span class="hljs-number">1</span><br>                <span class="hljs-comment"># 第二种情况就在前面查找 end = middle</span><br>                <span class="hljs-keyword">else</span>:<br>                    end = middle<br>            <span class="hljs-keyword">elif</span> count &gt; middle - start + <span class="hljs-number">1</span>:  <span class="hljs-comment"># 注意，这里是 &gt;</span><br>                end = middle<br>            <span class="hljs-keyword">else</span>:<br>                start = middle + <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 $O(nlogn)$ 。<br><br>空间复杂度 $O(1)$</p>
-
+<p>时间复杂度 <span class="math inline">\(O(nlogn)\)</span> 。<br> 空间复杂度 <span class="math inline">\(O(1)\)</span></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -615,6 +615,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

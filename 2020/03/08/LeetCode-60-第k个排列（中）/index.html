@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,37 +251,36 @@
             <h1 style="display: none">LeetCode 60. 第k个排列（中）</h1>
             
             <div class="markdown-body">
-              <p> 用阶乘数系统解决排列问题 </p>
+              <p>用阶乘数系统解决排列问题</p>
 <a id="more"></a>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给出集合 [1,2,3,…,n]，其所有元素共有 n! 种排列。<br>按大小顺序列出所有排列情况，并一一标记，当 n = 3 时, 所有排列如下：</p>
-<ol>
-<li><code>&quot;123&quot;</code></li>
-<li><code>&quot;132&quot;</code></li>
-<li><code>&quot;213&quot;</code></li>
-<li><code>&quot;231&quot;</code></li>
-<li><code>&quot;312&quot;</code></li>
-<li><code>&quot;321&quot;</code></li>
+<h2 id="题目">题目</h2>
+<p>给出集合 [1,2,3,…,n]，其所有元素共有 n! 种排列。 按大小顺序列出所有排列情况，并一一标记，当 n = 3 时, 所有排列如下：</p>
+<ol type="1">
+<li><code>"123"</code></li>
+<li><code>"132"</code></li>
+<li><code>"213"</code></li>
+<li><code>"231"</code></li>
+<li><code>"312"</code></li>
+<li><code>"321"</code></li>
 </ol>
 <p>给定 n 和 k，返回第 k 个排列。</p>
-<p>说明：<br>给定 n 的范围是 <code>[1, 9]</code>。<br>给定 k 的范围是 <code>[1,  n!]</code>。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>示例 1:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">n</span> = <span class="hljs-number">3</span>, <span class="hljs-attr">k</span> = <span class="hljs-number">3</span><br>输出: <span class="hljs-string">&quot;213&quot;</span><br></code></pre></div></td></tr></table></figure><br>示例 2:<br><figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">n</span> = <span class="hljs-number">4</span>, <span class="hljs-attr">k</span> = <span class="hljs-number">9</span><br>输出: <span class="hljs-string">&quot;2314&quot;</span><br></code></pre></div></td></tr></table></figure></p>
-<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>数学、回溯</p>
-<p>这道题，虽然是一道中等难度的题，但是，其构造阶乘数系统和排列映射关系的方法，十分的巧妙。通过阶乘数系统，可以直接由 <code>n=4, k=9</code> 推出要返回的字符串是 ‘2314’，不需要回溯，时间复杂度大大降低。</p>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><h3 id="方法一、先回溯后排序"><a href="#方法一、先回溯后排序" class="headerlink" title="方法一、先回溯后排序"></a>方法一、先回溯后排序</h3><p>利用回溯法获得int类型数字排列，然后排序，接着输出第k-1个数字的字符串形式。</p>
-<h3 id="方法二、基于阶乘数系统"><a href="#方法二、基于阶乘数系统" class="headerlink" title="方法二、基于阶乘数系统"></a>方法二、基于阶乘数系统</h3><p>面试中主要有三种类型的排列问题：</p>
-<ol>
-<li>全排列</li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/articles/next-permutation/">下一个排列</a></li>
-<li>第 k 个排列（当前问题）</li>
-</ol>
-<p><strong>如果排列的顺序不重要，可以使用“交换”的思想回溯写出全排列。</strong>生成 $N!$ 个全排列需要时间 $\mathcal{O}(N \times N!)$。该算法可以解决第一类问题。</p>
-<p>D.E. Knuth 算法<strong>按照字典顺序生成全排列，在 $\mathcal{O}(N)$ 时间内完成。该算法可以解决第二类问题。</strong></p>
+<p>说明： 给定 n 的范围是 <code>[1, 9]</code>。 给定 k 的范围是 <code>[1,  n!]</code>。</p>
+<h2 id="示例">示例</h2>
+<p>示例 1: <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">n</span> = <span class="hljs-number">3</span>, <span class="hljs-attr">k</span> = <span class="hljs-number">3</span><br>输出: <span class="hljs-string">&quot;213&quot;</span><br></code></pre></div></td></tr></table></figure> 示例 2: <figure class="highlight nix"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nix">输入: <span class="hljs-attr">n</span> = <span class="hljs-number">4</span>, <span class="hljs-attr">k</span> = <span class="hljs-number">9</span><br>输出: <span class="hljs-string">&quot;2314&quot;</span><br></code></pre></div></td></tr></table></figure></p>
+<h2 id="考察知识点">考察知识点</h2>
+<p>数学、回溯</p>
+<p>这道题，虽然是一道中等难度的题，但是，其构造阶乘数系统和排列映射关系的方法，十分的巧妙。通过阶乘数系统，可以直接由 <code>n=4, k=9</code> 推出要返回的字符串是 '2314'，不需要回溯，时间复杂度大大降低。</p>
+<h2 id="核心思想">核心思想</h2>
+<h3 id="方法一先回溯后排序">方法一、先回溯后排序</h3>
+<p>利用回溯法获得int类型数字排列，然后排序，接着输出第k-1个数字的字符串形式。</p>
+<h3 id="方法二基于阶乘数系统">方法二、基于阶乘数系统</h3>
+<p>面试中主要有三种类型的排列问题： 1. 全排列 2. <a target="_blank" rel="noopener" href="https://leetcode-cn.com/articles/next-permutation/">下一个排列</a> 3. 第 k 个排列（当前问题）</p>
+<p><strong>如果排列的顺序不重要，可以使用“交换”的思想回溯写出全排列。</strong>生成 <span class="math inline">\(N!\)</span> 个全排列需要时间 <span class="math inline">\(\mathcal{O}(N \times N!)\)</span>。该算法可以解决第一类问题。</p>
+<p>D.E. Knuth 算法<strong>按照字典顺序生成全排列，在 <span class="math inline">\(\mathcal{O}(N)\)</span> 时间内完成。该算法可以解决第二类问题。</strong></p>
 <p>但是这两个算法不能解决第三类问题：</p>
 <ul>
-<li><p>良好的时间复杂度，即无回溯。</p>
-</li>
-<li><p>先前排列未知，即不能使用 D.E. Knuth 算法。</p>
-</li>
+<li><p>良好的时间复杂度，即无回溯。</p></li>
+<li><p>先前排列未知，即不能使用 D.E. Knuth 算法。</p></li>
 </ul>
 <p>为了解决这两个问题，可以<strong>使用映射的思路，因为生成数字的排列更容易，降低算法的时间复杂度</strong>。</p>
 <blockquote>
@@ -290,67 +289,82 @@
 <p><strong>这种方法也广泛用于密码破解算法。</strong></p>
 <p><strong>为什么需要阶乘数系统</strong></p>
 <p><strong>排列的每种情况都可以使用十进制或二进制数表示：</strong></p>
-<p>$k= \sum_{m=0}^{N-1} k_m 2^m, 0≤k_m≤1$</p>
+<p><span class="math inline">\(k= \sum_{m=0}^{N-1} k_m 2^m, 0≤k_m≤1\)</span></p>
 <p>原理如下：</p>
-<p><img src="https://i.loli.net/2020/03/06/DlAjOcazH5hZYeg.png" srcset="/img/loading.gif" alt="subsets.png"></p>
-<p><strong>排列的问题在于排列的所有情况可能比数字表示的范围更大。$N$ 个元素的全排列数量为 $N!$，$N$ 位二进制包含 $2^N$ 个不同的数字。简单使用二进制数作为解空间不能包含排列的所有情况。</strong></p>
+<figure>
+<img src="https://i.loli.net/2020/03/06/DlAjOcazH5hZYeg.png" srcset="/img/loading.gif" alt="subsets.png" /><figcaption aria-hidden="true">subsets.png</figcaption>
+</figure>
+<p><strong>排列的问题在于排列的所有情况可能比数字表示的范围更大。<span class="math inline">\(N\)</span> 个元素的全排列数量为 <span class="math inline">\(N!\)</span>，<span class="math inline">\(N\)</span> 位二进制包含 <span class="math inline">\(2^N\)</span> 个不同的数字。简单使用二进制数作为解空间不能包含排列的所有情况。</strong></p>
 <p>因此使用<strong>阶乘数系统，它具有非恒定基数</strong>：</p>
-<p>$k = \sum\limits_{N−1}^{m=0} k_m m!,\ 0≤k_m≤m$</p>
-<p>注意：<strong>权重（$k_m$）的大小不恒定，而是取决于基数（$m!$）</strong>，当 $0 \le k_m \le m$ 时基数为 $m!$，例如 $k_0 = 0,\ 0 \le k_1 \le 1,\ 0 \le k_2 \le 2$ 等等。映射方式如下：</p>
-<p><img src="https://i.loli.net/2020/03/06/XJM8pU6Zltqcw2a.png" srcset="/img/loading.gif" alt="permutations2.png"></p>
-<p>现在映射全部排列情况。从排列数 $k=0 = \sum\limits_{m = 0}^{N - 1}{0 \times m!}$ 到排列数 $k=N! - 1 = \sum\limits_{m = 0}^{N - 1}{m \times m!}$</p>
+<p><span class="math inline">\(k = \sum\limits_{N−1}^{m=0} k_m m!,\ 0≤k_m≤m\)</span></p>
+<p>注意：<strong>权重（<span class="math inline">\(k_m\)</span>）的大小不恒定，而是取决于基数（<span class="math inline">\(m!\)</span>）</strong>，当 <span class="math inline">\(0 \le k_m \le m\)</span> 时基数为 <span class="math inline">\(m!\)</span>，例如 <span class="math inline">\(k_0 = 0,\ 0 \le k_1 \le 1,\ 0 \le k_2 \le 2\)</span> 等等。映射方式如下：</p>
+<figure>
+<img src="https://i.loli.net/2020/03/06/XJM8pU6Zltqcw2a.png" srcset="/img/loading.gif" alt="permutations2.png" /><figcaption aria-hidden="true">permutations2.png</figcaption>
+</figure>
+<p>现在映射全部排列情况。从排列数 <span class="math inline">\(k=0 = \sum\limits\_{m = 0}^{N - 1}{0 \times m!}\)</span> 到排列数 <span class="math inline">\(k=N! - 1 = \sum\limits_{m = 0}^{N - 1}{m \times m!}\)</span></p>
 <blockquote>
 <p>现在使用这些阶乘数构造全部的排列</p>
 </blockquote>
 <p><strong>如何从阶乘构造排列？已知N为输入nums长度，K为要输出的那个数字在排序之后所处的位置。</strong></p>
 <p><strong>以N=3 ，即输入数组为 nums = [1, 2, 3]，k = 3 为例</strong>。排列的编号为从 0 到 N! - 1，而不是从 1 到 N!。因此 <strong>N = 3时，k = 2（数组排序是从0开始的，所以要在输入的k上减去1，从3变成2）。</strong></p>
-<p>首先构造 $k = 2$ 的阶乘数：<font color='blue'> $ k=2=1×2!+0×1!+0×0!=(1,0,0) $ </font></p>
+<p>首先构造 <span class="math inline">\(k = 2\)</span> 的阶乘数：<font color='blue'> $ k=2=1×2!+0×1!+0×0!=(1,0,0) $ </font></p>
 <blockquote>
 <p><strong>阶乘中的系数表示输入数组中，除去已使用元素的索引。</strong>这符合每个元素只能在排列中出现一次的要求。</p>
 </blockquote>
-<p><img src="https://i.loli.net/2020/03/06/bAuROigzJVCyKGo.png" srcset="/img/loading.gif" alt="index.png"></p>
-<hr>
-<p>已知， $k = 2$ 的阶乘数为 $ k=2=1×2!+0×1!+0×0!=(1,0,0) $，可以发现第一个数字是 <code>1</code>，即排列中的第一个元素是 <code>nums[1] = 2</code>。由于每个元素只能使用一次，则从 <code>nums</code> 中删除该元素（也就是2），并将其加入到 <code>output</code> 变量中，nums中还剩1和3，此时 <code>output = [&#39;2&#39;]</code>。</p>
-<p><img src="https://i.loli.net/2020/03/06/V7ats1Xod2v8gmO.png" srcset="/img/loading.gif" alt="step1.png"></p>
-<hr>
-<p>$ k=2=1×2!+0×1!+0×0!=(1,0,0) $ 阶乘中下一个系数为 <code>0</code>，即排列中 <code>nums[0] = 1</code>，然后从 <code>nums</code> 中删除该元素（也就是1），并将其加入到 <code>output</code> 变量中，nums中还剩3，<code>output = [&#39;2&#39;, &#39;1&#39;]</code>。</p>
-<p><img src="https://i.loli.net/2020/03/06/EOiqGn47MlHCPNj.png" srcset="/img/loading.gif" alt="step2.png"></p>
-<hr>
-<p>$ k=2=1×2!+0×1!+0×0!=(1,0,0) $ 阶乘中下一个系数也是 <code>0</code>，即排列中 <code>nums[0] = 3</code>，然后从 <code>nums</code> 中删除该元素（也就是3），并将其加入到 <code>output</code> 变量中，此时 <code>output = [&#39;2&#39;, &#39;1&#39;, &#39;3&#39;]</code>。</p>
-<p><img src="https://i.loli.net/2020/03/06/4hxBOnSPqVuADfa.png" srcset="/img/loading.gif" alt="step3.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/03/06/bAuROigzJVCyKGo.png" srcset="/img/loading.gif" alt="index.png" /><figcaption aria-hidden="true">index.png</figcaption>
+</figure>
+<hr />
+<p>已知， <span class="math inline">\(k = 2\)</span> 的阶乘数为 $ k=2=1×2!+0×1!+0×0!=(1,0,0) $，可以发现第一个数字是 <code>1</code>，即排列中的第一个元素是 <code>nums[1] = 2</code>。由于每个元素只能使用一次，则从 <code>nums</code> 中删除该元素（也就是2），并将其加入到 <code>output</code> 变量中，nums中还剩1和3，此时 <code>output = ['2']</code>。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/06/V7ats1Xod2v8gmO.png" srcset="/img/loading.gif" alt="step1.png" /><figcaption aria-hidden="true">step1.png</figcaption>
+</figure>
+<hr />
+<p>$ k=2=1×2!+0×1!+0×0!=(1,0,0) $ 阶乘中下一个系数为 <code>0</code>，即排列中 <code>nums[0] = 1</code>，然后从 <code>nums</code> 中删除该元素（也就是1），并将其加入到 <code>output</code> 变量中，nums中还剩3，<code>output = ['2', '1']</code>。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/06/EOiqGn47MlHCPNj.png" srcset="/img/loading.gif" alt="step2.png" /><figcaption aria-hidden="true">step2.png</figcaption>
+</figure>
+<hr />
+<p>$ k=2=1×2!+0×1!+0×0!=(1,0,0) $ 阶乘中下一个系数也是 <code>0</code>，即排列中 <code>nums[0] = 3</code>，然后从 <code>nums</code> 中删除该元素（也就是3），并将其加入到 <code>output</code> 变量中，此时 <code>output = ['2', '1', '3']</code>。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/06/4hxBOnSPqVuADfa.png" srcset="/img/loading.gif" alt="step3.png" /><figcaption aria-hidden="true">step3.png</figcaption>
+</figure>
 <p>将以上关系简化为</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入N=<span class="hljs-number">3</span>，K=<span class="hljs-number">3</span>。实际上要求的是nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]时第<span class="hljs-number">2</span>位（从<span class="hljs-number">0</span>开始）的排列组合。<br>k  排列组合  k的阶乘系数表示为   <br><span class="hljs-number">2</span>  <span class="hljs-number">213</span>      <span class="hljs-number">1</span>*<span class="hljs-number">2</span>! + <span class="hljs-number">0</span>*<span class="hljs-number">1</span>! + <span class="hljs-number">0</span>*<span class="hljs-number">0</span>! = <span class="hljs-number">2</span> = (<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)  <span class="hljs-comment"># (1, 0, 0)就是把系数提出来了。</span><br>从上面可以发现<br>由k的阶乘系数表示(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)去先获取nums对应位置数字,再删除再重新获取的结果就是<span class="hljs-string">&#x27;213&#x27;</span>,这样,我们就找到了nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]，k=<span class="hljs-number">2</span>和输出<span class="hljs-string">&#x27;213&#x27;</span>之间的关系。<br><br>由k的阶乘系数表示(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)，nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]。<br>1、先获取nums[1]（也就是2） ---&gt; 2<br><span class="hljs-number">2</span>、再删除已经获取了的<span class="hljs-number">2</span>，nums = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>]。<br>3、再获取nums[0]（也就是1） ---&gt; 1<br><span class="hljs-number">4</span>、然后删除已经获取了的<span class="hljs-number">1</span>，nums = [<span class="hljs-number">3</span>]。<br>5、最后获取nums[0]（也就是3） ---&gt; 3<br><span class="hljs-number">6</span>、最后删除已经获取了的<span class="hljs-number">3</span>，nums = []。<br><span class="hljs-number">7</span>、当nums为空时，我们依次获取的<span class="hljs-number">2</span>、<span class="hljs-number">1</span>、<span class="hljs-number">3</span>组成的字符串<span class="hljs-string">&#x27;213&#x27;</span>，就是最终答案。<br></code></pre></div></td></tr></table></figure>
 <p><strong>算法</strong></p>
 <ul>
-<li>声明保存阶层数的变量 <code>factorials</code>，<code>factorials[0]</code> 就是 <code>1</code>，以及存储从 <code>1</code> 到 <code>N</code> 的数字的变量 <code>nums</code>，<code>nums[0]</code> 是 <code>&#39;1&#39;</code>。</li>
-<li>开始循环生成 <code>factorials</code> 和 <code>nums</code><ul>
+<li>声明保存阶层数的变量 <code>factorials</code>，<code>factorials[0]</code> 就是 <code>1</code>，以及存储从 <code>1</code> 到 <code>N</code> 的数字的变量 <code>nums</code>，<code>nums[0]</code> 是 <code>'1'</code>。</li>
+<li>开始循环生成 <code>factorials</code> 和 <code>nums</code>
+<ul>
 <li>计算从 <code>0</code> 到 <code>(N - 1)!</code> 的所有阶乘数，<code>factorials.append(factorials[i - 1] * i)</code>。</li>
 <li>生成输入数组，存储从 <code>1</code> 到 <code>N</code> 的数字，<code>nums.append(str(i + 1))</code>。</li>
-</ul>
-</li>
+</ul></li>
 <li><code>k</code> 减去 <code>1</code>（数组排序是从0开始的，所以要在输入的k上减去1），声明保存结果的变量 <code>output</code>。</li>
-<li>开始循环计算 <code>k</code> 的阶乘表示，循环范围从 <code>n - 1</code> 到 <code>0</code>。<ul>
-<li>已知 $k = k_0 \times 0! + k_1 \times 1! + … + k_m \times m! $ ，则计算当前阶乘 $m!$ 对应的阶乘系数 $k_m$。</li>
-<li>更新 $k$。</li>
+<li>开始循环计算 <code>k</code> 的阶乘表示，循环范围从 <code>n - 1</code> 到 <code>0</code>。
+<ul>
+<li>已知 $k = k_0 ! + k_1 ! + ... + k_m m! $ ，则计算当前阶乘 <span class="math inline">\(m!\)</span> 对应的阶乘系数 <span class="math inline">\(k_m\)</span>。</li>
+<li>更新 <span class="math inline">\(k\)</span>。</li>
 <li>将阶乘系数对应的数选中放入output中。</li>
 <li>再从nums中删除这次被选中的数字</li>
-</ul>
-</li>
+</ul></li>
 <li>返回选中的排列字符串output的字符串形式。</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutation-sequence/solution/di-k-ge-pai-lie-by-leetcode/">LeetCode题解</a></p>
-<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><ul>
+<h2 id="python版本">Python版本</h2>
+<ul>
 <li>方法一的实现，这个方法在n大于8时就会超时。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getPermutation</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; str:</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;1&quot;</span><br><br>        nums = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))<br>        parmutations = self.generatePermute(nums)<br>        parmutations.sort()<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">str</span>(parmutations[k-<span class="hljs-number">1</span>])<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generatePermute</span>(<span class="hljs-params">self, nums</span>):</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">path=[], depth=<span class="hljs-number">0</span></span>):</span><br>            <span class="hljs-keyword">if</span> depth == length:<br>                tmp_d = <span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;&#x27;</span>.join(path[:]))<br>                output.append(tmp_d)<br>                <span class="hljs-comment"># output.append(int(&#x27;&#x27;.join(path[:])))</span><br>                <span class="hljs-keyword">return</span><br><br>            <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> used[index]:<br>                    path.append(<span class="hljs-built_in">str</span>(nums[index]))<br>                    used[index] = <span class="hljs-literal">True</span><br>                    backtrack(path, depth+<span class="hljs-number">1</span>)<br>                    path.pop()<br>                    used[index] = <span class="hljs-literal">False</span><br><br>        output = []<br>        length = <span class="hljs-built_in">len</span>(nums)<br>        used = [<span class="hljs-literal">False</span>] * length<br>        backtrack()<br>        <span class="hljs-keyword">return</span> output<br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [<span class="hljs-number">9</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]<br>Input1 = [<span class="hljs-number">273815</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>]<br>Answer = [<span class="hljs-string">&quot;783269514&quot;</span>, <span class="hljs-string">&quot;213&quot;</span>, <span class="hljs-string">&quot;2314&quot;</span>]<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.getPermutation(Input[i], Input1[i])<br>        print(reslut == Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度 $O(N \times N!)$<br>空间复杂度 $O(N×N!)$</p>
+<p>时间复杂度 <span class="math inline">\(O(N \times N!)\)</span> 空间复杂度 <span class="math inline">\(O(N×N!)\)</span></p>
 <ul>
 <li>方法二的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getPermutation</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; str:</span><br>        factorials, nums = [<span class="hljs-number">1</span>], [<span class="hljs-string">&#x27;1&#x27;</span>]  <span class="hljs-comment"># 声明保存阶层数的变量factorials，factorials[0]就是1，以及存储从 1 到 N 的数字的变量nums，nums[0]是&#x27;1&#x27;。</span><br>        <br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>            <span class="hljs-comment"># 计算从 0 到 (N - 1)!的所有阶乘数。</span><br>            factorials.append(factorials[i - <span class="hljs-number">1</span>] * i)<br>            <span class="hljs-comment"># 生成输入数组，存储从 1 到 N 的数字。</span><br>            nums.append(<span class="hljs-built_in">str</span>(i + <span class="hljs-number">1</span>))<br><br>        k -= <span class="hljs-number">1</span>  <span class="hljs-comment"># 数组排序是从0开始的，所以要在输入的k上减去1</span><br>        <br>        output = []  <span class="hljs-comment"># 声明保存结果的output</span><br>        <span class="hljs-comment"># 开始循环计算k的阶乘表示，循环范围从n - 1到0。</span><br>        <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n - <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>            <span class="hljs-comment"># 计算 k 的阶乘表示，使用阶乘系数构造排列。</span><br>            <span class="hljs-comment"># 已知 k = k_0 * 0! + k_1 * 1! + ... + k_m * m!</span><br>            k_m = k // factorials[m]  <span class="hljs-comment"># 计算计算当前阶乘 m! 对应的阶乘系数 k_m。</span><br>            k -= k_m * factorials[m]  <span class="hljs-comment"># 更新k</span><br><br>            output.append(nums[k_m])  <span class="hljs-comment"># 将阶乘系数对应的数选中放入output中</span><br>            <span class="hljs-keyword">del</span> nums[k_m]  <span class="hljs-comment"># 再从nums中删除这次被选中的数字</span><br>        <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.join(output)  <span class="hljs-comment"># 返回选中的排列字符串output的字符串形式。</span><br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$\mathcal{O}(N^2)$，从列表中删除元素，共执行操作次数：$N + (N - 1) + … + 1 = N(N - 1)/2$<br>空间复杂度：$\mathcal{O}(N)$。<br>执行用时 :36 ms, 在所有 Python3 提交中击败了64.41%的用户<br>内存消耗 :13.3 MB, 在所有 Python3 提交中击败了20.80%的用户</p>
-<h2 id="有效语法糖"><a href="#有效语法糖" class="headerlink" title="有效语法糖"></a>有效语法糖</h2><p>1、如果外层声明的变量，内层要使用，可能会出现下面这种情况，output会报错未声明。</p>
+<p>时间复杂度：<span class="math inline">\(\mathcal{O}(N^2)\)</span>，从列表中删除元素，共执行操作次数：<span class="math inline">\(N + (N - 1) + ... + 1 = N(N - 1)/2\)</span> 空间复杂度：<span class="math inline">\(\mathcal{O}(N)\)</span>。 执行用时 :36 ms, 在所有 Python3 提交中击败了64.41%的用户 内存消耗 :13.3 MB, 在所有 Python3 提交中击败了20.80%的用户</p>
+<h2 id="有效语法糖">有效语法糖</h2>
+<p>1、如果外层声明的变量，内层要使用，可能会出现下面这种情况，output会报错未声明。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generatePermute</span>(<span class="hljs-params">self, nums</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">path=[], depth=<span class="hljs-number">0</span></span>):</span><br>        <span class="hljs-keyword">if</span> depth == length:<br>            <span class="hljs-comment"># 第一种方式</span><br>            output.append(<span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;&#x27;</span>.join(path[:])))  <span class="hljs-comment"># 直接往output中添加元素就会报错output未声明，可能是由于要添加的内容太过复杂</span><br>            <span class="hljs-comment"># 第二种方式</span><br>            tmp_d = <span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;&#x27;</span>.join(path[:]))<br>            output.append(tmp_d)  <span class="hljs-comment"># 这样，先获取后添加，就不会报错，以后如果在添加之前要进行复杂的处理，请先单独处理后保存在一个变量中，再添加。                </span><br>            <span class="hljs-keyword">return</span><br><br>        <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> used[index]:<br>                path.append(<span class="hljs-built_in">str</span>(nums[index]))<br>                used[index] = <span class="hljs-literal">True</span><br>                backtrack(path, depth+<span class="hljs-number">1</span>)<br>                path.pop()<br>                used[index] = <span class="hljs-literal">False</span><br><br>    output = []<br>    length = <span class="hljs-built_in">len</span>(nums)<br>    used = [<span class="hljs-literal">False</span>] * length<br>    backtrack()<br>    <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -587,6 +601,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

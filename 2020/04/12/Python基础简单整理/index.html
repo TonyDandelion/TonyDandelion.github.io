@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,357 +253,364 @@
             <div class="markdown-body">
               <p>整理一下Python的基础和面试常问的问题</p>
 <a id="more"></a>
-<h1 id="Python基础"><a href="#Python基础" class="headerlink" title="Python基础"></a>Python基础</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><h3 id="数值型"><a href="#数值型" class="headerlink" title="数值型"></a>数值型</h3><ul>
-<li><strong>int</strong>：整型，Python对整数没有大小限制，一般java的整型限制在 $-2^{32}$ 到 $2^{32} - 1$。</li>
-<li><strong>float</strong>：浮点型  </li>
+<h1 id="python基础">Python基础</h1>
+<h2 id="基本数据类型">基本数据类型</h2>
+<h3 id="数值型">数值型</h3>
+<ul>
+<li><strong>int</strong>：整型，Python对整数没有大小限制，一般java的整型限制在 <span class="math inline">\(-2^{32}\)</span> 到 <span class="math inline">\(2^{32} - 1\)</span>。</li>
+<li><strong>float</strong>：浮点型<br />
+</li>
 <li><strong>complex</strong>：复数，前两种数值型很常见，这里重点介绍 complex，<code>complex(real, imag)</code> 实际上是一个创建 <code>real + imag * j</code> 复数的函数。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&gt;&gt;&gt;<span class="hljs-built_in">complex</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>(<span class="hljs-number">1</span> + <span class="hljs-number">2j</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">complex</span>(<span class="hljs-number">1</span>)<br>(<span class="hljs-number">1</span>+<span class="hljs-number">0j</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">complex</span>(<span class="hljs-string">&quot;1&quot;</span>)<br>(<span class="hljs-number">1</span>+<span class="hljs-number">0j</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">complex</span>(<span class="hljs-string">&quot;1+2j&quot;</span>)<br>(<span class="hljs-number">1</span>+<span class="hljs-number">2j</span>)<br></code></pre></div></td></tr></table></figure>
-<h4 id="Python数学函数"><a href="#Python数学函数" class="headerlink" title="Python数学函数"></a>Python数学函数</h4><div class="table-container">
+<h4 id="python数学函数">Python数学函数</h4>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">函数</th>
-<th style="text-align:left">返回值 ( 描述 )</th>
+<tr class="header">
+<th style="text-align: left;">函数</th>
+<th style="text-align: left;">返回值 ( 描述 )</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-abs.html">abs(x)</a></td>
-<td style="text-align:left">返回数字的绝对值，如abs(-10) 返回 10</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-abs.html">abs(x)</a></td>
+<td style="text-align: left;">返回数字的绝对值，如abs(-10) 返回 10</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-ceil.html">ceil(x)</a></td>
-<td style="text-align:left">返回数字的上入整数，如math.ceil(4.1) 返回 5</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-ceil.html">ceil(x)</a></td>
+<td style="text-align: left;">返回数字的上入整数，如math.ceil(4.1) 返回 5</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-cmp.html">cmp(x, y)</a></td>
-<td style="text-align:left">如果 x &lt; y 返回 -1, 如果 x == y 返回 0, 如果 x &gt; y 返回 1</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-cmp.html">cmp(x, y)</a></td>
+<td style="text-align: left;">如果 x &lt; y 返回 -1, 如果 x == y 返回 0, 如果 x &gt; y 返回 1</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-exp.html">exp(x)</a></td>
-<td style="text-align:left">返回e的x次幂(ex),如math.exp(1) 返回2.718281828459045</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-exp.html">exp(x)</a></td>
+<td style="text-align: left;">返回e的x次幂(ex),如math.exp(1) 返回2.718281828459045</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-fabs.html">fabs(x)</a></td>
-<td style="text-align:left">返回数字的绝对值，如math.fabs(-10) 返回10.0</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-fabs.html">fabs(x)</a></td>
+<td style="text-align: left;">返回数字的绝对值，如math.fabs(-10) 返回10.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-floor.html">floor(x)</a></td>
-<td style="text-align:left">返回数字的下舍整数，如math.floor(4.9)返回 4</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-floor.html">floor(x)</a></td>
+<td style="text-align: left;">返回数字的下舍整数，如math.floor(4.9)返回 4</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-log.html">log(x)</a></td>
-<td style="text-align:left">如math.log(math.e)返回1.0,math.log(100,10)返回2.0</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-log.html">log(x)</a></td>
+<td style="text-align: left;">如math.log(math.e)返回1.0,math.log(100,10)返回2.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-log10.html">log10(x)</a></td>
-<td style="text-align:left">返回以10为基数的x的对数，如math.log10(100)返回 2.0</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-log10.html">log10(x)</a></td>
+<td style="text-align: left;">返回以10为基数的x的对数，如math.log10(100)返回 2.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-max.html">max(x1, x2,…)</a></td>
-<td style="text-align:left">返回给定参数的最大值，参数可以为序列。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-max.html">max(x1, x2,...)</a></td>
+<td style="text-align: left;">返回给定参数的最大值，参数可以为序列。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-min.html">min(x1, x2,…)</a></td>
-<td style="text-align:left">返回给定参数的最小值，参数可以为序列。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-min.html">min(x1, x2,...)</a></td>
+<td style="text-align: left;">返回给定参数的最小值，参数可以为序列。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-modf.html">modf(x)</a></td>
-<td style="text-align:left">返回x的整数部分与小数部分，两部分的数值符号与x相同，整数部分以浮点型表示。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-modf.html">modf(x)</a></td>
+<td style="text-align: left;">返回x的整数部分与小数部分，两部分的数值符号与x相同，整数部分以浮点型表示。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-pow.html">pow(x, y)</a></td>
-<td style="text-align:left">x**y 运算后的值。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-pow.html">pow(x, y)</a></td>
+<td style="text-align: left;">x**y 运算后的值。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-round.html">round(x [,n])</a></td>
-<td style="text-align:left">返回浮点数x的四舍五入值，如给出n值，则代表舍入到小数点后的位数。</td>
+<tr class="odd">
+<td style="text-align: left;">[round(x <a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-round.html">,n])</a></td>
+<td style="text-align: left;">返回浮点数x的四舍五入值，如给出n值，则代表舍入到小数点后的位数。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-sqrt.html">sqrt(x)</a></td>
-<td style="text-align:left">返回数字x的平方根</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-sqrt.html">sqrt(x)</a></td>
+<td style="text-align: left;">返回数字x的平方根</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h4 id="Python随机数函数"><a href="#Python随机数函数" class="headerlink" title="Python随机数函数"></a>Python随机数函数</h4><p>随机数可以用于数学，游戏，安全等领域中，还经常被嵌入到算法中，用以提高算法效率，并提高程序的安全性。Python包含以下常用随机数函数：</p>
-<div class="table-container">
+<h4 id="python随机数函数">Python随机数函数</h4>
+<p>随机数可以用于数学，游戏，安全等领域中，还经常被嵌入到算法中，用以提高算法效率，并提高程序的安全性。Python包含以下常用随机数函数：</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">函数</th>
-<th style="text-align:left">描述</th>
+<tr class="header">
+<th style="text-align: left;">函数</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-choice.html">choice(seq)</a></td>
-<td style="text-align:left">从序列的元素中随机挑选一个元素，比如random.choice(range(10))，从0到9中随机挑选一个整数。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-choice.html">choice(seq)</a></td>
+<td style="text-align: left;">从序列的元素中随机挑选一个元素，比如random.choice(range(10))，从0到9中随机挑选一个整数。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-randrange.html">randrange ([start,] stop [,step])</a></td>
-<td style="text-align:left">从指定范围内，按指定基数递增的集合中获取一个随机数，基数默认值为 1</td>
+<tr class="even">
+<td style="text-align: left;">[randrange (<a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-randrange.html">start,] stop [,step])</a></td>
+<td style="text-align: left;">从指定范围内，按指定基数递增的集合中获取一个随机数，基数默认值为 1</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-random.html">random()</a></td>
-<td style="text-align:left">随机生成下一个实数，它在[0,1)范围内。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-random.html">random()</a></td>
+<td style="text-align: left;">随机生成下一个实数，它在[0,1)范围内。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-seed.html">seed([x])</a></td>
-<td style="text-align:left">改变随机数生成器的种子seed。如果你不了解其原理，你不必特别去设定seed，Python会帮你选择seed。</td>
+<tr class="even">
+<td style="text-align: left;">[seed(<a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-seed.html">x])</a></td>
+<td style="text-align: left;">改变随机数生成器的种子seed。如果你不了解其原理，你不必特别去设定seed，Python会帮你选择seed。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-shuffle.html">shuffle(lst)</a></td>
-<td style="text-align:left">将序列的所有元素随机排序</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-shuffle.html">shuffle(lst)</a></td>
+<td style="text-align: left;">将序列的所有元素随机排序</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-uniform.html">uniform(x, y)</a></td>
-<td style="text-align:left">随机生成下一个实数，它在[x,y]范围内。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-uniform.html">uniform(x, y)</a></td>
+<td style="text-align: left;">随机生成下一个实数，它在[x,y]范围内。</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h4 id="Python三角函数"><a href="#Python三角函数" class="headerlink" title="Python三角函数"></a>Python三角函数</h4><p>Python包括以下三角函数：</p>
-<div class="table-container">
+<h4 id="python三角函数">Python三角函数</h4>
+<p>Python包括以下三角函数：</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">函数</th>
-<th style="text-align:left">描述</th>
+<tr class="header">
+<th style="text-align: left;">函数</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-acos.html">acos(x)</a></td>
-<td style="text-align:left">返回x的反余弦弧度值。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-acos.html">acos(x)</a></td>
+<td style="text-align: left;">返回x的反余弦弧度值。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-asin.html">asin(x)</a></td>
-<td style="text-align:left">返回x的反正弦弧度值。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-asin.html">asin(x)</a></td>
+<td style="text-align: left;">返回x的反正弦弧度值。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-atan.html">atan(x)</a></td>
-<td style="text-align:left">返回x的反正切弧度值。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-atan.html">atan(x)</a></td>
+<td style="text-align: left;">返回x的反正切弧度值。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-atan2.html">atan2(y, x)</a></td>
-<td style="text-align:left">返回给定的 X 及 Y 坐标值的反正切值。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-atan2.html">atan2(y, x)</a></td>
+<td style="text-align: left;">返回给定的 X 及 Y 坐标值的反正切值。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-cos.html">cos(x)</a></td>
-<td style="text-align:left">返回x的弧度的余弦值。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-cos.html">cos(x)</a></td>
+<td style="text-align: left;">返回x的弧度的余弦值。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-hypot.html">hypot(x, y)</a></td>
-<td style="text-align:left">返回欧几里德范数 sqrt(x<em>x + y</em>y)。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-hypot.html">hypot(x, y)</a></td>
+<td style="text-align: left;">返回欧几里德范数 sqrt(x<em>x + y</em>y)。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-sin.html">sin(x)</a></td>
-<td style="text-align:left">返回的x弧度的正弦值。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-sin.html">sin(x)</a></td>
+<td style="text-align: left;">返回的x弧度的正弦值。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-tan.html">tan(x)</a></td>
-<td style="text-align:left">返回x弧度的正切值。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-tan.html">tan(x)</a></td>
+<td style="text-align: left;">返回x弧度的正切值。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-degrees.html">degrees(x)</a></td>
-<td style="text-align:left">将弧度转换为角度,如degrees(math.pi/2) ， 返回90.0</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-degrees.html">degrees(x)</a></td>
+<td style="text-align: left;">将弧度转换为角度,如degrees(math.pi/2) ， 返回90.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-radians.html">radians(x)</a></td>
-<td style="text-align:left">将角度转换为弧度</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/func-number-radians.html">radians(x)</a></td>
+<td style="text-align: left;">将角度转换为弧度</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h3><p>布尔值和布尔代数的表示完全一致，Python中用<code>True</code>、<code>False</code>表示布尔值的两种值。</p>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>关于转义，如果字符串里面有很多字符都需要转义，就需要加很多<code>\</code>，为了简化，<strong>Python允许用 <code>r&#39;&#39;</code> 表示 <code>&#39;&#39;</code> 内部的字符串默认不转义</strong>，可以自己试试：</p>
+<h3 id="布尔型">布尔型</h3>
+<p>布尔值和布尔代数的表示完全一致，Python中用<code>True</code>、<code>False</code>表示布尔值的两种值。</p>
+<h3 id="字符串">字符串</h3>
+<p>关于转义，如果字符串里面有很多字符都需要转义，就需要加很多<code>\</code>，为了简化，<strong>Python允许用 <code>r''</code> 表示 <code>''</code> 内部的字符串默认不转义</strong>，可以自己试试：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">&#x27;\\\t\\&#x27;</span>)<br>\       \<br><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">r&#x27;\\\t\\&#x27;</span>)<br>\\\t\\<br></code></pre></div></td></tr></table></figure>
-<p>如果字符串内部有很多换行，用 <code>\n</code> 写在一行里不好阅读，为了简化，Python允许用 <code>&#39;&#39;&#39;...&#39;&#39;&#39;</code> 的格式表示多行内容，可以自己试试：</p>
+<p>如果字符串内部有很多换行，用 <code>\n</code> 写在一行里不好阅读，为了简化，Python允许用 <code>'''...'''</code> 的格式表示多行内容，可以自己试试：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">&quot;&quot;&quot;line1</span><br><span class="hljs-string"><span class="hljs-meta">... </span>line2</span><br><span class="hljs-string"><span class="hljs-meta">... </span>line3&quot;&quot;&quot;</span>)<br>line1<br>line2<br>line3<br></code></pre></div></td></tr></table></figure>
-<p>啥是内建方法：类自身就拥有的方法，使用方法是 <code>instance.Operation()</code>。<br>啥是内建函数：不需要 <code>import</code>，可以直接使用的函数，使用方法是 <code>function()</code>。</p>
-<h4 id="常用内建方法"><a href="#常用内建方法" class="headerlink" title="常用内建方法"></a>常用内建方法</h4><div class="table-container">
+<p>啥是内建方法：类自身就拥有的方法，使用方法是 <code>instance.Operation()</code>。 啥是内建函数：不需要 <code>import</code>，可以直接使用的函数，使用方法是 <code>function()</code>。</p>
+<h4 id="常用内建方法">常用内建方法</h4>
 <table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left"><strong>方法</strong></th>
-<th style="text-align:left"><strong>详述</strong></th>
+<tr class="header">
+<th style="text-align: left;"><strong>方法</strong></th>
+<th style="text-align: left;"><strong>详述</strong></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-capitalize.html">string.capitalize()</a></td>
-<td style="text-align:left">把字符串的第一个字符大写</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-capitalize.html">string.capitalize()</a></td>
+<td style="text-align: left;">把字符串的第一个字符大写</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-center.html">string.center(width)</a></td>
-<td style="text-align:left">返回一个原字符串居中,并使用空格填充至长度 width 的新字符串</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-center.html">string.center(width)</a></td>
+<td style="text-align: left;">返回一个原字符串居中,并使用空格填充至长度 width 的新字符串</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-count.html">string.count(str, beg=0, end=len(string))</a></strong></td>
-<td style="text-align:left">返回 str 在 string 里面出现的次数，如果 beg 或者 end 指定则返回指定范围内 str 出现的次数</td>
+<tr class="odd">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-count.html">string.count(str, beg=0, end=len(string))</a></strong></td>
+<td style="text-align: left;">返回 str 在 string 里面出现的次数，如果 beg 或者 end 指定则返回指定范围内 str 出现的次数</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-decode.html">string.decode(encoding=’UTF-8’, errors=’strict’)</a></td>
-<td style="text-align:left">以 encoding 指定的编码格式解码 string，如果出错默认报一个 ValueError 的 异 常 ， 除非 errors 指 定 的 是 ‘ignore’ 或 者’replace’</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-decode.html">string.decode(encoding='UTF-8', errors='strict')</a></td>
+<td style="text-align: left;">以 encoding 指定的编码格式解码 string，如果出错默认报一个 ValueError 的 异 常 ， 除非 errors 指 定 的 是 'ignore' 或 者'replace'</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-encode.html">string.encode(encoding=’UTF-8’, errors=’strict’)</a></td>
-<td style="text-align:left">以 encoding 指定的编码格式编码 string，如果出错默认报一个ValueError 的异常，除非 errors 指定的是’ignore’或者’replace’</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-encode.html">string.encode(encoding='UTF-8', errors='strict')</a></td>
+<td style="text-align: left;">以 encoding 指定的编码格式编码 string，如果出错默认报一个ValueError 的异常，除非 errors 指定的是'ignore'或者'replace'</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-endswith.html">string.endswith(obj, beg=0, end=len(string))</a></strong></td>
-<td style="text-align:left">检查字符串是否以 obj 结束，如果beg 或者 end 指定则检查指定的范围内是否以 obj 结束，如果是，返回 True,否则返回 False.</td>
+<tr class="even">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-endswith.html">string.endswith(obj, beg=0, end=len(string))</a></strong></td>
+<td style="text-align: left;">检查字符串是否以 obj 结束，如果beg 或者 end 指定则检查指定的范围内是否以 obj 结束，如果是，返回 True,否则返回 False.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-expandtabs.html">string.expandtabs(tabsize=8)</a></td>
-<td style="text-align:left">把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-expandtabs.html">string.expandtabs(tabsize=8)</a></td>
+<td style="text-align: left;">把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8。</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-find.html">string.find(str, beg=0, end=len(string))</a></strong></td>
-<td style="text-align:left">检测 str 是否包含在 string 中，如果 beg 和 end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1</td>
+<tr class="even">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-find.html">string.find(str, beg=0, end=len(string))</a></strong></td>
+<td style="text-align: left;">检测 str 是否包含在 string 中，如果 beg 和 end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-format.html">string.format()</a></strong></td>
-<td style="text-align:left">格式化字符串</td>
+<tr class="odd">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-format.html">string.format()</a></strong></td>
+<td style="text-align: left;">格式化字符串</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-index.html">string.index(str, beg=0, end=len(string))</a></strong></td>
-<td style="text-align:left">跟find()方法一样，只不过如果str不在 string中会报一个异常.</td>
+<tr class="even">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-index.html">string.index(str, beg=0, end=len(string))</a></strong></td>
+<td style="text-align: left;">跟find()方法一样，只不过如果str不在 string中会报一个异常.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isalnum.html">string.isalnum()</a></td>
-<td style="text-align:left">如果 string 至少有一个字符并且所有字符都是字母或数字则返回 True,否则返回 False</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isalnum.html">string.isalnum()</a></td>
+<td style="text-align: left;">如果 string 至少有一个字符并且所有字符都是字母或数字则返回 True,否则返回 False</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isalpha.html">string.isalpha()</a></td>
-<td style="text-align:left">如果 string 至少有一个字符并且所有字符都是字母则返回 True,否则返回 False</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isalpha.html">string.isalpha()</a></td>
+<td style="text-align: left;">如果 string 至少有一个字符并且所有字符都是字母则返回 True,否则返回 False</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isdecimal.html">string.isdecimal()</a></td>
-<td style="text-align:left">如果 string 只包含十进制数字则返回 True 否则返回 False.</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isdecimal.html">string.isdecimal()</a></td>
+<td style="text-align: left;">如果 string 只包含十进制数字则返回 True 否则返回 False.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isdigit.html">string.isdigit()</a></td>
-<td style="text-align:left">如果 string 只包含数字则返回 True 否则返回 False.</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isdigit.html">string.isdigit()</a></td>
+<td style="text-align: left;">如果 string 只包含数字则返回 True 否则返回 False.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-islower.html">string.islower()</a></td>
-<td style="text-align:left">如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-islower.html">string.islower()</a></td>
+<td style="text-align: left;">如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True，否则返回 False</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isnumeric.html">string.isnumeric()</a></td>
-<td style="text-align:left">如果 string 中只包含数字字符，则返回 True，否则返回 False</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isnumeric.html">string.isnumeric()</a></td>
+<td style="text-align: left;">如果 string 中只包含数字字符，则返回 True，否则返回 False</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isspace.html">string.isspace()</a></td>
-<td style="text-align:left">如果 string 中只包含空格，则返回 True，否则返回 False.</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isspace.html">string.isspace()</a></td>
+<td style="text-align: left;">如果 string 中只包含空格，则返回 True，否则返回 False.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-istitle.html">string.istitle()</a></td>
-<td style="text-align:left">如果 string 是标题化的(见 title())则返回 True，否则返回 False</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-istitle.html">string.istitle()</a></td>
+<td style="text-align: left;">如果 string 是标题化的(见 title())则返回 True，否则返回 False</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isupper.html">string.isupper()</a></td>
-<td style="text-align:left">如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-isupper.html">string.isupper()</a></td>
+<td style="text-align: left;">如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True，否则返回 False</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-join.html">string.join(seq)</a></strong></td>
-<td style="text-align:left">以 string 作为分隔符，将 seq 中所有的元素(的字符串表示)合并为一个新的字符串</td>
+<tr class="even">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-join.html">string.join(seq)</a></strong></td>
+<td style="text-align: left;">以 string 作为分隔符，将 seq 中所有的元素(的字符串表示)合并为一个新的字符串</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-ljust.html">string.ljust(width)</a></td>
-<td style="text-align:left">返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-ljust.html">string.ljust(width)</a></td>
+<td style="text-align: left;">返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-lower.html">string.lower()</a></td>
-<td style="text-align:left">转换 string 中所有大写字符为小写.</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-lower.html">string.lower()</a></td>
+<td style="text-align: left;">转换 string 中所有大写字符为小写.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-lstrip.html">string.lstrip()</a></td>
-<td style="text-align:left">截掉 string 左边的空格</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-lstrip.html">string.lstrip()</a></td>
+<td style="text-align: left;">截掉 string 左边的空格</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-maketrans.html">string.maketrans(intab, outtab])</a></td>
-<td style="text-align:left">maketrans() 方法用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-maketrans.html">string.maketrans(intab, outtab])</a></td>
+<td style="text-align: left;">maketrans() 方法用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-max.html">max(str)</a></td>
-<td style="text-align:left">返回字符串 <em>str</em> 中最大的字母。</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-max.html">max(str)</a></td>
+<td style="text-align: left;">返回字符串 <em>str</em> 中最大的字母。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-min.html">min(str)</a></td>
-<td style="text-align:left">返回字符串 <em>str</em> 中最小的字母。</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-min.html">min(str)</a></td>
+<td style="text-align: left;">返回字符串 <em>str</em> 中最小的字母。</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-partition.html">string.partition(str)</a></strong></td>
-<td style="text-align:left">有点像 find()和 split()的结合体,从 str 出现的第一个位置起,把 字 符 串 string 分 成 一 个 3 元 素 的 元 组 (string_pre_str,str,string_post_str),如果 string 中不包含str 则 string_pre_str == string.</td>
+<tr class="odd">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-partition.html">string.partition(str)</a></strong></td>
+<td style="text-align: left;">有点像 find()和 split()的结合体,从 str 出现的第一个位置起,把 字 符 串 string 分 成 一 个 3 元 素 的 元 组 (string_pre_str,str,string_post_str),如果 string 中不包含str 则 string_pre_str == string.</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-replace.html">string.replace(str1, str2, num=string.count(str1))</a></strong></td>
-<td style="text-align:left">把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次.</td>
+<tr class="even">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-replace.html">string.replace(str1, str2, num=string.count(str1))</a></strong></td>
+<td style="text-align: left;">把 string 中的 str1 替换成 str2,如果 num 指定，则替换不超过 num 次.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rfind.html">string.rfind(str, beg=0,end=len(string) )</a></td>
-<td style="text-align:left">类似于 find()函数，不过是从右边开始查找.</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rfind.html">string.rfind(str, beg=0,end=len(string) )</a></td>
+<td style="text-align: left;">类似于 find()函数，不过是从右边开始查找.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rindex.html">string.rindex( str, beg=0,end=len(string))</a></td>
-<td style="text-align:left">类似于 index()，不过是从右边开始.</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rindex.html">string.rindex( str, beg=0,end=len(string))</a></td>
+<td style="text-align: left;">类似于 index()，不过是从右边开始.</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rjust.html">string.rjust(width)</a></td>
-<td style="text-align:left">返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rjust.html">string.rjust(width)</a></td>
+<td style="text-align: left;">返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rpartition.html">string.rpartition(str)</a></td>
-<td style="text-align:left">类似于 partition()函数,不过是从右边开始查找</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rpartition.html">string.rpartition(str)</a></td>
+<td style="text-align: left;">类似于 partition()函数,不过是从右边开始查找</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rstrip.html">string.rstrip()</a></td>
-<td style="text-align:left">删除 string 字符串末尾的空格.</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-rstrip.html">string.rstrip()</a></td>
+<td style="text-align: left;">删除 string 字符串末尾的空格.</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-split.html">string.split(str=””, num=string.count(str))</a></strong></td>
-<td style="text-align:left">以 str 为分隔符切片 string，如果 num 有指定值，则仅分隔 num+ 个子字符串</td>
+<tr class="even">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-split.html">string.split(str="", num=string.count(str))</a></strong></td>
+<td style="text-align: left;">以 str 为分隔符切片 string，如果 num 有指定值，则仅分隔 num+ 个子字符串</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-splitlines.html">string.splitlines([keepends])</a></td>
-<td style="text-align:left">按照行(‘\r’, ‘\r\n’, \n’)分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行符，如果为 True，则保留换行符。</td>
+<tr class="odd">
+<td style="text-align: left;">[string.splitlines(<a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-splitlines.html">keepends])</a></td>
+<td style="text-align: left;">按照行(', '', ')分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行符，如果为 True，则保留换行符。</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-startswith.html">string.startswith(obj, beg=0,end=len(string))</a></td>
-<td style="text-align:left">检查字符串是否是以 obj 开头，是则返回 True，否则返回 False。如果beg 和 end 指定值，则在指定范围内检查.</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-startswith.html">string.startswith(obj, beg=0,end=len(string))</a></td>
+<td style="text-align: left;">检查字符串是否是以 obj 开头，是则返回 True，否则返回 False。如果beg 和 end 指定值，则在指定范围内检查.</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-strip.html">string.strip([obj])</a></strong></td>
-<td style="text-align:left">在 string 上执行 lstrip()和 rstrip()</td>
+<tr class="odd">
+<td style="text-align: left;"><strong>[string.strip(<a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-strip.html">obj])</a></strong></td>
+<td style="text-align: left;">在 string 上执行 lstrip()和 rstrip()</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-swapcase.html">string.swapcase()</a></td>
-<td style="text-align:left">翻转 string 中的大小写</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-swapcase.html">string.swapcase()</a></td>
+<td style="text-align: left;">翻转 string 中的大小写</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-title.html">string.title()</a></td>
-<td style="text-align:left">返回”标题化”的 string,就是说所有单词都是以大写开始，其余字母均为小写(见 istitle())</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-title.html">string.title()</a></td>
+<td style="text-align: left;">返回"标题化"的 string,就是说所有单词都是以大写开始，其余字母均为小写(见 istitle())</td>
 </tr>
-<tr>
-<td style="text-align:left"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-translate.html">string.translate(str, del=””)</a></strong></td>
-<td style="text-align:left">根据 str 给出的表(包含 256 个字符)转换 string 的字符,要过滤掉的字符放到 del 参数中</td>
+<tr class="even">
+<td style="text-align: left;"><strong><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-translate.html">string.translate(str, del="")</a></strong></td>
+<td style="text-align: left;">根据 str 给出的表(包含 256 个字符)转换 string 的字符,要过滤掉的字符放到 del 参数中</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-upper.html">string.upper()</a></td>
-<td style="text-align:left">转换 string 中的小写字母为大写</td>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-upper.html">string.upper()</a></td>
+<td style="text-align: left;">转换 string 中的小写字母为大写</td>
 </tr>
-<tr>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-zfill.html">string.zfill(width)</a></td>
-<td style="text-align:left">返回长度为 width 的字符串，原字符串 string 右对齐，前面填充0</td>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-zfill.html">string.zfill(width)</a></td>
+<td style="text-align: left;">返回长度为 width 的字符串，原字符串 string 右对齐，前面填充0</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。所以，可以用set去重其他集合对象。<a href="/2020/03/08/LeetCode-14-最长公共前缀（易）/#有效语法糖">set()去重</a></p>
+<h3 id="集合">集合</h3>
+<p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。所以，可以用set去重其他集合对象。<a href="/2020/03/08/LeetCode-14-最长公共前缀（易）/#有效语法糖">set()去重</a></p>
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = (<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(a)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">tuple</span>&#x27;&gt;</span><br>&gt;&gt;&gt; b = set(a)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(b)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">set</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">b</span></span><br>&#123;&#x27;2&#x27;, &#x27;4&#x27;, &#x27;1&#x27;, &#x27;5&#x27;, &#x27;3&#x27;&#125;<br></code></pre></div></td></tr></table></figure>
 <p>要创建一个set，需要提供一个list作为输入集合：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-built_in">set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br><span class="hljs-meta">&gt;&gt;&gt; </span>s<br>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;<br></code></pre></div></td></tr></table></figure>
@@ -615,94 +622,93 @@
 <p>set可以看成数学意义上的无序和无重复元素的集合，因此，两个set可以做数学意义上的交集、并集等操作：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>s1 = <span class="hljs-built_in">set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br><span class="hljs-meta">&gt;&gt;&gt; </span>s2 = <span class="hljs-built_in">set</span>([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])<br><span class="hljs-meta">&gt;&gt;&gt; </span>s1 &amp; s2<br>&#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;<br><span class="hljs-meta">&gt;&gt;&gt; </span>s1 | s2<br>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;<br></code></pre></div></td></tr></table></figure>
 <p><code>set</code> 和 <code>dict</code> 的唯一区别仅在于没有存储对应的 <code>value</code>，但是，<code>set</code> 的原理和 <code>dict</code> 一样，所以，同样不可以放入可变对象，因为无法判断两个可变对象是否相等，也就无法保证 <code>set</code> 内部“不会有重复元素”。试试把 <code>list</code> 放入 <code>set</code> ，看看是否会报错。</p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>Python内置的一种数据类型是列表：list。list是一种有序的集合，可以随时添加和删除其中的元素。</p>
+<h3 id="列表">列表</h3>
+<p>Python内置的一种数据类型是列表：list。list是一种有序的集合，可以随时添加和删除其中的元素。</p>
 <p>list 可以用来做为 栈和队列直接使用，入栈 <code>append()</code>，出栈 <code>pop()</code>，入栈 <code>append()</code>，出栈 <code>pop(0)</code>。</p>
 <p>也可以把元素插入到指定的位置，比如索引号为<code>1</code>的位置：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>classmates.insert(<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;Jack&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>classmates<br>[<span class="hljs-string">&#x27;Michael&#x27;</span>, <span class="hljs-string">&#x27;Jack&#x27;</span>, <span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-string">&#x27;Tracy&#x27;</span>, <span class="hljs-string">&#x27;Adam&#x27;</span>]<br></code></pre></div></td></tr></table></figure>
-<h4 id="Python列表函数-amp-方法"><a href="#Python列表函数-amp-方法" class="headerlink" title="Python列表函数&amp;方法"></a>Python列表函数&amp;方法</h4><p>Python包含以下函数:</p>
-<div class="table-container">
+<h4 id="python列表函数方法">Python列表函数&amp;方法</h4>
+<p>Python包含以下函数:</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">序号</th>
-<th style="text-align:left">函数</th>
+<tr class="header">
+<th style="text-align: left;">序号</th>
+<th style="text-align: left;">函数</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">1</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-cmp.html">cmp(list1, list2)</a> 比较两个列表的元素</td>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-cmp.html">cmp(list1, list2)</a> 比较两个列表的元素</td>
 </tr>
-<tr>
-<td style="text-align:left">2</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-len.html">len(list)</a> 列表元素个数</td>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-len.html">len(list)</a> 列表元素个数</td>
 </tr>
-<tr>
-<td style="text-align:left">3</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-max.html">max(list)</a> 返回列表元素最大值</td>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-max.html">max(list)</a> 返回列表元素最大值</td>
 </tr>
-<tr>
-<td style="text-align:left">4</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-min.html">min(list)</a> 返回列表元素最小值</td>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-min.html">min(list)</a> 返回列表元素最小值</td>
 </tr>
-<tr>
-<td style="text-align:left">5</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-list.html">list(seq)</a> 将元组转换为列表</td>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-list.html">list(seq)</a> 将元组转换为列表</td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>Python包含以下方法:</p>
-<div class="table-container">
 <table>
 <thead>
-<tr>
-<th style="text-align:left">序号</th>
-<th style="text-align:left">方法</th>
+<tr class="header">
+<th style="text-align: left;">序号</th>
+<th style="text-align: left;">方法</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">1</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-append.html">list.append(obj)</a> 在列表末尾添加新的对象</td>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-append.html">list.append(obj)</a> 在列表末尾添加新的对象</td>
 </tr>
-<tr>
-<td style="text-align:left">2</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-count.html">list.count(obj)</a> 统计某个元素在列表中出现的次数</td>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-count.html">list.count(obj)</a> 统计某个元素在列表中出现的次数</td>
 </tr>
-<tr>
-<td style="text-align:left">3</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-extend.html">list.extend(seq)</a> 在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-extend.html">list.extend(seq)</a> 在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
 </tr>
-<tr>
-<td style="text-align:left">4</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-index.html">list.index(obj)</a> 从列表中找出某个值第一个匹配项的索引位置</td>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-index.html">list.index(obj)</a> 从列表中找出某个值第一个匹配项的索引位置</td>
 </tr>
-<tr>
-<td style="text-align:left">5</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-insert.html">list.insert(index, obj)</a> 将对象插入列表</td>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-insert.html">list.insert(index, obj)</a> 将对象插入列表</td>
 </tr>
-<tr>
-<td style="text-align:left">6</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-pop.html">list.pop([index=-1])</a> 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">[list.pop(<a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-pop.html">index=-1])</a> 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
 </tr>
-<tr>
-<td style="text-align:left">7</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-remove.html">list.remove(obj)</a> 移除列表中某个值的第一个匹配项</td>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-remove.html">list.remove(obj)</a> 移除列表中某个值的第一个匹配项</td>
 </tr>
-<tr>
-<td style="text-align:left">8</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-reverse.html">list.reverse()</a> 反向列表中元素</td>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-reverse.html">list.reverse()</a> 反向列表中元素</td>
 </tr>
-<tr>
-<td style="text-align:left">9</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-sort.html">list.sort(cmp=None, key=None, reverse=False)</a> 对原列表进行排序</td>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-list-sort.html">list.sort(cmp=None, key=None, reverse=False)</a> 对原列表进行排序</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="元祖"><a href="#元祖" class="headerlink" title="元祖"></a>元祖</h3><p>另一种有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改。没有<code>append()</code>，<code>insert()</code>，<code>pop()</code> 这样的方法。其他获取元素的方法和list是一样的。</p>
-<p>tuple所谓的“不变”是说，tuple的每个元素，<strong>指向永远不变</strong>。即指向<code>&#39;a&#39;</code>，就不能改成指向<code>&#39;b&#39;</code>。当tuple指向一个可变对象（list、set、dict）时，tuple也可以变化。</p>
+<h3 id="元祖">元祖</h3>
+<p>另一种有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改。没有<code>append()</code>，<code>insert()</code>，<code>pop()</code> 这样的方法。其他获取元素的方法和list是一样的。</p>
+<p>tuple所谓的“不变”是说，tuple的每个元素，<strong>指向永远不变</strong>。即指向<code>'a'</code>，就不能改成指向<code>'b'</code>。当tuple指向一个可变对象（list、set、dict）时，tuple也可以变化。</p>
 <p><strong>tuple的陷阱</strong></p>
 <p>当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来，比如：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>t = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>t<br>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
@@ -714,44 +720,45 @@
 <p>所以，<strong>只有1个元素的tuple定义时必须加一个逗号<code>,</code>，来消除歧义</strong>：</p>
 <figure class="highlight lisp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lisp">&gt;&gt;&gt; <span class="hljs-literal">t</span> = (<span class="hljs-number">1</span>,)<br>&gt;&gt;&gt; <span class="hljs-literal">t</span><br>(<span class="hljs-number">1</span>,)<br></code></pre></div></td></tr></table></figure>
 <p><strong>Python在显示只有1个元素的tuple时，也会加一个逗号<code>,</code>，以免你误解成数学计算意义上的括号。</strong></p>
-<p>请问以下变量哪些是tuple类型：<br><figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">a</span> = ()       <span class="hljs-comment"># Yes</span><br><span class="hljs-attr">b</span> = (<span class="hljs-number">1</span>)      <span class="hljs-comment"># No</span><br><span class="hljs-attr">c</span> = [<span class="hljs-number">2</span>]      <span class="hljs-comment"># No</span><br><span class="hljs-attr">d</span> = (<span class="hljs-number">3</span>,)     <span class="hljs-comment"># Yes</span><br><span class="hljs-attr">e</span> = (<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>)  <span class="hljs-comment"># Yes</span><br></code></pre></div></td></tr></table></figure></p>
-<h4 id="python可迭代对象的解压与压缩？"><a href="#python可迭代对象的解压与压缩？" class="headerlink" title="python可迭代对象的解压与压缩？"></a>python可迭代对象的解压与压缩？</h4><p>利用 <code>zip</code> 将可迭代的对象作为参数，将对象中对应的元素<strong>打包</strong>成<strong>一个个元组</strong>，然后返回由这些元组组成的对象，这样做的好处是节约了不少的内存。</p>
+<p>请问以下变量哪些是tuple类型： <figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">a</span> = ()       <span class="hljs-comment"># Yes</span><br><span class="hljs-attr">b</span> = (<span class="hljs-number">1</span>)      <span class="hljs-comment"># No</span><br><span class="hljs-attr">c</span> = [<span class="hljs-number">2</span>]      <span class="hljs-comment"># No</span><br><span class="hljs-attr">d</span> = (<span class="hljs-number">3</span>,)     <span class="hljs-comment"># Yes</span><br><span class="hljs-attr">e</span> = (<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>)  <span class="hljs-comment"># Yes</span><br></code></pre></div></td></tr></table></figure></p>
+<h4 id="python可迭代对象的解压与压缩">python可迭代对象的解压与压缩？</h4>
+<p>利用 <code>zip</code> 将可迭代的对象作为参数，将对象中对应的元素<strong>打包</strong>成<strong>一个个元组</strong>，然后返回由这些元组组成的对象，这样做的好处是节约了不少的内存。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>c = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>zipped = <span class="hljs-built_in">zip</span>(a,b)     <span class="hljs-comment"># 返回一个对象</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>zipped<br>&lt;<span class="hljs-built_in">zip</span> <span class="hljs-built_in">object</span> at <span class="hljs-number">0x103abc288</span>&gt;<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(zipped)  <span class="hljs-comment"># list() 转换为列表</span><br>[(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">5</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">6</span>)]<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(a,c))              <span class="hljs-comment"># 元素个数与最短的列表一致</span><br>[(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">5</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">6</span>)]<br> <br><span class="hljs-meta">&gt;&gt;&gt; </span>a1, a2 = <span class="hljs-built_in">zip</span>(*<span class="hljs-built_in">zip</span>(a,b))          <span class="hljs-comment"># 与 zip 相反，zip(*) 可理解为解压，返回二维矩阵式</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(a1)<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">list</span>(a2)<br>[<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]<br>&gt;&gt;&gt;<br></code></pre></div></td></tr></table></figure>
-<h4 id="元组内置函数"><a href="#元组内置函数" class="headerlink" title="元组内置函数"></a>元组内置函数</h4><p>Python元组包含了以下内置函数</p>
-<div class="table-container">
+<h4 id="元组内置函数">元组内置函数</h4>
+<p>Python元组包含了以下内置函数</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">序号</th>
-<th style="text-align:left">方法及描述</th>
+<tr class="header">
+<th style="text-align: left;">序号</th>
+<th style="text-align: left;">方法及描述</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">1</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-cmp.html">cmp(tuple1, tuple2)</a> 比较两个元组元素。</td>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-cmp.html">cmp(tuple1, tuple2)</a> 比较两个元组元素。</td>
 </tr>
-<tr>
-<td style="text-align:left">2</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-len.html">len(tuple)</a> 计算元组元素个数。</td>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-len.html">len(tuple)</a> 计算元组元素个数。</td>
 </tr>
-<tr>
-<td style="text-align:left">3</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-max.html">max(tuple)</a> 返回元组中元素最大值。</td>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-max.html">max(tuple)</a> 返回元组中元素最大值。</td>
 </tr>
-<tr>
-<td style="text-align:left">4</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-min.html">min(tuple)</a> 返回元组中元素最小值。</td>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-min.html">min(tuple)</a> 返回元组中元素最小值。</td>
 </tr>
-<tr>
-<td style="text-align:left">5</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-tuple.html">tuple(seq)</a> 将列表转换为元组。</td>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-tuple-tuple.html">tuple(seq)</a> 将列表转换为元组。</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>Python内置了字典：dict的支持，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。</p>
-<p>为什么dict查找速度这么快？dict是基于索引实现的，给定一个名字，比如<code>&#39;Michael&#39;</code>，dict在内部就可以直接计算出<code>Michael</code>对应的存放成绩的“页码”，也就是<code>95</code>这个数字存放的内存地址，直接取出来，所以速度非常快。</p>
+<h3 id="字典">字典</h3>
+<p>Python内置了字典：dict的支持，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。</p>
+<p>为什么dict查找速度这么快？dict是基于索引实现的，给定一个名字，比如<code>'Michael'</code>，dict在内部就可以直接计算出<code>Michael</code>对应的存放成绩的“页码”，也就是<code>95</code>这个数字存放的内存地址，直接取出来，所以速度非常快。</p>
 <p>你可以猜到，这种key-value存储方式，在放进去的时候，必须根据key算出value的存放位置，这样，取的时候才能根据key直接拿到value。</p>
 <p>通过dict提供的<code>get()</code>方法，如果key不存在，可以返回<code>None</code>，或者自己指定的value：</p>
 <p>要删除一个key，用<code>pop(key)</code>方法，对应的value也会从dict中删除。</p>
@@ -759,95 +766,100 @@
 <p>Q：遍历字典是否顺序固定？</p>
 <p>A：是的，每次输出的顺序是固定的。</p>
 <p>Q：遍历字典是否有序</p>
-<p>A：Python3.5之前，都是无序的。之后都是有序的。<a target="_blank" rel="noopener" href="https://legacy.python.org/dev/peps/pep-0468/">https://legacy.python.org/dev/peps/pep-0468/</a></p>
-<h4 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h4><div class="table-container">
+<p>A：Python3.5之前，都是无序的。之后都是有序的。https://legacy.python.org/dev/peps/pep-0468/</p>
+<h4 id="内置函数">内置函数</h4>
 <table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 93%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left">序号</th>
-<th style="text-align:left">函数及描述</th>
+<tr class="header">
+<th style="text-align: left;">序号</th>
+<th style="text-align: left;">函数及描述</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">1</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-cmp.html">cmp(dict1, dict2)</a> 比较两个字典元素。</td>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-cmp.html">cmp(dict1, dict2)</a> 比较两个字典元素。</td>
 </tr>
-<tr>
-<td style="text-align:left">2</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-len.html">len(dict)</a> 计算字典元素个数，即键的总数。</td>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-len.html">len(dict)</a> 计算字典元素个数，即键的总数。</td>
 </tr>
-<tr>
-<td style="text-align:left">3</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-str.html">str(dict)</a> 输出字典可打印的字符串表示。</td>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-str.html">str(dict)</a> 输出字典可打印的字符串表示。</td>
 </tr>
-<tr>
-<td style="text-align:left">4</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-type.html">type(variable)</a> 返回输入的变量类型，如果变量是字典就返回字典类型。</td>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-type.html">type(variable)</a> 返回输入的变量类型，如果变量是字典就返回字典类型。</td>
 </tr>
-<tr>
-<td style="text-align:left">5</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-clear.html">dict.clear()</a> 删除字典内所有元素</td>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-clear.html">dict.clear()</a> 删除字典内所有元素</td>
 </tr>
-<tr>
-<td style="text-align:left">6</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-copy.html">dict.copy()</a> 返回一个字典的浅复制</td>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-copy.html">dict.copy()</a> 返回一个字典的浅复制</td>
 </tr>
-<tr>
-<td style="text-align:left">7</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-fromkeys.html">dict.fromkeys(seq[, val])</a> 创建一个新字典，以序列 seq 中元素做字典的键，val 为字典所有键对应的初始值</td>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">[dict.fromkeys(seq<a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-fromkeys.html">, val])</a> 创建一个新字典，以序列 seq 中元素做字典的键，val 为字典所有键对应的初始值</td>
 </tr>
-<tr>
-<td style="text-align:left">8</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-get.html">dict.get(key, default=None)</a> 返回指定键的值，如果值不在字典中返回default值</td>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-get.html">dict.get(key, default=None)</a> 返回指定键的值，如果值不在字典中返回default值</td>
 </tr>
-<tr>
-<td style="text-align:left">9</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-has_key.html">dict.has_key(key)</a> 如果键在字典dict里返回true，否则返回false</td>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-has_key.html">dict.has_key(key)</a> 如果键在字典dict里返回true，否则返回false</td>
 </tr>
-<tr>
-<td style="text-align:left">10</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-items.html">dict.items()</a> 以列表返回可遍历的(键, 值) 元组数组</td>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-items.html">dict.items()</a> 以列表返回可遍历的(键, 值) 元组数组</td>
 </tr>
-<tr>
-<td style="text-align:left">11</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-keys.html">dict.keys()</a> 以列表返回一个字典所有的键</td>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-keys.html">dict.keys()</a> 以列表返回一个字典所有的键</td>
 </tr>
-<tr>
-<td style="text-align:left">12</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-setdefault.html">dict.setdefault(key, default=None)</a> 和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</td>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-setdefault.html">dict.setdefault(key, default=None)</a> 和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</td>
 </tr>
-<tr>
-<td style="text-align:left">13</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-update.html">dict.update(dict2)</a> 把字典dict2的键/值对更新到dict里</td>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-update.html">dict.update(dict2)</a> 把字典dict2的键/值对更新到dict里</td>
 </tr>
-<tr>
-<td style="text-align:left">14</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-values.html">dict.values()</a> 以列表返回字典中的所有值</td>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-values.html">dict.values()</a> 以列表返回字典中的所有值</td>
 </tr>
-<tr>
-<td style="text-align:left">15</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-att-dictionary-pop.html">pop(key[,default])</a> 删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。</td>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">[pop(key<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-att-dictionary-pop.html">,default])</a> 删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。</td>
 </tr>
-<tr>
-<td style="text-align:left">16</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-att-dictionary-popitem.html">popitem()</a> 返回并删除字典中的最后一对键和值。</td>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-att-dictionary-popitem.html">popitem()</a> 返回并删除字典中的最后一对键和值。</td>
 </tr>
 </tbody>
 </table>
-</div>
-<h3 id="dict-和-list-比较"><a href="#dict-和-list-比较" class="headerlink" title="dict 和 list 比较"></a><code>dict</code> 和 <code>list</code> 比较</h3><p><code>dict</code>有以下几个特点：</p>
-<ol>
+<h3 id="dict-和-list-比较"><code>dict</code> 和 <code>list</code> 比较</h3>
+<p><code>dict</code>有以下几个特点：</p>
+<ol type="1">
 <li>查找和插入的速度极快，不会随着key的增加而变慢；</li>
 <li>需要占用大量的内存，内存浪费多。</li>
 </ol>
 <p>而<code>list</code>相反：</p>
-<ol>
+<ol type="1">
 <li>查找和插入的时间随着元素的增加而增加；</li>
 <li>占用空间小，浪费内存很少。</li>
 </ol>
 <p>所以，dict是用空间来换取时间的一种方法。</p>
-<h3 id="列表（list）和元祖（tuple）的区别"><a href="#列表（list）和元祖（tuple）的区别" class="headerlink" title="列表（list）和元祖（tuple）的区别"></a>列表（<code>list</code>）和元祖（<code>tuple</code>）的区别</h3><ol>
+<h3 id="列表list和元祖tuple的区别">列表（<code>list</code>）和元祖（<code>tuple</code>）的区别</h3>
+<ol type="1">
 <li>元组内容是不可变的， 而列表内容是可变的。所以，元祖是不可变对象，列表是可变对象。</li>
 <li>因为元祖不可变的，所以元祖无法复制，但是可以添加一个新的引用。</li>
 <li>使用方括号 <code>[]</code> 创建列表，而使用括号 <code>()</code> 创建元组。</li>
@@ -855,15 +867,16 @@
 <li>不能将列表当作字典或集合的key， 而元组可以。</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>c = &#123;a: <span class="hljs-number">1</span>&#125;<br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>TypeError: unhashable <span class="hljs-built_in">type</span>: <span class="hljs-string">&#x27;list&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>c = &#123;b: <span class="hljs-number">1</span>&#125;<br><span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-built_in">set</span>()<br><span class="hljs-meta">&gt;&gt;&gt; </span>s.add([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>TypeError: unhashable <span class="hljs-built_in">type</span>: <span class="hljs-string">&#x27;list&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>s.add((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>))<br></code></pre></div></td></tr></table></figure>
-<ol>
+<ol start="4" type="1">
 <li><p>由于元组支持的操作比列表小， 所以元组会比列表稍稍快上那么一丢丢。但是除非你有巨量的数据要去处理，否者这一点不需要特别强调。为啥元祖比列表更快，有以几个原因：</p>
-<p>1). tuple中是不可变的，在CPython中<strong>tuple被存储在一块固定连续的内存中，创建tuple的时候只需要一次性分配内存。</strong>但是<strong>List被的被存储在两块内存中，一块内存固定大小，记录着Python Object（某个list对象）的信息，另一块是不固定大小的内存，用来存储数据。</strong>所以，查找时tuple可以快速定位（C中的数组）；list必须遍历（C中的链表）。在编译中，由于Tuple是不可变的，python编译器将它存储在它所在的函数或者模块的“常量表”（constants table）中。运行时，只要找到这些预构建的常量元组。但是List是可变的，必须在运行中构建，分配内存。<br>2). 当Tuple的元素是List的时候，它只存储list的引用，（C中定长数组里一个元素是指向某个链表的指针），定位查找时它还是会比List快。<br>3). CPython中已经做了相关优化以减少内存分配次数：释放一个List对象的时候，它的内存会被保存在一个自由List中以重复使用。不过非空list的创建时，仍然需要给它分配内存存储数据。</p>
-</li>
+<p>1). tuple中是不可变的，在CPython中<strong>tuple被存储在一块固定连续的内存中，创建tuple的时候只需要一次性分配内存。</strong>但是<strong>List被的被存储在两块内存中，一块内存固定大小，记录着Python Object（某个list对象）的信息，另一块是不固定大小的内存，用来存储数据。</strong>所以，查找时tuple可以快速定位（C中的数组）；list必须遍历（C中的链表）。在编译中，由于Tuple是不可变的，python编译器将它存储在它所在的函数或者模块的“常量表”（constants table）中。运行时，只要找到这些预构建的常量元组。但是List是可变的，必须在运行中构建，分配内存。 2). 当Tuple的元素是List的时候，它只存储list的引用，（C中定长数组里一个元素是指向某个链表的指针），定位查找时它还是会比List快。 3). CPython中已经做了相关优化以减少内存分配次数：释放一个List对象的时候，它的内存会被保存在一个自由List中以重复使用。不过非空list的创建时，仍然需要给它分配内存存储数据。</p></li>
 </ol>
-<h2 id="变量、常量和对象"><a href="#变量、常量和对象" class="headerlink" title="变量、常量和对象"></a>变量、常量和对象</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><blockquote>
+<h2 id="变量常量和对象">变量、常量和对象</h2>
+<h3 id="基本概念">基本概念</h3>
+<blockquote>
 <p><strong>变量</strong></p>
 </blockquote>
-<p><strong>变量存储在内存中的值</strong>，这就意味着在创建变量时会在内存中开辟一个空间。<br>变量本身类型不固定的语言称之为<em>动态语言</em>，与之对应的是<em>静态语言</em>。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。</p>
+<p><strong>变量存储在内存中的值</strong>，这就意味着在创建变量时会在内存中开辟一个空间。 变量本身类型不固定的语言称之为<em>动态语言</em>，与之对应的是<em>静态语言</em>。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。</p>
 <p><strong>常量</strong></p>
 <p><strong>常量就是不能变的变量，也是存储在内存中的值，不过不能变化。</strong>比如常用的数学常数π就是一个常量。在Python中，通常用全部大写的变量名表示常量：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">PI = <span class="hljs-number">3.14159265359</span><br></code></pre></div></td></tr></table></figure>
@@ -880,44 +893,46 @@
 <p>Python中一切皆对象，函数是对象，<strong>就连创建对象的类也是对象。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, val</span>):</span><br>        self.val = val<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">return</span> self.val<br><br>a = A(<span class="hljs-number">1</span>)<br>print(<span class="hljs-built_in">id</span>(A))<br>print(<span class="hljs-built_in">type</span>(A))<br>print(A)<br><br><span class="hljs-comment"># output</span><br><span class="hljs-number">2565931138736</span>         <span class="hljs-comment"># 身份</span><br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;        # 类型</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">__main__</span>.<span class="hljs-title">A</span>&#x27;&gt;  # 值 默认为引用的对象 所以是<span class="hljs-title">main</span>.<span class="hljs-title">A</span></span><br></code></pre></div></td></tr></table></figure>
 <p>代码，函数，类，方法，都是对象，但是<strong>函数和类相对来说比较高级</strong>，属于Python的一等公民，具有如下特性：</p>
-<ol>
+<ol type="1">
 <li>能够直接赋值给一个变量</li>
 <li>可以添加到集合对象中</li>
 <li>能作为函数参数进行传递</li>
 <li>可以作为函数返回值</li>
 </ol>
 <p>仔细想一想，python中是的确是一切皆对象，因为都符合以上条件，属于一等公民对象。</p>
-<h3 id="type-object和class的关系（）？"><a href="#type-object和class的关系（）？" class="headerlink" title="type,object和class的关系（）？"></a>type,object和class的关系（）？</h3><ul>
-<li><p>object：有两层含义</p>
+<h3 id="typeobject和class的关系">type,object和class的关系（）？</h3>
+<ul>
+<li>object：有两层含义
 <ul>
 <li>1、泛指所有对象。</li>
 <li>2、特指Python中的一个基类，Python中所有类都继承自 object。</li>
-</ul>
-</li>
-<li><p>type：有三层含义</p>
+</ul></li>
+<li>type：有三层含义
 <ul>
-<li>1、type是一种类型，object（<strong>含义二</strong>）是的类型就是type，而object（<strong>含义二</strong>）又是所有类的基类，所以所有 class 的类型都是type。<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-built_in">type</span>(<span class="hljs-built_in">object</span>))<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br></code></pre></div></td></tr></table></figure></li>
-<li>2、<strong>type也是自己的一个对象（实例）用于返回类型</strong>，说到这里，你可能不相信，不过我们下面会有验证。<strong>type，一个连自己都不肯放过的类，都要自己实现自己的对象的类</strong>。<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-built_in">type</span>(<span class="hljs-built_in">type</span>))<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br></code></pre></div></td></tr></table></figure></li>
-<li>3、其他的类都是通过type来生成的，所以类型都是 type。<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(<span class="hljs-built_in">int</span>)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">type</span>(<span class="hljs-params"><span class="hljs-built_in">float</span></span>)</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">type</span>(<span class="hljs-params"><span class="hljs-built_in">list</span></span>)</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br></code></pre></div></td></tr></table></figure></li>
-</ul>
-</li>
+<li>1、type是一种类型，object（<strong>含义二</strong>）是的类型就是type，而object（<strong>含义二</strong>）又是所有类的基类，所以所有 class 的类型都是type。 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-built_in">type</span>(<span class="hljs-built_in">object</span>))<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+<li>2、<strong>type也是自己的一个对象（实例）用于返回类型</strong>，说到这里，你可能不相信，不过我们下面会有验证。<strong>type，一个连自己都不肯放过的类，都要自己实现自己的对象的类</strong>。 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-built_in">type</span>(<span class="hljs-built_in">type</span>))<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+<li>3、其他的类都是通过type来生成的，所以类型都是 type。 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(<span class="hljs-built_in">int</span>)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">type</span>(<span class="hljs-params"><span class="hljs-built_in">float</span></span>)</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">type</span>(<span class="hljs-params"><span class="hljs-built_in">list</span></span>)</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+</ul></li>
 <li>class：Python中的class，<strong>又称类</strong>，就和我们常见的<strong>面向对象编程</strong>中的概念一样，<strong>是用来描述具有相同的属性和方法的对象的集合。</strong>它定义了该集合中每个对象所共有的属性和方法。而对象是类的实例。</li>
 </ul>
-<p><strong>这里更加充分说明python中一切皆对象的本质。</strong>那么，已知，类是通过type来生成的，对象是通过类来生成的，type，object（<strong>含义一</strong>）和class的关系如下，type 是 class的父层，class是object（<strong>含义一</strong>）的父层：</p>
-<script type="math/tex; mode=display">
-type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</p>
+<p><strong>这里更加充分说明python中一切皆对象的本质。</strong>那么，已知，类是通过type来生成的，对象是通过类来生成的，type，object（<strong>含义一</strong>）和class的关系如下，type 是 class的父层，class是object（<strong>含义一</strong>）的父层： <span class="math display">\[
+type \rightarrow class \rightarrow obeject
+\]</span> 下面用代码来看看</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, val</span>):</span><br>        self.val = val<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">return</span> self.val<br><br>a = A(<span class="hljs-number">1</span>)  <span class="hljs-comment"># a是对象 A是类</span><br>print(<span class="hljs-string">&quot;*&quot;</span>*<span class="hljs-number">50</span>)<br>print(<span class="hljs-string">&quot;输出type&quot;</span>)<br>print(<span class="hljs-built_in">id</span>(<span class="hljs-built_in">type</span>))<br>print(<span class="hljs-built_in">type</span>(<span class="hljs-built_in">type</span>))<br>print(<span class="hljs-built_in">type</span>)<br>print(<span class="hljs-string">&quot;*&quot;</span>*<span class="hljs-number">50</span>)<br>print(<span class="hljs-string">&quot;输出对象&quot;</span>)<br>print(<span class="hljs-built_in">id</span>(a))<br>print(<span class="hljs-built_in">type</span>(a))<br>print(a)<br>print(<span class="hljs-string">&quot;*&quot;</span>*<span class="hljs-number">50</span>)<br>print(<span class="hljs-string">&quot;输出类&quot;</span>)<br>print(<span class="hljs-built_in">id</span>(A))<br>print(<span class="hljs-built_in">type</span>(A))<br>print(A)<br><br><span class="hljs-comment"># output</span><br>**************************************************<br>输出<span class="hljs-built_in">type</span><br><span class="hljs-number">140706553554960</span>  <span class="hljs-comment"># 身份</span><br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;   # 类型</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;   # 值</span><br><span class="hljs-class">**************************************************</span><br><span class="hljs-class">输出对象</span><br><span class="hljs-class">2060822051376                              # 身份</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">__main__</span>.<span class="hljs-title">A</span>&#x27;&gt;                       # 类型</span><br><span class="hljs-class">&lt;<span class="hljs-title">__main__</span>.<span class="hljs-title">A</span> <span class="hljs-title">object</span> <span class="hljs-title">at</span> 0<span class="hljs-title">x000001DFD290FA30</span>&gt;  # 值 </span><br><span class="hljs-class">**************************************************</span><br><span class="hljs-class">输出类</span><br><span class="hljs-class">2060814280688         # 身份</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">type</span>&#x27;&gt;        # 类型</span><br><span class="hljs-class">&lt;<span class="hljs-title">class</span> &#x27;<span class="hljs-title">__main__</span>.<span class="hljs-title">A</span>&#x27;&gt;  # 值</span><br></code></pre></div></td></tr></table></figure>
 <p><strong><font color='red'>type有两种功能，一个是返回一个对象的类型，另一个是生成一个类，所以type、object就是python世界的亚当和夏娃。</font></strong></p>
-<p><img src="https://i.loli.net/2020/04/13/VGXQroxFOHnUSJh.png" srcset="/img/loading.gif" alt="TIM截图20181228201435.png"></p>
-<h3 id="Python运行时变量如何保存？"><a href="#Python运行时变量如何保存？" class="headerlink" title="Python运行时变量如何保存？"></a>Python运行时变量如何保存？</h3><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = <span class="hljs-string">&#x27;ABC&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<figure>
+<img src="https://i.loli.net/2020/04/13/VGXQroxFOHnUSJh.png" srcset="/img/loading.gif" alt="TIM截图20181228201435.png" /><figcaption aria-hidden="true">TIM截图20181228201435.png</figcaption>
+</figure>
+<h3 id="python运行时变量如何保存">Python运行时变量如何保存？</h3>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = <span class="hljs-string">&#x27;ABC&#x27;</span><br></code></pre></div></td></tr></table></figure>
 <p>当读取到这行代码编译成的字节码文件时，Python解释器干了两件事情：</p>
-<ol>
+<ol type="1">
 <li>在内存中创造了一个名为 <code>ABC</code> 的字符串。</li>
-<li>在内存中创造了一个名为 <code>a</code> 的<strong>变量</strong>，并把它指向<code>&#39;ABC&#39;</code>。</li>
+<li>在内存中创造了一个名为 <code>a</code> 的<strong>变量</strong>，并把它指向<code>'ABC'</code>。</li>
 </ol>
-<h3 id="Python中的可变对象和不可变对象？"><a href="#Python中的可变对象和不可变对象？" class="headerlink" title="Python中的可变对象和不可变对象？"></a>Python中的可变对象和不可变对象？</h3><font color='red'>python中一切的传递都是引用（地址）传递，无论是赋值还是函数调用时的参数传递，不存在值传递。</font>
-
-<p>python变量保存的是对象的引用，这个引用指向堆内存里的对象。<br>在堆中分配的对象分为两类，一类是可变对象，一类是不可变对象。</p>
+<h3 id="python中的可变对象和不可变对象">Python中的可变对象和不可变对象？</h3>
+<p><font color='red'>python中一切的传递都是引用（地址）传递，无论是赋值还是函数调用时的参数传递，不存在值传递。</font></p>
+<p>python变量保存的是对象的引用，这个引用指向堆内存里的对象。 在堆中分配的对象分为两类，一类是可变对象，一类是不可变对象。</p>
 <ul>
 <li><p><strong>不可变对象的内容不可改变，复制或者参数传递时开辟新空间（元组除外，由于元祖无法修改，就不能再原来的基础上做任何变化，要赋值或者参数传递，直接用同一个引用就行）。</strong>保证了数据的不可修改（安全，防止出错），同时可以使得在多线程读取的时候<strong>不需要加锁</strong>。</p>
 <p><strong>数值类型（int、float和complex），字符串str，元组tuple都是不可变对象。</strong></p>
@@ -925,53 +940,42 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <li><p>可变对象，<strong>变量指向的内存的中的值能够被改变，复制时添加引用，不开辟新空间</strong>，多线程读取的时候<strong>需要加锁</strong>。</p>
 <p><strong>列表list，字典dict，集合set都是可变对象。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br><span class="hljs-built_in">print</span> <span class="hljs-built_in">id</span>(a)    <span class="hljs-comment"># 44186120L。</span><br><br>a += [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]     <span class="hljs-comment"># 相当于调用了a.extend([4])</span><br><span class="hljs-built_in">print</span> <span class="hljs-built_in">id</span>(a)    <span class="hljs-comment"># 44186120L，列表list可改变，直接改变指向的内存中的值，没开辟新空间。</span><br><br>a = a + [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>]  <span class="hljs-comment"># 直接+和+=并不等价，使用+来操作list时，得到的是新的list，不指向原空间。</span><br><span class="hljs-built_in">print</span> <span class="hljs-built_in">id</span>(a)    <span class="hljs-comment"># 44210632L</span><br></code></pre></div></td></tr></table></figure>
-<p><em>参考连接</em></p>
-</li>
+<p><em>参考连接</em></p></li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-object.html">Python 面向对象</a><br><a target="_blank" rel="noopener" href="http://www.langzi.fun/Python一切皆对象.html">Python一切皆对象</a><br><a target="_blank" rel="noopener" href="https://juejin.im/post/5b508e30e51d45190f4ab5e6">浅谈python中一切皆对象</a></p>
-<h2 id="基本的运算"><a href="#基本的运算" class="headerlink" title="基本的运算"></a>基本的运算</h2><p><strong>加减乘除和取余</strong></p>
-<p>python的加减乘除和取余，都是很常规的操作。<br>唯一要注意的是Python的整除 <code>//</code>  都是向下取整的。</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-object.html">Python 面向对象</a> <a target="_blank" rel="noopener" href="http://www.langzi.fun/Python一切皆对象.html">Python一切皆对象</a> <a target="_blank" rel="noopener" href="https://juejin.im/post/5b508e30e51d45190f4ab5e6">浅谈python中一切皆对象</a></p>
+<h2 id="基本的运算">基本的运算</h2>
+<p><strong>加减乘除和取余</strong></p>
+<p>python的加减乘除和取余，都是很常规的操作。 唯一要注意的是Python的整除 <code>//</code> 都是向下取整的。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-number">11</span> // <span class="hljs-number">2</span><br><span class="hljs-number">5</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>-<span class="hljs-number">11</span> // <span class="hljs-number">2</span><br>-<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
 <p><strong>位运算</strong></p>
 <p>关于Python的位运算，参看专题 <a href="/2020/04/10/算法：位运算/">算法：位运算</a>。</p>
-<h2 id="函数和方法"><a href="#函数和方法" class="headerlink" title="函数和方法"></a>函数和方法</h2><blockquote>
+<h2 id="函数和方法">函数和方法</h2>
+<blockquote>
 <p>首先，从<strong>分类</strong>的角度来分析。</p>
 </blockquote>
-<p><em>函数的分类</em></p>
-<ol>
-<li>内置函数：python内嵌的一些函数。</li>
-<li>匿名函数：一行代码实现一个函数功能。</li>
-<li>递归函数。</li>
-<li>自定义函数：根据自己的需求，来进行定义函数。</li>
-</ol>
-<p><em>方法的分类</em></p>
-<ol>
-<li>普通方法：直接用self调用的方法。</li>
-<li>私有方法：__函数名__，只能在类中被调用的方法。</li>
-<li>属性方法：@property，将方法伪装成为属性，让代码看起来更合理。</li>
-<li>特殊方法(双下划线方法)：以<strong>init</strong>为例，是用来封装实例化对象的属性，<strong>只要是实例化对象就一定会执行__init方法</strong>，如果对象子类中没有则会寻找父类（超类），如果父类（超类）也没有，则直接继承object（python 3.x）类，执行类中的<strong>init</strong>方法。</li>
-<li>类方法：通过类名的调用去操作公共模板中的属性和方法。</li>
-<li>静态方法：不用传入类空间、对象的方法， 作用是保证代码的一致性，规范性，可以完全独立类外的一个方法，但是为了代码的一致性统一的放到某个模块（py文件）中。</li>
-</ol>
+<p><em>函数的分类</em> 1. 内置函数：python内嵌的一些函数。 2. 匿名函数：一行代码实现一个函数功能。 3. 递归函数。 4. 自定义函数：根据自己的需求，来进行定义函数。</p>
+<p><em>方法的分类</em> 1. 普通方法：直接用self调用的方法。 2. 私有方法：__函数名__，只能在类中被调用的方法。 3. 属性方法：<span class="citation" data-cites="property">@property</span>，将方法伪装成为属性，让代码看起来更合理。 4. 特殊方法(双下划线方法)：以__init__为例，是用来封装实例化对象的属性，**只要是实例化对象就一定会执行__init方法**，如果对象子类中没有则会寻找父类（超类），如果父类（超类）也没有，则直接继承object（python 3.x）类，执行类中的__init__方法。 5. 类方法：通过类名的调用去操作公共模板中的属性和方法。 6. 静态方法：不用传入类空间、对象的方法， 作用是保证代码的一致性，规范性，可以完全独立类外的一个方法，但是为了代码的一致性统一的放到某个模块（py文件）中。</p>
 <blockquote>
-<p> 其次，从<strong>作用域</strong>的角度来分析：</p>
+<p>其次，从<strong>作用域</strong>的角度来分析：</p>
 </blockquote>
-<ol>
+<ol type="1">
 <li>函数作用域：<strong>从函数调用开始至函数执行完成，返回给调用者后，</strong>在执行过程中开辟的空间<strong>会自动释放</strong>，也就是说函数执行完成后，函数体内部通过赋值等方式修改变量的值不会保留，会随着返回给调用者后，开辟的空间会自动释放。</li>
 <li>方法作用域：通过实例化的对象进行方法的调用，调用后开辟的空间<strong>不会释放</strong>，也就是说调用方法中对变量的修改值会一直保留，<strong>直到对象被销毁？</strong>。</li>
 </ol>
 <blockquote>
 <p>最后，<strong>调用的方式</strong>的角度来分析：</p>
 </blockquote>
-<ol>
+<ol type="1">
 <li>函数：通过“函数名()”的方式进行调用。</li>
 <li>方法：通过“对象.方法名”的方式进行调用。</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># 实例化</span><br>obj = Foo()<br><br><span class="hljs-comment"># 执行方式一:调用的func是方法</span><br>obj.func() <span class="hljs-comment"># func 方法</span><br><br><span class="hljs-comment"># 执行方式二：调用的func是函数</span><br>Foo.func(<span class="hljs-number">123</span>) <span class="hljs-comment"># 函数</span><br></code></pre></div></td></tr></table></figure>
 <p><em>参考链接</em></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mayugang/p/9977914.html">python中函数和方法的区别</a></p>
-<hr>
-<h1 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h1><h2 id="Python的列表解析式"><a href="#Python的列表解析式" class="headerlink" title="Python的列表解析式"></a>Python的列表解析式</h2><p>从1-100中选出所有奇数</p>
+<hr />
+<h1 id="面试常见问题">面试常见问题</h1>
+<h2 id="python的列表解析式">Python的列表解析式</h2>
+<p>从1-100中选出所有奇数</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">101</span>) <span class="hljs-keyword">if</span> i%<span class="hljs-number">2</span> !=<span class="hljs-number">0</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br>[<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>, <span class="hljs-number">13</span>, <span class="hljs-number">15</span>, <span class="hljs-number">17</span>, <span class="hljs-number">19</span>, <span class="hljs-number">21</span>, <span class="hljs-number">23</span>, <span class="hljs-number">25</span>, <span class="hljs-number">27</span>, <span class="hljs-number">29</span>, <span class="hljs-number">31</span>, <span class="hljs-number">33</span>, <span class="hljs-number">35</span>, <span class="hljs-number">37</span>, <span class="hljs-number">39</span>, <span class="hljs-number">41</span>, <span class="hljs-number">43</span>, <span class="hljs-number">45</span>, <span class="hljs-number">47</span>, <span class="hljs-number">49</span>, <span class="hljs-number">51</span>, <span class="hljs-number">53</span>, <span class="hljs-number">55</span>, <span class="hljs-number">57</span>, <span class="hljs-number">59</span>, <span class="hljs-number">61</span>, <span class="hljs-number">63</span>, <span class="hljs-number">65</span>, <span class="hljs-number">67</span>, <span class="hljs-number">69</span>, <span class="hljs-number">71</span>, <span class="hljs-number">73</span>, <span class="hljs-number">75</span>, <span class="hljs-number">77</span>, <span class="hljs-number">79</span>, <span class="hljs-number">81</span>, <span class="hljs-number">83</span>, <span class="hljs-number">85</span>, <span class="hljs-number">87</span>, <span class="hljs-number">89</span>, <span class="hljs-number">91</span>, <span class="hljs-number">93</span>, <span class="hljs-number">95</span>, <span class="hljs-number">97</span>, <span class="hljs-number">99</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(a)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">list</span>&#x27;&gt;</span><br></code></pre></div></td></tr></table></figure>
 <p>这行代码和上面那有什么区别？</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">101</span>) <span class="hljs-keyword">if</span> i%<span class="hljs-number">2</span> !=<span class="hljs-number">0</span>)<br></code></pre></div></td></tr></table></figure>
@@ -979,9 +983,12 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a<br>&lt;generator <span class="hljs-built_in">object</span> &lt;genexpr&gt; at <span class="hljs-number">0x00000267D42255F0</span>&gt;<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(a)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">generator</span>&#x27;&gt;</span><br></code></pre></div></td></tr></table></figure>
 <p>或者，从1-100中选出所有的素数</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = [<span class="hljs-built_in">str</span>(item) <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-built_in">filter</span>(<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">all</span>(<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> p: x % p != <span class="hljs-number">0</span>, <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, x))), <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, <span class="hljs-number">101</span>))]  <span class="hljs-comment"># 1不是素数</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="Python的装饰器"><a href="#Python的装饰器" class="headerlink" title="Python的装饰器"></a>Python的装饰器</h2><p><a href="/2020/04/17/Python的装饰器/">Python的装饰器</a></p>
-<h2 id="Python中的闭包函数"><a href="#Python中的闭包函数" class="headerlink" title="Python中的闭包函数"></a>Python中的闭包函数</h2><p><a href="/2020/04/14/Python的函数式编程思想/#返回函数（闭包）">返回函数（闭包）</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Lin-Yi/p/7305364.html">谈谈自己的理解:python中闭包，闭包的实质</a></p>
-<h2 id="Python变量的作用域（LEGB原则）"><a href="#Python变量的作用域（LEGB原则）" class="headerlink" title="Python变量的作用域（LEGB原则）"></a>Python变量的作用域（LEGB原则）</h2><p>Python 中，程序的变量并不是在哪个位置都可以访问的，访问权限决定于这个变量是在哪里赋值的。变量的作用域决定了在哪一部分程序可以访问哪个特定的变量名称。Python的作用域一共有4种，分别是：</p>
+<h2 id="python的装饰器">Python的装饰器</h2>
+<p><a href="/2020/04/17/Python的装饰器/">Python的装饰器</a></p>
+<h2 id="python中的闭包函数">Python中的闭包函数</h2>
+<p><a href="/2020/04/14/Python的函数式编程思想/#返回函数（闭包）">返回函数（闭包）</a> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/Lin-Yi/p/7305364.html">谈谈自己的理解:python中闭包，闭包的实质</a></p>
+<h2 id="python变量的作用域legb原则">Python变量的作用域（LEGB原则）</h2>
+<p>Python 中，程序的变量并不是在哪个位置都可以访问的，访问权限决定于这个变量是在哪里赋值的。变量的作用域决定了在哪一部分程序可以访问哪个特定的变量名称。Python的作用域一共有4种，分别是：</p>
 <ul>
 <li>L （Local） 局部作用域，即函数中定义的变量。</li>
 <li>E （Enclosing） 闭包函数外的函数中，嵌套的父级函数的局部作用域，即包含此函数的上级函数的局部作用域，但不是全局的；</li>
@@ -1005,47 +1012,51 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <p>关键字 <code>nonlocal</code>，用于闭包中，<code>nonlocal</code> 就是在闭包中怎样对上一层函数内的变量进行更改。（<strong>nonlocal是Python3的新特性</strong>）</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">x = <span class="hljs-number">123</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">outer</span>():</span><br>    x = <span class="hljs-number">100</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inter</span>():</span><br>        x = <span class="hljs-number">200</span><br>    inter()<br>    print(<span class="hljs-string">&quot;inner x is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(x))<br>outer()<br>print(<span class="hljs-string">&quot;outer x is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(x))<br><br><span class="hljs-comment"># output</span><br>inner x <span class="hljs-keyword">is</span> <span class="hljs-number">100</span><br>outer x <span class="hljs-keyword">is</span> <span class="hljs-number">123</span><br></code></pre></div></td></tr></table></figure>
 <p>可以看到，闭包内没有 <code>x</code> 会先调用外层 <code>def</code> 的 <code>x</code>，而不是模块中的全局变量 <code>x</code>。故结果为 100。</p>
- <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 不加nonlocal</span><br>x = <span class="hljs-number">123</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">outer</span>():</span><br>    x = <span class="hljs-number">100</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inter</span>():</span><br>        x = x + <span class="hljs-number">1</span>  <span class="hljs-comment"># 这一行会报错 Using variable &#x27;x&#x27; before assignment</span><br>        print(x)<br>    <span class="hljs-keyword">return</span> inter()<br>outer()<br><br><br><span class="hljs-comment"># 加nonlocal</span><br>x = <span class="hljs-number">123</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">outer</span>():</span><br>    x = <span class="hljs-number">100</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inner</span>():</span><br>        <span class="hljs-keyword">nonlocal</span> x<br>        x = x + <span class="hljs-number">1</span><br>    inner()<br>    print(<span class="hljs-string">&quot;inner x is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(x))<br>outer()<br>print(<span class="hljs-string">&quot;outer x is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(x))<br><br><span class="hljs-comment"># output</span><br>inner x <span class="hljs-keyword">is</span> <span class="hljs-number">101</span><br>outer x <span class="hljs-keyword">is</span> <span class="hljs-number">123</span><br></code></pre></div></td></tr></table></figure>
-<p>闭包内使用 <code>nonlocal</code>，更改了外层 <code>def</code> 定义的 <code>x</code>，故结果变为 <code>101</code>，但是全局变量没有更改，仍为 123。</p>
+<p><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 不加nonlocal</span><br>x = <span class="hljs-number">123</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">outer</span>():</span><br>    x = <span class="hljs-number">100</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inter</span>():</span><br>        x = x + <span class="hljs-number">1</span>  <span class="hljs-comment"># 这一行会报错 Using variable &#x27;x&#x27; before assignment</span><br>        print(x)<br>    <span class="hljs-keyword">return</span> inter()<br>outer()<br><br><br><span class="hljs-comment"># 加nonlocal</span><br>x = <span class="hljs-number">123</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">outer</span>():</span><br>    x = <span class="hljs-number">100</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inner</span>():</span><br>        <span class="hljs-keyword">nonlocal</span> x<br>        x = x + <span class="hljs-number">1</span><br>    inner()<br>    print(<span class="hljs-string">&quot;inner x is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(x))<br>outer()<br>print(<span class="hljs-string">&quot;outer x is &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(x))<br><br><span class="hljs-comment"># output</span><br>inner x <span class="hljs-keyword">is</span> <span class="hljs-number">101</span><br>outer x <span class="hljs-keyword">is</span> <span class="hljs-number">123</span><br></code></pre></div></td></tr></table></figure> 闭包内使用 <code>nonlocal</code>，更改了外层 <code>def</code> 定义的 <code>x</code>，故结果变为 <code>101</code>，但是全局变量没有更改，仍为 123。</p>
 <blockquote>
 <p><code>locals()</code></p>
 </blockquote>
 <p><code>locals()</code> 会以字典类型返回当前位置的全部局部变量。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">runoob</span>(<span class="hljs-params">arg</span>):</span>    <span class="hljs-comment"># 两个局部变量：arg、z</span><br>    z = <span class="hljs-number">1</span><br>    <span class="hljs-built_in">print</span> (<span class="hljs-built_in">locals</span>())    <br>runoob(<span class="hljs-number">4</span>)<br><br><span class="hljs-comment"># 局部变量</span><br>&#123;<span class="hljs-string">&#x27;arg&#x27;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&#x27;z&#x27;</span>: <span class="hljs-number">1</span>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>名规范建议建议：<br>全局变量全部大写，局部变量全部小写。<br>不要用内建函数和关键字作变量/函数名。</p>
-<h2 id="深拷贝（deepcopy）和浅拷贝（copy）的区别"><a href="#深拷贝（deepcopy）和浅拷贝（copy）的区别" class="headerlink" title="深拷贝（deepcopy）和浅拷贝（copy）的区别"></a>深拷贝（deepcopy）和浅拷贝（copy）的区别</h2><p>Python中对象之间的赋值是按引用传递的，如果要拷贝对象需要使用标准模板中的copy</p>
-<ul>
-<li>copy.copy：浅拷贝，只拷贝父对象，不拷贝父对象的子对象。</li>
-<li>copy.deepcopy：深拷贝，拷贝父对象和子对象。</li>
-</ul>
+<p>名规范建议建议： 全局变量全部大写，局部变量全部小写。 不要用内建函数和关键字作变量/函数名。</p>
+<h2 id="深拷贝deepcopy和浅拷贝copy的区别">深拷贝（deepcopy）和浅拷贝（copy）的区别</h2>
+<p>Python中对象之间的赋值是按引用传递的，如果要拷贝对象需要使用标准模板中的copy - copy.copy：浅拷贝，只拷贝父对象，不拷贝父对象的子对象。 - copy.deepcopy：深拷贝，拷贝父对象和子对象。</p>
 <p>The difference between shallow and deep copying is only relevant for compound objects (objects that contain other objects, like lists orclass instances).A shallow copy constructs a new compound object and then (to theextent possible) inserts the same objects into it that theoriginal contains.A deep copy constructs a new compound object and then, recursively,inserts copies into it of the objects found in the original.</p>
-<p>浅拷贝构造一个新的复合对象，然后递归地将原来包含的对象的<strong>引用</strong>插入其中。<br>深拷贝构造一个新的复合对象，然后递归地将原来包含的对象的<strong>副本</strong>插入其中。<br>一般深拷贝比浅拷贝复制得更加完全，但也更占资源（包括时间和空间资源）。<br>浅层复制和深层复制之间的区别只适用于复合对象(包含其他对象的对象，如列表或类实例)。</p>
+<p>浅拷贝构造一个新的复合对象，然后递归地将原来包含的对象的<strong>引用</strong>插入其中。 深拷贝构造一个新的复合对象，然后递归地将原来包含的对象的<strong>副本</strong>插入其中。 一般深拷贝比浅拷贝复制得更加完全，但也更占资源（包括时间和空间资源）。 浅层复制和深层复制之间的区别只适用于复合对象(包含其他对象的对象，如列表或类实例)。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> copy<br><span class="hljs-meta">&gt;&gt;&gt; </span>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">100</span>]]<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = copy.copy(a)  <span class="hljs-comment"># 浅拷贝  复制了所以引用</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">100</span>]]<br><span class="hljs-meta">&gt;&gt;&gt; </span>c = copy.deepcopy(a)  <span class="hljs-comment"># 深拷贝 复制了所有对象</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>c<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">100</span>]]<br><span class="hljs-meta">&gt;&gt;&gt; </span>a[<span class="hljs-number">2</span>] += [<span class="hljs-number">1</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">100</span>, <span class="hljs-number">1</span>]]<br><span class="hljs-meta">&gt;&gt;&gt; </span>b<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">100</span>, <span class="hljs-number">1</span>]]  <span class="hljs-comment"># 浅拷贝会受到影响</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>c<br>[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, [<span class="hljs-number">100</span>]]  <span class="hljs-comment"># 深拷贝不会受到影响</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="python2和python3的一些区别"><a href="#python2和python3的一些区别" class="headerlink" title="python2和python3的一些区别"></a>python2和python3的一些区别</h2><p>1、Python3 使用 print 必须要以小括号包裹打印内容，比如 print(‘hi’)。<br>Python2 既可以使用带小括号的方式，也可以使用一个空格来分隔打印内容，比 如 print ‘hi’。<br>2、python2 range(1,10)返回列表，python3中返回迭代器，节约内存。<br>3、python2中使用ascii编码，python中使用utf-8编码。<br>4、python2中unicode表示字符串序列，str表示字节序列，python3中str表示字符串序列，byte表示字节序列。<br>5、python2中为正常显示中文，引入coding声明，python3中不需要。<br>6、python2中是raw_input()函数，python3中是input()函数。<br>7、nonlocal是Python3的新特性。</p>
-<h2 id="Python的面向对象编程"><a href="#Python的面向对象编程" class="headerlink" title="Python的面向对象编程"></a>Python的面向对象编程</h2><p><a href="/2020/04/22/Python的面向对象编程/">Python的面向对象编程</a></p>
+<h2 id="python2和python3的一些区别">python2和python3的一些区别</h2>
+<p>1、Python3 使用 print 必须要以小括号包裹打印内容，比如 print('hi')。 Python2 既可以使用带小括号的方式，也可以使用一个空格来分隔打印内容，比 如 print 'hi'。 2、python2 range(1,10)返回列表，python3中返回迭代器，节约内存。 3、python2中使用ascii编码，python中使用utf-8编码。 4、python2中unicode表示字符串序列，str表示字节序列，python3中str表示字符串序列，byte表示字节序列。 5、python2中为正常显示中文，引入coding声明，python3中不需要。 6、python2中是raw_input()函数，python3中是input()函数。 7、nonlocal是Python3的新特性。</p>
+<h2 id="python的面向对象编程">Python的面向对象编程</h2>
+<p><a href="/2020/04/22/Python的面向对象编程/">Python的面向对象编程</a></p>
 <p>python类怎么定义静态方法？怎么使用？</p>
 <p>Python抽象类</p>
 <p>还有类的使用、继承、__init__和__new__的区别，实例方法、类方法、静态方法，实例属性、类属性等等。不一一展开了。</p>
-<h2 id="Python里lambda函数"><a href="#Python里lambda函数" class="headerlink" title="Python里lambda函数"></a>Python里lambda函数</h2><p><a href="/2020/04/14/Python的函数式编程思想/#匿名函数">Python里的lambda函数</a></p>
-<h2 id="python的-is-和-的区别？"><a href="#python的-is-和-的区别？" class="headerlink" title="python的 is 和 == 的区别？"></a>python的 <code>is</code> 和 <code>==</code> 的区别？</h2><p>简单点讲：<br>1、<strong>Python中对象包含的三个基本要素，分别是：id(身份标识)、type(数据类型)和value(值)。</strong><br>2、<code>==</code> 是python标准操作符中的<strong>比较操作符</strong>，用来比较判断两个对象的<strong>value是否相等</strong>。<br>3、<code>is</code> 也被叫做<strong>同一性运算符</strong>，这个运算符比较判断的是对象间的唯一身份标识，也就是<strong>id是否相同</strong></p>
+<h2 id="python里lambda函数">Python里lambda函数</h2>
+<p><a href="/2020/04/14/Python的函数式编程思想/#匿名函数">Python里的lambda函数</a></p>
+<h2 id="python的-is-和-的区别">python的 <code>is</code> 和 <code>==</code> 的区别？</h2>
+<p>简单点讲： 1、<strong>Python中对象包含的三个基本要素，分别是：id(身份标识)、type(数据类型)和value(值)。</strong> 2、<code>==</code> 是python标准操作符中的<strong>比较操作符</strong>，用来比较判断两个对象的<strong>value是否相等</strong>。 3、<code>is</code> 也被叫做<strong>同一性运算符</strong>，这个运算符比较判断的是对象间的唯一身份标识，也就是<strong>id是否相同</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-meta">&gt;&gt;&gt; </span>a == b<br><span class="hljs-literal">True</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a <span class="hljs-keyword">is</span> b<br><span class="hljs-literal">False</span><br></code></pre></div></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/CheeseZH/p/5260560.html">Python中is和==的区别</a></p>
-<h2 id="python内存管理？"><a href="#python内存管理？" class="headerlink" title="python内存管理？"></a>python内存管理？</h2><ul>
+<h2 id="python内存管理">python内存管理？</h2>
+<ul>
 <li>Python内存由Python私有堆空间管理。所有Python对象和数据结构都位于私有堆中。程序员无权访问此私有堆，解释器负责处理此私有堆。</li>
 <li>Python对象的Python堆空间分配由Python内存管理器完成。核心API提供了一些程序员编写代码的工具。</li>
 <li>Python还有一个内置的垃圾收集器，它可以回收所有未使用的内存并释放内存并使其可用于堆空间。</li>
 <li><a href="/2020/03/25/Python的垃圾回收机制/">Python垃圾回收机制详解</a></li>
 </ul>
-<h2 id="cls和self含义"><a href="#cls和self含义" class="headerlink" title="cls和self含义"></a>cls和self含义</h2><p>python中<strong>cls代表的是类对象的本身</strong>，相对应的<strong>self则是类的一个具体实例对象</strong>。<br>cls是<strong>类方法</strong>的参数。<br>self是<strong>实例方法</strong>的参数。<br>关于类方法、实例方法、静态方法参看 <a href="/2020/04/22/Python的面向对象编程/#Python类方法、类属性、静态方法">Python类方法、类属性、静态方法</a>。</p>
+<h2 id="cls和self含义">cls和self含义</h2>
+<p>python中<strong>cls代表的是类对象的本身</strong>，相对应的<strong>self则是类的一个具体实例对象</strong>。 cls是<strong>类方法</strong>的参数。 self是<strong>实例方法</strong>的参数。 关于类方法、实例方法、静态方法参看 <a href="/2020/04/22/Python的面向对象编程/#Python类方法、类属性、静态方法">Python类方法、类属性、静态方法</a>。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-comment"># 实例方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, name, age</span>):</span><br>        self.name = name<br>        self.age = age<br>        print(<span class="hljs-string">&#x27;self:&#x27;</span>, self)<br><br>    <span class="hljs-comment"># 类方法</span><br>    <span class="hljs-comment"># 定义一个build方法，返回一个person实例对象，这个方法等价于Person()。</span><br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build</span>(<span class="hljs-params">cls</span>):</span><br>        <span class="hljs-comment"># cls()等于Person()</span><br>        p = cls(<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">18</span>)<br>        print(<span class="hljs-string">&#x27;cls:&#x27;</span>, cls)<br>        <span class="hljs-keyword">return</span> p<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    person = Person.build()<br>    print(person, person.name, person.age)<br></code></pre></div></td></tr></table></figure>
-<h2 id="new-和-init-的区别"><a href="#new-和-init-的区别" class="headerlink" title="_new\_ 和 __init__ 的区别"></a><em>_new\</em>_ 和 __init__ 的区别</h2><ul>
+<h2 id="new__-和-__init__-的区别">__new__ 和 __init__ 的区别</h2>
+<ul>
 <li>__init__为初始化方法，__new__方法是真正的构造函数。类对象先调用__new__方法，返回该类的实例对象，这个实例对象就是__init__方法的第一个参数self，即self是__new__的返回值。然后实例对象再调用__init__方法初始化。</li>
 <li>简单来说，创建一个新实例的时候调用 __new__，初始化一个实例用 __init__。</li>
 <li>__new__是实例创建之前被调用，它的任务是创建并返回该实例，是静态方法。</li>
 <li>__init__是<strong>实例创建之后</strong>被调用的，然后设置对象属性的一些初始值，是实例方法。</li>
-<li>由于<em>_new\</em>_ 是静态方法，所以无需参数。而 __init__ 是实例方法，所以第一个参数必须是self。</li>
+<li>由于__new__ 是静态方法，所以无需参数。而 __init__ 是实例方法，所以第一个参数必须是self。</li>
 </ul>
-<h2 id="python的生成器和迭代器"><a href="#python的生成器和迭代器" class="headerlink" title="python的生成器和迭代器"></a>python的生成器和迭代器</h2><blockquote>
+<h2 id="python的生成器和迭代器">python的生成器和迭代器</h2>
+<blockquote>
 <p>总结</p>
 </blockquote>
 <ul>
@@ -1058,7 +1069,9 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <blockquote>
 <p>关系图</p>
 </blockquote>
-<p><img src="https://i.loli.net/2020/04/21/BZybxOIKtpNs2eT.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-21_10-32-15.png"></p>
+<figure>
+<img src="https://i.loli.net/2020/04/21/BZybxOIKtpNs2eT.png" srcset="/img/loading.gif" alt="Snipaste_2020-04-21_10-32-15.png" /><figcaption aria-hidden="true">Snipaste_2020-04-21_10-32-15.png</figcaption>
+</figure>
 <ul>
 <li><strong>可迭代对象需要实现__iter__方法</strong></li>
 <li><strong>迭代器不仅要实现__iter__方法，还需要实现__next__方法</strong></li>
@@ -1069,7 +1082,7 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <blockquote>
 <p>Iterator</p>
 </blockquote>
-<p>生成器都是<code>Iterator</code>对象，但<code>list</code>、<code>dict</code>、<code>str</code>虽然是<code>Iterable</code>，却不是<code>Iterator</code>。<br>把<code>range</code>、<code>list</code>、<code>dict</code>、<code>str</code> 等 <code>Iterable</code> 变成<code>Iterator</code> 可以使用 <code>iter()</code>函数：</p>
+<p>生成器都是<code>Iterator</code>对象，但<code>list</code>、<code>dict</code>、<code>str</code>虽然是<code>Iterable</code>，却不是<code>Iterator</code>。 把<code>range</code>、<code>list</code>、<code>dict</code>、<code>str</code> 等 <code>Iterable</code> 变成<code>Iterator</code> 可以使用 <code>iter()</code>函数：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(a)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">range</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">next</span>(<span class="hljs-params">a</span>)</span><br><span class="hljs-class"><span class="hljs-title">Traceback</span> (<span class="hljs-params">most recent call last</span>):</span><br>  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>TypeError: <span class="hljs-string">&#x27;range&#x27;</span> <span class="hljs-built_in">object</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> an iterator  <span class="hljs-comment"># range object 非迭代器</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-built_in">list</span>(a)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(a)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">list</span>&#x27;&gt;</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">next</span>(<span class="hljs-params">a</span>)</span><br><span class="hljs-class"><span class="hljs-title">Traceback</span> (<span class="hljs-params">most recent call last</span>):</span><br>  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> &lt;module&gt;<br>TypeError: <span class="hljs-string">&#x27;list&#x27;</span> <span class="hljs-built_in">object</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> an iterator  <span class="hljs-comment"># list object 非迭代器</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-built_in">iter</span>(a)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(a)<br>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">list_iterator</span>&#x27;&gt;  #  <span class="hljs-title">list</span>经过<span class="hljs-title">iter</span>处理之后就变成了迭代器</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">next</span>(<span class="hljs-params">a</span>)</span><br><span class="hljs-class">0</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">next</span>(<span class="hljs-params">a</span>)</span><br><span class="hljs-class">1</span><br><span class="hljs-class">&gt;&gt;&gt; <span class="hljs-title">next</span>(<span class="hljs-params">a</span>)</span><br><span class="hljs-class">2</span><br></code></pre></div></td></tr></table></figure>
 <p><strong>Python的iterator是一个惰性序列，意思是表达式和变量绑定后不会立即进行求值，而是当你用到其中某些元素的时候才去求某元素对的值。</strong> 惰性是指，你不主动去遍历它，就不会计算其中元素的值。</p>
 <blockquote>
@@ -1099,33 +1112,43 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">from</span> collections.abc <span class="hljs-keyword">import</span> Iterable<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">isinstance</span>([], Iterable)<br><span class="hljs-literal">True</span><br><br><span class="hljs-comment"># 或者</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>_str = <span class="hljs-string">&quot;123&quot;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>print(<span class="hljs-string">&#x27;__iter__&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">dir</span>(_str))  <span class="hljs-comment"># 查看内置函数内部有哪些方法用dir</span><br><span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
 <p>而生成器不但可以作用于 <code>for</code> 循环，还可以被 <code>next()</code>函数不断调用并返回下一个值，直到最后抛出<code>StopIteration</code> 错误表示无法继续返回下一个值了。</p>
-<h2 id="一堆有关函数和表达式的写输出"><a href="#一堆有关函数和表达式的写输出" class="headerlink" title="一堆有关函数和表达式的写输出"></a>一堆有关函数和表达式的写输出</h2><p>涉及到各种嵌套使用，类内初始化类本身并赋值，全局变量局部变量）</p>
-<h2 id="Python的网络编程了解不"><a href="#Python的网络编程了解不" class="headerlink" title="Python的网络编程了解不"></a>Python的网络编程了解不</h2><p>socket编程</p>
+<h2 id="一堆有关函数和表达式的写输出">一堆有关函数和表达式的写输出</h2>
+<p>涉及到各种嵌套使用，类内初始化类本身并赋值，全局变量局部变量）</p>
+<h2 id="python的网络编程了解不">Python的网络编程了解不</h2>
+<p>socket编程</p>
 <p>如何限制Socket的最大连接数<strong>设定一个集合和count变量</strong>这个集合用什么数据结构比较好</p>
-<h2 id="GIL锁出现的原因"><a href="#GIL锁出现的原因" class="headerlink" title="GIL锁出现的原因"></a>GIL锁出现的原因</h2><p>In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython’s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.)</p>
+<h2 id="gil锁出现的原因">GIL锁出现的原因</h2>
+<p>In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython’s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.)</p>
 <p>在CPython中，全局解释器锁(GIL)是一个互斥锁，它阻止多个本机线程同时执行Python字节码。这个锁是必需的，主要是因为CPython的内存管理不是线程安全的。(然而，自从GIL存在以来，其他特性已经逐渐依赖于它所实施的保证。)</p>
-<p>1) 历史原因，python作者当时就没有多核cpu</p>
-<p>2) 没钱，不能像java那样做优化</p>
-<p>3) multiprocessing库做的太好了</p>
-<p>为什么会有GIL<br>由于物理上得限制，各CPU厂商在核心频率上的比赛已经被多核所取代。为了更有效的利用多核处理器的性能，就出现了多线程的编程方式，而随之带来的就是线程间数据一致性和状态同步的困难。即使在CPU内部的Cache也不例外，为了有效解决多份缓存之间的数据同步时各厂商花费了不少心思，也不可避免的带来了一定的性能损失。</p>
+<ol type="1">
+<li><p>历史原因，python作者当时就没有多核cpu</p></li>
+<li><p>没钱，不能像java那样做优化</p></li>
+<li><p>multiprocessing库做的太好了</p></li>
+</ol>
+<p>为什么会有GIL 由于物理上得限制，各CPU厂商在核心频率上的比赛已经被多核所取代。为了更有效的利用多核处理器的性能，就出现了多线程的编程方式，而随之带来的就是线程间数据一致性和状态同步的困难。即使在CPU内部的Cache也不例外，为了有效解决多份缓存之间的数据同步时各厂商花费了不少心思，也不可避免的带来了一定的性能损失。</p>
 <p>Python当然也逃不开，为了利用多核，Python开始支持多线程。而解决多线程之间数据完整性和状态同步的最简单方法自然就是加锁。 于是有了GIL这把超级大锁，而当越来越多的代码库开发者接受了这种设定后，他们开始大量依赖这种特性（即默认python内部对象是thread-safe的，无需在实现时考虑额外的内存锁和同步操作）。</p>
 <p>慢慢的这种实现方式被发现是蛋疼且低效的。但当大家试图去拆分和去除GIL的时候，发现大量库代码开发者已经重度依赖GIL而非常难以去除了。有多难？做个类比，像MySQL这样的“小项目”为了把Buffer Pool Mutex这把大锁拆分成各个小锁也花了从5.5到5.6再到5.7多个大版为期近5年的时间，并且仍在继续。MySQL这个背后有公司支持且有固定开发团队的产品走的如此艰难，那又更何况Python这样核心开发和代码贡献者高度社区化的团队呢？</p>
 <p>所以简单的说GIL的存在更多的是历史原因。如果推到重来，多线程的问题依然还是要面对，但是至少会比目前GIL这种方式会更优雅。</p>
-<p>作者：luikore<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/323812020/answer/679515735">https://www.zhihu.com/question/323812020/answer/679515735</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>作者：luikore 链接：https://www.zhihu.com/question/323812020/answer/679515735 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <p>一是部分诟病的人所碰到的性能问题，真正原因并不是 GIL。他们不知道，或者知道但只需要一个可以甩锅的点。这些人不会正确 benchmark 也不了解实现，自然没有能力去改。另一部分批评的人是为了推广自家语言或者彰显优越感，这些人没有动力去改。</p>
 <p>二是改起来太费劲。参考 Java 的实现，虚拟机里要管理很多细粒度的锁才能保证正确性，改得不好单线程的性能要大打折扣。有能力改的人要么认为这根本不需要改，要么没精力改。</p>
 <p><a target="_blank" rel="noopener" href="http://doc.pypy.org/en/latest/faq.html#does-pypy-have-a-gil-why">pypy</a> 也说了：</p>
 <blockquote>
-<p>Yes, PyPy has a GIL. Removing the GIL is very hard. On top of CPython, you have two problems: (1) GC, in this case reference counting; (2) the whole Python language.<br>For PyPy, the hard issue is (2): by that I mean issues like what occurs if a mutable object is changed from one thread and read from another concurrently. This is a problem for <em>any</em> mutable type: it needs careful review and fixes (fine-grained locks, mostly) through the <em>whole</em> Python interpreter. It is a major effort, although not completely impossible, as Jython/IronPython showed. This includes subtle decisions about whether some effects are ok or not for the user (i.e. the Python programmer).<br>CPython has additionally the problem (1) of reference counting. With PyPy, this sub-problem is simpler: we need to make our GC multithread-aware. This is easier to do efficiently in PyPy than in CPython. It doesn’t solve the issue (2), though.<br>Note that since 2012 there is work going on on a still very experimental <a target="_blank" rel="noopener" href="http://doc.pypy.org/en/latest/stm.html">Software Transactional Memory</a> (STM) version of PyPy. This should give an alternative PyPy which works without a GIL, while at the same time continuing to give the Python programmer the complete illusion of having one. This work is currently a bit stalled because of its own technical difficulties.</p>
+<p>Yes, PyPy has a GIL. Removing the GIL is very hard. On top of CPython, you have two problems: (1) GC, in this case reference counting; (2) the whole Python language. For PyPy, the hard issue is (2): by that I mean issues like what occurs if a mutable object is changed from one thread and read from another concurrently. This is a problem for <em>any</em> mutable type: it needs careful review and fixes (fine-grained locks, mostly) through the <em>whole</em> Python interpreter. It is a major effort, although not completely impossible, as Jython/IronPython showed. This includes subtle decisions about whether some effects are ok or not for the user (i.e. the Python programmer). CPython has additionally the problem (1) of reference counting. With PyPy, this sub-problem is simpler: we need to make our GC multithread-aware. This is easier to do efficiently in PyPy than in CPython. It doesn’t solve the issue (2), though. Note that since 2012 there is work going on on a still very experimental <a target="_blank" rel="noopener" href="http://doc.pypy.org/en/latest/stm.html">Software Transactional Memory</a> (STM) version of PyPy. This should give an alternative PyPy which works without a GIL, while at the same time continuing to give the Python programmer the complete illusion of having one. This work is currently a bit stalled because of its own technical difficulties.</p>
 </blockquote>
 <p>有一个捷径是用软件事务内存，保留 GIL 的代码，但如果没有同时写同一块内存就不是真的锁定。</p>
-<p>后来有硬件事务内存，效率想当然是比软件事务内存高的，参见 <a target="_blank" rel="noopener" href="https://sabi.net/nriley/pubs/dls6-riley.pdf">https://sabi.net/nriley/pubs/dls6-riley.pdf</a> 。</p>
-<p>Ruby 的尝试 <a target="_blank" rel="noopener" href="http://rubykaigi.org/2014/presentation/S-ReiOdaira/">http://rubykaigi.org/2014/presentation/S-ReiOdaira/</a> 据说效果很好。</p>
+<p>后来有硬件事务内存，效率想当然是比软件事务内存高的，参见 https://sabi.net/nriley/pubs/dls6-riley.pdf 。</p>
+<p>Ruby 的尝试 http://rubykaigi.org/2014/presentation/S-ReiOdaira/ 据说效果很好。</p>
 <p>x86 也有 TSX 扩展，但这些尝试能否实用到 x86 的处理器就很难说了。</p>
 <p>好了就算你用 HTM 减少了锁的工作量，还有大量语言设计上的问题，这些矛盾和取舍不是几个人发篇文章就能搞得定的。</p>
-<h2 id="RESTful-API-设计指南"><a href="#RESTful-API-设计指南" class="headerlink" title="RESTful API 设计指南"></a>RESTful API 设计指南</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></p>
-<h2 id="工厂模式的三种"><a href="#工厂模式的三种" class="headerlink" title="工厂模式的三种"></a>工厂模式的三种</h2><h2 id="pass语句的作用"><a href="#pass语句的作用" class="headerlink" title="pass语句的作用"></a>pass语句的作用</h2><h2 id="Python文件对象的权限：r-w-a-x-a-r-w-的区别"><a href="#Python文件对象的权限：r-w-a-x-a-r-w-的区别" class="headerlink" title="Python文件对象的权限：r/w/a/x/a+/r+/w+ 的区别"></a>Python文件对象的权限：r/w/a/x/a+/r+/w+ 的区别</h2><p>简单来说，r是读，w是写，a是追加写，x也是写模式，a+是可读可写，r+也    是可读可写，w+也是可读可写。<br><strong>[r+]</strong>  如果是<strong>先读后写</strong>的话是<strong>在原有文本后添加</strong>，因为读完后类指针已经在最末尾了，如果是先写后读的话，是从头开始覆盖式写（如只修改了前面的字符，后面字符是不会被删掉的），类指针停留在写完的末尾，不是文档末尾，可以读出未被覆盖写的部分；<br><strong>[w+]</strong>  为<strong>先写后读</strong>，先写完后使用 <code>f.seek(0)</code> 回到初始位置然后开始读，如果<strong>先读的话是读不出任何东西的，因为w+也是纯粹的覆盖写，在未使用写操作前文档是完全空白的，无论之前该文件里有什么。</strong>故，只能先写后读。<br><strong>[a+]</strong>  打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。<br><strong>[r / a / w / x]</strong>  r要求必须已经存在这个文件了而a、w、x则要求文件可以有也可以没有。如果没有原文件，a、w和x都会创建一个。如果有原文件，a会在其后追加、w会覆盖，x会报错。<br><em>参考连接：</em><a target="_blank" rel="noopener" href="https://www.runoob.com/python/file-methods.html">https://www.runoob.com/python/file-methods.html</a></p>
-<h2 id="arg-和-kwargs的区别"><a href="#arg-和-kwargs的区别" class="headerlink" title="*arg 和 **kwargs的区别"></a>*arg 和 **kwargs的区别</h2><p>这里实际上是想问面试者的Python参数传递机制</p>
+<h2 id="restful-api-设计指南">RESTful API 设计指南</h2>
+<p>http://www.ruanyifeng.com/blog/2014/05/restful_api.html</p>
+<h2 id="工厂模式的三种">工厂模式的三种</h2>
+<h2 id="pass语句的作用">pass语句的作用</h2>
+<h2 id="python文件对象的权限rwaxarw-的区别">Python文件对象的权限：r/w/a/x/a+/r+/w+ 的区别</h2>
+<p>简单来说，r是读，w是写，a是追加写，x也是写模式，a+是可读可写，r+也 是可读可写，w+也是可读可写。 <strong>[r+]</strong> 如果是<strong>先读后写</strong>的话是<strong>在原有文本后添加</strong>，因为读完后类指针已经在最末尾了，如果是先写后读的话，是从头开始覆盖式写（如只修改了前面的字符，后面字符是不会被删掉的），类指针停留在写完的末尾，不是文档末尾，可以读出未被覆盖写的部分； <strong>[w+]</strong> 为<strong>先写后读</strong>，先写完后使用 <code>f.seek(0)</code> 回到初始位置然后开始读，如果<strong>先读的话是读不出任何东西的，因为w+也是纯粹的覆盖写，在未使用写操作前文档是完全空白的，无论之前该文件里有什么。</strong>故，只能先写后读。 <strong>[a+]</strong> 打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。 <strong>[r / a / w / x]</strong> r要求必须已经存在这个文件了而a、w、x则要求文件可以有也可以没有。如果没有原文件，a、w和x都会创建一个。如果有原文件，a会在其后追加、w会覆盖，x会报错。 <em>参考连接：</em>https://www.runoob.com/python/file-methods.html</p>
+<h2 id="arg-和-kwargs的区别">*arg 和 **kwargs的区别</h2>
+<p>这里实际上是想问面试者的Python参数传递机制</p>
 <p><strong>两种基本的参数传递方法</strong></p>
 <p>Python的参数传递机制有两种基本机制：</p>
 <ul>
@@ -1133,8 +1156,7 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <li>引用传递（以字典、列表等可变对象），引用传递，引用的参数发生更改（传的是真实的地址）。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 示例1：值传递</span><br><span class="hljs-keyword">if</span> <span class="hljs-literal">True</span>:<br>    a = <span class="hljs-number">5</span>  <span class="hljs-comment"># 没有引入新的作用域</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span>(<span class="hljs-params">a</span>):</span>  <span class="hljs-comment"># 值传入，非引用传入</span><br>    a += <span class="hljs-number">1</span>  <span class="hljs-comment"># 能访问a但是不能改变a</span><br>    print(<span class="hljs-string">&quot;函数内：%d&quot;</span> % a)<br><br>test(a)<br>print(<span class="hljs-string">&quot;函数外：%d&quot;</span> % a)<br><br><span class="hljs-comment"># output</span><br>函数内：<span class="hljs-number">6</span><br>函数外：<span class="hljs-number">5</span><br><br><span class="hljs-comment"># 示例2：引用传递</span><br><span class="hljs-keyword">if</span> <span class="hljs-literal">True</span>:<br>    a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]  <span class="hljs-comment"># 没有引入新的作用域</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span>(<span class="hljs-params">a</span>):</span>  <span class="hljs-comment"># 引用传入，非值传入</span><br>    a += [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>]  <span class="hljs-comment"># 能访问a也能改变a</span><br>    print(<span class="hljs-string">&quot;函数内：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(a))<br><br>test(a)<br>print(<span class="hljs-string">&quot;函数外：&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(a))<br><br><span class="hljs-comment"># output</span><br>函数内：[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>]<br>函数外：[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>]<br></code></pre></div></td></tr></table></figure>
-<font color='red'>python中一切的传递都是引用（地址）传递，无论是赋值还是函数/方法调用时的参数传递，不存在值传递。</font>
-
+<p><font color='red'>python中一切的传递都是引用（地址）传递，无论是赋值还是函数/方法调用时的参数传递，不存在值传递。</font></p>
 <ul>
 <li>之所以看起来有值传递，是因为传入的是不可变对象，传入前会开辟了一个新的内存空间赋值该不可变对象的值进行保存并为其设置一个引用，之后的传入的就是这新开辟的内存空间的引用。所以看起来像是进行的值传递。</li>
 <li>但是，如果传入的是可变对象，就不存在开辟新的内存空间这一说法了，直接就是将这个要传入的可变对象的引用作为参数传入了函数/方法中。</li>
@@ -1143,7 +1165,7 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <p>python中还允许包裹方式的参数传递，这为不确定参数个数和参数类型的函数调用提供了基础：</p>
 <p>python中还允许包裹方式的参数传递，这为不确定参数个数和参数类型的函数调用提供了基础：</p>
 <p>知识点：</p>
-<ol>
+<ol type="1">
 <li>在函数调用时，<strong>*会以单个元素的形式解包一个元祖</strong>，使其成为<strong>独立的参数。</strong></li>
 <li>在函数调用时，<strong>**会以键/值对的形式解包一个字典</strong>，使其成为<strong>独立的关键字参数。</strong></li>
 </ol>
@@ -1156,44 +1178,48 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <p>如果我们不知道往函数中传递多少个关键词参数或者想传入字典的值作为关键词参数的时候我们可以使用**kwargs（双星号），<strong>args、kwargs两个标识符是约定俗成的用法。</strong></p>
 <p>解释二</p>
 <p>当函数的参数前面有一个星号*号的时候表示这是一个<strong>可变的位置参数</strong>，两个星号**表示这是一个<strong>可变的关键词参数</strong></p>
-<h2 id="Python3-assert（断言）"><a href="#Python3-assert（断言）" class="headerlink" title="Python3 assert（断言）"></a>Python3 assert（断言）</h2><p>Python assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常。<br>断言可以在条件不满足程序运行的情况下直接返回错误，而不必等待程序运行后出现崩溃的情况，例如我们的代码只能在 Linux 系统下运行，可以先判断当前系统是否符合条件。<br>例如，对输入数据进行格式判断，不符合要求的抛出异常。<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>	<span class="hljs-keyword">assert</span> <span class="hljs-built_in">type</span>(info)==<span class="hljs-built_in">dict</span><br><span class="hljs-keyword">except</span>:<br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;info structure is not correct&quot;</span><br></code></pre></div></td></tr></table></figure></p>
-<h1 id="python运维"><a href="#python运维" class="headerlink" title="python运维"></a>python运维</h1><h2 id="python查看进程使用内存信息-psutil"><a href="#python查看进程使用内存信息-psutil" class="headerlink" title="python查看进程使用内存信息 psutil"></a>python查看进程使用内存信息 psutil</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os,psutil<br><br>process = psutil.Process(os.getpid())<br>print(<span class="hljs-string">&#x27;Used Memory:&#x27;</span>,process.memory_info().rss / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>,<span class="hljs-string">&#x27;MB&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
-<h2 id="python查看进程"><a href="#python查看进程" class="headerlink" title="python查看进程"></a>python查看进程</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#/usr/bin/env python</span><br><br><span class="hljs-comment">#coding=utf-8</span><br><span class="hljs-comment">#进程检测程序</span><br><span class="hljs-keyword">import</span> psutil<br><span class="hljs-keyword">import</span> types<br><span class="hljs-keyword">import</span> datetime<br><br><span class="hljs-comment">#获取用户输入的PID</span><br><span class="hljs-keyword">try</span>:<br>	PID = <span class="hljs-built_in">int</span>(raw_input(<span class="hljs-string">&#x27;Please input PID: &#x27;</span>))<br><span class="hljs-keyword">except</span> Exception,e:<br>	<span class="hljs-built_in">print</span> e<br><br><span class="hljs-comment">#获取pid对应的应用名</span><br>p = psutil.Process(PID)<br>print(<span class="hljs-string">&#x27;Process name : %s&#x27;</span> % p.name())<br><br><span class="hljs-comment">#获取进程bin路径</span><br>print(<span class="hljs-string">&#x27;Process bin  path : %s&#x27;</span> % p.exe())<br><br><span class="hljs-comment">#获取pid对应的路径</span><br>print(<span class="hljs-string">&#x27;Process path : %s&#x27;</span> % p.cwd())<br><br><span class="hljs-comment">#进程状态</span><br>print(<span class="hljs-string">&#x27;Process status : %s&#x27;</span> % p.status())<br><br><span class="hljs-comment">#进程运行时间</span><br>print(<span class="hljs-string">&#x27;Process creation time : %s&#x27;</span> % datetime.datetime.fromtimestamp(p.create_time()).strftime(<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>))<br><br><span class="hljs-comment">#CPU使用情况</span><br>print(p.cpu_times())<br><br><span class="hljs-comment">#内存使用情况</span><br>print(<span class="hljs-string">&#x27;Memory usage : %s%%&#x27;</span> % p.memory_percent())<br><br><span class="hljs-comment">#硬盘读取信息</span><br>print(p.io_counters())<br><br><span class="hljs-comment">#打开进程socket的namedutples列表</span><br>print(p.connections())<br><br><span class="hljs-comment">#此进程的线程数</span><br>print(<span class="hljs-string">&#x27;Process number of threads : %s&#x27;</span> % p.num_threads())<br></code></pre></div></td></tr></table></figure>
-<h2 id="如何在Python里调用shell命令"><a href="#如何在Python里调用shell命令" class="headerlink" title="如何在Python里调用shell命令"></a>如何在Python里调用shell命令</h2><ul>
-<li><code>os.system(&#39;ls -l&#39;)</code></li>
-<li><code>os.popen(&#39;ls -l&#39;)</code></li>
-<li><code>cammands.getstatusoutput(&#39;ls -l&#39;)</code></li>
+<h2 id="python3-assert断言">Python3 assert（断言）</h2>
+<p>Python assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常。 断言可以在条件不满足程序运行的情况下直接返回错误，而不必等待程序运行后出现崩溃的情况，例如我们的代码只能在 Linux 系统下运行，可以先判断当前系统是否符合条件。 例如，对输入数据进行格式判断，不符合要求的抛出异常。 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>	<span class="hljs-keyword">assert</span> <span class="hljs-built_in">type</span>(info)==<span class="hljs-built_in">dict</span><br><span class="hljs-keyword">except</span>:<br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;info structure is not correct&quot;</span><br></code></pre></div></td></tr></table></figure></p>
+<h1 id="python运维">python运维</h1>
+<h2 id="python查看进程使用内存信息-psutil">python查看进程使用内存信息 psutil</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os,psutil<br><br>process = psutil.Process(os.getpid())<br>print(<span class="hljs-string">&#x27;Used Memory:&#x27;</span>,process.memory_info().rss / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>,<span class="hljs-string">&#x27;MB&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+<h2 id="python查看进程">python查看进程</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#/usr/bin/env python</span><br><br><span class="hljs-comment">#coding=utf-8</span><br><span class="hljs-comment">#进程检测程序</span><br><span class="hljs-keyword">import</span> psutil<br><span class="hljs-keyword">import</span> types<br><span class="hljs-keyword">import</span> datetime<br><br><span class="hljs-comment">#获取用户输入的PID</span><br><span class="hljs-keyword">try</span>:<br>	PID = <span class="hljs-built_in">int</span>(raw_input(<span class="hljs-string">&#x27;Please input PID: &#x27;</span>))<br><span class="hljs-keyword">except</span> Exception,e:<br>	<span class="hljs-built_in">print</span> e<br><br><span class="hljs-comment">#获取pid对应的应用名</span><br>p = psutil.Process(PID)<br>print(<span class="hljs-string">&#x27;Process name : %s&#x27;</span> % p.name())<br><br><span class="hljs-comment">#获取进程bin路径</span><br>print(<span class="hljs-string">&#x27;Process bin  path : %s&#x27;</span> % p.exe())<br><br><span class="hljs-comment">#获取pid对应的路径</span><br>print(<span class="hljs-string">&#x27;Process path : %s&#x27;</span> % p.cwd())<br><br><span class="hljs-comment">#进程状态</span><br>print(<span class="hljs-string">&#x27;Process status : %s&#x27;</span> % p.status())<br><br><span class="hljs-comment">#进程运行时间</span><br>print(<span class="hljs-string">&#x27;Process creation time : %s&#x27;</span> % datetime.datetime.fromtimestamp(p.create_time()).strftime(<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>))<br><br><span class="hljs-comment">#CPU使用情况</span><br>print(p.cpu_times())<br><br><span class="hljs-comment">#内存使用情况</span><br>print(<span class="hljs-string">&#x27;Memory usage : %s%%&#x27;</span> % p.memory_percent())<br><br><span class="hljs-comment">#硬盘读取信息</span><br>print(p.io_counters())<br><br><span class="hljs-comment">#打开进程socket的namedutples列表</span><br>print(p.connections())<br><br><span class="hljs-comment">#此进程的线程数</span><br>print(<span class="hljs-string">&#x27;Process number of threads : %s&#x27;</span> % p.num_threads())<br></code></pre></div></td></tr></table></figure>
+<h2 id="如何在python里调用shell命令">如何在Python里调用shell命令</h2>
+<ul>
+<li><code>os.system('ls -l')</code></li>
+<li><code>os.popen('ls -l')</code></li>
+<li><code>cammands.getstatusoutput('ls -l')</code></li>
 <li><code>subprocess.run()</code></li>
 </ul>
 <p><strong>方法一、</strong>使用os模块的system方法：<strong>os.system（cmd）</strong>，其返回值是shell指令运行后返回的状态码，int类型，0表示shell指令成功执行，256表示未找到，该方法适用于shell命令不需要输出内容的场景。</p>
 <figure class="highlight moonscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs moonscript"><span class="hljs-keyword">import</span> <span class="hljs-built_in">os</span><br>val = <span class="hljs-built_in">os</span>.system(<span class="hljs-string">&#x27;ls -al&#x27;</span>)<br><span class="hljs-built_in">print</span>(val)<br></code></pre></div></td></tr></table></figure>
-<p><strong>方法二、使用os.popen()</strong>，该方法以文件的形式返回shell指令运行后的结果，需要获取内容时可使用 <code>read()</code> 或<code>readlines()</code> 方法，举例如下：     </p>
+<p><strong>方法二、使用os.popen()</strong>，该方法以文件的形式返回shell指令运行后的结果，需要获取内容时可使用 <code>read()</code> 或<code>readlines()</code> 方法，举例如下：</p>
 <figure class="highlight lua"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs lua">import <span class="hljs-built_in">os</span><br>val = <span class="hljs-built_in">os</span>.<span class="hljs-built_in">popen</span>(<span class="hljs-string">&#x27;ls -al&#x27;</span>)<br><span class="hljs-keyword">for</span> tmp <span class="hljs-keyword">in</span> val.readlines():<br>    <span class="hljs-built_in">print</span>(tmp)<br></code></pre></div></td></tr></table></figure>
 <p><strong>方法三、使用commands模块（该方法Python3已经失效了），</strong>有三个方法可以使用：</p>
-<ol>
+<ol type="1">
 <li><code>commands.getstatusoutput(cmd)</code>，其以字符串的形式返回的是输出结果和状态码，即（status,output）。</li>
 <li><code>commands.getoutput(cmd)</code>，返回cmd的输出结果。</li>
 <li><code>commands.getstatus(file)</code>，返回 <code>ls -l file</code>的执行结果字符串，调用了 <code>getoutput</code>，不建议使用此方法。</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> commands<br>(status, output) = commands.getstatusoutput(<span class="hljs-string">&#x27;ls -l&#x27;</span>)<br>print(<span class="hljs-string">&#x27;*&#x27;</span> * <span class="hljs-number">50</span>)<br>print(status)<br>print(<span class="hljs-string">&#x27;*&#x27;</span> * <span class="hljs-number">50</span>)<br>print(output)<br><br>Output<br>**************************************************<br><span class="hljs-number">0</span><br>**************************************************<br>total <span class="hljs-number">1264700</span><br>-rwxrwxr-x <span class="hljs-number">1</span> ubuntu ubuntu  <span class="hljs-number">12109497</span> Jul  <span class="hljs-number">5</span>  <span class="hljs-number">2018</span> adminMongo-<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>.tar.gz<br></code></pre></div></td></tr></table></figure>
 <p><strong>方法四、subprocess模块（该方法为Python3推荐方法）</strong>，允许创建很多子进程，创建的时候能指定子进程和子进程的输入、输出、错误输出管道，执行后能获取输出结果和执行状态。</p>
-<ol>
+<ol type="1">
 <li><p><strong><code>subprocess.run()</code></strong>：python3.5中新增的函数， 执行指定的命令， 等待命令执行完成后返回一个包含执行结果的 <code>CompletedProcess</code> 类的实例。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">subprocess.run(args, *, stdin=<span class="hljs-literal">None</span>, <span class="hljs-built_in">input</span>=<span class="hljs-literal">None</span>, stdout=<span class="hljs-literal">None</span>, stderr=<span class="hljs-literal">None</span>, shell=<span class="hljs-literal">False</span>, timeout=<span class="hljs-literal">None</span>, check=<span class="hljs-literal">False</span>, universal_newlines=<span class="hljs-literal">False</span>)<br></code></pre></div></td></tr></table></figure></li>
 <li><p><code>subprocess.call()</code>：执行指定的命令， 返回命令执行状态， 功能类似 <code>os.system(cmd)</code>。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">subprocess.call(args, *, stdin=<span class="hljs-literal">None</span>, stdout=<span class="hljs-literal">None</span>, stderr=<span class="hljs-literal">None</span>, shell=<span class="hljs-literal">False</span>, timeout=<span class="hljs-literal">None</span>)<br></code></pre></div></td></tr></table></figure></li>
 <li><p><code>subprocess.check_call()</code>：python2.5中新增的函数, 执行指定的命令, 如果执行成功则返回状态码， 否则抛出异常。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">subprocess.check_call(args, *, stdin=<span class="hljs-literal">None</span>, stdout=<span class="hljs-literal">None</span>, stderr=<span class="hljs-literal">None</span>, shell=<span class="hljs-literal">False</span>, timeout=<span class="hljs-literal">None</span>)<br></code></pre></div></td></tr></table></figure>
-<p>举例如下：</p>
-</li>
+<p>举例如下：</p></li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> subprocess<br>val = subprocess.run(<span class="hljs-string">&#x27;ls -l&#x27;</span>, shell=<span class="hljs-literal">True</span>)<br>print(val)<br><br><span class="hljs-comment"># output</span><br>total <span class="hljs-number">1264700</span><br>-rwxrwxr-x <span class="hljs-number">1</span> ubuntu ubuntu  <span class="hljs-number">12109497</span> Jul  <span class="hljs-number">5</span>  <span class="hljs-number">2018</span> adminMongo-<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>.tar.gz<br>......<br>-rw-r--r-- <span class="hljs-number">1</span> root   root        <span class="hljs-number">5723</span> Jul  <span class="hljs-number">5</span>  <span class="hljs-number">2018</span> Wechat.py<br>CompletedProcess(args=<span class="hljs-string">&#x27;ls -l&#x27;</span>, returncode=<span class="hljs-number">0</span>)<br></code></pre></div></td></tr></table></figure>
 <p><strong>注意</strong>：</p>
-<ol>
-<li><strong>args：表示shell指令，若以字符串形式给出shell指令，如”ls -l “则需要使shell = Ture。否则默认已数组形式表示shell变量，如”ls”,”-l”。</strong></li>
+<ol type="1">
+<li><strong>args：表示shell指令，若以字符串形式给出shell指令，如"ls -l "则需要使shell = Ture。否则默认已数组形式表示shell变量，如"ls","-l"。</strong></li>
 <li>当使用比较复杂的shell语句时，可以先使用<strong>shlex模块的shlex.split()</strong>方法来帮助格式化命令，然后在传递给run()方法或Popen。</li>
 </ol>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -1430,6 +1456,26 @@ type \rightarrow class \rightarrow obeject</script><p>下面用代码来看看</
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

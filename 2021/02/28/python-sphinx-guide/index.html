@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      270 字
+      271 字
     </span>
   
 
@@ -258,8 +258,11 @@
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.sphinx-doc.org/zh_CN/master/usage/index.html"></a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_29957455/article/details/83657029">使用sphinx快速为你python注释生成API文档</a></p>
-<h1 id="sphinx注释风格"><a href="#sphinx注释风格" class="headerlink" title="sphinx注释风格"></a>sphinx注释风格</h1><h2 id="class-注释"><a href="#class-注释" class="headerlink" title="class 注释"></a><code>class</code> 注释</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span>():</span><br>    <span class="hljs-string">&quot;&quot;&quot;类的功能说明&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">pass</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="method-注释"><a href="#method-注释" class="headerlink" title="method 注释"></a><code>method</code> 注释</h2><p>无参数情况</p>
+<h1 id="sphinx注释风格">sphinx注释风格</h1>
+<h2 id="class-注释"><code>class</code> 注释</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span>():</span><br>    <span class="hljs-string">&quot;&quot;&quot;类的功能说明&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">pass</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="method-注释"><code>method</code> 注释</h2>
+<p>无参数情况</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span>(<span class="hljs-params">self,a,b</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;两个数字相加，并返回结果&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> a+b<br></code></pre></div></td></tr></table></figure>
 <p>带参数的 <code>method</code> 注释，示例1。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">google_style</span>(<span class="hljs-params">arg1, arg2</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;函数功能(简述)。</span><br><span class="hljs-string"></span><br><span class="hljs-string">    函数功能说明（详细说明）。</span><br><span class="hljs-string">    </span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        arg1 (int): arg1的参数说明</span><br><span class="hljs-string">        arg2 (str): arg2的参数说明</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">        bool: 返回值说明</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
@@ -267,7 +270,7 @@
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">numpy_style</span>(<span class="hljs-params">arg1, arg2</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;函数功能(简述)。</span><br><span class="hljs-string"></span><br><span class="hljs-string">    函数功能说明（详细说明）。</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Parameters</span><br><span class="hljs-string">    ----------</span><br><span class="hljs-string">    arg1 : int</span><br><span class="hljs-string">        arg1的参数说明</span><br><span class="hljs-string">    arg2 : str</span><br><span class="hljs-string">        arg2的参数说明</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Returns</span><br><span class="hljs-string">    -------</span><br><span class="hljs-string">    bool</span><br><span class="hljs-string">        返回值说明</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></div></td></tr></table></figure>
 <p>在注释中添加代码说明的 <code>method</code> 注释。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_function</span>(<span class="hljs-params">a, b</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;函数功能(简述)。</span><br><span class="hljs-string"></span><br><span class="hljs-string">    函数功能说明（详细说明）。</span><br><span class="hljs-string"></span><br><span class="hljs-string">     &gt;&gt;&gt; my_function(2, 3)</span><br><span class="hljs-string">     6</span><br><span class="hljs-string">     &gt;&gt;&gt; my_function(&#x27;a&#x27;, 3)</span><br><span class="hljs-string">     &#x27;aaa&#x27;</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <br>    <span class="hljs-keyword">return</span> a * b<br><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -497,6 +500,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

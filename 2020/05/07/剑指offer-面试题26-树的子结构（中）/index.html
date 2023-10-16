@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      793 字
+      795 字
     </span>
   
 
@@ -253,7 +253,8 @@
             <div class="markdown-body">
               <p>考察面试者对二叉树遍历算法和<strong>递归</strong>编程的理解。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)。<br>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
+<h1 id="question">Question</h1>
+<p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)。 B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
 <blockquote>
 <p><strong><em>Tag</em></strong></p>
 </blockquote>
@@ -261,27 +262,30 @@
 <blockquote>
 <p><strong><em>测试样例</em></strong></p>
 </blockquote>
-<p>功能测试（树A和树B都是普通的二叉树；树B是或者不是树A的子结构）。<br>特殊输入测试（两棵二叉树的一个或者两个根节点为 <code>nullptr</code> 指针；二叉树的所有节点都没有左子树或者右子树）。</p>
+<p>功能测试（树A和树B都是普通的二叉树；树B是或者不是树A的子结构）。 特殊输入测试（两棵二叉树的一个或者两个根节点为 <code>nullptr</code> 指针；二叉树的所有节点都没有左子树或者右子树）。</p>
 <blockquote>
 <p><strong><em>考点</em></strong></p>
 </blockquote>
-<p>考查应聘者对二叉树遍历算法的理解及递归编程能力。<br>考查应聘者所写代码的鲁棒性。本题的代码中含有大量的指针操作，稍有不慎程序就会崩溃。应聘者需要采用防御性编程的方式，每次访问指针地址之前都要考虑这个指针有没有可能是nullptr。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>我们可以分成两步：第一步，在树A中找到和树B的根节点的值一样的节点R；第二步，判断树A中以R为根节点的子树是不是包含和树B一样的结构。</p>
+<p>考查应聘者对二叉树遍历算法的理解及递归编程能力。 考查应聘者所写代码的鲁棒性。本题的代码中含有大量的指针操作，稍有不慎程序就会崩溃。应聘者需要采用防御性编程的方式，每次访问指针地址之前都要考虑这个指针有没有可能是nullptr。</p>
+<h1 id="intuition">Intuition</h1>
+<p>我们可以分成两步：第一步，在树A中找到和树B的根节点的值一样的节点R；第二步，判断树A中以R为根节点的子树是不是包含和树B一样的结构。</p>
 <p>在面试的时候，我们一定要注意边界条件的检查，即检查空指针。当树A或树B为空的时候，定义相应的输出。如果没有检查并进行相应的处理，则程序非常容易崩溃，这是面试时非常忌讳的事情。</p>
 <p><strong>算法流程</strong></p>
 <p><strong><code>recur(A, B)</code> 函数：</strong></p>
-<ol>
-<li>终止条件：<br>当节点 B 为空：说明树 BB 已匹配完成（越过叶子节点），因此返回 true ；<br>当节点 A 为空：说明已经越过树 AA 叶子节点，即匹配失败，返回 false ；<br>当节点 A 和 B 的值不同：说明匹配失败，返回 false ；</li>
-<li>返回值：<br>判断 A 和 B 的左子节点是否相等，即 recur(A.left, B.left) ；<br>判断 A 和 B 的右子节点是否相等，即 recur(A.right, B.right) ；<br>isSubStructure(A, B) 函数：</li>
+<ol type="1">
+<li>终止条件： 当节点 B 为空：说明树 BB 已匹配完成（越过叶子节点），因此返回 true ； 当节点 A 为空：说明已经越过树 AA 叶子节点，即匹配失败，返回 false ； 当节点 A 和 B 的值不同：说明匹配失败，返回 false ；</li>
+<li>返回值： 判断 A 和 B 的左子节点是否相等，即 recur(A.left, B.left) ； 判断 A 和 B 的右子节点是否相等，即 recur(A.right, B.right) ； isSubStructure(A, B) 函数：</li>
 </ol>
 <p><strong><code>isSubStructure(A, B)</code> 函数：</strong></p>
-<ol>
-<li>特例处理：<br>当 树 A 为空 或 树 B 为空 时，直接返回 false ；</li>
-<li>返回值：<br>若树 B 是树 A 的子结构，则必满足以下三种情况之一，因此用或 || 连接；<br>1). 以 节点 A 为根节点的子树 包含树 B ，对应 recur(A, B)；<br>2). 树 B 是 树 A 左子树 的子结构，对应 isSubStructure(A.left, B)；<br>3). 树 B 是 树 A 右子树 的子结构，对应 isSubStructure(A.right, B)；<br>   以上 2. 3. 实质上是在对树 AA 做 先序遍历 。</li>
+<ol type="1">
+<li>特例处理： 当 树 A 为空 或 树 B 为空 时，直接返回 false ；</li>
+<li>返回值： 若树 B 是树 A 的子结构，则必满足以下三种情况之一，因此用或 || 连接； 1). 以 节点 A 为根节点的子树 包含树 B ，对应 recur(A, B)； 2). 树 B 是 树 A 左子树 的子结构，对应 isSubStructure(A.left, B)； 3). 树 B 是 树 A 右子树 的子结构，对应 isSubStructure(A.right, B)； 以上 2. 3. 实质上是在对树 AA 做 先序遍历 。</li>
 </ol>
 <p><strong>参考链接</strong></p>
-<p>作者：jyd<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/solution/mian-shi-ti-26-shu-de-zi-jie-gou-xian-xu-bian-li-p/">https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/solution/mian-shi-ti-26-shu-de-zi-jie-gou-xian-xu-bian-li-p/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isSubStructure</span>(<span class="hljs-params">self, A: TreeNode, B: TreeNode</span>) -&gt; bool:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recur</span>(<span class="hljs-params">A, B</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> B:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> A <span class="hljs-keyword">or</span> A.val != B.val: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">return</span> recur(A.left, B.left) <span class="hljs-keyword">and</span> recur(A.right, B.right)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">bool</span>(A <span class="hljs-keyword">and</span> B) <span class="hljs-keyword">and</span> (recur(A, B) <span class="hljs-keyword">or</span> self.isSubStructure(A.left, B) <span class="hljs-keyword">or</span> self.isSubStructure(A.right, B))<br></code></pre></div></td></tr></table></figure>
+<p>作者：jyd 链接：https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/solution/mian-shi-ti-26-shu-de-zi-jie-gou-xian-xu-bian-li-p/ 来源：力扣（LeetCode） 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isSubStructure</span>(<span class="hljs-params">self, A: TreeNode, B: TreeNode</span>) -&gt; bool:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recur</span>(<span class="hljs-params">A, B</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> B:  <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> A <span class="hljs-keyword">or</span> A.val != B.val: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">return</span> recur(A.left, B.left) <span class="hljs-keyword">and</span> recur(A.right, B.right)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">bool</span>(A <span class="hljs-keyword">and</span> B) <span class="hljs-keyword">and</span> (recur(A, B) <span class="hljs-keyword">or</span> self.isSubStructure(A.left, B) <span class="hljs-keyword">or</span> self.isSubStructure(A.right, B))<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -525,6 +529,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

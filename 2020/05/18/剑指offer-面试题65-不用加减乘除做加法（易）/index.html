@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,8 +253,9 @@
             <div class="markdown-body">
               <p>考查应聘者对二进制和位运算的理解。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“×”、“/” 四则运算符号。</p>
-<p>示例:<br><figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: a = 1, b = 1</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure><br>提示：a, b 均可能是负数或 0，结果不会溢出 32 位整数。</p>
+<h1 id="question">Question</h1>
+<p>写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“×”、“/” 四则运算符号。</p>
+<p>示例: <figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile"><span class="hljs-section">输入: a = 1, b = 1</span><br><span class="hljs-section">输出: 2</span><br></code></pre></div></td></tr></table></figure> 提示：a, b 均可能是负数或 0，结果不会溢出 32 位整数。</p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
@@ -262,40 +263,45 @@
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者的发散思维能力。当“+”、“-”、“×”、“/”运算符都不能使用时，应聘者能不能打开思路想到用位运算做加法，是能否顺利解决这个问题的关键。<br>考查应聘者对二进制和位运算的理解。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p><strong><em>拆分加法过程</em></strong><br>首先我们可以分析人们是<strong>如何做十进制加法</strong>的，比如是如何得出 <code>5+17=22</code> 这个结果的。实际上，我们可以分成三步进行：<br>第一步、只做各位相加不进位，此时相加的结果是12（个位数5和7相加不要进位是2，十位数0和1相加结果是1）；<br>第二步、做进位，5+7中有进位，进位的值是10；<br>第三步、把前面两个结果加起来，12+10的结果是22，刚好5+17=22。  </p>
-<p><strong><em>用位运算替代加法完成上述三个步骤</em></strong><br>5的二进制是 <code>101</code>，17的二进制是 <code>10001</code>。我们还是试着把计算分成三步：<br>第一步、各位相加但不计进位，得到的结果是10100（最后一位两个数都是1，相加的结果是二进制的10。这一步不计进位，因此结果仍然是0）。第一步不考虑进位对每一位相加。0加0、1加1的结果都是0，0加1、1加0的结果都是1，<strong>这个过程可以用位异或来替代。</strong><br>第二步、记下进位，在这个例子中只在最后一位相加时产生一个进位，结果是二进制的10。对0加0、0加1、1加0而言，都不会产生进位，只有1加1时，会向前产生一个进位。<strong>此时我们可以想象成两个数先做位与运算，然后再向左移动一位；</strong><br>第三步、把前两步的结果相加，得到的结果是10110，转换成十进制正好是22。<strong>第三步把前两个步骤的结果相加，第三步相加的过程依然是重复前面两步，直到不产生进位为止。</strong></p>
-<p><strong><em>考虑负数问题</em></strong><br>Q ： 若数字 aa 和 bb 中有负数，则变成了减法，如何处理？<br>A ： 在计算机系统中，数值一律用 补码来表示和存储。补码的优势： 加法、减法可以统一处理（CPU只有加法器）。因此，以上方法 同时适用于正数和负数的加法 。<br><strong>Python有其特殊性</strong>：Python / Java 中的数字都是以补码形式存储的。但 Python 没有 int , long 等不同长度变量，即没有变量位数的概念。<br><strong>获取负数的补码</strong>： 需要将数字与十六进制数 <code>0xffffffff</code> 相与。可理解为舍去此数字 <code>32</code> 位以上的数字，从无限长度变为一个 <code>32</code> 位整数。<br><strong>返回前数字还原</strong>： 已知 <code>0x7fffffff</code> 是最大正数的补码， <code>0x7fffffff</code> 就是31位全是1的二进制数的16进制形式，若补码 <code>a&gt;0x7fffffff</code> ，则说明 <code>a</code> 为负数。需执行 <code>~(a ^ 0xffffffff)</code> 操作，将补码还原至 Python 的存储格式。 <code>a ^ 0xffffffff</code> 运算将 <code>1</code> 至 <code>32</code> 位按位取反； <code>~</code> 运算是将整个数字取反；因此， <code>~(a ^ 0xffffffff)</code> 是将 <code>32</code> 位以上的位取反，即由 <code>0</code> 变为 <code>1</code> ， <code>1</code> 至 <code>32</code> 位不变。</p>
+<p>考查应聘者的发散思维能力。当“+”、“-”、“×”、“/”运算符都不能使用时，应聘者能不能打开思路想到用位运算做加法，是能否顺利解决这个问题的关键。 考查应聘者对二进制和位运算的理解。</p>
+<h1 id="intuition">Intuition</h1>
+<p><strong><em>拆分加法过程</em></strong> 首先我们可以分析人们是<strong>如何做十进制加法</strong>的，比如是如何得出 <code>5+17=22</code> 这个结果的。实际上，我们可以分成三步进行：<br />
+第一步、只做各位相加不进位，此时相加的结果是12（个位数5和7相加不要进位是2，十位数0和1相加结果是1）；<br />
+第二步、做进位，5+7中有进位，进位的值是10；<br />
+第三步、把前面两个结果加起来，12+10的结果是22，刚好5+17=22。</p>
+<p><strong><em>用位运算替代加法完成上述三个步骤</em></strong> 5的二进制是 <code>101</code>，17的二进制是 <code>10001</code>。我们还是试着把计算分成三步： 第一步、各位相加但不计进位，得到的结果是10100（最后一位两个数都是1，相加的结果是二进制的10。这一步不计进位，因此结果仍然是0）。第一步不考虑进位对每一位相加。0加0、1加1的结果都是0，0加1、1加0的结果都是1，<strong>这个过程可以用位异或来替代。</strong> 第二步、记下进位，在这个例子中只在最后一位相加时产生一个进位，结果是二进制的10。对0加0、0加1、1加0而言，都不会产生进位，只有1加1时，会向前产生一个进位。<strong>此时我们可以想象成两个数先做位与运算，然后再向左移动一位；</strong> 第三步、把前两步的结果相加，得到的结果是10110，转换成十进制正好是22。<strong>第三步把前两个步骤的结果相加，第三步相加的过程依然是重复前面两步，直到不产生进位为止。</strong></p>
+<p><strong><em>考虑负数问题</em></strong> Q ： 若数字 aa 和 bb 中有负数，则变成了减法，如何处理？ A ： 在计算机系统中，数值一律用 补码来表示和存储。补码的优势： 加法、减法可以统一处理（CPU只有加法器）。因此，以上方法 同时适用于正数和负数的加法 。 <strong>Python有其特殊性</strong>：Python / Java 中的数字都是以补码形式存储的。但 Python 没有 int , long 等不同长度变量，即没有变量位数的概念。 <strong>获取负数的补码</strong>： 需要将数字与十六进制数 <code>0xffffffff</code> 相与。可理解为舍去此数字 <code>32</code> 位以上的数字，从无限长度变为一个 <code>32</code> 位整数。 <strong>返回前数字还原</strong>： 已知 <code>0x7fffffff</code> 是最大正数的补码， <code>0x7fffffff</code> 就是31位全是1的二进制数的16进制形式，若补码 <code>a&gt;0x7fffffff</code> ，则说明 <code>a</code> 为负数。需执行 <code>~(a ^ 0xffffffff)</code> 操作，将补码还原至 Python 的存储格式。 <code>a ^ 0xffffffff</code> 运算将 <code>1</code> 至 <code>32</code> 位按位取反； <code>~</code> 运算是将整个数字取反；因此， <code>~(a ^ 0xffffffff)</code> 是将 <code>32</code> 位以上的位取反，即由 <code>0</code> 变为 <code>1</code> ， <code>1</code> 至 <code>32</code> 位不变。</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>a = <span class="hljs-string">&#x27;0xffffffff&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>a<br><span class="hljs-string">&#x27;0xffffffff&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>b = <span class="hljs-built_in">int</span>(a, <span class="hljs-number">16</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span>b<br><span class="hljs-number">4294967295</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">hex</span>(<span class="hljs-number">1</span>)  <span class="hljs-comment"># 0x1 补码</span><br><span class="hljs-string">&#x27;0x1&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">hex</span>(-<span class="hljs-number">1</span>)  <span class="hljs-comment"># -0x1 负号 + 原码 （ Python 特色，Java 会直接输出真实补码0xffffffff）</span><br><span class="hljs-string">&#x27;-0x1&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">hex</span>(<span class="hljs-number">1</span> &amp; <span class="hljs-number">0xffffffff</span>)  <span class="hljs-comment"># 0x1 正数补码</span><br><span class="hljs-string">&#x27;0x1&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">hex</span>(-<span class="hljs-number">1</span> &amp; <span class="hljs-number">0xffffffff</span>)  <span class="hljs-comment"># 0xffffffff 得到负数的真实补码</span><br><span class="hljs-string">&#x27;0xffffffff&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>-<span class="hljs-number">1</span> &amp; <span class="hljs-number">0xffffffff</span>  <span class="hljs-comment"># 4294967295 （ Python 将其认为正数）</span><br><span class="hljs-number">4294967295</span><br></code></pre></div></td></tr></table></figure>
-<p><strong><em>时间复杂度分析</em></strong><br>时间复杂度 $O(1)$： 最差情况下（例如 <code>a = 0x7fffffff</code> , <code>b = 1</code> 时），需循环 31 次，使用 $O(1)$ 时间；每轮中的常数次位操作使用 $O(1)$ 时间。<br>空间复杂度 $O(1)$ ： 使用常数大小的额外空间。</p>
-<p><strong><em>参考链接</em></strong><br>作者：Krahets<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/solution/mian-shi-ti-65-bu-yong-jia-jian-cheng-chu-zuo-ji-7/">https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/solution/mian-shi-ti-65-bu-yong-jia-jian-cheng-chu-zuo-ji-7/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span>(<span class="hljs-params">self, a: <span class="hljs-built_in">int</span>, b: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        x = <span class="hljs-number">0xffffffff</span><br>        <span class="hljs-comment"># 获取负数的补码， 需要将数字与十六进制数 0xffffffff 相与。可理解为舍去此数字32位以上的数字，从无限长度变为一个32位整数。</span><br>        a, b = a &amp; x, b &amp; x<br>        _sum, _carry = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            _sum = a ^ b<br>            _carry = (a &amp; b) &lt;&lt; <span class="hljs-number">1</span> &amp; x  <span class="hljs-comment"># 进位也要取负数的补码</span><br>            a = _sum<br>            b = _carry<br>            <span class="hljs-keyword">if</span> _carry == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">break</span><br>        <span class="hljs-comment"># 返回前数字还原，已知0x7fffffff是最大正数的补码，若 a&gt;0x7fffffff ，则说明a为负数。需执行~(a ^ 0xffffffff)操作，将补码还原至 Python 的存储格式。~(a ^ 0xffffffff)是将32位以上的位取反，即由0变为1，1至32位不变。</span><br>        <span class="hljs-keyword">return</span> a <span class="hljs-keyword">if</span> a &lt;= <span class="hljs-number">0x7fffffff</span> <span class="hljs-keyword">else</span> ~(a^x)<br></code></pre></div></td></tr></table></figure>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><p>不使用新的变量，交换两个变量的值。比如有两个变量a、b，我们希望交换它们的值。有两种不同的方法：</p>
-<div class="table-container">
+<p><strong><em>时间复杂度分析</em></strong> 时间复杂度 <span class="math inline">\(O(1)\)</span>： 最差情况下（例如 <code>a = 0x7fffffff</code> , <code>b = 1</code> 时），需循环 31 次，使用 <span class="math inline">\(O(1)\)</span> 时间；每轮中的常数次位操作使用 <span class="math inline">\(O(1)\)</span> 时间。<br />
+空间复杂度 <span class="math inline">\(O(1)\)</span> ： 使用常数大小的额外空间。</p>
+<p><strong><em>参考链接</em></strong> 作者：Krahets 链接：https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/solution/mian-shi-ti-65-bu-yong-jia-jian-cheng-chu-zuo-ji-7/ 来源：力扣（LeetCode） 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h1 id="code">Code</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add</span>(<span class="hljs-params">self, a: <span class="hljs-built_in">int</span>, b: <span class="hljs-built_in">int</span></span>) -&gt; int:</span><br>        x = <span class="hljs-number">0xffffffff</span><br>        <span class="hljs-comment"># 获取负数的补码， 需要将数字与十六进制数 0xffffffff 相与。可理解为舍去此数字32位以上的数字，从无限长度变为一个32位整数。</span><br>        a, b = a &amp; x, b &amp; x<br>        _sum, _carry = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            _sum = a ^ b<br>            _carry = (a &amp; b) &lt;&lt; <span class="hljs-number">1</span> &amp; x  <span class="hljs-comment"># 进位也要取负数的补码</span><br>            a = _sum<br>            b = _carry<br>            <span class="hljs-keyword">if</span> _carry == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">break</span><br>        <span class="hljs-comment"># 返回前数字还原，已知0x7fffffff是最大正数的补码，若 a&gt;0x7fffffff ，则说明a为负数。需执行~(a ^ 0xffffffff)操作，将补码还原至 Python 的存储格式。~(a ^ 0xffffffff)是将32位以上的位取反，即由0变为1，1至32位不变。</span><br>        <span class="hljs-keyword">return</span> a <span class="hljs-keyword">if</span> a &lt;= <span class="hljs-number">0x7fffffff</span> <span class="hljs-keyword">else</span> ~(a^x)<br></code></pre></div></td></tr></table></figure>
+<h1 id="extension">Extension</h1>
+<p>不使用新的变量，交换两个变量的值。比如有两个变量a、b，我们希望交换它们的值。有两种不同的方法：</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>基于加减法</th>
 <th>基于异或运算</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>a = a + b</td>
 <td>a = a ^ b</td>
 </tr>
-<tr>
+<tr class="even">
 <td>b = a - b</td>
 <td>b = a ^ b</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>a = a - b</td>
 <td>a = a ^ b</td>
 </tr>
 </tbody>
 </table>
-</div>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -539,6 +545,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

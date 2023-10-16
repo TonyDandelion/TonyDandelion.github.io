@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      794 字
+      795 字
     </span>
   
 
@@ -251,31 +251,44 @@
             <h1 style="display: none">LeetCode 55. 跳跃游戏（中）</h1>
             
             <div class="markdown-body">
-              <p>利用贪心算法，从第一个位置开始，每个位置都跳到最远处，分别记录当前位置能达到的最远距离。遍历到最后一位，如果跳跃距离大于等于最后一位则可以达到最后一位。  </p>
+              <p>利用贪心算法，从第一个位置开始，每个位置都跳到最远处，分别记录当前位置能达到的最远距离。遍历到最后一位，如果跳跃距离大于等于最后一位则可以达到最后一位。</p>
 <a id="more"></a>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个非负整数数组，你最初位于数组的第一个位置。<br>数组中的每个元素代表你在该位置可以跳跃的最大长度。<br>判断你是否能够到达最后一个位置。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>示例 1:<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>]<br>输出: true<br></code></pre></div></td></tr></table></figure><br>解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。<br>示例 2:</p>
+<h2 id="题目">题目</h2>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。<br />
+数组中的每个元素代表你在该位置可以跳跃的最大长度。<br />
+判断你是否能够到达最后一个位置。</p>
+<h2 id="示例">示例</h2>
+<p>示例 1: <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>]<br>输出: true<br></code></pre></div></td></tr></table></figure> 解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。 示例 2:</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">输入: [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">4</span>]<br>输出: false<br></code></pre></div></td></tr></table></figure>
 <p>解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</p>
-<h2 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h2><p>贪心算法、数组</p>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p><strong>贪心算法的三个步骤</strong></p>
-<p>第一步、明确到底什么是最优解？<br>第二步、明确什么是子问题的最优解？（子问题的最优解有很多，选择一个最直接、最容易理解的方式进行定义即可。）<br>第三步、分别求出子问题的最优解再堆叠出全局最优解。<br>使用贪心算法，从第一个位置开始，每个位置都跳到最远处，分别记录当前位置能达到的最远距离。遍历到最后一位，如果跳跃距离大于等于最后一位则可以达到最后一位。  </p>
+<h2 id="考察知识点">考察知识点</h2>
+<p>贪心算法、数组</p>
+<h2 id="核心思想">核心思想</h2>
+<p><strong>贪心算法的三个步骤</strong></p>
+<p>第一步、明确到底什么是最优解？<br />
+第二步、明确什么是子问题的最优解？（子问题的最优解有很多，选择一个最直接、最容易理解的方式进行定义即可。）<br />
+第三步、分别求出子问题的最优解再堆叠出全局最优解。<br />
+使用贪心算法，从第一个位置开始，每个位置都跳到最远处，分别记录当前位置能达到的最远距离。遍历到最后一位，如果跳跃距离大于等于最后一位则可以达到最后一位。</p>
 <p><strong>算法</strong></p>
 <ul>
 <li>变量声明</li>
 <li>特判</li>
-<li>开始循环计算<ul>
+<li>开始循环计算
+<ul>
 <li>如果当前终点小于当前位置，说明到不了这个位置，直接return False就行。</li>
 <li>更新max_bound</li>
 <li>如果新的最远距离大于等于最后一位，说明可以到达这里， return True。</li>
 <li>如果达到终点，就更新max_bound</li>
-</ul>
-</li>
+</ul></li>
 <li>如果循环结束也没能达到最后一位就return False</li>
 </ul>
-<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">canJump</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; bool:</span><br>        max_bound = nums[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 变量声明</span><br>        end = nums[<span class="hljs-number">0</span>]<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:  <span class="hljs-comment"># 特判</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">if</span> nums[<span class="hljs-number">0</span>] == <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> n == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-comment"># 开始循环计算</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>            <span class="hljs-comment"># 如果当前终点小于当前位置，说明到不了这个位置，直接return False就行。</span><br>            <span class="hljs-keyword">if</span> end &lt; i: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-comment"># 更新max_bound</span><br>            max_bound = <span class="hljs-built_in">max</span>(max_bound, nums[i] + i)<br>            <span class="hljs-comment"># 如果新的最远距离大于等于最后一位，说明可以到达这里， return True。</span><br>            <span class="hljs-keyword">if</span> max_bound &gt;= n-<span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>             <span class="hljs-comment"># 如果达到终点，就更新max_bound</span><br>            <span class="hljs-keyword">if</span> i == end: end = max_bound<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>  <span class="hljs-comment"># 如果循环结束也没能达到最后一位就return False</span><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">0</span>], [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>], [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">4</span>]]<br>Input1 = [<span class="hljs-number">10</span>]<br>Answer = [<span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.canJump(Input[i])<br>        print(reslut == Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度：$O(n)$ 。<br>空间复杂度：$O(1)$ 。<br>执行用时 :56 ms, 在所有 Python3 提交中击败了90.28%的用户。<br>内存消耗 :14.8 MB, 在所有 Python3 提交中击败了60.40%的用户。  </p>
-
+<h2 id="python版本">Python版本</h2>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">canJump</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; bool:</span><br>        max_bound = nums[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 变量声明</span><br>        end = nums[<span class="hljs-number">0</span>]<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:  <span class="hljs-comment"># 特判</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">if</span> nums[<span class="hljs-number">0</span>] == <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> n == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-comment"># 开始循环计算</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>            <span class="hljs-comment"># 如果当前终点小于当前位置，说明到不了这个位置，直接return False就行。</span><br>            <span class="hljs-keyword">if</span> end &lt; i: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-comment"># 更新max_bound</span><br>            max_bound = <span class="hljs-built_in">max</span>(max_bound, nums[i] + i)<br>            <span class="hljs-comment"># 如果新的最远距离大于等于最后一位，说明可以到达这里， return True。</span><br>            <span class="hljs-keyword">if</span> max_bound &gt;= n-<span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>             <span class="hljs-comment"># 如果达到终点，就更新max_bound</span><br>            <span class="hljs-keyword">if</span> i == end: end = max_bound<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>  <span class="hljs-comment"># 如果循环结束也没能达到最后一位就return False</span><br><br>print(<span class="hljs-string">&quot;leet code accept!!!&quot;</span>)<br>Input = [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">0</span>], [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>], [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">4</span>]]<br>Input1 = [<span class="hljs-number">10</span>]<br>Answer = [<span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.canJump(Input[i])<br>        print(reslut == Answer[i])<br></code></pre></div></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(n)\)</span> 。<br />
+空间复杂度：<span class="math inline">\(O(1)\)</span> 。<br />
+执行用时 :56 ms, 在所有 Python3 提交中击败了90.28%的用户。<br />
+内存消耗 :14.8 MB, 在所有 Python3 提交中击败了60.40%的用户。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -519,6 +532,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

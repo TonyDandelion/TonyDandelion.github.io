@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,7 +253,8 @@
             <div class="markdown-body">
               <p>这个题目的关键，是写出可扩展的代码，本题的要求是使奇数位于偶数前面，那么使负数位于非负数前面，使3的倍数位于3的非倍数前面的功能也要能够直接拓展实现才行。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。</p>
+<h1 id="question">Question</h1>
+<p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。</p>
 <p>示例：</p>
 <figure class="highlight dns"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dns">输入：nums = [<span class="hljs-number">1,2,3,4</span>]<br>输出：[<span class="hljs-number">1,3,2,4</span>] <br></code></pre></div></td></tr></table></figure>
 <p>注：[3,1,2,4] 也是正确的答案之一。</p>
@@ -261,16 +262,22 @@
 <blockquote>
 <p>测试样例</p>
 </blockquote>
-<p>功能测试（输入数组中的奇数、偶数交替出现；输入的数组中所有偶数都出现在奇数的前面；输入的数组中所有奇数都出现在偶数的前面）。<br>特殊输入测试（输入 <code>nullptr</code> 指针；输入的数组只包含一个数字）。</p>
+<p>功能测试（输入数组中的奇数、偶数交替出现；输入的数组中所有偶数都出现在奇数的前面；输入的数组中所有奇数都出现在偶数的前面）。 特殊输入测试（输入 <code>nullptr</code> 指针；输入的数组只包含一个数字）。</p>
 <blockquote>
 <p>考点</p>
 </blockquote>
-<p>考查应聘者的快速思维能力。要在短时间内按照要求把数组分隔成两部分不是一件容易的事情，需要较快的思维能力。<br>对于已经工作了几年的应聘者，面试官还将考查其对扩展性的理解，要求应聘者写出的代码具有可重用性。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h2><p><strong>从头扫描这个数组，每碰到一个偶数，拿出这个数字，并把位于这个数字后面的所有数字往前挪动一位。挪完之后在数组的末尾有一个空位，这时把该偶数放入这个空位。</strong>由于每碰到一个偶数就需要移动 $O(n)$ 个数字，因此总的时间复杂度是 $O(n^2)$。但是，这种方法<strong>不能让面试官满意。</strong>不过如果我们在听到题目之后能马上说出这种解法，那么面试官至少会觉得我们的思维非常敏捷。<strong>通过修改 <code>func</code> 函数可以是随意调整前移条件，实现代码的可扩展性。</strong></p>
-<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><p>实际上就是快排。</p>
-<p>因此，我们可以维护两个指针：<strong>第一个指针初始化时指向数组的第一个数字，它只向后移动；第二个指针初始化时指向数组的最后一个数字，它只向前移动。在两个指针相遇之前，第一个指针总是位于第二个指针的前面。如果第一个指针指向的数字是偶数，并且第二个指针指向的数字是奇数，则交换这两个数字。</strong><br>下面以一个具体的例子，如输入数组{1，2，3，4，5}来分析这种思路。在初始化时，把第一个指针指向数组第一个数字1，而把第二个指针指向最后一个数字5，如图3.6（a）所示。第一个指针指向的数字1是一个奇数，不需要处理，我们把第一个指针向后移动，<strong>直到碰到一个偶数2</strong>。此时第二个指针已经指向了奇数，因此不需要移动。此时两个指针指向的位置如图3.6（b）所示。这时候我们发现偶数2位于奇数5的前面，符合交换条件，于是交换这两个指针指向的数字，如图3.6（c）所示。<br>接下来我们继续向后移动第一个指针，<strong>直到碰到下一个偶数4</strong>，并向前移动第二个指针，直到碰到第一个奇数3，如图3.6（d）所示。我们发现第二个指针已经在第一个指针的前面了，表示所有的奇数都已经在偶数的前面了。此时的数组是{1，5，3，4，2}，的确是奇数位于数组的前半部分而偶数位于数组的后半部分。<strong>通过修改 <code>func</code> 函数可以是随意调整前移条件，实现代码的可扩展性。</strong></p>
-<p><img src="https://i.loli.net/2020/05/06/BLYS7mPRFX3yNIu.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-06_23-52-05.png"></p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<p>考查应聘者的快速思维能力。要在短时间内按照要求把数组分隔成两部分不是一件容易的事情，需要较快的思维能力。 对于已经工作了几年的应聘者，面试官还将考查其对扩展性的理解，要求应聘者写出的代码具有可重用性。</p>
+<h1 id="intuition">Intuition</h1>
+<h2 id="暴力破解">暴力破解</h2>
+<p><strong>从头扫描这个数组，每碰到一个偶数，拿出这个数字，并把位于这个数字后面的所有数字往前挪动一位。挪完之后在数组的末尾有一个空位，这时把该偶数放入这个空位。</strong>由于每碰到一个偶数就需要移动 <span class="math inline">\(O(n)\)</span> 个数字，因此总的时间复杂度是 <span class="math inline">\(O(n^2)\)</span>。但是，这种方法<strong>不能让面试官满意。</strong>不过如果我们在听到题目之后能马上说出这种解法，那么面试官至少会觉得我们的思维非常敏捷。<strong>通过修改 <code>func</code> 函数可以是随意调整前移条件，实现代码的可扩展性。</strong></p>
+<h2 id="双指针">双指针</h2>
+<p>实际上就是快排。</p>
+<p>因此，我们可以维护两个指针：<strong>第一个指针初始化时指向数组的第一个数字，它只向后移动；第二个指针初始化时指向数组的最后一个数字，它只向前移动。在两个指针相遇之前，第一个指针总是位于第二个指针的前面。如果第一个指针指向的数字是偶数，并且第二个指针指向的数字是奇数，则交换这两个数字。</strong> 下面以一个具体的例子，如输入数组{1，2，3，4，5}来分析这种思路。在初始化时，把第一个指针指向数组第一个数字1，而把第二个指针指向最后一个数字5，如图3.6（a）所示。第一个指针指向的数字1是一个奇数，不需要处理，我们把第一个指针向后移动，<strong>直到碰到一个偶数2</strong>。此时第二个指针已经指向了奇数，因此不需要移动。此时两个指针指向的位置如图3.6（b）所示。这时候我们发现偶数2位于奇数5的前面，符合交换条件，于是交换这两个指针指向的数字，如图3.6（c）所示。 接下来我们继续向后移动第一个指针，<strong>直到碰到下一个偶数4</strong>，并向前移动第二个指针，直到碰到第一个奇数3，如图3.6（d）所示。我们发现第二个指针已经在第一个指针的前面了，表示所有的奇数都已经在偶数的前面了。此时的数组是{1，5，3，4，2}，的确是奇数位于数组的前半部分而偶数位于数组的后半部分。<strong>通过修改 <code>func</code> 函数可以是随意调整前移条件，实现代码的可扩展性。</strong></p>
+<figure>
+<img src="https://i.loli.net/2020/05/06/BLYS7mPRFX3yNIu.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-06_23-52-05.png" /><figcaption aria-hidden="true">Snipaste_2020-05-06_23-52-05.png</figcaption>
+</figure>
+<h1 id="code">Code</h1>
+<ul>
 <li>暴力破解</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> unittest<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">self, number</span>):</span><br>        <span class="hljs-keyword">return</span> number &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>  <span class="hljs-comment"># 偶数的二进制表示，第一位必然为0。</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exchange</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[int]:</span><br>        _len = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> _len:  <span class="hljs-keyword">return</span> []<br>        i = <span class="hljs-number">0</span><br>        count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> i &lt; _len:<br>            <span class="hljs-keyword">if</span> i + count == _len:  <span class="hljs-comment"># 完成全部移动</span><br>                <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">if</span> self.func(nums[i]):  <span class="hljs-comment"># 偶数</span><br>                tmp = nums[i]<br>                <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(i, _len-<span class="hljs-number">1</span>):<br>                    nums[j] = nums[j+<span class="hljs-number">1</span>]<br>                nums[_len-<span class="hljs-number">1</span>] = tmp<br>                count += <span class="hljs-number">1</span><br>                <span class="hljs-comment"># i -= 1</span><br>            <span class="hljs-keyword">else</span>:<br>                i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> nums<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSolution</span>(<span class="hljs-params">unittest.TestCase</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setUp</span>(<span class="hljs-params">self</span>):</span><br>        self.test_class = Solution()<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_solution</span>(<span class="hljs-params">self</span>):</span><br>        inputs = [<br>            <span class="hljs-comment"># 功能测试</span><br>            [<span class="hljs-number">2</span>,<span class="hljs-number">16</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">13</span>,<span class="hljs-number">1</span>,<span class="hljs-number">16</span>,<span class="hljs-number">1</span>,<span class="hljs-number">12</span>,<span class="hljs-number">18</span>,<span class="hljs-number">11</span>,<span class="hljs-number">8</span>,<span class="hljs-number">11</span>,<span class="hljs-number">11</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>],<br>            <span class="hljs-comment"># 边界值的测试</span><br>            <span class="hljs-comment"># 特殊样例</span><br>        ]<br>        answers = [<br>            [<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">13</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">11</span>,<span class="hljs-number">11</span>,<span class="hljs-number">11</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">16</span>,<span class="hljs-number">16</span>,<span class="hljs-number">12</span>,<span class="hljs-number">18</span>,<span class="hljs-number">8</span>],<br>        ]<br>        res = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(inputs)):<br>            res.append(self.test_class.exchange(inputs[i]))<br>        self.assertEqual(res, answers)<br> <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tearDown</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-keyword">del</span> self.test_class<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    unittest.main()<br></code></pre></div></td></tr></table></figure>
@@ -278,6 +285,7 @@
 <li>双指针</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">self, number</span>):</span><br>        <span class="hljs-keyword">return</span> number &amp; <span class="hljs-number">1</span> == <span class="hljs-number">0</span>  <span class="hljs-comment"># 偶数的二进制表示，第一位必然为0。</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exchange</span>(<span class="hljs-params">self, nums: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[int]:</span><br>        _len = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> _len:  <span class="hljs-keyword">return</span> []<br>        p1 = <span class="hljs-number">0</span><br>        p2 = _len -<span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> p1 &lt; p2:<br>            <span class="hljs-comment"># 向后移动p1 直到遇到偶数</span><br>            <span class="hljs-keyword">while</span> p1 &lt; p2 <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> self.func(nums[p1]):  <span class="hljs-comment"># 遇到奇数就继续后移</span><br>                p1 += <span class="hljs-number">1</span><br><br>            <span class="hljs-comment"># 向前移动p2 直到遇到奇数</span><br>            <span class="hljs-keyword">while</span> p1 &lt; p2 <span class="hljs-keyword">and</span> self.func(nums[p2]):  <span class="hljs-comment"># 遇到偶数就继续前移</span><br>                p2 -= <span class="hljs-number">1</span><br>            <br>            <span class="hljs-comment"># 交换</span><br>            <span class="hljs-keyword">if</span> p1 &lt; p2:<br>                tmp = nums[p1]<br>                nums[p1] = nums[p2]<br>                nums[p2] = tmp<br><br>        <span class="hljs-keyword">return</span> nums<br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -521,6 +529,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

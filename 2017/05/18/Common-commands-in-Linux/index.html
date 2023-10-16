@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      476 字
+      477 字
     </span>
   
 
@@ -254,24 +254,27 @@
               <p>记录一些常用的Linux命令</p>
 <a id="more"></a>
 <p>能够使用常用的命令，比如 cat 文件内容查看、find 搜索文件，以及 cut、sort 等管线命令。了解 grep 和 awk 的作用。</p>
-<h1 id="find"><a href="#find" class="headerlink" title="find"></a>find</h1><p>删除30天之前的数据<br><figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">#find . -mtime +<span class="hljs-number">30</span> -<span class="hljs-keyword">type</span> <span class="hljs-type">f </span>| xargs rm -rf<br><span class="hljs-keyword">or</span><br>#find . -mtime +<span class="hljs-number">30</span> -<span class="hljs-keyword">type</span> <span class="hljs-type">f </span>-name *.json | xargs rm -rf<br></code></pre></div></td></tr></table></figure><br><strong>参数</strong></p>
+<h1 id="find">find</h1>
+<p>删除30天之前的数据 <figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">#find . -mtime +<span class="hljs-number">30</span> -<span class="hljs-keyword">type</span> <span class="hljs-type">f </span>| xargs rm -rf<br><span class="hljs-keyword">or</span><br>#find . -mtime +<span class="hljs-number">30</span> -<span class="hljs-keyword">type</span> <span class="hljs-type">f </span>-name *.json | xargs rm -rf<br></code></pre></div></td></tr></table></figure> <strong>参数</strong></p>
 <ul>
 <li>type f 查找文件类型的数据</li>
 </ul>
-<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><blockquote>
-<p>查看当前文件夹下文件数量   </p>
+<h1 id="grep">grep</h1>
+<blockquote>
+<p>查看当前文件夹下文件数量</p>
 </blockquote>
 <figure class="highlight coq"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coq">ls -l |<span class="hljs-type">grep</span> <span class="hljs-string">&quot;^-&quot;</span>|<span class="hljs-type">wc</span> -l<br></code></pre></div></td></tr></table></figure>
-<h1 id="xsel"><a href="#xsel" class="headerlink" title="xsel"></a>xsel</h1><blockquote>
-<p>打开当前路径下的文件管理器  </p>
+<h1 id="xsel">xsel</h1>
+<blockquote>
+<p>打开当前路径下的文件管理器</p>
 </blockquote>
 <figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata"><span class="hljs-keyword">pwd</span> | xsel<br>nautilus Shift+<span class="hljs-keyword">Ins</span><br></code></pre></div></td></tr></table></figure>
 <blockquote>
-<p> cat </p>
+<p>cat</p>
 </blockquote>
 <p>1</p>
 <blockquote>
-<p>find </p>
+<p>find</p>
 </blockquote>
 <p>2</p>
 <blockquote>
@@ -293,13 +296,14 @@
 <p>\5. linux命令，查内存，查cpu，查进程</p>
 <p>\6. linux命令找出文件中的词并用另一个代替</p>
 <p>Linux <code>fork()</code> 的返回值解释一下</p>
-<p>\7. <strong>linux查找大于1**</strong>G<strong>**的文件并删除？</strong></p>
-<p>\8. <strong>linux如何配置权限 可执行-**</strong>&gt;<strong> </strong>不可执行**</p>
-<p>vi/vim 中可以使用 ：s 命令来替换字符串。该命令有很多种不同细节使用方法，可以实现复杂的功能，记录几种在此，方便以后查询。 </p>
-<p>：s/vivian/sky/ 替换当前行第一个 vivian 为 sky<br>　<br>　　：s/vivian/sky/g 替换当前行所有 vivian 为 sky<br>　<br>　　：n，$s/vivian/sky/ 替换第 n 行开始到最后一行中每一行的第一个 vivian 为 sky<br>　<br>　　：n，$s/vivian/sky/g 替换第 n 行开始到最后一行中每一行所有 vivian 为 sky<br>　<br>　　n 为数字，若 n 为 .，表示从当前行开始到最后一行<br>　<br>　　：%s/vivian/sky/（等同于 ：g/vivian/s//sky/） 替换每一行的第一个 vivian 为 sky<br>　<br>　　：%s/vivian/sky/g（等同于 ：g/vivian/s//sky/g） 替换每一行中所有 vivian 为 sky<br>　<br>　　可以使用 # 作为分隔符，此时中间出现的 / 不会作为分隔符<br>　<br>　　：s#vivian/#sky/# 替换当前行第一个 vivian/ 为 sky/<br>　<br>　　：%s+/oradata/apras/+/user01/apras1+ （使用+ 来 替换 / ）： /oradata/apras/替换成/user01/apras1/ </p>
+<p>\7. <strong>linux查找大于1G的文件并删除？</strong></p>
+<p>\8. <strong>linux如何配置权限 可执行-&gt;</strong> <strong>不可执行</strong></p>
+<p>vi/vim 中可以使用 ：s 命令来替换字符串。该命令有很多种不同细节使用方法，可以实现复杂的功能，记录几种在此，方便以后查询。</p>
+<p>：s/vivian/sky/ 替换当前行第一个 vivian 为 sky 　 　　：s/vivian/sky/g 替换当前行所有 vivian 为 sky 　 　　：n，$s/vivian/sky/ 替换第 n 行开始到最后一行中每一行的第一个 vivian 为 sky 　 　　：n，$s/vivian/sky/g 替换第 n 行开始到最后一行中每一行所有 vivian 为 sky 　<br />
+　　n 为数字，若 n 为 .，表示从当前行开始到最后一行 　 　　：%s/vivian/sky/（等同于 ：g/vivian/s//sky/） 替换每一行的第一个 vivian 为 sky 　 　　：%s/vivian/sky/g（等同于 ：g/vivian/s//sky/g） 替换每一行中所有 vivian 为 sky 　 　　可以使用 # 作为分隔符，此时中间出现的 / 不会作为分隔符 　 　　：s#vivian/#sky/# 替换当前行第一个 vivian/ 为 sky/ 　 　　：%s+/oradata/apras/+/user01/apras1+ （使用+ 来 替换 / ）： /oradata/apras/替换成/user01/apras1/</p>
 <p>top命令详解</p>
 <p>如何部署django，这个很重要</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -538,6 +542,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

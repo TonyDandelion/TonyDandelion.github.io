@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,7 +253,7 @@
             <div class="markdown-body">
               <p>面向业务的docker笔记</p>
 <a id="more"></a>
-<hr>
+<hr />
 <p>拉取最新镜像</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker pull ubuntu</span><br></code></pre></div></td></tr></table></figure>
 <p>创建容器，将容器的 80 端口映射到主机的 80 端口，主机的目录 /data 映射到容器的 /data。</p>
@@ -271,7 +271,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-4-13-ubuntu:~<span class="hljs-comment"># docker images</span><br>REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE<br>realdonaldtrump/brlcheckin   v1                  b8d800ddf075        6 minutes ago       4.37GB<br>ubuntu                       18.04               329ed837d508        11 days ago         63.3MB<br>root@VM-4-13-ubuntu:~<span class="hljs-comment"># docker push realdonaldtrump/brlcheckin</span><br>The push refers to repository [docker.io/realdonaldtrump/brlcheckin]<br>c7d7db6b578a: Pushed <br>07adad8f2cae: Pushed <br>0dd1581dbc3c: Pushed <br>837d6facb613: Pushed <br>v1: digest: sha256:cf1c2b2383298604faf6365d54a2b838bc3812dbf0dd7bc8362b86d3d736e6d9 size: 1157<br></code></pre></div></td></tr></table></figure>
 <p>修改docker image的名字</p>
 <figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-comment"># cp一个新的</span><br><span class="hljs-attribute">docker</span> tag brlcheckin:v<span class="hljs-number">1</span> realdonaldtrump/brlcheckin:v<span class="hljs-number">1</span><br><span class="hljs-comment"># 删除旧的</span><br><span class="hljs-attribute">docker</span> rmi brlcheckin:v<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -508,6 +508,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

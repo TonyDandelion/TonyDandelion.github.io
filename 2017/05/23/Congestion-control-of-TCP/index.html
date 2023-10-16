@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,44 +251,69 @@
             <h1 style="display: none">TCP协议流量控制过程</h1>
             
             <div class="markdown-body">
-              <p>TCP协议使用窗口字段和一系列算法实现拥塞控制<br>Congestion control of TCP</p>
+              <p>TCP协议使用窗口字段和一系列算法实现拥塞控制 Congestion control of TCP</p>
 <a id="more"></a>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="http://blog.csdn.net/sicofield/article/details/9708383">参考链接</a></p>
 </blockquote>
-<h1 id="什么是-TCP-拥塞控制"><a href="#什么是-TCP-拥塞控制" class="headerlink" title="什么是 TCP 拥塞控制"></a>什么是 TCP 拥塞控制</h1><p>1）、TCP 拥塞控制的目标是最大化利用网络上瓶颈链路的带宽。<br>简单来说是将网络链路比喻成一根水管，如果我们希望尽可能地使用网络传输数据，方法就是给水管注水，就有如下公式：<br><strong>水管内的水的数量 = 水管的容积 = 水管粗细 × 水管长度</strong><br>对应的网络名词就是：<br><strong>网络内尚未被确认收到的数据包数量 = 网络链路上能容纳的数据包数量 = 链路带宽 × 往返延迟</strong>  </p>
-<p><img src="https://i.loli.net/2020/03/12/Ay3N5tYLbapnc6i.jpg" srcset="/img/loading.gif" alt="v2-6a3a7b0f85bf9a664e8f9a000d80a8e7_720w.jpg"></p>
-<p>为了保证水管不会爆管，TCP 维护一个拥塞窗口cwnd（congestion window），用来估计在一段时间内这条链路（水管中）可以承载和运输的数据（水）的数量，拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化，但是为了达到最大的传输效率，我们该如何知道这条水管的运送效率是多少呢？  </p>
-<p>一个简单的方法就是不断增加传输的水量，直到水管破裂（对应到网络上就是发生丢包）为止，用 TCP 的描述就是：  <strong>只要网络中没有出现拥塞，拥塞窗口的值就可以再增大一些，以便把更多的数据包发送出去，但只要网络出现拥塞，拥塞窗口的值就应该减小一些，以减少注入到网络中的数据包数。</strong></p>
-<p>2）、简而言之：TCP协议采用<strong>单位为字节</strong>，大小可变的<strong>滑动窗口</strong>进行流量控制。窗口值就是给对方设置的发送窗口上限，当TCP链接建立时由发送方和接收方协商确定，在传输过程中会动态变化。拥塞窗口的窗口值在标志字段(URG—-FIN)的后面,一共占16个bit位。</p>
+<h1 id="什么是-tcp-拥塞控制">什么是 TCP 拥塞控制</h1>
+<p>1）、TCP 拥塞控制的目标是最大化利用网络上瓶颈链路的带宽。<br />
+简单来说是将网络链路比喻成一根水管，如果我们希望尽可能地使用网络传输数据，方法就是给水管注水，就有如下公式：<br />
+<strong>水管内的水的数量 = 水管的容积 = 水管粗细 × 水管长度</strong><br />
+对应的网络名词就是：<br />
+<strong>网络内尚未被确认收到的数据包数量 = 网络链路上能容纳的数据包数量 = 链路带宽 × 往返延迟</strong></p>
+<figure>
+<img src="https://i.loli.net/2020/03/12/Ay3N5tYLbapnc6i.jpg" srcset="/img/loading.gif" alt="v2-6a3a7b0f85bf9a664e8f9a000d80a8e7_720w.jpg" /><figcaption aria-hidden="true">v2-6a3a7b0f85bf9a664e8f9a000d80a8e7_720w.jpg</figcaption>
+</figure>
+<p>为了保证水管不会爆管，TCP 维护一个拥塞窗口cwnd（congestion window），用来估计在一段时间内这条链路（水管中）可以承载和运输的数据（水）的数量，拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化，但是为了达到最大的传输效率，我们该如何知道这条水管的运送效率是多少呢？</p>
+<p>一个简单的方法就是不断增加传输的水量，直到水管破裂（对应到网络上就是发生丢包）为止，用 TCP 的描述就是： <strong>只要网络中没有出现拥塞，拥塞窗口的值就可以再增大一些，以便把更多的数据包发送出去，但只要网络出现拥塞，拥塞窗口的值就应该减小一些，以减少注入到网络中的数据包数。</strong></p>
+<p>2）、简而言之：TCP协议采用<strong>单位为字节</strong>，大小可变的<strong>滑动窗口</strong>进行流量控制。窗口值就是给对方设置的发送窗口上限，当TCP链接建立时由发送方和接收方协商确定，在传输过程中会动态变化。拥塞窗口的窗口值在标志字段(URG---FIN)的后面,一共占16个bit位。</p>
 <p><strong>如何确定滑动窗口大小？</strong></p>
-<p>确定滑动窗口的大小一般取”接收端窗口”和”拥塞窗口”较小的那一个。</p>
+<p>确定滑动窗口的大小一般取"接收端窗口"和"拥塞窗口"较小的那一个。</p>
 <ul>
 <li>接收端窗口(rwnd): 接收端根据其目前的接收缓存大小所许诺的最新的窗口值，是来自接收端的流量控制。接收端将此窗口值放在 TCP 报文的首部中的窗口字段，传送给发送端。</li>
 <li>拥塞窗口(cwnd): 发送端根据自己估计的网络拥塞程度而设置的窗口值，是来自发送端的流量控制。发送端将此窗口值放在 TCP 报文的首部中的窗口字段，传送给接收端。</li>
 </ul>
-<p>知道接收端目前的”接收缓存大小“很容易，所以，接收端窗口(rwnd)可以定量确定，但是”网络拥塞程度”很难定量确定。所以滑动窗口大小主要由拥塞窗口大小决定。</p>
-<h1 id="常见的-TCP-拥塞控制算法"><a href="#常见的-TCP-拥塞控制算法" class="headerlink" title="常见的 TCP 拥塞控制算法"></a>常见的 TCP 拥塞控制算法</h1><h2 id="历史沿革"><a href="#历史沿革" class="headerlink" title="历史沿革"></a>历史沿革</h2><p>1988年，首次提出<strong>TCP拥塞控制算法</strong>由<strong>慢开始和拥塞避免</strong>算法组成（Tahoe Version）。<br>1990年，在之前的基础上加入了<strong>快重传和快恢复算法</strong>构成新的<strong>TCP拥塞控制算法</strong>，是目前使用较为广泛的版本也是Linux 内核默认的拥塞控制算法算法。（Reno Version）<br>2016年，Google提出的一种新的拥塞控制算法，BBR。 </p>
-<h2 id="Reno"><a href="#Reno" class="headerlink" title="Reno"></a>Reno</h2><p>Reno 被许多教材（例如：《计算机网络——自顶向下的方法》）所介绍，适用于<strong>低延时、低带宽的网络</strong>，它将拥塞控制的过程分为四个阶段：慢启动、拥塞避免、快重传和快恢复。</p>
-<h3 id="慢启动阶段（cwnd指数增大）-发送方"><a href="#慢启动阶段（cwnd指数增大）-发送方" class="headerlink" title="慢启动阶段（cwnd指数增大）[发送方]"></a>慢启动阶段（cwnd指数增大）<strong>[发送方]</strong></h3><p>思路是不要一开始就发送大量的数据，先探测一下网络的拥塞程度，也就是说由小到大逐渐增加拥塞窗口（cwnd，congestion window）的大小，<strong>在没有出现丢包时每收到一个ACK报文就将拥塞窗口大小加一</strong>（单位是 MSS，<strong>最大单个报文段长度</strong>），每个<strong>传输轮次（也就是RTT/Round-Trip Time，往返时延）</strong>发送窗口增加一倍，呈指数增长。<strong>最大单个报文段长度</strong>MSS选项是TCP协议定义的一个选项，MSS选项用于在TCP连接建立时，收发双方协商通信时每一个报文段所能承载的最大数据长度。  </p>
-<h3 id="拥塞避免阶段（cwnd线性增大）-发送方"><a href="#拥塞避免阶段（cwnd线性增大）-发送方" class="headerlink" title="拥塞避免阶段（cwnd线性增大）[发送方]"></a>拥塞避免阶段（cwnd线性增大）<strong>[发送方]</strong></h3><p>当窗口达到<strong>慢启动阈值/慢开始门限（slow start threshold/ssthresh）</strong>或出现丢包时，进入拥塞避免阶段，窗口每轮次加一<strong><font color='red'>（加法增大）</font></strong>，呈线性增长；  </p>
-<h3 id="快重传阶段-接收方-发送方"><a href="#快重传阶段-接收方-发送方" class="headerlink" title="快重传阶段 [接收方/发送方]"></a>快重传阶段 <strong>[接收方/发送方]</strong></h3><p>快重传机制要求<strong>接收方在收到一个失序的报文段后就立即发出与之前重复的确认ACK而不要等到自己发送数据时捎带确认；当发送方收到对一个报文的三个重复的 ACK 时，认为这个报文的下一个报文丢失了，这时就立即重发这个丢失的报文，而不用等待为该报文设置的重传计时器到期之后再重发。</strong>由于快重传使发送方及早知道有报文段没有到达对方，可提高网络吞吐量约20%。  </p>
-<p>这里举一个例子来理解快重传，如图所示，接收方收到了M1和M2后都分别及时发出了确认。现假定接收方没有收到M3但却收到了M4。本来接收方可以什么都不做。但按照快重传算法，接收方必须立即发送对M2的重复确认，以便让发送方及早知道接收方没有收到报文段M3。发送方接着发送M5和M6。接收方收到后也仍要再次分别发出对M2的重复确认。这样，发送方共收到了接收方的4个对M2的确认，其中后3个都是重复确认。快重传算法规定，发送方只要一连收到3个重复确认，就知道接收方确实没有收到报文段M3，因而应当立即进行重传（即“快重传”），这样就不会出现超时，发送方也不就会误认为出现了网络拥塞。使用快重传可以使整个网络的吞吐量提高约20%。<br><img src="https://i.loli.net/2020/03/13/amAw6ui5Lvx7rGn.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-13_00-17-24.png"></p>
-<h3 id="快恢复阶段-发送方"><a href="#快恢复阶段-发送方" class="headerlink" title="快恢复阶段 [发送方]"></a>快恢复阶段 <strong>[发送方]</strong></h3><p>快重传完成后进入快恢复阶段，将<strong>慢启动阈值修改为当前拥塞窗口值的一半<font color='red'>（乘法减半）</font></strong>。同时拥塞窗口值等于更新之后的慢启动阈值（也就是快重传阶段时的拥塞窗口值的一半），然后进入<strong>拥塞避免阶段</strong>，重复上述过程。</p>
+<p>知道接收端目前的”接收缓存大小“很容易，所以，接收端窗口(rwnd)可以定量确定，但是"网络拥塞程度"很难定量确定。所以滑动窗口大小主要由拥塞窗口大小决定。</p>
+<h1 id="常见的-tcp-拥塞控制算法">常见的 TCP 拥塞控制算法</h1>
+<h2 id="历史沿革">历史沿革</h2>
+<p>1988年，首次提出<strong>TCP拥塞控制算法</strong>由<strong>慢开始和拥塞避免</strong>算法组成（Tahoe Version）。 1990年，在之前的基础上加入了<strong>快重传和快恢复算法</strong>构成新的<strong>TCP拥塞控制算法</strong>，是目前使用较为广泛的版本也是Linux 内核默认的拥塞控制算法算法。（Reno Version） 2016年，Google提出的一种新的拥塞控制算法，BBR。</p>
+<h2 id="reno">Reno</h2>
+<p>Reno 被许多教材（例如：《计算机网络——自顶向下的方法》）所介绍，适用于<strong>低延时、低带宽的网络</strong>，它将拥塞控制的过程分为四个阶段：慢启动、拥塞避免、快重传和快恢复。</p>
+<h3 id="慢启动阶段cwnd指数增大发送方">慢启动阶段（cwnd指数增大）<strong>[发送方]</strong></h3>
+<p>思路是不要一开始就发送大量的数据，先探测一下网络的拥塞程度，也就是说由小到大逐渐增加拥塞窗口（cwnd，congestion window）的大小，<strong>在没有出现丢包时每收到一个ACK报文就将拥塞窗口大小加一</strong>（单位是 MSS，<strong>最大单个报文段长度</strong>），每个<strong>传输轮次（也就是RTT/Round-Trip Time，往返时延）</strong>发送窗口增加一倍，呈指数增长。<strong>最大单个报文段长度</strong>MSS选项是TCP协议定义的一个选项，MSS选项用于在TCP连接建立时，收发双方协商通信时每一个报文段所能承载的最大数据长度。</p>
+<h3 id="拥塞避免阶段cwnd线性增大发送方">拥塞避免阶段（cwnd线性增大）<strong>[发送方]</strong></h3>
+<p>当窗口达到<strong>慢启动阈值/慢开始门限（slow start threshold/ssthresh）</strong>或出现丢包时，进入拥塞避免阶段，窗口每轮次加一<strong><font color='red'>（加法增大）</font></strong>，呈线性增长；</p>
+<h3 id="快重传阶段-接收方发送方">快重传阶段 <strong>[接收方/发送方]</strong></h3>
+<p>快重传机制要求<strong>接收方在收到一个失序的报文段后就立即发出与之前重复的确认ACK而不要等到自己发送数据时捎带确认；当发送方收到对一个报文的三个重复的 ACK 时，认为这个报文的下一个报文丢失了，这时就立即重发这个丢失的报文，而不用等待为该报文设置的重传计时器到期之后再重发。</strong>由于快重传使发送方及早知道有报文段没有到达对方，可提高网络吞吐量约20%。</p>
+<p>这里举一个例子来理解快重传，如图所示，接收方收到了M1和M2后都分别及时发出了确认。现假定接收方没有收到M3但却收到了M4。本来接收方可以什么都不做。但按照快重传算法，接收方必须立即发送对M2的重复确认，以便让发送方及早知道接收方没有收到报文段M3。发送方接着发送M5和M6。接收方收到后也仍要再次分别发出对M2的重复确认。这样，发送方共收到了接收方的4个对M2的确认，其中后3个都是重复确认。快重传算法规定，发送方只要一连收到3个重复确认，就知道接收方确实没有收到报文段M3，因而应当立即进行重传（即“快重传”），这样就不会出现超时，发送方也不就会误认为出现了网络拥塞。使用快重传可以使整个网络的吞吐量提高约20%。<br />
+<img src="https://i.loli.net/2020/03/13/amAw6ui5Lvx7rGn.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-13_00-17-24.png" /></p>
+<h3 id="快恢复阶段-发送方">快恢复阶段 <strong>[发送方]</strong></h3>
+<p>快重传完成后进入快恢复阶段，将<strong>慢启动阈值修改为当前拥塞窗口值的一半<font color='red'>（乘法减半）</font></strong>。同时拥塞窗口值等于更新之后的慢启动阈值（也就是快重传阶段时的拥塞窗口值的一半），然后进入<strong>拥塞避免阶段</strong>，重复上述过程。</p>
 <p><strong>注意</strong>：如果使用的不是Reno算法是原始的Tahoe算法，那么不会有快恢复阶段，当网络出现时间延迟或者丢包时，也会将<strong>慢启动阈值修改为当前拥塞窗口值的一半<font color='red'>（乘法减半）</font></strong>，但拥塞窗口值不再是之前拥塞窗口值的一半，而是置为 1个单位的<strong>最大单个报文段长度</strong>MSS，重新进入慢开始阶段。</p>
-<p>整体过程如下图所示，从第1个传输轮次到第13个传输轮次，一般初始的cwnd=1个单位MMS。<br><img src="https://i.loli.net/2020/03/13/jo1SlBwOCF4JDEL.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-13_00-20-28.png">  </p>
-<h2 id="BBR"><a href="#BBR" class="headerlink" title="BBR"></a>BBR</h2><p>BBR 是谷歌在 2016 年提出的一种新的拥塞控制算法，已经在 Youtube 服务器和谷歌跨数据中心广域网上部署，据 Youtube 官方数据称，部署 BBR 后，在全球范围内访问 Youtube 的延迟降低了 53%，在时延较高的发展中国家，延迟降低了 80%。  </p>
+<p>整体过程如下图所示，从第1个传输轮次到第13个传输轮次，一般初始的cwnd=1个单位MMS。<br />
+<img src="https://i.loli.net/2020/03/13/jo1SlBwOCF4JDEL.png" srcset="/img/loading.gif" alt="Snipaste_2020-03-13_00-20-28.png" /></p>
+<h2 id="bbr">BBR</h2>
+<p>BBR 是谷歌在 2016 年提出的一种新的拥塞控制算法，已经在 Youtube 服务器和谷歌跨数据中心广域网上部署，据 Youtube 官方数据称，部署 BBR 后，在全球范围内访问 Youtube 的延迟降低了 53%，在时延较高的发展中国家，延迟降低了 80%。</p>
 <p>BBR 算法<strong>不将出现丢包或时延增加作为拥塞的信号，而是认为当网络上的数据包总量大于瓶颈链路带宽和时延的乘积时才出现了拥塞</strong>，所以 BBR 也称为基于拥塞的拥塞控制算法（Congestion-Based Congestion Control），其适用网络为<strong>高带宽、高时延、有一定丢包率的长肥网络</strong>，可以有效降低传输时延，并保证较高的吞吐量，与其他两个常见算法发包速率对比如下：</p>
-<p><img src="https://i.loli.net/2020/03/13/VNBJKSvPr6X1ZiQ.jpg" srcset="/img/loading.gif" alt="v2-87e9aa069720faf6bf16b8d10a72265e_720w.jpg"></p>
-<p>BBR 算法周期性地探测网络的容量，交替测量一段时间内的<strong>带宽极大值和时延极小值</strong>，将其乘积作为作为拥塞窗口大小，使得<strong>拥塞窗口始的值始终与网络的容量保持一致</strong>。  </p>
-<p>所以 BBR 算法解决了两个比较主要的问题：  </p>
+<figure>
+<img src="https://i.loli.net/2020/03/13/VNBJKSvPr6X1ZiQ.jpg" srcset="/img/loading.gif" alt="v2-87e9aa069720faf6bf16b8d10a72265e_720w.jpg" /><figcaption aria-hidden="true">v2-87e9aa069720faf6bf16b8d10a72265e_720w.jpg</figcaption>
+</figure>
+<p>BBR 算法周期性地探测网络的容量，交替测量一段时间内的<strong>带宽极大值和时延极小值</strong>，将其乘积作为作为拥塞窗口大小，使得<strong>拥塞窗口始的值始终与网络的容量保持一致</strong>。</p>
+<p>所以 BBR 算法解决了两个比较主要的问题：</p>
 <ul>
-<li>在有一定丢包率的网络链路上充分利用带宽。适合高延迟、高带宽的网络链路。  </li>
-<li>降低网络链路上的 buffer 占用率，从而降低延迟。适合慢速接入网络的用户。  </li>
+<li>在有一定丢包率的网络链路上充分利用带宽。适合高延迟、高带宽的网络链路。<br />
+</li>
+<li>降低网络链路上的 buffer 占用率，从而降低延迟。适合慢速接入网络的用户。</li>
 </ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>目前有非常多的 TCP 的拥塞控制协议，例如：</p>
-<p>基于丢包的拥塞控制：<strong>将丢包视为出现拥塞</strong>，采取缓慢探测的方式，逐渐增大拥塞窗口，当出现丢包时，将拥塞窗口减小，如 Reno、Cubic 等。<br>基于时延的拥塞控制：<strong>将时延增加视为出现拥塞</strong>，延时增加时增大拥塞窗口，延时减小时减小拥塞窗口，如 Vegas、FastTCP 等。<br>基于链路容量的拥塞控制：<strong>实时测量网络带宽和时延</strong>，认为网络上报文总量大于带宽时延乘积时出现了拥塞，如 BBR。<br>基于学习的拥塞控制：<strong>没有特定的拥塞信号</strong>，而是借助评价函数，基于训练数据，使用机器学习的方法形成一个控制策略，如 Remy。<br>从使用的角度来说，我们应该根据自身的实际情况来选择自己机器的拥塞控制协议（而不是跟风 BBR），同时对于拥塞控制原理的掌握（尤其是掌握 Reno 的控制机理和几个重要阶段）可以加强对于网络发包机制的了解，在排查问题或面对面试的时候有更好的表现。  </p>
-
+<h1 id="总结">总结</h1>
+<p>目前有非常多的 TCP 的拥塞控制协议，例如：</p>
+<p>基于丢包的拥塞控制：<strong>将丢包视为出现拥塞</strong>，采取缓慢探测的方式，逐渐增大拥塞窗口，当出现丢包时，将拥塞窗口减小，如 Reno、Cubic 等。<br />
+基于时延的拥塞控制：<strong>将时延增加视为出现拥塞</strong>，延时增加时增大拥塞窗口，延时减小时减小拥塞窗口，如 Vegas、FastTCP 等。<br />
+基于链路容量的拥塞控制：<strong>实时测量网络带宽和时延</strong>，认为网络上报文总量大于带宽时延乘积时出现了拥塞，如 BBR。<br />
+基于学习的拥塞控制：<strong>没有特定的拥塞信号</strong>，而是借助评价函数，基于训练数据，使用机器学习的方法形成一个控制策略，如 Remy。<br />
+从使用的角度来说，我们应该根据自身的实际情况来选择自己机器的拥塞控制协议（而不是跟风 BBR），同时对于拥塞控制原理的掌握（尤其是掌握 Reno 的控制机理和几个重要阶段）可以加强对于网络发包机制的了解，在排查问题或面对面试的时候有更好的表现。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -525,6 +550,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

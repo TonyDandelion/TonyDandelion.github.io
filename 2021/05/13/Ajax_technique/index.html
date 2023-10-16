@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -196,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-05-13 14:08" pubdate>
-        2021年5月13日 下午
+      <time datetime="2021-05-13 06:08" pubdate>
+        2021年5月13日 早上
       </time>
     </span>
   
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      126 字
+      127 字
     </span>
   
 
@@ -253,7 +253,8 @@
             <div class="markdown-body">
               <p>记录一些常见的Ajax小技巧</p>
 <a id="more"></a>
-<h1 id="Post-And-Get"><a href="#Post-And-Get" class="headerlink" title="Post And Get"></a>Post And Get</h1><ul>
+<h1 id="post-and-get">Post And Get</h1>
+<ul>
 <li>Post</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">	<span class="hljs-keyword">var</span> url = <span class="hljs-string">&quot;/api/item/add&quot;</span></span><br><span class="javascript">	$.post(url, &#123;</span><br><span class="javascript">      <span class="hljs-string">&quot;parame1&quot;</span>: parame1,</span><br><span class="javascript">      <span class="hljs-string">&quot;parame2&quot;</span>: parame2,</span><br><span class="javascript">      <span class="hljs-string">&quot;parame3&quot;</span>: parame3,</span><br><span class="javascript">    &#125; <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, textStatus, xhr</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-comment">// Do something</span></span><br>    &#125;);<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
@@ -261,8 +262,9 @@
 <li>Get</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">	<span class="hljs-keyword">var</span> url = <span class="hljs-string">&quot;/api/item/&quot;</span> + id</span><br><span class="javascript">	$.get(url, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, textStatus, xhr</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-comment">// Do something</span></span><br>    &#125;);<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-<h1 id="Run-code-after-Ajax-finish"><a href="#Run-code-after-Ajax-finish" class="headerlink" title="Run code after Ajax finish"></a>Run code after Ajax finish</h1><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">	<span class="hljs-comment">// request events data</span></span><br><span class="javascript">    <span class="hljs-keyword">var</span> eventsajax = $.get(url, &#123;</span><br><span class="javascript">      <span class="hljs-string">&quot;parame1&quot;</span>: parame1,</span><br><span class="javascript">      <span class="hljs-string">&quot;parame2&quot;</span>: parame2,</span><br><span class="javascript">      <span class="hljs-string">&quot;parame3&quot;</span>: parame3,</span><br><span class="javascript">    &#125; <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, textStatus, xhr</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-comment">// Do something</span></span><br>    &#125;);<br><br><span class="javascript">    $.when(eventsajax).done(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-comment">// Ajax Finish</span></span><br>    &#125;)<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-
+<h1 id="run-code-after-ajax-finish">Run code after Ajax finish</h1>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">	<span class="hljs-comment">// request events data</span></span><br><span class="javascript">    <span class="hljs-keyword">var</span> eventsajax = $.get(url, &#123;</span><br><span class="javascript">      <span class="hljs-string">&quot;parame1&quot;</span>: parame1,</span><br><span class="javascript">      <span class="hljs-string">&quot;parame2&quot;</span>: parame2,</span><br><span class="javascript">      <span class="hljs-string">&quot;parame3&quot;</span>: parame3,</span><br><span class="javascript">    &#125; <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, textStatus, xhr</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-comment">// Do something</span></span><br>    &#125;);<br><br><span class="javascript">    $.when(eventsajax).done(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-comment">// Ajax Finish</span></span><br>    &#125;)<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -499,6 +501,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

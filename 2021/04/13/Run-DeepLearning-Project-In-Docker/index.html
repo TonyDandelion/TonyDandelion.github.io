@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      919 字
+      928 字
     </span>
   
 
@@ -257,10 +257,13 @@
 <blockquote>
 <p>需要在宿主机上提前安装好驱动和cuda，驱动版本需要比较高。</p>
 </blockquote>
-<h1 id="安装Docker和Nvidia-docker"><a href="#安装Docker和Nvidia-docker" class="headerlink" title="安装Docker和Nvidia-docker"></a>安装Docker和Nvidia-docker</h1><h2 id="配置-Docker-源"><a href="#配置-Docker-源" class="headerlink" title="配置 Docker 源"></a>配置 Docker 源</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 更新源</span><br>$ sudo apt update<br><br><span class="hljs-comment"># 启用HTTPS</span><br>$ sudo apt install -y \<br>    apt-transport-https \<br>    ca-certificates \<br>    curl \<br>    gnupg-agent \<br>    software-properties-common<br><br><span class="hljs-comment"># 添加GPG key</span><br>$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -<br><br><span class="hljs-comment"># 添加稳定版的源</span><br>$ sudo add-apt-repository \<br>   <span class="hljs-string">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span><br><span class="hljs-string">   <span class="hljs-subst">$(lsb_release -cs)</span> \</span><br><span class="hljs-string">   stable&quot;</span><br></code></pre></div></td></tr></table></figure>
-<h2 id="安装-Docker-CE"><a href="#安装-Docker-CE" class="headerlink" title="安装 Docker CE"></a>安装 Docker CE</h2><p>此刻 Docker 版本需要 19.03，此后可能需要更新。</p>
+<h1 id="安装docker和nvidia-docker">安装Docker和Nvidia-docker</h1>
+<h2 id="配置-docker-源">配置 Docker 源</h2>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 更新源</span><br>$ sudo apt update<br><br><span class="hljs-comment"># 启用HTTPS</span><br>$ sudo apt install -y \<br>    apt-transport-https \<br>    ca-certificates \<br>    curl \<br>    gnupg-agent \<br>    software-properties-common<br><br><span class="hljs-comment"># 添加GPG key</span><br>$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -<br><br><span class="hljs-comment"># 添加稳定版的源</span><br>$ sudo add-apt-repository \<br>   <span class="hljs-string">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span><br><span class="hljs-string">   <span class="hljs-subst">$(lsb_release -cs)</span> \</span><br><span class="hljs-string">   stable&quot;</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="安装-docker-ce">安装 Docker CE</h2>
+<p>此刻 Docker 版本需要 19.03，此后可能需要更新。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 更新源</span><br>$ sudo apt update<br><br><span class="hljs-comment"># 安装Docker CE</span><br>$ sudo apt install -y docker-ce<br></code></pre></div></td></tr></table></figure>
-<p>如果这种方式安装失败，也有解决方案。<br>报错时屏幕上会显示下载失败的 deb 文件，<strong>想办法</strong>下载下来，然后挨个手动安装就好。</p>
+<p>如果这种方式安装失败，也有解决方案。 报错时屏幕上会显示下载失败的 deb 文件，<strong>想办法</strong>下载下来，然后挨个手动安装就好。</p>
 <p>此刻我需要下载的是下面三个文件，此后更新为当时最新版本即可：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/containerd.io_1.2.6-3_amd64.deb">containerd.io_1.2.6-3_amd64.deb</a></li>
@@ -269,25 +272,37 @@
 </ul>
 <p>手动依次安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo dpkg -i containerd.io_1.2.6-3_amd64.deb<br>$ sudo dpkg -i docker-ce-cli_19.03.0~3-0~ubuntu-bionic_amd64.deb<br>$ sudo dpkg -i docker-ce_19.03.0~3-0~ubuntu-bionic_amd64.deb<br></code></pre></div></td></tr></table></figure>
-<h2 id="验证-Docker-CE"><a href="#验证-Docker-CE" class="headerlink" title="验证 Docker CE"></a>验证 Docker CE</h2><p>如果出现下面的内容，说明安装成功。</p>
+<h2 id="验证-docker-ce">验证 Docker CE</h2>
+<p>如果出现下面的内容，说明安装成功。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo docker run hello-world<br><br>Unable to find image <span class="hljs-string">&#x27;hello-world:latest&#x27;</span> locally<br>latest: Pulling from library/hello-world<br>1b930d010525: Pull complete <br>Digest: sha256:2557e3c07ed1e38f26e389462d03ed943586f744621577a99efb77324b0fe535<br>Status: Downloaded newer image <span class="hljs-keyword">for</span> hello-world:latest<br><br>Hello from Docker!<br>This message shows that your installation appears to be working correctly.<br><br>To generate this message, Docker took the following steps:<br> 1. The Docker client contacted the Docker daemon.<br> 2. The Docker daemon pulled the <span class="hljs-string">&quot;hello-world&quot;</span> image from the Docker Hub.<br>    (amd64)<br> 3. The Docker daemon created a new container from that image <span class="hljs-built_in">which</span> runs the<br>    executable that produces the output you are currently reading.<br> 4. The Docker daemon streamed that output to the Docker client, <span class="hljs-built_in">which</span> sent it<br>    to your terminal.<br><br>To try something more ambitious, you can run an Ubuntu container with:<br> $ docker run -it ubuntu bash<br><br>Share images, automate workflows, and more with a free Docker ID:<br> https://hub.docker.com/<br><br>For more examples and ideas, visit:<br> https://docs.docker.com/get-started/<br></code></pre></div></td></tr></table></figure>
-<h2 id="安装-nvidia-container-toolkit"><a href="#安装-nvidia-container-toolkit" class="headerlink" title="安装 nvidia-container-toolkit"></a>安装 <code>nvidia-container-toolkit</code></h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 添加源</span><br>$ distribution=$(. /etc/os-release;<span class="hljs-built_in">echo</span> $ID<span class="hljs-variable">$VERSION_ID</span>)<br>$ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -<br>$ curl -s -L https://nvidia.github.io/nvidia-docker/<span class="hljs-variable">$distribution</span>/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list<br><br><span class="hljs-comment"># 安装并重启docker</span><br>$ sudo apt update &amp;&amp; sudo apt install -y nvidia-container-toolkit<br>$ sudo systemctl restart docker<br></code></pre></div></td></tr></table></figure>
-<h2 id="使用-nvidia-container-toolkit"><a href="#使用-nvidia-container-toolkit" class="headerlink" title="使用 nvidia-container-toolkit"></a>使用 <code>nvidia-container-toolkit</code></h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 在官方CUDA镜像上测试 nvidia-smi</span><br>$ sudo docker run --gpus all nvidia/cuda:9.0-base nvidia-smi<br><br><span class="hljs-comment"># 启动支持双GPU的容器</span><br>$ sudo docker run --gpus 2 nvidia/cuda:9.0-base nvidia-smi<br><br><span class="hljs-comment"># 指定GPU 1，运行容器</span><br>$ sudo docker run --gpus device=0 nvidia/cuda:9.0-base nvidia-smi<br></code></pre></div></td></tr></table></figure>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/journeyonmyway/p/11234572.html">https://www.cnblogs.com/journeyonmyway/p/11234572.html</a></p>
-<h1 id="安装Tensorflow和Pytorch"><a href="#安装Tensorflow和Pytorch" class="headerlink" title="安装Tensorflow和Pytorch"></a>安装Tensorflow和Pytorch</h1><h2 id="Keras"><a href="#Keras" class="headerlink" title="Keras"></a>Keras</h2><p>keras依赖于tensor flow，安装好tensorflow就行。</p>
-<h3 id="Pull-Tensorflow-Docker-Images"><a href="#Pull-Tensorflow-Docker-Images" class="headerlink" title="Pull Tensorflow Docker Images"></a>Pull Tensorflow Docker Images</h3><p>配置可以使用keras起调GPU的Docker环境。keras以 <code>tensorflow-gpu</code> 为后端,  在这个<a target="_blank" rel="noopener" href="https://hub.docker.com/r/tensorflow/tensorflow/tags">页面</a> 找到符合自己版本的tensorflow-gpu, pull下来。</p>
+<h2 id="安装-nvidia-container-toolkit">安装 <code>nvidia-container-toolkit</code></h2>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 添加源</span><br>$ distribution=$(. /etc/os-release;<span class="hljs-built_in">echo</span> $ID<span class="hljs-variable">$VERSION_ID</span>)<br>$ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -<br>$ curl -s -L https://nvidia.github.io/nvidia-docker/<span class="hljs-variable">$distribution</span>/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list<br><br><span class="hljs-comment"># 安装并重启docker</span><br>$ sudo apt update &amp;&amp; sudo apt install -y nvidia-container-toolkit<br>$ sudo systemctl restart docker<br></code></pre></div></td></tr></table></figure>
+<h2 id="使用-nvidia-container-toolkit">使用 <code>nvidia-container-toolkit</code></h2>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 在官方CUDA镜像上测试 nvidia-smi</span><br>$ sudo docker run --gpus all nvidia/cuda:9.0-base nvidia-smi<br><br><span class="hljs-comment"># 启动支持双GPU的容器</span><br>$ sudo docker run --gpus 2 nvidia/cuda:9.0-base nvidia-smi<br><br><span class="hljs-comment"># 指定GPU 1，运行容器</span><br>$ sudo docker run --gpus device=0 nvidia/cuda:9.0-base nvidia-smi<br></code></pre></div></td></tr></table></figure>
+<h2 id="参考链接">参考链接</h2>
+<p>https://www.cnblogs.com/journeyonmyway/p/11234572.html</p>
+<h1 id="安装tensorflow和pytorch">安装Tensorflow和Pytorch</h1>
+<h2 id="keras">Keras</h2>
+<p>keras依赖于tensor flow，安装好tensorflow就行。</p>
+<h3 id="pull-tensorflow-docker-images">Pull Tensorflow Docker Images</h3>
+<p>配置可以使用keras起调GPU的Docker环境。keras以 <code>tensorflow-gpu</code> 为后端, 在这个<a target="_blank" rel="noopener" href="https://hub.docker.com/r/tensorflow/tensorflow/tags">页面</a> 找到符合自己版本的tensorflow-gpu, pull下来。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">docker pull tensorflow/tensorflow:1.9.0-devel-gpu<br></code></pre></div></td></tr></table></figure>
-<h3 id="Run-Tensorflow-Docker-Container"><a href="#Run-Tensorflow-Docker-Container" class="headerlink" title="Run Tensorflow Docker Container"></a>Run Tensorflow Docker Container</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker --runtime=nvidia run -p 8085:8085 -v /home/brl/docker_share:/data --name speech_emotion_recognition --gpus all -it tensorflow/tensorflow:1.9.0-devel-gpu /bin/bash<br></code></pre></div></td></tr></table></figure>
+<h3 id="run-tensorflow-docker-container">Run Tensorflow Docker Container</h3>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker --runtime=nvidia run -p 8085:8085 -v /home/brl/docker_share:/data --name speech_emotion_recognition --gpus all -it tensorflow/tensorflow:1.9.0-devel-gpu /bin/bash<br></code></pre></div></td></tr></table></figure>
 <p>去runtime版</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo run -p 8085:8085 -v /home/brl/docker_share:/data --name container --gpus all -it tensorflow/tensorflow:1.9.0-devel-gpu /bin/bash<br></code></pre></div></td></tr></table></figure>
-<h3 id="参考链接-1"><a href="#参考链接-1" class="headerlink" title="参考链接"></a>参考链接</h3><p><a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/docker?hl=zh-cn">tensorflow for docker homepage</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/docker?hl=zh-cn#examples_using_gpu-enabled_images">https://www.tensorflow.org/install/docker?hl=zh-cn#examples_using_gpu-enabled_images</a></p>
-<h2 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h2><h3 id="Pull-Pytorch-Docker-Images"><a href="#Pull-Pytorch-Docker-Images" class="headerlink" title="Pull Pytorch Docker Images"></a>Pull Pytorch Docker Images</h3><p>配置可以使用Pytorch起调GPU的Docker环境。去这个<a target="_blank" rel="noopener" href="https://hub.docker.com/r/pytorch/pytorch/tags?page=1&amp;ordering=last_updated">页面</a>，找到符合自己版本的pytorch-gpu, pull下来。</p>
+<h3 id="参考链接-1">参考链接</h3>
+<p><a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/docker?hl=zh-cn">tensorflow for docker homepage</a></p>
+<p>https://www.tensorflow.org/install/docker?hl=zh-cn#examples_using_gpu-enabled_images</p>
+<h2 id="pytorch">Pytorch</h2>
+<h3 id="pull-pytorch-docker-images">Pull Pytorch Docker Images</h3>
+<p>配置可以使用Pytorch起调GPU的Docker环境。去这个<a target="_blank" rel="noopener" href="https://hub.docker.com/r/pytorch/pytorch/tags?page=1&amp;ordering=last_updated">页面</a>，找到符合自己版本的pytorch-gpu, pull下来。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker pull pytorch/pytorch:0.4.1-cuda9-cudnn7-runtime<br></code></pre></div></td></tr></table></figure>
-<h3 id="Run-Pytorch-Docker-Container"><a href="#Run-Pytorch-Docker-Container" class="headerlink" title="Run Pytorch Docker Container"></a>Run Pytorch Docker Container</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker run --runtime=nvidia -p 8086:8086 -v /home/brl/docker_share:/data --name sound_event_detection --gpus=all -it pytorch/pytorch:0.4.1-cuda9-cudnn7-runtime /bin/bash<br></code></pre></div></td></tr></table></figure>
+<h3 id="run-pytorch-docker-container">Run Pytorch Docker Container</h3>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker run --runtime=nvidia -p 8086:8086 -v /home/brl/docker_share:/data --name sound_event_detection --gpus=all -it pytorch/pytorch:0.4.1-cuda9-cudnn7-runtime /bin/bash<br></code></pre></div></td></tr></table></figure>
 <p>去runtime版</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo docker run -p 8086:8086 -v /home/brl/docker_share:/data --name sound_event_detection --gpus=all -it pytorch/pytorch:0.4.1-cuda9-cudnn7-runtime /bin/bash<br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -524,6 +539,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

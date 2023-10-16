@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      523 字
+      522 字
     </span>
   
 
@@ -255,11 +255,15 @@
 <p>记录每天遇到的各种bug的流水账</p>
 <p>定期会把其中可分类的部分分离出来</p>
 <a id="more"></a>
-<h1 id="2021-03-16"><a href="#2021-03-16" class="headerlink" title="2021-03-16"></a>2021-03-16</h1><h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><p>在腾讯云服务器的docker container中执行shell脚本<code>sh activateEnv.sh</code>时，执行其中的 <code>conda activate env_name</code>，出现了<code>CommandNotFoundError: Your shell has not been properly configured to use &#39;conda activate&#39;.</code> 的报错。</p>
+<h1 id="section">2021-03-16</h1>
+<h2 id="复现">复现</h2>
+<p>在腾讯云服务器的docker container中执行shell脚本<code>sh activateEnv.sh</code>时，执行其中的 <code>conda activate env_name</code>，出现了<code>CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.</code> 的报错。</p>
 <p>shell脚本</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-built_in">cd</span> ~/brl_checkIn/back_end/<br>conda activate brl_checkIn<br></code></pre></div></td></tr></table></figure>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>不使用<code>sh *.sh</code>执行shell脚本，使用<code>. *sh</code>或者<code>source *.sh</code>执行脚本。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>几种shell脚本执行方法</p>
+<h2 id="解决">解决</h2>
+<p>不使用<code>sh *.sh</code>执行shell脚本，使用<code>. *sh</code>或者<code>source *.sh</code>执行脚本。</p>
+<h2 id="分析">分析</h2>
+<p>几种shell脚本执行方法</p>
 <p><strong>使用 <code>sh test.sh</code> 执行</strong></p>
 <p>使用 sh test.sh 来执行 script 文件，该方法标明使用 sh 这种 shell 来执行 test.sh 文件，sh 已经是一种被 bash 替代的 shell，尽管我们在 test.sh 中声明使用 #!/bin/bash 来执行我们的文件，但此时使用 sh 而不是 bash，则#!/bin/bash 已不起作用。</p>
 <p><strong>使用 <code>bash test.sh</code> 执行</strong></p>
@@ -271,7 +275,7 @@
 <p>添加完执行权限之后，便可以使用 ./test.sh 来执行脚本，该方式与 bash test.sh 是一样的，默认使用 bin/bash 来执行我们的脚本。只有该种执行方式需要对文件添加执行权限，其他方式并不需要。</p>
 <p><strong>使用 <code>source test.sh</code>执行</strong></p>
 <p>source 方法执行脚本是在父进程中执行的，以上三种方法是在shell子进程中执行的。test.sh 的各项操作都会在原本的 shell 内生效，这也是为什么不注销系统而要让某些写入～/.bashrc 的设置生效时，需要使用 source ~/.bashrc 而不能使用 bash ~/.bashrc</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -501,6 +505,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -259,49 +259,47 @@
 <p><strong>最终状态</strong></p>
 <p>到倒数第二轮轮到对方拿币的时候，<strong>必须剩下6(5+1)个币</strong>，不多也不能少，这样无论对方怎么拿，总会剩下少于6个币，最后一轮我把剩下的币全部拿走就行了。则，倒数第二轮轮到对方拿币的时候，我们一共拿掉了94个币。</p>
 <p><strong>答案</strong></p>
-<p>设第一次我取币 $x$ 个，接着对方拿 $n$ 个币，我就拿 $6-n$ 个币，保证每次和对方凑成 $6$ 个币，经过 $15$ 轮之后，就拿走了 $15\times6=90$ 个币，加上最开始我拿走的 $x$ 个币，一共要有 $90 + x = 94$ 个币，所以 $x = 4$。</p>
+<p>设第一次我取币 <span class="math inline">\(x\)</span> 个，接着对方拿 <span class="math inline">\(n\)</span> 个币，我就拿 <span class="math inline">\(6-n\)</span> 个币，保证每次和对方凑成 <span class="math inline">\(6\)</span> 个币，经过 <span class="math inline">\(15\)</span> 轮之后，就拿走了 <span class="math inline">\(15\times6=90\)</span> 个币，加上最开始我拿走的 <span class="math inline">\(x\)</span> 个币，一共要有 <span class="math inline">\(90 + x = 94\)</span> 个币，所以 <span class="math inline">\(x = 4\)</span>。</p>
 <p>策略是：第一次，我取走4个，后面后手每次拿n个币，我就拿走 6 - n 个 币，最终肯定会剩下小于 6 个币给我全部拿掉，我就赢得了比赛。</p>
 <blockquote>
 <p>7升水桶和11升水桶怎么倒出2升</p>
 </blockquote>
 <p><strong>最终状态：</strong></p>
-<p><strong>1、小桶倒大桶：7升水桶满水倒掉5升，还剩2升，要求11升水桶里面还剩6升。</strong><br><strong>2、大桶倒小桶：11升水桶里面有9升，倒掉7升，还剩2升。</strong></p>
+<p><strong>1、小桶倒大桶：7升水桶满水倒掉5升，还剩2升，要求11升水桶里面还剩6升。</strong> <strong>2、大桶倒小桶：11升水桶里面有9升，倒掉7升，还剩2升。</strong></p>
 <p><strong>答案：</strong></p>
-<ol>
-<li><p>大桶倒满，然后倒满小桶，大桶还剩4升。</p>
-</li>
-<li><p>大桶4升倒进小桶，然后重新倒满，再次倒满小桶，大桶还剩8升。</p>
-</li>
-<li>小桶清空，大桶倒满小桶，还剩1升。</li>
-<li>小桶清空，将大桶的1升倒进去，接着倒满大桶，再去到满小桶，大桶还剩5升。</li>
-<li>小桶清空，大桶的5升水倒进小桶，接着倒满大桶，再去到满小桶，大桶还剩9升。</li>
-<li>小桶清空，大桶里面有9升，倒满小桶，还剩2升。</li>
+<ol type="1">
+<li><p>大桶倒满，然后倒满小桶，大桶还剩4升。</p></li>
+<li><p>大桶4升倒进小桶，然后重新倒满，再次倒满小桶，大桶还剩8升。</p></li>
+<li><p>小桶清空，大桶倒满小桶，还剩1升。</p></li>
+<li><p>小桶清空，将大桶的1升倒进去，接着倒满大桶，再去到满小桶，大桶还剩5升。</p></li>
+<li><p>小桶清空，大桶的5升水倒进小桶，接着倒满大桶，再去到满小桶，大桶还剩9升。</p></li>
+<li><p>小桶清空，大桶里面有9升，倒满小桶，还剩2升。</p></li>
 </ol>
 <blockquote>
 <p>八个球,其中有一个是其余球重量的1.5倍,有什么方案找出来</p>
 </blockquote>
 <p><strong>答案</strong></p>
-<p>第一次分成两组AB，每组4个球，找出重的那个组。<br>第二次将重的那个组的球随机分两组，找出重的那个组。<br>第三次将重的那个组的球随机分两个，找出重的那个个。</p>
+<p>第一次分成两组AB，每组4个球，找出重的那个组。 第二次将重的那个组的球随机分两组，找出重的那个组。 第三次将重的那个组的球随机分两个，找出重的那个个。</p>
 <p><strong>升级</strong>：使用一个天平找8个球中其中一个重量不一致的球。</p>
 <p><strong>答案</strong></p>
-<p>首先得明确知道那个重量不一致的球并不知道是过重还是过轻！！！<br>解决方法采用排除法！！！<br>假设给八个球进行编号，分别为：12345678；</p>
-<p>第一次称：<br>将八个球每两两进行分组，分为4个组，假设12为A组、34为B组、56为C组、78为D组；<br>将A组放在天平左盘，B组放在右盘，如果不平衡，可以判断出不一致的球在AB两组中，即在1234这四个球中，且5678四个球重量是一样的球；如果平衡，可以判断不一致的球在CD两组中，即在5678四个球中，且1234四个球重量是一样的球；</p>
-<p>第二次称：<br>假设不一致的球在AB两组(在CD两组也可一样)中，即在1234四个球中；<br>方法一：<br>将A组放在左盘，C组(或D组)放在右盘(此时右盘放的球已经知道为重量一样的)，<br>如果不平衡，可知不一致的球在A组，即在12这连个球中，且34球为重量一样的球；<br>如果平衡，则可以推断出不一致的球在B组，即在34这两个球中，且12球为重量一样的球；<br>方法二：<br>将1球放在左盘，2球放在右盘，如果不平衡，可知不一致的球在12这两个球中；如果平衡，则可推断出不一致的球在34这两个球中；</p>
-<p>第三次称：<br>假设不一致的球在A组，即在12两个球中；<br>将1球放在左盘，3(45678任一个都可以)放在右盘，如果不平衡，可判断出不一致的球为1球；如果平衡，可推断出不一致的球为2球；</p>
-<p>————————————————<br>版权声明：本文为CSDN博主「debimeng」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/debimeng/article/details/87898726">https://blog.csdn.net/debimeng/article/details/87898726</a></p>
+<p>首先得明确知道那个重量不一致的球并不知道是过重还是过轻！！！ 解决方法采用排除法！！！ 假设给八个球进行编号，分别为：12345678；</p>
+<p>第一次称： 将八个球每两两进行分组，分为4个组，假设12为A组、34为B组、56为C组、78为D组； 将A组放在天平左盘，B组放在右盘，如果不平衡，可以判断出不一致的球在AB两组中，即在1234这四个球中，且5678四个球重量是一样的球；如果平衡，可以判断不一致的球在CD两组中，即在5678四个球中，且1234四个球重量是一样的球；</p>
+<p>第二次称： 假设不一致的球在AB两组(在CD两组也可一样)中，即在1234四个球中； 方法一： 将A组放在左盘，C组(或D组)放在右盘(此时右盘放的球已经知道为重量一样的)， 如果不平衡，可知不一致的球在A组，即在12这连个球中，且34球为重量一样的球； 如果平衡，则可以推断出不一致的球在B组，即在34这两个球中，且12球为重量一样的球； 方法二： 将1球放在左盘，2球放在右盘，如果不平衡，可知不一致的球在12这两个球中；如果平衡，则可推断出不一致的球在34这两个球中；</p>
+<p>第三次称： 假设不一致的球在A组，即在12两个球中； 将1球放在左盘，3(45678任一个都可以)放在右盘，如果不平衡，可判断出不一致的球为1球；如果平衡，可推断出不一致的球为2球；</p>
+<p>———————————————— 版权声明：本文为CSDN博主「debimeng」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。 原文链接：https://blog.csdn.net/debimeng/article/details/87898726</p>
 <blockquote>
 <p>64匹马8个跑道最少需要多少轮才能选出最快的4匹马？</p>
 </blockquote>
 <p>如果可以计时：先把64匹马分成8组，每组跑一轮，得到8匹跑的最快的马，再跑一轮，记录前4名。一共跑了9轮。</p>
 <p>如果不能计时：</p>
 <p>要点：</p>
-<p>1、不能进入每组前4的，必然可以淘汰。-32匹（8轮）<br>2、每组第1名比赛后，不在前4的组必然可以淘汰。-16匹（1轮）（该种方法很高效排除无效参赛马匹）<br>3、伪TOP16后情况开始麻烦：由于此时无法必然选出真top8的马匹，因此+1轮比赛无法必然搞定。<br>4、伪TOP8比赛后（+1轮），结果分为3类（不是3种，每类可能有多种排列）：伪top4分布在4、2、3组之中。<br>5、第1类，可以直接确定伪top4就是真top4；第2-3类，由于均存在未参赛马匹进入真TOP4的可能性（此处需要仔细思考），因此还需要（+1）轮比赛。</p>
-<p>由于第1类仅仅是可能性之一，属于幸运情况（需10轮），不属于最坏的情况，因此最坏的情况下，至少经过11轮（=8+1+1+1）比赛。<br>————————————————<br>版权声明：本文为CSDN博主「Sunset Coder」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Andrew_Zeng/article/details/104187464">https://blog.csdn.net/Andrew_Zeng/article/details/104187464</a></p>
+<p>1、不能进入每组前4的，必然可以淘汰。-32匹（8轮） 2、每组第1名比赛后，不在前4的组必然可以淘汰。-16匹（1轮）（该种方法很高效排除无效参赛马匹） 3、伪TOP16后情况开始麻烦：由于此时无法必然选出真top8的马匹，因此+1轮比赛无法必然搞定。 4、伪TOP8比赛后（+1轮），结果分为3类（不是3种，每类可能有多种排列）：伪top4分布在4、2、3组之中。 5、第1类，可以直接确定伪top4就是真top4；第2-3类，由于均存在未参赛马匹进入真TOP4的可能性（此处需要仔细思考），因此还需要（+1）轮比赛。</p>
+<p>由于第1类仅仅是可能性之一，属于幸运情况（需10轮），不属于最坏的情况，因此最坏的情况下，至少经过11轮（=8+1+1+1）比赛。 ———————————————— 版权声明：本文为CSDN博主「Sunset Coder」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。 原文链接：https://blog.csdn.net/Andrew_Zeng/article/details/104187464</p>
 <blockquote>
-<p> 比如一个班级有50个学生，求至少两个人生日相同的概率。</p>
+<p>比如一个班级有50个学生，求至少两个人生日相同的概率。</p>
 </blockquote>
-<p>运用反证法的思想,50个同学中没复有两人生日相同的概率为<br>365*364*363*…*316 / 365^50≈0.03<br>（365*364*363*…*316）一共50项,表示50个学生的生日都不在同一制天<br>365^50表示50个学生生日组合的总数<br>故一个班50个同学中有两人生日相同的概率约为0.97</p>
-
+<p>运用反证法的思想,50个同学中没复有两人生日相同的概率为 365*364*363*...*316 / 365^50≈0.03 （365*364*363*...*316）一共50项,表示50个学生的生日都不在同一制天 365^50表示50个学生生日组合的总数 故一个班50个同学中有两人生日相同的概率约为0.97</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -538,6 +536,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

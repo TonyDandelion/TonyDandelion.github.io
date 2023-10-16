@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -203,24 +203,24 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/03/08/LeetCode-27.-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%EF%BC%88%E6%98%93%EF%BC%89/" target="_self">
-          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 27. 移除元素（易）">
+        <a href="/2020/03/09/LeetCode-38-%E5%A4%96%E8%A7%82%E6%95%B0%E5%88%97%EF%BC%88%E6%98%93%EF%BC%89/" target="_self">
+          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 38. 外观数列（易）">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/03/08/LeetCode-27.-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%EF%BC%88%E6%98%93%EF%BC%89/">LeetCode 27. 移除元素（易）</a>
+        <a href="/2020/03/09/LeetCode-38-%E5%A4%96%E8%A7%82%E6%95%B0%E5%88%97%EF%BC%88%E6%98%93%EF%BC%89/">LeetCode 38. 外观数列（易）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/03/08/LeetCode-27.-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0%EF%BC%88%E6%98%93%EF%BC%89/">
+        <a href="/2020/03/09/LeetCode-38-%E5%A4%96%E8%A7%82%E6%95%B0%E5%88%97%EF%BC%88%E6%98%93%EF%BC%89/">
           
           
             
           
-          当我们遇到 $nums[i] = val$ 时，我们可以将当前元素与最后一个元素进行交换，并释放最后一个元素，这实际上使数组的大小减少了 1，最后返回 $nums$ 的长度就行了。 
+          动态规划，正向循环，更新保留每次first_str，作为下一次迭代的字符串,遍历字符串数组，如果前一个和后一个相同则继续，记录相同的个数count + 1，不相同，则更新前面相同的临时temp以及重置count = 1。 最后一个数要分情况单独讨论更新temp，并初始化所有与之相关的参数。方便下一次迭代。
         </a>
       </p>
 
@@ -228,8 +228,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-03-08 21:53" pubdate>
-              2020-03-08
+            <time datetime="2020-03-09 22:28" pubdate>
+              2020-03-09
             </time>
           </div>
         
@@ -245,7 +245,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
             
           </div>
         
@@ -257,24 +257,25 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/03/08/LeetCode-26-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%EF%BC%88%E6%98%93%EF%BC%89/" target="_self">
-          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 26. 删除排序数组中的重复项（易）">
+        <a href="/2020/03/09/LeetCode-37-%E8%A7%A3%E6%95%B0%E7%8B%AC%EF%BC%88%E9%9A%BE%EF%BC%89/" target="_self">
+          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 37. 解数独（难）">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/03/08/LeetCode-26-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%EF%BC%88%E6%98%93%EF%BC%89/">LeetCode 26. 删除排序数组中的重复项（易）</a>
+        <a href="/2020/03/09/LeetCode-37-%E8%A7%A3%E6%95%B0%E7%8B%AC%EF%BC%88%E9%9A%BE%EF%BC%89/">LeetCode 37. 解数独（难）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/03/08/LeetCode-26-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%EF%BC%88%E6%98%93%EF%BC%89/">
+        <a href="/2020/03/09/LeetCode-37-%E8%A7%A3%E6%95%B0%E7%8B%AC%EF%BC%88%E9%9A%BE%EF%BC%89/">
           
           
             
           
-           指针操作数组 
+          约束编程：基本的意思是在放置每个数字时都设置约束。在数独上放置一个数字后立即排除当前行、列和子方块对该数字的使用。这会传播 约束条件 并有利于减少需要考虑组合的个数。
+回溯算法：让我们想象一下已经成功放置了几个数字在数独上。但是该组合不是最优的并且不能继续放置数字了。该怎么办？ 回溯。意思是回退，来改变之前放置的数字并且继续尝试。如果还是不行，再次回溯。
         </a>
       </p>
 
@@ -282,8 +283,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-03-08 21:40" pubdate>
-              2020-03-08
+            <time datetime="2020-03-09 22:20" pubdate>
+              2020-03-09
             </time>
           </div>
         
@@ -299,7 +300,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+              <a href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">回溯算法</a>
             
           </div>
         
@@ -311,24 +312,27 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/03/08/LeetCode-25-K-%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%EF%BC%88%E9%9A%BE%EF%BC%89/" target="_self">
-          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 25. K 个一组翻转链（难）">
+        <a href="/2020/03/09/LeetCode-36-%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E7%8B%AC%EF%BC%88%E4%B8%AD%EF%BC%89/" target="_self">
+          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 36. 有效的数独（中）">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/03/08/LeetCode-25-K-%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%EF%BC%88%E9%9A%BE%EF%BC%89/">LeetCode 25. K 个一组翻转链（难）</a>
+        <a href="/2020/03/09/LeetCode-36-%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E7%8B%AC%EF%BC%88%E4%B8%AD%EF%BC%89/">LeetCode 36. 有效的数独（中）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/03/08/LeetCode-25-K-%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%EF%BC%88%E9%9A%BE%EF%BC%89/">
+        <a href="/2020/03/09/LeetCode-36-%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E7%8B%AC%EF%BC%88%E4%B8%AD%EF%BC%89/">
           
           
             
           
-           基于链表或者栈、队列，都可以解决这个问题。 
+          首先，让我们来讨论下面两个关键问题，想清楚以下两个问题，这道题就很好理解并解决了：
+1、如何枚举子数独？
+可以使用 box_index = (row / 3) * 3 + columns / 3 ，其中 / 是整数除法。 2、如何确保行 / 列 / 子数独中没有重复项？
+可以利用 value -&gt; count 哈希映射来跟踪所有已经遇到的值。
         </a>
       </p>
 
@@ -336,8 +340,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-03-08 21:32" pubdate>
-              2020-03-08
+            <time datetime="2020-03-09 22:10" pubdate>
+              2020-03-09
             </time>
           </div>
         
@@ -353,7 +357,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%93%88%E5%B8%8C%E8%A1%A8/">字符串与哈希表</a>
             
           </div>
         
@@ -365,24 +369,24 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/03/08/LeetCode-24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%88%E4%B8%AD%EF%BC%89/" target="_self">
-          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 24. 两两交换链表中的节点（中）">
+        <a href="/2020/03/09/LeetCode-35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE%EF%BC%88%E6%98%93%EF%BC%89/" target="_self">
+          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 35. 搜索插入位置（易）">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/03/08/LeetCode-24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%88%E4%B8%AD%EF%BC%89/">LeetCode 24. 两两交换链表中的节点（中）</a>
+        <a href="/2020/03/09/LeetCode-35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE%EF%BC%88%E6%98%93%EF%BC%89/">LeetCode 35. 搜索插入位置（易）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/03/08/LeetCode-24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%88%E4%B8%AD%EF%BC%89/">
+        <a href="/2020/03/09/LeetCode-35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE%EF%BC%88%E6%98%93%EF%BC%89/">
           
           
             
           
-           基本的链表问题 
+          减治：通过不断排除非目标元素，在循环结束之后，最后剩下的那个元素，必然是我们想要的目标元素。减治思想特点，将二分法查找区间，从以前的[left, mid]、mid、[mid, right] 三个部分改成两个区间。
         </a>
       </p>
 
@@ -390,8 +394,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-03-08 21:27" pubdate>
-              2020-03-08
+            <time datetime="2020-03-09 22:04" pubdate>
+              2020-03-09
             </time>
           </div>
         
@@ -407,7 +411,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%92%8C%E6%90%9C%E7%B4%A2/">二分查找和搜索</a>
             
           </div>
         
@@ -419,24 +423,24 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/03/08/LeetCode-23-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%EF%BC%88%E9%9A%BE%EF%BC%89/" target="_self">
-          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 23. 合并K个排序链表（难）">
+        <a href="/2020/03/09/LeetCode-34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%88%E4%B8%AD%EF%BC%89/" target="_self">
+          <img src="/img/83802124_p0.jpg" srcset="/img/loading.gif" alt="LeetCode 34. 在排序数组中查找元素的第一个和最后一个位置（中）&amp; 剑指offer 面试题53 - I. 在排序数组中查找数字 I（易）">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/03/08/LeetCode-23-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%EF%BC%88%E9%9A%BE%EF%BC%89/">LeetCode 23. 合并K个排序链表（难）</a>
+        <a href="/2020/03/09/LeetCode-34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%88%E4%B8%AD%EF%BC%89/">LeetCode 34. 在排序数组中查找元素的第一个和最后一个位置（中）&amp; 剑指offer 面试题53 - I. 在排序数组中查找数字 I（易）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/03/08/LeetCode-23-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%EF%BC%88%E9%9A%BE%EF%BC%89/">
+        <a href="/2020/03/09/LeetCode-34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%88%E4%B8%AD%EF%BC%89/">
           
           
             
           
-           循环遍历、两两合并、分治、暴力破解、注意对比，五种方法解决该问题。 
+          看到有序数组，无论数组里面是字符还是数字，都可以用二分查找解决。总体算法工作过程与线性扫描方法类似，除了找最左和最右下标的方法。这里我们仅仅做几个微小的调整，用这种修改过的二分查找方法去搜索这个排过序的数组。首先，为了找到最左边（或者最右边）包含 target 的下标（而不是找到的话就返回 true ），所以算法在我们找到一个 target 后不能马上停止。我们需要继续搜索，直到 lo == hi
         </a>
       </p>
 
@@ -444,8 +448,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-03-08 21:15" pubdate>
-              2020-03-08
+            <time datetime="2020-03-09 21:53" pubdate>
+              2020-03-09
             </time>
           </div>
         
@@ -455,17 +459,15 @@
             
               <a href="/categories/LeetCode/">LeetCode</a>
             
+              <a href="/categories/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+            
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
-            
-              <a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
-            
-              <a href="/tags/%E5%9B%BE%E4%B8%8E%E5%A0%86/">图与堆</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%92%8C%E6%90%9C%E7%B4%A2/">二分查找和搜索</a>
             
           </div>
         
@@ -477,7 +479,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/60/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/62/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/60/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/page/82/">82</a><a class="extend next" rel="next" href="/page/62/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   
@@ -628,6 +630,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

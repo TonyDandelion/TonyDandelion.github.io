@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -196,8 +196,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-05-13 20:09" pubdate>
-        2021年5月13日 晚上
+      <time datetime="2021-05-13 12:09" pubdate>
+        2021年5月13日 中午
       </time>
     </span>
   
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      490 字
+      492 字
     </span>
   
 
@@ -253,14 +253,16 @@
             <div class="markdown-body">
               <p>Write some code paradigm.</p>
 <a id="more"></a>
-<h1 id="Login-Check"><a href="#Login-Check" class="headerlink" title="Login Check"></a>Login Check</h1><p>Examine login status without parameter loss.</p>
+<h1 id="login-check">Login Check</h1>
+<p>Examine login status without parameter loss.</p>
 <p>Specially design for Django. It takes advantage of the decorator feature of python.</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">check_login</span>(<span class="hljs-params">func</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">inner_func</span>(<span class="hljs-params">*args, **kwargs</span>):</span><br>        request = args[<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">if</span> request.session.get(<span class="hljs-string">&#x27;is_login&#x27;</span>, <span class="hljs-literal">False</span>):<br>            <span class="hljs-keyword">return</span> func(*args, **kwargs)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-string">&quot;no session!&quot;</span>)<br>            <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&#x27;/login&#x27;</span>)<br>    <span class="hljs-keyword">return</span> inner_func<br></code></pre></div></td></tr></table></figure>
-<h1 id="Modify-Item"><a href="#Modify-Item" class="headerlink" title="Modify Item"></a>Modify Item</h1><p>model</p>
+<h1 id="modify-item">Modify Item</h1>
+<p>model</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Panda</span>(<span class="hljs-params">models.Model</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;大熊猫</span><br><span class="hljs-string">    Attributes:</span><br><span class="hljs-string">        name(:obj:`models.CharField`): 大熊猫名称</span><br><span class="hljs-string">        age(:obj:`models.IntegerField`): 大熊猫年龄</span><br><span class="hljs-string">        gender(:obj:`models.IntegerField`): 大熊猫性别，雄性（1），雌性（0），默认为雄性。</span><br><span class="hljs-string">        pedigreeId(:obj:`models.CharField`): 谱系ID </span><br><span class="hljs-string">        status(:obj:`models.IntegerField`): 大熊猫状态，普通（0），发情（1），默认为普通。</span><br><span class="hljs-string">        remark(:obj:`models.TextField`): 备注信息，如本年度发情时间等。 &#123;&quot;estrus_time&quot;: 1610288040&#125;</span><br><span class="hljs-string">        state(:obj:`models.IntegerField`): 状态，0为删除，1为可用。</span><br><span class="hljs-string">        hormone(:obj:`models.TextField`): 激素水平</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    name = models.CharField(max_length=<span class="hljs-number">100</span>)<br>    age = models.IntegerField()<br>    gender = models.IntegerField(default=<span class="hljs-number">1</span>)<br>    pedigreeId = models.CharField(max_length=<span class="hljs-number">100</span>, blank=<span class="hljs-literal">True</span>)<br>    status =  models.IntegerField(default=<span class="hljs-number">0</span>)<br>    remark = models.TextField(default=<span class="hljs-string">&quot;&quot;</span>, blank=<span class="hljs-literal">True</span>)<br>    state = models.IntegerField(default=<span class="hljs-number">1</span>)<br>    hormone = models.TextField(default=<span class="hljs-string">&quot;&quot;</span>, blank=<span class="hljs-literal">True</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__unicode__</span>(<span class="hljs-params">self</span>):</span><br><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&#123;&#125;-&#123;&#125;-&#123;&#125;-&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(self.name, self.pedigreeId, self.status, self.state)<br></code></pre></div></td></tr></table></figure>
 <p>modify</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">@check_login</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pandaChange</span>(<span class="hljs-params">request</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;修改大熊猫信息的API</span><br><span class="hljs-string">    Arg:</span><br><span class="hljs-string">        request(:obj:`HttpRequest`): 当一个页面被请求时，Django 会创建一个 HttpRequest 对象，这个对象包含了请求的元数据。然后，Django 加载相应的视图，将 HttpRequest 作为视图函数的第一个参数。每个视图负责返回一个 HttpResponse 对象。</span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">        JsonObject(:obj:`HttpResponse`): Json对象</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br><br>    response_data = &#123;<span class="hljs-string">&quot;errcode&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;操作成功&quot;</span>&#125;<br><br>    data = &#123;&#125;<br>    panda_keys = [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;gender&quot;</span>, <span class="hljs-string">&quot;pedigreeId&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>, <span class="hljs-string">&quot;remark&quot;</span>, <span class="hljs-string">&quot;state&quot;</span>, <span class="hljs-string">&quot;hormone&quot;</span>]<br>    <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> panda_keys:<br>        <span class="hljs-keyword">if</span> request.POST.get(key):<br>            data[key] = request.POST.get(key)<br><br>    panda = Panda.objects.<span class="hljs-built_in">filter</span>(<span class="hljs-built_in">id</span>=data[<span class="hljs-string">&quot;id&quot;</span>]).<span class="hljs-built_in">filter</span>(state=<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(panda)==<span class="hljs-number">0</span>:<br>        response_data = &#123;<span class="hljs-string">&quot;errcode&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;大熊猫（id：&#123;&#125;）个体不存在！&quot;</span>.<span class="hljs-built_in">format</span>(data[<span class="hljs-string">&quot;panda_id&quot;</span>])&#125;<br>    <br>    panda = panda[<span class="hljs-number">0</span>]<br>    <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> data:<br>        <span class="hljs-keyword">if</span> key != <span class="hljs-string">&#x27;id&#x27;</span>:<br>            <span class="hljs-built_in">setattr</span>(panda, key, data[key])<br>    panda.save()<br><br>    <span class="hljs-keyword">return</span> HttpResponse(json.dumps(response_data, ensure_ascii=<span class="hljs-literal">False</span>), content_type=<span class="hljs-string">&quot;application/json&quot;</span>)<br><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -276,7 +278,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/22/What-s-the-Transformer/">
+                      <a href="/2021/05/21/What-s-the-Transformer/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">What's the Transformer</span>
                         <span class="visible-mobile">上一篇</span>
@@ -490,6 +492,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

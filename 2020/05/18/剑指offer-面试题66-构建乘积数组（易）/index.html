@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,23 +251,29 @@
             <h1 style="display: none">剑指offer 面试题66. 构建乘积数组（易）</h1>
             
             <div class="markdown-body">
-              <p>考查应聘者的发散思维能力。这道题目有两种常规解法：一种是把所有数字都相乘再分别除以各个数字，但题目已经限定不能使用除法；另一种解法是连乘 <code>n-1</code> 个数字得到 <code>B[i]</code>。通常面试官会告知应聘者还有比 $O(n^2)$ 更高效的算法。此时应聘者不能放弃，还要继续打开思路，多角度去分析解答问题。</p>
+              <p>考查应聘者的发散思维能力。这道题目有两种常规解法：一种是把所有数字都相乘再分别除以各个数字，但题目已经限定不能使用除法；另一种解法是连乘 <code>n-1</code> 个数字得到 <code>B[i]</code>。通常面试官会告知应聘者还有比 <span class="math inline">\(O(n^2)\)</span> 更高效的算法。此时应聘者不能放弃，还要继续打开思路，多角度去分析解答问题。</p>
 <a id="more"></a>
-<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B 中的元素 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。<strong>不能使用除法。</strong></p>
-<p>示例:<br><figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入: <span class="hljs-string">[1,2,3,4,5]</span><br>输出: <span class="hljs-string">[120,60,40,30,24]</span><br></code></pre></div></td></tr></table></figure><br>提示：<br>所有元素乘积之和不会溢出 32 位整数<br><code>a.length &lt;= 100000</code></p>
+<h1 id="question">Question</h1>
+<p>给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B 中的元素 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。<strong>不能使用除法。</strong></p>
+<p>示例: <figure class="highlight accesslog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs accesslog">输入: <span class="hljs-string">[1,2,3,4,5]</span><br>输出: <span class="hljs-string">[120,60,40,30,24]</span><br></code></pre></div></td></tr></table></figure> 提示： 所有元素乘积之和不会溢出 32 位整数 <code>a.length &lt;= 100000</code></p>
 <blockquote>
 <p><strong><em>测试用例</em></strong></p>
 </blockquote>
-<p>功能测试（输入数组包含正数、负数、一个0、多个0）。<br>边界值测试（输入数组的长度为0）。</p>
+<p>功能测试（输入数组包含正数、负数、一个0、多个0）。 边界值测试（输入数组的长度为0）。</p>
 <blockquote>
 <p><strong><em>本题考点</em></strong></p>
 </blockquote>
-<p>考查应聘者的发散思维能力。这道题目有两种常规解法：一种是把所有数字都相乘再分别除以各个数字，但题目已经限定不能使用除法；另一种解法是连乘 <code>n-1</code> 个数字得到 <code>B[i]</code>。通常面试官会告知应聘者还有比 $O(n^2)$ 更高效的算法。此时应聘者不能放弃，还要继续打开思路，多角度去分析解答问题。<br>考查应聘者对数组的理解和编程能力。</p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>可以把 <code>B[i]=A[0]×A[1]…×A[i-1]×A[i+1]…×A[n-1]</code> 看成 <code>A[0]×A[1]…×A[i-1]</code> 和 <code>A[i+1]…×A[n-1]</code> 两部分的乘积。因此，数组 <code>B</code> 可以用一个矩阵来创建。在下图中，<code>B[i]</code> 为矩阵中第<code>i</code> 行所有元素的乘积。</p>
-<p><img src="https://i.loli.net/2020/05/18/VF3WETseSkGJcYg.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-18_11-42-48"></p>
-<p>不妨定义<code>C[i]=A[0]×A[1]×…×A[i-2]×A[i-1]</code>，<code>D[i]=A[i+1]×…×A[n-2]×A[n-1]</code>。<br><code>C[i]</code>可以用<strong>自上而下</strong>的顺序计算出来，即 <code>C[i]=C[i-1]×A[i-1]</code>，其中 <code>C[i-1]=A[0]×A[1]×…×A[i-2]</code>。类似的 <code>D[i]</code>，也可以用<strong>自下而上</strong>的顺序计算出来，即<code>D[i]=D[i+1]×A[i+1]</code>，其中<code>D[i+1]=A[i+2]×…×A[n-2]×A[n-1]</code>。</p>
-<p>时间复杂度： $O(N)$ ，其中 $N$ 为数组长度，两轮遍历数组 $a$ ，使用 $O(N)$ 时间。<br>空间复杂度： $O(N)$ ，变量 <code>B[]</code> 和 <code>C[]</code> 使用 <code>n</code> 大小额外空间。</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
+<p>考查应聘者的发散思维能力。这道题目有两种常规解法：一种是把所有数字都相乘再分别除以各个数字，但题目已经限定不能使用除法；另一种解法是连乘 <code>n-1</code> 个数字得到 <code>B[i]</code>。通常面试官会告知应聘者还有比 <span class="math inline">\(O(n^2)\)</span> 更高效的算法。此时应聘者不能放弃，还要继续打开思路，多角度去分析解答问题。 考查应聘者对数组的理解和编程能力。</p>
+<h1 id="intuition">Intuition</h1>
+<p>可以把 <code>B[i]=A[0]×A[1]…×A[i-1]×A[i+1]…×A[n-1]</code> 看成 <code>A[0]×A[1]…×A[i-1]</code> 和 <code>A[i+1]…×A[n-1]</code> 两部分的乘积。因此，数组 <code>B</code> 可以用一个矩阵来创建。在下图中，<code>B[i]</code> 为矩阵中第<code>i</code> 行所有元素的乘积。</p>
+<figure>
+<img src="https://i.loli.net/2020/05/18/VF3WETseSkGJcYg.png" srcset="/img/loading.gif" alt="Snipaste_2020-05-18_11-42-48" /><figcaption aria-hidden="true">Snipaste_2020-05-18_11-42-48</figcaption>
+</figure>
+<p>不妨定义<code>C[i]=A[0]×A[1]×…×A[i-2]×A[i-1]</code>，<code>D[i]=A[i+1]×…×A[n-2]×A[n-1]</code>。 <code>C[i]</code>可以用<strong>自上而下</strong>的顺序计算出来，即 <code>C[i]=C[i-1]×A[i-1]</code>，其中 <code>C[i-1]=A[0]×A[1]×…×A[i-2]</code>。类似的 <code>D[i]</code>，也可以用<strong>自下而上</strong>的顺序计算出来，即<code>D[i]=D[i+1]×A[i+1]</code>，其中<code>D[i+1]=A[i+2]×…×A[n-2]×A[n-1]</code>。</p>
+<p>时间复杂度： <span class="math inline">\(O(N)\)</span> ，其中 <span class="math inline">\(N\)</span> 为数组长度，两轮遍历数组 <span class="math inline">\(a\)</span> ，使用 <span class="math inline">\(O(N)\)</span> 时间。<br />
+空间复杂度： <span class="math inline">\(O(N)\)</span> ，变量 <code>B[]</code> 和 <code>C[]</code> 使用 <code>n</code> 大小额外空间。</p>
+<h1 id="code">Code</h1>
+<ul>
 <li>我的解法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">constructArr</span>(<span class="hljs-params">self, a: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[int]:</span><br>        <span class="hljs-comment"># 计算长度length</span><br>        length = <span class="hljs-built_in">len</span>(a)<br>        <span class="hljs-keyword">if</span> length &lt; <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> []<br><br>        <span class="hljs-comment"># 定义C[i]=A[0]×A[1]×…×A[i-2]×A[i-1]</span><br>        <span class="hljs-comment"># 自上而下计算 C[i]</span><br>        <span class="hljs-comment"># 即 C[i]=C[i-1]×A[i-1]，其中 C[i-1]=A[0]×A[1]×…×A[i-2]。</span><br>        C = [<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, length):<br>            C =  C + [C[row-<span class="hljs-number">1</span>] * a[row-<span class="hljs-number">1</span>]]<br><br>        <span class="hljs-comment"># 定义D[i]=A[i+1]×…×A[n-2]×A[n-1]</span><br>        <span class="hljs-comment"># 自下而上计算 D[i]</span><br>        <span class="hljs-comment"># 即D[i]=D[i+1]×A[i+1]，其中D[i+1]=A[i+2]×…×A[n-2]×A[n-1]。</span><br>        D = [<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length-<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>            D = [D[<span class="hljs-number">0</span>] * a[row + <span class="hljs-number">1</span>]] + D<br><br>        <span class="hljs-comment"># 计算 B[i]</span><br>        <span class="hljs-comment"># B[i] = C[i] * D[i]</span><br>        B = [<span class="hljs-number">0</span>] * length<br>        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>            B[row] = C[row] * D[row]<br><br>        <span class="hljs-keyword">return</span> B<br></code></pre></div></td></tr></table></figure>
@@ -276,9 +282,10 @@
 <li>Krahets大佬解法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">constructArr</span>(<span class="hljs-params">self, a: List[<span class="hljs-built_in">int</span>]</span>) -&gt; List[int]:</span><br>        b, tmp = [<span class="hljs-number">1</span>] * <span class="hljs-built_in">len</span>(a), <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(a)):<br>            b[i] = b[i - <span class="hljs-number">1</span>] * a[i - <span class="hljs-number">1</span>] <span class="hljs-comment"># 下三角</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(a) - <span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>): <br>            tmp *= a[i + <span class="hljs-number">1</span>] <span class="hljs-comment"># 上三角</span><br>            b[i] *= tmp <span class="hljs-comment"># 下三角 * 上三角</span><br>        <span class="hljs-keyword">return</span> b<br></code></pre></div></td></tr></table></figure>
-<p>时间复杂度： $O(N)$ ，其中 $N$ 为数组长度，两轮遍历数组 $a$ ，使用 $O(N)$ 时间。<br>空间复杂度： $O(1)$ ，变量 <code>tmp</code> 使用常数大小额外空间（数组 <code>b</code> 作为返回值，不计入复杂度考虑）。</p>
-<p>作者：Krahets<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/solution/mian-shi-ti-66-gou-jian-cheng-ji-shu-zu-biao-ge-fe/">https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/solution/mian-shi-ti-66-gou-jian-cheng-ji-shu-zu-biao-ge-fe/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-
+<p>时间复杂度： <span class="math inline">\(O(N)\)</span> ，其中 <span class="math inline">\(N\)</span> 为数组长度，两轮遍历数组 <span class="math inline">\(a\)</span> ，使用 <span class="math inline">\(O(N)\)</span> 时间。<br />
+空间复杂度： <span class="math inline">\(O(1)\)</span> ，变量 <code>tmp</code> 使用常数大小额外空间（数组 <code>b</code> 作为返回值，不计入复杂度考虑）。</p>
+<p>作者：Krahets 链接：https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/solution/mian-shi-ti-66-gou-jian-cheng-ji-shu-zu-biao-ge-fe/ 来源：力扣（LeetCode） 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -522,6 +529,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

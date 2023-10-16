@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,30 +253,33 @@
             <div class="markdown-body">
               <p>记录深度学习的一些理论</p>
 <a id="more"></a>
-<h1 id="为啥要用ReLU函数"><a href="#为啥要用ReLU函数" class="headerlink" title="为啥要用ReLU函数"></a>为啥要用ReLU函数</h1><p>ReLU函数如下图所示：</p>
-<p><img src="http://oke9xbto1.bkt.clouddn.com/20161113161105403" srcset="/img/loading.gif" alt=""></p>
+<h1 id="为啥要用relu函数">为啥要用ReLU函数</h1>
+<p>ReLU函数如下图所示：</p>
+<p><img src="http://oke9xbto1.bkt.clouddn.com/20161113161105403" srcset="/img/loading.gif" /></p>
 <p>ReLU函数能够解决梯度爆炸和梯度消失的问题，因为ReLU函数在x&gt;0的时候，导数为1，在梯度传导过程中是不会对梯度大小造成任何数值上的影响的。</p>
-<h1 id="啥是SoftMax？"><a href="#啥是SoftMax？" class="headerlink" title="啥是SoftMax？"></a>啥是SoftMax？</h1><p>softmax用于多分类过程中，它将多个神经元的输出，映射到（0,1）区间内，可以看成概率来理解，从而来进行多分类！假设我们有一个数组，V，Vi表示V中的第i个元素，那么这个元素的softmax值就是<br><img src="http://oke9xbto1.bkt.clouddn.com/v2-39eca1f41fe487983f5111f5e5073396_hd.jpg" srcset="/img/loading.gif" alt=""></p>
-<p>softmax直白来说就是将原来输出是3,1,-3通过softmax函数一作用，就映射成为(0,1)的值，而这些值的累和为1（满足概率的性质），那么我们就可以将它理解成概率，在最后选取输出结点的时候，我们就可以选取概率最大（也就是值对应最大的）结点，作为我们的预测目标。<br><img src="http://oke9xbto1.bkt.clouddn.com/v2-998ddf16795db98b980443db952731c2_hd.jpg" srcset="/img/loading.gif" alt=""></p>
-<p>在神经网络的计算当中，我们经常需要计算按照神经网络的正向传播计算的分数S1，和按照正确标注计算的分数S2，之间的差距，计算Loss，才能应用反向传播。Loss定义为交叉熵。<br><img src="http://oke9xbto1.bkt.clouddn.com/equation%20%282%29.svg" srcset="/img/loading.gif" alt=""><br>取log里面的值就是这组数据正确分类的Softmax值，它占的比重越大，这个样本的Loss也就越小，这种定义符合我们的要求。  </p>
-<p>我们求Loss对每个权重矩阵的偏导，应用链式法则<br><img src="http://oke9xbto1.bkt.clouddn.com/equation%20%281%29.svg" srcset="/img/loading.gif" alt=""></p>
+<h1 id="啥是softmax">啥是SoftMax？</h1>
+<p>softmax用于多分类过程中，它将多个神经元的输出，映射到（0,1）区间内，可以看成概率来理解，从而来进行多分类！假设我们有一个数组，V，Vi表示V中的第i个元素，那么这个元素的softmax值就是 <img src="http://oke9xbto1.bkt.clouddn.com/v2-39eca1f41fe487983f5111f5e5073396_hd.jpg" srcset="/img/loading.gif" /></p>
+<p>softmax直白来说就是将原来输出是3,1,-3通过softmax函数一作用，就映射成为(0,1)的值，而这些值的累和为1（满足概率的性质），那么我们就可以将它理解成概率，在最后选取输出结点的时候，我们就可以选取概率最大（也就是值对应最大的）结点，作为我们的预测目标。 <img src="http://oke9xbto1.bkt.clouddn.com/v2-998ddf16795db98b980443db952731c2_hd.jpg" srcset="/img/loading.gif" /></p>
+<p>在神经网络的计算当中，我们经常需要计算按照神经网络的正向传播计算的分数S1，和按照正确标注计算的分数S2，之间的差距，计算Loss，才能应用反向传播。Loss定义为交叉熵。 <img src="http://oke9xbto1.bkt.clouddn.com/equation%20%282%29.svg" srcset="/img/loading.gif" /> 取log里面的值就是这组数据正确分类的Softmax值，它占的比重越大，这个样本的Loss也就越小，这种定义符合我们的要求。</p>
+<p>我们求Loss对每个权重矩阵的偏导，应用链式法则 <img src="http://oke9xbto1.bkt.clouddn.com/equation%20%281%29.svg" srcset="/img/loading.gif" /></p>
 <p>最后结果的形式非常的简单，<strong>只要将算出来的概率的向量对应的真正结果的那一维减1</strong>，就可以了。举个例子，通过若干层的计算，最后得到的某个训练样本的向量的分数是[ 1, 5, 3 ], 那么概率分别就是[0.015,0.866,0.117],如果这个样本正确的分类是第二个的话，那么计算出来的偏导就是[0.015,0.866−1,0.117]=[0.015,−0.134,0.117]，是不是很简单！！然后再根据这个进行back propagation就可以了。</p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23765351/answer/139826397">Softmax 函数的特点和作用是什么？ - 杨思达zzzz的回答 - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23765351/answer/240869755">Softmax 函数的特点和作用是什么？ - 忆臻的回答 - 知乎</a></p>
-<h1 id="神经网络的学习率有啥用？"><a href="#神经网络的学习率有啥用？" class="headerlink" title="神经网络的学习率有啥用？"></a>神经网络的学习率有啥用？</h1><blockquote>
-<p>神经网络学习率定律一：一般来说，某一层的真实学习率越大，训练的过程对该层参数的更新影响也就越大。  </p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23765351/answer/139826397">Softmax 函数的特点和作用是什么？ - 杨思达zzzz的回答 - 知乎</a><br />
+<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23765351/answer/240869755">Softmax 函数的特点和作用是什么？ - 忆臻的回答 - 知乎</a></p>
+<h1 id="神经网络的学习率有啥用">神经网络的学习率有啥用？</h1>
+<blockquote>
+<p>神经网络学习率定律一：一般来说，某一层的真实学习率越大，训练的过程对该层参数的更新影响也就越大。</p>
 </blockquote>
 <p><strong>某一层的真实学习率</strong>由网络结构文件中的<strong>层学习率lr_mul</strong>和超参数文件中<strong>整体学习率base_lr</strong>共同决定，公式如下：</p>
 <blockquote>
 <p>神经网络学习率定律二：某一层的真实学习率 = 层学习率lr_mul × 整体学习率base_lr</p>
 </blockquote>
 <ul>
-<li><p>如果我们的目的是从无到有训练一个网络，那我们就需要设置一个较大的base_lr，比如说是0.01。各层的学习率lr_mul则设置较小，比如（1或者2），这样在训练过程中，各层的真实学习率就很大（0.01*1），各层参数会在训练过程中受到的影响也很大（见神经网络学习率定律一）。  </p>
-</li>
-<li><p>如果我们只是finetune，就不需要设置这么大的base_lr，通常是设置一个较小的的base_lr(0.001)，然后在我们在需要彻底重新训练的层设置一个较大的lr_mult(10)，其他不需要重新训练的层设置一个较小的lr_mult(1或者2)，<strong>这样一来，在finetune的过程中，训练就不会影响那些不需要重新训练的层（对于这些层真实学习率其实很小，为0.001*1），而那些需要被重新训练的层就会受到很大的影响（对于这些层真实学习率很大，为0.001*10）</strong>。</p>
-</li>
+<li><p>如果我们的目的是从无到有训练一个网络，那我们就需要设置一个较大的base_lr，比如说是0.01。各层的学习率lr_mul则设置较小，比如（1或者2），这样在训练过程中，各层的真实学习率就很大（0.01*1），各层参数会在训练过程中受到的影响也很大（见神经网络学习率定律一）。</p></li>
+<li><p>如果我们只是finetune，就不需要设置这么大的base_lr，通常是设置一个较小的的base_lr(0.001)，然后在我们在需要彻底重新训练的层设置一个较大的lr_mult(10)，其他不需要重新训练的层设置一个较小的lr_mult(1或者2)，<strong>这样一来，在finetune的过程中，训练就不会影响那些不需要重新训练的层（对于这些层真实学习率其实很小，为0.001*1），而那些需要被重新训练的层就会受到很大的影响（对于这些层真实学习率很大，为0.001*10）</strong>。</p></li>
 </ul>
-<p>base_lr的配置环境上下文：<br><figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm"><span class="hljs-symbol">net:</span> <span class="hljs-string">&quot;/home/weijian/caffe/models/finetune_test/train_val.prototxt&quot;</span><br><span class="hljs-symbol">test_iter:</span> <span class="hljs-number">60</span><br><span class="hljs-symbol">test_interval:</span> <span class="hljs-number">500</span><br><span class="hljs-meta"># lr for fine-tuning should be lower than when starting from scratch</span><br><span class="hljs-symbol">base_lr:</span> <span class="hljs-number">0.001</span>  <span class="hljs-meta"># 这里就是整体学习率</span><br><span class="hljs-symbol">lr_policy:</span> <span class="hljs-string">&quot;step&quot;</span><br></code></pre></div></td></tr></table></figure><br>lr_mul的配置环境上下文：</p>
+<p>base_lr的配置环境上下文： <figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm"><span class="hljs-symbol">net:</span> <span class="hljs-string">&quot;/home/weijian/caffe/models/finetune_test/train_val.prototxt&quot;</span><br><span class="hljs-symbol">test_iter:</span> <span class="hljs-number">60</span><br><span class="hljs-symbol">test_interval:</span> <span class="hljs-number">500</span><br><span class="hljs-meta"># lr for fine-tuning should be lower than when starting from scratch</span><br><span class="hljs-symbol">base_lr:</span> <span class="hljs-number">0.001</span>  <span class="hljs-meta"># 这里就是整体学习率</span><br><span class="hljs-symbol">lr_policy:</span> <span class="hljs-string">&quot;step&quot;</span><br></code></pre></div></td></tr></table></figure> lr_mul的配置环境上下文：</p>
 <figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-class">param </span>&#123;<br><span class="hljs-symbol">  lr_mult:</span> <span class="hljs-number">10</span>  <span class="hljs-meta"># 这里就是层学习率 整体学习率(0.001) 乘以 层学习率(10) 即真实学习率(0.01)</span><br><span class="hljs-symbol">  decay_mult:</span> <span class="hljs-number">1</span><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -513,6 +516,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

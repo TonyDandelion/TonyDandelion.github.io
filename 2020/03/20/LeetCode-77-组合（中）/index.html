@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -253,54 +253,96 @@
             <div class="markdown-body">
               <p>经典问题，从常规解到剪枝优化再到非回溯解法进行了记录，需要特别关注。</p>
 <a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。  </p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><strong>示例:</strong></p>
+<h1 id="题目">题目</h1>
+<p>给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。</p>
+<h1 id="示例">示例</h1>
+<p><strong>示例:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 输入</span><br>n = <span class="hljs-number">4</span>, k = <span class="hljs-number">2</span><br><span class="hljs-comment"># 输出:</span><br>[<br>  [<span class="hljs-number">2</span>,<span class="hljs-number">4</span>],<br>  [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],<br>  [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">1</span>,<span class="hljs-number">4</span>],<br>]<br></code></pre></div></td></tr></table></figure>
-<h1 id="考察知识点"><a href="#考察知识点" class="headerlink" title="考察知识点"></a>考察知识点</h1><p>回溯算法</p>
-<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>方法一、回溯法</strong><br>不设置 <code>is_validate</code> 函数和 <code>used</code> 变量，每次都从下一个位置开始遍历，这样就跳过了重复的情况。例如，取了1，从[2, 3, 4]中匹配，跳过了1本身，避免了 <code>[1, 1]</code> 这样的答案。输出 <code>[1, 2]</code>、<code>[1, 3]</code> 、<code>[1, 4]</code> 三种情况之后，再取2，就要从[3, 4]中匹配，跳过了1和2，避免了<code>[2, 1]</code>、<code>[2, 2]</code> 这样的答案。  </p>
-<p><img src="https://i.loli.net/2020/03/20/GHPRUW8T7pjSgDO.png" srcset="/img/loading.gif" alt="fcdaa96defd9caacec12eb6c86cac6b8932c93d7a6da7a649791e1031a8da2b5-image.png">  </p>
-<p><strong>方法二、回溯加剪枝</strong>  </p>
-<p>其中绿色的部分，是不能产生结果的分支，但是我们的代码确实又执行到了这部分。<br>上面的代码中，我们发现：其实如果 <code>pre</code> 已经选择到 <code>[1,4,5]</code> 或者 <code>[2,4,5]</code> 或者 <code>[3,4,5]</code> ，后序的代码就没有必要执行，继续走也不能发现新的满足题意的组合。<code>[1,4,5]</code>之后的<strong>多余步骤</strong>如下：<br>1、选择了 <code>[1,4,5]</code> 以后， <code>5</code> 弹出 <code>[1,4,5]</code> 成为 <code>[1,4]</code><br>2、<code>4</code> 弹出 <code>[1,4]</code> 成为 <code>[1]</code> ，然后 <code>5</code> 进来，成为 <code>[1,5]</code>。<br>3、再继续循环，会发现 <code>for</code> 循环都进不了（因为没有可选的元素），然后 <code>5</code> 又弹出，接着 <code>1</code> 弹出。<br>以上几步其实都是<strong>多余步骤</strong>。  </p>
-<p><img src="https://i.loli.net/2020/03/20/RmE2VorJenthUDp.png" srcset="/img/loading.gif" alt="3ddd55697423b5831cbbd42f4b901ebbade0daa456c651a70c758fe359d8a0d1-image.png"></p>
-<p>发现多余操作：那么我们如何发现多余的步骤呢，其实也是有规律可寻的，就在 for 循环中：<br><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n+<span class="hljs-number">1</span>):<br>    pre.append(i)<br>    backtrack(i + <span class="hljs-number">1</span>, selects)<br>    pre.pop()<br></code></pre></div></td></tr></table></figure><br>这个for循环干的事情，是从 <code>[i, n]</code> 这个区间里（注意，左右都是闭区间），找到 <code>k - len(selects)</code>个元素。 <code>i</code> 不是每一次都要走到 <code>n</code> 的， <code>i</code> 有一个上限。那这个上限是多少呢？通过观察可以发现：<br>当选定了一个元素，即 <code>len(selects) == 1</code> 的时候，接下来要选择 2 个元素， i 最大的值是 4 ，因为从 5 开始选择，就无解了。<br>当选定了两个元素，即 <code>len(selects) == 2</code> 的时候，接下来要选择 1 个元素， i 最大的值是 5 ，因为从 6 开始选择，就无解了。  </p>
-<p><img src="https://i.loli.net/2020/03/20/J7ir3mKBZh4YwTt.png" srcset="/img/loading.gif" alt="3ddd55697423b5831cbbd42f4b901ebbade0daa456c651a70c758fe359d8a0d1-image - 副本.png"></p>
-<p>再如：如果 <code>n = 6 ，k = 4</code>，<br><code>len(selects) == 1</code> 的时候，接下来要选择 3 个元素， <code>i</code> 最大的值是 4，最后一个被选的是 <code>[4,5,6]</code>；<br><code>len(selects) == 2</code> 的时候，接下来要选择 2 个元素， <code>i</code> 最大的值是 5，最后一个被选的是 <code>[5,6]</code>；<br><code>len(selects) == 3</code> 的时候，接下来要选择 1 个元素， <code>i</code> 最大的值是 6，最后一个被选的是 <code>[6]</code>；<br>再如：如果 <code>n = 15</code> ，<code>k = 4</code>，<br><code>len(selects) == 1</code> 的时候，接下来要选择 3 个元素，<code>i</code> 最大的值是 13，最后一个被选的是 <code>[13,14,15]</code>；<br><code>len(selects) == 2</code> 的时候，接下来要选择 2 个元素， <code>i</code> 最大的值是 14，最后一个被选的是 <code>[14,15]</code>；<br><code>len(selects) == 3</code> 的时候，接下来要选择 1 个元素， <code>i</code> 最大的值是 15，最后一个被选的是 <code>[15]</code>；<br>多写几遍（发现 <code>max(i)</code> 是我们倒着写出来），我么就可以发现 <code>max(i)</code> 与 接下来要选择的元素貌似有一点关系，很容易知道：<br><code>max(i) + 接下来要选择的元素个数 - 1 = n</code>，其中， 接下来要选择的元素个数就是<code>k - len(selects)</code>，整理可得：</p>
+<h1 id="考察知识点">考察知识点</h1>
+<p>回溯算法</p>
+<h1 id="核心思想">核心思想</h1>
+<p><strong>方法一、回溯法</strong><br />
+不设置 <code>is_validate</code> 函数和 <code>used</code> 变量，每次都从下一个位置开始遍历，这样就跳过了重复的情况。例如，取了1，从[2, 3, 4]中匹配，跳过了1本身，避免了 <code>[1, 1]</code> 这样的答案。输出 <code>[1, 2]</code>、<code>[1, 3]</code> 、<code>[1, 4]</code> 三种情况之后，再取2，就要从[3, 4]中匹配，跳过了1和2，避免了<code>[2, 1]</code>、<code>[2, 2]</code> 这样的答案。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/20/GHPRUW8T7pjSgDO.png" srcset="/img/loading.gif" alt="fcdaa96defd9caacec12eb6c86cac6b8932c93d7a6da7a649791e1031a8da2b5-image.png" /><figcaption aria-hidden="true">fcdaa96defd9caacec12eb6c86cac6b8932c93d7a6da7a649791e1031a8da2b5-image.png</figcaption>
+</figure>
+<p><strong>方法二、回溯加剪枝</strong></p>
+<p>其中绿色的部分，是不能产生结果的分支，但是我们的代码确实又执行到了这部分。<br />
+上面的代码中，我们发现：其实如果 <code>pre</code> 已经选择到 <code>[1,4,5]</code> 或者 <code>[2,4,5]</code> 或者 <code>[3,4,5]</code> ，后序的代码就没有必要执行，继续走也不能发现新的满足题意的组合。<code>[1,4,5]</code>之后的<strong>多余步骤</strong>如下：<br />
+1、选择了 <code>[1,4,5]</code> 以后， <code>5</code> 弹出 <code>[1,4,5]</code> 成为 <code>[1,4]</code><br />
+2、<code>4</code> 弹出 <code>[1,4]</code> 成为 <code>[1]</code> ，然后 <code>5</code> 进来，成为 <code>[1,5]</code>。<br />
+3、再继续循环，会发现 <code>for</code> 循环都进不了（因为没有可选的元素），然后 <code>5</code> 又弹出，接着 <code>1</code> 弹出。<br />
+以上几步其实都是<strong>多余步骤</strong>。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/20/RmE2VorJenthUDp.png" srcset="/img/loading.gif" alt="3ddd55697423b5831cbbd42f4b901ebbade0daa456c651a70c758fe359d8a0d1-image.png" /><figcaption aria-hidden="true">3ddd55697423b5831cbbd42f4b901ebbade0daa456c651a70c758fe359d8a0d1-image.png</figcaption>
+</figure>
+<p>发现多余操作：那么我们如何发现多余的步骤呢，其实也是有规律可寻的，就在 for 循环中：<br />
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n+<span class="hljs-number">1</span>):<br>    pre.append(i)<br>    backtrack(i + <span class="hljs-number">1</span>, selects)<br>    pre.pop()<br></code></pre></div></td></tr></table></figure> 这个for循环干的事情，是从 <code>[i, n]</code> 这个区间里（注意，左右都是闭区间），找到 <code>k - len(selects)</code>个元素。 <code>i</code> 不是每一次都要走到 <code>n</code> 的， <code>i</code> 有一个上限。那这个上限是多少呢？通过观察可以发现：<br />
+当选定了一个元素，即 <code>len(selects) == 1</code> 的时候，接下来要选择 2 个元素， i 最大的值是 4 ，因为从 5 开始选择，就无解了。<br />
+当选定了两个元素，即 <code>len(selects) == 2</code> 的时候，接下来要选择 1 个元素， i 最大的值是 5 ，因为从 6 开始选择，就无解了。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/20/J7ir3mKBZh4YwTt.png" srcset="/img/loading.gif" alt="3ddd55697423b5831cbbd42f4b901ebbade0daa456c651a70c758fe359d8a0d1-image - 副本.png" /><figcaption aria-hidden="true">3ddd55697423b5831cbbd42f4b901ebbade0daa456c651a70c758fe359d8a0d1-image - 副本.png</figcaption>
+</figure>
+<p>再如：如果 <code>n = 6 ，k = 4</code>，<br />
+<code>len(selects) == 1</code> 的时候，接下来要选择 3 个元素， <code>i</code> 最大的值是 4，最后一个被选的是 <code>[4,5,6]</code>；<br />
+<code>len(selects) == 2</code> 的时候，接下来要选择 2 个元素， <code>i</code> 最大的值是 5，最后一个被选的是 <code>[5,6]</code>；<br />
+<code>len(selects) == 3</code> 的时候，接下来要选择 1 个元素， <code>i</code> 最大的值是 6，最后一个被选的是 <code>[6]</code>；<br />
+再如：如果 <code>n = 15</code> ，<code>k = 4</code>，<br />
+<code>len(selects) == 1</code> 的时候，接下来要选择 3 个元素，<code>i</code> 最大的值是 13，最后一个被选的是 <code>[13,14,15]</code>；<br />
+<code>len(selects) == 2</code> 的时候，接下来要选择 2 个元素， <code>i</code> 最大的值是 14，最后一个被选的是 <code>[14,15]</code>；<br />
+<code>len(selects) == 3</code> 的时候，接下来要选择 1 个元素， <code>i</code> 最大的值是 15，最后一个被选的是 <code>[15]</code>；<br />
+多写几遍（发现 <code>max(i)</code> 是我们倒着写出来），我么就可以发现 <code>max(i)</code> 与 接下来要选择的元素貌似有一点关系，很容易知道：<br />
+<code>max(i) + 接下来要选择的元素个数 - 1 = n</code>，其中， 接下来要选择的元素个数就是<code>k - len(selects)</code>，整理可得：</p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-built_in">max</span>(i) = n - (k -<span class="hljs-built_in">len</span>(selects)) + <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
-<p>所以，我们的剪枝过程就是：把for循环的终止条件从 <code>i &lt; n+1</code> 改成 <code>i &lt; n - (k - len(selects)) + 2</code>  </p>
+<p>所以，我们的剪枝过程就是：把for循环的终止条件从 <code>i &lt; n+1</code> 改成 <code>i &lt; n - (k - len(selects)) + 2</code></p>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n - (k - <span class="hljs-built_in">len</span>(selects)) + <span class="hljs-number">2</span>):<br>    pre.append(i)<br>    backtrack(i + <span class="hljs-number">1</span>, selects)<br>    pre.pop()<br></code></pre></div></td></tr></table></figure>
-<p><strong>方法三、字典序 (二进制排序) 组合</strong>  </p>
-<p>主要思路是以字典序的顺序获得全部组合。  </p>
-<p><img src="https://i.loli.net/2020/03/20/8ao12dGI45tSpqc.png" srcset="/img/loading.gif" alt="ab26203eb768a3153fe704cfee97158429d08e886f7e5b453b2256ee658f0598-image.png"></p>
-<p><strong>算法</strong><br>算法非常直截了当 :  </p>
+<p><strong>方法三、字典序 (二进制排序) 组合</strong></p>
+<p>主要思路是以字典序的顺序获得全部组合。</p>
+<figure>
+<img src="https://i.loli.net/2020/03/20/8ao12dGI45tSpqc.png" srcset="/img/loading.gif" alt="ab26203eb768a3153fe704cfee97158429d08e886f7e5b453b2256ee658f0598-image.png" /><figcaption aria-hidden="true">ab26203eb768a3153fe704cfee97158429d08e886f7e5b453b2256ee658f0598-image.png</figcaption>
+</figure>
+<p><strong>算法</strong><br />
+算法非常直截了当 :<br />
+- 将 <code>nums</code> 初始化为从 <code>1</code> 到 <code>k</code>的整数序列。 将 <code>n + 1</code>添加为末尾元素，起到“哨兵”的作用。将指针设为列表的开头 <code>j = 0</code>. - While <code>j &lt; k</code> : - 将<code>nums</code> 中的前k个元素添加到输出中，换而言之，除了“哨兵”之外的全部元素。 - 找到<code>nums</code>中的第一个满足 <code>nums[j] + 1 != nums[j + 1]</code>的元素，并将其加一 <code>nums[j]++</code> 以转到下一个组合。</p>
+<h1 id="python版本">Python版本</h1>
 <ul>
-<li>将 <code>nums</code> 初始化为从 <code>1</code> 到 <code>k</code>的整数序列。 将 <code>n + 1</code>添加为末尾元素，起到“哨兵”的作用。将指针设为列表的开头 <code>j = 0</code>.</li>
-<li>While <code>j &lt; k</code> :<ul>
-<li>将<code>nums</code> 中的前k个元素添加到输出中，换而言之，除了“哨兵”之外的全部元素。</li>
-<li>找到<code>nums</code>中的第一个满足 <code>nums[j] + 1 != nums[j + 1]</code>的元素，并将其加一<br><code>nums[j]++</code> 以转到下一个组合。</li>
-</ul>
-</li>
-</ul>
-<h1 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h1><ul>
 <li>方法一的实现</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> List<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">first=<span class="hljs-number">1</span>, selects=[]</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(selects) == k:<br>                res.append(selects[:])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n+<span class="hljs-number">1</span>):<br>                selects.append(i)<br>                backtrack(i+<span class="hljs-number">1</span>, selects)<br>                selects.pop()<br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))]<br>        res = []<br>        backtrack()<br>        <span class="hljs-keyword">return</span> res<br><br>Input = [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>]<br>Input1 = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]<br>Answer = [<br>    [[<span class="hljs-number">1</span>],[<span class="hljs-number">2</span>]],<br>    [<br>        [<span class="hljs-number">2</span>,<span class="hljs-number">4</span>],<br>        [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],<br>        [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],<br>        [<span class="hljs-number">1</span>,<span class="hljs-number">4</span>],<br>    ],<br>    [[<span class="hljs-number">1</span>]]<br>]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    solution = Solution()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(Input)):<br>        print(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">50</span>)<br>        reslut = solution.combine(Input[i], Input1[i])<br>        <span class="hljs-keyword">if</span> reslut == Answer[i]:<br>            print(<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">else</span>:<br>            print(<span class="hljs-literal">False</span>)<br>            print(reslut)<br>            print(Answer[i])<br></code></pre></div></td></tr></table></figure>
-<p><strong>时间复杂度</strong> : $O(k C_N^k)$，其中 $C_N^k = \frac{N!}{(N - k)! k!}$ 是要构成的组合数。<code>append / pop</code> (<code>add / removeLast</code>) 操作使用常数时间，唯一耗费时间的是将长度为 <code>k</code> 的组合添加到输出中。<br><strong>空间复杂度</strong> : $O(C_N^k)$ ，用于保存全部组合数以输出。<br><strong>这里有两组运行结果：</strong><br>1、执行用时 :604 ms, 在所有 Python3 提交中击败了<strong>37.44%</strong>的用户<br>内存消耗 :15.1 MB, 在所有 Python3 提交中击败了5.06%的用户<br>这一组代码在 <code>res.append(selects[:])</code> 之后，没有 <code>return</code>。<br>2、执行用时 :508 ms, 在所有 Python3 提交中击败了<strong>66.70%</strong>的用户<br>内存消耗 :14.8 MB, 在所有 Python3 提交中击败了7.09%的用户<br>这一组代码在 <code>res.append(selects[:])</code> 之后， <code>return</code>了，就没有执行后面的无效循环了，效率高了一些。  </p>
+<p><strong>时间复杂度</strong> : <span class="math inline">\(O(k C_N^k)\)</span>，其中 <span class="math inline">\(C_N^k = \frac{N!}{(N - k)! k!}\)</span> 是要构成的组合数。<code>append / pop</code> (<code>add / removeLast</code>) 操作使用常数时间，唯一耗费时间的是将长度为 <code>k</code> 的组合添加到输出中。<br />
+<strong>空间复杂度</strong> : <span class="math inline">\(O(C_N^k)\)</span> ，用于保存全部组合数以输出。<br />
+<strong>这里有两组运行结果：</strong><br />
+1、执行用时 :604 ms, 在所有 Python3 提交中击败了<strong>37.44%</strong>的用户<br />
+内存消耗 :15.1 MB, 在所有 Python3 提交中击败了5.06%的用户<br />
+这一组代码在 <code>res.append(selects[:])</code> 之后，没有 <code>return</code>。 2、执行用时 :508 ms, 在所有 Python3 提交中击败了<strong>66.70%</strong>的用户<br />
+内存消耗 :14.8 MB, 在所有 Python3 提交中击败了7.09%的用户<br />
+这一组代码在 <code>res.append(selects[:])</code> 之后， <code>return</code>了，就没有执行后面的无效循环了，效率高了一些。</p>
 <ul>
-<li>方法二的实现：剪枝版本的回溯算法  </li>
+<li>方法二的实现：剪枝版本的回溯算法</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">backtrack</span>(<span class="hljs-params">first=<span class="hljs-number">1</span>, selects=[]</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(selects) == k:<br>                res.append(selects[:])<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-comment"># for i in range(first, n + 1):  # 剪枝之前 66.70%</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(first, n - (k - <span class="hljs-built_in">len</span>(selects)) + <span class="hljs-number">2</span>):  <span class="hljs-comment"># 剪枝之后 97.27%</span><br>                selects.append(i)<br>                backtrack(i+<span class="hljs-number">1</span>, selects)<br>                selects.pop()<br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))]<br>        res = []<br>        backtrack()<br>        <span class="hljs-keyword">return</span> res<br></code></pre></div></td></tr></table></figure>
-<p><strong>时间复杂度</strong> : $O(k C_N^k)$。<br><strong>空间复杂度</strong> : $O(C_N^k)$ ，用于保存全部组合数以输出。<br>执行用时 :52 ms, 在所有 Python3 提交中击败了<strong>97.27%</strong>的用户<br>内存消耗 :15 MB, 在所有 Python3 提交中击败了5.31%的用户  </p>
+<p><strong>时间复杂度</strong> : <span class="math inline">\(O(k C_N^k)\)</span>。<br />
+<strong>空间复杂度</strong> : <span class="math inline">\(O(C_N^k)\)</span> ，用于保存全部组合数以输出。<br />
+执行用时 :52 ms, 在所有 Python3 提交中击败了<strong>97.27%</strong>的用户<br />
+内存消耗 :15 MB, 在所有 Python3 提交中击败了5.31%的用户</p>
 <ul>
-<li>方法三的实现：字典序 (二进制排序) 组合  </li>
+<li>方法三的实现：字典序 (二进制排序) 组合</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">combine</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span>, k: <span class="hljs-built_in">int</span></span>) -&gt; List[List[int]]:</span><br>        <span class="hljs-comment"># 特判</span><br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &lt;= <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> k &gt; n:  <span class="hljs-keyword">return</span> []<br>        <span class="hljs-keyword">if</span> k == n:  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n+<span class="hljs-number">1</span>))]<br>         <br>        <span class="hljs-comment"># init first combination</span><br>        nums = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, k + <span class="hljs-number">1</span>)) + [n + <span class="hljs-number">1</span>]<br>        <br>        output, j = [], <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> j &lt; k:<br>            <span class="hljs-comment"># add current combination</span><br>            output.append(nums[:k])<br>            <span class="hljs-comment"># increase first nums[j] by one</span><br>            <span class="hljs-comment"># if nums[j] + 1 != nums[j + 1]</span><br>            j = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">while</span> j &lt; k <span class="hljs-keyword">and</span> nums[j + <span class="hljs-number">1</span>] == nums[j] + <span class="hljs-number">1</span>:<br>                nums[j] = j + <span class="hljs-number">1</span><br>                j += <span class="hljs-number">1</span><br>            nums[j] += <span class="hljs-number">1</span><br>            <br>        <span class="hljs-keyword">return</span> output<br></code></pre></div></td></tr></table></figure>
-<p><strong>时间复杂度</strong> : $O(k C<em>N^k)$，其中 $C_N^k = \frac{N!}{(N - k)! k!}$ 是要构建的组合数。由于组合数是 $C_N^k$ ，外层的 <code>while</code> 循环执行了 $C_N^k$ 次 。对给定的一个<code>j</code>，内层的 <code>while</code> 循环执行了 $C</em>{N - j}^{k - j}$。外层循环超过 $C_N^k$次访问，平均而言每次访问的执行次数少于1。因此，最耗费时间的部分是将每个长度为 $k$的组合(共计 $C_N^k$ 个组合) 添加到输出中，消耗 $O(k C_N^k)$ 的时间。你可能注意到，尽管方法三的时间复杂度与方法一相同，但方法三却要快上许多。<strong>这是由于基于回溯算法的方法一需要处理递归调用栈，且其带来的影响在Python中比在Java中更为显著。</strong><br><strong>空间复杂度</strong> : $O(C_N^k)$ ，用于保存全部组合数以输出。<br><strong>这里有两组运行结果：</strong><br>第一组是没有特判的，第二组是加上特判的结果。<br>1、执行用时 :68 ms, 在所有 Python3 提交中击败了93.57% 的用户<br>内存消耗 :14.9 MB, 在所有 Python3 提交中击败了6.58%的用户<br>2、执行用时 :40 ms, 在所有 Python3 提交中击败了 <font color='green'><strong>99.17%</strong></font>的用户<br>内存消耗 :14.9 MB, 在所有 Python3 提交中击败了5.82%的用户  </p>
-<p><strong>剪枝和特判都会有效的提升算法运行效率。</strong>   </p>
+<p><strong>时间复杂度</strong> : <span class="math inline">\(O(k C_N^k)\)</span>，其中 <span class="math inline">\(C_N^k = \frac{N!}{(N - k)! k!}\)</span> 是要构建的组合数。由于组合数是 <span class="math inline">\(C_N^k\)</span> ，外层的 <code>while</code> 循环执行了 <span class="math inline">\(C_N^k\)</span> 次 。对给定的一个<code>j</code>，内层的 <code>while</code> 循环执行了 <span class="math inline">\(C_{N - j}^{k - j}\)</span>。外层循环超过 <span class="math inline">\(C_N^k\)</span>次访问，平均而言每次访问的执行次数少于1。因此，最耗费时间的部分是将每个长度为 <span class="math inline">\(k\)</span>的组合(共计 <span class="math inline">\(C_N^k\)</span> 个组合) 添加到输出中，消耗 <span class="math inline">\(O(k C_N^k)\)</span> 的时间。你可能注意到，尽管方法三的时间复杂度与方法一相同，但方法三却要快上许多。<strong>这是由于基于回溯算法的方法一需要处理递归调用栈，且其带来的影响在Python中比在Java中更为显著。</strong><br />
+<strong>空间复杂度</strong> : <span class="math inline">\(O(C_N^k)\)</span> ，用于保存全部组合数以输出。<br />
+<strong>这里有两组运行结果：</strong><br />
+第一组是没有特判的，第二组是加上特判的结果。 1、执行用时 :68 ms, 在所有 Python3 提交中击败了93.57% 的用户<br />
+内存消耗 :14.9 MB, 在所有 Python3 提交中击败了6.58%的用户<br />
+2、执行用时 :40 ms, 在所有 Python3 提交中击败了 <font color='green'><strong>99.17%</strong></font>的用户<br />
+内存消耗 :14.9 MB, 在所有 Python3 提交中击败了5.82%的用户</p>
+<p><strong>剪枝和特判都会有效的提升算法运行效率。</strong></p>
 <blockquote>
-<p>参考链接   </p>
+<p>参考链接</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-ma-/">回溯算法 + 剪枝</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/solution/zu-he-by-leetcode/">LeetCode题解</a>  </p>
-
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-ma-/">回溯算法 + 剪枝</a><br />
+<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/solution/zu-he-by-leetcode/">LeetCode题解</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -544,6 +586,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

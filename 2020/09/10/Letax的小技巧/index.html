@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -208,7 +208,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      152 字
+      153 字
     </span>
   
 
@@ -252,22 +252,25 @@
             
             <div class="markdown-body">
               <a id="more"></a>
-<h1 id="行号"><a href="#行号" class="headerlink" title="行号"></a>行号</h1><p><a target="_blank" rel="noopener" href="http://muchong.com/html/201707/3170793.html">latex 中怎么将行号标在外侧？</a></p>
+<h1 id="行号">行号</h1>
+<p><a target="_blank" rel="noopener" href="http://muchong.com/html/201707/3170793.html">latex 中怎么将行号标在外侧？</a></p>
 <p>行号</p>
 <figure class="highlight tex"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tex">\usepackage&#123;lineno&#125;<br>\linenumbers<br></code></pre></div></td></tr></table></figure>
 <p>双栏模式下，外侧显示行号。</p>
 <figure class="highlight tex"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tex">\usepackage[switch]&#123;lineno&#125;<br>\linenumbers<br></code></pre></div></td></tr></table></figure>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p><a target="_blank" rel="noopener" href="https://tex.stackexchange.com/questions/108871/how-to-remove-parentheses-from-year-in-the-references-in-chicago-bibliography-st">How to remove parentheses from year in the references in chicago bibliography sty</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34484209">latex 如何在引用参考文献的时候不显示序号？</a></p>
-<p><code>citep</code> </p>
+<h1 id="引用">引用</h1>
+<p><a target="_blank" rel="noopener" href="https://tex.stackexchange.com/questions/108871/how-to-remove-parentheses-from-year-in-the-references-in-chicago-bibliography-st">How to remove parentheses from year in the references in chicago bibliography sty</a> <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34484209">latex 如何在引用参考文献的时候不显示序号？</a></p>
+<p><code>citep</code></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">The giant panda <span class="hljs-keyword">is</span> a <span class="hljs-keyword">Class</span> I endangered species endemic <span class="hljs-keyword">to</span> China.  Existing research <span class="hljs-built_in">found</span> that the estrus period <span class="hljs-keyword">for</span> femalegiant pandas <span class="hljs-keyword">is</span> very short (Cai et al., <span class="hljs-number">2017</span>). <br></code></pre></div></td></tr></table></figure>
 <p><code>cite</code></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">The giant panda <span class="hljs-keyword">is</span> a <span class="hljs-keyword">Class</span> I endangered species endemic <span class="hljs-keyword">to</span> China.  Existing research <span class="hljs-built_in">found</span> that the estrus period <span class="hljs-keyword">for</span> femalegiant pandas <span class="hljs-keyword">is</span> very short Cai et al. (<span class="hljs-number">2017</span>).  <br></code></pre></div></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011442170/article/details/107490584">Latex 中文文献的引用（bib）</a></p>
-<h1 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h1><p>Figure</p>
+<h1 id="图片">图片</h1>
+<p>Figure</p>
 <p>文字在下</p>
 <p>Table</p>
 <p>文字在上</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -497,6 +500,26 @@
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

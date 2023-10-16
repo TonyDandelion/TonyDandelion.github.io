@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -251,38 +251,44 @@
             <h1 style="display: none">3-sigma Anomaly Detect</h1>
             
             <div class="markdown-body">
-              <p>简单记录基于 $3\sigma$ 原则的时序数据异常检测算法原理</p>
+              <p>简单记录基于 <span class="math inline">\(3\sigma\)</span> 原则的时序数据异常检测算法原理</p>
 <a id="more"></a>
-<h1 id="正态分布"><a href="#正态分布" class="headerlink" title="正态分布"></a>正态分布</h1><p><strong>正态分布</strong>（台湾作<strong>常态分布</strong>，英语：normal distribution）又名<strong>高斯分布</strong>（英语：<strong>Gaussian distribution</strong>），是一个非常常见的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/概率分布">连续概率分布</a>。正态分布在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/统计学">统计学</a>上十分重要，经常用在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/自然科学">自然</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/社会科学">社会科学</a>来代表一个不明的随机变量<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/正态分布#cite_note-1">[1]</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/正态分布#cite_note-2">[2]</a>。若<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/隨機變量">随机变量</a> $X$ 服从一个位置参数为 $\mu$、尺度参数为$\sigma$的正态分布，记为： </p>
-<script type="math/tex; mode=display">
-X \sim N( \mu, \sigma^2 )</script><p>其<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/機率密度函數">概率密度函数</a>为:</p>
-<script type="math/tex; mode=display">
-{\displaystyle f(x)={\frac {1}{\sigma {\sqrt {2\pi }}}}\;e^{-{\frac {\left(x-\mu \right)^{2}}{2\sigma ^{2}}}}\!}</script><p>正态分布的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/数学期望">数学期望</a>值或<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/期望值">期望值</a> $\mu$ 等于位置参数，决定了分布的位置；其<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/方差">方差</a>$\sigma ^{2}$的开平方或<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/標準差">标准差</a> $\sigma$ 等于尺度参数，决定了分布的幅度。</p>
-<p>正态分布的概率密度函数曲线呈钟形，因此人们又经常称之为<strong>钟形曲线</strong>（类似于寺庙里的大钟，因此得名）。我们通常所说的<strong>标准正态分布</strong>是位置参数 $ \mu =0$，尺度参数 $\sigma ^{2}=1$ 的正态分布。</p>
-<h1 id="3-sigma-原则"><a href="#3-sigma-原则" class="headerlink" title="$3\sigma$ 原则"></a>$3\sigma$ 原则</h1><p>3-sigma原则又称为68–95–99.7原则</p>
-<p>在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/統計">统计</a>上，<strong>68–95–99.7原则</strong>（68–95–99.7 rule）是在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/正态分布">正态分布</a>中，距平均值小于一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/標準差">标准差</a>、二个标准差、三个标准差以内的百分比，更精确的数字是68.27%、95.45%及99.73%。若用数学用语表示，其算式如下，其中 </p>
+<h1 id="正态分布">正态分布</h1>
+<p><strong>正态分布</strong>（台湾作<strong>常态分布</strong>，英语：normal distribution）又名<strong>高斯分布</strong>（英语：<strong>Gaussian distribution</strong>），是一个非常常见的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/概率分布">连续概率分布</a>。正态分布在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/统计学">统计学</a>上十分重要，经常用在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/自然科学">自然</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/社会科学">社会科学</a>来代表一个不明的随机变量<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/正态分布#cite_note-1">[1]</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/正态分布#cite_note-2">[2]</a>。若<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/隨機變量">随机变量</a> <span class="math inline">\(X\)</span> 服从一个位置参数为 <span class="math inline">\(\mu\)</span>、尺度参数为<span class="math inline">\(\sigma\)</span>的正态分布，记为： <span class="math display">\[
+X \sim N( \mu, \sigma^2 )
+\]</span> 其<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/機率密度函數">概率密度函数</a>为: <span class="math display">\[
+{\displaystyle f(x)={\frac {1}{\sigma {\sqrt {2\pi }}}}\;e^{-{\frac {\left(x-\mu \right)^{2}}{2\sigma ^{2}}}}\!}
+\]</span> 正态分布的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/数学期望">数学期望</a>值或<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/期望值">期望值</a> <span class="math inline">\(\mu\)</span> 等于位置参数，决定了分布的位置；其<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/方差">方差</a><span class="math inline">\(\sigma ^{2}\)</span>的开平方或<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/標準差">标准差</a> <span class="math inline">\(\sigma\)</span> 等于尺度参数，决定了分布的幅度。</p>
+<p>正态分布的概率密度函数曲线呈钟形，因此人们又经常称之为<strong>钟形曲线</strong>（类似于寺庙里的大钟，因此得名）。我们通常所说的<strong>标准正态分布</strong>是位置参数 $ $，尺度参数 <span class="math inline">\(\sigma ^{2}=1\)</span> 的正态分布。</p>
+<h1 id="sigma-原则"><span class="math inline">\(3\sigma\)</span> 原则</h1>
+<p>3-sigma原则又称为68–95–99.7原则</p>
+<p>在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/統計">统计</a>上，<strong>68–95–99.7原则</strong>（68–95–99.7 rule）是在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/正态分布">正态分布</a>中，距平均值小于一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/標準差">标准差</a>、二个标准差、三个标准差以内的百分比，更精确的数字是68.27%、95.45%及99.73%。若用数学用语表示，其算式如下，其中</p>
 <ul>
-<li>$X$ 为正态分布<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/隨機變數">随机变数</a>的观测值</li>
-<li>$\mu$为分布的平均值</li>
-<li>而$\sigma$为标准差</li>
+<li><span class="math inline">\(X\)</span> 为正态分布<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/隨機變數">随机变数</a>的观测值</li>
+<li><span class="math inline">\(\mu\)</span>为分布的平均值</li>
+<li>而<span class="math inline">\(\sigma\)</span>为标准差</li>
 </ul>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 Pr(\mu - 1 \times \sigma \leq X  \leq \mu  + 1 \times \sigma) \approx 0.68 \\
 Pr(\mu - 2 \times \sigma \leq X  \leq \mu  + 2 \times \sigma) \approx 0.95 \\
-Pr(\mu - 3 \times \sigma \leq X  \leq \mu  + 3 \times \sigma) \approx 0.99</script><p>总体的标准差计算公式，$\mu$是均值：</p>
-<script type="math/tex; mode=display">
-\sigma = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2</script><h1 id="时序数据异常检测"><a href="#时序数据异常检测" class="headerlink" title="时序数据异常检测"></a>时序数据异常检测</h1><p>基于 $3\sigma$ 原则的时序数据异常检测原理</p>
+Pr(\mu - 3 \times \sigma \leq X  \leq \mu  + 3 \times \sigma) \approx 0.99
+\]</span></p>
+<p>总体的标准差计算公式，<span class="math inline">\(\mu\)</span>是均值： <span class="math display">\[
+\sigma = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2
+\]</span></p>
+<h1 id="时序数据异常检测">时序数据异常检测</h1>
+<p>基于 <span class="math inline">\(3\sigma\)</span> 原则的时序数据异常检测原理</p>
 <p><em>Step 0</em></p>
-<p>输入长度为 $N$ 的序列，计算其均值：</p>
-<script type="math/tex; mode=display">
-\mu = \frac{1}{N} \sum_{i=1}^{N} x_i</script><p><em>Step 1</em></p>
-<p>计算其标准差</p>
-<script type="math/tex; mode=display">
-\sigma = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2</script><p><em>Step 2</em></p>
-<p>从头到尾遍历时序数据，计算该数据是否超出  $\mu \pm 3 \times sigma$ 或者 $\mu \pm k \times \sigma$ 范围。超出则认为是异常点。</p>
+<p>输入长度为 <span class="math inline">\(N\)</span> 的序列，计算其均值： <span class="math display">\[
+\mu = \frac{1}{N} \sum_{i=1}^{N} x_i
+\]</span> <em>Step 1</em></p>
+<p>计算其标准差 <span class="math display">\[
+\sigma = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2
+\]</span> <em>Step 2</em></p>
+<p>从头到尾遍历时序数据，计算该数据是否超出 <span class="math inline">\(\mu \pm 3 \times sigma\)</span> 或者 <span class="math inline">\(\mu \pm k \times \sigma\)</span> 范围。超出则认为是异常点。</p>
 <p>Java Code</p>
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javadef"><br></code></pre></div></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -519,6 +525,26 @@ Pr(\mu - 3 \times \sigma \leq X  \leq \mu  + 3 \times \sigma) \approx 0.99</scri
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>

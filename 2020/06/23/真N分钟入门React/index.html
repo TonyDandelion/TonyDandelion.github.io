@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;dark&quot;>
 
 
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      42
+      43
        分钟
     </span>
   
@@ -254,7 +254,7 @@
               <p>假设你有一些前端开发经验，但是你从未接触过React，更没有接触过Ant Design。那么，这个教程会让你在N分钟内完成Ant Design的基础入门。</p>
 <a id="more"></a>
 <p>博客更新时间：2020-06-23</p>
-<p>Ant Design是一个服务于企业级产品的设计体系。<code>antd(Ant Design of React)</code> 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。 </p>
+<p>Ant Design是一个服务于企业级产品的设计体系。<code>antd(Ant Design of React)</code> 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。</p>
 <p>Ant Design可以与React生态圈内的所有<strong>数据流方案</strong>以及<strong>应用框架</strong>搭配使用。Ant Design 技术体系推荐使用dav+umi+Ant Design构建一个前后端分离的Web Application。</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://redux.js.org/">Redux</a> 是一个用于<strong>应用程序状态管理</strong>的开源JavaScript库。Redux经常与React搭配运用，但其也可以独立使用。</li>
@@ -263,7 +263,7 @@
 <li><a target="_blank" rel="noopener" href="http://umijs.org/">umi</a> 是一个可插拔的企业级 react 应用框架。umi 以路由为基础的，支持<a target="_blank" rel="noopener" href="https://umijs.org/zh/guide/router.html">类 next.js 的约定式路由</a>，以及各种进阶的路由功能，并以此进行功能扩展，比如<a target="_blank" rel="noopener" href="https://umijs.org/zh/plugin/umi-plugin-react.html#dynamicimport">支持路由级的按需加载</a>。然后配以完善的<a target="_blank" rel="noopener" href="https://umijs.org/zh/plugin/">插件体系</a>，覆盖从源码到构建产物的每个生命周期，支持各种功能扩展和业务需求，同时提供 <a target="_blank" rel="noopener" href="https://umijs.org/zh/guide/umi-ui.html">Umi UI</a> 通过可视化辅助编程（VAP）提高开发体验和研发效率。</li>
 </ul>
 <p><strong>关系梳理</strong></p>
-<p>在Redux的基础上，开发了dva这样一个轻量级的数据流解决方案。<br>在React的基础上，开发了一系列符合Ant Design的Ant Desgin Componets。<br>umiJS是一个类似create-react-app的打包工具。<br>dva、umiJS、Ant Desgin Componets共同组成了Ant Design Pro、antd-admin、d2-admin等脚手架，开发者可以直接使用这一套脚手架完成企业级应用的开发。</p>
+<p>在Redux的基础上，开发了dva这样一个轻量级的数据流解决方案。 在React的基础上，开发了一系列符合Ant Design的Ant Desgin Componets。 umiJS是一个类似create-react-app的打包工具。 dva、umiJS、Ant Desgin Componets共同组成了Ant Design Pro、antd-admin、d2-admin等脚手架，开发者可以直接使用这一套脚手架完成企业级应用的开发。</p>
 <p><strong>关系图如下</strong></p>
 <pre><code class=" mermaid">graph LR;
 Redux[Redux] --&gt; dva[dva Lightweight Data-flow Solution];
@@ -275,12 +275,15 @@ Application[Web Application] --&gt; A(Ant Design Pro);
 Application[Web Application] --&gt; B(antd-admin);
 Application[Web Application] --&gt; C(d2-admin);
 </code></pre>
-<h1 id="Ant-Design-Environment"><a href="#Ant-Design-Environment" class="headerlink" title="Ant Design Environment"></a>Ant Design Environment</h1><h2 id="Install-NodeJS"><a href="#Install-NodeJS" class="headerlink" title="Install NodeJS"></a>Install NodeJS</h2><blockquote>
-<p><strong>Node.js</strong> 是能够在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/伺服器">服务器</a>端运行 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JavaScript">JavaScript</a> 的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/開放原始碼">开放源代码</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/跨平台">跨平台</a> JavaScript <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/执行环境">运行环境</a>。Node.js采用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Google">Google</a>开发的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/V8_(JavaScript引擎">V8</a>)运行代码，使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/事件驅動">事件驱动</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=非阻塞&amp;action=edit&amp;redlink=1">非阻塞</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/异步IO">异步输入输出</a>模型等技术来提高性能，可优化应用程序的传输量和规模。  —- Wiki</p>
+<h1 id="ant-design-environment">Ant Design Environment</h1>
+<h2 id="install-nodejs">Install NodeJS</h2>
+<blockquote>
+<p><strong>Node.js</strong> 是能够在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/伺服器">服务器</a>端运行 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JavaScript">JavaScript</a> 的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/開放原始碼">开放源代码</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/跨平台">跨平台</a> JavaScript <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/执行环境">运行环境</a>。Node.js采用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Google">Google</a>开发的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/V8_(JavaScript引擎)">V8</a>运行代码，使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/事件驅動">事件驱动</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=非阻塞&amp;action=edit&amp;redlink=1">非阻塞</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/异步IO">异步输入输出</a>模型等技术来提高性能，可优化应用程序的传输量和规模。 --- Wiki</p>
 </blockquote>
 <p>Node.js是一切的基础，最开始你就要安装Node.js，不同平台安装方式有所不同，不过过程很简单，参看<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">官网介绍</a>就行。</p>
-<h2 id="Install-ReactJS"><a href="#Install-ReactJS" class="headerlink" title="Install ReactJS"></a>Install ReactJS</h2><blockquote>
-<p><strong>React</strong>（有时叫<strong>React.js</strong>或<strong>ReactJS</strong>），是一个为数据提供渲染为<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTML">HTML</a>视图的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/开源软件">开源</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JavaScript函式库">JavaScript 库</a>。React视图通常采用包含以自定义HTML标记规定的其他组件的组件渲染。React为程序员提供了一种子组件不能直接影响外层组件（”data flows down”）的模型，数据改变时对HTML文档的有效更新，和现代单页应用中组件之间干净的分离。—- Wiki</p>
+<h2 id="install-reactjs">Install ReactJS</h2>
+<blockquote>
+<p><strong>React</strong>（有时叫<strong>React.js</strong>或<strong>ReactJS</strong>），是一个为数据提供渲染为<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTML">HTML</a>视图的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/开源软件">开源</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JavaScript函式库">JavaScript 库</a>。React视图通常采用包含以自定义HTML标记规定的其他组件的组件渲染。React为程序员提供了一种子组件不能直接影响外层组件（"data flows down"）的模型，数据改变时对HTML文档的有效更新，和现代单页应用中组件之间干净的分离。--- Wiki</p>
 </blockquote>
 <p>在正式开始之前，你需要安装React环境。</p>
 <ul>
@@ -297,7 +300,8 @@ Application[Web Application] --&gt; C(d2-admin);
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs react">import React from &#39;react&#39;;<br>import ReactDOM from &#39;react-dom&#39;;<br>import &#39;.&#x2F;index.css&#39;;<br>import App from &#39;.&#x2F;App&#39;;<br>import * as serviceWorker from &#39;.&#x2F;serviceWorker&#39;;<br><br>ReactDOM.render(<br>  &lt;h1&gt;Hello, world!&lt;&#x2F;h1&gt;,<br>  document.getElementById(&#39;root&#39;)<br>);<br><br>serviceWorker.unregister();<br></code></pre></div></td></tr></table></figure>
 <p>然后运行 <code>npm start</code> ，打开浏览器，看到如下页面，证明React安装成功。</p>
 <p><img src="https://i.loli.net/2020/06/23/7VprC1OHjdDgsZR.png" srcset="/img/loading.gif" alt="image-20200623204101345" style="zoom:50%;" /></p>
-<h2 id="Install-Yarn"><a href="#Install-Yarn" class="headerlink" title="Install Yarn"></a>Install Yarn</h2><p><em>什么是Yarn？</em></p>
+<h2 id="install-yarn">Install Yarn</h2>
+<p><em>什么是Yarn？</em></p>
 <p>Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 — Yarn，正如<a href="https://link.zhihu.com/?target=https%3A//code.facebook.com/posts/1840075619545360">官方文档</a>中写的，Yarn 是为了弥补 npm 的一些缺陷而出现的。因此，<a target="_blank" rel="noopener" href="https://yarnpkg.com/">Yarn</a>和npm类似，是一个 <strong>package 管理器</strong>，它能让你充分利用庞大的第三方 package 的生态系统，并且轻松地安装或更新它们。<strong>Yarn安装的Repository就是npm的Repository。</strong></p>
 <p><em>为什么用Yarn？</em></p>
 <p>简单来说，Yarn的主要优点如下：</p>
@@ -312,7 +316,8 @@ Application[Web Application] --&gt; C(d2-admin);
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">brew install yarn<br></code></pre></div></td></tr></table></figure>
 <p>离线安装</p>
 <p><a target="_blank" rel="noopener" href="https://classic.yarnpkg.com/en/docs/install#mac-stable">Yarn安装方法</a></p>
-<h2 id="Install-umijs"><a href="#Install-umijs" class="headerlink" title="Install umijs"></a>Install umijs</h2><p><em>为什么是umijs？</em></p>
+<h2 id="install-umijs">Install umijs</h2>
+<p><em>为什么是umijs？</em></p>
 <p>umijs可以视为create-react-app替代，create-react-app 是基于 webpack 的打包层方案，包含 build、dev、lint 等，他在打包层把体验做到了极致，<strong>但是不包含路由，不是框架，也不支持配置。</strong>所以，如果想基于create-react-app修改部分配置，或者希望在打包层之外也做技术收敛时，就会遇到困难，因此Ant Design使用了Umijs。</p>
 <p><em>什么是umijs？</em></p>
 <p>Umi，中文可发音为<strong>乌米</strong>，是可扩展的企业级前端应用框架。Umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。然后配以生命周期完善的插件体系，覆盖从源码到构建产物的每个生命周期，支持各种功能扩展和业务需求。</p>
@@ -351,7 +356,9 @@ Application[Web Application] --&gt; C(d2-admin);
 <figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">yarn start<br>yarn run v1<span class="hljs-number">.22</span><span class="hljs-number">.4</span><br><span class="hljs-function"><span class="hljs-title">warning</span></span> ../package.json: <span class="hljs-keyword">No</span> license field<br><span class="hljs-symbol">$</span> umi dev<br><span class="hljs-function"><span class="hljs-title">Starting</span></span> the development server...<br><br>✔ Webpack<br>  Compiled successfully in <span class="hljs-number">2.87</span>s<br><br> DONE  Compiled successfully in <span class="hljs-number">2874</span>ms          <span class="hljs-number">10</span>:<span class="hljs-number">20</span>:<span class="hljs-number">35</span> ├F10: AM┤<br><br><br>  App running at:<br>  - Local:   http:<span class="hljs-comment">//localhost:8000 (copied to clipboard)</span><br>  - Network: http:<span class="hljs-comment">//XX.XXX.XX.<span class="hljs-doctag">XXX:</span>8000</span><br></code></pre></div></td></tr></table></figure>
 <p>打开浏览器可以看到，说明你的umijs安装成功了。</p>
 <p><img src="https://i.loli.net/2020/06/24/dgHyhCYvujDNZGM.png" srcset="/img/loading.gif" alt="image-20200624102322783" style="zoom:50%;" /></p>
-<h1 id="Naive-Ant-Design"><a href="#Naive-Ant-Design" class="headerlink" title="Naive Ant Design"></a>Naive Ant Design</h1><h2 id="Start-from-scratch"><a href="#Start-from-scratch" class="headerlink" title="Start from scratch"></a>Start from scratch</h2><p>完成了上述前置安装之后，就可以安装Antd了。</p>
+<h1 id="naive-ant-design">Naive Ant Design</h1>
+<h2 id="start-from-scratch">Start from scratch</h2>
+<p>完成了上述前置安装之后，就可以安装Antd了。</p>
 <p>由于Ant Design是构建在React之上的，所以，我们先初始化一个基本的React项目。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yarn create react-app simple_anrd<br></code></pre></div></td></tr></table></figure>
 <p>安装依赖</p>
@@ -379,18 +386,27 @@ Application[Web Application] --&gt; C(d2-admin);
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yarn start<br></code></pre></div></td></tr></table></figure>
 <p>最终出现如下页面，说明Ant Design Components组件引入成功了。</p>
 <p><img src="/Users/yanweiran/Library/Application Support/typora-user-images/image-20200624202556847.png" srcset="/img/loading.gif" alt="image-20200624202556847" style="zoom: 50%;" /></p>
-<h2 id="Load-for-need"><a href="#Load-for-need" class="headerlink" title="Load for need"></a>Load for need</h2><p><code>antd</code> 默认支持基于 ES modules 的 tree shaking，对于 js 部分，直接引入 <code>import &#123; Button &#125; from &#39;antd&#39;</code> 就会有按需加载的效果。</p>
+<h2 id="load-for-need">Load for need</h2>
+<p><code>antd</code> 默认支持基于 ES modules 的 tree shaking，对于 js 部分，直接引入 <code>import &#123; Button &#125; from 'antd'</code> 就会有按需加载的效果。</p>
 <p>如果你在开发环境的控制台看到下面的提示，那么你可能还在使用 <code>webpack@1.x</code> 或者 tree shaking 失效，请升级或检查相关配置。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">You are using a whole package of antd, please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.<br></code></pre></div></td></tr></table></figure>
-<h2 id="Optimizers-Package-Size"><a href="#Optimizers-Package-Size" class="headerlink" title="Optimizers Package Size"></a>Optimizers Package Size</h2><p>你可以使用 <a target="_blank" rel="noopener" href="https://github.com/ant-design/antd-dayjs-webpack-plugin">antd-dayjs-webpack-plugin</a> 插件用 <a target="_blank" rel="noopener" href="https://day.js.org/">Day.js</a> 替换 Moment.js 来大幅减小打包大小。这需要更新 webpack 的配置文件如下：</p>
+<h2 id="optimizers-package-size">Optimizers Package Size</h2>
+<p>你可以使用 <a target="_blank" rel="noopener" href="https://github.com/ant-design/antd-dayjs-webpack-plugin">antd-dayjs-webpack-plugin</a> 插件用 <a target="_blank" rel="noopener" href="https://day.js.org/">Day.js</a> 替换 Moment.js 来大幅减小打包大小。这需要更新 webpack 的配置文件如下：</p>
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-comment">// webpack-config.js</span><br>import AntdDayjsWebpackPlugin from &#x27;antd-dayjs-webpack-plugin&#x27;;<br><br>module.exports = &#123;<br>  <span class="hljs-comment">// ...</span><br>  plugins: [new AntdDayjsWebpackPlugin()],<br>&#125;;<br></code></pre></div></td></tr></table></figure>
-<h1 id="Antd-admin"><a href="#Antd-admin" class="headerlink" title="Antd-admin"></a>Antd-admin</h1><p><a target="_blank" rel="noopener" href="https://github.com/zuiidea/antd-admin">antd-admin</a></p>
+<h1 id="antd-admin">Antd-admin</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/zuiidea/antd-admin">antd-admin</a></p>
 <p>一套优秀的中后台前端解决方案。</p>
-<p><img src="https://i.loli.net/2020/06/27/w1JHj7iOA6Xox5t.png" srcset="/img/loading.gif" alt="image-20200627191222314"></p>
-<h1 id="Ant-Design-Pro"><a href="#Ant-Design-Pro" class="headerlink" title="Ant Design Pro"></a>Ant Design Pro</h1><p>Ant Design Pro 是一个企业级中后台前端/设计解决方案。可以理解为 Ant Design React 是一套 React 组件库，而 Pro 是使用了这套组件库的<strong>完整前端脚手架</strong>。</p>
+<figure>
+<img src="https://i.loli.net/2020/06/27/w1JHj7iOA6Xox5t.png" srcset="/img/loading.gif" alt="image-20200627191222314" /><figcaption aria-hidden="true">image-20200627191222314</figcaption>
+</figure>
+<h1 id="ant-design-pro">Ant Design Pro</h1>
+<p>Ant Design Pro 是一个企业级中后台前端/设计解决方案。可以理解为 Ant Design React 是一套 React 组件库，而 Pro 是使用了这套组件库的<strong>完整前端脚手架</strong>。</p>
 <p>Ant Design Pro和Ant Design不一样，Ant Design Pro是基于Ant Design原则的一套UI组件库。</p>
-<p><img src="https://i.loli.net/2020/06/27/H6WRBsyVxUzqKT8.png" srcset="/img/loading.gif" alt="image-20200627191403468"></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>完成 NodeJS、ReactJS、Yarn的安装之后，就可以开始使用Ant Design Pro。</p>
+<figure>
+<img src="https://i.loli.net/2020/06/27/H6WRBsyVxUzqKT8.png" srcset="/img/loading.gif" alt="image-20200627191403468" /><figcaption aria-hidden="true">image-20200627191403468</figcaption>
+</figure>
+<h2 id="quick-start">Quick Start</h2>
+<p>完成 NodeJS、ReactJS、Yarn的安装之后，就可以开始使用Ant Design Pro。</p>
 <p>Ant Design Pro 是一个企业级中后台前端/设计解决方案，我们秉承 <a target="_blank" rel="noopener" href="http://ant.design/">Ant Design</a> 的设计价值观，致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。</p>
 <ul>
 <li>创建项目文件</li>
@@ -415,7 +431,8 @@ Application[Web Application] --&gt; C(d2-admin);
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yarn start<br></code></pre></div></td></tr></table></figure>
 <p>之后，打开提示链接，如果能看到对应页面，就说明这里安装成功。</p>
 <p><img src="https://i.loli.net/2020/06/24/9ka6H8PZGTMrhd4.png" srcset="/img/loading.gif" alt="image-20200624141713895" style="zoom: 33%;" /></p>
-<h2 id="Available-Scripts"><a href="#Available-Scripts" class="headerlink" title="Available Scripts"></a>Available Scripts</h2><ul>
+<h2 id="available-scripts">Available Scripts</h2>
+<ul>
 <li>启动项目</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yarn start<br></code></pre></div></td></tr></table></figure>
@@ -423,7 +440,7 @@ Application[Web Application] --&gt; C(d2-admin);
 <li>构建项目</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yarn run build<br></code></pre></div></td></tr></table></figure>
-<p>运行这个脚本将会编译你的项目，你可以在项目中的 <code>dist</code> 目录中找到编译后的文件用于部署。<br>编译之后的文件经过压缩。如果你想知道更详细的信息可以查阅 <a target="_blank" rel="noopener" href="https://pro.ant.design/docs/build-cn">编译</a>。<br>如果你需要部署，可以查阅 <a target="_blank" rel="noopener" href="https://pro.ant.design/docs/deploy-cn">部署</a>。</p>
+<p>运行这个脚本将会编译你的项目，你可以在项目中的 <code>dist</code> 目录中找到编译后的文件用于部署。 编译之后的文件经过压缩。如果你想知道更详细的信息可以查阅 <a target="_blank" rel="noopener" href="https://pro.ant.design/docs/build-cn">编译</a>。 如果你需要部署，可以查阅 <a target="_blank" rel="noopener" href="https://pro.ant.design/docs/deploy-cn">部署</a>。</p>
 <ul>
 <li>依赖分析</li>
 </ul>
@@ -439,10 +456,13 @@ Application[Web Application] --&gt; C(d2-admin);
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yarn <span class="hljs-built_in">test</span><br></code></pre></div></td></tr></table></figure>
 <p>这个脚本会执行一系列测试，包括 e2e 测试。详细信息可以看 <a target="_blank" rel="noopener" href="https://pro.ant.design/doc/ui-test-cn">测试</a>。</p>
-<h1 id="Ant-Design-Pro-Key-Points"><a href="#Ant-Design-Pro-Key-Points" class="headerlink" title="Ant Design Pro Key Points"></a>Ant Design Pro Key Points</h1><h2 id="Router-Configuration"><a href="#Router-Configuration" class="headerlink" title="Router Configuration"></a>Router Configuration</h2><h1 id="d2-admin"><a href="#d2-admin" class="headerlink" title="d2-admin"></a>d2-admin</h1><p><a target="_blank" rel="noopener" href="https://github.com/d2-projects/d2-admin">d2-admin</a></p>
+<h1 id="ant-design-pro-key-points">Ant Design Pro Key Points</h1>
+<h2 id="router-configuration">Router Configuration</h2>
+<h1 id="d2-admin">d2-admin</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/d2-projects/d2-admin">d2-admin</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/d2-projects/d2-admin">D2Admin</a> 是一个完全 <strong>开源免费</strong> 的企业中后台产品前端集成方案，使用最新的前端技术栈，小于 60kb 的本地首屏 js 加载，已经做好大部分项目前期准备工作，并且带有大量示例代码，助力管理系统敏捷开发。</p>
 <p>D2 admin是一个基于VUE的前端框架，并不是一个基于React的前端框架。</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
             </div>
             <hr>
             <div>
@@ -679,6 +699,26 @@ Application[Web Application] --&gt; C(d2-admin);
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<!-- <script type="text/javascript" src="/js/cdnjs.cloudflare.com_ajax_libs_mathjax_2.7.1_MathJax.js_config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 
 </body>
